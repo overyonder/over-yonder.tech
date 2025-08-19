@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Lora', serif;
+  color: #333;
+  overflow-x: hidden;
+  background: url('assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo img {
+  max-width: 300px;
+}
+
+.content {
+  padding: 100vh 20px 100px 20px;
+  /* Start content after the initial view */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content h2,
+.content p {
+  color: #282E26;
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+}
+
+.content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  z-index: 100;
+}
+
+footer p {
+  margin: 0;
+  color: #282E26;
+  font-size: 0.9rem;
+}
