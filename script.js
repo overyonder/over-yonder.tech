@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var scrollY = window.scrollY;
     logo.style.top = Math.max(finalLogoTop, initialLogoTop - scrollY) + 'px';
 
-    // Fade individual visual blocks based on their own position
     var els = document.querySelectorAll(
       '.tab-bar, #projects-panel h2, #projects-panel .about > p, ' +
       '#projects-panel .project-card, #projects-panel .repo-badges'
@@ -35,23 +34,61 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   window.requestAnimationFrame(animate);
 
-  // ── Tab switching ──
+  // ── Hash routing ──
+  function parseHash() {
+    var h = window.location.hash.replace(/^#\/?/, '');
+    if (!h) return { tab: 'projects', slug: null };
+    var parts = h.split('/');
+    if (parts[0] === 'articles') return { tab: 'articles', slug: parts[1] || null };
+    if (parts[0] === 'projects') return { tab: 'projects', slug: null };
+    return { tab: 'projects', slug: null };
+  }
+
+  function selectTab(name) {
+    tabs.forEach(function (b) { b.classList.remove('active'); });
+    tabs.forEach(function (b) {
+      if (b.dataset.tab === name) b.classList.add('active');
+    });
+    if (name === 'articles') {
+      slider.classList.add('show-articles');
+    } else {
+      slider.classList.remove('show-articles');
+    }
+  }
+
+  // ── Tab switching (updates hash) ──
   tabs.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      tabs.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      if (btn.dataset.tab === 'articles') {
-        slider.classList.add('show-articles');
-      } else {
-        slider.classList.remove('show-articles');
-      }
+      selectTab(btn.dataset.tab);
+      history.replaceState(null, '', '#' + btn.dataset.tab);
     });
+  });
+
+  // Listen for hash changes (back/forward)
+  window.addEventListener('hashchange', function () {
+    var route = parseHash();
+    selectTab(route.tab);
+    if (route.tab === 'articles') openArticleBySlug(route.slug);
   });
 
   // ── Load articles eagerly on page load ──
   fetch('articles/index.json')
     .then(function (r) { return r.json(); })
-    .then(function (articles) { buildAccordion(articles); })
+    .then(function (articles) {
+      buildAccordion(articles);
+      // Apply initial route after articles are built
+      var route = parseHash();
+      selectTab(route.tab);
+      if (route.slug) {
+        openArticleBySlug(route.slug);
+      } else if (route.tab === 'articles') {
+        // On articles tab with no specific slug, expand first (most recent)
+        expandFirst();
+      } else {
+        // Default: expand most recent article so it's ready when user switches
+        expandFirst();
+      }
+    })
     .catch(function () {
       panel.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Could not load articles.</p>';
     });
@@ -62,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
     articles.forEach(function (a) {
       var item = document.createElement('div');
       item.className = 'accordion-item';
+      var slug = a.file.replace(/\.md$/, '');
+      item.dataset.slug = slug;
 
       var tags = '';
       if (a.tags && a.tags.length) {
@@ -88,11 +127,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
       item.querySelector('.accordion-header').addEventListener('click', function () {
         toggleAccordion(item);
+        // Update hash when an article is toggled
+        if (item.classList.contains('open')) {
+          history.replaceState(null, '', '#articles/' + slug);
+        } else {
+          history.replaceState(null, '', '#articles');
+        }
       });
 
       // Eagerly fetch and render markdown
       loadArticle(item.querySelector('.article-content'), a.author, a.date);
     });
+  }
+
+  // ── Open article by slug ──
+  function openArticleBySlug(slug) {
+    if (!slug) return;
+    var item = panel.querySelector('.accordion-item[data-slug="' + slug + '"]');
+    if (!item || item.classList.contains('open')) return;
+    toggleAccordion(item);
+  }
+
+  // ── Expand first (most recent) article ──
+  function expandFirst() {
+    var first = panel.querySelector('.accordion-item');
+    if (first && !first.classList.contains('open')) {
+      toggleAccordion(first);
+    }
   }
 
   // ── Accordion toggle ──
@@ -128,6 +189,13 @@ document.addEventListener('DOMContentLoaded', function () {
         el.querySelectorAll('pre code').forEach(function (block) {
           hljs.highlightElement(block);
         });
+
+        // Recompute max-height if this article's accordion is already open
+        var item = el.closest('.accordion-item');
+        if (item && item.classList.contains('open')) {
+          item.querySelector('.accordion-body').style.maxHeight =
+            item.querySelector('.accordion-body').scrollHeight + 'px';
+        }
       })
       .catch(function () {
         el.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Failed to load article.</p>';
