@@ -5,14 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var panel = document.getElementById('articles-panel');
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
-  var indexLoaded = false;
 
   // ── Scroll animation (logo + section fade) ──
   function animate() {
     var scrollY = window.scrollY;
     logo.style.top = Math.max(finalLogoTop, initialLogoTop - scrollY) + 'px';
 
-    // Only fade sections inside the projects panel
     var sections = document.querySelectorAll('#projects-panel section');
     sections.forEach(function (s) {
       var r = s.getBoundingClientRect();
@@ -39,25 +37,21 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.classList.add('active');
       if (btn.dataset.tab === 'articles') {
         slider.classList.add('show-articles');
-        if (!indexLoaded) loadIndex();
       } else {
         slider.classList.remove('show-articles');
       }
     });
   });
 
-  // ── Load article index ──
-  function loadIndex() {
-    indexLoaded = true;
-    fetch('articles/index.json')
-      .then(function (r) { return r.json(); })
-      .then(function (articles) { buildAccordion(articles); })
-      .catch(function (e) {
-        panel.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Could not load articles.</p>';
-      });
-  }
+  // ── Load articles eagerly on page load ──
+  fetch('articles/index.json')
+    .then(function (r) { return r.json(); })
+    .then(function (articles) { buildAccordion(articles); })
+    .catch(function () {
+      panel.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Could not load articles.</p>';
+    });
 
-  // ── Build accordion from manifest ──
+  // ── Build accordion and pre-render all articles ──
   function buildAccordion(articles) {
     panel.innerHTML = '';
     articles.forEach(function (a) {
@@ -67,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var tags = '';
       if (a.tags && a.tags.length) {
         tags = '<span class="article-tags">' +
-          a.tags.map(function (t) { return '<span class="article-tag">' + t + '</span>'; }).join('') +
+          a.tags.map(function (t) { return '<span class="article-tag">' + esc(t) + '</span>'; }).join('') +
           '</span>';
       }
 
@@ -79,7 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
           '<span class="accordion-chevron">&#9662;</span>' +
         '</button>' +
         '<div class="accordion-body">' +
-          '<div class="article-content" data-file="' + esc(a.file) + '" data-author="' + esc(a.author) + '" data-date="' + esc(a.date) + '"></div>' +
+          '<div class="article-content" data-file="' + esc(a.file) + '">' +
+            '<div class="article-meta">' + esc(a.author) + ' &middot; ' + esc(a.date) + '</div>' +
+            '<p style="color:rgba(255,255,255,0.5)">Loading...</p>' +
+          '</div>' +
         '</div>';
 
       panel.appendChild(item);
@@ -87,13 +84,15 @@ document.addEventListener('DOMContentLoaded', function () {
       item.querySelector('.accordion-header').addEventListener('click', function () {
         toggleAccordion(item);
       });
+
+      // Eagerly fetch and render markdown
+      loadArticle(item.querySelector('.article-content'), a.author, a.date);
     });
   }
 
   // ── Accordion toggle ──
   function toggleAccordion(item) {
     var body = item.querySelector('.accordion-body');
-    var content = item.querySelector('.article-content');
 
     if (item.classList.contains('open')) {
       body.style.maxHeight = '0';
@@ -108,41 +107,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     item.classList.add('open');
-
-    if (!content.dataset.loaded) {
-      content.dataset.loaded = '1';
-      loadArticle(content, function () {
-        body.style.maxHeight = body.scrollHeight + 'px';
-      });
-    } else {
-      body.style.maxHeight = body.scrollHeight + 'px';
-    }
+    body.style.maxHeight = body.scrollHeight + 'px';
   }
 
-  // ── Lazy markdown fetch + render ──
-  function loadArticle(el, cb) {
+  // ── Fetch and render markdown ──
+  function loadArticle(el, author, date) {
     var file = el.dataset.file;
-    var author = el.dataset.author;
-    var date = el.dataset.date;
 
     fetch('articles/' + file)
       .then(function (r) { return r.text(); })
       .then(function (md) {
-        // Strip YAML front matter
         var stripped = md.replace(/^---[\s\S]*?---\s*/, '');
         var meta = '<div class="article-meta">' + esc(author) + ' &middot; ' + esc(date) + '</div>';
         el.innerHTML = meta + marked.parse(stripped);
-        if (cb) cb();
       })
       .catch(function () {
         el.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Failed to load article.</p>';
-        if (cb) cb();
       });
   }
 
-  // ── Minimal HTML escaper ──
   function esc(s) {
     if (!s) return '';
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 });

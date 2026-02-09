@@ -205,16 +205,17 @@ footer p {
 
 .tab-bar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .tab-btn {
   font-family: 'Lora', serif;
-  font-size: 1rem;
-  padding: 10px 24px;
+  font-size: 1.15rem;
+  padding: 14px 40px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
+  border-radius: 28px;
   background: rgba(30, 35, 30, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -240,10 +241,6 @@ footer p {
 
 .tab-viewport {
   overflow: hidden;
-  mask-image: linear-gradient(to right,
-    transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right,
-    transparent, black 5%, black 95%, transparent);
 }
 
 .tab-slider {
