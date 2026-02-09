@@ -14,66 +14,82 @@
   </div>
 
   <main class="content">
-    <section class="about">
-      <h2>About</h2>
-      <p>Project portfolio of Kieran Hannigan.</p>
-    </section>
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="projects">Projects</button>
+      <button class="tab-btn" data-tab="articles">Articles</button>
+    </div>
 
-    <section class="projects">
-      <h2>Recent Projects</h2>
-      <div class="project-cards">
-        <div class="project-card">
-          <div class="card-image" style="background-image: url('https://rake-lang.org/wallpaper.png')"></div>
-          <div class="card-content">
-            <span class="year">2026</span>
-            <h3>Rake</h3>
-            <p class="subtitle">Programming Language Compiler</p>
-            <p class="desc">A vector-first language for CPU SIMD with divergent control flow</p>
-            <a href="https://rake-lang.org" class="visit-btn" target="_blank">Visit Site →</a>
-          </div>
+    <div class="tab-viewport">
+      <div class="tab-slider">
+        <div class="tab-panel" id="projects-panel">
+          <section class="about">
+            <h2>About</h2>
+            <p>Project portfolio of Kieran Hannigan.</p>
+          </section>
+
+          <section class="projects">
+            <h2>Recent Projects</h2>
+            <div class="project-cards">
+              <div class="project-card">
+                <div class="card-image" style="background-image: url('https://rake-lang.org/wallpaper.png')"></div>
+                <div class="card-content">
+                  <span class="year">2026</span>
+                  <h3>Rake</h3>
+                  <p class="subtitle">Programming Language Compiler</p>
+                  <p class="desc">A vector-first language for CPU SIMD with divergent control flow</p>
+                  <a href="https://rake-lang.org" class="visit-btn" target="_blank">Visit Site →</a>
+                </div>
+              </div>
+              <div class="project-card">
+                <div class="card-image pong-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f8/Pong.png')"></div>
+                <div class="card-content">
+                  <span class="year">2025</span>
+                  <h3>Pong AI</h3>
+                  <p class="subtitle">Neural Network Game Agent</p>
+                  <p class="desc">Multi-layer perceptron trained through neuro-evolution in Rust and WebAssembly</p>
+                  <a href="https://pong.over-yonder.tech" class="visit-btn" target="_blank">Visit Site →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="repos">
+            <h2>Other Projects</h2>
+            <div class="repo-badges">
+              <a href="https://github.com/rakelang/rake"><img src="https://img.shields.io/github/stars/rakelang/rake?style=flat-square&label=rake" alt="rake"></a>
+              <a href="https://github.com/rakelang/tree-sitter-rake"><img src="https://img.shields.io/github/stars/rakelang/tree-sitter-rake?style=flat-square&label=tree-sitter-rake" alt="tree-sitter-rake"></a>
+              <a href="https://github.com/KaiStarkk/claude-usage-monitor"><img src="https://img.shields.io/github/stars/KaiStarkk/claude-usage-monitor?style=flat-square&label=claude-usage-monitor" alt="claude-usage-monitor"></a>
+              <a href="https://github.com/KaiStarkk/nixup"><img src="https://img.shields.io/github/stars/KaiStarkk/nixup?style=flat-square&label=nixup" alt="nixup"></a>
+              <a href="https://github.com/KaiStarkk/ghall"><img src="https://img.shields.io/github/stars/KaiStarkk/ghall?style=flat-square&label=ghall" alt="ghall"></a>
+              <a href="https://github.com/KaiStarkk/scope-spider"><img src="https://img.shields.io/github/stars/KaiStarkk/scope-spider?style=flat-square&label=scope-spider" alt="scope-spider"></a>
+              <a href="https://github.com/KaiStarkk/wumps"><img src="https://img.shields.io/github/stars/KaiStarkk/wumps?style=flat-square&label=wumps" alt="wumps"></a>
+              <a href="https://github.com/KaiStarkk/langs"><img src="https://img.shields.io/github/stars/KaiStarkk/langs?style=flat-square&label=langs" alt="langs"></a>
+              <a href="https://github.com/KaiStarkk/neutral-board"><img src="https://img.shields.io/github/stars/KaiStarkk/neutral-board?style=flat-square&label=neutral-board" alt="neutral-board"></a>
+              <a href="https://github.com/KaiStarkk/unity-copilot-docker-demo"><img src="https://img.shields.io/github/stars/KaiStarkk/unity-copilot-docker-demo?style=flat-square&label=unity-copilot-docker-demo" alt="unity-copilot-docker-demo"></a>
+              <a href="https://github.com/KaiStarkk/devilutionX_save_manager"><img src="https://img.shields.io/github/stars/KaiStarkk/devilutionX_save_manager?style=flat-square&label=devilutionX_save_manager" alt="devilutionX_save_manager"></a>
+              <a href="https://github.com/KaiStarkk/3DPrintMe"><img src="https://img.shields.io/github/stars/KaiStarkk/3DPrintMe?style=flat-square&label=3DPrintMe" alt="3DPrintMe"></a>
+              <a href="https://github.com/KaiStarkk/Tennis-Ball-Collecting-Robot"><img src="https://img.shields.io/github/stars/KaiStarkk/Tennis-Ball-Collecting-Robot?style=flat-square&label=Tennis-Ball-Collecting-Robot" alt="Tennis-Ball-Collecting-Robot"></a>
+              <a href="https://github.com/KaiStarkk/CITS3200"><img src="https://img.shields.io/github/stars/KaiStarkk/CITS3200?style=flat-square&label=CITS3200" alt="CITS3200"></a>
+              <a href="https://github.com/KaiStarkk/CITS3003"><img src="https://img.shields.io/github/stars/KaiStarkk/CITS3003?style=flat-square&label=CITS3003" alt="CITS3003"></a>
+              <a href="https://github.com/KaiStarkk/aea"><img src="https://img.shields.io/github/stars/KaiStarkk/aea?style=flat-square&label=aea" alt="aea"></a>
+              <a href="https://github.com/overyonder/over-yonder.tech"><img src="https://img.shields.io/github/stars/overyonder/over-yonder.tech?style=flat-square&label=over-yonder.tech" alt="over-yonder.tech"></a>
+              <a href="https://github.com/hannigancooper/hannigancooper.github.io"><img src="https://img.shields.io/github/stars/hannigancooper/hannigancooper.github.io?style=flat-square&label=hannigancooper.github.io" alt="hannigancooper.github.io"></a>
+            </div>
+          </section>
         </div>
-        <div class="project-card">
-          <div class="card-image pong-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f8/Pong.png')"></div>
-          <div class="card-content">
-            <span class="year">2025</span>
-            <h3>Pong AI</h3>
-            <p class="subtitle">Neural Network Game Agent</p>
-            <p class="desc">Multi-layer perceptron trained through neuro-evolution in Rust and WebAssembly</p>
-            <a href="https://pong.over-yonder.tech" class="visit-btn" target="_blank">Visit Site →</a>
-          </div>
+
+        <div class="tab-panel" id="articles-panel">
+          <!-- Populated dynamically from articles/index.json -->
         </div>
       </div>
-    </section>
-
-    <section class="repos">
-      <h2>Other Projects</h2>
-      <div class="repo-badges">
-        <a href="https://github.com/rakelang/rake"><img src="https://img.shields.io/github/stars/rakelang/rake?style=flat-square&label=rake" alt="rake"></a>
-        <a href="https://github.com/rakelang/tree-sitter-rake"><img src="https://img.shields.io/github/stars/rakelang/tree-sitter-rake?style=flat-square&label=tree-sitter-rake" alt="tree-sitter-rake"></a>
-        <a href="https://github.com/KaiStarkk/claude-usage-monitor"><img src="https://img.shields.io/github/stars/KaiStarkk/claude-usage-monitor?style=flat-square&label=claude-usage-monitor" alt="claude-usage-monitor"></a>
-        <a href="https://github.com/KaiStarkk/nixup"><img src="https://img.shields.io/github/stars/KaiStarkk/nixup?style=flat-square&label=nixup" alt="nixup"></a>
-        <a href="https://github.com/KaiStarkk/ghall"><img src="https://img.shields.io/github/stars/KaiStarkk/ghall?style=flat-square&label=ghall" alt="ghall"></a>
-        <a href="https://github.com/KaiStarkk/scope-spider"><img src="https://img.shields.io/github/stars/KaiStarkk/scope-spider?style=flat-square&label=scope-spider" alt="scope-spider"></a>
-        <a href="https://github.com/KaiStarkk/wumps"><img src="https://img.shields.io/github/stars/KaiStarkk/wumps?style=flat-square&label=wumps" alt="wumps"></a>
-        <a href="https://github.com/KaiStarkk/langs"><img src="https://img.shields.io/github/stars/KaiStarkk/langs?style=flat-square&label=langs" alt="langs"></a>
-        <a href="https://github.com/KaiStarkk/neutral-board"><img src="https://img.shields.io/github/stars/KaiStarkk/neutral-board?style=flat-square&label=neutral-board" alt="neutral-board"></a>
-        <a href="https://github.com/KaiStarkk/unity-copilot-docker-demo"><img src="https://img.shields.io/github/stars/KaiStarkk/unity-copilot-docker-demo?style=flat-square&label=unity-copilot-docker-demo" alt="unity-copilot-docker-demo"></a>
-        <a href="https://github.com/KaiStarkk/devilutionX_save_manager"><img src="https://img.shields.io/github/stars/KaiStarkk/devilutionX_save_manager?style=flat-square&label=devilutionX_save_manager" alt="devilutionX_save_manager"></a>
-        <a href="https://github.com/KaiStarkk/3DPrintMe"><img src="https://img.shields.io/github/stars/KaiStarkk/3DPrintMe?style=flat-square&label=3DPrintMe" alt="3DPrintMe"></a>
-        <a href="https://github.com/KaiStarkk/Tennis-Ball-Collecting-Robot"><img src="https://img.shields.io/github/stars/KaiStarkk/Tennis-Ball-Collecting-Robot?style=flat-square&label=Tennis-Ball-Collecting-Robot" alt="Tennis-Ball-Collecting-Robot"></a>
-        <a href="https://github.com/KaiStarkk/CITS3200"><img src="https://img.shields.io/github/stars/KaiStarkk/CITS3200?style=flat-square&label=CITS3200" alt="CITS3200"></a>
-        <a href="https://github.com/KaiStarkk/CITS3003"><img src="https://img.shields.io/github/stars/KaiStarkk/CITS3003?style=flat-square&label=CITS3003" alt="CITS3003"></a>
-        <a href="https://github.com/KaiStarkk/aea"><img src="https://img.shields.io/github/stars/KaiStarkk/aea?style=flat-square&label=aea" alt="aea"></a>
-        <a href="https://github.com/overyonder/over-yonder.tech"><img src="https://img.shields.io/github/stars/overyonder/over-yonder.tech?style=flat-square&label=over-yonder.tech" alt="over-yonder.tech"></a>
-        <a href="https://github.com/hannigancooper/hannigancooper.github.io"><img src="https://img.shields.io/github/stars/hannigancooper/hannigancooper.github.io?style=flat-square&label=hannigancooper.github.io" alt="hannigancooper.github.io"></a>
-      </div>
-    </section>
+    </div>
   </main>
 
   <footer>
     <p class="copyright">&copy; 2025 over|yonder</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="script.js"></script>
 </body>
 
