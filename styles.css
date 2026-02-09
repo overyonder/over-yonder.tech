@@ -210,6 +210,28 @@ footer p {
   margin-bottom: 32px;
 }
 
+.tab-bar.sticky {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 840px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  z-index: 100;
+  margin-bottom: 0;
+}
+
+.tab-bar-placeholder {
+  display: none;
+}
+
+.tab-bar-placeholder.visible {
+  display: block;
+}
+
 .tab-btn {
   font-family: 'Lora', serif;
   font-size: 1.15rem;
@@ -263,6 +285,14 @@ footer p {
 #articles-panel {
   box-sizing: border-box;
   padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media (max-width: 600px) {
+  #articles-panel {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* ==================== Accordion ==================== */

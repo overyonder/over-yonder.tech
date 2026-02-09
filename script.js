@@ -1,18 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
   var logo = document.querySelector('.logo');
   var slider = document.querySelector('.tab-slider');
+  var tabBar = document.querySelector('.tab-bar');
   var tabs = document.querySelectorAll('.tab-btn');
   var panel = document.getElementById('articles-panel');
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
 
-  // ── Scroll animation (logo + section fade) ──
+  // ── Placeholder for tab bar when it goes sticky ──
+  var placeholder = document.createElement('div');
+  placeholder.className = 'tab-bar-placeholder';
+  tabBar.parentNode.insertBefore(placeholder, tabBar.nextSibling);
+  var tabBarOffset = null;
+
+  // ── Scroll animation (logo + section fade + sticky tabs) ──
   function animate() {
     var scrollY = window.scrollY;
     logo.style.top = Math.max(finalLogoTop, initialLogoTop - scrollY) + 'px';
 
+    // Sticky tab bar
+    if (tabBarOffset === null && !tabBar.classList.contains('sticky')) {
+      tabBarOffset = tabBar.offsetTop;
+    }
+    if (tabBarOffset !== null) {
+      if (scrollY >= tabBarOffset - 20) {
+        if (!tabBar.classList.contains('sticky')) {
+          placeholder.style.height = tabBar.offsetHeight + 32 + 'px';
+          placeholder.classList.add('visible');
+          tabBar.classList.add('sticky');
+        }
+      } else {
+        if (tabBar.classList.contains('sticky')) {
+          tabBar.classList.remove('sticky');
+          placeholder.classList.remove('visible');
+          tabBarOffset = null;
+        }
+      }
+    }
+
     var els = document.querySelectorAll(
-      '.tab-bar, #projects-panel h2, #projects-panel .about > p, ' +
+      '#projects-panel h2, #projects-panel .about > p, ' +
       '#projects-panel .project-card, #projects-panel .repo-badges'
     );
     els.forEach(function (el) {
@@ -161,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var body = item.querySelector('.accordion-body');
 
     if (item.classList.contains('open')) {
+      // Snap to scrollHeight first so the transition animates from content height to 0
+      body.style.maxHeight = body.scrollHeight + 'px';
+      // Force reflow
+      body.offsetHeight;
       body.style.maxHeight = '0';
       item.classList.remove('open');
       return;
@@ -168,12 +199,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close others
     document.querySelectorAll('.accordion-item.open').forEach(function (o) {
+      var ob = o.querySelector('.accordion-body');
+      ob.style.maxHeight = ob.scrollHeight + 'px';
+      ob.offsetHeight;
+      ob.style.maxHeight = '0';
       o.classList.remove('open');
-      o.querySelector('.accordion-body').style.maxHeight = '0';
     });
 
     item.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
+
+    // After transition, remove the cap so content is never clipped
+    function onEnd() {
+      if (item.classList.contains('open')) {
+        body.style.maxHeight = 'none';
+      }
+      body.removeEventListener('transitionend', onEnd);
+    }
+    body.addEventListener('transitionend', onEnd);
   }
 
   // ── Fetch and render markdown ──
@@ -190,11 +233,10 @@ document.addEventListener('DOMContentLoaded', function () {
           hljs.highlightElement(block);
         });
 
-        // Recompute max-height if this article's accordion is already open
+        // If accordion is open, uncap max-height so new content isn't clipped
         var item = el.closest('.accordion-item');
         if (item && item.classList.contains('open')) {
-          item.querySelector('.accordion-body').style.maxHeight =
-            item.querySelector('.accordion-body').scrollHeight + 'px';
+          item.querySelector('.accordion-body').style.maxHeight = 'none';
         }
       })
       .catch(function () {
