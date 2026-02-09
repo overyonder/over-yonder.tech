@@ -11,21 +11,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var scrollY = window.scrollY;
     logo.style.top = Math.max(finalLogoTop, initialLogoTop - scrollY) + 'px';
 
-    // Fade individual visual blocks, not whole sections
+    // Fade individual visual blocks based on their own position
     var els = document.querySelectorAll(
-      '#projects-panel h2, #projects-panel .about > p, ' +
+      '.tab-bar, #projects-panel h2, #projects-panel .about > p, ' +
       '#projects-panel .project-card, #projects-panel .repo-badges'
     );
     els.forEach(function (el) {
       var r = el.getBoundingClientRect();
       var vh = window.innerHeight;
-      // Use element's vertical centre for smoother per-element fade
       var mid = (r.top + r.bottom) / 2 / vh * 100;
-      var o = 0;
-      if (mid >= 90) o = 0;
-      else if (mid >= 80) o = (90 - mid) / 10;
-      else if (mid >= 15) o = 1;
-      else if (mid >= 5) o = (mid - 5) / 10;
+      var o;
+      if (mid > 95) o = 0;
+      else if (mid > 85) o = (95 - mid) / 10;
+      else if (mid > 8) o = 1;
+      else if (mid > -2) o = (mid + 2) / 10;
       else o = 0;
       el.style.opacity = Math.max(0, Math.min(1, o));
     });
