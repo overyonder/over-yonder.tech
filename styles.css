@@ -474,3 +474,53 @@ footer p {
   color: rgba(255, 255, 255, 0.7);
   font-style: italic;
 }
+
+/* ==================== Inline SVG diagrams ==================== */
+
+.article-content svg {
+  width: 100%;
+  height: auto;
+  margin: 1.5em 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==================== Memory comparison callout ==================== */
+
+.memory-comparison {
+  margin: 1.5em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+}
+
+.comparison-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+}
+
+.comparison-label {
+  font-weight: bold;
+  min-width: 100px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.comparison-stats {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.comparison-bad {
+  background: rgba(192, 57, 43, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comparison-good {
+  background: rgba(46, 204, 113, 0.1);
+}

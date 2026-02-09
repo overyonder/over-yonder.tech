@@ -18,15 +18,45 @@ user  318925   0.6  0.3    47276   29636  python3 bluetooth.py
 
 3.4GB virtual address space. 135MB RSS. 10% CPU. Persistent `Gjs-Console-CRITICAL` warnings. GDBus errors about missing portal interfaces. A Python subprocess for Bluetooth. For a status bar.
 
-This is not an indictment of the people who built HyprPanel -- it's genuinely useful software. It is an indictment of the architectural norms that led us here. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
+This is not an indictment of the people who built HyprPanel -- it's genuinely useful software, and its creator [Jas-SinghFSU](https://github.com/Jas-SinghFSU) agrees with the diagnosis. HyprPanel is now in maintenance mode, and Jas is building its successor -- [Wayle](https://github.com/Jas-SinghFSU/HyprPanel) -- entirely in Rust, noting that *"GJS (even with TypeScript) just isn't a good systems language."* The problem is the architectural norms, not the people working within them. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
 
 A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to Waybar, which is written in C++ and renders with GTK. And then I needed a system monitor module that actually took its job seriously.
 
-This is the story of `rstat`: a system health monitor that started as a bash script running every 3 seconds and ended as a sub-millisecond eBPF-instrumented Rust daemon with zero heap allocations in steady state. Each stage of optimisation was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
+This is the story of `rstat`: a system health monitor that started as a 2-second bash script and ended as a Rust daemon that injects a small verified program into the kernel itself -- running at ring 0 privilege, reading scheduler data structures directly, bypassing the filesystem and syscall overhead entirely. Zero heap allocations in steady state. Sub-millisecond samples. Each stage of optimisation was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
+
+<svg viewBox="0 0 750 222" xmlns="http://www.w3.org/2000/svg" class="perf-waterfall" role="img" aria-label="Performance waterfall: 2 seconds down to sub-millisecond">
+  <style>
+    .wf-label { fill: rgba(255,255,255,0.9); font-family: 'Lora', serif; font-size: 13px; }
+    .wf-time  { fill: rgba(255,255,255,0.6); font-family: 'Courier New', monospace; font-size: 12px; }
+    .wf-bar   { rx: 4; ry: 4; }
+  </style>
+  <text x="375" y="22" text-anchor="middle" class="wf-label" font-size="15" fill="rgba(255,255,255,0.95)">Sample time per stage (log scale)</text>
+  <!-- Bash: ~2000ms measured. log scale, full width = log10(2000), base. -->
+  <!-- Using log10(val)/log10(2000)*500 for bar widths. log10(2000)=3.301 -->
+  <text x="14" y="58" class="wf-label">Bash + coreutils</text>
+  <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
+  <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
+  <!-- Rust + /proc + powerprofilesctl: ~100ms. log10(100)/3.301*500 ≈ 303 -->
+  <text x="14" y="96" class="wf-label">Rust + /proc</text>
+  <rect x="220" y="82" width="303" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
+  <text x="529" y="98" text-anchor="end" class="wf-time">~100 ms</text>
+  <!-- After sysfs/buffer reuse: ~5ms. log10(5)/3.301*500 ≈ 106 -->
+  <text x="14" y="134" class="wf-label">Sysfs + buffer reuse</text>
+  <rect x="220" y="120" width="106" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
+  <text x="332" y="136" text-anchor="end" class="wf-time">~5 ms</text>
+  <!-- eBPF: sub-1ms (min 0.78ms bench). log10(0.78) = -0.108, need offset -->
+  <!-- Use (log10(val)+0.5)/(3.301+0.5)*500 to handle sub-1 values -->
+  <!-- (-.108+.5)/3.801*500 = 52 -->
+  <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
+  <rect x="220" y="158" width="52" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
+  <text x="278" y="174" class="wf-time">&lt;1 ms</text>
+  <!-- Source note -->
+  <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Measured on current system (325 PIDs). Commit messages record higher figures under heavier load.</text>
+</svg>
 
 ---
 
-## Stage 1: The Baseline -- Bash + Coreutils (~3-5 seconds)
+## Stage 1: The Baseline -- Bash + Coreutils (~2 seconds)
 
 The original implementation was a shell script invoked by Waybar's `custom` module on a polling interval. Every two or three seconds, Waybar would fork a shell, the shell would execute the script, and the script would fan out into a tree of subprocesses:
 
@@ -47,15 +77,54 @@ The costs compound:
 - **Shell string parsing.** Every intermediate result was a string. Numbers were parsed from text, manipulated as text, formatted back to text. The shell's arithmetic capabilities are limited to integers, hence the `bc` dependency for floating-point.
 - **Filesystem round-trips.** `/proc` is a virtual filesystem. Each `open()` triggers the kernel to generate the file contents on demand. Each `read()` copies them to userspace. Each `close()` tears down the file descriptor. Multiply by every metric, every subprocess, every invocation.
 
-The 3-second polling interval was chosen not because the data changed that slowly, but to hide how slow the collection was. Even so, the script occasionally lagged Waybar's rendering, causing the status bar to display stale data or briefly blank.
+The polling interval was chosen not because the data changed that slowly, but to hide how slow the collection was. Even so, the script occasionally lagged Waybar's rendering, causing the status bar to display stale data or briefly blank.
 
 This was the motivation for a rewrite: not performance for its own sake, but the observation that a status bar module should not be a measurable load on the system it monitors.
 
 ---
 
-## Stage 2: Rust + /proc Parsing (~12ms)
+## Stage 2: Rust + /proc Parsing (~100ms)
 
-The first rewrite eliminated every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared -- no polling interval on Waybar's side, no repeated process spawning.
+The first rewrite eliminated almost every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared -- no polling interval on Waybar's side, no repeated process spawning.
+
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" class="diagram-proc-roundtrip" role="img" aria-label="Diagram: /proc serialisation round-trip">
+  <style>
+    .d-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 12px; }
+    .d-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
+    .d-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; font-style: italic; }
+    .d-box   { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 1; rx: 6; }
+    .d-arrow { stroke: rgba(168,200,160,0.6); stroke-width: 1.5; fill: none; marker-end: url(#ah); }
+    .d-arrow-back { stroke: rgba(200,160,160,0.6); stroke-width: 1.5; fill: none; marker-end: url(#ah2); }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.6)"/></marker>
+    <marker id="ah2" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(200,160,160,0.6)"/></marker>
+  </defs>
+  <!-- Column headers -->
+  <text x="140" y="20" text-anchor="middle" class="d-label" font-size="14">Userspace</text>
+  <text x="520" y="20" text-anchor="middle" class="d-label" font-size="14">Kernel</text>
+  <line x1="330" y1="8" x2="330" y2="190" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- Row 1: open -->
+  <text x="14" y="50" class="d-mono">open("/proc/123/stat")</text>
+  <line x1="230" y1="46" x2="380" y2="46" class="d-arrow"/>
+  <text x="390" y="50" class="d-label">allocate fd, find inode</text>
+  <!-- Row 2: read -->
+  <text x="14" y="80" class="d-mono">read(fd, buf, 4096)</text>
+  <line x1="210" y1="76" x2="380" y2="76" class="d-arrow"/>
+  <text x="390" y="80" class="d-label">walk task_struct, format</text>
+  <text x="390" y="94" class="d-label">50 fields as ASCII text</text>
+  <!-- Row 3: parse back -->
+  <text x="14" y="120" class="d-mono">"14523 (firefox) S 1 ..."</text>
+  <line x1="380" y1="116" x2="250" y2="116" class="d-arrow-back"/>
+  <text x="390" y="120" class="d-dim">only need fields 14 and 15</text>
+  <!-- Row 4: close -->
+  <text x="14" y="148" class="d-mono">close(fd)</text>
+  <line x1="120" y1="144" x2="380" y2="144" class="d-arrow"/>
+  <text x="390" y="148" class="d-label">release fd</text>
+  <!-- Insight -->
+  <rect x="14" y="164" width="672" height="28" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="350" y="183" text-anchor="middle" class="d-dim" font-size="11">The kernel has the numbers. It formats them as text. We parse the text back. A serialisation round-trip through ASCII — per PID, per file, per sample.</text>
+</svg>
 
 The key changes:
 
@@ -70,15 +139,60 @@ The key changes:
 
 **serde_json for output.** The daemon serialised a struct to JSON using serde. Convenient, correct, and -- as would later become relevant -- not free.
 
-The result was approximately 12ms per sample. A 250x improvement over the bash script. The daemon consumed negligible CPU, and Waybar always had fresh data.
+The result was approximately 100ms per sample -- a huge improvement over the bash script, but still dominated by one remaining subprocess: `powerprofilesctl get`. This spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~100ms. Everything else -- the /proc walk, the delta computation, the JSON serialisation -- fit inside the remaining time.
 
-But 12ms is still a long time. A CPU running at 5 GHz executes 60 million cycles in 12ms. Reading a few dozen integers from the kernel should not require 60 million cycles. The bottleneck was obvious: the `/proc/[pid]/*` walk.
+But 100ms for a status bar sample felt wrong. Profiling made the bottleneck obvious.
 
 ---
 
-## Stage 3: Eliminating /proc Walks for Process Metrics (~3.3ms)
+## Stage 2.5: Eliminating the Last Subprocess (~5ms)
+
+Three optimisations in quick succession collapsed the sample time from ~100ms to single-digit milliseconds:
+
+**Reusable read buffers.** The initial implementation allocated a new `String` for each `/proc/[pid]/*` read. With 300+ PIDs and 3 files each, that was ~900 allocations and deallocations per sample. Switching to a single stack-allocated `[u8; 8192]` buffer reused across all reads eliminated the allocation overhead entirely.
+
+**Skipping kernel threads.** Not all PIDs in `/proc` are userspace processes. Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out -- by checking whether the virtual size is zero in `/proc/[pid]/stat` -- cut the PID count roughly in half and avoided unnecessary IO reads for 250+ PIDs.
+
+**Direct sysfs instead of D-Bus.** The power profile that `powerprofilesctl` spent ~100ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile` -- a single file read, no IPC, no subprocess. This one change eliminated the dominant bottleneck.
+
+After these changes, the sample time dropped to around 5ms on a typical desktop. The remaining cost was the /proc walk itself -- still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
+
+---
+
+## Stage 3: Eliminating /proc Walks Entirely (sub-1ms)
 
 ### The /proc problem
+
+<svg viewBox="0 0 600 170" xmlns="http://www.w3.org/2000/svg" class="diagram-syscall-cost" role="img" aria-label="Diagram: /proc syscall cost multiplier">
+  <style>
+    .sc-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 13px; }
+    .sc-num   { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 22px; font-weight: bold; }
+    .sc-op    { fill: rgba(255,255,255,0.6); font-family: 'Lora', serif; font-size: 18px; }
+    .sc-box   { fill: rgba(0,0,0,0.25); stroke: rgba(255,255,255,0.15); stroke-width: 1; rx: 8; }
+    .sc-res   { fill: rgba(168,200,160,0.12); stroke: rgba(168,200,160,0.3); stroke-width: 1; rx: 8; }
+    .sc-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; font-style: italic; }
+  </style>
+  <!-- 3 files -->
+  <rect x="20" y="15" width="120" height="65" class="sc-box"/>
+  <text x="80" y="42" text-anchor="middle" class="sc-num">3</text>
+  <text x="80" y="62" text-anchor="middle" class="sc-label">files/PID</text>
+  <!-- × -->
+  <text x="162" y="52" text-anchor="middle" class="sc-op">×</text>
+  <!-- 300 PIDs -->
+  <rect x="182" y="15" width="120" height="65" class="sc-box"/>
+  <text x="242" y="42" text-anchor="middle" class="sc-num">300</text>
+  <text x="242" y="62" text-anchor="middle" class="sc-label">PIDs</text>
+  <!-- = -->
+  <text x="324" y="52" text-anchor="middle" class="sc-op">=</text>
+  <!-- 2700 syscalls -->
+  <rect x="344" y="15" width="240" height="65" class="sc-res"/>
+  <text x="464" y="42" text-anchor="middle" class="sc-num">2,700</text>
+  <text x="464" y="62" text-anchor="middle" class="sc-label">syscalls (open + read + close)</text>
+  <!-- Annotation -->
+  <text x="300" y="110" text-anchor="middle" class="sc-dim">Each syscall = context switch to kernel mode.</text>
+  <text x="300" y="128" text-anchor="middle" class="sc-dim">Each read = kernel formats ASCII text we immediately parse back into numbers.</text>
+  <text x="300" y="146" text-anchor="middle" class="sc-dim">Each close = teardown of fd we'll just reopen next sample.</text>
+</svg>
 
 Walking `/proc` for per-PID metrics is expensive because it is fundamentally a filesystem operation. For each PID:
 
@@ -96,6 +210,50 @@ With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for t
 ### eBPF: reading kernel data in-kernel
 
 The solution was to move the data collection into the kernel itself using eBPF. A BPF program attached to the `sched_switch` tracepoint fires every time the scheduler switches between tasks. At that moment, the kernel has the outgoing task's `task_struct` right there -- its PID, its accumulated CPU time, its memory maps, its IO accounting. Instead of asking the kernel to format this data into text files and then parsing it back, the BPF program reads the values directly from the kernel's data structures and writes them into a BPF hash map.
+
+<svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" class="diagram-ebpf-rings" role="img" aria-label="Diagram: eBPF privilege rings — sandboxed code running inside the kernel">
+  <style>
+    .ring-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 13px; }
+    .ring-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 14px; font-weight: bold; }
+    .ring-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
+    .ring-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; font-style: italic; }
+  </style>
+  <!-- Ring 0 outer box -->
+  <rect x="10" y="10" width="600" height="230" rx="12" fill="rgba(39,174,96,0.06)" stroke="rgba(39,174,96,0.3)" stroke-width="1.5"/>
+  <text x="30" y="36" class="ring-title">Ring 0 (Kernel)</text>
+  <!-- eBPF sandbox -->
+  <rect x="30" y="50" width="260" height="130" rx="8" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.4)" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="50" y="74" class="ring-label" font-weight="600">eBPF Sandbox</text>
+  <text x="50" y="96" class="ring-mono">• Verified bytecode</text>
+  <text x="50" y="114" class="ring-mono">• Can't crash the kernel</text>
+  <text x="50" y="132" class="ring-mono">• Bounded execution time</text>
+  <text x="50" y="150" class="ring-mono">• Direct struct access</text>
+  <text x="50" y="168" class="ring-mono">• No text serialisation</text>
+  <!-- Data structures -->
+  <text x="340" y="74" class="ring-mono">task_struct →</text>
+  <text x="340" y="96" class="ring-mono">mm_struct   →</text>
+  <text x="340" y="118" class="ring-mono">task->ioac  →</text>
+  <!-- Arrows from data to sandbox -->
+  <line x1="330" y1="70" x2="295" y2="90" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
+  <line x1="330" y1="92" x2="295" y2="110" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
+  <line x1="330" y1="114" x2="295" y2="130" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
+  <!-- BPF maps bridge -->
+  <text x="160" y="210" text-anchor="middle" class="ring-mono">↕ BPF maps (shared memory)</text>
+  <!-- Divider -->
+  <line x1="10" y1="240" x2="610" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <!-- Ring 3 -->
+  <rect x="10" y="240" width="600" height="90" rx="12" fill="rgba(52,152,219,0.06)" stroke="rgba(52,152,219,0.25)" stroke-width="1.5"/>
+  <text x="30" y="268" class="ring-title">Ring 3 (Userspace)</text>
+  <text x="50" y="292" class="ring-mono">rstat daemon</text>
+  <text x="50" y="310" class="ring-label">• Single batch read of BPF map  • No /proc  • No text parsing</text>
+  <!-- Insight box -->
+  <rect x="310" y="256" width="285" height="60" rx="6" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="320" y="276" class="ring-dim">Instead of asking the kernel to format data</text>
+  <text x="320" y="292" class="ring-dim">into text files, send a verified program into</text>
+  <text x="320" y="308" class="ring-dim">the kernel. It reads structs directly.</text>
+</svg>
+
+eBPF is not a hack or a backdoor. It's a formally verified sandbox -- the kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
 
 **The custom BPF loader.** The standard approach would be to use aya or libbpf-rs, high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in tokio (an async runtime), libbpf-rs pulls in libbpf-sys with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads a single tracepoint probe with three maps, this is absurd.
 
@@ -121,13 +279,38 @@ This was discarded. IO collection stayed with `/proc/[pid]/io` and delta trackin
 
 When the BPF map contained entries created by the (now-discarded) block layer path, some PIDs had all-zero `comm` fields because `bpf_get_current_comm()` was returning the kernel worker's name rather than the originating process. Even after removing the block layer tracepoint, this pattern served as a reminder: always validate BPF-collected data and implement fallbacks. The daemon fell back to reading `/proc/[pid]/comm` when a BPF entry's comm was all zeroes.
 
-**Result: ~3.3ms.** The /proc walk for CPU was eliminated entirely. IO and memory still required per-PID /proc reads, but the most expensive part -- the directory walk and stat file parsing -- was gone.
+The initial approach for IO -- using the `block_rq_issue` tracepoint -- was tried and discarded. But collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
 
----
-
-## Stage 4: Pure BPF -- No /proc, No /sys/net (~1.34ms avg, 0.98ms p50)
-
-The 3.3ms result from Stage 3 was dominated by the remaining `/proc/[pid]/io` and `/proc/[pid]/statm` reads. Each PID still required opening, reading, parsing, and closing two files. The solution was to collect RSS and IO directly from kernel data structures within the `sched_switch` BPF probe.
+<svg viewBox="0 0 580 220" xmlns="http://www.w3.org/2000/svg" class="diagram-sched-switch" role="img" aria-label="Diagram: sched_switch tracepoint firing on context switch">
+  <style>
+    .ss-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 12px; }
+    .ss-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
+    .ss-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
+    .ss-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; font-style: italic; }
+    .ss-box   { fill: rgba(0,0,0,0.2); stroke: rgba(255,255,255,0.15); rx: 6; }
+    .ss-arr   { stroke: rgba(168,200,160,0.5); stroke-width: 1.5; fill: none; marker-end: url(#ssa); }
+  </style>
+  <defs><marker id="ssa" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.5)"/></marker></defs>
+  <!-- Step 1 -->
+  <rect x="10" y="10" width="250" height="36" class="ss-box"/>
+  <text x="135" y="33" text-anchor="middle" class="ss-title">CPU running Task A → switch to B</text>
+  <line x1="135" y1="46" x2="135" y2="68" class="ss-arr"/>
+  <!-- Step 2 -->
+  <rect x="50" y="70" width="170" height="30" rx="6" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="135" y="90" text-anchor="middle" class="ss-mono">sched_switch fires</text>
+  <line x1="135" y1="100" x2="135" y2="118" class="ss-arr"/>
+  <!-- Step 3: BPF reads -->
+  <rect x="20" y="120" width="240" height="60" class="ss-box"/>
+  <text x="35" y="138" class="ss-label">BPF probe reads outgoing task's:</text>
+  <text x="45" y="156" class="ss-mono">• cpu_ns  • mm→rss_stat  • task→ioac</text>
+  <line x1="260" y1="150" x2="320" y2="150" class="ss-arr"/>
+  <!-- Step 4: Map write -->
+  <rect x="325" y="130" width="240" height="40" rx="6" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="445" y="155" text-anchor="middle" class="ss-mono">writes to BPF map[pid]</text>
+  <!-- Insight -->
+  <rect x="10" y="192" width="560" height="22" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="290" y="208" text-anchor="middle" class="ss-dim">Every task eventually gets switched out. At that moment, all its accounting data is right there in the task_struct.</text>
+</svg>
 
 ### RSS from mm->rss_stat
 
@@ -202,6 +385,37 @@ The original script called `powerprofilesctl get`, which spawns a process that m
 
 The original bash script collected network statistics from `/proc/net/dev`. This was removed entirely. Waybar has a built-in network module that does this more efficiently, and duplicating it in a system health monitor provides no value.
 
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
+  <style>
+    .ba-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
+    .ba-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
+    .ba-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; }
+    .ba-num   { fill: #c0392b; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
+    .ba-num-g { fill: #2ecc71; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
+  </style>
+  <!-- Before box -->
+  <rect x="10" y="10" width="330" height="220" rx="10" fill="rgba(192,57,43,0.06)" stroke="rgba(192,57,43,0.25)" stroke-width="1"/>
+  <text x="175" y="35" text-anchor="middle" class="ba-title">Before (Stage 2)</text>
+  <text x="30" y="60" class="ba-mono">Every 2s, for each of 300 PIDs:</text>
+  <text x="40" y="80" class="ba-mono">open 3 files → read text → parse → close</text>
+  <text x="40" y="100" class="ba-mono">= 2,700 syscalls</text>
+  <text x="40" y="120" class="ba-mono">+ 7 sysfs reads (14 syscalls)</text>
+  <text x="40" y="140" class="ba-mono">+ powerprofilesctl subprocess</text>
+  <text x="30" y="175" class="ba-dim">Total per sample:</text>
+  <text x="30" y="200" class="ba-num">~100 ms</text>
+  <!-- After box -->
+  <rect x="360" y="10" width="330" height="220" rx="10" fill="rgba(46,204,113,0.06)" stroke="rgba(46,204,113,0.25)" stroke-width="1"/>
+  <text x="525" y="35" text-anchor="middle" class="ba-title">After (Stage 3+)</text>
+  <text x="380" y="60" class="ba-mono">Continuously:</text>
+  <text x="390" y="80" class="ba-mono">BPF probe fires on context switch</text>
+  <text x="390" y="100" class="ba-mono">writes to kernel map (0 userspace syscalls)</text>
+  <text x="380" y="124" class="ba-mono">Every 2s:</text>
+  <text x="390" y="144" class="ba-mono">1 batch map read + 7 pread() = 8 syscalls</text>
+  <text x="390" y="164" class="ba-mono">+ hand-written JSON (0 allocs)</text>
+  <text x="380" y="195" class="ba-dim">Total per sample:</text>
+  <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
+</svg>
+
 ### The remaining filesystem: sysfs
 
 After eliminating all /proc reads, the only filesystem access remaining was sysfs for hardware-specific values that have no syscall equivalent:
@@ -216,11 +430,11 @@ After eliminating all /proc reads, the only filesystem access remaining was sysf
 
 Seven files. All opened once at startup and held open for the lifetime of the daemon. Read via `lseek(0) + read()` each tick.
 
-**Result: 1.34ms average, 0.98ms p50.** The median was sub-millisecond. The tail was dominated by occasional kernel scheduling latency and sysfs read variability.
+**Result: sub-millisecond median.** The commit message recorded "down from 12ms to sub-1ms." The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
 
 ---
 
-## Stage 5: Zero-Allocation Steady State (~0.97ms avg, 0.74ms min)
+## Stage 4: Zero-Allocation Steady State
 
 At this point, the sample loop was fast enough that allocator overhead and syscall count became the dominant factors. Profiling revealed several sources of heap allocation and unnecessary work:
 
@@ -429,6 +643,59 @@ for cpu in 0..ncpu {
 
 ## Architecture Summary
 
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" class="diagram-architecture" role="img" aria-label="Architecture diagram: BPF probes, maps, userspace daemon, Waybar output">
+  <style>
+    .ar-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
+    .ar-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
+    .ar-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
+    .ar-box   { rx: 8; stroke-width: 1; }
+    .ar-arr   { stroke: rgba(168,200,160,0.5); stroke-width: 1.5; fill: none; marker-end: url(#ara); }
+  </style>
+  <defs><marker id="ara" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.5)"/></marker></defs>
+  <!-- Kernel zone -->
+  <rect x="10" y="10" width="660" height="120" class="ar-box" fill="rgba(39,174,96,0.05)" stroke="rgba(39,174,96,0.25)"/>
+  <text x="30" y="32" class="ar-title">Kernel</text>
+  <!-- Tracepoints -->
+  <rect x="30" y="42" width="160" height="32" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="110" y="63" text-anchor="middle" class="ar-mono">sched_switch probe</text>
+  <rect x="30" y="80" width="160" height="32" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="110" y="101" text-anchor="middle" class="ar-mono">sched_process_exit probe</text>
+  <!-- BPF maps -->
+  <rect x="250" y="42" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="310" y="61" text-anchor="middle" class="ar-mono">stats (HASH)</text>
+  <rect x="250" y="74" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="310" y="93" text-anchor="middle" class="ar-mono">sys (ARRAY)</text>
+  <rect x="250" y="106" width="120" height="18" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="310" y="120" text-anchor="middle" class="ar-mono">sched_start (HASH)</text>
+  <!-- Arrows probes → maps -->
+  <line x1="190" y1="58" x2="245" y2="56" class="ar-arr"/>
+  <line x1="190" y1="96" x2="245" y2="96" class="ar-arr"/>
+  <!-- sysfs files -->
+  <rect x="430" y="42" width="220" height="82" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="540" y="60" text-anchor="middle" class="ar-label">sysfs (7 files)</text>
+  <text x="445" y="78" class="ar-mono">thermal_zone0/temp</text>
+  <text x="445" y="92" class="ar-mono">cpufreq/scaling_cur_freq</text>
+  <text x="445" y="106" class="ar-mono">drm/card1/gt/gt0/rps_act_freq_mhz</text>
+  <text x="445" y="120" class="ar-mono">platform_profile ...</text>
+  <!-- Divider -->
+  <line x1="10" y1="140" x2="670" y2="140" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <!-- Userspace zone -->
+  <rect x="10" y="140" width="660" height="150" class="ar-box" fill="rgba(52,152,219,0.04)" stroke="rgba(52,152,219,0.2)"/>
+  <text x="30" y="162" class="ar-title">Userspace</text>
+  <!-- rstat daemon -->
+  <rect x="180" y="170" width="300" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
+  <text x="330" y="192" text-anchor="middle" class="ar-title">rstat daemon</text>
+  <text x="330" y="210" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
+  <!-- Arrows maps → daemon -->
+  <line x1="310" y1="128" x2="310" y2="165" class="ar-arr"/>
+  <!-- Arrow sysfs → daemon -->
+  <line x1="540" y1="128" x2="430" y2="165" class="ar-arr"/>
+  <!-- Waybar -->
+  <rect x="250" y="245" width="160" height="34" class="ar-box" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="330" y="267" text-anchor="middle" class="ar-label">Waybar (stdout → JSON)</text>
+  <line x1="330" y1="220" x2="330" y2="240" class="ar-arr"/>
+</svg>
+
 ### BPF probe (probe.bpf.c)
 
 A single C source file compiled with `clang -target bpf -O2 -g`. Uses `vmlinux.h` for kernel type definitions (generated from BTF, avoids kernel header dependency).
@@ -473,14 +740,46 @@ The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent 
 
 ## Performance Timeline
 
-| Stage | Avg | P50 | Min | Approach |
-|-------|-----|-----|-----|----------|
-| Bash + coreutils | ~3-5s | -- | -- | Subprocesses for every metric, no state between runs |
-| Rust + /proc | 12.4ms | -- | -- | Direct /proc parsing, kept file handles, in-memory deltas |
-| Rust + eBPF (hybrid) | 3.28ms | -- | -- | BPF for CPU via sched_switch, /proc for IO and memory |
-| Pure BPF (no /proc) | 1.34ms | 0.98ms | -- | RSS and IO read in-kernel, sysinfo() for system metrics |
-| Zero-alloc optimised | 0.97ms | 0.97ms | 0.74ms | Batch map reads, sorted vec, pread, hand-written JSON |
+| Stage | Measured | Source | Approach |
+|-------|----------|--------|----------|
+| Bash + coreutils | ~2s | Benched (excl. 1s sleep) | Subprocesses for every metric, no state between runs |
+| Rust + /proc | ~100ms | Benched | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess |
+| Sysfs + buffer reuse | ~5ms | Benched | Reusable buffers, skip kthreads, sysfs replaces D-Bus |
+| eBPF -- no /proc walks | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
+| Zero-alloc optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
 
-Each stage represents roughly a 3-4x improvement. The total improvement from bash to final is approximately 4000x. The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob -- CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns -- in under a millisecond.
+The "Benched" column reflects measurements on the current system with ~325 PIDs under moderate load. The commit messages record higher figures (e.g. "~30ms" for the sysfs stage, "12ms → sub-1ms" for eBPF) -- those were measured at the time of development under heavier conditions (HyprPanel running, more processes, different system load).
+
+The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob -- CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns -- in under a millisecond on a quiet desktop.
+
+<img src="assets/rstat-tooltip.png" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
+<em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">The final result: a complete system health snapshot in under 3ms.</em>
+
+<div class="memory-comparison">
+  <div class="comparison-row comparison-bad">
+    <span class="comparison-label">HyprPanel</span>
+    <span class="comparison-stats">135 MB RSS, 10% CPU, JS runtime + GObject + D-Bus</span>
+  </div>
+  <div class="comparison-row comparison-good">
+    <span class="comparison-label">rstat</span>
+    <span class="comparison-stats">~200 KB RSS, &lt;0.01% CPU, zero heap allocations</span>
+  </div>
+</div>
+
+---
+
+## The Real Lesson
+
+The first improvement -- bash to Rust -- captured more than 95% of the practical benefit. Going from 2 seconds to 5 milliseconds was a 400× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 5ms is already negligible. Nobody would notice the difference between 5ms and sub-1ms.
+
+The subsequent journey from 5ms to sub-millisecond was intellectually rewarding. It taught me how /proc works under the hood, how BPF program loading actually happens at the syscall level, how the scheduler accounts CPU time on tickless kernels, and why `percpu_counter` values are approximate. I would do it again. But it was not practically necessary.
+
+This is the shape of most performance work: the first 10% of effort captures 90% of the improvement. The remaining 90% of effort is for the remaining 10% of improvement. Knowing which side you're on matters.
+
+We don't need everyone writing eBPF probes. We need people to stop embedding JavaScript runtimes in desktop utilities. The gap between "shell script that forks 15 processes" and "compiled binary that holds file descriptors open" is where almost all the real-world wins live. Everything beyond that is craft.
 
 The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism -- the processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
+
+Meanwhile, my "AI-powered code editor" -- a React SPA running on Node.js to print characters to a terminal -- sits at 100% CPU with zram thrashing. Four `libuv-worker` processes, each consuming 700MB. The status bar daemon samples the carnage in under a millisecond.
+
+Sometimes the message writes itself.
