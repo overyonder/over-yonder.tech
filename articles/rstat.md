@@ -22,7 +22,11 @@ This is not an indictment of the people who built HyprPanel -- it's genuinely us
 
 A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to Waybar, which is written in C++ and renders with GTK. And then I needed a system monitor module that actually took its job seriously.
 
-This is the story of `rstat`: a system health monitor that started as a 2-second bash script and ended as a Rust daemon that injects a small verified program into the kernel itself -- running at ring 0 privilege, reading scheduler data structures directly, bypassing the filesystem and syscall overhead entirely. Zero heap allocations in steady state. Sub-millisecond samples. Each stage of optimisation was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
+This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a Rust daemon that injects its own code into the kernel.
+
+Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks -- no filesystem, no syscalls, no text parsing, no heap allocations. Sub-millisecond samples.
+
+Each stage was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
 
 <svg viewBox="0 0 750 222" xmlns="http://www.w3.org/2000/svg" class="perf-waterfall" role="img" aria-label="Performance waterfall: 2 seconds down to sub-millisecond">
   <style>
@@ -31,27 +35,24 @@ This is the story of `rstat`: a system health monitor that started as a 2-second
     .wf-bar   { rx: 4; ry: 4; }
   </style>
   <text x="375" y="22" text-anchor="middle" class="wf-label" font-size="15" fill="rgba(255,255,255,0.95)">Sample time per stage (log scale)</text>
-  <!-- Bash: ~2000ms measured. log scale, full width = log10(2000), base. -->
-  <!-- Using log10(val)/log10(2000)*500 for bar widths. log10(2000)=3.301 -->
+  <!-- Bash: ~2000ms. log10(2000)=3.301. Bar widths = log10(val)/3.301*500 -->
   <text x="14" y="58" class="wf-label">Bash + coreutils</text>
   <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
   <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
-  <!-- Rust + /proc + powerprofilesctl: ~100ms. log10(100)/3.301*500 ≈ 303 -->
+  <!-- Rust + /proc + powerprofilesctl: ~700ms. log10(700)/3.301*500 ≈ 431 -->
   <text x="14" y="96" class="wf-label">Rust + /proc</text>
-  <rect x="220" y="82" width="303" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
-  <text x="529" y="98" text-anchor="end" class="wf-time">~100 ms</text>
-  <!-- After sysfs/buffer reuse: ~5ms. log10(5)/3.301*500 ≈ 106 -->
-  <text x="14" y="134" class="wf-label">Sysfs + buffer reuse</text>
-  <rect x="220" y="120" width="106" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
-  <text x="332" y="136" text-anchor="end" class="wf-time">~5 ms</text>
-  <!-- eBPF: sub-1ms (min 0.78ms bench). log10(0.78) = -0.108, need offset -->
-  <!-- Use (log10(val)+0.5)/(3.301+0.5)*500 to handle sub-1 values -->
-  <!-- (-.108+.5)/3.801*500 = 52 -->
+  <rect x="220" y="82" width="431" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
+  <text x="657" y="98" text-anchor="end" class="wf-time">~700 ms</text>
+  <!-- After sysfs/byte-level parsing: ~15ms. log10(15)/3.301*500 ≈ 178 -->
+  <text x="14" y="134" class="wf-label">Optimised /proc</text>
+  <rect x="220" y="120" width="178" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
+  <text x="404" y="136" text-anchor="end" class="wf-time">~15 ms</text>
+  <!-- eBPF: sub-1ms. (log10(0.78)+0.5)/(3.301+0.5)*500 ≈ 52 -->
   <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
   <rect x="220" y="158" width="52" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
   <text x="278" y="174" class="wf-time">&lt;1 ms</text>
   <!-- Source note -->
-  <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Measured on current system (325 PIDs). Commit messages record higher figures under heavier load.</text>
+  <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Development-time measurements. Current-system benchmarks show lower figures due to different load conditions.</text>
 </svg>
 
 ---
@@ -83,7 +84,7 @@ This was the motivation for a rewrite: not performance for its own sake, but the
 
 ---
 
-## Stage 2: Rust + /proc Parsing (~100ms)
+## Stage 2: Rust + /proc Parsing (~700ms)
 
 The first rewrite eliminated almost every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared -- no polling interval on Waybar's side, no repeated process spawning.
 
@@ -139,23 +140,25 @@ The key changes:
 
 **serde_json for output.** The daemon serialised a struct to JSON using serde. Convenient, correct, and -- as would later become relevant -- not free.
 
-The result was approximately 100ms per sample -- a huge improvement over the bash script, but still dominated by one remaining subprocess: `powerprofilesctl get`. This spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~100ms. Everything else -- the /proc walk, the delta computation, the JSON serialisation -- fit inside the remaining time.
+The result was approximately 700ms per sample. Better than 2 seconds, but embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. Everything else -- the /proc walk, the delta computation, the JSON serialisation -- fit in the remaining time.
 
-But 100ms for a status bar sample felt wrong. Profiling made the bottleneck obvious.
+The Rust binary wasn't slow. The single subprocess it still shelled out to was slow. The lesson was immediate: a compiled daemon that spawns one subprocess is only as fast as that subprocess.
 
 ---
 
-## Stage 2.5: Eliminating the Last Subprocess (~5ms)
+## Stage 2.5: Killing the Subprocess, Then the Overhead (~15ms)
 
-Three optimisations in quick succession collapsed the sample time from ~100ms to single-digit milliseconds:
+The 700ms number had one obvious cause. Eliminating `powerprofilesctl` was the first fix, and the rest followed in quick succession:
+
+**Direct sysfs instead of D-Bus.** The power profile that `powerprofilesctl` spent ~810ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile` -- a single file read, no IPC, no subprocess. This one change dropped sample time from ~700ms to ~28ms. The entire 700ms was one subprocess.
 
 **Reusable read buffers.** The initial implementation allocated a new `String` for each `/proc/[pid]/*` read. With 300+ PIDs and 3 files each, that was ~900 allocations and deallocations per sample. Switching to a single stack-allocated `[u8; 8192]` buffer reused across all reads eliminated the allocation overhead entirely.
 
 **Skipping kernel threads.** Not all PIDs in `/proc` are userspace processes. Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out -- by checking whether the virtual size is zero in `/proc/[pid]/stat` -- cut the PID count roughly in half and avoided unnecessary IO reads for 250+ PIDs.
 
-**Direct sysfs instead of D-Bus.** The power profile that `powerprofilesctl` spent ~100ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile` -- a single file read, no IPC, no subprocess. This one change eliminated the dominant bottleneck.
+**Byte-level /proc parsing.** The initial parser used Rust's `str::split()` and `parse::<u64>()` on each `/proc/[pid]/stat` line. Replacing this with a hand-rolled byte scanner that walks the buffer once -- skipping fields by counting spaces, converting digits inline -- cut the parsing cost substantially.
 
-After these changes, the sample time dropped to around 5ms on a typical desktop. The remaining cost was the /proc walk itself -- still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
+After these changes, the sample time dropped to around 15ms on a typical desktop. The remaining cost was the /proc walk itself -- still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
 
 ---
 
@@ -400,9 +403,9 @@ The original bash script collected network statistics from `/proc/net/dev`. This
   <text x="40" y="80" class="ba-mono">open 3 files → read text → parse → close</text>
   <text x="40" y="100" class="ba-mono">= 2,700 syscalls</text>
   <text x="40" y="120" class="ba-mono">+ 7 sysfs reads (14 syscalls)</text>
-  <text x="40" y="140" class="ba-mono">+ powerprofilesctl subprocess</text>
+  <text x="40" y="140" class="ba-mono">+ powerprofilesctl subprocess (~810ms)</text>
   <text x="30" y="175" class="ba-dim">Total per sample:</text>
-  <text x="30" y="200" class="ba-num">~100 ms</text>
+  <text x="30" y="200" class="ba-num">~700 ms</text>
   <!-- After box -->
   <rect x="360" y="10" width="330" height="220" rx="10" fill="rgba(46,204,113,0.06)" stroke="rgba(46,204,113,0.25)" stroke-width="1"/>
   <text x="525" y="35" text-anchor="middle" class="ba-title">After (Stage 3+)</text>
@@ -743,17 +746,29 @@ The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent 
 | Stage | Measured | Source | Approach |
 |-------|----------|--------|----------|
 | Bash + coreutils | ~2s | Benched (excl. 1s sleep) | Subprocesses for every metric, no state between runs |
-| Rust + /proc | ~100ms | Benched | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess |
-| Sysfs + buffer reuse | ~5ms | Benched | Reusable buffers, skip kthreads, sysfs replaces D-Bus |
+| Rust + /proc | ~700ms | Dev measurement | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
+| Sysfs + optimised /proc | ~15ms | Dev measurement | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
 | eBPF -- no /proc walks | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
 | Zero-alloc optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
 
-The "Benched" column reflects measurements on the current system with ~325 PIDs under moderate load. The commit messages record higher figures (e.g. "~30ms" for the sysfs stage, "12ms → sub-1ms" for eBPF) -- those were measured at the time of development under heavier conditions (HyprPanel running, more processes, different system load).
+Development measurements were taken under heavier load conditions (HyprPanel running, more processes). Current-system benchmarks show lower figures for the /proc stages due to lighter load and fewer PIDs.
 
 The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob -- CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns -- in under a millisecond on a quiet desktop.
 
 <img src="assets/rstat-tooltip.png" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
 <em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">The final result: a complete system health snapshot in under 3ms.</em>
+
+### CPU Flamegraphs
+
+Before the zero-allocation work, `perf record` on the sample loop shows serde_json serialisation and `take_sample` dominating:
+
+<img src="assets/rstat-flamegraph-old.svg" alt="CPU flamegraph before optimisation -- serde_json and take_sample dominate" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
+<em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">Pre-optimisation: serde serialisation and proc walks visible in the profile.</em>
+
+After optimisation, the hot path is so fast that `perf` mostly captures debug symbol resolution noise (backtrace symbolisation from the benchmark harness):
+
+<img src="assets/rstat-flamegraph.svg" alt="CPU flamegraph after optimisation -- hot path too fast, profiler captures mostly noise" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
+<em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">Post-optimisation: the actual sample loop is invisible in the profile. The profiler is profiling itself.</em>
 
 <div class="memory-comparison">
   <div class="comparison-row comparison-bad">
@@ -770,9 +785,9 @@ The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing 
 
 ## The Real Lesson
 
-The first improvement -- bash to Rust -- captured more than 95% of the practical benefit. Going from 2 seconds to 5 milliseconds was a 400× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 5ms is already negligible. Nobody would notice the difference between 5ms and sub-1ms.
+The first improvement -- bash to Rust -- captured more than 95% of the practical benefit. Going from 2 seconds to 15 milliseconds was a 130× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 15ms is already negligible. Nobody would notice the difference between 15ms and sub-1ms.
 
-The subsequent journey from 5ms to sub-millisecond was intellectually rewarding. It taught me how /proc works under the hood, how BPF program loading actually happens at the syscall level, how the scheduler accounts CPU time on tickless kernels, and why `percpu_counter` values are approximate. I would do it again. But it was not practically necessary.
+The subsequent journey from 15ms to sub-millisecond was intellectually rewarding. It taught me how /proc works under the hood, how BPF program loading actually happens at the syscall level, how the scheduler accounts CPU time on tickless kernels, and why `percpu_counter` values are approximate. I would do it again. But it was not practically necessary.
 
 This is the shape of most performance work: the first 10% of effort captures 90% of the improvement. The remaining 90% of effort is for the remaining 10% of improvement. Knowing which side you're on matters.
 
@@ -780,6 +795,6 @@ We don't need everyone writing eBPF probes. We need people to stop embedding Jav
 
 The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism -- the processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
 
-Meanwhile, my "AI-powered code editor" -- a React SPA running on Node.js to print characters to a terminal -- sits at 100% CPU with zram thrashing. Four `libuv-worker` processes, each consuming 700MB. The status bar daemon samples the carnage in under a millisecond.
+Meanwhile, Claude Code -- a React SPA running on Node.js to print characters to a terminal -- sits at 100% CPU with zram thrashing. Four `libuv-worker` processes, each consuming 700MB. The status bar daemon samples the carnage in under a millisecond.
 
 Sometimes the message writes itself.
