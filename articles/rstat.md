@@ -1,5 +1,5 @@
 ---
-title: "From 3 Seconds to 0.7 Milliseconds: eBPF + Zero-Alloc Rust"
+title: "System calls are slow. So run your code in the kernel!"
 date: 2026-02-09
 author: Kieran Hannigan
 tags: [rust, ebpf, performance, linux]
