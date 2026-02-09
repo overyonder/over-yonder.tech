@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var stripped = md.replace(/^---[\s\S]*?---\s*/, '');
         var meta = '<div class="article-meta">' + esc(author) + ' &middot; ' + esc(date) + '</div>';
         el.innerHTML = meta + marked.parse(stripped);
+        el.querySelectorAll('pre code').forEach(function (block) {
+          hljs.highlightElement(block);
+        });
       })
       .catch(function () {
         el.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Failed to load article.</p>';

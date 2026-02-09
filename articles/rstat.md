@@ -1,15 +1,28 @@
 ---
-title: "System calls are slow. So run your code in the kernel!"
+title: "System calls are slow. Run your code in the kernel!"
 date: 2026-02-09
 author: Kieran Hannigan
 tags: [rust, ebpf, performance, linux]
 ---
 
-# From 3 Seconds to 0.7 Milliseconds: Optimising a System Monitor with eBPF and Zero-Allocation Rust
+# System calls are slow. Run your code in the kernel!
 
-A modern CPU executes billions of operations per second. Reading a handful of integers from the kernel -- CPU usage, memory consumption, IO rates -- should not take three seconds. It should not take twelve milliseconds. The fact that it does, in the naive case, is a story about the cumulative cost of abstractions: process creation, filesystem overhead, string parsing, memory allocation, and the sheer number of syscalls required to ask the operating system simple questions about itself.
+The status bar on my Linux desktop was using 135MB of RAM and 10% CPU. Not the applications it was monitoring -- the bar itself. The monitoring tool was a measurable load on the system it was supposed to monitor.
 
-This is the story of `rstat`, a system health monitor for Waybar that started as a bash script and ended as a sub-millisecond eBPF-instrumented Rust daemon with zero heap allocations in steady state. Each stage of optimisation was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
+HyprPanel is the de facto status bar for the Hyprland compositor. It's written in TypeScript and runs on GJS -- GNOME's JavaScript runtime, which embeds the SpiderMonkey engine from Firefox. A full JavaScript engine, a GObject type system, a D-Bus session bridge, a CSS layout engine -- all running persistently to display a few numbers at the top of the screen. The process tree told the story:
+
+```
+user  318867  10.4  1.7  3467764  138444  gjs -m hyprpanel-wrapped
+user  318925   0.6  0.3    47276   29636  python3 bluetooth.py
+```
+
+3.4GB virtual address space. 135MB RSS. 10% CPU. Persistent `Gjs-Console-CRITICAL` warnings. GDBus errors about missing portal interfaces. A Python subprocess for Bluetooth. For a status bar.
+
+This is not an indictment of the people who built HyprPanel -- it's genuinely useful software. It is an indictment of the architectural norms that led us here. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
+
+A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to Waybar, which is written in C++ and renders with GTK. And then I needed a system monitor module that actually took its job seriously.
+
+This is the story of `rstat`: a system health monitor that started as a bash script running every 3 seconds and ended as a sub-millisecond eBPF-instrumented Rust daemon with zero heap allocations in steady state. Each stage of optimisation was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
 
 ---
 
