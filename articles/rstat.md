@@ -769,10 +769,6 @@ This gives accurate CPU utilisation regardless of the kernel's tick configuratio
 
 The original script called `powerprofilesctl get`, which spawns a process that makes a D-Bus call to the power-profiles-daemon. D-Bus involves socket communication, message serialisation, and the overhead of the D-Bus daemon itself. The power profile is exposed directly via sysfs at `/sys/firmware/acpi/platform_profile`: a single file read, no IPC, no subprocess.
 
-### /proc/net reads
-
-The original bash script collected network statistics from `/proc/net/dev`. This was removed entirely. Waybar has a built-in network module that does this more efficiently, and duplicating it in a system health monitor provides no value.
-
 </details>
 </div>
 
