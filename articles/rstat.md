@@ -31,9 +31,9 @@ This is not an indictment of the people who built HyprPanel. It's genuinely usef
 
 A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to [Waybar](https://github.com/Alexays/Waybar), which is written in C++ and renders with [GTK](https://gtk.org/) -- as close as I could get to a status bar that respects the job description. But I still needed a system monitor module that actually took *its* job seriously.
 
-This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a [Rust](https://www.rust-lang.org/) daemon that injects its own code into the kernel.
+This is the story of `rstat`: a system health monitor that went from an 800-millisecond bash script to a [Rust](https://www.rust-lang.org/) daemon that injects its own code into the kernel.
 
-Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing. Sub-millisecond samples.
+Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing. Single-digit microseconds per context switch, sub-millisecond per sample.
 
 Each stage was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
 
@@ -44,19 +44,19 @@ Each stage was motivated by the same question: where is the time actually going,
     .wf-bar   { rx: 4; ry: 4; }
   </style>
   <text x="375" y="22" text-anchor="middle" class="wf-label" font-size="15" fill="rgba(255,255,255,0.95)">Sample time per stage</text>
-  <!-- Linear scale: bar width = (ms / 2000) * 500 -->
+  <!-- Linear scale: bar width = (ms / 800) * 500 -->
   <text x="14" y="58" class="wf-label">Bash + coreutils</text>
   <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
-  <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
-  <!-- 700/2000 * 500 = 175 -->
+  <text x="726" y="60" text-anchor="end" class="wf-time">~800 ms</text>
+  <!-- 700/800 * 500 = 437 -->
   <text x="14" y="96" class="wf-label">Rust + /proc</text>
-  <rect x="220" y="82" width="175" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
-  <text x="401" y="98" text-anchor="end" class="wf-time">~700 ms</text>
-  <!-- 15/2000 * 500 = 3.75 -->
+  <rect x="220" y="82" width="437" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
+  <text x="663" y="98" text-anchor="end" class="wf-time">~700 ms</text>
+  <!-- 15/800 * 500 = 9 -->
   <text x="14" y="134" class="wf-label">Optimised /proc</text>
-  <rect x="220" y="120" width="4" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
-  <text x="230" y="136" class="wf-time">~15 ms</text>
-  <!-- 0.78/2000 * 500 ≈ 0.2 -->
+  <rect x="220" y="120" width="9" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
+  <text x="235" y="136" class="wf-time">~15 ms</text>
+  <!-- sub-1ms -->
   <text x="14" y="172" class="wf-label">eBPF</text>
   <rect x="220" y="158" width="1" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
   <text x="227" y="174" class="wf-time">&lt;1 ms</text>
@@ -71,28 +71,28 @@ Alright. Let me try that again in log scale.
     .wf-bar   { rx: 4; ry: 4; }
   </style>
   <text x="375" y="22" text-anchor="middle" class="wf-label" font-size="15" fill="rgba(255,255,255,0.95)">Sample time per stage (log scale)</text>
-  <!-- Bash: ~2000ms. log10(2000)=3.301. Bar widths = log10(val)/3.301*500 -->
+  <!-- Bash: ~800ms. log10(800)=2.903. Bar widths = log10(val)/2.903*500 -->
   <text x="14" y="58" class="wf-label">Bash + coreutils</text>
   <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
-  <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
-  <!-- log10(700)/3.301*500 ≈ 431 -->
+  <text x="726" y="60" text-anchor="end" class="wf-time">~800 ms</text>
+  <!-- log10(700)/2.903*500 ≈ 490 -->
   <text x="14" y="96" class="wf-label">Rust + /proc</text>
-  <rect x="220" y="82" width="431" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
-  <text x="657" y="98" text-anchor="end" class="wf-time">~700 ms</text>
-  <!-- log10(15)/3.301*500 ≈ 178 -->
+  <rect x="220" y="82" width="490" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
+  <text x="716" y="98" text-anchor="end" class="wf-time">~700 ms</text>
+  <!-- log10(15)/2.903*500 ≈ 203 -->
   <text x="14" y="134" class="wf-label">Optimised /proc</text>
-  <rect x="220" y="120" width="178" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
-  <text x="404" y="136" text-anchor="end" class="wf-time">~15 ms</text>
+  <rect x="220" y="120" width="203" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
+  <text x="429" y="136" text-anchor="end" class="wf-time">~15 ms</text>
   <!-- sub-1ms -->
   <text x="14" y="172" class="wf-label">eBPF</text>
-  <rect x="220" y="158" width="52" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
-  <text x="278" y="174" class="wf-time">&lt;1 ms</text>
+  <rect x="220" y="158" width="1" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
+  <text x="227" y="174" class="wf-time">&lt;1 ms</text>
   <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Dev-time measurements. Current-system benchmarks show lower figures due to different load.</text>
 </svg>
 
 ---
 
-## <svg class="stage-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="18" height="18" rx="3" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="5" y="14.5" font-family="'Courier New',monospace" font-size="11" fill="#c8d8c0">&gt;_</text></svg> Stage 1: The Baseline — Bash + Coreutils (~2 seconds)
+## <svg class="stage-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="18" height="18" rx="3" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="5" y="14.5" font-family="'Courier New',monospace" font-size="11" fill="#c8d8c0">&gt;_</text></svg> Stage 1: The Baseline — Bash + Coreutils (~800ms)
 
 <svg class="stage-breakdown" viewBox="0 0 140 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stage 1 time breakdown">
   <style>
@@ -100,32 +100,32 @@ Alright. Let me try that again in log scale.
     .sb-time  { fill: rgba(255,255,255,0.5); font-family: 'Courier New', monospace; font-size: 9px; }
     .sb-title { fill: rgba(255,255,255,0.9); font-family: 'Lora', serif; font-size: 10px; font-weight: bold; }
   </style>
-  <text x="70" y="14" text-anchor="middle" class="sb-title">~2,000ms</text>
-  <!-- Bar segments (total height 200px, scaled proportionally) -->
-  <!-- fork+exec: ~20ms = 2px -->
-  <rect x="50" y="24" width="50" height="10" rx="2" fill="#c0392b" opacity="0.7"/>
-  <text x="46" y="32" text-anchor="end" class="sb-label">fork+exec</text>
-  <!-- /proc reads: ~15ms = 2px -->
-  <rect x="50" y="36" width="50" height="8" rx="2" fill="#e67e22" opacity="0.7"/>
-  <text x="46" y="42" text-anchor="end" class="sb-label">/proc</text>
-  <!-- text parsing: ~5ms = 1px -->
-  <rect x="50" y="46" width="50" height="6" rx="2" fill="#f39c12" opacity="0.7"/>
-  <text x="46" y="51" text-anchor="end" class="sb-label">parse</text>
-  <!-- powerprofilesctl: ~810ms = 81px -->
-  <rect x="50" y="54" width="50" height="81" rx="2" fill="#c0392b" opacity="0.85"/>
-  <text x="46" y="98" text-anchor="end" class="sb-label">dbus</text>
-  <!-- sleep: ~1000ms = 100px -->
-  <rect x="50" y="137" width="50" height="100" rx="2" fill="rgba(255,255,255,0.08)"/>
-  <text x="46" y="190" text-anchor="end" class="sb-label">sleep</text>
+  <text x="70" y="14" text-anchor="middle" class="sb-title">~800ms</text>
+  <!-- Bar segments (total height 200px for ~800ms, 0.25px/ms) -->
+  <!-- fork+exec: ~20ms = 5px -->
+  <rect x="50" y="24" width="50" height="5" rx="2" fill="#c0392b" opacity="0.7"/>
+  <text x="46" y="29" text-anchor="end" class="sb-label">fork+exec</text>
+  <!-- /proc reads: ~15ms = 4px -->
+  <rect x="50" y="31" width="50" height="4" rx="2" fill="#e67e22" opacity="0.7"/>
+  <text x="46" y="35" text-anchor="end" class="sb-label">/proc</text>
+  <!-- text parsing: ~5ms = 2px -->
+  <rect x="50" y="37" width="50" height="2" rx="2" fill="#f39c12" opacity="0.7"/>
+  <text x="46" y="40" text-anchor="end" class="sb-label">parse</text>
+  <!-- powerprofilesctl: ~610ms = 152px -->
+  <rect x="50" y="41" width="50" height="152" rx="2" fill="#c0392b" opacity="0.85"/>
+  <text x="46" y="120" text-anchor="end" class="sb-label">dbus</text>
+  <!-- misc overhead: ~150ms = 38px -->
+  <rect x="50" y="195" width="50" height="38" rx="2" fill="rgba(255,255,255,0.08)"/>
+  <text x="46" y="216" text-anchor="end" class="sb-label">misc</text>
   <text x="70" y="250" text-anchor="middle" class="sb-time">Stage 1</text>
 </svg>
 
 The original implementation was a shell script invoked by Waybar's `custom` module on a polling interval. Every two or three seconds, Waybar would fork a shell, the shell would execute the script, and the script would fan out into a tree of subprocesses:
 
 ```
-cat /proc/stat | awk '{...}'
-cat /proc/meminfo | grep MemTotal | awk '{print $2}'
-cat /proc/loadavg
+awk '{...}' /proc/stat
+awk '/MemTotal/ {print $2}' /proc/meminfo
+read load _ < /proc/loadavg
 bc <<< "scale=2; $used / $total * 100"
 powerprofilesctl get
 ```
@@ -147,37 +147,30 @@ powerprofilesctl get
   <text x="300" y="66" text-anchor="middle" class="ft-mono">bash</text>
   <!-- fork lines to children -->
   <line x1="300" y1="74" x2="300" y2="86" class="ft-line"/>
-  <line x1="55" y1="86" x2="545" y2="86" class="ft-line"/>
-  <line x1="55" y1="86" x2="55" y2="98" class="ft-line"/>
-  <line x1="155" y1="86" x2="155" y2="98" class="ft-line"/>
-  <line x1="255" y1="86" x2="255" y2="98" class="ft-line"/>
+  <line x1="95" y1="86" x2="495" y2="86" class="ft-line"/>
+  <line x1="95" y1="86" x2="95" y2="98" class="ft-line"/>
+  <line x1="215" y1="86" x2="215" y2="98" class="ft-line"/>
   <line x1="355" y1="86" x2="355" y2="98" class="ft-line"/>
-  <line x1="545" y1="86" x2="545" y2="98" class="ft-line"/>
-  <!-- Children: cat, awk, grep, bc, powerprofilesctl -->
-  <rect x="15" y="98" width="80" height="24" class="ft-box"/>
-  <text x="55" y="114" text-anchor="middle" class="ft-mono">cat</text>
-  <rect x="115" y="98" width="80" height="24" class="ft-box"/>
-  <text x="155" y="114" text-anchor="middle" class="ft-mono">awk</text>
-  <rect x="215" y="98" width="80" height="24" class="ft-box"/>
-  <text x="255" y="114" text-anchor="middle" class="ft-mono">grep</text>
+  <line x1="495" y1="86" x2="495" y2="98" class="ft-line"/>
+  <!-- Children: awk, awk, bc, powerprofilesctl -->
+  <rect x="55" y="98" width="80" height="24" class="ft-box"/>
+  <text x="95" y="114" text-anchor="middle" class="ft-mono">awk</text>
+  <rect x="175" y="98" width="80" height="24" class="ft-box"/>
+  <text x="215" y="114" text-anchor="middle" class="ft-mono">awk</text>
   <rect x="315" y="98" width="80" height="24" class="ft-box"/>
   <text x="355" y="114" text-anchor="middle" class="ft-mono">bc</text>
   <rect x="420" y="98" width="150" height="24" class="ft-box"/>
   <text x="495" y="114" text-anchor="middle" class="ft-mono">powerprofilesctl</text>
-  <!-- Pipe connections: cat→awk, cat→grep -->
-  <path d="M 95 110 L 115 110" class="ft-pipe"/>
-  <path d="M 95 116 Q 130 138 215 116" class="ft-pipe"/>
-  <text x="155" y="140" text-anchor="middle" class="ft-dim">pipes</text>
   <!-- Annotation -->
-  <text x="300" y="160" text-anchor="middle" class="ft-dim">Each fork+exec ~1-2ms. 10-15 per invocation.</text>
-  <text x="300" y="174" text-anchor="middle" class="ft-dim">Multiply by one invocation every 2-3 seconds, continuously.</text>
+  <text x="300" y="150" text-anchor="middle" class="ft-dim">Each fork+exec ~1-2ms. 8-12 per invocation.</text>
+  <text x="300" y="164" text-anchor="middle" class="ft-dim">Multiply by one invocation every 2-3 seconds, continuously.</text>
 </svg>
 
 Each line is a fork+exec. `cat` opens a file, reads it, writes it to a pipe. `awk` reads from the pipe, parses the text, emits a result. `grep` does the same. `bc` spawns to perform arithmetic that the shell cannot do natively. `powerprofilesctl` spawns a process that makes a D-Bus call to query the power profile daemon.
 
 The costs compound:
 
-- **Process creation overhead.** Each `fork()` copies the process's page tables. Each `exec()` loads a new binary, links it, initialises its runtime. On Linux, a fork+exec cycle costs roughly 1-2ms even for trivial programs. The script spawned 10-15 of these per invocation.
+- **Process creation overhead.** Each `fork()` copies the process's page tables. Each `exec()` loads a new binary, links it, initialises its runtime. On Linux, a fork+exec cycle costs roughly 1-2ms even for trivial programs. The script spawned 8-12 of these per invocation.
 - **No state between runs.** Every invocation started from scratch. No open file handles, no cached values, no deltas. CPU usage requires two readings of `/proc/stat` separated by a time interval. The script either read it once and computed nothing meaningful, or slept internally and doubled its execution time.
 - **Shell string parsing.** Every intermediate result was a string. Numbers were parsed from text, manipulated as text, formatted back to text. The shell's arithmetic capabilities are limited to integers, hence the `bc` dependency for floating-point.
 - **Filesystem round-trips.** `/proc` is a virtual filesystem. Each `open()` allocates a file descriptor and finds the inode. Each `read()` triggers the kernel to walk its data structures and generate the file contents on demand, formatting them as ASCII text that gets copied to userspace. Each `close()` tears down the file descriptor. Multiply by every metric, every subprocess, every invocation.
@@ -272,7 +265,7 @@ The first rewrite eliminated almost every subprocess. A single Rust binary ran a
 
 The key changes:
 
-**Direct /proc parsing.** Instead of `cat /proc/stat | awk`, the daemon opened `/proc/stat` once, kept the file descriptor, and on each tick called `lseek(fd, 0, SEEK_SET)` followed by `read()`. The kernel regenerates the virtual file contents on each read from offset 0, but the open/close overhead is eliminated. Same pattern for `/proc/meminfo`, `/proc/loadavg`.
+**Direct /proc parsing.** Instead of `awk '{...}' /proc/stat` invoked as a subprocess, the daemon opened `/proc/stat` once, kept the file descriptor, and on each tick called `lseek(fd, 0, SEEK_SET)` followed by `read()`. The kernel regenerates the virtual file contents on each read from offset 0, but the open/close overhead is eliminated. Same pattern for `/proc/meminfo`, `/proc/loadavg`.
 
 **In-memory delta computation.** CPU usage is computed from the difference in jiffies between two samples. The daemon kept the previous sample in memory and computed deltas on each tick. No need for an external tool, no need for two reads with a sleep in between.
 
@@ -283,7 +276,7 @@ The key changes:
 
 **[serde_json](https://github.com/serde-rs/json) for output.** The daemon serialised a struct to JSON using [serde](https://serde.rs/). Convenient and correct, but not free.
 
-The result was approximately 700ms per sample. Better than 2 seconds, but embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. The /proc walk, delta computation, and JSON serialisation all fit in the remaining time.
+The result was approximately 700ms per sample. Barely faster than the bash version (~800ms), and embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. The /proc walk, delta computation, and JSON serialisation all fit in the remaining time.
 
 The Rust binary wasn't slow. The single subprocess it still shelled out to was slow. The lesson was immediate: a compiled daemon that spawns one subprocess is only as fast as that subprocess.
 
@@ -313,7 +306,7 @@ The 700ms number had one obvious cause. Eliminating `powerprofilesctl` was the f
 
 1. **sysfs instead of D-Bus: 700ms → 28ms.** The power profile that `powerprofilesctl` spent ~810ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile`. A single file read, no IPC, no subprocess. The entire 700ms was one subprocess.
 2. **Reusable read buffers: ~900 allocations eliminated.** The initial implementation allocated a new `String` for each `/proc/[pid]/*` read. With 300+ PIDs and 3 files each, that was ~900 allocations and deallocations per sample. Switching to a single stack-allocated `[u8; 8192]` buffer reused across all reads eliminated the allocation overhead entirely.
-3. **Skip kernel threads: halved PID count (~250 fewer).** Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out by checking whether the virtual size is zero in `/proc/[pid]/stat` avoided unnecessary IO reads for 250+ PIDs.
+3. **Skip kernel threads: halved PID count (~250 fewer).** Kernel threads (kworkers, ksoftirqd, migration threads) have zero RSS (they share the kernel's address space) and their CPU attribution is ambiguous -- a kworker executing a writeback on behalf of Firefox shows as kworker CPU, not Firefox CPU. Filtering them out by checking whether the virtual size is zero in `/proc/[pid]/stat` avoided unnecessary IO reads for 250+ PIDs. (The eBPF version later brought these back as an optional view -- middle-click toggles a "Kernel" section in the tooltip showing top kernel threads by CPU, useful for diagnosing kworker storms or excessive softirq activity.)
 4. **Byte-level parsing: reduced per-PID parse cost.** The initial parser used Rust's `str::split()` and `parse::<u64>()` on each `/proc/[pid]/stat` line. Replacing this with a hand-rolled byte scanner that walks the buffer once, skipping fields by counting spaces and converting digits inline, cut the parsing cost substantially.
 
 Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc walk itself: still hundreds of syscalls for the per-PID breakdown.
@@ -324,6 +317,8 @@ Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc 
 
 <div class="emphasis-block">
 Before I started this project, this was about the limit of what I knew. 15ms per sample -- roughly where the established tools land. <a href="https://gitlab.com/procps-ng/procps">procps-ng</a> (<code>top</code>) walks <code>/proc</code> the same way: <code>openat()</code> per PID, read the stat files, parse the ASCII, close. It mitigates the cost with cached directory file descriptors, a gperf-generated hash table for field lookup, and double-buffered history arrays, but the fundamental pattern is the same -- hundreds of <code>/proc</code> reads per refresh. <a href="https://github.com/aristocratos/btop">btop++</a> does it with C++ <code>ifstream</code> per file per cycle, normalising CPU% against system ticks rather than wall-clock deltas.
+
+A note on what "faster" means here. <code>top</code> achieves refresh intervals as low as 50ms, and <code>btop</code> goes down to 100ms. They do this by reading <em>less</em> per sample -- <code>top</code> at its leanest reads only <code>/proc/[pid]/stat</code> for CPU%, skipping IO and detailed memory breakdowns. rstat collects <em>more</em> data per sample (per-process IO, exact RSS, GPU utilisation, thermals, power profile, D/Z process states) in less time. The comparison is not "rstat refreshes faster" but "rstat gathers a superset of data in a fraction of the time." On a typical Unix system, getting the equivalent coverage requires running <code>top</code>, <code>iotop</code> (or <code>pidstat -d</code>), and <code>ps aux | grep ' [DZ] '</code> simultaneously. rstat unifies all of that into a single sub-millisecond read of a BPF map.
 
 Both tools are well-optimised for the /proc model. But they are still bound by it. Was 15ms the floor, or could you go further if you stopped reading files entirely? It was time to consult the kernel documentation -- specifically, the <a href="https://docs.kernel.org/bpf/">BPF documentation</a> and the <code>bpf(2)</code> man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
 
@@ -588,10 +583,12 @@ Both states are observable from the scheduler:
   <text x="480" y="123" text-anchor="middle" class="dz-label">Deleted</text>
   <!-- Annotations -->
   <text x="330" y="165" text-anchor="middle" class="dz-dim">D-state entries persist while the process is stuck. Z-state entries persist until the parent reaps.</text>
-  <text x="330" y="180" text-anchor="middle" class="dz-dim">BPF map mirrors the kernel's own lifecycle. No polling, no /proc walk, no missed entries.</text>
+  <text x="330" y="180" text-anchor="middle" class="dz-dim">BPF map mirrors the kernel's own lifecycle. A one-time /proc scan at startup seeds pre-existing D/Z processes.</text>
 </svg>
 
 The `prev_state` argument to `sched_switch` encodes the outgoing task's state. When a D-state process is switched back in (woke up from its uninterruptible wait), the probe clears the flag. Zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table.
+
+One edge case: the BPF probes only observe state *transitions* after they attach. Processes that were already in D or Z state before rstat started -- zombies left over from boot, for example -- would never pass through `sched_switch` or `sched_process_exit` while the probe is running. To handle this, userspace performs a one-time `/proc` scan at startup: it walks `/proc/[pid]/stat`, finds any processes in D or Z state, and seeds them into the BPF stats map with `BPF_NOEXIST` (so it won't overwrite entries the probe has already created during the brief window between probe attach and the scan). This is the only /proc walk rstat ever performs.
 
 Userspace collects up to 10 D/Z entries during the existing map iteration, requiring no extra passes or syscalls. They're rendered at the top of the CPU section:
 
@@ -605,6 +602,8 @@ Userspace collects up to 10 D/Z entries during the existing map iteration, requi
 ```
 
 The `D` and `Z` labels replace the CPU percentage because those processes aren't consuming CPU; they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D`. Just glance at the status bar.
+
+This is the kind of data that traditionally requires multiple tools to assemble. CPU and memory come from `top`. Per-process IO requires `iotop` or `pidstat -d`, which need `CONFIG_TASK_IO_ACCOUNTING` and usually root. D/Z state requires `ps` with the right flags and a grep. rstat surfaces all of it from a single BPF map read, in a single tooltip, updated every tick.
 
 ### The remaining data sources
 
@@ -657,7 +656,7 @@ One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf e
   <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
 </svg>
 
-**Result: sub-millisecond median.** The commit message recorded "down from 12ms to sub-1ms." The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
+**Result: sub-millisecond median.** Down from 12ms to sub-1ms. The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
 
 <div class="dead-ends">
 <details open>
@@ -1034,17 +1033,66 @@ Two-derivation build: `rstat-probe` compiles `probe.bpf.c` with `clang -target b
 
 ## Performance Timeline
 
-| Stage | Measured | Source | Approach |
-|-------|----------|--------|----------|
-| Bash + coreutils | ~2s | Benched (excl. 1s sleep) | Subprocesses for every metric, no state between runs |
-| Rust + /proc | ~700ms | Dev measurement | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
-| Sysfs + optimised /proc | ~15ms | Dev measurement | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
-| eBPF (no /proc walks) | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
-| Final optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
+| Stage | Measured | Approach |
+|-------|----------|----------|
+| Bash + coreutils | ~800ms | Subprocesses for every metric, no state between runs |
+| Rust + /proc | ~700ms | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
+| Sysfs + optimised /proc | ~15ms | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
+| eBPF (no /proc walks) | sub-1ms | BPF probe reads task_struct directly, sysinfo() for system metrics |
+| Final optimised | min 0.78ms | Batch map reads, sorted vec, pread, hand-written JSON |
 
 Development measurements were taken under heavier load conditions (HyprPanel running, more processes). Current-system benchmarks show lower figures for the /proc stages due to lighter load and fewer PIDs.
 
 The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init) and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
+
+### Kernel-side overhead
+
+The userspace sampling cost is sub-millisecond, but the BPF probe runs on *every context switch* -- thousands per second. That cost is invisible to the daemon's benchmark mode because it happens in kernel context, distributed across all cores. It's honest to measure it.
+
+**Self-timing.** The probe brackets itself with `bpf_ktime_get_ns()` and records each invocation in a log2 histogram. Over 10 seconds on a quiet desktop (~2,400 context switches/second):
+
+```
+    ns               count  distribution
+      128-255             4  |                                        |
+      256-511           670  |**                                      |
+      512-1023         4080  |***************                         |
+     1024-2047        10641  |****************************************|
+     2048-4095         7942  |*****************************           |
+     4096-8191          642  |**                                      |
+     8192-16383          51  |                                        |
+    16384-32767          15  |                                        |
+
+  avg: ~2040ns  overhead: 0.49% of one core
+```
+
+Median is in the 1-2μs range. The tail (8-32μs) likely reflects cache misses on the BPF hash map or `probe_read_kernel` hitting cold pages. This is the cost of three `bpf_probe_read_kernel()` calls per switch (RSS from `mm->rss_stat`, IO from `task->ioac`) plus the hash lookups and atomic adds. The self-timing itself adds one extra `bpf_ktime_get_ns()` call (~25ns), so production overhead is marginally lower.
+
+**External validation.** To measure real-world impact rather than just the probe's own view, `perf bench sched pipe` (100,000 pipe operations, each causing two context switches) was run with and without the BPF probe attached:
+
+| Condition | Median μs/op | Ops/sec |
+|-----------|-------------|---------|
+| No BPF probe | 7.94 | 125,967 |
+| With rstat probe | 9.66 | 103,484 |
+| **Overhead** | **+1.72 μs/op** | **-18%** |
+
+Each pipe operation involves two context switches (write → read → write), so the per-switch overhead is ~0.86μs externally -- lower than the self-timed ~2μs because the self-timing includes the measurement's own `bpf_ktime_get_ns()` overhead and the probe's full execution, while the external benchmark amortises tracepoint dispatch costs.
+
+**In practice:** at 2,400 switches/second on a quiet desktop, the probe consumes ~4.9ms of CPU per second -- 0.49% of one core, 0.06% of eight. The `perf bench` result shows an 18% regression on a *synthetic worst case* designed to maximise context switches. Real workloads with meaningful computation between switches see a negligible impact.
+
+**Is it worth it?** This is where the numbers get honest. The optimised /proc approach from the previous stage sampled in ~15ms. The eBPF approach samples in sub-1ms but runs a continuous kernel probe at ~4.8ms/s. At the default 2-second interval, the total CPU cost is surprisingly close:
+
+| Interval | /proc polling (ms/s) | eBPF total (ms/s) | eBPF advantage |
+|----------|---------------------|-------------------|----------------|
+| 2000ms | 7.5 | 5.0 | 1.5× |
+| 500ms | 30 | 6.8 | 4.4× |
+| 250ms | 60 | 5.8 | 10× |
+| 100ms | 150 | 9.8 | 15× |
+
+The /proc cost scales linearly with sample rate -- every sample opens, reads, and closes hundreds of files. The eBPF cost is almost constant: the kernel probe runs at ~4.8ms/s regardless of how often userspace reads the map, and the map read itself is sub-millisecond. At 2-second intervals, you're barely breaking even. At 100ms intervals -- which `btop` supports, and `top` goes even lower -- the /proc approach is 15× more expensive.
+
+The real value of running code in the kernel isn't faster samples at leisurely intervals. It's that the cost *decouples from the sample rate entirely*. The probe could sample at 10ms intervals for less CPU than a /proc walk at 100ms. That headroom is what makes features like click-to-cycle (2000 → 1000 → 500 → 250 → 100ms) practical rather than reckless.
+
+The probe can be profiled on any system with `rstat --profile [seconds]`.
 
 <div class="detour">
 <details>
@@ -1076,7 +1124,7 @@ After optimisation, the hot path is so fast that `perf` mostly captures debug sy
 
 ## The Real Lesson
 
-The first improvement, bash to Rust, captured more than 95% of the practical benefit. Going from 2 seconds to 15 milliseconds was a 130× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 15ms is already negligible. Nobody would notice the difference between 15ms and sub-1ms.
+The first improvements captured more than 95% of the practical benefit. The Rust rewrite itself barely helped -- 800ms to 700ms -- because the bottleneck was a single subprocess (`powerprofilesctl`), not the language. Removing that subprocess and replacing D-Bus with a sysfs read dropped the sample time to 15ms: a 53× improvement from the bash baseline. For a tool that samples every 2 seconds, 15ms is already negligible. Nobody would notice the difference between 15ms and sub-1ms.
 
 The subsequent journey from 15ms to sub-millisecond was intellectually rewarding. It taught me how /proc works under the hood, how BPF program loading actually happens at the syscall level, how the scheduler accounts CPU time on tickless kernels, and why `percpu_counter` values are approximate. I would do it again. But it was not practically necessary.
 
@@ -1092,4 +1140,10 @@ The lesson, if there is one: the cost is almost never in the computation. It is 
 
 This is not a barren field. As I write this, Anthropic's Claude Code -- a flagship product of a $350-billion AI company, running Opus 4.6, one of the most capable language models ever built -- is helping me check my grammar by printing characters to my terminal via a React SPA on Node.js. It is sitting at 100% CPU. Four `libuv-worker` processes, each consuming 700MB, are fighting for swap. Zram is thrashing. The status bar daemon samples the carnage in under a millisecond.
 
+There is also more to explore here. BPF -- the Berkeley Packet Filter -- was [created in 1992](https://www.tcpdump.org/papers/bpf-usenix93.pdf) for exactly one thing: high-performance network packet filtering at the socket layer. The "extended" BPF that Linux adopted has since generalised far beyond networking into tracing, security, scheduling, and resource accounting, which is where rstat lives. But the original use case -- attaching verified programs to network paths for filtering, routing, and observability -- is still where BPF is most mature. Per-connection bandwidth attribution, TCP retransmit tracking, DNS query latency -- the same architecture that reads `task_struct` on context switches could read `sk_buff` on packet events, adding network monitoring to the tooltip without a single extra syscall. The kernel is already touching every packet. You just have to be there when it does.
+
 If you've decided you want to be a good engineer, this era needs you as much as any.
+
+---
+
+*Thanks to [minektur](https://www.reddit.com/user/minektur/) for pointing out that filtering kernel threads from the display was leaving diagnostic data on the table. The kernel thread toggle (middle-click) was added in response to their feedback.*
