@@ -10,7 +10,7 @@ tags: [rust, ebpf, performance, linux]
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
-  <a href="https://github.com/kaistarkk/rstat"><img src="https://img.shields.io/github/stars/kaistarkk/rstat?style=flat-square&label=rstat" alt="rstat" class="shields-badge" /></a>
+  <a href="https://github.com/overyonder/rstat"><img src="https://img.shields.io/github/stars/overyonder/rstat?style=flat-square&label=rstat" alt="rstat" class="shields-badge" /></a>
 </div>
 
 <img src="assets/rstat-hero.webp" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" class="hero-img" />
@@ -1109,6 +1109,8 @@ Key components:
 - **Built-in benchmark mode**: `--bench N` runs N samples with 1ms spacing and reports avg/p50/p95/p99/min/max timings.
 
 ### Nix packaging (flake.nix)
+
+Rust, by the way. On NixOS, by the way.
 
 Two-derivation build:
 
