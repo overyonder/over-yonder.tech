@@ -619,18 +619,13 @@ With per-PID metrics handled by BPF, the remaining metrics come from:
 - **System-wide stats**: `libc::sysinfo()` returns total/free memory and load averages in a single syscall. `sysconf(_SC_NPROCESSORS_ONLN)` for core count.
 - **Hardware sensors**: 7 sysfs files for CPU temperature, frequency, GPU stats, and power profile. All opened once at startup, read via `pread()` each tick.
 
-<div class="detour">
-<details>
-<summary>The custom BPF loader</summary>
+### The custom BPF loader
 
 The standard approach would be [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs). aya pulls in tokio; libbpf-rs pulls in a C build step. Both add hundreds of milliseconds to startup and megabytes to binary size. For three probes and three maps, this is absurd.
 
 Instead, `rstat` implements its own loader in ~100 lines: ELF parse via goblin → map create via `BPF_MAP_CREATE` → relocate `LD_IMM64` instructions → load via `BPF_PROG_LOAD` → attach via `perf_event_open` + `ioctl`.
 
 One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf event fd (the kernel's `tp_event` is shared). But `PERF_EVENT_IOC_ENABLE` must be called on every CPU's fd.
-
-</details>
-</div>
 
 <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
   <style>
