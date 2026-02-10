@@ -13,7 +13,7 @@ tags: [rust, ebpf, performance, linux]
   <a href="https://github.com/kaistarkk/rstat"><img src="https://img.shields.io/github/stars/kaistarkk/rstat?style=flat-square&label=rstat" alt="rstat" class="shields-badge" /></a>
 </div>
 
-<img src="assets/rstat-hero.png" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" class="hero-img" />
+<img src="assets/rstat-hero.webp" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" class="hero-img" />
 
 The status bar on my Linux desktop was using 135MB of RAM and 10% CPU. Not the applications it was monitoring. The bar itself. The monitoring tool was a measurable load on the system it was supposed to monitor.
 
