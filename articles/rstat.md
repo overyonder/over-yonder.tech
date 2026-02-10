@@ -1117,6 +1117,8 @@ The subsequent journey from 15ms to sub-millisecond was intellectually rewarding
 
 This is the shape of most performance work: the first 10% of effort captures 90% of the improvement. The remaining 90% of effort is for the remaining 10% of improvement. Knowing which side you're on matters.
 
+There is a growing contingent of engineers who care about this distinction -- who insist that software should be fast because the hardware is fast, and that slowness is a choice made by layers of abstraction rather than an inevitability. Casey Muratori's [Handmade Hero](https://handmadehero.org/) and [Computer Enhance](https://www.computerenhance.com/) have been catalysts for this shift, making the case that understanding the machine from the instruction set up changes what you consider acceptable.
+
 We don't need everyone writing eBPF probes. We need people to stop embedding JavaScript runtimes in desktop utilities. The gap between "shell script that forks 15 processes" and "compiled binary that holds file descriptors open" is where almost all the real-world wins live. Everything beyond that is craft.
 
 The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism. The processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
