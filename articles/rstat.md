@@ -1149,7 +1149,7 @@ There is a growing contingent of engineers who care about this distinction -- wh
 
 We don't need everyone writing eBPF probes. We need people to stop embedding JavaScript runtimes in desktop utilities. The gap between "shell script that forks 15 processes" and "compiled binary that holds file descriptors open" is where almost all the real-world wins live. Everything beyond that is craft.
 
-That's why this entire website is [<1MB](https://1mb.club/), *including* all the glossy textures, animations, images, and other fanfare. We make things more complicated than they need to be.
+That's why this entire website is [<400KB](https://1mb.club/), *including* all the glossy textures, animations, images, and other fanfare. We make things more complicated than they need to be. But I digress.
 
 The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism. The processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
 
