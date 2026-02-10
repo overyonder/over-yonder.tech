@@ -871,6 +871,25 @@ loop {
 }
 ```
 
+<div class="detour">
+<details>
+<summary>Why allocate at all?</summary>
+
+A truly zero-allocation approach would use `static mut [Entry; MAX_PIDS]` in `.bss`, avoiding even the init-time heap allocation. The reasons for `Vec::with_capacity()` instead:
+
+**Rust ergonomics.** Static mutable globals require `unsafe` on every access, or wrapping in `Mutex`/`RefCell`/`UnsafeCell`. Pre-allocated vecs are safe after init.
+
+**Two buffers, swapped.** The current/previous pair is `std::mem::swap()`ed each tick. With statics you'd need two globals and a flag to track which is active.
+
+**Stack is out.** 8192 × 56 bytes ≈ 450KB per vec. Too large for stack on most systems.
+
+**Cache locality is preserved.** Vec guarantees contiguous memory layout, same as a static array. Sequential access during the top-N scan and delta computation benefits from hardware prefetching either way. The sorted layout also means binary search touches predictable cache lines.
+
+**The win is already captured.** The hot path makes zero `malloc`/`free` calls. The init-time allocation is amortised over the daemon's lifetime — effectively free. Truly static buffers would shave microseconds off startup but add `unsafe` blocks throughout. For a long-running daemon, not worth the ergonomic cost.
+
+</details>
+</div>
+
 ### BPF_MAP_LOOKUP_BATCH
 
 Reading the BPF hash map was previously done with the iterative pattern: `BPF_MAP_GET_NEXT_KEY` to get each key, then `BPF_MAP_LOOKUP_ELEM` to get each value. For N entries, that is 2N syscalls.
