@@ -904,34 +904,15 @@ fn read_batch(&mut self, out: &mut PidStats) -> bool {
 
 The batch key and value buffers (`bk`, `bv`) are pre-allocated in the `BpfLoader` struct and reused every tick. The implementation falls back to the iterative path if batch lookup returns an error other than ENOENT (indicating the kernel doesn't support it).
 
-### pread() instead of lseek() + read()
-
-For the 7 sysfs files read each tick, the original code called `lseek(fd, 0, SEEK_SET)` followed by `read(fd, buf, len)`. Two syscalls per file, 14 total.
-
-`pread(fd, buf, len, 0)` combines both into a single syscall. Same result, half the syscalls, 7 instead of 14:
-
-```rust
-fn pread_raw(f: &fs::File, buf: &mut [u8]) -> usize {
-    let n = unsafe { libc::pread(f.as_raw_fd(), buf.as_mut_ptr() as _, buf.len(), 0) };
-    if n < 0 { 0 } else { n as usize }
-}
-```
-
 ### Pre-opened throttle sysfs files
 
 GPU throttle status was read from `/sys/class/drm/card1/gt/gt0/throttle_reason_*`, a set of files discovered via `readdir()` at runtime. The initial implementation called `readdir()` each tick to enumerate the files, then opened, read, and closed each one.
 
-Moved to init-time discovery: `readdir()` once at startup, open all matching files, store them in a `Vec<ThrottleFile>` with the file handle and a fixed-size name buffer. Each tick just does `pread()` on the pre-opened handles:
-
-```rust
-struct ThrottleFile { file: fs::File, name: [u8; 32], nl: u8 }
-```
-
-The throttle status output is built into a stack-allocated `[u8; 64]` buffer.
+Moved to init-time discovery: `readdir()` once at startup, open all matching files, store them in a `Vec<ThrottleFile>` with the file handle and a fixed-size name buffer. Each tick just does `pread()` on the pre-opened handles.
 
 ### Removing serde_json
 
-serde_json is a powerful, correct, and general-purpose JSON serialiser. With derive-based serialisation (`#[derive(Serialize)]` + `to_string()`), it allocates a `String` for the output and runs through a generic `Formatter` that handles escaping and structure. It does not create intermediate `Value` trees in this mode, but the allocation and formatting overhead is still significant when called hundreds of times per second. For a fixed-schema output with two string fields and one string field that contains only ASCII and newlines, this is overkill.
+serde_json is a powerful, correct, and general-purpose JSON serialiser. With derive-based serialisation (`#[derive(Serialize)]` + `to_string()`), it allocates a `String` for the output and runs through a generic `Formatter` that handles escaping and structure. For a fixed-schema output with two string fields containing only ASCII and newlines, this is overkill.
 
 Replaced with a hand-written JSON emitter that writes directly into a reusable `String`:
 
@@ -951,41 +932,33 @@ fn json_str(out: &mut String, s: &str) {
 }
 ```
 
-The escaper handles exactly the characters that appear in the tooltip (newlines, and theoretically backslashes or quotes in process names). The `unsafe` push directly into the String's backing vec avoids the UTF-8 validation overhead of `push()` for known-ASCII bytes.
-
-### Eliminating format!() temporaries
-
-Every `format!()` macro allocates a new `String`. In the hot path, these appeared in tooltip construction, the `text` field, and the final JSON output. All replaced with `write!()` into pre-allocated, reusable `String` buffers:
-
-```rust
-let mut tt = String::with_capacity(1024);       // tooltip
-let mut json = String::with_capacity(1536);      // JSON output line
-let mut text_buf = String::with_capacity(16);    // "text" field value
-
-loop {
-    tt.clear();
-    json.clear();
-    text_buf.clear();
-    // write!() into these buffers -- clear() keeps capacity, never reallocates
-}
-```
-
 ### Top-N without allocation
 
-The top-5 CPU, memory, and IO process lists use stack-allocated fixed-size arrays (`[TopEntry; 5]`) with insertion sort. No Vec, no heap. The `comm` field is a fixed `[u8; 16]` (matching the kernel's `TASK_COMM_LEN`) rather than a `String`:
+The top-5 CPU, memory, and IO process lists use stack-allocated fixed-size arrays (`[TopEntry; 5]`) with insertion sort. The `comm` field is a fixed `[u8; 16]` (matching the kernel's `TASK_COMM_LEN`) rather than a `String`:
 
 ```rust
 struct TopEntry { val: u64, comm: [u8; COMM_LEN], cl: u8 }
 struct Top5 { e: [TopEntry; TOP_N], n: usize }
 ```
 
-### Minor optimisations
+<div class="detour">
+<details>
+<summary>Standard optimisations</summary>
 
-- `BpfMapDef::name` changed from heap-allocated `String` to `&'static str`. The map names are compile-time constants.
-- Direct PID comparison (`pid == me || pid == parent`) instead of `slice.contains(&pid)`. Two comparisons vs. a function call with a loop.
-- `parse_u64_trim()` is a hand-rolled integer parser that operates on byte slices, avoiding `str::parse::<u64>()` which requires UTF-8 validation and handles a wider range of formats.
+**pread() instead of lseek() + read().** For the 7 sysfs files read each tick, the original code called `lseek(fd, 0, SEEK_SET)` followed by `read(fd, buf, len)`. Two syscalls per file, 14 total. `pread(fd, buf, len, 0)` combines both into a single syscall: 7 instead of 14.
 
-**Result: 0.97ms average, 0.78ms minimum.** Zero heap allocations in the steady-state hot path. All memory is either stack-allocated (sample structs, Top5 arrays, sysfs buffers) or pre-allocated and reused (PidStats vecs, String buffers, BPF batch arrays).
+**write!() instead of format!().** Every `format!()` macro allocates a new `String`. In the hot path, these appeared in tooltip construction, the `text` field, and the final JSON output. All replaced with `write!()` into pre-allocated, reusable `String` buffers that are `clear()`ed each tick.
+
+**Static strings.** `BpfMapDef::name` changed from heap-allocated `String` to `&'static str`. The map names are compile-time constants.
+
+**Direct comparisons.** `pid == me || pid == parent` instead of `slice.contains(&pid)`. Two comparisons vs. a function call with a loop.
+
+**Byte-level parsing.** `parse_u64_trim()` is a hand-rolled integer parser that operates on byte slices, avoiding `str::parse::<u64>()` which requires UTF-8 validation.
+
+</details>
+</div>
+
+**Result: 0.97ms average, 0.78ms minimum.** All memory is either stack-allocated (sample structs, Top5 arrays, sysfs buffers) or pre-allocated and reused (PidStats vecs, String buffers, BPF batch arrays).
 
 <div class="dead-ends">
 <details open>
