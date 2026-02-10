@@ -10,6 +10,10 @@ tags: [rust, ebpf, performance, linux]
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
+  <a href="https://github.com/kaistarkk/rstat" class="repo-badge">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    kaistarkk/rstat
+  </a>
 </div>
 
 <img src="assets/rstat-hero.png" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" class="hero-img" />
@@ -129,9 +133,8 @@ bc <<< "scale=2; $used / $total * 100"
 powerprofilesctl get
 ```
 
-<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" class="diagram-fork-tree" role="img" aria-label="Diagram: Bash fork tree for each Waybar invocation">
+<svg viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg" class="diagram-fork-tree" role="img" aria-label="Diagram: Bash fork tree for each Waybar invocation">
   <style>
-    .ft-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
     .ft-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
     .ft-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 10px; font-style: italic; }
     .ft-box   { fill: rgba(0,0,0,0.2); stroke: rgba(255,255,255,0.15); stroke-width: 1; rx: 5; }
@@ -139,42 +142,38 @@ powerprofilesctl get
     .ft-pipe  { stroke: rgba(200,160,100,0.5); stroke-width: 1; fill: none; stroke-dasharray: 4,3; }
   </style>
   <!-- Waybar -->
-  <rect x="250" y="6" width="120" height="26" class="ft-box" stroke="rgba(52,152,219,0.3)"/>
-  <text x="310" y="24" text-anchor="middle" class="ft-mono">Waybar</text>
-  <!-- fork arrow -->
-  <line x1="310" y1="32" x2="310" y2="50" class="ft-line"/>
+  <rect x="230" y="6" width="140" height="26" class="ft-box" stroke="rgba(52,152,219,0.3)"/>
+  <text x="300" y="24" text-anchor="middle" class="ft-mono">Waybar (fork)</text>
+  <line x1="300" y1="32" x2="300" y2="48" class="ft-line"/>
   <!-- Shell -->
-  <rect x="260" y="50" width="100" height="26" class="ft-box"/>
-  <text x="310" y="68" text-anchor="middle" class="ft-mono">bash</text>
+  <rect x="250" y="48" width="100" height="26" class="ft-box"/>
+  <text x="300" y="66" text-anchor="middle" class="ft-mono">bash</text>
   <!-- fork lines to children -->
-  <line x1="310" y1="76" x2="310" y2="90" class="ft-line"/>
-  <line x1="60" y1="90" x2="560" y2="90" class="ft-line"/>
-  <line x1="60" y1="90" x2="60" y2="102" class="ft-line"/>
-  <line x1="160" y1="90" x2="160" y2="102" class="ft-line"/>
-  <line x1="260" y1="90" x2="260" y2="102" class="ft-line"/>
-  <line x1="360" y1="90" x2="360" y2="102" class="ft-line"/>
-  <line x1="460" y1="90" x2="460" y2="102" class="ft-line"/>
-  <line x1="560" y1="90" x2="560" y2="102" class="ft-line"/>
-  <!-- Children -->
-  <rect x="20" y="102" width="80" height="24" class="ft-box"/>
-  <text x="60" y="118" text-anchor="middle" class="ft-mono">cat</text>
-  <rect x="120" y="102" width="80" height="24" class="ft-box"/>
-  <text x="160" y="118" text-anchor="middle" class="ft-mono">awk</text>
-  <rect x="220" y="102" width="80" height="24" class="ft-box"/>
-  <text x="260" y="118" text-anchor="middle" class="ft-mono">grep</text>
-  <rect x="320" y="102" width="80" height="24" class="ft-box"/>
-  <text x="360" y="118" text-anchor="middle" class="ft-mono">bc</text>
-  <rect x="420" y="102" width="80" height="24" class="ft-box"/>
-  <text x="460" y="118" text-anchor="middle" class="ft-mono">cat</text>
-  <rect x="500" y="102" width="120" height="24" class="ft-box"/>
-  <text x="560" y="118" text-anchor="middle" class="ft-mono">powerprofilesctl</text>
-  <!-- Pipe connections -->
-  <path d="M 100 114 Q 110 114 120 114" class="ft-pipe"/>
-  <path d="M 100 114 Q 130 140 220 114" class="ft-pipe"/>
-  <text x="110" y="140" class="ft-dim">pipe</text>
+  <line x1="300" y1="74" x2="300" y2="86" class="ft-line"/>
+  <line x1="55" y1="86" x2="545" y2="86" class="ft-line"/>
+  <line x1="55" y1="86" x2="55" y2="98" class="ft-line"/>
+  <line x1="155" y1="86" x2="155" y2="98" class="ft-line"/>
+  <line x1="255" y1="86" x2="255" y2="98" class="ft-line"/>
+  <line x1="355" y1="86" x2="355" y2="98" class="ft-line"/>
+  <line x1="545" y1="86" x2="545" y2="98" class="ft-line"/>
+  <!-- Children: cat, awk, grep, bc, powerprofilesctl -->
+  <rect x="15" y="98" width="80" height="24" class="ft-box"/>
+  <text x="55" y="114" text-anchor="middle" class="ft-mono">cat</text>
+  <rect x="115" y="98" width="80" height="24" class="ft-box"/>
+  <text x="155" y="114" text-anchor="middle" class="ft-mono">awk</text>
+  <rect x="215" y="98" width="80" height="24" class="ft-box"/>
+  <text x="255" y="114" text-anchor="middle" class="ft-mono">grep</text>
+  <rect x="315" y="98" width="80" height="24" class="ft-box"/>
+  <text x="355" y="114" text-anchor="middle" class="ft-mono">bc</text>
+  <rect x="420" y="98" width="150" height="24" class="ft-box"/>
+  <text x="495" y="114" text-anchor="middle" class="ft-mono">powerprofilesctl</text>
+  <!-- Pipe connections: cat→awk, cat→grep -->
+  <path d="M 95 110 L 115 110" class="ft-pipe"/>
+  <path d="M 95 116 Q 130 138 215 116" class="ft-pipe"/>
+  <text x="155" y="140" text-anchor="middle" class="ft-dim">pipes</text>
   <!-- Annotation -->
-  <text x="310" y="160" text-anchor="middle" class="ft-dim">Each fork+exec ~1-2ms. 10-15 per invocation.</text>
-  <text x="310" y="176" text-anchor="middle" class="ft-dim">Multiply by one invocation every 2-3 seconds, continuously.</text>
+  <text x="300" y="160" text-anchor="middle" class="ft-dim">Each fork+exec ~1-2ms. 10-15 per invocation.</text>
+  <text x="300" y="174" text-anchor="middle" class="ft-dim">Multiply by one invocation every 2-3 seconds, continuously.</text>
 </svg>
 
 Each line is a fork+exec. `cat` opens a file, reads it, writes it to a pipe. `awk` reads from the pipe, parses the text, emits a result. `grep` does the same. `bc` spawns to perform arithmetic that the shell cannot do natively. `powerprofilesctl` spawns a process that makes a D-Bus call to query the power profile daemon.
@@ -234,13 +233,13 @@ The first rewrite eliminated almost every subprocess. A single Rust binary ran a
   <!-- Column headers -->
   <text x="140" y="20" text-anchor="middle" class="d-label" font-size="14">Userspace</text>
   <text x="520" y="20" text-anchor="middle" class="d-label" font-size="14">Kernel</text>
-  <line x1="330" y1="8" x2="330" y2="190" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="330" y1="8" x2="330" y2="215" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
   <!-- Row 1: open -->
   <text x="14" y="50" class="d-mono">open("/proc/123/stat")</text>
   <line x1="230" y1="46" x2="380" y2="46" class="d-arrow"/>
   <text x="390" y="50" class="d-label">allocate fd, find inode</text>
   <!-- Return: fd -->
-  <text x="14" y="66" class="d-mono" fill="rgba(200,160,160,0.8)">&larr; fd</text>
+  <text x="14" y="66" class="d-mono" fill="rgba(200,160,160,0.8)">&#x2190; fd</text>
   <line x1="380" y1="62" x2="80" y2="62" class="d-arrow-back"/>
   <!-- Row 2: read -->
   <text x="14" y="90" class="d-mono">read(fd, buf, 4096)</text>
@@ -312,7 +311,15 @@ Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc 
 
 ---
 
-Before I started this project, this was about the limit of what I knew. But I was in this for the long haul now. Was 15ms the floor, or could I go further? It was time to consult the kernel documentation -- specifically, the [BPF documentation](https://docs.kernel.org/bpf/) and the `bpf(2)` man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
+---
+
+<div class="emphasis-block">
+Before I started this project, this was about the limit of what I knew. But I was in this for the long haul now. Was 15ms the floor, or could I go further? It was time to consult the kernel documentation -- specifically, the <a href="https://docs.kernel.org/bpf/">BPF documentation</a> and the <code>bpf(2)</code> man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
+</div>
+
+---
+
+---
 
 ## <svg class="stage-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="16" height="12" rx="2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><line x1="6" y1="7" x2="6" y2="13" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/><line x1="10" y1="7" x2="10" y2="13" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/><line x1="14" y1="7" x2="14" y2="13" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/><line x1="4" y1="10" x2="16" y2="10" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/><circle cx="6" cy="7" r="1" fill="#2ecc71" opacity="0.8"/><circle cx="14" cy="13" r="1" fill="#2ecc71" opacity="0.8"/></svg> Stage 3: Eliminating /proc Walks Entirely (sub-1ms)
 
@@ -969,61 +976,68 @@ for cpu in 0..ncpu {
 
 ## Architecture Summary
 
-<svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" class="diagram-architecture" role="img" aria-label="Architecture diagram: BPF probes, maps, userspace daemon, Waybar output">
+<svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" class="diagram-architecture" role="img" aria-label="Architecture diagram: BPF probes, maps, userspace daemon, Waybar output">
   <style>
     .ar-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
     .ar-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
     .ar-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
+    .ar-dim   { fill: rgba(255,255,255,0.45); font-family: 'Lora', serif; font-size: 9px; font-style: italic; }
     .ar-box   { rx: 8; stroke-width: 1; }
     .ar-arr   { stroke: rgba(168,200,160,0.5); stroke-width: 1.5; fill: none; marker-end: url(#ara); }
   </style>
   <defs><marker id="ara" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.5)"/></marker></defs>
   <!-- Kernel zone -->
-  <rect x="10" y="10" width="660" height="150" class="ar-box" fill="rgba(39,174,96,0.05)" stroke="rgba(39,174,96,0.25)"/>
+  <rect x="10" y="10" width="660" height="170" class="ar-box" fill="rgba(39,174,96,0.05)" stroke="rgba(39,174,96,0.25)"/>
   <text x="30" y="32" class="ar-title">Kernel</text>
-  <!-- Tracepoints -->
-  <rect x="30" y="42" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="110" y="61" text-anchor="middle" class="ar-mono">sched_switch</text>
-  <rect x="30" y="74" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="110" y="93" text-anchor="middle" class="ar-mono">sched_process_exit</text>
-  <rect x="30" y="106" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="110" y="125" text-anchor="middle" class="ar-mono">sched_process_free</text>
-  <!-- BPF maps -->
-  <rect x="250" y="42" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="310" y="61" text-anchor="middle" class="ar-mono">stats (HASH)</text>
-  <rect x="250" y="74" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="310" y="93" text-anchor="middle" class="ar-mono">sys (ARRAY)</text>
-  <rect x="250" y="106" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="310" y="125" text-anchor="middle" class="ar-mono">sched_start (HASH)</text>
-  <!-- Arrows probes → maps (simplified: all three probes interact with stats) -->
-  <line x1="190" y1="56" x2="245" y2="56" class="ar-arr"/>
-  <line x1="190" y1="88" x2="245" y2="56" class="ar-arr"/>
-  <line x1="190" y1="120" x2="245" y2="56" class="ar-arr"/>
-  <line x1="190" y1="56" x2="245" y2="120" class="ar-arr"/>
+  <!-- BPF probes (injected code) -->
+  <text x="105" y="48" text-anchor="middle" class="ar-dim">BPF probes (injected code)</text>
+  <rect x="20" y="54" width="170" height="28" class="ar-box" fill="rgba(46,204,113,0.12)" stroke="rgba(46,204,113,0.4)" stroke-dasharray="5,3"/>
+  <text x="105" y="73" text-anchor="middle" class="ar-mono">tp/sched/sched_switch</text>
+  <rect x="20" y="86" width="170" height="28" class="ar-box" fill="rgba(46,204,113,0.12)" stroke="rgba(46,204,113,0.4)" stroke-dasharray="5,3"/>
+  <text x="105" y="105" text-anchor="middle" class="ar-mono">tp/sched/process_exit</text>
+  <rect x="20" y="118" width="170" height="28" class="ar-box" fill="rgba(46,204,113,0.12)" stroke="rgba(46,204,113,0.4)" stroke-dasharray="5,3"/>
+  <text x="105" y="137" text-anchor="middle" class="ar-mono">tp/sched/process_free</text>
+  <!-- BPF maps (shared memory) -->
+  <text x="305" y="48" text-anchor="middle" class="ar-dim">BPF maps (kernel memory)</text>
+  <rect x="240" y="54" width="130" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="305" y="73" text-anchor="middle" class="ar-mono">stats (HASH)</text>
+  <rect x="240" y="86" width="130" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="305" y="105" text-anchor="middle" class="ar-mono">sys (ARRAY)</text>
+  <rect x="240" y="118" width="130" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="305" y="137" text-anchor="middle" class="ar-mono">sched_start (HASH)</text>
+  <!-- Arrows: sched_switch → stats, sys, sched_start (all three maps) -->
+  <line x1="190" y1="68" x2="235" y2="68" class="ar-arr"/>
+  <line x1="190" y1="68" x2="235" y2="100" class="ar-arr"/>
+  <line x1="190" y1="68" x2="235" y2="132" class="ar-arr"/>
+  <!-- process_exit → stats -->
+  <line x1="190" y1="100" x2="235" y2="68" class="ar-arr"/>
+  <!-- process_free → stats, sched_start (deletes) -->
+  <line x1="190" y1="132" x2="235" y2="68" class="ar-arr"/>
+  <line x1="190" y1="132" x2="235" y2="132" class="ar-arr"/>
   <!-- sysfs files -->
-  <rect x="430" y="42" width="220" height="92" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
-  <text x="540" y="60" text-anchor="middle" class="ar-label">sysfs (7 files)</text>
-  <text x="445" y="78" class="ar-mono">thermal_zone0/temp</text>
-  <text x="445" y="92" class="ar-mono">cpufreq/scaling_cur_freq</text>
-  <text x="445" y="106" class="ar-mono">drm/card1/gt/gt0/rps_act_freq_mhz</text>
-  <text x="445" y="120" class="ar-mono">platform_profile ...</text>
+  <rect x="420" y="54" width="230" height="92" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="535" y="72" text-anchor="middle" class="ar-label">sysfs (7 pre-opened files)</text>
+  <text x="435" y="90" class="ar-mono">thermal_zone0/temp</text>
+  <text x="435" y="104" class="ar-mono">cpufreq/scaling_cur_freq</text>
+  <text x="435" y="118" class="ar-mono">drm/card1/gt/gt0/rps_act_freq_mhz</text>
+  <text x="435" y="132" class="ar-mono">platform_profile ...</text>
   <!-- Divider -->
-  <line x1="10" y1="170" x2="670" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <line x1="10" y1="188" x2="670" y2="188" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
   <!-- Userspace zone -->
-  <rect x="10" y="170" width="660" height="150" class="ar-box" fill="rgba(52,152,219,0.04)" stroke="rgba(52,152,219,0.2)"/>
-  <text x="30" y="192" class="ar-title">Userspace</text>
+  <rect x="10" y="188" width="660" height="160" class="ar-box" fill="rgba(52,152,219,0.04)" stroke="rgba(52,152,219,0.2)"/>
+  <text x="30" y="210" class="ar-title">Userspace</text>
   <!-- rstat daemon -->
-  <rect x="180" y="200" width="300" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
-  <text x="330" y="222" text-anchor="middle" class="ar-title">rstat daemon</text>
-  <text x="330" y="240" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
+  <rect x="160" y="218" width="340" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
+  <text x="330" y="238" text-anchor="middle" class="ar-title">rstat daemon</text>
+  <text x="330" y="256" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
   <!-- Arrows maps → daemon -->
-  <line x1="310" y1="155" x2="310" y2="195" class="ar-arr"/>
+  <line x1="305" y1="170" x2="305" y2="213" class="ar-arr"/>
   <!-- Arrow sysfs → daemon -->
-  <line x1="540" y1="138" x2="430" y2="195" class="ar-arr"/>
+  <line x1="535" y1="150" x2="440" y2="213" class="ar-arr"/>
   <!-- Waybar -->
-  <rect x="250" y="275" width="160" height="34" class="ar-box" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="330" y="297" text-anchor="middle" class="ar-label">Waybar (stdout → JSON)</text>
-  <line x1="330" y1="250" x2="330" y2="270" class="ar-arr"/>
+  <rect x="250" y="292" width="160" height="34" class="ar-box" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="330" y="314" text-anchor="middle" class="ar-label">Waybar (stdout → JSON)</text>
+  <line x1="330" y1="268" x2="330" y2="287" class="ar-arr"/>
 </svg>
 
 ### BPF probe (probe.bpf.c)

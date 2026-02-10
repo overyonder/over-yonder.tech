@@ -25,7 +25,7 @@ html {
 
 .content {
   padding: 100vh 20px 100px 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -215,7 +215,7 @@ footer p {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 840px;
+  max-width: 1040px;
   padding: 0 20px;
   box-sizing: border-box;
   margin-bottom: 0;
@@ -396,7 +396,7 @@ footer p {
 
 .article-content p {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   text-shadow: none;
   margin: 0.8em 0;
@@ -415,7 +415,7 @@ footer p {
 .article-content ul,
 .article-content ol {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   padding-left: 1.5em;
 }
@@ -486,6 +486,37 @@ footer p {
   clear: both;
 }
 
+.article-content .emphasis-block {
+  background: rgba(168, 200, 160, 0.06);
+  border-left: 3px solid rgba(168, 200, 160, 0.4);
+  border-radius: 0 8px 8px 0;
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.article-content .repo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.article-content .repo-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .article-content blockquote {
   border-left: 3px solid rgba(168, 200, 160, 0.4);
   margin: 1em 0;
@@ -549,7 +580,7 @@ footer p {
 .article-content .stage-breakdown {
   float: right;
   margin: 0 0 1em 1.5em;
-  width: 140px;
+  width: 154px;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
@@ -574,8 +605,8 @@ footer p {
 }
 
 .article-content .author-badge img {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: 1.5px solid rgba(168, 200, 160, 0.4);
 }
@@ -589,12 +620,12 @@ footer p {
 
 .article-content .stage-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 56px;
+  height: 56px;
   vertical-align: middle;
-  margin-right: 6px;
+  margin-right: 10px;
   position: relative;
-  top: -1px;
+  top: -3px;
 }
 
 /* ==================== Hero image ==================== */
