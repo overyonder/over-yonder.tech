@@ -33,7 +33,7 @@ A status bar reads a few integers from the kernel and renders them into a strip 
 
 This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a [Rust](https://www.rust-lang.org/) daemon that injects its own code into the kernel.
 
-Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing, no heap allocations. Sub-millisecond samples.
+Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing. Sub-millisecond samples.
 
 Each stage was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
 
@@ -57,7 +57,7 @@ Each stage was motivated by the same question: where is the time actually going,
   <rect x="220" y="120" width="4" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
   <text x="230" y="136" class="wf-time">~15 ms</text>
   <!-- 0.78/2000 * 500 ≈ 0.2 -->
-  <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
+  <text x="14" y="172" class="wf-label">eBPF</text>
   <rect x="220" y="158" width="1" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
   <text x="227" y="174" class="wf-time">&lt;1 ms</text>
 </svg>
@@ -84,7 +84,7 @@ Alright. Let me try that again in log scale.
   <rect x="220" y="120" width="178" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
   <text x="404" y="136" text-anchor="end" class="wf-time">~15 ms</text>
   <!-- sub-1ms -->
-  <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
+  <text x="14" y="172" class="wf-label">eBPF</text>
   <rect x="220" y="158" width="52" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
   <text x="278" y="174" class="wf-time">&lt;1 ms</text>
   <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Dev-time measurements. Current-system benchmarks show lower figures due to different load.</text>
@@ -598,7 +598,7 @@ Both states are observable from the scheduler:
   <text x="65" y="43" text-anchor="middle" class="dz-label" font-weight="600">Running</text>
   <line x1="120" y1="38" x2="210" y2="38" class="dz-arr" stroke="rgba(192,57,43,0.5)"/>
   <text x="165" y="30" text-anchor="middle" class="dz-mono" font-size="8">sched_switch</text>
-  <text x="165" y="54" text-anchor="middle" class="dz-dim">prev_state &amp; 0x02</text>
+  <text x="165" y="54" text-anchor="middle" class="dz-dim">D-state detected</text>
   <rect x="215" y="20" width="110" height="36" class="dz-state" fill="rgba(192,57,43,0.1)" stroke="rgba(192,57,43,0.4)"/>
   <text x="270" y="43" text-anchor="middle" class="dz-label" font-weight="600" fill="#e74c3c">D-state</text>
   <line x1="325" y1="38" x2="420" y2="38" class="dz-arr" stroke="rgba(46,204,113,0.5)"/>
@@ -623,7 +623,7 @@ Both states are observable from the scheduler:
   <text x="330" y="180" text-anchor="middle" class="dz-dim">BPF map mirrors the kernel's own lifecycle. No polling, no /proc walk, no missed entries.</text>
 </svg>
 
-The `prev_state` argument to `sched_switch` encodes the outgoing task's state: bit 1 (`0x02`) indicates `TASK_UNINTERRUPTIBLE`. When a D-state process is switched back in (woke up from its uninterruptible wait), the probe clears the flag. Zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table.
+The `prev_state` argument to `sched_switch` encodes the outgoing task's state. When a D-state process is switched back in (woke up from its uninterruptible wait), the probe clears the flag. Zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table.
 
 Userspace collects up to 10 D/Z entries during the existing map iteration, requiring no extra passes or syscalls. They're rendered at the top of the CPU section:
 
@@ -730,7 +730,7 @@ Seven files. All opened once at startup and held open for the lifetime of the da
   <text x="390" y="100" class="ba-mono">writes to kernel map (0 userspace syscalls)</text>
   <text x="380" y="124" class="ba-mono">Every 2s:</text>
   <text x="390" y="144" class="ba-mono">1 batch map read + 7 pread() = ~8 syscalls</text>
-  <text x="390" y="164" class="ba-mono">+ hand-written JSON (0 allocs)</text>
+  <text x="390" y="164" class="ba-mono">+ hand-written JSON</text>
   <text x="380" y="195" class="ba-dim">Total per sample:</text>
   <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
 </svg>
@@ -805,10 +805,6 @@ cpu% = sum(all per-PID busy_ns deltas) / (elapsed_seconds * num_cores * 1e9) * 1
 
 This gives accurate CPU utilisation regardless of the kernel's tick configuration.
 
-### D-Bus for power profile
-
-The original script called `powerprofilesctl get`, which spawns a process that makes a D-Bus call to the power-profiles-daemon. D-Bus involves socket communication, message serialisation, and the overhead of the D-Bus daemon itself. The power profile is exposed directly via sysfs at `/sys/firmware/acpi/platform_profile`: a single file read, no IPC, no subprocess.
-
 </details>
 </div>
 
@@ -848,7 +844,7 @@ The original script called `powerprofilesctl get`, which spawns a process that m
   <text x="70" y="250" text-anchor="middle" class="sb-time">Stage 4</text>
 </svg>
 
-At this point, the sample loop was fast enough that allocator overhead and syscall count became the dominant factors. Profiling revealed several sources of heap allocation and unnecessary work:
+At this point, the sample loop was fast enough that syscall count became the dominant factor. Profiling revealed several remaining sources of overhead:
 
 ### Eliminating HashMap
 
@@ -862,7 +858,7 @@ Replaced with two `Vec<(u32, BpfPidStats)>`, each pre-allocated to `MAX_PIDS` (8
 4. Delta computation uses `binary_search_by_key()` on the previous vec
 5. `swap()` current and previous vecs
 
-Zero allocation, zero deallocation, O(n log n) sort, O(log n) lookups. The vecs are allocated once at startup and never again.
+O(n log n) sort, O(log n) lookups. The vecs are allocated once at startup and reused every tick.
 
 ```rust
 let mut cur = PidStats::with_capacity(MAX_PIDS);
@@ -931,7 +927,7 @@ Moved to init-time discovery: `readdir()` once at startup, open all matching fil
 struct ThrottleFile { file: fs::File, name: [u8; 32], nl: u8 }
 ```
 
-The throttle status output is built into a stack-allocated `[u8; 64]` buffer with no String and no allocation.
+The throttle status output is built into a stack-allocated `[u8; 64]` buffer.
 
 ### Removing serde_json
 
@@ -1081,7 +1077,7 @@ A single C source file compiled with [`clang`](https://clang.llvm.org/) `-target
 
 Three tracepoint programs:
 
-- **`handle_sched_switch`** (tracepoint/sched/sched_switch): On every context switch, accounts CPU time for the outgoing task (delta from `sched_start` map), snapshots RSS from `mm->rss_stat` and IO from `task->ioac`, stores cumulative values in the `stats` hash map. Also tracks D-state: if the outgoing task's `prev_state` has bit 1 set (`TASK_UNINTERRUPTIBLE`), marks it; clears the flag on the incoming task. Idle time (PID 0) is accumulated in the `sys` array map (currently unused in userspace -- CPU% is computed from busy_ns sum).
+- **`handle_sched_switch`** (tracepoint/sched/sched_switch): On every context switch, accounts CPU time for the outgoing task (delta from `sched_start` map), snapshots RSS from `mm->rss_stat` and IO from `task->ioac`, stores cumulative values in the `stats` hash map. Also tracks D-state from `prev_state`; clears the flag on the incoming task. Idle time (PID 0) is accumulated in the `sys` array map (currently unused in userspace -- CPU% is computed from busy_ns sum).
 - **`handle_sched_exit`** (tracepoint/sched/sched_process_exit): Marks the exiting PID with `state = 'Z'` in the stats map. The entry persists so userspace can display zombies.
 - **`handle_sched_free`** (tracepoint/sched/sched_process_free): Fires when the parent reaps a zombie. Deletes the PID from both `sched_start` and `stats` maps. This is the actual cleanup that prevents unbounded map growth.
 
@@ -1129,11 +1125,11 @@ The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent 
 | Rust + /proc | ~700ms | Dev measurement | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
 | Sysfs + optimised /proc | ~15ms | Dev measurement | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
 | eBPF (no /proc walks) | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
-| Zero-alloc optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
+| Final optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
 
 Development measurements were taken under heavier load conditions (HyprPanel running, more processes). Current-system benchmarks show lower figures for the /proc stages due to lighter load and fewer PIDs.
 
-The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
+The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init) and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
 
 ### CPU Flamegraphs
 
