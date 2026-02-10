@@ -304,14 +304,18 @@ The 700ms number had one obvious cause. Eliminating `powerprofilesctl` was the f
 3. **Skip kernel threads: halved PID count (~250 fewer).** Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out by checking whether the virtual size is zero in `/proc/[pid]/stat` avoided unnecessary IO reads for 250+ PIDs.
 4. **Byte-level parsing: reduced per-PID parse cost.** The initial parser used Rust's `str::split()` and `parse::<u64>()` on each `/proc/[pid]/stat` line. Replacing this with a hand-rolled byte scanner that walks the buffer once, skipping fields by counting spaces and converting digits inline, cut the parsing cost substantially.
 
-Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc walk itself: still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
+Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc walk itself: still hundreds of syscalls for the per-PID breakdown.
 
 ---
 
 ---
 
 <div class="emphasis-block">
-Before I started this project, this was about the limit of what I knew. But I was in this for the long haul now. Was 15ms the floor, or could I go further? It was time to consult the kernel documentation -- specifically, the <a href="https://docs.kernel.org/bpf/">BPF documentation</a> and the <code>bpf(2)</code> man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
+
+Before I started this project, this was about the limit of what I knew. 15ms per sample -- roughly where the established tools land. <a href="https://gitlab.com/procps-ng/procps">procps-ng</a> (<code>top</code>) walks <code>/proc</code> the same way: <code>openat()</code> per PID, read the stat files, parse the ASCII, close. It mitigates the cost with cached directory file descriptors, a gperf-generated hash table for field lookup, and double-buffered history arrays, but the fundamental pattern is the same -- hundreds of <code>/proc</code> reads per refresh. <a href="https://github.com/aristocratos/btop">btop++</a> does it with C++ <code>ifstream</code> per file per cycle, normalising CPU% against system ticks rather than wall-clock deltas.
+
+Both tools are well-optimised for the /proc model. But they are still bound by it. Was 15ms the floor, or could you go further if you stopped reading files entirely? It was time to consult the kernel documentation -- specifically, the <a href="https://docs.kernel.org/bpf/">BPF documentation</a> and the <code>bpf(2)</code> man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
+
 </div>
 
 ---
@@ -391,7 +395,7 @@ The full walk per sample:
 7. Parse the text to extract the 2-3 fields we actually need -- string scanning in userspace
 8. Repeat for `/proc/[pid]/statm` and `/proc/[pid]/io` -- 6 more syscalls per PID
 
-With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for the per-process breakdown. Each syscall is a context switch to kernel mode, and each `/proc` read triggers the kernel to walk its internal data structures and format the results into human-readable text that we immediately parse back into numbers. The entire /proc interface is a serialisation-deserialisation round-trip through ASCII text.
+With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for the per-process breakdown (the diagram above shows the worked example for 300 PIDs). Each syscall is a transition to kernel mode, and each `/proc` read triggers the kernel to walk its internal data structures and generate the result on demand.
 
 ### eBPF: reading kernel data in-kernel
 
@@ -503,7 +507,7 @@ This was discarded. IO collection stayed with `/proc/[pid]/io` and delta trackin
 
 When the BPF map contained entries created by the (now-discarded) block layer path, some PIDs had all-zero `comm` fields because `bpf_get_current_comm()` was returning the kernel worker's name rather than the originating process. Even after removing the block layer tracepoint, this pattern served as a reminder: always validate BPF-collected data and implement fallbacks. The daemon fell back to reading `/proc/[pid]/comm` when a BPF entry's comm was all zeroes.
 
-The initial approach for IO using the `block_rq_issue` tracepoint was tried and discarded. But collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
+Collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
 
 <svg viewBox="0 0 580 240" xmlns="http://www.w3.org/2000/svg" class="diagram-sched-switch" role="img" aria-label="Diagram: sched_switch tracepoint firing on context switch">
   <style>
