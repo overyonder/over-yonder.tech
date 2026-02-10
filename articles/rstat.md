@@ -182,7 +182,18 @@ The costs compound:
 - **Shell string parsing.** Every intermediate result was a string. Numbers were parsed from text, manipulated as text, formatted back to text. The shell's arithmetic capabilities are limited to integers, hence the `bc` dependency for floating-point.
 - **Filesystem round-trips.** `/proc` is a virtual filesystem. Each `open()` allocates a file descriptor and finds the inode. Each `read()` triggers the kernel to walk its data structures and generate the file contents on demand, formatting them as ASCII text that gets copied to userspace. Each `close()` tears down the file descriptor. Multiply by every metric, every subprocess, every invocation.
 
-Each of these operations is a syscall. On modern x86-64, a syscall uses the `syscall` instruction, which jumps directly to the kernel's entry point via a model-specific register. The legacy mechanism was `int 0x80`, a software interrupt dispatched through the interrupt descriptor table -- slower due to the IDT lookup and interrupt handling overhead. Even the modern path has non-trivial cost: the CPU must flush the pipeline, switch to ring 0, save registers, and on return do it all in reverse. For a deeper treatment, see Abhinav Upadhyay's [What Makes System Calls Expensive](https://blog.codingconfessions.com/p/what-makes-system-calls-expensive) for the architectural explanation, and Georg Sauthoff's [On the Costs of Syscalls](https://gms.tf/on-the-costs-of-syscalls.html) for microbenchmark data.
+Each of these operations is a syscall -- a transition from userspace into the kernel and back. Hundreds of them per invocation, for data the kernel already has in memory.
+
+<div class="detour">
+<details>
+<summary>What actually happens during a syscall</summary>
+
+On modern x86-64, a syscall uses the `syscall` instruction, which jumps directly to the kernel's entry point via a model-specific register (MSR). The legacy mechanism was `int 0x80`, a software interrupt dispatched through the interrupt descriptor table -- slower due to the IDT lookup and interrupt handling overhead. Even the modern path has non-trivial cost: the CPU must flush the pipeline, switch to ring 0, save registers, and on return do it all in reverse.
+
+For a deeper treatment, see Abhinav Upadhyay's [What Makes System Calls Expensive](https://blog.codingconfessions.com/p/what-makes-system-calls-expensive) for the architectural explanation, and Georg Sauthoff's [On the Costs of Syscalls](https://gms.tf/on-the-costs-of-syscalls.html) for microbenchmark data.
+
+</details>
+</div>
 
 The polling interval was chosen not because the data changed that slowly, but to hide how slow the collection was. Even so, the script occasionally lagged Waybar's rendering, causing the status bar to display stale data or briefly blank.
 
@@ -497,9 +508,18 @@ When the BPF probe fires on `sched_switch`, the current task's `task_struct` is 
 - Index 2: swap entries
 - Index 3: shared memory pages
 
-RSS is the sum of indices 0, 1, and 3. The BPF probe reads the `.count` field of each `percpu_counter`, which is the approximate value. The exact value would require summing the per-CPU delta arrays (`percpu_counter->counters[cpu]`), but BPF cannot iterate over per-CPU data. The approximate value has a maximum error of `batch * num_cpus` pages (where `batch` is typically 32), giving an accuracy of +/-512KB on a 4-core system (32 * 4 = 128 pages * 4KB/page). For a status bar, this is more than sufficient.
+RSS is the sum of indices 0, 1, and 3. The BPF probe reads the `.count` field of each `percpu_counter`, which is the approximate value -- accurate to +/-512KB on a 4-core system. For a status bar, more than sufficient.
 
-Note: `rss_stat` uses `percpu_counter` on kernel 6.2+. Earlier kernels use `atomic_long_t` per memory type, which is exact but slightly more expensive to read.
+<div class="detour">
+<details>
+<summary>Why percpu_counter is approximate</summary>
+
+The exact RSS value would require summing the per-CPU delta arrays (`percpu_counter->counters[cpu]`), but BPF cannot iterate over per-CPU data. The `.count` field is a periodically-synced aggregate with a maximum error of `batch * num_cpus` pages (where `batch` is typically 32): 32 × 4 = 128 pages × 4KB/page = 512KB.
+
+This uses `percpu_counter` on kernel 6.2+. Earlier kernels use `atomic_long_t` per memory type, which is exact but slightly more expensive to update under contention.
+
+</details>
+</div>
 
 ```c
 static __always_inline void snapshot_task(struct pid_stats *s)
@@ -541,6 +561,26 @@ Linux tracks two pathological process states that are invisible to most monitori
 
 - **D (uninterruptible sleep)**: the process is blocked on IO or a kernel lock and cannot be interrupted, not even by `kill -9`. Common causes: NFS timeouts, disk IO stalls, journaling waits, driver bugs. D-state processes inflate the load average without consuming CPU, making load numbers misleading.
 - **Z (zombie)**: the process has exited but its parent hasn't called `wait()` to collect its exit status. The process occupies a PID and a slot in the process table but consumes no resources. A handful of zombies is normal; hundreds suggest a buggy parent that's leaking children.
+
+<div class="detour">
+<details>
+<summary>Why kill -9 doesn't work on D-state processes</summary>
+
+Signals -- including SIGKILL -- are only delivered when a process returns to userspace or wakes from an *interruptible* sleep. A D-state process is blocked on a kernel code path that has declared "I cannot be safely interrupted here." The signal sits in the queue, undelivered. This is why Ctrl+C, Ctrl+\, and even your window manager's kill shortcut all fail on a terminal whose underlying process is stuck in D-state.
+
+The fix depends on what the process is waiting on:
+
+- **NFS/CIFS**: `umount -f` (or `umount -l` for lazy). The `soft` mount option makes NFS time out rather than hang forever; `hard` (the default) retries indefinitely.
+- **Disk IO**: the process unblocks when the IO completes or the device times out. Check `dmesg` for block layer errors.
+- **FUSE**: restart the FUSE daemon, or `fusermount -u` the mount point.
+- **Driver bugs**: often nothing short of a reboot. GPU driver hangs sometimes resolve after the driver's internal timeout (30-60s).
+
+There is no userspace fix for an arbitrary D-state process. The kernel chose not to allow interruption because aborting mid-operation could corrupt its data structures. You have to resolve whatever the process is waiting *on*.
+
+One nuance: kernel 2.6.25 added `TASK_KILLABLE`, a variant of uninterruptible sleep that responds to SIGKILL (but not other signals). NFS has been gradually migrating its wait paths to TASK_KILLABLE, so modern NFS D-state hangs are often killable with `-9`. But not all kernel code paths have been converted. rstat's BPF probe checks bit 1 (`0x02`, `TASK_UNINTERRUPTIBLE`), which catches both variants.
+
+</details>
+</div>
 
 Both states are observable from the scheduler:
 
