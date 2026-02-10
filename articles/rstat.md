@@ -214,7 +214,7 @@ This was the motivation for a rewrite: not performance for its own sake, but the
 
 The first rewrite eliminated almost every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared, with no polling interval on Waybar's side and no repeated process spawning.
 
-<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" class="diagram-proc-roundtrip" role="img" aria-label="Diagram: /proc serialisation round-trip">
+<svg viewBox="0 0 700 234" xmlns="http://www.w3.org/2000/svg" class="diagram-proc-roundtrip" role="img" aria-label="Diagram: /proc serialisation round-trip">
   <style>
     .d-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 12px; }
     .d-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
@@ -254,8 +254,9 @@ The first rewrite eliminated almost every subprocess. A single Rust binary ran a
   <!-- Annotation -->
   <text x="350" y="178" text-anchor="middle" class="d-dim" font-size="10">Each arrow = syscall instruction (MSR-based kernel entry on x86-64; replaces legacy int 0x80)</text>
   <!-- Insight -->
-  <rect x="14" y="184" width="672" height="28" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
-  <text x="350" y="203" text-anchor="middle" class="d-dim" font-size="11">The kernel has the numbers. It formats them as text. We parse the text back. A serialisation round-trip through ASCII — per PID, per file, per sample.</text>
+  <rect x="14" y="184" width="672" height="42" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="350" y="200" text-anchor="middle" class="d-dim" font-size="11">The kernel has the numbers. It formats them as text. We parse the text back.</text>
+  <text x="350" y="216" text-anchor="middle" class="d-dim" font-size="11">A serialisation round-trip through ASCII — per PID, per file, per sample.</text>
 </svg>
 
 The key changes:
