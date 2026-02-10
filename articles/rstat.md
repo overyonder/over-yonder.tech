@@ -1174,6 +1174,6 @@ That's why this entire website is [<400KB](https://1mb.club/), *including* all t
 
 The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism. The processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
 
-This is not a barren field. As I write this, Anthropic's Claude Code -- a flagship product of a $350-billion AI company, running Opus 4.6, one of the most capable language models ever built -- is helping me check my grammar by printing characters to my terminal via a React SPA on Node.js. It is sitting at 100% CPU. Four `libuv-worker` processes, each consuming 700MB. Zram is thrashing. The status bar daemon samples the carnage in under a millisecond.
+This is not a barren field. As I write this, Anthropic's Claude Code -- a flagship product of a $350-billion AI company, running Opus 4.6, one of the most capable language models ever built -- is helping me check my grammar by printing characters to my terminal via a React SPA on Node.js. It is sitting at 100% CPU. Four `libuv-worker` processes, each consuming 700MB, are fighting for swap. Zram is thrashing. The status bar daemon samples the carnage in under a millisecond.
 
 The most advanced artificial intelligence on the planet, and the bottleneck is the JavaScript runtime it shipped inside.
