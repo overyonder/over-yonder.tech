@@ -499,59 +499,27 @@ Collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields w
   <text x="290" y="222" text-anchor="middle" class="ss-dim">Every task eventually gets switched out. At that moment, all its accounting data is right there in the task_struct.</text>
 </svg>
 
-### RSS from mm->rss_stat
-
-When the BPF probe fires on `sched_switch`, the current task's `task_struct` is available via `bpf_get_current_task()`. The task's memory descriptor (`task->mm`) contains `rss_stat`, an array of `percpu_counter` structs indexed by memory type:
-
-- Index 0: file-backed pages (page cache)
-- Index 1: anonymous pages (heap, stack)
-- Index 2: swap entries
-- Index 3: shared memory pages
-
-RSS is the sum of indices 0, 1, and 3. The BPF probe reads the `.count` field of each `percpu_counter`, which is the approximate value -- accurate to +/-512KB on a 4-core system. For a status bar, more than sufficient.
-
 <div class="detour">
 <details>
-<summary>Why percpu_counter is approximate</summary>
+<summary>Reading RSS and IO from task_struct</summary>
 
-The exact RSS value would require summing the per-CPU delta arrays (`percpu_counter->counters[cpu]`), but BPF cannot iterate over per-CPU data. The `.count` field is a periodically-synced aggregate with a maximum error of `batch * num_cpus` pages (where `batch` is typically 32): 32 × 4 = 128 pages × 4KB/page = 512KB.
+**RSS from mm->rss_stat.** The task's memory descriptor (`task->mm`) contains `rss_stat`, an array of `percpu_counter` structs indexed by memory type (file-backed, anonymous, swap, shared). RSS is the sum of indices 0, 1, and 3. The probe reads the `.count` field — an approximate value accurate to ±512KB on a 4-core system, sufficient for a status bar.
 
-This uses `percpu_counter` on kernel 6.2+. Earlier kernels use `atomic_long_t` per memory type, which is exact but slightly more expensive to update under contention.
+```c
+bpf_probe_read_kernel(&file, sizeof(file), &mm->rss_stat[0].count);
+bpf_probe_read_kernel(&anon, sizeof(anon), &mm->rss_stat[1].count);
+bpf_probe_read_kernel(&shm,  sizeof(shm),  &mm->rss_stat[3].count);
+```
+
+**IO from task->ioac.** The task accounting structure contains cumulative `read_bytes` and `write_bytes` counters — the same values exposed via `/proc/[pid]/io`. Userspace computes deltas between ticks.
+
+```c
+bpf_probe_read_kernel(&rb, sizeof(rb), &task->ioac.read_bytes);
+bpf_probe_read_kernel(&wb, sizeof(wb), &task->ioac.write_bytes);
+```
 
 </details>
 </div>
-
-```c
-static __always_inline void snapshot_task(struct pid_stats *s)
-{
-    struct task_struct *task = (void *)bpf_get_current_task();
-    struct mm_struct *mm = 0;
-    bpf_probe_read_kernel(&mm, sizeof(mm), &task->mm);
-    if (mm) {
-        __s64 file = 0, anon = 0, shm = 0;
-        bpf_probe_read_kernel(&file, sizeof(file), &mm->rss_stat[0].count);
-        bpf_probe_read_kernel(&anon, sizeof(anon), &mm->rss_stat[1].count);
-        bpf_probe_read_kernel(&shm,  sizeof(shm),  &mm->rss_stat[3].count);
-        __s64 total = file + anon + shm;
-        s->rss_pages = total > 0 ? (__u64)total : 0;
-    }
-    // ...
-}
-```
-
-### IO from task->ioac
-
-The task accounting structure (`task->ioac`) contains cumulative `read_bytes` and `write_bytes` counters, the same values exposed via `/proc/[pid]/io`. Reading them directly in the BPF probe eliminates the filesystem entirely:
-
-```c
-    __u64 rb = 0, wb = 0;
-    bpf_probe_read_kernel(&rb, sizeof(rb), &task->ioac.read_bytes);
-    bpf_probe_read_kernel(&wb, sizeof(wb), &task->ioac.write_bytes);
-    s->io_rb = rb;
-    s->io_wb = wb;
-```
-
-These are cumulative counters. Userspace computes deltas between ticks by storing the previous snapshot in a sorted vector and performing binary search by PID.
 
 ### Process state from scheduler transitions
 
@@ -638,71 +606,25 @@ Userspace collects up to 10 D/Z entries during the existing map iteration, requi
 
 The `D` and `Z` labels replace the CPU percentage because those processes aren't consuming CPU; they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D`. Just glance at the status bar.
 
-### System-wide metrics without /proc
+### The remaining data sources
 
-With per-PID metrics handled by BPF, the remaining system-wide metrics were also migrated away from /proc:
+With per-PID metrics handled by BPF, the remaining metrics come from:
 
-- **Total/free memory**: `libc::sysinfo()` syscall. Returns `totalram`, `freeram`, `bufferram`, `mem_unit` in a single syscall. Replaces parsing `/proc/meminfo` (which involves reading a multi-line text file, scanning for specific field names, parsing the values and units).
-- **Load averages**: Also from `sysinfo()`. Replaces `/proc/loadavg`. The load values are in fixed-point format (divide by 65536.0 for float).
-- **Core count**: `sysconf(_SC_NPROCESSORS_ONLN)`. A single syscall, cached by libc.
+- **System-wide stats**: `libc::sysinfo()` returns total/free memory and load averages in a single syscall. `sysconf(_SC_NPROCESSORS_ONLN)` for core count.
+- **Hardware sensors**: 7 sysfs files for CPU temperature, frequency, GPU stats, and power profile. All opened once at startup, read via `pread()` each tick.
 
-### The custom BPF loader
+<div class="detour">
+<details>
+<summary>The custom BPF loader</summary>
 
-The standard approach would be to use [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs), high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in [tokio](https://tokio.rs/) (an async runtime), libbpf-rs pulls in [libbpf-sys](https://github.com/libbpf/libbpf-sys) with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
+The standard approach would be [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs). aya pulls in tokio; libbpf-rs pulls in a C build step. Both add hundreds of milliseconds to startup and megabytes to binary size. For three probes and three maps, this is absurd.
 
-Instead, `rstat` implements its own loader in ~100 lines of Rust:
+Instead, `rstat` implements its own loader in ~100 lines: ELF parse via goblin → map create via `BPF_MAP_CREATE` → relocate `LD_IMM64` instructions → load via `BPF_PROG_LOAD` → attach via `perf_event_open` + `ioctl`.
 
-<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="diagram-bpf-loader" role="img" aria-label="BPF loader pipeline: ELF parse → map create → relocate → load → attach">
-  <style>
-    .bl-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
-    .bl-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
-    .bl-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 9px; font-style: italic; }
-    .bl-box   { fill: rgba(0,0,0,0.2); stroke: rgba(46,204,113,0.3); stroke-width: 1; rx: 6; }
-    .bl-arr   { stroke: rgba(168,200,160,0.4); stroke-width: 1.5; fill: none; marker-end: url(#bla); }
-  </style>
-  <defs><marker id="bla" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.4)"/></marker></defs>
-  <!-- Step 1 -->
-  <rect x="10" y="8" width="200" height="30" class="bl-box"/>
-  <text x="110" y="28" text-anchor="middle" class="bl-mono">ELF parse (goblin)</text>
-  <text x="230" y="28" class="bl-dim">pure Rust, no C deps</text>
-  <line x1="110" y1="38" x2="110" y2="50" class="bl-arr"/>
-  <!-- Step 2 -->
-  <rect x="10" y="52" width="200" height="30" class="bl-box"/>
-  <text x="110" y="72" text-anchor="middle" class="bl-mono">map create (bpf syscall)</text>
-  <text x="230" y="72" class="bl-dim">BPF_MAP_CREATE</text>
-  <line x1="110" y1="82" x2="110" y2="94" class="bl-arr"/>
-  <!-- Step 3 -->
-  <rect x="10" y="96" width="200" height="30" class="bl-box"/>
-  <text x="110" y="116" text-anchor="middle" class="bl-mono">relocate (patch LD_IMM64)</text>
-  <text x="230" y="116" class="bl-dim">symbol → map fd</text>
-  <line x1="110" y1="126" x2="110" y2="138" class="bl-arr"/>
-  <!-- Step 4 -->
-  <rect x="10" y="140" width="200" height="30" class="bl-box"/>
-  <text x="110" y="160" text-anchor="middle" class="bl-mono">load (bpf syscall)</text>
-  <text x="230" y="160" class="bl-dim">BPF_PROG_LOAD</text>
-  <line x1="110" y1="170" x2="110" y2="182" class="bl-arr"/>
-  <!-- Step 5 -->
-  <rect x="10" y="184" width="200" height="30" class="bl-box"/>
-  <text x="110" y="204" text-anchor="middle" class="bl-mono">attach (perf_event)</text>
-  <text x="230" y="198" class="bl-dim">perf_event_open</text>
-  <text x="230" y="210" class="bl-dim">+ ioctl SET_BPF + ENABLE</text>
-</svg>
+One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf event fd (the kernel's `tp_event` is shared). But `PERF_EVENT_IOC_ENABLE` must be called on every CPU's fd.
 
-One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on a single CPU's perf event fd (CPU 0). The kernel's `tp_event` is shared, so the BPF program fires system-wide regardless of which CPU's fd was used for attachment. `PERF_EVENT_IOC_ENABLE`, however, must be called on every CPU's fd to actually enable the tracepoint event on each CPU. This was discovered empirically after initially attaching to all CPUs and getting duplicate firings.
-
-### The remaining filesystem: sysfs
-
-After eliminating all /proc reads, the only filesystem access remaining was sysfs for hardware-specific values that have no syscall equivalent:
-
-- `/sys/class/thermal/thermal_zone0/temp` -- CPU temperature
-- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq` -- current CPU frequency
-- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq` -- max CPU frequency
-- `/sys/class/drm/card1/gt/gt0/rc6_residency_ms` -- GPU idle residency
-- `/sys/class/drm/card1/gt/gt0/rps_act_freq_mhz` -- GPU current frequency
-- `/sys/class/drm/card1/gt/gt0/rps_max_freq_mhz` -- GPU max frequency
-- `/sys/firmware/acpi/platform_profile` -- power profile
-
-Seven files. All opened once at startup and held open for the lifetime of the daemon. Read via `lseek(0) + read()` each tick.
+</details>
+</div>
 
 <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
   <style>
@@ -1063,38 +985,25 @@ Discarded for two reasons:
   <line x1="330" y1="268" x2="330" y2="287" class="ar-arr"/>
 </svg>
 
-### BPF probe (probe.bpf.c)
+<div class="detour">
+<details>
+<summary>Component reference</summary>
 
-A single C source file compiled with [`clang`](https://clang.llvm.org/) `-target bpf -O2 -g`. Uses `vmlinux.h` for kernel type definitions (generated from BTF, avoids kernel header dependency).
+**BPF probe (probe.bpf.c)** — compiled with `clang -target bpf -O2 -g`, uses `vmlinux.h` for kernel types.
 
 Three tracepoint programs:
+- `handle_sched_switch`: accounts CPU time, snapshots RSS/IO, tracks D-state
+- `handle_sched_exit`: marks zombies
+- `handle_sched_free`: cleans up reaped processes
 
-- **`handle_sched_switch`** (tracepoint/sched/sched_switch): On every context switch, accounts CPU time for the outgoing task (delta from `sched_start` map), snapshots RSS from `mm->rss_stat` and IO from `task->ioac`, stores cumulative values in the `stats` hash map. Also tracks D-state from `prev_state`; clears the flag on the incoming task. Idle time (PID 0) is accumulated in the `sys` array map (currently unused in userspace -- CPU% is computed from busy_ns sum).
-- **`handle_sched_exit`** (tracepoint/sched/sched_process_exit): Marks the exiting PID with `state = 'Z'` in the stats map. The entry persists so userspace can display zombies.
-- **`handle_sched_free`** (tracepoint/sched/sched_process_free): Fires when the parent reaps a zombie. Deletes the PID from both `sched_start` and `stats` maps. This is the actual cleanup that prevents unbounded map growth.
+Three BPF maps: `stats` (per-PID data), `sys` (system-wide idle_ns), `sched_start` (per-PID timestamps).
 
-Three BPF maps:
+**Rust daemon (main.rs)** — ~795 lines, no async runtime, no framework.
 
-| Map | Type | Key | Value | Max Entries | Purpose |
-|-----|------|-----|-------|-------------|---------|
-| `stats` | HASH | u32 (PID) | pid_stats (56B) | 8192 | Per-PID cumulative stats + D/Z state |
-| `sys` | ARRAY | u32 (0) | sys_stats (8B) | 1 | System-wide idle_ns |
-| `sched_start` | HASH | u32 (PID) | sched_in (8B) | 8192 | Per-PID schedule-in timestamp |
+Key components: custom ELF loader via goblin, sorted vec with binary search for delta computation, batch map reading, pre-opened sysfs handles, stack-allocated top-N arrays, hand-written JSON emitter, built-in benchmark mode (`--bench N`).
 
-### Rust daemon (main.rs)
-
-A single-file ~795-line Rust program. No async runtime, no framework, no macros beyond `write!()`.
-
-Key components:
-
-- **Custom ELF loader** (`BpfLoader`): Parses BPF ELF via [goblin](https://github.com/m4b/goblin), creates maps with raw `bpf()` syscalls, resolves map relocations in program instructions, loads programs, attaches via perf_event.
-- **Sorted vec with binary search** (`PidStats`): Two pre-allocated vecs swapped each tick. `clear()` + `push()` + `sort_unstable()` for population, `binary_search_by_key()` for O(log n) delta lookups.
-- **Batch map reading**: `BPF_MAP_LOOKUP_BATCH` with pre-allocated key/value arrays. Falls back to iterative get_next_key + lookup if unsupported.
-- **pread for sysfs**: 7 pre-opened file handles, `pread(fd, buf, len, 0)` per tick.
-- **Stack-allocated top-N** (`Top5`, `IoTop5`): Fixed-size arrays with insertion, sorted on output.
-- **D/Z state display** (`StateList`): Collects up to 10 blocked/zombie entries during the existing map iteration, rendered above CPU percentages in the tooltip.
-- **Hand-written JSON**: Direct byte-level string building with a minimal escaper. No serde dependency.
-- **Built-in benchmark mode**: `--bench N` runs N samples with 1ms spacing and reports avg/p50/p95/p99/min/max timings.
+</details>
+</div>
 
 <div class="detour">
 <details>
@@ -1110,16 +1019,16 @@ The value proposition holds: everything *else* — data structures, control flow
 </details>
 </div>
 
-### Nix packaging (flake.nix)
+<div class="detour">
+<details>
+<summary>Nix packaging</summary>
 
 Rust, by the way. On NixOS, by the way.
 
-Two-derivation build:
+Two-derivation build: `rstat-probe` compiles `probe.bpf.c` with `clang -target bpf`; `rstat` builds the Rust binary and copies the probe alongside it. The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its executable path. Requires `CAP_SYS_ADMIN` for `bpf()` and `perf_event_open()`.
 
-1. **rstat-probe**: `stdenv.mkDerivation` that compiles `probe.bpf.c` with `clang -target bpf -O2 -g` against libbpf headers and the local `vmlinux.h`. Produces `probe.bpf.o`.
-2. **rstat**: `rustPlatform.buildRustPackage` that builds the Rust binary. `postInstall` copies the probe object from the first derivation into `$out/bin/` alongside the binary.
-
-The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its own executable path, or accepts an explicit path as a command-line argument. The program requires `CAP_SYS_ADMIN` or equivalent (e.g., via [NixOS](https://nixos.org/) `security.wrappers` with setuid) for the `bpf()` and `perf_event_open()` syscalls.
+</details>
+</div>
 
 ---
 
@@ -1137,17 +1046,20 @@ Development measurements were taken under heavier load conditions (HyprPanel run
 
 The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init) and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
 
-### CPU Flamegraphs
+<div class="detour">
+<details>
+<summary>CPU flamegraphs</summary>
 
-Before the zero-allocation work, `perf record` on the sample loop shows serde_json serialisation and `take_sample` dominating:
+Before the optimisation work, `perf record` shows serde_json serialisation and `take_sample` dominating:
 
-<img src="assets/rstat-flamegraph-old.svg" alt="CPU flamegraph before optimisation -- serde_json and take_sample dominate" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
-<em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">Pre-optimisation: serde serialisation and proc walks visible in the profile.</em>
+<img src="assets/rstat-flamegraph-old.svg" alt="CPU flamegraph before optimisation" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
 
-After optimisation, the hot path is so fast that `perf` mostly captures debug symbol resolution noise (backtrace symbolisation from the benchmark harness):
+After optimisation, the hot path is so fast that `perf` mostly captures debug symbol resolution noise:
 
-<img src="assets/rstat-flamegraph.svg" alt="CPU flamegraph after optimisation -- hot path too fast, profiler captures mostly noise" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
-<em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">Post-optimisation: the actual sample loop is invisible in the profile. The profiler is profiling itself.</em>
+<img src="assets/rstat-flamegraph.svg" alt="CPU flamegraph after optimisation" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
+
+</details>
+</div>
 
 <div class="memory-comparison">
   <div class="comparison-row comparison-bad">
