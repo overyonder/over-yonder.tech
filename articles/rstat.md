@@ -7,9 +7,9 @@ tags: [rust, ebpf, performance, linux]
 
 # System calls are slow. Run your code in the kernel!
 
-The status bar on my Linux desktop was using 135MB of RAM and 10% CPU. Not the applications it was monitoring -- the bar itself. The monitoring tool was a measurable load on the system it was supposed to monitor.
+The status bar on my Linux desktop was using 135MB of RAM and 10% CPU. Not the applications it was monitoring. The bar itself. The monitoring tool was a measurable load on the system it was supposed to monitor.
 
-HyprPanel is the de facto status bar for the Hyprland compositor. It's written in TypeScript and runs on GJS -- GNOME's JavaScript runtime, which embeds the SpiderMonkey engine from Firefox. A full JavaScript engine, a GObject type system, a D-Bus session bridge, a CSS layout engine -- all running persistently to display a few numbers at the top of the screen. The process tree told the story:
+HyprPanel is the de facto status bar for the Hyprland compositor. It's written in TypeScript and runs on GJS (GNOME's JavaScript runtime, which embeds the SpiderMonkey engine from Firefox). A full JavaScript engine, a GObject type system, a D-Bus session bridge, a CSS layout engine, all running persistently to display a few numbers at the top of the screen. The process tree told the story:
 
 ```
 user  318867  10.4  1.7  3467764  138444  gjs -m hyprpanel-wrapped
@@ -18,17 +18,44 @@ user  318925   0.6  0.3    47276   29636  python3 bluetooth.py
 
 3.4GB virtual address space. 135MB RSS. 10% CPU. Persistent `Gjs-Console-CRITICAL` warnings. GDBus errors about missing portal interfaces. A Python subprocess for Bluetooth. For a status bar.
 
-This is not an indictment of the people who built HyprPanel -- it's genuinely useful software, and its creator [Jas-SinghFSU](https://github.com/Jas-SinghFSU) agrees with the diagnosis. HyprPanel is now in maintenance mode, and Jas is building its successor -- [Wayle](https://github.com/Jas-SinghFSU/HyprPanel) -- entirely in Rust, noting that *"GJS (even with TypeScript) just isn't a good systems language."* The problem is the architectural norms, not the people working within them. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
+This is not an indictment of the people who built HyprPanel. It's genuinely useful software, and its creator [Jas-SinghFSU](https://github.com/Jas-SinghFSU) agrees with the diagnosis. HyprPanel is now in maintenance mode, and Jas is building its successor, [Wayle](https://github.com/Jas-SinghFSU/HyprPanel), entirely in Rust, noting that *"GJS (even with TypeScript) just isn't a good systems language."* The problem is the architectural norms, not the people working within them. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
 
 A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to Waybar, which is written in C++ and renders with GTK. And then I needed a system monitor module that actually took its job seriously.
 
 This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a Rust daemon that injects its own code into the kernel.
 
-Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks -- no filesystem, no syscalls, no text parsing, no heap allocations. Sub-millisecond samples.
+Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing, no heap allocations. Sub-millisecond samples.
 
 Each stage was motivated by the same question: where is the time actually going, and can we eliminate the mechanism entirely rather than just making it faster?
 
-<svg viewBox="0 0 750 222" xmlns="http://www.w3.org/2000/svg" class="perf-waterfall" role="img" aria-label="Performance waterfall: 2 seconds down to sub-millisecond">
+<svg viewBox="0 0 750 200" xmlns="http://www.w3.org/2000/svg" class="perf-waterfall" role="img" aria-label="Performance waterfall: linear scale">
+  <style>
+    .wf-label { fill: rgba(255,255,255,0.9); font-family: 'Lora', serif; font-size: 13px; }
+    .wf-time  { fill: rgba(255,255,255,0.6); font-family: 'Courier New', monospace; font-size: 12px; }
+    .wf-bar   { rx: 4; ry: 4; }
+  </style>
+  <text x="375" y="22" text-anchor="middle" class="wf-label" font-size="15" fill="rgba(255,255,255,0.95)">Sample time per stage</text>
+  <!-- Linear scale: bar width = (ms / 2000) * 500 -->
+  <text x="14" y="58" class="wf-label">Bash + coreutils</text>
+  <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
+  <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
+  <!-- 700/2000 * 500 = 175 -->
+  <text x="14" y="96" class="wf-label">Rust + /proc</text>
+  <rect x="220" y="82" width="175" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
+  <text x="401" y="98" text-anchor="end" class="wf-time">~700 ms</text>
+  <!-- 15/2000 * 500 = 3.75 -->
+  <text x="14" y="134" class="wf-label">Optimised /proc</text>
+  <rect x="220" y="120" width="4" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
+  <text x="230" y="136" class="wf-time">~15 ms</text>
+  <!-- 0.78/2000 * 500 ≈ 0.2 -->
+  <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
+  <rect x="220" y="158" width="1" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
+  <text x="227" y="174" class="wf-time">&lt;1 ms</text>
+</svg>
+
+Alright. Let me try that again in log scale.
+
+<svg viewBox="0 0 750 222" xmlns="http://www.w3.org/2000/svg" class="perf-waterfall" role="img" aria-label="Performance waterfall: log scale">
   <style>
     .wf-label { fill: rgba(255,255,255,0.9); font-family: 'Lora', serif; font-size: 13px; }
     .wf-time  { fill: rgba(255,255,255,0.6); font-family: 'Courier New', monospace; font-size: 12px; }
@@ -39,25 +66,24 @@ Each stage was motivated by the same question: where is the time actually going,
   <text x="14" y="58" class="wf-label">Bash + coreutils</text>
   <rect x="220" y="44" width="500" height="22" class="wf-bar" fill="#c0392b" opacity="0.85"/>
   <text x="726" y="60" text-anchor="end" class="wf-time">~2,000 ms</text>
-  <!-- Rust + /proc + powerprofilesctl: ~700ms. log10(700)/3.301*500 ≈ 431 -->
+  <!-- log10(700)/3.301*500 ≈ 431 -->
   <text x="14" y="96" class="wf-label">Rust + /proc</text>
   <rect x="220" y="82" width="431" height="22" class="wf-bar" fill="#e67e22" opacity="0.85"/>
   <text x="657" y="98" text-anchor="end" class="wf-time">~700 ms</text>
-  <!-- After sysfs/byte-level parsing: ~15ms. log10(15)/3.301*500 ≈ 178 -->
+  <!-- log10(15)/3.301*500 ≈ 178 -->
   <text x="14" y="134" class="wf-label">Optimised /proc</text>
   <rect x="220" y="120" width="178" height="22" class="wf-bar" fill="#f39c12" opacity="0.85"/>
   <text x="404" y="136" text-anchor="end" class="wf-time">~15 ms</text>
-  <!-- eBPF: sub-1ms. (log10(0.78)+0.5)/(3.301+0.5)*500 ≈ 52 -->
+  <!-- sub-1ms -->
   <text x="14" y="172" class="wf-label">eBPF + zero-alloc</text>
   <rect x="220" y="158" width="52" height="22" class="wf-bar" fill="#2ecc71" opacity="0.85"/>
   <text x="278" y="174" class="wf-time">&lt;1 ms</text>
-  <!-- Source note -->
-  <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Development-time measurements. Current-system benchmarks show lower figures due to different load conditions.</text>
+  <text x="375" y="210" text-anchor="middle" class="wf-time" font-size="10">Dev-time measurements. Current-system benchmarks show lower figures due to different load.</text>
 </svg>
 
 ---
 
-## Stage 1: The Baseline -- Bash + Coreutils (~2 seconds)
+## Stage 1: The Baseline — Bash + Coreutils (~2 seconds)
 
 The original implementation was a shell script invoked by Waybar's `custom` module on a polling interval. Every two or three seconds, Waybar would fork a shell, the shell would execute the script, and the script would fan out into a tree of subprocesses:
 
@@ -74,7 +100,7 @@ Each line is a fork+exec. `cat` opens a file, reads it, writes it to a pipe. `aw
 The costs compound:
 
 - **Process creation overhead.** Each `fork()` copies the process's page tables. Each `exec()` loads a new binary, links it, initialises its runtime. On Linux, a fork+exec cycle costs roughly 1-2ms even for trivial programs. The script spawned 10-15 of these per invocation.
-- **No state between runs.** Every invocation started from scratch. No open file handles, no cached values, no deltas. CPU usage requires two readings of `/proc/stat` separated by a time interval -- the script either read it once and computed nothing meaningful, or slept internally and doubled its execution time.
+- **No state between runs.** Every invocation started from scratch. No open file handles, no cached values, no deltas. CPU usage requires two readings of `/proc/stat` separated by a time interval. The script either read it once and computed nothing meaningful, or slept internally and doubled its execution time.
 - **Shell string parsing.** Every intermediate result was a string. Numbers were parsed from text, manipulated as text, formatted back to text. The shell's arithmetic capabilities are limited to integers, hence the `bc` dependency for floating-point.
 - **Filesystem round-trips.** `/proc` is a virtual filesystem. Each `open()` triggers the kernel to generate the file contents on demand. Each `read()` copies them to userspace. Each `close()` tears down the file descriptor. Multiply by every metric, every subprocess, every invocation.
 
@@ -86,7 +112,7 @@ This was the motivation for a rewrite: not performance for its own sake, but the
 
 ## Stage 2: Rust + /proc Parsing (~700ms)
 
-The first rewrite eliminated almost every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared -- no polling interval on Waybar's side, no repeated process spawning.
+The first rewrite eliminated almost every subprocess. A single Rust binary ran as a long-lived daemon, writing JSON lines to stdout. Waybar read these lines as they appeared, with no polling interval on Waybar's side and no repeated process spawning.
 
 <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" class="diagram-proc-roundtrip" role="img" aria-label="Diagram: /proc serialisation round-trip">
   <style>
@@ -138,9 +164,9 @@ The key changes:
 - `/proc/[pid]/statm` -- RSS in pages
 - `/proc/[pid]/io` -- read_bytes, write_bytes
 
-**serde_json for output.** The daemon serialised a struct to JSON using serde. Convenient, correct, and -- as would later become relevant -- not free.
+**serde_json for output.** The daemon serialised a struct to JSON using serde. Convenient and correct, but not free.
 
-The result was approximately 700ms per sample. Better than 2 seconds, but embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. Everything else -- the /proc walk, the delta computation, the JSON serialisation -- fit in the remaining time.
+The result was approximately 700ms per sample. Better than 2 seconds, but embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. The /proc walk, delta computation, and JSON serialisation all fit in the remaining time.
 
 The Rust binary wasn't slow. The single subprocess it still shelled out to was slow. The lesson was immediate: a compiled daemon that spawns one subprocess is only as fast as that subprocess.
 
@@ -150,15 +176,15 @@ The Rust binary wasn't slow. The single subprocess it still shelled out to was s
 
 The 700ms number had one obvious cause. Eliminating `powerprofilesctl` was the first fix, and the rest followed in quick succession:
 
-**Direct sysfs instead of D-Bus.** The power profile that `powerprofilesctl` spent ~810ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile` -- a single file read, no IPC, no subprocess. This one change dropped sample time from ~700ms to ~28ms. The entire 700ms was one subprocess.
+**Direct sysfs instead of D-Bus.** The power profile that `powerprofilesctl` spent ~810ms querying via D-Bus is exposed directly at `/sys/firmware/acpi/platform_profile`. A single file read, no IPC, no subprocess. This one change dropped sample time from ~700ms to ~28ms. The entire 700ms was one subprocess.
 
 **Reusable read buffers.** The initial implementation allocated a new `String` for each `/proc/[pid]/*` read. With 300+ PIDs and 3 files each, that was ~900 allocations and deallocations per sample. Switching to a single stack-allocated `[u8; 8192]` buffer reused across all reads eliminated the allocation overhead entirely.
 
-**Skipping kernel threads.** Not all PIDs in `/proc` are userspace processes. Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out -- by checking whether the virtual size is zero in `/proc/[pid]/stat` -- cut the PID count roughly in half and avoided unnecessary IO reads for 250+ PIDs.
+**Skipping kernel threads.** Not all PIDs in `/proc` are userspace processes. Kernel threads (kworkers, ksoftirqd, migration threads) have no meaningful CPU, memory, or IO stats for a desktop status bar. Filtering them out by checking whether the virtual size is zero in `/proc/[pid]/stat` cut the PID count roughly in half and avoided unnecessary IO reads for 250+ PIDs.
 
-**Byte-level /proc parsing.** The initial parser used Rust's `str::split()` and `parse::<u64>()` on each `/proc/[pid]/stat` line. Replacing this with a hand-rolled byte scanner that walks the buffer once -- skipping fields by counting spaces, converting digits inline -- cut the parsing cost substantially.
+**Byte-level /proc parsing.** The initial parser used Rust's `str::split()` and `parse::<u64>()` on each `/proc/[pid]/stat` line. Replacing this with a hand-rolled byte scanner that walks the buffer once, skipping fields by counting spaces and converting digits inline, cut the parsing cost substantially.
 
-After these changes, the sample time dropped to around 15ms on a typical desktop. The remaining cost was the /proc walk itself -- still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
+After these changes, the sample time dropped to around 15ms on a typical desktop. The remaining cost was the /proc walk itself: still hundreds of syscalls for the per-PID breakdown, each one a serialisation round-trip through ASCII text.
 
 ---
 
@@ -256,7 +282,7 @@ The solution was to move the data collection into the kernel itself using eBPF. 
   <text x="320" y="308" class="ring-dim">the kernel. It reads structs directly.</text>
 </svg>
 
-eBPF is not a hack or a backdoor. It's a formally verified sandbox -- the kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
+eBPF is not a hack or a backdoor. It's a formally verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
 
 **The custom BPF loader.** The standard approach would be to use aya or libbpf-rs, high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in tokio (an async runtime), libbpf-rs pulls in libbpf-sys with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
 
@@ -268,11 +294,11 @@ Instead, `rstat` implements its own loader in ~100 lines of Rust:
 - Load programs via `bpf(BPF_PROG_LOAD, ...)`
 - Attach via `perf_event_open` + `ioctl(PERF_EVENT_IOC_SET_BPF)` + `ioctl(PERF_EVENT_IOC_ENABLE)`
 
-One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on a single CPU's perf event fd (CPU 0). The kernel's `tp_event` is shared -- the BPF program fires system-wide regardless of which CPU's fd was used for attachment. `PERF_EVENT_IOC_ENABLE`, however, must be called on every CPU's fd to actually enable the tracepoint event on each CPU. This was discovered empirically after initially attaching to all CPUs and getting duplicate firings.
+One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on a single CPU's perf event fd (CPU 0). The kernel's `tp_event` is shared, so the BPF program fires system-wide regardless of which CPU's fd was used for attachment. `PERF_EVENT_IOC_ENABLE`, however, must be called on every CPU's fd to actually enable the tracepoint event on each CPU. This was discovered empirically after initially attaching to all CPUs and getting duplicate firings.
 
 ### What was tried and discarded: block_rq_issue for IO
 
-The initial approach was to collect all three per-PID metrics (CPU, memory, IO) entirely within BPF. CPU time was straightforward via `sched_switch`. For IO, the `block_rq_issue` tracepoint looked promising -- it fires when the block layer issues an IO request.
+The initial approach was to collect all three per-PID metrics (CPU, memory, IO) entirely within BPF. CPU time was straightforward via `sched_switch`. For IO, the `block_rq_issue` tracepoint looked promising since it fires when the block layer issues an IO request.
 
 The problem: PID attribution in the block layer is unreliable. `block_rq_issue` fires from interrupt or kernel worker context, not from the process that initiated the IO. `bpf_get_current_pid_tgid()` returns whichever PID happens to be running on that CPU when the block request is submitted, which may be a kworker thread, the block device's IRQ handler, or a completely unrelated process. The resulting per-PID IO stats were essentially random.
 
@@ -282,7 +308,7 @@ This was discarded. IO collection stayed with `/proc/[pid]/io` and delta trackin
 
 When the BPF map contained entries created by the (now-discarded) block layer path, some PIDs had all-zero `comm` fields because `bpf_get_current_comm()` was returning the kernel worker's name rather than the originating process. Even after removing the block layer tracepoint, this pattern served as a reminder: always validate BPF-collected data and implement fallbacks. The daemon fell back to reading `/proc/[pid]/comm` when a BPF entry's comm was all zeroes.
 
-The initial approach for IO -- using the `block_rq_issue` tracepoint -- was tried and discarded. But collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
+The initial approach for IO using the `block_rq_issue` tracepoint was tried and discarded. But collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
 
 <svg viewBox="0 0 580 220" xmlns="http://www.w3.org/2000/svg" class="diagram-sched-switch" role="img" aria-label="Diagram: sched_switch tracepoint firing on context switch">
   <style>
@@ -346,7 +372,7 @@ static __always_inline void snapshot_task(struct pid_stats *s)
 
 ### IO from task->ioac
 
-The task accounting structure (`task->ioac`) contains cumulative `read_bytes` and `write_bytes` counters -- the same values exposed via `/proc/[pid]/io`. Reading them directly in the BPF probe eliminates the filesystem entirely:
+The task accounting structure (`task->ioac`) contains cumulative `read_bytes` and `write_bytes` counters, the same values exposed via `/proc/[pid]/io`. Reading them directly in the BPF probe eliminates the filesystem entirely:
 
 ```c
     __u64 rb = 0, wb = 0;
@@ -360,12 +386,12 @@ These are cumulative counters. Userspace computes deltas between ticks by storin
 
 ### Process state from scheduler transitions
 
-Load averages tell you the system is stressed. They don't tell you *why*. A load average of 8.0 on a 4-core system could mean 8 CPU-bound processes competing for time, or it could mean 4 processes are running while 4 are stuck in uninterruptible sleep waiting on a dead NFS mount. The distinction matters -- one is normal, the other means something is broken.
+Load averages tell you the system is stressed. They don't tell you *why*. A load average of 8.0 on a 4-core system could mean 8 CPU-bound processes competing for time, or it could mean 4 processes are running while 4 are stuck in uninterruptible sleep waiting on a dead NFS mount. The distinction matters. One is normal, the other means something is broken.
 
 Linux tracks two pathological process states that are invisible to most monitoring tools:
 
-- **D (uninterruptible sleep)** -- the process is blocked on IO or a kernel lock and cannot be interrupted, not even by `kill -9`. Common causes: NFS timeouts, disk IO stalls, journaling waits, driver bugs. D-state processes inflate the load average without consuming CPU, making load numbers misleading.
-- **Z (zombie)** -- the process has exited but its parent hasn't called `wait()` to collect its exit status. The process occupies a PID and a slot in the process table but consumes no resources. A handful of zombies is normal; hundreds suggest a buggy parent that's leaking children.
+- **D (uninterruptible sleep)**: the process is blocked on IO or a kernel lock and cannot be interrupted, not even by `kill -9`. Common causes: NFS timeouts, disk IO stalls, journaling waits, driver bugs. D-state processes inflate the load average without consuming CPU, making load numbers misleading.
+- **Z (zombie)**: the process has exited but its parent hasn't called `wait()` to collect its exit status. The process occupies a PID and a slot in the process table but consumes no resources. A handful of zombies is normal; hundreds suggest a buggy parent that's leaking children.
 
 Both states are observable from the scheduler. The `prev_state` argument to `sched_switch` encodes the outgoing task's state: bit 1 (`0x02`) indicates `TASK_UNINTERRUPTIBLE`. When a D-state process is switched out, the probe marks it:
 
@@ -374,11 +400,11 @@ Both states are observable from the scheduler. The `prev_state` argument to `sch
         s->state = 'D';
 ```
 
-When the task is switched back in -- meaning it woke up from its uninterruptible wait -- the probe clears the flag. This gives a live view of which processes are *currently* stuck, not which ones were stuck at some point in the past.
+When the task is switched back in (meaning it woke up from its uninterruptible wait), the probe clears the flag. This gives a live view of which processes are *currently* stuck, not which ones were stuck at some point in the past.
 
-Zombies require a different lifecycle. A zombie can't schedule back in -- it's already exited. The `sched_process_exit` tracepoint marks the entry with `state = 'Z'` instead of deleting it from the map. The actual deletion moves to `sched_process_free`, which fires when the parent reaps the zombie (or when the kernel cleans it up after the parent exits). This means zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table -- no polling, no /proc walk, no missed zombies between samples.
+Zombies require a different lifecycle. A zombie can't schedule back in because it's already exited. The `sched_process_exit` tracepoint marks the entry with `state = 'Z'` instead of deleting it from the map. The actual deletion moves to `sched_process_free`, which fires when the parent reaps the zombie (or when the kernel cleans it up after the parent exits). Zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table. No polling, no /proc walk, no missed zombies between samples.
 
-Userspace collects up to 10 D/Z entries during the existing map iteration -- no extra passes, no extra syscalls. They're rendered at the top of the CPU section:
+Userspace collects up to 10 D/Z entries during the existing map iteration, requiring no extra passes or syscalls. They're rendered at the top of the CPU section:
 
 ```
  CPU    45°C    12%    2.1/4.5 GHz
@@ -389,7 +415,7 @@ Userspace collects up to 10 D/Z entries during the existing map iteration -- no 
  2.3%  claude
 ```
 
-The `D` and `Z` labels replace the CPU percentage -- because those processes aren't consuming CPU, they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D` -- just glance at the status bar.
+The `D` and `Z` labels replace the CPU percentage because those processes aren't consuming CPU; they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D`. Just glance at the status bar.
 
 ### System-wide metrics without /proc
 
@@ -415,7 +441,7 @@ This gives accurate CPU utilisation regardless of the kernel's tick configuratio
 
 ### What was discarded: D-Bus for power profile
 
-The original script called `powerprofilesctl get`, which spawns a process that makes a D-Bus call to the power-profiles-daemon. D-Bus involves socket communication, message serialisation, and the overhead of the D-Bus daemon itself. The power profile is exposed directly via sysfs at `/sys/firmware/acpi/platform_profile` -- a single file read, no IPC, no subprocess.
+The original script called `powerprofilesctl get`, which spawns a process that makes a D-Bus call to the power-profiles-daemon. D-Bus involves socket communication, message serialisation, and the overhead of the D-Bus daemon itself. The power profile is exposed directly via sysfs at `/sys/firmware/acpi/platform_profile`: a single file read, no IPC, no subprocess.
 
 ### What was discarded: /proc/net reads
 
@@ -476,7 +502,7 @@ At this point, the sample loop was fast enough that allocator overhead and sysca
 
 ### Eliminating HashMap
 
-The BPF stats were initially stored in a `HashMap<u32, BpfPidStats>` -- created fresh each tick, populated from the BPF map, used for delta computation, then dropped. HashMap allocation involves bucket array creation, hashing, and on drop, deallocation of the bucket array and any spilled entries.
+The BPF stats were initially stored in a `HashMap<u32, BpfPidStats>`, created fresh each tick, populated from the BPF map, used for delta computation, then dropped. HashMap allocation involves bucket array creation, hashing, and on drop, deallocation of the bucket array and any spilled entries.
 
 Replaced with two `Vec<(u32, BpfPidStats)>`, each pre-allocated to `MAX_PIDS` (8192) capacity. On each tick:
 
@@ -534,7 +560,7 @@ The batch key and value buffers (`bk`, `bv`) are pre-allocated in the `BpfLoader
 
 ### pread() instead of lseek() + read()
 
-For the 7 sysfs files read each tick, the original code called `lseek(fd, 0, SEEK_SET)` followed by `read(fd, buf, len)` -- two syscalls per file, 14 syscalls total.
+For the 7 sysfs files read each tick, the original code called `lseek(fd, 0, SEEK_SET)` followed by `read(fd, buf, len)`. Two syscalls per file, 14 total.
 
 `pread(fd, buf, len, 0)` combines both into a single syscall. Same result, half the syscalls, 7 instead of 14:
 
@@ -547,7 +573,7 @@ fn pread_raw(f: &fs::File, buf: &mut [u8]) -> usize {
 
 ### Pre-opened throttle sysfs files
 
-GPU throttle status was read from `/sys/class/drm/card1/gt/gt0/throttle_reason_*` -- a set of files discovered via `readdir()` at runtime. The initial implementation called `readdir()` each tick to enumerate the files, then opened, read, and closed each one.
+GPU throttle status was read from `/sys/class/drm/card1/gt/gt0/throttle_reason_*`, a set of files discovered via `readdir()` at runtime. The initial implementation called `readdir()` each tick to enumerate the files, then opened, read, and closed each one.
 
 Moved to init-time discovery: `readdir()` once at startup, open all matching files, store them in a `Vec<ThrottleFile>` with the file handle and a fixed-size name buffer. Each tick just does `pread()` on the pre-opened handles:
 
@@ -555,7 +581,7 @@ Moved to init-time discovery: `readdir()` once at startup, open all matching fil
 struct ThrottleFile { file: fs::File, name: [u8; 32], nl: u8 }
 ```
 
-The throttle status output is built into a stack-allocated `[u8; 64]` buffer -- no String, no allocation.
+The throttle status output is built into a stack-allocated `[u8; 64]` buffer with no String and no allocation.
 
 ### Removing serde_json
 
@@ -625,7 +651,7 @@ With 7 sysfs files to read each tick, io_uring's submission queue could theoreti
 
 Discarded for two reasons:
 
-1. **sysfs files are not real files.** They are kernel-generated virtual files. io_uring's async read path is optimised for block devices with actual IO queues. For sysfs, the kernel generates the content synchronously during the read -- there is nothing to parallelise. The io_uring SQE submission, CQE reaping, and ring buffer management overhead would likely exceed the savings from reducing 7 `pread()` calls to 1 `io_uring_enter()`.
+1. **sysfs files are not real files.** They are kernel-generated virtual files. io_uring's async read path is optimised for block devices with actual IO queues. For sysfs, the kernel generates the content synchronously during the read, so there is nothing to parallelise. The io_uring SQE submission, CQE reaping, and ring buffer management overhead would likely exceed the savings from reducing 7 `pread()` calls to 1 `io_uring_enter()`.
 2. **Code complexity.** io_uring requires ring buffer setup, memory mapping for the SQ/CQ rings, careful lifetime management, and error handling for partial completions. For 7 files, this is a net negative.
 
 ### block_rq_issue tracepoint for IO attribution
@@ -638,7 +664,7 @@ Tracking idle time by accumulating nanoseconds spent in PID 0 (the idle/swapper 
 
 On a system with 4 cores, 3 of which are deeply idle, the tracked `idle_ns` might reflect only 10% of actual idle time, producing a reported CPU usage of 90%+ when true utilisation is under 5%.
 
-The fix -- summing per-PID busy_ns -- is accurate because every non-idle task *does* get scheduled out eventually (preemption, blocking syscall, voluntary yield), and its time is correctly accounted at that point.
+The fix (summing per-PID busy_ns) is accurate because every non-idle task *does* get scheduled out eventually (preemption, blocking syscall, voluntary yield), and its time is correctly accounted at that point.
 
 ### D-Bus for power profile (powerprofilesctl)
 
@@ -655,11 +681,11 @@ Both were discarded because their dependency trees are disproportionate to the p
 - **aya** pulls in async runtime dependencies (tokio features), BTF parsing, and various platform abstractions. The binary size increase was several megabytes.
 - **libbpf-rs** requires a C build step (libbpf-sys compiles libbpf from source), adds runtime initialisation cost, and introduces a C FFI boundary.
 
-rstat's BPF needs are minimal: load one ELF object with 3 programs and 3 maps, patch relocations, attach to tracepoints, read maps. The custom loader is ~100 lines of Rust using raw `bpf()` syscalls and `goblin` for ELF parsing. `goblin` is configured with minimal features (`elf32`, `elf64`, `endian_fd`, `std` -- no Mach-O, no PE, no archive support). The entire dependency tree is two crates: `goblin` and `libc`.
+rstat's BPF needs are minimal: load one ELF object with 3 programs and 3 maps, patch relocations, attach to tracepoints, read maps. The custom loader is ~100 lines of Rust using raw `bpf()` syscalls and `goblin` for ELF parsing. `goblin` is configured with minimal features (`elf32`, `elf64`, `endian_fd`, `std`, with no Mach-O, PE, or archive support). The entire dependency tree is two crates: `goblin` and `libc`.
 
 ### PERF_EVENT_IOC_SET_BPF on all CPUs
 
-The initial attachment logic called `ioctl(fd, PERF_EVENT_IOC_SET_BPF, prog_fd)` on every CPU's perf event fd. This is unnecessary. Tracepoint BPF programs are attached to the tracepoint's `tp_event`, which is a kernel-global structure. Setting the BPF program on one CPU's perf event fd is sufficient -- the program fires on all CPUs.
+The initial attachment logic called `ioctl(fd, PERF_EVENT_IOC_SET_BPF, prog_fd)` on every CPU's perf event fd. This is unnecessary. Tracepoint BPF programs are attached to the tracepoint's `tp_event`, which is a kernel-global structure. Setting the BPF program on one CPU's perf event fd is sufficient; the program fires on all CPUs.
 
 `PERF_EVENT_IOC_ENABLE` is different: it enables the perf event on a specific CPU. This must be called on every CPU's fd, or the tracepoint won't fire on CPUs that weren't enabled.
 
@@ -786,12 +812,12 @@ The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent 
 | Bash + coreutils | ~2s | Benched (excl. 1s sleep) | Subprocesses for every metric, no state between runs |
 | Rust + /proc | ~700ms | Dev measurement | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
 | Sysfs + optimised /proc | ~15ms | Dev measurement | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
-| eBPF -- no /proc walks | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
+| eBPF (no /proc walks) | sub-1ms | Commit `7601d77` | BPF probe reads task_struct directly, sysinfo() for system metrics |
 | Zero-alloc optimised | min 0.78ms | Benched (500 samples) | Batch map reads, sorted vec, pread, hand-written JSON |
 
 Development measurements were taken under heavier load conditions (HyprPanel running, more processes). Current-system benchmarks show lower figures for the /proc stages due to lighter load and fewer PIDs.
 
-The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob -- CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns -- in under a millisecond on a quiet desktop.
+The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init), zero allocations in the hot path, and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
 
 <img src="assets/rstat-tooltip.png" alt="rstat Waybar tooltip showing CPU, memory, IO breakdown, sampled in 2.9ms" style="max-width: 100%; border-radius: 8px; margin: 1em 0;" />
 <em style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">The final result: a complete system health snapshot in under 3ms.</em>
@@ -823,7 +849,7 @@ After optimisation, the hot path is so fast that `perf` mostly captures debug sy
 
 ## The Real Lesson
 
-The first improvement -- bash to Rust -- captured more than 95% of the practical benefit. Going from 2 seconds to 15 milliseconds was a 130× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 15ms is already negligible. Nobody would notice the difference between 15ms and sub-1ms.
+The first improvement, bash to Rust, captured more than 95% of the practical benefit. Going from 2 seconds to 15 milliseconds was a 130× improvement just by eliminating subprocesses and holding file descriptors open. For a tool that samples every 2 seconds, 15ms is already negligible. Nobody would notice the difference between 15ms and sub-1ms.
 
 The subsequent journey from 15ms to sub-millisecond was intellectually rewarding. It taught me how /proc works under the hood, how BPF program loading actually happens at the syscall level, how the scheduler accounts CPU time on tickless kernels, and why `percpu_counter` values are approximate. I would do it again. But it was not practically necessary.
 
@@ -831,8 +857,8 @@ This is the shape of most performance work: the first 10% of effort captures 90%
 
 We don't need everyone writing eBPF probes. We need people to stop embedding JavaScript runtimes in desktop utilities. The gap between "shell script that forks 15 processes" and "compiled binary that holds file descriptors open" is where almost all the real-world wins live. Everything beyond that is craft.
 
-The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism -- the processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
+The lesson, if there is one: the cost is almost never in the computation. It is in the mechanism. The processes spawned, the files opened and closed, the text serialised and deserialised, the memory allocated and freed, the syscalls made. Eliminate the mechanism and the computation takes care of itself.
 
-Meanwhile, Claude Code -- a React SPA running on Node.js to print characters to a terminal -- sits at 100% CPU with zram thrashing. Four `libuv-worker` processes, each consuming 700MB. The status bar daemon samples the carnage in under a millisecond.
+Meanwhile, Claude Code (a React SPA running on Node.js to print characters to a terminal) sits at 100% CPU with zram thrashing. Four `libuv-worker` processes, each consuming 700MB. The status bar daemon samples the carnage in under a millisecond.
 
 Sometimes the message writes itself.
