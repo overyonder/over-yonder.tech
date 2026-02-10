@@ -312,7 +312,6 @@ Result: ~15ms per sample on a typical desktop. The remaining cost was the /proc 
 ---
 
 <div class="emphasis-block">
-
 Before I started this project, this was about the limit of what I knew. 15ms per sample -- roughly where the established tools land. <a href="https://gitlab.com/procps-ng/procps">procps-ng</a> (<code>top</code>) walks <code>/proc</code> the same way: <code>openat()</code> per PID, read the stat files, parse the ASCII, close. It mitigates the cost with cached directory file descriptors, a gperf-generated hash table for field lookup, and double-buffered history arrays, but the fundamental pattern is the same -- hundreds of <code>/proc</code> reads per refresh. <a href="https://github.com/aristocratos/btop">btop++</a> does it with C++ <code>ifstream</code> per file per cycle, normalising CPU% against system ticks rather than wall-clock deltas.
 
 Both tools are well-optimised for the /proc model. But they are still bound by it. Was 15ms the floor, or could you go further if you stopped reading files entirely? It was time to consult the kernel documentation -- specifically, the <a href="https://docs.kernel.org/bpf/">BPF documentation</a> and the <code>bpf(2)</code> man page -- and find out what happens when you stop asking the kernel for data and start running your code inside it.
@@ -453,60 +452,6 @@ The solution was to move the data collection into the kernel itself using eBPF. 
 </svg>
 
 eBPF is not a hack or a backdoor. It's a statically verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't.
-
-**The custom BPF loader.** The standard approach would be to use [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs), high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in [tokio](https://tokio.rs/) (an async runtime), libbpf-rs pulls in [libbpf-sys](https://github.com/libbpf/libbpf-sys) with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
-
-Instead, `rstat` implements its own loader in ~100 lines of Rust:
-
-<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="diagram-bpf-loader" role="img" aria-label="BPF loader pipeline: ELF parse → map create → relocate → load → attach">
-  <style>
-    .bl-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
-    .bl-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
-    .bl-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 9px; font-style: italic; }
-    .bl-box   { fill: rgba(0,0,0,0.2); stroke: rgba(46,204,113,0.3); stroke-width: 1; rx: 6; }
-    .bl-arr   { stroke: rgba(168,200,160,0.4); stroke-width: 1.5; fill: none; marker-end: url(#bla); }
-  </style>
-  <defs><marker id="bla" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.4)"/></marker></defs>
-  <!-- Step 1 -->
-  <rect x="10" y="8" width="200" height="30" class="bl-box"/>
-  <text x="110" y="28" text-anchor="middle" class="bl-mono">ELF parse (goblin)</text>
-  <text x="230" y="28" class="bl-dim">pure Rust, no C deps</text>
-  <line x1="110" y1="38" x2="110" y2="50" class="bl-arr"/>
-  <!-- Step 2 -->
-  <rect x="10" y="52" width="200" height="30" class="bl-box"/>
-  <text x="110" y="72" text-anchor="middle" class="bl-mono">map create (bpf syscall)</text>
-  <text x="230" y="72" class="bl-dim">BPF_MAP_CREATE</text>
-  <line x1="110" y1="82" x2="110" y2="94" class="bl-arr"/>
-  <!-- Step 3 -->
-  <rect x="10" y="96" width="200" height="30" class="bl-box"/>
-  <text x="110" y="116" text-anchor="middle" class="bl-mono">relocate (patch LD_IMM64)</text>
-  <text x="230" y="116" class="bl-dim">symbol → map fd</text>
-  <line x1="110" y1="126" x2="110" y2="138" class="bl-arr"/>
-  <!-- Step 4 -->
-  <rect x="10" y="140" width="200" height="30" class="bl-box"/>
-  <text x="110" y="160" text-anchor="middle" class="bl-mono">load (bpf syscall)</text>
-  <text x="230" y="160" class="bl-dim">BPF_PROG_LOAD</text>
-  <line x1="110" y1="170" x2="110" y2="182" class="bl-arr"/>
-  <!-- Step 5 -->
-  <rect x="10" y="184" width="200" height="30" class="bl-box"/>
-  <text x="110" y="204" text-anchor="middle" class="bl-mono">attach (perf_event)</text>
-  <text x="230" y="198" class="bl-dim">perf_event_open</text>
-  <text x="230" y="210" class="bl-dim">+ ioctl SET_BPF + ENABLE</text>
-</svg>
-
-One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on a single CPU's perf event fd (CPU 0). The kernel's `tp_event` is shared, so the BPF program fires system-wide regardless of which CPU's fd was used for attachment. `PERF_EVENT_IOC_ENABLE`, however, must be called on every CPU's fd to actually enable the tracepoint event on each CPU. This was discovered empirically after initially attaching to all CPUs and getting duplicate firings.
-
-### What was tried and discarded: block_rq_issue for IO
-
-The initial approach was to collect all three per-PID metrics (CPU, memory, IO) entirely within BPF. CPU time was straightforward via `sched_switch`. For IO, the `block_rq_issue` tracepoint looked promising since it fires when the block layer issues an IO request.
-
-The problem: PID attribution in the block layer is unreliable. `block_rq_issue` fires from interrupt or kernel worker context, not from the process that initiated the IO. `bpf_get_current_pid_tgid()` returns whichever PID happens to be running on that CPU when the block request is submitted, which may be a kworker thread, the block device's IRQ handler, or a completely unrelated process. The resulting per-PID IO stats were essentially random.
-
-This was discarded. IO collection stayed with `/proc/[pid]/io` and delta tracking in userspace.
-
-### The empty comm field problem
-
-When the BPF map contained entries created by the (now-discarded) block layer path, some PIDs had all-zero `comm` fields because `bpf_get_current_comm()` was returning the kernel worker's name rather than the originating process. Even after removing the block layer tracepoint, this pattern served as a reminder: always validate BPF-collected data and implement fallbacks. The daemon fell back to reading `/proc/[pid]/comm` when a BPF entry's comm was all zeroes.
 
 Collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
 
@@ -661,7 +606,110 @@ With per-PID metrics handled by BPF, the remaining system-wide metrics were also
 - **Load averages**: Also from `sysinfo()`. Replaces `/proc/loadavg`. The load values are in fixed-point format (divide by 65536.0 for float).
 - **Core count**: `sysconf(_SC_NPROCESSORS_ONLN)`. A single syscall, cached by libc.
 
-### What was tried and discarded: idle-time CPU%
+### The custom BPF loader
+
+The standard approach would be to use [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs), high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in [tokio](https://tokio.rs/) (an async runtime), libbpf-rs pulls in [libbpf-sys](https://github.com/libbpf/libbpf-sys) with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
+
+Instead, `rstat` implements its own loader in ~100 lines of Rust:
+
+<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="diagram-bpf-loader" role="img" aria-label="BPF loader pipeline: ELF parse → map create → relocate → load → attach">
+  <style>
+    .bl-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
+    .bl-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
+    .bl-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 9px; font-style: italic; }
+    .bl-box   { fill: rgba(0,0,0,0.2); stroke: rgba(46,204,113,0.3); stroke-width: 1; rx: 6; }
+    .bl-arr   { stroke: rgba(168,200,160,0.4); stroke-width: 1.5; fill: none; marker-end: url(#bla); }
+  </style>
+  <defs><marker id="bla" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.4)"/></marker></defs>
+  <!-- Step 1 -->
+  <rect x="10" y="8" width="200" height="30" class="bl-box"/>
+  <text x="110" y="28" text-anchor="middle" class="bl-mono">ELF parse (goblin)</text>
+  <text x="230" y="28" class="bl-dim">pure Rust, no C deps</text>
+  <line x1="110" y1="38" x2="110" y2="50" class="bl-arr"/>
+  <!-- Step 2 -->
+  <rect x="10" y="52" width="200" height="30" class="bl-box"/>
+  <text x="110" y="72" text-anchor="middle" class="bl-mono">map create (bpf syscall)</text>
+  <text x="230" y="72" class="bl-dim">BPF_MAP_CREATE</text>
+  <line x1="110" y1="82" x2="110" y2="94" class="bl-arr"/>
+  <!-- Step 3 -->
+  <rect x="10" y="96" width="200" height="30" class="bl-box"/>
+  <text x="110" y="116" text-anchor="middle" class="bl-mono">relocate (patch LD_IMM64)</text>
+  <text x="230" y="116" class="bl-dim">symbol → map fd</text>
+  <line x1="110" y1="126" x2="110" y2="138" class="bl-arr"/>
+  <!-- Step 4 -->
+  <rect x="10" y="140" width="200" height="30" class="bl-box"/>
+  <text x="110" y="160" text-anchor="middle" class="bl-mono">load (bpf syscall)</text>
+  <text x="230" y="160" class="bl-dim">BPF_PROG_LOAD</text>
+  <line x1="110" y1="170" x2="110" y2="182" class="bl-arr"/>
+  <!-- Step 5 -->
+  <rect x="10" y="184" width="200" height="30" class="bl-box"/>
+  <text x="110" y="204" text-anchor="middle" class="bl-mono">attach (perf_event)</text>
+  <text x="230" y="198" class="bl-dim">perf_event_open</text>
+  <text x="230" y="210" class="bl-dim">+ ioctl SET_BPF + ENABLE</text>
+</svg>
+
+One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on a single CPU's perf event fd (CPU 0). The kernel's `tp_event` is shared, so the BPF program fires system-wide regardless of which CPU's fd was used for attachment. `PERF_EVENT_IOC_ENABLE`, however, must be called on every CPU's fd to actually enable the tracepoint event on each CPU. This was discovered empirically after initially attaching to all CPUs and getting duplicate firings.
+
+### The remaining filesystem: sysfs
+
+After eliminating all /proc reads, the only filesystem access remaining was sysfs for hardware-specific values that have no syscall equivalent:
+
+- `/sys/class/thermal/thermal_zone0/temp` -- CPU temperature
+- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq` -- current CPU frequency
+- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq` -- max CPU frequency
+- `/sys/class/drm/card1/gt/gt0/rc6_residency_ms` -- GPU idle residency
+- `/sys/class/drm/card1/gt/gt0/rps_act_freq_mhz` -- GPU current frequency
+- `/sys/class/drm/card1/gt/gt0/rps_max_freq_mhz` -- GPU max frequency
+- `/sys/firmware/acpi/platform_profile` -- power profile
+
+Seven files. All opened once at startup and held open for the lifetime of the daemon. Read via `lseek(0) + read()` each tick.
+
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
+  <style>
+    .ba-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
+    .ba-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
+    .ba-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; }
+    .ba-num   { fill: #c0392b; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
+    .ba-num-g { fill: #2ecc71; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
+  </style>
+  <!-- Before box -->
+  <rect x="10" y="10" width="330" height="220" rx="10" fill="rgba(192,57,43,0.06)" stroke="rgba(192,57,43,0.25)" stroke-width="1"/>
+  <text x="175" y="35" text-anchor="middle" class="ba-title">Before (Rust + /proc)</text>
+  <text x="30" y="60" class="ba-mono">Every 2s, for each of 300 PIDs:</text>
+  <text x="40" y="80" class="ba-mono">open 3 files → read text → parse → close</text>
+  <text x="40" y="100" class="ba-mono">= 2,700 syscalls</text>
+  <text x="40" y="120" class="ba-mono">+ sysinfo() + sysfs reads</text>
+  <text x="40" y="140" class="ba-mono">+ powerprofilesctl subprocess (~810ms)</text>
+  <text x="30" y="175" class="ba-dim">Total per sample:</text>
+  <text x="30" y="200" class="ba-num">~700 ms</text>
+  <!-- After box -->
+  <rect x="360" y="10" width="330" height="220" rx="10" fill="rgba(46,204,113,0.06)" stroke="rgba(46,204,113,0.25)" stroke-width="1"/>
+  <text x="525" y="35" text-anchor="middle" class="ba-title">After (Stage 3+)</text>
+  <text x="380" y="60" class="ba-mono">Continuously:</text>
+  <text x="390" y="80" class="ba-mono">BPF probe fires on context switch</text>
+  <text x="390" y="100" class="ba-mono">writes to kernel map (0 userspace syscalls)</text>
+  <text x="380" y="124" class="ba-mono">Every 2s:</text>
+  <text x="390" y="144" class="ba-mono">1 batch map read + 7 pread() = ~8 syscalls</text>
+  <text x="390" y="164" class="ba-mono">+ hand-written JSON (0 allocs)</text>
+  <text x="380" y="195" class="ba-dim">Total per sample:</text>
+  <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
+</svg>
+
+**Result: sub-millisecond median.** The commit message recorded "down from 12ms to sub-1ms." The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
+
+<div class="dead-ends">
+<details open>
+<summary>Dead ends along the way</summary>
+
+### block_rq_issue for IO
+
+The initial approach was to collect all three per-PID metrics (CPU, memory, IO) entirely within BPF. CPU time was straightforward via `sched_switch`. For IO, the `block_rq_issue` tracepoint looked promising since it fires when the block layer issues an IO request.
+
+The problem: PID attribution in the block layer is unreliable. `block_rq_issue` fires from interrupt or kernel worker context, not from the process that initiated the IO. `bpf_get_current_pid_tgid()` returns whichever PID happens to be running on that CPU when the block request is submitted, which may be a kworker thread, the block device's IRQ handler, or a completely unrelated process. The resulting per-PID IO stats were essentially random. IO collection stayed with `/proc/[pid]/io` and delta tracking in userspace.
+
+A related problem: when the BPF map contained entries created by the block layer path, some PIDs had all-zero `comm` fields because `bpf_get_current_comm()` was returning the kernel worker's name rather than the originating process. This served as a reminder: always validate BPF-collected data and implement fallbacks. The daemon fell back to reading `/proc/[pid]/comm` when a BPF entry's comm was all zeroes.
+
+### Idle-time CPU%
 
 The natural approach to computing system CPU utilisation is to track idle time: `cpu% = 100 - (idle_ns / total_ns * 100)`. The BPF probe can track idle time by accumulating time spent in PID 0 (the swapper/idle task) during `sched_switch`.
 
@@ -717,60 +765,16 @@ cpu% = sum(all per-PID busy_ns deltas) / (elapsed_seconds * num_cores * 1e9) * 1
 
 This gives accurate CPU utilisation regardless of the kernel's tick configuration.
 
-### What was discarded: D-Bus for power profile
+### D-Bus for power profile
 
 The original script called `powerprofilesctl get`, which spawns a process that makes a D-Bus call to the power-profiles-daemon. D-Bus involves socket communication, message serialisation, and the overhead of the D-Bus daemon itself. The power profile is exposed directly via sysfs at `/sys/firmware/acpi/platform_profile`: a single file read, no IPC, no subprocess.
 
-### What was discarded: /proc/net reads
+### /proc/net reads
 
 The original bash script collected network statistics from `/proc/net/dev`. This was removed entirely. Waybar has a built-in network module that does this more efficiently, and duplicating it in a system health monitor provides no value.
 
-<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
-  <style>
-    .ba-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
-    .ba-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
-    .ba-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; }
-    .ba-num   { fill: #c0392b; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
-    .ba-num-g { fill: #2ecc71; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; }
-  </style>
-  <!-- Before box -->
-  <rect x="10" y="10" width="330" height="220" rx="10" fill="rgba(192,57,43,0.06)" stroke="rgba(192,57,43,0.25)" stroke-width="1"/>
-  <text x="175" y="35" text-anchor="middle" class="ba-title">Before (Rust + /proc)</text>
-  <text x="30" y="60" class="ba-mono">Every 2s, for each of 300 PIDs:</text>
-  <text x="40" y="80" class="ba-mono">open 3 files → read text → parse → close</text>
-  <text x="40" y="100" class="ba-mono">= 2,700 syscalls</text>
-  <text x="40" y="120" class="ba-mono">+ sysinfo() + sysfs reads</text>
-  <text x="40" y="140" class="ba-mono">+ powerprofilesctl subprocess (~810ms)</text>
-  <text x="30" y="175" class="ba-dim">Total per sample:</text>
-  <text x="30" y="200" class="ba-num">~700 ms</text>
-  <!-- After box -->
-  <rect x="360" y="10" width="330" height="220" rx="10" fill="rgba(46,204,113,0.06)" stroke="rgba(46,204,113,0.25)" stroke-width="1"/>
-  <text x="525" y="35" text-anchor="middle" class="ba-title">After (Stage 3+)</text>
-  <text x="380" y="60" class="ba-mono">Continuously:</text>
-  <text x="390" y="80" class="ba-mono">BPF probe fires on context switch</text>
-  <text x="390" y="100" class="ba-mono">writes to kernel map (0 userspace syscalls)</text>
-  <text x="380" y="124" class="ba-mono">Every 2s:</text>
-  <text x="390" y="144" class="ba-mono">1 batch map read + 7 pread() = ~8 syscalls</text>
-  <text x="390" y="164" class="ba-mono">+ hand-written JSON (0 allocs)</text>
-  <text x="380" y="195" class="ba-dim">Total per sample:</text>
-  <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
-</svg>
-
-### The remaining filesystem: sysfs
-
-After eliminating all /proc reads, the only filesystem access remaining was sysfs for hardware-specific values that have no syscall equivalent:
-
-- `/sys/class/thermal/thermal_zone0/temp` -- CPU temperature
-- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq` -- current CPU frequency
-- `/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq` -- max CPU frequency
-- `/sys/class/drm/card1/gt/gt0/rc6_residency_ms` -- GPU idle residency
-- `/sys/class/drm/card1/gt/gt0/rps_act_freq_mhz` -- GPU current frequency
-- `/sys/class/drm/card1/gt/gt0/rps_max_freq_mhz` -- GPU max frequency
-- `/sys/firmware/acpi/platform_profile` -- power profile
-
-Seven files. All opened once at startup and held open for the lifetime of the daemon. Read via `lseek(0) + read()` each tick.
-
-**Result: sub-millisecond median.** The commit message recorded "down from 12ms to sub-1ms." The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
+</details>
+</div>
 
 ---
 
@@ -951,9 +955,9 @@ struct Top5 { e: [TopEntry; TOP_N], n: usize }
 
 **Result: 0.97ms average, 0.78ms minimum.** Zero heap allocations in the steady-state hot path. All memory is either stack-allocated (sample structs, Top5 arrays, sysfs buffers) or pre-allocated and reused (PidStats vecs, String buffers, BPF batch arrays).
 
----
-
-## Things Tried and Discarded
+<div class="dead-ends">
+<details open>
+<summary>Dead end: io_uring</summary>
 
 ### [io_uring](https://kernel.dk/io_uring.pdf) for batched sysfs reads
 
@@ -964,27 +968,8 @@ Discarded for two reasons:
 1. **sysfs files are not real files.** They are kernel-generated virtual files. io_uring's async read path is optimised for block devices with actual IO queues. For sysfs, the kernel generates the content synchronously during the read, so there is nothing to parallelise. The io_uring SQE submission, CQE reaping, and ring buffer management overhead would likely exceed the savings from reducing 7 `pread()` calls to 1 `io_uring_enter()`.
 2. **Code complexity.** io_uring requires ring buffer setup, memory mapping for the SQ/CQ rings, careful lifetime management, and error handling for partial completions. For 7 files, this is a net negative.
 
-### block_rq_issue, idle-time CPU%, D-Bus, aya/libbpf-rs
-
-These are covered in their respective Stage 3 sections above. In brief: `block_rq_issue` has unreliable PID attribution; idle-time tracking fails on tickless kernels; D-Bus was replaced by direct sysfs; aya and libbpf-rs have dependency trees disproportionate to the problem.
-
-### PERF_EVENT_IOC_SET_BPF on all CPUs
-
-The initial attachment logic called `ioctl(fd, PERF_EVENT_IOC_SET_BPF, prog_fd)` on every CPU's perf event fd. This is unnecessary. Tracepoint BPF programs are attached to the tracepoint's `tp_event`, which is a kernel-global structure. Setting the BPF program on one CPU's perf event fd is sufficient; the program fires on all CPUs.
-
-`PERF_EVENT_IOC_ENABLE` is different: it enables the perf event on a specific CPU. This must be called on every CPU's fd, or the tracepoint won't fire on CPUs that weren't enabled.
-
-The final pattern:
-
-```rust
-for cpu in 0..ncpu {
-    let pfd = perf_event_open_tracepoint(tp_id, cpu)?;
-    if cpu == 0 {
-        ioctl(pfd, PERF_EVENT_IOC_SET_BPF, fd);   // once
-    }
-    ioctl(pfd, PERF_EVENT_IOC_ENABLE, 0);          // every CPU
-}
-```
+</details>
+</div>
 
 ---
 
