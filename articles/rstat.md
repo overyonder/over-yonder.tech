@@ -258,7 +258,7 @@ The solution was to move the data collection into the kernel itself using eBPF. 
 
 eBPF is not a hack or a backdoor. It's a formally verified sandbox -- the kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
 
-**The custom BPF loader.** The standard approach would be to use aya or libbpf-rs, high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in tokio (an async runtime), libbpf-rs pulls in libbpf-sys with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads a single tracepoint probe with three maps, this is absurd.
+**The custom BPF loader.** The standard approach would be to use aya or libbpf-rs, high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in tokio (an async runtime), libbpf-rs pulls in libbpf-sys with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
 
 Instead, `rstat` implements its own loader in ~100 lines of Rust:
 
@@ -357,6 +357,39 @@ The task accounting structure (`task->ioac`) contains cumulative `read_bytes` an
 ```
 
 These are cumulative counters. Userspace computes deltas between ticks by storing the previous snapshot in a sorted vector and performing binary search by PID.
+
+### Process state from scheduler transitions
+
+Load averages tell you the system is stressed. They don't tell you *why*. A load average of 8.0 on a 4-core system could mean 8 CPU-bound processes competing for time, or it could mean 4 processes are running while 4 are stuck in uninterruptible sleep waiting on a dead NFS mount. The distinction matters -- one is normal, the other means something is broken.
+
+Linux tracks two pathological process states that are invisible to most monitoring tools:
+
+- **D (uninterruptible sleep)** -- the process is blocked on IO or a kernel lock and cannot be interrupted, not even by `kill -9`. Common causes: NFS timeouts, disk IO stalls, journaling waits, driver bugs. D-state processes inflate the load average without consuming CPU, making load numbers misleading.
+- **Z (zombie)** -- the process has exited but its parent hasn't called `wait()` to collect its exit status. The process occupies a PID and a slot in the process table but consumes no resources. A handful of zombies is normal; hundreds suggest a buggy parent that's leaking children.
+
+Both states are observable from the scheduler. The `prev_state` argument to `sched_switch` encodes the outgoing task's state: bit 1 (`0x02`) indicates `TASK_UNINTERRUPTIBLE`. When a D-state process is switched out, the probe marks it:
+
+```c
+    if (prev_state & 0x02)
+        s->state = 'D';
+```
+
+When the task is switched back in -- meaning it woke up from its uninterruptible wait -- the probe clears the flag. This gives a live view of which processes are *currently* stuck, not which ones were stuck at some point in the past.
+
+Zombies require a different lifecycle. A zombie can't schedule back in -- it's already exited. The `sched_process_exit` tracepoint marks the entry with `state = 'Z'` instead of deleting it from the map. The actual deletion moves to `sched_process_free`, which fires when the parent reaps the zombie (or when the kernel cleans it up after the parent exits). This means zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table -- no polling, no /proc walk, no missed zombies between samples.
+
+Userspace collects up to 10 D/Z entries during the existing map iteration -- no extra passes, no extra syscalls. They're rendered at the top of the CPU section:
+
+```
+ CPU    45°C    12%    2.1/4.5 GHz
+    D  find
+    D  git
+    Z  sd_voxin
+ 5.1%  firefox
+ 2.3%  claude
+```
+
+The `D` and `Z` labels replace the CPU percentage -- because those processes aren't consuming CPU, they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D` -- just glance at the status bar.
 
 ### System-wide metrics without /proc
 
@@ -622,7 +655,7 @@ Both were discarded because their dependency trees are disproportionate to the p
 - **aya** pulls in async runtime dependencies (tokio features), BTF parsing, and various platform abstractions. The binary size increase was several megabytes.
 - **libbpf-rs** requires a C build step (libbpf-sys compiles libbpf from source), adds runtime initialisation cost, and introduces a C FFI boundary.
 
-rstat's BPF needs are minimal: load one ELF object with 2 programs and 3 maps, patch relocations, attach to tracepoints, read maps. The custom loader is ~100 lines of Rust using raw `bpf()` syscalls and `goblin` for ELF parsing. `goblin` is configured with minimal features (`elf32`, `elf64`, `endian_fd`, `std` -- no Mach-O, no PE, no archive support). The entire dependency tree is two crates: `goblin` and `libc`.
+rstat's BPF needs are minimal: load one ELF object with 3 programs and 3 maps, patch relocations, attach to tracepoints, read maps. The custom loader is ~100 lines of Rust using raw `bpf()` syscalls and `goblin` for ELF parsing. `goblin` is configured with minimal features (`elf32`, `elf64`, `endian_fd`, `std` -- no Mach-O, no PE, no archive support). The entire dependency tree is two crates: `goblin` and `libc`.
 
 ### PERF_EVENT_IOC_SET_BPF on all CPUs
 
@@ -646,7 +679,7 @@ for cpu in 0..ncpu {
 
 ## Architecture Summary
 
-<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" class="diagram-architecture" role="img" aria-label="Architecture diagram: BPF probes, maps, userspace daemon, Waybar output">
+<svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" class="diagram-architecture" role="img" aria-label="Architecture diagram: BPF probes, maps, userspace daemon, Waybar output">
   <style>
     .ar-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 13px; font-weight: bold; }
     .ar-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
@@ -656,63 +689,67 @@ for cpu in 0..ncpu {
   </style>
   <defs><marker id="ara" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.5)"/></marker></defs>
   <!-- Kernel zone -->
-  <rect x="10" y="10" width="660" height="120" class="ar-box" fill="rgba(39,174,96,0.05)" stroke="rgba(39,174,96,0.25)"/>
+  <rect x="10" y="10" width="660" height="150" class="ar-box" fill="rgba(39,174,96,0.05)" stroke="rgba(39,174,96,0.25)"/>
   <text x="30" y="32" class="ar-title">Kernel</text>
   <!-- Tracepoints -->
-  <rect x="30" y="42" width="160" height="32" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="110" y="63" text-anchor="middle" class="ar-mono">sched_switch probe</text>
-  <rect x="30" y="80" width="160" height="32" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="110" y="101" text-anchor="middle" class="ar-mono">sched_process_exit probe</text>
+  <rect x="30" y="42" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="110" y="61" text-anchor="middle" class="ar-mono">sched_switch</text>
+  <rect x="30" y="74" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="110" y="93" text-anchor="middle" class="ar-mono">sched_process_exit</text>
+  <rect x="30" y="106" width="160" height="28" class="ar-box" fill="rgba(46,204,113,0.1)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="110" y="125" text-anchor="middle" class="ar-mono">sched_process_free</text>
   <!-- BPF maps -->
   <rect x="250" y="42" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
   <text x="310" y="61" text-anchor="middle" class="ar-mono">stats (HASH)</text>
   <rect x="250" y="74" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
   <text x="310" y="93" text-anchor="middle" class="ar-mono">sys (ARRAY)</text>
-  <rect x="250" y="106" width="120" height="18" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="310" y="120" text-anchor="middle" class="ar-mono">sched_start (HASH)</text>
+  <rect x="250" y="106" width="120" height="28" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="310" y="125" text-anchor="middle" class="ar-mono">sched_start (HASH)</text>
   <!-- Arrows probes → maps -->
-  <line x1="190" y1="58" x2="245" y2="56" class="ar-arr"/>
-  <line x1="190" y1="96" x2="245" y2="96" class="ar-arr"/>
+  <line x1="190" y1="56" x2="245" y2="56" class="ar-arr"/>
+  <line x1="190" y1="88" x2="245" y2="88" class="ar-arr"/>
+  <line x1="190" y1="120" x2="245" y2="120" class="ar-arr"/>
   <!-- sysfs files -->
-  <rect x="430" y="42" width="220" height="82" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="430" y="42" width="220" height="92" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
   <text x="540" y="60" text-anchor="middle" class="ar-label">sysfs (7 files)</text>
   <text x="445" y="78" class="ar-mono">thermal_zone0/temp</text>
   <text x="445" y="92" class="ar-mono">cpufreq/scaling_cur_freq</text>
   <text x="445" y="106" class="ar-mono">drm/card1/gt/gt0/rps_act_freq_mhz</text>
   <text x="445" y="120" class="ar-mono">platform_profile ...</text>
   <!-- Divider -->
-  <line x1="10" y1="140" x2="670" y2="140" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <line x1="10" y1="170" x2="670" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
   <!-- Userspace zone -->
-  <rect x="10" y="140" width="660" height="150" class="ar-box" fill="rgba(52,152,219,0.04)" stroke="rgba(52,152,219,0.2)"/>
-  <text x="30" y="162" class="ar-title">Userspace</text>
+  <rect x="10" y="170" width="660" height="150" class="ar-box" fill="rgba(52,152,219,0.04)" stroke="rgba(52,152,219,0.2)"/>
+  <text x="30" y="192" class="ar-title">Userspace</text>
   <!-- rstat daemon -->
-  <rect x="180" y="170" width="300" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
-  <text x="330" y="192" text-anchor="middle" class="ar-title">rstat daemon</text>
-  <text x="330" y="210" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
+  <rect x="180" y="200" width="300" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
+  <text x="330" y="222" text-anchor="middle" class="ar-title">rstat daemon</text>
+  <text x="330" y="240" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
   <!-- Arrows maps → daemon -->
-  <line x1="310" y1="128" x2="310" y2="165" class="ar-arr"/>
+  <line x1="310" y1="155" x2="310" y2="195" class="ar-arr"/>
   <!-- Arrow sysfs → daemon -->
-  <line x1="540" y1="128" x2="430" y2="165" class="ar-arr"/>
+  <line x1="540" y1="138" x2="430" y2="195" class="ar-arr"/>
   <!-- Waybar -->
-  <rect x="250" y="245" width="160" height="34" class="ar-box" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)"/>
-  <text x="330" y="267" text-anchor="middle" class="ar-label">Waybar (stdout → JSON)</text>
-  <line x1="330" y1="220" x2="330" y2="240" class="ar-arr"/>
+  <rect x="250" y="275" width="160" height="34" class="ar-box" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="330" y="297" text-anchor="middle" class="ar-label">Waybar (stdout → JSON)</text>
+  <line x1="330" y1="250" x2="330" y2="270" class="ar-arr"/>
 </svg>
 
 ### BPF probe (probe.bpf.c)
 
 A single C source file compiled with `clang -target bpf -O2 -g`. Uses `vmlinux.h` for kernel type definitions (generated from BTF, avoids kernel header dependency).
 
-Two tracepoint programs:
+Three tracepoint programs:
 
-- **`handle_sched_switch`** (tracepoint/sched/sched_switch): On every context switch, accounts CPU time for the outgoing task (delta from `sched_start` map), snapshots RSS from `mm->rss_stat` and IO from `task->ioac`, stores cumulative values in the `stats` hash map. Idle time (PID 0) is accumulated in the `sys` array map (currently unused in userspace -- CPU% is computed from busy_ns sum).
-- **`handle_sched_exit`** (tracepoint/sched/sched_process_exit): Deletes the exiting PID from both `sched_start` and `stats` maps. Prevents unbounded map growth.
+- **`handle_sched_switch`** (tracepoint/sched/sched_switch): On every context switch, accounts CPU time for the outgoing task (delta from `sched_start` map), snapshots RSS from `mm->rss_stat` and IO from `task->ioac`, stores cumulative values in the `stats` hash map. Also tracks D-state: if the outgoing task's `prev_state` has bit 1 set (`TASK_UNINTERRUPTIBLE`), marks it; clears the flag on the incoming task. Idle time (PID 0) is accumulated in the `sys` array map (currently unused in userspace -- CPU% is computed from busy_ns sum).
+- **`handle_sched_exit`** (tracepoint/sched/sched_process_exit): Marks the exiting PID with `state = 'Z'` in the stats map. The entry persists so userspace can display zombies.
+- **`handle_sched_free`** (tracepoint/sched/sched_process_free): Fires when the parent reaps a zombie. Deletes the PID from both `sched_start` and `stats` maps. This is the actual cleanup that prevents unbounded map growth.
 
 Three BPF maps:
 
 | Map | Type | Key | Value | Max Entries | Purpose |
 |-----|------|-----|-------|-------------|---------|
-| `stats` | HASH | u32 (PID) | pid_stats (48B) | 8192 | Per-PID cumulative stats |
+| `stats` | HASH | u32 (PID) | pid_stats (56B) | 8192 | Per-PID cumulative stats + D/Z state |
 | `sys` | ARRAY | u32 (0) | sys_stats (8B) | 1 | System-wide idle_ns |
 | `sched_start` | HASH | u32 (PID) | sched_in (8B) | 8192 | Per-PID schedule-in timestamp |
 
@@ -727,6 +764,7 @@ Key components:
 - **Batch map reading**: `BPF_MAP_LOOKUP_BATCH` with pre-allocated key/value arrays. Falls back to iterative get_next_key + lookup if unsupported.
 - **pread for sysfs**: 7 pre-opened file handles, `pread(fd, buf, len, 0)` per tick.
 - **Stack-allocated top-N** (`Top5`, `IoTop5`): Fixed-size arrays with insertion, sorted on output.
+- **D/Z state display** (`StateList`): Collects up to 10 blocked/zombie entries during the existing map iteration, rendered above CPU percentages in the tooltip.
 - **Hand-written JSON**: Direct byte-level string building with a minimal escaper. No serde dependency.
 - **Built-in benchmark mode**: `--bench N` runs N samples with 1ms spacing and reports avg/p50/p95/p99/min/max timings.
 
