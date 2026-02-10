@@ -166,7 +166,7 @@ powerprofilesctl get
   <text x="300" y="164" text-anchor="middle" class="ft-dim">Multiply by one invocation every 2-3 seconds, continuously.</text>
 </svg>
 
-Each line is a fork+exec. `cat` opens a file, reads it, writes it to a pipe. `awk` reads from the pipe, parses the text, emits a result. `grep` does the same. `bc` spawns to perform arithmetic that the shell cannot do natively. `powerprofilesctl` spawns a process that makes a D-Bus call to query the power profile daemon.
+Each line is a fork+exec. `awk` opens a file, parses the text, emits a result. `bc` spawns to perform arithmetic that the shell cannot do natively. `powerprofilesctl` spawns a process that makes a D-Bus call to query the power profile daemon.
 
 The costs compound:
 
