@@ -452,7 +452,7 @@ The solution was to move the data collection into the kernel itself using eBPF. 
   <text x="320" y="328" class="ring-dim">the kernel. It reads structs directly.</text>
 </svg>
 
-eBPF is not a hack or a backdoor. It's a statically verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
+eBPF is not a hack or a backdoor. It's a statically verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't.
 
 **The custom BPF loader.** The standard approach would be to use [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs), high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in [tokio](https://tokio.rs/) (an async runtime), libbpf-rs pulls in [libbpf-sys](https://github.com/libbpf/libbpf-sys) with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
 
