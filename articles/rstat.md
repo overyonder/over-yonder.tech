@@ -350,6 +350,8 @@ Before I started this project, this was about the limit of what I knew. But I wa
 
 ### The /proc problem
 
+Walking `/proc` for per-PID metrics is expensive because it is fundamentally a filesystem operation. For each PID: open, read, close, parse -- for three files per process, hundreds of processes. The kernel formats ~52 fields into ASCII text that we immediately parse back into the 2-3 numbers we need. The syscall count multiplies out fast:
+
 <svg viewBox="0 0 600 170" xmlns="http://www.w3.org/2000/svg" class="diagram-syscall-cost" role="img" aria-label="Diagram: /proc syscall cost multiplier">
   <style>
     .sc-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 13px; }
@@ -381,13 +383,13 @@ Before I started this project, this was about the limit of what I knew. But I wa
   <text x="300" y="146" text-anchor="middle" class="sc-dim">Each close = teardown of fd we'll just reopen next sample.</text>
 </svg>
 
-Walking `/proc` for per-PID metrics is expensive because it is fundamentally a filesystem operation. For each PID:
+The full walk per sample:
 
 1. `opendir("/proc")` -- one syscall
 2. `readdir()` in a loop -- one syscall per batch of directory entries, hundreds of entries on a running system
 3. Filter for numeric names (PIDs) -- string parsing in userspace
 4. For each PID, `open("/proc/[pid]/stat")` -- one syscall
-5. `read()` the contents -- one syscall, plus the kernel formats ~50 fields into a text buffer
+5. `read()` the contents -- one syscall, plus the kernel formats ~52 fields into a text buffer
 6. `close()` -- one syscall
 7. Parse the text to extract the 2-3 fields we actually need -- string scanning in userspace
 8. Repeat for `/proc/[pid]/statm` and `/proc/[pid]/io` -- 6 more syscalls per PID
@@ -398,7 +400,7 @@ With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for t
 
 The solution was to move the data collection into the kernel itself using eBPF. A BPF program attached to the `sched_switch` tracepoint fires every time the scheduler switches between tasks. At that moment, the kernel has the outgoing task's `task_struct` right there -- its PID, its accumulated CPU time, its memory maps, its IO accounting. Instead of asking the kernel to format this data into text files and then parsing it back, the BPF program reads the values directly from the kernel's data structures and writes them into a BPF hash map.
 
-<svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" class="diagram-ebpf-rings" role="img" aria-label="Diagram: eBPF privilege rings — sandboxed code running inside the kernel">
+<svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" class="diagram-ebpf-rings" role="img" aria-label="Diagram: eBPF privilege rings — sandboxed code running inside the kernel">
   <style>
     .ring-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 13px; }
     .ring-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 14px; font-weight: bold; }
@@ -406,7 +408,7 @@ The solution was to move the data collection into the kernel itself using eBPF. 
     .ring-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 11px; font-style: italic; }
   </style>
   <!-- Ring 0 outer box -->
-  <rect x="10" y="10" width="600" height="230" rx="12" fill="rgba(39,174,96,0.06)" stroke="rgba(39,174,96,0.3)" stroke-width="1.5"/>
+  <rect x="10" y="10" width="600" height="250" rx="12" fill="rgba(39,174,96,0.06)" stroke="rgba(39,174,96,0.3)" stroke-width="1.5"/>
   <text x="30" y="36" class="ring-title">Ring 0 (Kernel)</text>
   <!-- eBPF sandbox -->
   <rect x="30" y="50" width="260" height="130" rx="8" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.4)" stroke-width="1" stroke-dasharray="6,3"/>
@@ -416,28 +418,36 @@ The solution was to move the data collection into the kernel itself using eBPF. 
   <text x="50" y="132" class="ring-mono">• Bounded execution time</text>
   <text x="50" y="150" class="ring-mono">• Direct struct access</text>
   <text x="50" y="168" class="ring-mono">• No text serialisation</text>
-  <!-- Data structures -->
-  <text x="340" y="74" class="ring-mono">task_struct →</text>
-  <text x="340" y="96" class="ring-mono">mm_struct   →</text>
-  <text x="340" y="118" class="ring-mono">task->ioac  →</text>
-  <!-- Arrows from data to sandbox -->
-  <line x1="330" y1="70" x2="295" y2="90" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
-  <line x1="330" y1="92" x2="295" y2="110" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
-  <line x1="330" y1="114" x2="295" y2="130" stroke="rgba(46,204,113,0.3)" stroke-width="1"/>
+  <!-- Kernel data structures (BPF reads from these) -->
+  <text x="360" y="60" text-anchor="middle" class="ring-dim">kernel structs</text>
+  <rect x="320" y="66" width="130" height="28" rx="4" fill="rgba(0,0,0,0.15)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="385" y="84" text-anchor="middle" class="ring-mono">task_struct</text>
+  <rect x="320" y="98" width="130" height="28" rx="4" fill="rgba(0,0,0,0.15)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="385" y="116" text-anchor="middle" class="ring-mono">mm_struct</text>
+  <rect x="320" y="130" width="130" height="28" rx="4" fill="rgba(0,0,0,0.15)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="385" y="148" text-anchor="middle" class="ring-mono">task->ioac</text>
+  <!-- Arrows: sandbox ← reads from structs -->
+  <defs>
+    <marker id="rng-arr" viewBox="0 0 10 7" refX="1" refY="3.5" markerWidth="7" markerHeight="5" orient="auto-start-reverse"><polygon points="0 0,10 3.5,0 7" fill="rgba(46,204,113,0.5)"/></marker>
+  </defs>
+  <line x1="295" y1="100" x2="316" y2="80" stroke="rgba(46,204,113,0.4)" stroke-width="1.5" marker-start="url(#rng-arr)"/>
+  <line x1="295" y1="120" x2="316" y2="112" stroke="rgba(46,204,113,0.4)" stroke-width="1.5" marker-start="url(#rng-arr)"/>
+  <line x1="295" y1="140" x2="316" y2="144" stroke="rgba(46,204,113,0.4)" stroke-width="1.5" marker-start="url(#rng-arr)"/>
   <!-- BPF maps bridge -->
-  <text x="160" y="210" text-anchor="middle" class="ring-mono">↕ BPF maps (shared memory)</text>
+  <text x="160" y="230" text-anchor="middle" class="ring-mono">↕ BPF maps (shared memory)</text>
   <!-- Divider -->
-  <line x1="10" y1="240" x2="610" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <line x1="10" y1="260" x2="610" y2="260" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
   <!-- Ring 3 -->
-  <rect x="10" y="240" width="600" height="90" rx="12" fill="rgba(52,152,219,0.06)" stroke="rgba(52,152,219,0.25)" stroke-width="1.5"/>
-  <text x="30" y="268" class="ring-title">Ring 3 (Userspace)</text>
-  <text x="50" y="292" class="ring-mono">rstat daemon</text>
-  <text x="50" y="310" class="ring-label">• Single batch read of BPF map  • No /proc  • No text parsing</text>
+  <rect x="10" y="260" width="600" height="110" rx="12" fill="rgba(52,152,219,0.06)" stroke="rgba(52,152,219,0.25)" stroke-width="1.5"/>
+  <text x="30" y="288" class="ring-title">Ring 3 (Userspace)</text>
+  <text x="50" y="312" class="ring-mono">rstat daemon</text>
+  <text x="50" y="330" class="ring-mono">• Single batch read of BPF map</text>
+  <text x="50" y="346" class="ring-mono">• No /proc  • No text parsing</text>
   <!-- Insight box -->
-  <rect x="310" y="256" width="285" height="60" rx="6" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
-  <text x="320" y="276" class="ring-dim">Instead of asking the kernel to format data</text>
-  <text x="320" y="292" class="ring-dim">into text files, send a verified program into</text>
-  <text x="320" y="308" class="ring-dim">the kernel. It reads structs directly.</text>
+  <rect x="310" y="276" width="285" height="60" rx="6" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="320" y="296" class="ring-dim">Instead of asking the kernel to format data</text>
+  <text x="320" y="312" class="ring-dim">into text files, send a verified program into</text>
+  <text x="320" y="328" class="ring-dim">the kernel. It reads structs directly.</text>
 </svg>
 
 eBPF is not a hack or a backdoor. It's a statically verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
@@ -498,7 +508,7 @@ When the BPF map contained entries created by the (now-discarded) block layer pa
 
 The initial approach for IO using the `block_rq_issue` tracepoint was tried and discarded. But collecting all three metrics (CPU, RSS, IO) directly from `task_struct` fields within the `sched_switch` probe worked cleanly.
 
-<svg viewBox="0 0 580 220" xmlns="http://www.w3.org/2000/svg" class="diagram-sched-switch" role="img" aria-label="Diagram: sched_switch tracepoint firing on context switch">
+<svg viewBox="0 0 580 240" xmlns="http://www.w3.org/2000/svg" class="diagram-sched-switch" role="img" aria-label="Diagram: sched_switch tracepoint firing on context switch">
   <style>
     .ss-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 12px; }
     .ss-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 11px; }
@@ -517,16 +527,18 @@ The initial approach for IO using the `block_rq_issue` tracepoint was tried and 
   <text x="135" y="90" text-anchor="middle" class="ss-mono">sched_switch fires</text>
   <line x1="135" y1="100" x2="135" y2="118" class="ss-arr"/>
   <!-- Step 3: BPF reads -->
-  <rect x="20" y="120" width="240" height="60" class="ss-box"/>
+  <rect x="20" y="120" width="240" height="76" class="ss-box"/>
   <text x="35" y="138" class="ss-label">BPF probe reads outgoing task's:</text>
-  <text x="45" y="156" class="ss-mono">• cpu_ns  • mm→rss_stat  • task→ioac</text>
-  <line x1="260" y1="150" x2="320" y2="150" class="ss-arr"/>
+  <text x="45" y="156" class="ss-mono">• cpu_ns</text>
+  <text x="45" y="172" class="ss-mono">• mm&#x2192;rss_stat</text>
+  <text x="45" y="188" class="ss-mono">• task&#x2192;ioac</text>
+  <line x1="260" y1="158" x2="320" y2="158" class="ss-arr"/>
   <!-- Step 4: Map write -->
-  <rect x="325" y="130" width="240" height="40" rx="6" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.3)"/>
-  <text x="445" y="155" text-anchor="middle" class="ss-mono">writes to BPF map[pid]</text>
+  <rect x="325" y="140" width="240" height="40" rx="6" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="445" y="165" text-anchor="middle" class="ss-mono">writes to BPF map[pid]</text>
   <!-- Insight -->
-  <rect x="10" y="192" width="560" height="22" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
-  <text x="290" y="208" text-anchor="middle" class="ss-dim">Every task eventually gets switched out. At that moment, all its accounting data is right there in the task_struct.</text>
+  <rect x="10" y="206" width="560" height="22" rx="4" fill="rgba(168,200,160,0.08)" stroke="rgba(168,200,160,0.2)"/>
+  <text x="290" y="222" text-anchor="middle" class="ss-dim">Every task eventually gets switched out. At that moment, all its accounting data is right there in the task_struct.</text>
 </svg>
 
 ### RSS from mm->rss_stat
