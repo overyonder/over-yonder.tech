@@ -390,7 +390,9 @@ Walking `/proc` for per-PID metrics is expensive because it is fundamentally a f
   <text x="300" y="146" text-anchor="middle" class="sc-dim">Each close = teardown of fd we'll just reopen next sample.</text>
 </svg>
 
-The full walk per sample:
+<div class="detour">
+<details>
+<summary>The full walk per sample</summary>
 
 1. `opendir("/proc")` -- one syscall
 2. `readdir()` in a loop -- one syscall per batch of directory entries, hundreds of entries on a running system
@@ -401,7 +403,12 @@ The full walk per sample:
 7. Parse the text to extract the 2-3 fields we actually need -- string scanning in userspace
 8. Repeat for `/proc/[pid]/statm` and `/proc/[pid]/io` -- 6 more syscalls per PID
 
-With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for the per-process breakdown (the diagram above shows the worked example for 300 PIDs). Each syscall is a transition to kernel mode, and each `/proc` read triggers the kernel to walk its internal data structures and generate the result on demand.
+With 200-400 PIDs on a typical desktop, that is 1,500-3,000+ syscalls just for the per-process breakdown (the diagram above shows the worked example for 300 PIDs).
+
+</details>
+</div>
+
+Each syscall is a transition to kernel mode, and each `/proc` read triggers the kernel to walk its internal data structures and generate the result on demand.
 
 ### eBPF: reading kernel data in-kernel
 
