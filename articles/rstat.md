@@ -17,7 +17,7 @@ tags: [rust, ebpf, performance, linux]
 
 The status bar on my Linux desktop was using 135MB of RAM and 10% CPU. Not the applications it was monitoring. The bar itself. The monitoring tool was a measurable load on the system it was supposed to monitor.
 
-HyprPanel is the de facto status bar for the Hyprland compositor. It's written in TypeScript and runs on GJS (GNOME's JavaScript runtime, which embeds the SpiderMonkey engine from Firefox). A full JavaScript engine, a GObject type system, a D-Bus session bridge, a CSS layout engine, all running persistently to display a few numbers at the top of the screen. The process tree told the story:
+[HyprPanel](https://github.com/Jas-SinghFSU/HyprPanel) is the de facto status bar for the [Hyprland](https://hyprland.org/) compositor. It's written in [TypeScript](https://www.typescriptlang.org/) and runs on [GJS](https://gjs.guide/) (GNOME's JavaScript runtime, which embeds the [SpiderMonkey](https://spidermonkey.dev/) engine from Firefox). A full JavaScript engine, a [GObject](https://docs.gtk.org/gobject/) type system, a [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/) session bridge, a CSS layout engine, all running persistently to display a few numbers at the top of the screen. The process tree told the story:
 
 ```
 USER       PID  %CPU  %MEM     VSZ    RSS  COMMAND
@@ -29,9 +29,9 @@ user    318925   0.6   0.3    47276  29636  python3 bluetooth.py
 
 This is not an indictment of the people who built HyprPanel. It's genuinely useful software, and its creator [Jas-SinghFSU](https://github.com/Jas-SinghFSU) agrees with the diagnosis. HyprPanel is now in maintenance mode, and Jas is building its successor, [Wayle](https://github.com/Jas-SinghFSU/wayle), entirely in Rust, noting that *"GJS (even with TypeScript) just isn't a good systems language."* The problem is the architectural norms, not the people working within them. Somewhere along the way, "desktop widget" became synonymous with "embedded web browser." We treat the desktop like it's a deployment target for web applications, and then wonder why a laptop battery lasts four hours.
 
-A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to Waybar, which is written in C++ and renders with GTK. And then I needed a system monitor module that actually took its job seriously.
+A status bar reads a few integers from the kernel and renders them into a strip of pixels. It should behave like a real-time system: bounded memory, bounded latency, no garbage collection pauses, no interpreter overhead. So I switched to [Waybar](https://github.com/Alexays/Waybar), which is written in C++ and renders with [GTK](https://gtk.org/). And then I needed a system monitor module that actually took its job seriously.
 
-This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a Rust daemon that injects its own code into the kernel.
+This is the story of `rstat`: a system health monitor that went from a 2-second bash script to a [Rust](https://www.rust-lang.org/) daemon that injects its own code into the kernel.
 
 Userland code. Running in the kernel. At ring 0 privilege. Reading scheduler data structures directly from memory as the CPU switches between tasks. No filesystem, no syscalls, no text parsing, no heap allocations. Sub-millisecond samples.
 
@@ -269,7 +269,7 @@ The key changes:
 - `/proc/[pid]/statm` -- RSS in pages
 - `/proc/[pid]/io` -- read_bytes, write_bytes
 
-**serde_json for output.** The daemon serialised a struct to JSON using serde. Convenient and correct, but not free.
+**[serde_json](https://github.com/serde-rs/json) for output.** The daemon serialised a struct to JSON using [serde](https://serde.rs/). Convenient and correct, but not free.
 
 The result was approximately 700ms per sample. Better than 2 seconds, but embarrassingly slow for a compiled binary. Profiling made the bottleneck obvious: one remaining subprocess was eating almost all of it. `powerprofilesctl get` spawns a process, connects to D-Bus, queries the power profile daemon, deserialises the response, and exits. One command, ~810ms. The /proc walk, delta computation, and JSON serialisation all fit in the remaining time.
 
@@ -453,7 +453,7 @@ The solution was to move the data collection into the kernel itself using eBPF. 
 
 eBPF is not a hack or a backdoor. It's a statically verified sandbox. The kernel's verifier proves the program can't crash, loop forever, or access memory it shouldn't. It's the kernel giving you a supervised desk in its office.
 
-**The custom BPF loader.** The standard approach would be to use aya or libbpf-rs, high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in tokio (an async runtime), libbpf-rs pulls in libbpf-sys with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
+**The custom BPF loader.** The standard approach would be to use [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs), high-level frameworks that handle ELF parsing, map creation, relocation, and program loading. These were tried and discarded. aya pulls in [tokio](https://tokio.rs/) (an async runtime), libbpf-rs pulls in [libbpf-sys](https://github.com/libbpf/libbpf-sys) with its own C build step. Both add hundreds of milliseconds to startup time and megabytes to binary size. For a program that loads three tracepoint probes and three maps, this is absurd.
 
 Instead, `rstat` implements its own loader in ~100 lines of Rust:
 
@@ -954,7 +954,7 @@ struct Top5 { e: [TopEntry; TOP_N], n: usize }
 
 ## Things Tried and Discarded
 
-### io_uring for batched sysfs reads
+### [io_uring](https://kernel.dk/io_uring.pdf) for batched sysfs reads
 
 With 7 sysfs files to read each tick, io_uring's submission queue could theoretically batch all reads into a single `io_uring_enter()` syscall. The idea was to submit 7 read SQEs and reap 7 CQEs, reducing 7 pread syscalls to 1 io_uring_enter.
 
@@ -1055,7 +1055,7 @@ for cpu in 0..ncpu {
 
 ### BPF probe (probe.bpf.c)
 
-A single C source file compiled with `clang -target bpf -O2 -g`. Uses `vmlinux.h` for kernel type definitions (generated from BTF, avoids kernel header dependency).
+A single C source file compiled with [`clang`](https://clang.llvm.org/) `-target bpf -O2 -g`. Uses `vmlinux.h` for kernel type definitions (generated from BTF, avoids kernel header dependency).
 
 Three tracepoint programs:
 
@@ -1077,7 +1077,7 @@ A single-file ~795-line Rust program. No async runtime, no framework, no macros 
 
 Key components:
 
-- **Custom ELF loader** (`BpfLoader`): Parses BPF ELF via goblin, creates maps with raw `bpf()` syscalls, resolves map relocations in program instructions, loads programs, attaches via perf_event.
+- **Custom ELF loader** (`BpfLoader`): Parses BPF ELF via [goblin](https://github.com/m4b/goblin), creates maps with raw `bpf()` syscalls, resolves map relocations in program instructions, loads programs, attaches via perf_event.
 - **Sorted vec with binary search** (`PidStats`): Two pre-allocated vecs swapped each tick. `clear()` + `push()` + `sort_unstable()` for population, `binary_search_by_key()` for O(log n) delta lookups.
 - **Batch map reading**: `BPF_MAP_LOOKUP_BATCH` with pre-allocated key/value arrays. Falls back to iterative get_next_key + lookup if unsupported.
 - **pread for sysfs**: 7 pre-opened file handles, `pread(fd, buf, len, 0)` per tick.
@@ -1093,7 +1093,7 @@ Two-derivation build:
 1. **rstat-probe**: `stdenv.mkDerivation` that compiles `probe.bpf.c` with `clang -target bpf -O2 -g` against libbpf headers and the local `vmlinux.h`. Produces `probe.bpf.o`.
 2. **rstat**: `rustPlatform.buildRustPackage` that builds the Rust binary. `postInstall` copies the probe object from the first derivation into `$out/bin/` alongside the binary.
 
-The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its own executable path, or accepts an explicit path as a command-line argument. The program requires `CAP_SYS_ADMIN` or equivalent (e.g., via NixOS `security.wrappers` with setuid) for the `bpf()` and `perf_event_open()` syscalls.
+The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its own executable path, or accepts an explicit path as a command-line argument. The program requires `CAP_SYS_ADMIN` or equivalent (e.g., via [NixOS](https://nixos.org/) `security.wrappers` with setuid) for the `bpf()` and `perf_event_open()` syscalls.
 
 ---
 
@@ -1144,7 +1144,7 @@ The subsequent journey from 15ms to sub-millisecond was intellectually rewarding
 
 This is the shape of most performance work: the first 10% of effort captures 90% of the improvement. The remaining 90% of effort is for the remaining 10% of improvement. Knowing which side you're on matters.
 
-There is a growing contingent of engineers who care about this distinction -- who insist that software should be fast because the hardware is fast, and that slowness is a choice made by layers of abstraction rather than an inevitability. Casey Muratori's [Handmade Hero](https://handmadehero.org/) and [Computer Enhance](https://www.computerenhance.com/) have been catalysts for this shift, making the case that understanding the machine from the instruction set up changes what you consider acceptable.
+There is a growing contingent of engineers who care about this distinction -- who insist that software should be fast because the hardware is fast, and that slowness is a choice made by layers of abstraction rather than an inevitability. [Casey Muratori](https://caseymuratori.com/)'s [Handmade Hero](https://handmadehero.org/) and [Computer Enhance](https://www.computerenhance.com/) have been catalysts for this shift, making the case that understanding the machine from the instruction set up changes what you consider acceptable.
 
 We don't need everyone writing eBPF probes. We need people to stop embedding JavaScript runtimes in desktop utilities. The gap between "shell script that forks 15 processes" and "compiled binary that holds file descriptors open" is where almost all the real-world wins live. Everything beyond that is craft.
 
