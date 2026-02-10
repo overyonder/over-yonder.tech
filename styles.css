@@ -363,7 +363,7 @@ footer p {
 
 .article-content {
   padding: 24px 20px;
-  background: rgba(30, 35, 30, 0.7);
+  background: rgba(20, 24, 20, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -395,8 +395,8 @@ footer p {
 .article-content h3 { font-size: 1.1rem; }
 
 .article-content p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.1rem;
   line-height: 1.7;
   text-shadow: none;
   margin: 0.8em 0;
@@ -414,8 +414,8 @@ footer p {
 
 .article-content ul,
 .article-content ol {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.1rem;
   line-height: 1.7;
   padding-left: 1.5em;
 }
@@ -483,6 +483,7 @@ footer p {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin: 2em 0;
+  clear: both;
 }
 
 .article-content blockquote {
@@ -495,7 +496,7 @@ footer p {
 
 /* ==================== Inline SVG diagrams ==================== */
 
-.article-content svg {
+.article-content svg:not(.stage-icon):not(.stage-breakdown) {
   width: 100%;
   height: auto;
   margin: 1.5em 0;
@@ -541,4 +542,66 @@ footer p {
 
 .comparison-good {
   background: rgba(46, 204, 113, 0.1);
+}
+
+/* ==================== Stage breakdown float charts ==================== */
+
+.article-content .stage-breakdown {
+  float: right;
+  margin: 0 0 1em 1.5em;
+  width: 140px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .article-content .stage-breakdown {
+    float: none;
+    margin: 1em auto;
+  }
+}
+
+/* ==================== Author badge ==================== */
+
+.article-content .author-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0.5em 0 1.5em 0;
+}
+
+.article-content .author-badge img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(168, 200, 160, 0.4);
+}
+
+.article-content .author-badge a {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==================== Stage heading icons ==================== */
+
+.article-content .stage-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
+}
+
+/* ==================== Hero image ==================== */
+
+.article-content .hero-img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0.5em 0 1em 0;
+  display: block;
 }
