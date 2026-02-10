@@ -1176,4 +1176,4 @@ The lesson, if there is one: the cost is almost never in the computation. It is 
 
 This is not a barren field. As I write this, Anthropic's Claude Code -- a flagship product of a $350-billion AI company, running Opus 4.6, one of the most capable language models ever built -- is helping me check my grammar by printing characters to my terminal via a React SPA on Node.js. It is sitting at 100% CPU. Four `libuv-worker` processes, each consuming 700MB, are fighting for swap. Zram is thrashing. The status bar daemon samples the carnage in under a millisecond.
 
-The most advanced artificial intelligence on the planet, and the bottleneck is the JavaScript runtime it shipped inside.
+If you've decided you want to be a good engineer, this era needs you as much as any.
