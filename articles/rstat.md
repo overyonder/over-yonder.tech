@@ -593,7 +593,7 @@ Both states are observable from the scheduler:
   <text x="330" y="180" text-anchor="middle" class="dz-dim">BPF map mirrors the kernel's own lifecycle. A one-time /proc scan at startup seeds pre-existing D/Z processes.</text>
 </svg>
 
-The `prev_state` argument to `sched_switch` encodes the outgoing task's state. When a D-state process is switched back in (woke up from its uninterruptible wait), the probe clears the flag. Zombie entries persist in the BPF map for exactly as long as the zombie exists in the process table.
+The `prev_state` argument to `sched_switch` encodes the outgoing task's state. When a D-state process is switched back in (woke up from its uninterruptible wait), the probe clears the flag. Zombie entries persist in the BPF map between `sched_process_exit` and `sched_process_free` -- but most are too short-lived to display, which requires [a handshake between kernel and userspace](#ephemeral-zombies-and-the-seen-flag).
 
 One edge case: the BPF probes only observe state *transitions* after they attach. Processes that were already in D or Z state before rstat started -- zombies left over from boot, for example -- would never pass through `sched_switch` or `sched_process_exit` while the probe is running. To handle this, userspace performs a one-time `/proc` scan at startup: it walks `/proc/[pid]/stat`, finds any processes in D or Z state, and seeds them into the BPF stats map with `BPF_NOEXIST` (so it won't overwrite entries the probe has already created during the brief window between probe attach and the scan). This is the only /proc walk rstat ever performs.
 
@@ -611,6 +611,70 @@ Userspace collects up to 10 D/Z entries during the existing map iteration, requi
 The `D` and `Z` labels replace the CPU percentage because those processes aren't consuming CPU; they're stuck. Seeing `D find` at the top of the CPU list while `load: 6.2` is displayed immediately explains the discrepancy between high load and low CPU utilisation. No separate tool, no `ps aux | grep D`. Just glance at the status bar.
 
 This is the kind of data that traditionally requires multiple tools to assemble. CPU and memory come from `top`. Per-process IO requires `iotop` or `pidstat -d`, which need `CONFIG_TASK_IO_ACCOUNTING` and usually root. D/Z state requires `ps` with the right flags and a grep. rstat surfaces all of it from a single BPF map read, in a single tooltip, updated every tick.
+
+### Ephemeral zombies and the seen flag
+
+The BPF probe marks a process as `Z` on `sched_process_exit` and deletes it on `sched_process_free`. For most processes, the window between exit and reap is microseconds -- but userspace polls every 100-2000ms. At 100ms, nearly every short-lived process that exits during a polling interval gets caught in Z state before the reap deletes it. The tooltip fills with ghost zombies that no longer exist.
+
+The fix: a `seen` flag in the per-PID stats entry. The client marks each zombie the first time it observes one, and only displays it if the flag survives to the next sample. Stuck zombies persist; ephemeral ones are reaped (and deleted from the map) before the client looks again.
+
+<svg viewBox="0 0 660 220" xmlns="http://www.w3.org/2000/svg" class="diagram-seen-flag" role="img" aria-label="Seen flag protocol between client and BPF probe">
+  <style>
+    .sf-label { fill: rgba(255,255,255,0.85); font-family: 'Lora', serif; font-size: 11px; }
+    .sf-mono  { fill: #c8d8c0; font-family: 'Courier New', monospace; font-size: 10px; }
+    .sf-dim   { fill: rgba(255,255,255,0.5); font-family: 'Lora', serif; font-size: 9px; font-style: italic; }
+    .sf-title { fill: rgba(255,255,255,0.95); font-family: 'Lora', serif; font-size: 12px; font-weight: 600; }
+    .sf-state { rx: 6; stroke-width: 1.5; }
+    .sf-arr   { stroke-width: 1.5; fill: none; marker-end: url(#sfa); }
+  </style>
+  <defs><marker id="sfa" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="rgba(168,200,160,0.5)"/></marker></defs>
+
+  <!-- Column headers -->
+  <text x="110" y="20" text-anchor="middle" class="sf-title">Client</text>
+  <text x="330" y="20" text-anchor="middle" class="sf-title">BPF map entry</text>
+  <text x="550" y="20" text-anchor="middle" class="sf-title">BPF probe</text>
+
+  <!-- Divider lines -->
+  <line x1="220" y1="8" x2="220" y2="210" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <line x1="440" y1="8" x2="440" y2="210" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+  <!-- State box: initial -->
+  <rect x="260" y="35" width="140" height="28" class="sf-state" fill="rgba(142,68,173,0.1)" stroke="rgba(142,68,173,0.4)"/>
+  <text x="330" y="54" text-anchor="middle" class="sf-mono">state=Z  seen=0</text>
+
+  <!-- BPF arrow: exit sets Z, clears seen -->
+  <line x1="440" y1="49" x2="405" y2="49" class="sf-arr" stroke="rgba(192,57,43,0.5)"/>
+  <text x="540" y="44" text-anchor="middle" class="sf-mono" font-size="9">sched_process_exit</text>
+  <text x="540" y="56" text-anchor="middle" class="sf-dim">sets Z, clears seen</text>
+
+  <!-- Client arrow: sets seen -->
+  <line x1="220" y1="90" x2="255" y2="90" class="sf-arr" stroke="rgba(52,152,219,0.5)"/>
+  <text x="110" y="85" text-anchor="middle" class="sf-mono" font-size="9">poll N: sees Z, seen=0</text>
+  <text x="110" y="97" text-anchor="middle" class="sf-dim">marks seen, doesn't display</text>
+
+  <!-- State box: seen -->
+  <rect x="260" y="76" width="140" height="28" class="sf-state" fill="rgba(142,68,173,0.15)" stroke="rgba(142,68,173,0.5)"/>
+  <text x="330" y="95" text-anchor="middle" class="sf-mono">state=Z  seen=1</text>
+
+  <!-- Fork: two outcomes -->
+  <!-- Left path: still Z at next poll (stuck) -->
+  <line x1="260" y1="104" x2="170" y2="140" stroke="rgba(46,204,113,0.4)" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="50" y="135" width="175" height="28" class="sf-state" fill="rgba(46,204,113,0.08)" stroke="rgba(46,204,113,0.3)"/>
+  <text x="137" y="148" text-anchor="middle" class="sf-mono" font-size="9">poll N+1: Z, seen=1</text>
+  <text x="137" y="158" text-anchor="middle" class="sf-dim"></text>
+  <text x="137" y="178" text-anchor="middle" class="sf-label" fill="#2ecc71">display (stuck zombie)</text>
+
+  <!-- Right path: reaped before next poll (ephemeral) -->
+  <line x1="400" y1="104" x2="490" y2="140" stroke="rgba(192,57,43,0.4)" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="435" y="135" width="175" height="28" class="sf-state" fill="rgba(192,57,43,0.06)" stroke="rgba(192,57,43,0.25)"/>
+  <text x="522" y="148" text-anchor="middle" class="sf-mono" font-size="9">sched_process_free</text>
+  <text x="522" y="158" text-anchor="middle" class="sf-dim"></text>
+  <text x="522" y="178" text-anchor="middle" class="sf-label" fill="rgba(255,255,255,0.5)">entry deleted (ephemeral)</text>
+
+  <text x="330" y="210" text-anchor="middle" class="sf-dim">A zombie must survive a full polling interval to be displayed.</text>
+</svg>
+
+Two conditions must hold for a zombie to be displayed: it must exist in the map when the client polls (the probe marked it `Z`), and it must still be there with `seen=1` on the *next* poll (the probe never reaped it). Ephemeral zombies are deleted by `sched_process_free` between polls. Stuck zombies aren't -- and those are the ones worth investigating.
 
 ### The remaining data sources
 
