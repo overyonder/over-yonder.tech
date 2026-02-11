@@ -1158,7 +1158,7 @@ Each pipe operation involves two context switches (write → read → write), so
 
 The /proc cost scales linearly with sample rate -- every sample opens, reads, and closes hundreds of files. The eBPF cost is almost constant: the kernel probe runs at ~4.8ms/s regardless of how often userspace reads the map, and the map read itself is sub-millisecond. At 2-second intervals, you're barely breaking even. At 100ms intervals -- which `btop` supports, and `top` goes even lower -- the /proc approach is 15× more expensive.
 
-The real value of running code in the kernel isn't faster samples at leisurely intervals. It's that the cost *decouples from the sample rate entirely*. The probe could sample at 10ms intervals for less CPU than a /proc walk at 100ms. That headroom is what makes features like click-to-cycle (2000 → 1000 → 500 → 250 → 100ms) practical rather than reckless.
+The real value of running code in the kernel isn't faster samples at leisurely intervals. It's that the cost *decouples from the sample rate entirely*. The probe could sample at 10ms intervals for less CPU than a /proc walk at 100ms. That headroom is what makes features like click-to-cycle (2000 → 1000 → 500 → 250 → 100ms) practical rather than reckless. The 100ms floor is a Waybar/GTK rendering limit, not an rstat one -- below that, pipe backpressure throttles output regardless of sample speed. For terminal use, `--ludicrous` pushes the interval to 16ms (~60 fps).
 
 The probe can be profiled on any system with `rstat --profile [seconds]`.
 
