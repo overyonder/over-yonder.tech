@@ -687,7 +687,7 @@ With per-PID metrics handled by BPF, the remaining metrics come from:
 
 The standard approach would be [aya](https://github.com/aya-rs/aya) or [libbpf-rs](https://github.com/libbpf/libbpf-rs). aya pulls in tokio; libbpf-rs pulls in a C build step. Both add hundreds of milliseconds to startup and megabytes to binary size. For three probes and three maps, this is absurd.
 
-Instead, `rstat` implements its own loader in ~100 lines: ELF parse via goblin → map create via `BPF_MAP_CREATE` → relocate `LD_IMM64` instructions → load via `BPF_PROG_LOAD` → attach via `perf_event_open` + `ioctl`.
+Instead, `rstat` implements its own loader in roughly a hundred lines of core logic: ELF parse via goblin → map create via `BPF_MAP_CREATE` → relocate `LD_IMM64` instructions → load via `BPF_PROG_LOAD` → attach via `perf_event_open` + `ioctl`.
 
 One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf event fd (the kernel's `tp_event` is shared). But `PERF_EVENT_IOC_ENABLE` must be called on every CPU's fd.
 
@@ -722,7 +722,7 @@ One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf e
   <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
 </svg>
 
-**Result: sub-millisecond median.** Down from 12ms to sub-1ms. The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
+**Result: sub-millisecond median.** Down from ~15ms to sub-1ms. The exact numbers vary with system load and PID count, but the architectural win is clear: eliminating the /proc walk removed thousands of syscalls from every sample.
 
 <div class="dead-ends">
 <details open>
@@ -1063,9 +1063,9 @@ Three tracepoint programs:
 - `handle_sched_exit`: marks zombies
 - `handle_sched_free`: cleans up reaped processes
 
-Three BPF maps: `stats` (per-PID data), `sys` (system-wide idle_ns), `sched_start` (per-PID timestamps).
+Four BPF maps: `stats` (per-PID data), `sys` (system-wide idle_ns), `sched_start` (per-PID timestamps), `latency` (probe self-timing histogram).
 
-**Rust daemon (main.rs)** — ~795 lines, no async runtime, no framework.
+**Rust daemon (main.rs)** — ~1530 lines, no async runtime, no framework.
 
 Key components: custom ELF loader via goblin, sorted vec with binary search for delta computation, batch map reading, pre-opened sysfs handles, stack-allocated top-N arrays, hand-written JSON emitter, built-in benchmark mode (`--bench N`).
 
@@ -1092,7 +1092,7 @@ The value proposition holds: everything *else* — data structures, control flow
 
 Rust, by the way. On NixOS, by the way.
 
-Two-derivation build: `rstat-probe` compiles `probe.bpf.c` with `clang -target bpf`; `rstat` builds the Rust binary and copies the probe alongside it. The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its executable path. Requires `CAP_SYS_ADMIN` for `bpf()` and `perf_event_open()`.
+Two-derivation build: `rstat-probe` compiles `probe.bpf.c` with `clang -target bpf`; `rstat` builds the Rust binary and copies the probe alongside it. The binary discovers the probe at runtime by looking for `probe.bpf.o` adjacent to its executable path. Requires `CAP_BPF` + `CAP_PERFMON` on newer kernels (or `CAP_SYS_ADMIN` when unprivileged BPF is restricted).
 
 </details>
 </div>
@@ -1184,7 +1184,7 @@ After optimisation, the hot path is so fast that `perf` mostly captures debug sy
   </div>
   <div class="comparison-row comparison-good">
     <span class="comparison-label">rstat</span>
-    <span class="comparison-stats">~200 KB RSS, &lt;0.01% CPU, zero heap allocations</span>
+    <span class="comparison-stats">~200 KB RSS, &lt;0.01% CPU, zero allocations per tick</span>
   </div>
 </div>
 
