@@ -689,7 +689,13 @@ The standard approach would be [aya](https://github.com/aya-rs/aya) or [libbpf-r
 
 Instead, `rstat` implements its own loader in roughly a hundred lines of core logic: ELF parse via goblin → map create via `BPF_MAP_CREATE` → relocate `LD_IMM64` instructions → load via `BPF_PROG_LOAD` → attach via `perf_event_open` + `ioctl`.
 
-One subtlety: `PERF_EVENT_IOC_SET_BPF` only needs to be called on CPU 0's perf event fd (the kernel's `tp_event` is shared). But `PERF_EVENT_IOC_ENABLE` must be called on every CPU's fd.
+One subtlety: `PERF_EVENT_IOC_SET_BPF` is done once per tracepoint event fd, then `PERF_EVENT_IOC_ENABLE` is called on every CPU fd. Repeating `SET_BPF` on every CPU can return `EEXIST` because the tracepoint event already has the program attached.
+
+Another subtlety: `sched_process_free` exposes `comm` as `__data_loc char[]` in tracepoint context, not `char[16]`. In the BPF ctx struct this field must be modelled as a `u32` location descriptor; otherwise subsequent fields (like `pid`) are read at the wrong offsets.
+
+Current behavior is strict: required tracepoints must load/attach/enable successfully at startup, or rstat exits. It does not continue in degraded mode with partial probe coverage.
+
+To avoid competing probe instances, rstat also takes a single-instance lock (runtime dir lockfile). If another instance is already running, the new one exits instead of attaching partially.
 
 <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" class="diagram-before-after" role="img" aria-label="Before and after architecture comparison">
   <style>
@@ -1063,7 +1069,11 @@ Three tracepoint programs:
 - `handle_sched_exit`: marks zombies
 - `handle_sched_free`: cleans up reaped processes
 
-Four BPF maps: `stats` (per-PID data), `sys` (system-wide idle_ns), `sched_start` (per-PID timestamps), `latency` (probe self-timing histogram).
+`handle_sched_free` uses the tracepoint's `__data_loc` layout (`comm` is a `u32` location descriptor in ctx, not an inline `char[16]` buffer).
+
+Four BPF maps: `stats` (per-task data keyed by PID/TID), `sys` (system-wide idle_ns), `sched_start` (per-PID timestamps), `latency` (probe self-timing histogram).
+
+Userspace then aggregates `stats` by TGID so the UI shows process-level rows (instead of duplicate per-thread rows).
 
 **Rust daemon (main.rs)** — ~1530 lines, no async runtime, no framework.
 
