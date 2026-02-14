@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Scans articles/*.md, extracts YAML front matter, emits articles/index.json
-# sorted by date descending.
+# sorted by modification time (newest first).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,7 +9,8 @@ OUT="$DIR/index.json"
 
 entries=()
 
-for f in "$DIR"/*.md; do
+# Iterate newest-first by mtime
+while IFS= read -r f; do
   [ -f "$f" ] || continue
   fname="$(basename "$f")"
 
@@ -43,12 +44,12 @@ for f in "$DIR"/*.md; do
     awk '{print "["$0"]"}')"
 
   entries+=("{\"file\":\"$fname\",\"title\":\"$title\",\"date\":\"$date\",\"author\":\"$author\",\"tags\":$tags_json}")
-done
+done < <(stat -c '%Y %n' "$DIR"/*.md 2>/dev/null | sort -rn | cut -d' ' -f2-)
 
-# Sort by date descending, emit JSON array
+# Emit JSON array (already sorted by mtime)
 if [ ${#entries[@]} -eq 0 ]; then
   echo "[]" > "$OUT"
 else
-  printf '%s\n' "${entries[@]}" | sort -t'"' -k8 -r | \
+  printf '%s\n' "${entries[@]}" | \
     awk 'BEGIN{printf "[\n"} NR>1{printf ",\n"} {printf "  %s",$0} END{printf "\n]\n"}' > "$OUT"
 fi
