@@ -566,6 +566,28 @@ footer p {
   font-style: italic;
 }
 
+.article-content .info {
+  background: rgba(241, 196, 15, 0.04);
+  border-left: 3px solid rgba(241, 196, 15, 0.25);
+  border-radius: 0 8px 8px 0;
+  padding: 1.2em 1.5em;
+  margin: 2em 0;
+}
+
+.article-content .info summary {
+  font-family: 'Source Serif 4', 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  font-style: italic;
+}
+
+.article-content .info summary::before {
+  content: "\24D8\2002";
+  font-style: normal;
+  color: rgba(241, 196, 15, 0.6);
+}
+
 .article-content .dead-ends h3 {
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.7);
