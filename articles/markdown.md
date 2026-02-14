@@ -12,34 +12,34 @@ tags: [markdown, pandoc, writing, productivity]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-Executive memos. Financial reports. Case studies. The documents that shape decisions in organisations are, almost universally, drafted in Google Docs or Microsoft Word -- tools that require a browser engine or a desktop application to edit a few paragraphs of text.
+Most professional documents -- executive memos, financial reports, case studies -- are drafted in Google Docs or Microsoft Word. These are applications that need a full browser engine or a multi-gigabyte desktop installation to let you type paragraphs of text, and they'll happily drain your laptop battery in the process. The formatting you carefully arranged will shift when someone opens the file on a different machine, and the version history is a list of timestamps with no indication of what actually changed.
 
 <div class="emphasis-block">
-This article is a Markdown file. Plain text, editable in Notepad, readable on any device. The same source file produces the webpage you are reading now and can generate a typeset PDF with a single command.
+This article is a Markdown file -- plain text, editable in Notepad, readable on any device. The same source produces this webpage and can generate a typeset PDF with a single command.
 </div>
 
-Markdown is plain text with a handful of formatting conventions. It can be written in any editor on any device -- desktop, phone, or browser. A `.md` file opens instantly because there is nothing to load: no XML to parse, no rendering engine to initialise, no application to boot. Google Docs needs a Chromium browser tab to *edit text* and will drain your laptop battery doing it. A Markdown file runs on anything. It could run on a toaster.
+Markdown is plain text with a handful of formatting hints. You can write it in any editor on any device -- desktop, phone, browser, anything with a keyboard. A `.md` file opens instantly because there's nothing to load: no XML to unpack, no rendering engine to boot, no application to initialise. Google Docs needs a Chromium tab running just to let you *edit text*, and your battery pays for that privilege. Markdown could run on a toaster.
 
-What has changed since Markdown's creation in 2004 is the tooling around it. [Pandoc](https://pandoc.org/) can produce PDFs with LaTeX-quality typesetting. [KaTeX](https://katex.org/) renders publication-grade mathematics in the browser. [Git](https://git-scm.com/) provides line-by-line version control that no word processor can match. The format that powers GitHub READMEs, Jupyter notebooks, and most technical documentation can produce boardroom-ready output with minimal effort.
+What's changed since Markdown's creation in 2004 isn't the format itself -- it's the tooling around it. [Pandoc](https://pandoc.org/) can now produce PDFs with LaTeX-quality typesetting. [KaTeX](https://katex.org/) renders publication-grade mathematics in the browser. [Git](https://git-scm.com/) gives you line-by-line version control that no word processor can match. The same format that powers GitHub READMEs, Jupyter notebooks, and most technical documentation can produce boardroom-ready output with minimal ceremony.
 
 ---
 
 ## Getting Started
 
-The entire workflow:
+Here's the entire workflow:
 
 1. Write a `.md` file in any text editor
 2. Run `pandoc` to convert it to PDF or HTML
 
-Everything below expands on these two steps.
+That's it. Everything below expands on these two steps.
 
 ---
 
 ## Step 1: Write
 
-Open any text editor. Notepad works. VS Code works. [Markor](https://github.com/gsantner/markor) works on a phone. The examples here come from [Neovim](https://neovim.io/), but the content is the same regardless of where you type it -- it is just text.
+Open any text editor. Notepad will do, VS Code is fine, [Markor](https://github.com/gsantner/markor) works on your phone. The examples in this article come from [Neovim](https://neovim.io/), but it doesn't matter where you type -- it's just text.
 
-Markdown's formatting conventions are designed to be obvious even in their raw form. A `#` is a heading. A `|` separates table columns. A `$` wraps a formula. Here is how each of those looks in practice, using an executive memo as the running example.
+Markdown's formatting conventions are designed to be obvious even in their raw form. A `#` before a line makes it a heading. Pipes (`|`) define table columns. Dollar signs (`$`) wrap formulas. Here's how each of those looks in practice, using an executive memo as the running example.
 
 ### Headings
 
@@ -63,7 +63,7 @@ Domestic revenue grew to $15.8M in Q2.
 International revenue declined 3%.
 ```
 
-Each `#` level maps to a heading level in the output. `##` is a subheading, `###` is a sub-subheading. The `---` produces a horizontal rule between major sections. Bold text uses `**double asterisks**` and italics use `*single asterisks*`.
+Each `#` level maps to a heading in the output -- `##` is a subheading, `###` is a sub-subheading. The `---` produces a horizontal rule between major sections. Bold uses `**double asterisks**`, italics use `*single*`.
 
 ### Numbered lists
 
@@ -75,7 +75,7 @@ Key findings:
 3. Net promoter score improved from 42 to 57
 ```
 
-Numbered lists start with `1.`, `2.`, etc. Bullet lists use `-` or `*`. Indenting creates nested lists.
+Numbered lists start with `1.`, `2.`, and so on. Bullets use `-` or `*`. Indent to nest them.
 
 ### Tables
 
@@ -87,7 +87,7 @@ Numbered lists start with `1.`, `2.`, etc. Bullet lists use `-` or `*`. Indentin
 | Q3 2025 | 16.1        | 1.9%   |
 ```
 
-Pipes define columns. The dashed row separates the header from the data. Column alignment does not need to be precise -- the converter handles the layout.
+Pipes define columns, and the dashed row separates the header from the data. The alignment doesn't need to be precise -- pandoc handles the layout.
 
 ### Formulas
 
@@ -98,7 +98,7 @@ $$\text{ETR} = \frac{\text{Tax Expense}}{\text{Pre-tax Income}}
              = \frac{11{,}122}{41{,}332} = 26.9\%$$
 ```
 
-`$$` delimiters mark a display-mode equation. Inline math uses single `$` -- writing `$x^2 + y^2 = r^2$` renders the formula inline with the surrounding text. The syntax between the delimiters is LaTeX math notation, the standard for mathematical typesetting in academia and publishing. When converted with pandoc, this renders as a properly typeset fraction -- identical to what you would see in a journal paper or textbook.
+The `$$` delimiters mark a display-mode equation (centred, on its own line). Inline math uses single `$` -- so `$x^2 + y^2 = r^2$` renders the formula right there in the paragraph. The syntax between the delimiters is standard LaTeX math notation, the same system used for mathematical typesetting in journals and textbooks. When pandoc converts this, you get a properly typeset fraction -- identical to what you'd see in a published paper.
 
 <div class="info">
 <details>
@@ -115,7 +115,7 @@ The `.md` file extension is standard. [CommonMark](https://commonmark.org/) (201
 <details>
 <summary>What is KaTeX?</summary>
 
-[KaTeX](https://katex.org/) is a math typesetting library created by [Khan Academy](https://www.khanacademy.org/). It renders LaTeX math notation directly in the browser, producing publication-quality formulas without server-side processing. KaTeX is significantly faster than the older [MathJax](https://www.mathjax.org/) library because it parses and renders in a single pass.
+[KaTeX](https://katex.org/) is a math typesetting library created by [Khan Academy](https://www.khanacademy.org/). It renders LaTeX math notation directly in the browser, producing publication-quality formulas without server-side processing. It's significantly faster than the older [MathJax](https://www.mathjax.org/) library because it parses and renders in a single pass rather than doing multiple layout passes.
 
 Pandoc's `--katex` flag embeds the KaTeX library in HTML output, so math expressions like `$\frac{a}{b}$` render as properly typeset fractions in any modern browser.
 
@@ -126,7 +126,7 @@ Pandoc's `--katex` flag embeds the KaTeX library in HTML output, so math express
 
 ## Step 2: Convert
 
-With the document written, conversion is a single command.
+Once the document's written, conversion is a single command.
 
 **To PDF** (typeset with LaTeX):
 
@@ -140,9 +140,9 @@ pandoc memo.md -o memo.pdf --pdf-engine=pdflatex -V geometry:margin=1in
 pandoc memo.md -o memo.html --katex --standalone
 ```
 
-`--pdf-engine=pdflatex` tells pandoc to typeset the PDF using LaTeX's engine -- the same system used in academic journals and textbooks. `--katex` renders math notation in the browser. `--standalone` produces a complete HTML file rather than a fragment.
+`--pdf-engine=pdflatex` tells pandoc to typeset the PDF using LaTeX's engine -- the same system behind academic journals and textbooks. `--katex` renders math in the browser using [KaTeX](https://katex.org/). `--standalone` produces a complete HTML file with proper `<head>` and `<body>` tags rather than just a fragment.
 
-For finer control over PDF appearance:
+For finer control over the PDF's appearance:
 
 ```bash
 pandoc memo.md -o memo.pdf \
@@ -153,7 +153,7 @@ pandoc memo.md -o memo.pdf \
   --highlight-style=tango
 ```
 
-These are variables passed to the LaTeX template. The full list is in the [pandoc manual](https://pandoc.org/MANUAL.html).
+These are variables passed to the underlying LaTeX template. Pandoc exposes a lot of knobs -- the full list is in the [pandoc manual](https://pandoc.org/MANUAL.html).
 
 <div class="info">
 <details>
@@ -174,28 +174,28 @@ Install: [pandoc.org/installing](https://pandoc.org/installing.html). Most Linux
 
 ### Readable anywhere, no software required
 
-A `.md` file is plain text. It opens instantly in any editor on any operating system -- a 1990s terminal, a modern IDE, a phone's built-in text editor. There is no proprietary format to decode, no rendering engine required. Anyone can read the source, regardless of what tools they have installed.
+A `.md` file is plain text. It opens instantly in any editor on any operating system -- a 1990s terminal, a modern IDE, your phone's built-in text editor, anything. There's no proprietary format to decode, no rendering engine required. Anyone can read the raw source regardless of what tools they have installed.
 
-The rendered output is equally portable. A pandoc-generated HTML file is static text and basic CSS -- it loads in milliseconds and works offline. The same content in Google Docs requires downloading and bootstrapping a JavaScript application before the first sentence is visible. On a laptop, the difference is measured in battery life.
+The rendered output is just as portable. A pandoc-generated HTML page is static text and basic CSS -- it loads in milliseconds and works offline. The same content served through Google Docs requires downloading and bootstrapping an entire JavaScript application before the first sentence becomes visible. On a laptop, the difference shows up in your battery meter.
 
 ### Line-by-line version control
 
-Word processors store documents as opaque binary blobs or zipped XML archives. Version control systems can tell you that the file changed, but not what changed in a meaningful way. Diff tools produce unintelligible output because the file format is designed for the application, not for human readers.
+Word processors store documents as opaque binary blobs (`.doc`) or zipped XML archives (`.docx`, `.odt`). Version control systems like Git can tell you *that* the file changed, but not *what* changed -- diff tools produce unintelligible output because the format was designed for the application, not for human eyes.
 
-Markdown is line-oriented text. Every change is a clean, readable diff. This unlocks capabilities that are impossible with traditional document formats:
+Because Markdown is line-oriented text, every change produces a clean, readable diff. This unlocks capabilities that are simply impossible with traditional document formats:
 
 - **Meaningful diffs** -- see exactly which sentence was reworded, which figure was updated, which section was added
 - **Attribution** -- `git blame` shows who wrote each line and when it was last modified
 - **Branching** -- draft two alternative versions in parallel and merge the preferred one
 - **Complete history** -- every edit, by every author, preserved with timestamps and commit messages
 
-For teams producing reports, proposals, or policy documents, this replaces emailing `memo_v3_final_FINAL_jm-edits.docx`.
+For teams producing reports, proposals, or policy documents, this is the end of emailing `memo_v3_final_FINAL_jm-edits.docx`.
 
 <div class="detour">
 <details>
 <summary>Advanced: collaborative editing with Git</summary>
 
-When a Markdown document is stored in a Git repository, the full power of version control applies to prose the same way it applies to code.
+When a Markdown document lives in a Git repository, the full power of version control applies to prose the same way it applies to code.
 
 **Commit history** shows who changed what and why:
 
@@ -216,7 +216,7 @@ e8b2d15 Draft executive summary      (James Miller)
  | Q3 2025 | 16.1        | 1.9%   |
 ```
 
-Sarah corrected Q2's revenue from $15.1M to $15.8M and the growth rate from 6.3% to 11.3%. The diff shows the exact change, in context. Try getting that from a `.docx`.
+Sarah corrected Q2's revenue from $15.1M to $15.8M and the growth rate from 6.3% to 11.3%. The diff shows exactly what changed, in context. Try getting that out of a `.docx`.
 
 **Blame** traces every line to its author:
 
@@ -235,9 +235,9 @@ a3f7c21 (Sarah Chen    2025-03-03) | Q2 2025 | 15.8        | 11.3%  |
 e8b2d15 (James Miller  2025-03-01) | Q3 2025 | 16.1        | 1.9%   |
 ```
 
-James wrote the structure and initial data. Sarah updated the executive summary and corrected the Q2 figures. Every line is attributed, timestamped, and linked to a commit message explaining the change.
+James wrote the original structure and data. Sarah updated the executive summary and corrected Q2. Every line is attributed, timestamped, and linked to a commit message explaining *why* the change was made.
 
-This workflow is standard in software development and increasingly adopted for document-heavy work in legal, finance, and compliance teams.
+This is standard workflow in software development, and it's increasingly showing up in document-heavy fields -- legal, finance, compliance -- where knowing who changed what and when isn't optional.
 
 </details>
 </div>
@@ -248,7 +248,7 @@ This workflow is standard in software development and increasingly adopted for d
 
 Markdown borrows its math syntax from a tool worth knowing about: [LaTeX](https://www.latex-project.org/).
 
-LaTeX has been the standard typesetting system in academia since the 1980s, used for journals, theses, and textbooks. It produces byte-identical output from the same source on any machine -- one of the same benefits Markdown inherits through pandoc. But where Markdown uses lightweight conventions, LaTeX is a full document programming language, and its syntax reflects that.
+LaTeX has been the standard typesetting system in academia since the 1980s -- journals, theses, textbooks. It produces byte-identical output from the same source on any machine, which is one of the same benefits Markdown inherits through pandoc. But where Markdown opts for lightweight conventions, LaTeX is a full document programming language, and its syntax reflects that.
 
 The same content in both formats:
 
@@ -274,20 +274,20 @@ Revenue grew \textbf{12\%} year-over-year. The effective tax rate:
 \end{equation}
 ```
 
-Both produce identical typeset output. Markdown is readable at a glance; LaTeX requires familiarity with its command vocabulary.
+Both produce identical typeset output. The Markdown is readable at a glance; the LaTeX requires knowing the command vocabulary. For a one-page memo, the difference in verbosity is minor. For a fifty-page document, it compounds.
 
-LaTeX's advantages are real, particularly at scale:
+LaTeX's advantages are real, especially at scale:
 
-- **Automatic numbering** -- sections, figures, tables, and equations are numbered and cross-referenced automatically. Inserting a new section renumbers everything downstream.
+- **Automatic numbering** -- sections, figures, tables, and equations are numbered and cross-referenced automatically. Insert a new section and everything downstream renumbers itself.
 - **Citation management** -- [BibTeX](http://www.bibtex.org/) integrates bibliography databases, formatting citations across dozens of journal styles automatically.
-- **Collaborative editing** -- platforms like [Overleaf](https://www.overleaf.com/) provide real-time collaborative LaTeX editing with live preview, similar to Google Docs but for LaTeX documents.
+- **Collaborative editing** -- platforms like [Overleaf](https://www.overleaf.com/) provide real-time collaborative LaTeX editing with live preview, essentially Google Docs for LaTeX.
 - **Precision layout control** -- every dimension of the output -- margins, headers, footnotes, column widths, float placement -- is programmable.
 
-Markdown, through pandoc, is steadily acquiring these capabilities with simpler syntax:
+Markdown, through pandoc, is steadily picking up these capabilities with simpler syntax:
 
 - `--citeproc` with a `.bib` file handles citations in common styles
 - [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref) adds numbered references to figures, tables, and equations
 - YAML metadata in the document header controls layout, numbering, and styling
-- Custom LaTeX templates provide full typographic control when the defaults are not sufficient
+- Custom LaTeX templates give you full typographic control when the defaults aren't enough
 
-For most professional documents -- memos, reports, proposals, briefs -- Markdown with pandoc provides what is needed at a fraction of the syntactic cost. For a 300-page thesis with hundreds of citations and complex cross-references, LaTeX remains the more capable tool. The gap is narrowing.
+For most professional documents -- memos, reports, proposals, briefs -- Markdown with pandoc does the job at a fraction of the syntactic overhead. For a 300-page thesis with hundreds of citations and complex cross-references, LaTeX is still the right tool. But the gap is closing.
