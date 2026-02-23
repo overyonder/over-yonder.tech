@@ -682,6 +682,9 @@ With per-PID metrics handled by BPF, the remaining metrics come from:
 
 - **System-wide stats**: `libc::sysinfo()` returns total/free memory and load averages in a single syscall. `sysconf(_SC_NPROCESSORS_ONLN)` for core count.
 - **Hardware sensors**: 7 sysfs files for CPU temperature, frequency, GPU stats, and power profile. All opened once at startup, read via `pread()` each tick.
+- **Memory pressure + swap activity**: two procfs counters (`/proc/pressure/memory`, `/proc/vmstat`) opened once and read via `pread()` each tick. The daemon computes deltas per interval to emit `PSI some/full` (%) and swap rate (`pswpin/pswpout`, pages/sec).
+
+This keeps the no-`/proc`-walk property intact: there is still no per-PID procfs churn in steady state, only two fixed system-level procfs reads.
 
 ### The custom BPF loader
 
@@ -722,7 +725,7 @@ To avoid competing probe instances, rstat also takes a single-instance lock (run
   <text x="390" y="80" class="ba-mono">BPF probe fires on context switch</text>
   <text x="390" y="100" class="ba-mono">writes to kernel map (0 userspace syscalls)</text>
   <text x="380" y="124" class="ba-mono">Every 2s:</text>
-  <text x="390" y="144" class="ba-mono">1 batch map read + 7 pread() = ~8 syscalls</text>
+  <text x="390" y="144" class="ba-mono">1 batch map read + 9 pread() = ~10 syscalls</text>
   <text x="390" y="164" class="ba-mono">+ hand-written JSON</text>
   <text x="380" y="195" class="ba-dim">Total per sample:</text>
   <text x="380" y="220" class="ba-num-g">&lt;1 ms</text>
@@ -1034,11 +1037,11 @@ There is also more to explore here. BPF -- the Berkeley Packet Filter -- was [cr
   <line x1="190" y1="132" x2="235" y2="132" class="ar-arr"/>
   <!-- sysfs files -->
   <rect x="420" y="54" width="230" height="92" class="ar-box" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.1)"/>
-  <text x="535" y="72" text-anchor="middle" class="ar-label">sysfs (7 pre-opened files)</text>
+  <text x="535" y="72" text-anchor="middle" class="ar-label">sysfs + procfs (9 pre-opened files)</text>
   <text x="435" y="90" class="ar-mono">thermal_zone0/temp</text>
   <text x="435" y="104" class="ar-mono">cpufreq/scaling_cur_freq</text>
   <text x="435" y="118" class="ar-mono">drm/card1/gt/gt0/rps_act_freq_mhz</text>
-  <text x="435" y="132" class="ar-mono">platform_profile ...</text>
+  <text x="435" y="132" class="ar-mono">platform_profile, pressure/memory ...</text>
   <!-- Divider -->
   <line x1="10" y1="188" x2="670" y2="188" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
   <!-- Userspace zone -->
@@ -1047,7 +1050,7 @@ There is also more to explore here. BPF -- the Berkeley Packet Filter -- was [cr
   <!-- rstat daemon -->
   <rect x="160" y="218" width="340" height="50" class="ar-box" fill="rgba(52,152,219,0.08)" stroke="rgba(52,152,219,0.3)"/>
   <text x="330" y="238" text-anchor="middle" class="ar-title">rstat daemon</text>
-  <text x="330" y="256" text-anchor="middle" class="ar-mono">batch map read + 7× pread() + JSON emit</text>
+  <text x="330" y="256" text-anchor="middle" class="ar-mono">batch map read + 9× pread() + JSON emit</text>
   <!-- Arrows maps → daemon -->
   <line x1="305" y1="170" x2="305" y2="213" class="ar-arr"/>
   <!-- Arrow sysfs → daemon -->
@@ -1116,12 +1119,12 @@ Two-derivation build: `rstat-probe` compiles `probe.bpf.c` with `clang -target b
 | Bash + coreutils | ~800ms | Subprocesses for every metric, no state between runs |
 | Rust + /proc | ~700ms | Direct /proc parsing, kept file handles, `powerprofilesctl` subprocess (~810ms) |
 | Sysfs + optimised /proc | ~15ms | Sysfs replaces D-Bus, reusable buffers, byte-level parsing, skip kthreads |
-| eBPF (no /proc walks) | sub-1ms | BPF probe reads task_struct directly, sysinfo() for system metrics |
+| eBPF (no /proc walks) | sub-1ms | BPF probe reads task_struct directly, plus fixed sysinfo/sysfs/procfs reads for system metrics |
 | Final optimised | min 0.78ms | Batch map reads, sorted vec, pread, hand-written JSON |
 
 Development measurements were taken under heavier load conditions (HyprPanel running, more processes). Current-system benchmarks show lower figures for the /proc stages due to lighter load and fewer PIDs.
 
-The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init) and produces a complete system health JSON blob (CPU%, memory, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
+The final binary has two runtime dependencies (`libc`, `goblin` for ELF parsing at init) and produces a complete system health JSON blob (CPU%, memory, memory pressure, swap rate, load, temperature, frequency, GPU utilisation, power profile, throttle status, top-5 CPU/memory/IO processes with per-process breakdowns) in under a millisecond on a quiet desktop.
 
 ### Kernel-side overhead
 
