@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
 
-  // ── Configure marked extensions ──
-  if (window.markedSmartypants) {
-    var sp = window.markedSmartypants.markedSmartypants || window.markedSmartypants;
-    if (typeof sp === 'function') marked.use(sp());
-  }
-  if (window.markedKatex) {
-    marked.use(markedKatex({ throwOnError: false }));
-  }
-  if (window.markedFootnote) {
-    marked.use(markedFootnote());
-  }
-  mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+  // ── Configure marked extensions (guarded so a CDN failure can't crash the page) ──
+  try {
+    if (window.markedSmartypants) {
+      var sp = window.markedSmartypants.markedSmartypants || window.markedSmartypants;
+      if (typeof sp === 'function') marked.use(sp());
+    }
+    if (window.markedKatex) {
+      marked.use(markedKatex({ throwOnError: false }));
+    }
+    if (window.markedFootnote) {
+      marked.use(markedFootnote());
+    }
+  } catch (e) { console.error('marked extension init failed:', e); }
+  try { mermaid.initialize({ startOnLoad: false, theme: 'dark' }); }
+  catch (e) { console.error('mermaid init failed:', e); }
 
   // ── Placeholder for tab bar when it goes sticky ──
   var placeholder = document.createElement('div');
