@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ── Configure marked extensions ──
   if (window.markedSmartypants) {
-    marked.use(markedSmartypants());
+    var sp = window.markedSmartypants.markedSmartypants || window.markedSmartypants;
+    if (typeof sp === 'function') marked.use(sp());
   }
   if (window.markedKatex) {
     marked.use(markedKatex({ throwOnError: false }));
@@ -77,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function parseHash() {
     var h = window.location.hash.replace(/^#\/?/, '');
     if (!h) return { tab: 'projects', slug: null };
+    // Ignore footnote anchors -- not a route change
+    if (h.indexOf('footnote-') === 0) return null;
     var parts = h.split('/');
     if (parts[0] === 'articles') return { tab: 'articles', slug: parts[1] || null };
     if (parts[0] === 'projects') return { tab: 'projects', slug: null };
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Listen for hash changes (back/forward)
   window.addEventListener('hashchange', function () {
     var route = parseHash();
+    if (!route) return; // footnote anchor, not a route
     selectTab(route.tab);
     if (route.tab === 'articles') openArticleBySlug(route.slug);
   });
@@ -117,10 +121,10 @@ document.addEventListener('DOMContentLoaded', function () {
       buildAccordion(articles);
       // Apply initial route after articles are built
       var route = parseHash();
-      selectTab(route.tab);
-      if (route.slug) {
+      if (route) selectTab(route.tab);
+      if (route && route.slug) {
         openArticleBySlug(route.slug);
-      } else if (route.tab === 'articles') {
+      } else if (route && route.tab === 'articles') {
         // On articles tab with no specific slug, expand first (most recent)
         expandFirst();
       } else {
@@ -258,6 +262,16 @@ document.addEventListener('DOMContentLoaded', function () {
           pre.replaceWith(diagram);
         });
         mermaid.run({ nodes: el.querySelectorAll('.mermaid') });
+
+        // Wire footnote links to scroll within the article instead of changing hash
+        el.querySelectorAll('a[data-footnote-ref], a[data-footnote-backref]').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            var id = link.getAttribute('href').replace(/^#/, '');
+            var target = el.querySelector('[id="' + id + '"]');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
 
         // If accordion is open, uncap max-height so new content isn't clipped
         var item = el.closest('.accordion-item');

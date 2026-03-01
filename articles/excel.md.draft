@@ -1,0 +1,104 @@
+# Excel Spreadsheet Generation with openpyxl
+
+## Library
+
+**openpyxl** — the only Python library used. Pure Python, reads and writes `.xlsx` files. No dependency on Excel or LibreOffice being installed.
+
+```bash
+nix-shell -p python3Packages.openpyxl --run "python3 script.py"
+```
+
+## Core workflow
+
+1. Load an existing workbook (or create one with `openpyxl.Workbook()`)
+2. Select a sheet by name: `ws = wb["Sheet Name"]`
+3. Write values or formulas to cells
+4. Save: `wb.save("path.xlsx")`
+
+## Writing to cells
+
+Two equivalent ways to address cells:
+
+```python
+ws["D22"] = "Some label"                    # A1-style reference
+ws.cell(row=27, column=3).value = 0         # row/column integers (1-based)
+```
+
+**Plain values** — just assign a Python literal:
+```python
+ws["B7"] = 1294                             # integer
+ws["E22"] = 50                              # number
+ws["D22"] = "Pre-Harvest Labor ($000)"      # string
+```
+
+**Formulas** — assign a string starting with `=`:
+```python
+ws["D29"] = "=SUM(D25:D28)"
+ws["B48"] = "=IRR(C45:S45)"
+ws.cell(row=27, column=4).value = "=IF(D6<=Assumptions!$E$20,Assumptions!$E$22*(1+Assumptions!$B$21)^(D6-1),Assumptions!$B$16/(1+Assumptions!$B$21)^(Assumptions!$E$21-D6))"
+```
+
+Formulas are stored as text — openpyxl does not evaluate them. They compute when the file is opened in Excel or LibreCalc.
+
+**Column letter helper** — when building formulas in a loop:
+```python
+from openpyxl.utils import get_column_letter
+L = get_column_letter(5)  # → "E"
+```
+
+## Styling
+
+All from `openpyxl.styles`. Styles are per-cell, not inherited.
+
+**Fills** (cell background):
+```python
+from openpyxl.styles import PatternFill
+yellow = PatternFill(start_color="FFFFF2CC", end_color="FFFFF2CC", fill_type="solid")
+ws["E22"].fill = yellow
+```
+
+**Fonts**:
+```python
+from openpyxl.styles import Font
+ws["A1"].font = Font(bold=True, size=12, name="Calibri")
+```
+
+**Number formats**:
+```python
+ws["E22"].number_format = "$#,##0"          # dollar, no decimals
+ws["B48"].number_format = "0.0%"            # percentage
+ws["C18"].number_format = "$#,##0.000"      # dollar, 3 decimals
+```
+
+**Copying styles** from a reference cell (useful for consistency):
+```python
+from copy import copy
+ws["E22"].font = copy(ws["E20"].font)
+```
+
+## Typical script structure
+
+```python
+import openpyxl
+from openpyxl.utils import get_column_letter
+
+wb = openpyxl.load_workbook("template.xlsx")
+ws = wb["Cash Flow Model"]
+
+COL_C, COL_S = 3, 19  # Year 0 through Year 16
+
+for t in range(17):
+    c = COL_C + t
+    L = get_column_letter(c)
+    # write formulas using L for column references
+    ws.cell(row=20, column=c).value = f"=Assumptions!$B$7*{L}18*{L}19/1000"
+
+wb.save("output.xlsx")
+```
+
+## Limitations
+
+- **No formula evaluation** — openpyxl writes formulas as strings. You only see computed values when the file is opened in a spreadsheet application.
+- **No DATA TABLE support** — Excel's What-If / Data Table feature (used for sensitivity grids) cannot be created via openpyxl. Use the Python model for sensitivity analysis instead.
+- **Circular references** — openpyxl can write circular formulas but they won't resolve until opened in Excel with iterative calculation enabled.
+- **Charts and images** — openpyxl can create basic charts but I haven't used this; formatting is done through cell styles only.

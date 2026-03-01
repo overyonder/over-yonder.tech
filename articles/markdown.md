@@ -160,10 +160,11 @@ pandoc report.md -o report.pdf \
 | `-V fontsize=11pt` | Sets the body text size |
 | `--toc` | Generates a table of contents from your headings |
 
-Need Word instead? Change the extension. Pandoc figures out the rest.
+Need Word instead? Change the extension. PowerPoint too. Pandoc figures out the format from the filename.
 
 ```bash
 pandoc report.md -o report.docx
+pandoc report.md -o report.pptx
 ```
 
 Everything below teaches you the Markdown syntax that goes *into* that file. Pandoc handles getting it out.
@@ -491,25 +492,27 @@ xychart-beta
 Footnotes let you add references and asides without cluttering the main text. The syntax is simple: a marker in the text and a definition anywhere in the file.
 
 ```markdown
-The firm faces severe liquidity risk[^1] and excessive leverage[^2],
-which together create a fragile financial structure.
+The firm faces severe liquidity risk[^example-1] and excessive
+leverage[^example-2], which together create a fragile financial
+structure.
 
-[^1]: Current ratio of 0.57 vs. industry average of 1.72. A ratio
-    below 1.0 indicates current liabilities exceed current assets.
+[^example-1]: Current ratio of 0.57 vs. industry average of 1.72.
+    A ratio below 1.0 indicates current liabilities exceed current
+    assets.
 
-[^2]: Debt-to-assets of 78.64% vs. industry average of 61.33%.
-    Interest coverage of 3.97x provides limited buffer.
+[^example-2]: Debt-to-assets of 78.64% vs. industry average of
+    61.33%. Interest coverage of 3.97x provides limited buffer.
 ```
 
 Renders as:
 
-The firm faces severe liquidity risk[^1] and excessive leverage[^2],
+The firm faces severe liquidity risk[^example-1] and excessive leverage[^example-2],
 which together create a fragile financial structure.
 
-[^1]: Current ratio of 0.57 vs. industry average of 1.72. A ratio
+[^example-1]: Current ratio of 0.57 vs. industry average of 1.72. A ratio
     below 1.0 indicates current liabilities exceed current assets.
 
-[^2]: Debt-to-assets of 78.64% vs. industry average of 61.33%.
+[^example-2]: Debt-to-assets of 78.64% vs. industry average of 61.33%.
     Interest coverage of 3.97x provides limited buffer.
 
 The footnote definitions don't need to be near the markers -- they can be collected at the bottom of your file. The renderer numbers them automatically and creates clickable links between the marker and the note.
@@ -661,6 +664,27 @@ theme: default
 
 ![Marp for VS Code showing markdown source alongside rendered slide preview](assets/markdown-marp.webp)
 
+### Publishing to the web
+
+The article you're reading right now is a Markdown file in a folder on my computer. The entire site is a handful of files:
+
+```
+over-yonder.tech/
+├── articles/
+│   ├── index.json
+│   ├── markdown.md    ← this article
+│   └── rstat.md
+├── assets/
+│   └── ...
+├── index.html
+├── script.js
+└── styles.css
+```
+
+There's no CMS, no database, no build step. The browser loads each `.md` file, renders it with [marked](https://marked.js.org/), and applies syntax highlighting and maths rendering client-side. If I want to publish another article, I open a text editor, write a Markdown file, drop it in the `articles/` folder, add a line to `index.json`, and push. That's it.
+
+Static site generators like [Hugo](https://gohugo.io/), [Jekyll](https://jekyllrb.com/), and [Astro](https://astro.build/) take this further -- they pre-render your Markdown into HTML at build time, generate RSS feeds, handle templating, and deploy to any static host. Most technical blogs, documentation sites, and personal wikis work this way. The source files are still just Markdown. The publishing pipeline is `git push`.
+
 ---
 
 ## Putting it together: a complete example
@@ -761,3 +785,7 @@ You don't need to learn all of this at once. Headings, bold, lists, and tables w
 4. **Add features as you need them.** Footnotes for citations. Maths notation for quantitative cases. Mermaid when a diagram would genuinely help.
 
 The whole syntax fits on an index card. The output is professional enough that people will ask how you did it. And because the files are just text, they version-control cleanly, sync across every device you own, and will still be perfectly readable in twenty years -- long after whatever version of Word we're using today has been quietly put down.
+
+---
+
+*Watch this space -- and let me know if you'd find an article about using [openpyxl](https://openpyxl.readthedocs.io/) in Python to create Excel spreadsheets from plain text too.*
