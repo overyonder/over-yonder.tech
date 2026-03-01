@@ -286,7 +286,7 @@ Three dashes, asterisks, or underscores on their own line create a divider:
 
 LaTeX has come a long way from the command-line-only days. [Overleaf](https://www.overleaf.com/) provides a browser-based editor with real-time collaboration, live preview, and thousands of journal templates. If your programme requires LaTeX (common in quantitative finance or economics PhDs), Overleaf is the place to start. It eliminates the installation headache entirely.
 
-<!-- TODO: screenshot of Overleaf's split source/preview editor -->
+![Overleaf's browser-based split editor with source on the left and live preview on the right](assets/markdown-overleaf.webp)
 
 ### Markdown: an ecosystem of choice
 
@@ -294,23 +294,26 @@ One of Markdown's greatest strengths is that you're never locked into a single t
 
 **[Obsidian](https://obsidian.md/)** -- A desktop and mobile app that stores notes as local Markdown files in a folder (a "vault"). Powerful linking between notes, a graph view that visualises connections, and a rich plugin ecosystem. Free for personal use. Popular with students who want a personal knowledge base that outlasts any single course.
 
-<!-- TODO: screenshot of Obsidian editor with graph view -->
+![Obsidian's desktop editor with linked notes and graph view](assets/markdown-obsidian.webp)
 
 **[Notion](https://www.notion.so/)** -- A collaborative workspace that supports Markdown input shortcuts but stores content in its own database. Great for team projects and shared wikis. The trade-off: your content lives on Notion's servers, and export fidelity can vary.
 
-<!-- TODO: screenshot of Notion's block-based editor -->
+![Notion's block-based collaborative workspace](assets/markdown-notion.webp)
 
 **[SilverBullet](https://silverbullet.md/)** -- A self-hosted, open-source note-taking platform that runs in the browser. Stores everything as Markdown files on your own server. Supports live queries, templates, and programmable automation. More technical to set up, but you own your data completely.
 
-<!-- TODO: screenshot of SilverBullet's browser editor -->
+![SilverBullet's self-hosted browser-based editor](assets/markdown-silverbullet.webp)
 
 **[Markor](https://gsantner.net/project/markor.html)** -- An Android app for editing Markdown files on your phone. Lightweight, offline, and free. Useful for reviewing notes on the go or drafting sections during a commute.
 
-<!-- TODO: screenshot of Markor on Android -->
+![Markor's lightweight Markdown editor on Android](assets/markdown-markor.webp)
 
 **[Pandoc](https://pandoc.org/)** -- Not an editor, but the Swiss Army knife of document conversion. Pandoc takes Markdown files and converts them to PDF, Word, LaTeX, HTML, slide decks, and dozens of other formats. If you want to write in Markdown and submit in `.docx` or `.pdf`, Pandoc is how you bridge the gap. Combined with a good template, the output is indistinguishable from a natively typeset document.
 
-<!-- TODO: terminal screenshot of Pandoc converting markdown to PDF -->
+```bash
+$ pandoc case-study.md -o case-study.pdf --pdf-engine=xelatex
+$ pandoc case-study.md -o case-study.docx
+```
 
 | Tool | Platform | Collaboration | Data ownership | Cost |
 |:-----|:---------|:-------------:|:--------------:|:-----|
@@ -627,7 +630,7 @@ theme: default
 | Current Ratio | 0.57 | 1.72 |
 ```
 
-<!-- TODO: screenshot of a Marp slide deck rendered from the source above -->
+![Marp for VS Code showing markdown source alongside rendered slide preview](assets/markdown-marp.webp)
 
 ---
 
