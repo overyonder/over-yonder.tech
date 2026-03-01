@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var finalLogoTop = 50;
 
   // ── Configure marked extensions ──
+  if (window.markedSmartypants) {
+    marked.use(markedSmartypants());
+  }
   if (window.markedKatex) {
     marked.use(markedKatex({ throwOnError: false }));
   }
