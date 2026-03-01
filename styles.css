@@ -598,6 +598,87 @@ footer p {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* ==================== GitHub-style admonitions (marked-alert) ==================== */
+
+.article-content .markdown-alert {
+  border-radius: 0 8px 8px 0;
+  padding: 1.2em 1.5em;
+  margin: 2em 0;
+  font-style: normal;
+}
+
+.article-content .markdown-alert > :first-child { margin-top: 0; }
+.article-content .markdown-alert > :last-child  { margin-bottom: 0; }
+
+.article-content .markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Source Serif 4', 'Lora', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+}
+
+.article-content .markdown-alert-title svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.article-content .markdown-alert-note {
+  background: rgba(52, 152, 219, 0.04);
+  border-left: 3px solid rgba(52, 152, 219, 0.25);
+}
+.article-content .markdown-alert-note .markdown-alert-title {
+  color: rgba(52, 152, 219, 0.8);
+}
+.article-content .markdown-alert-note .markdown-alert-title svg { fill: rgba(52, 152, 219, 0.8); }
+
+.article-content .markdown-alert-tip {
+  background: rgba(168, 200, 160, 0.06);
+  border-left: 3px solid rgba(168, 200, 160, 0.4);
+}
+.article-content .markdown-alert-tip .markdown-alert-title {
+  color: rgba(168, 200, 160, 0.9);
+}
+.article-content .markdown-alert-tip .markdown-alert-title svg { fill: rgba(168, 200, 160, 0.9); }
+
+.article-content .markdown-alert-important {
+  background: rgba(155, 89, 182, 0.04);
+  border-left: 3px solid rgba(155, 89, 182, 0.25);
+}
+.article-content .markdown-alert-important .markdown-alert-title {
+  color: rgba(155, 89, 182, 0.8);
+}
+.article-content .markdown-alert-important .markdown-alert-title svg { fill: rgba(155, 89, 182, 0.8); }
+
+.article-content .markdown-alert-warning {
+  background: rgba(241, 196, 15, 0.04);
+  border-left: 3px solid rgba(241, 196, 15, 0.25);
+}
+.article-content .markdown-alert-warning .markdown-alert-title {
+  color: rgba(241, 196, 15, 0.7);
+}
+.article-content .markdown-alert-warning .markdown-alert-title svg { fill: rgba(241, 196, 15, 0.7); }
+
+.article-content .markdown-alert-caution {
+  background: rgba(192, 57, 43, 0.04);
+  border-left: 3px solid rgba(192, 57, 43, 0.25);
+}
+.article-content .markdown-alert-caution .markdown-alert-title {
+  color: rgba(192, 57, 43, 0.7);
+}
+.article-content .markdown-alert-caution .markdown-alert-title svg { fill: rgba(192, 57, 43, 0.7); }
+
+.article-content .markdown-alert p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
 .article-content .author-badge .shields-badge {
   height: 22px;
   width: auto;

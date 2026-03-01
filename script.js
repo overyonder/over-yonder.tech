@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.markedFootnote) {
       marked.use(markedFootnote());
     }
+    if (window.markedAlert) {
+      marked.use(markedAlert());
+    }
   } catch (e) { console.error('marked extension init failed:', e); }
   try { mermaid.initialize({ startOnLoad: false, theme: 'dark' }); }
   catch (e) { console.error('mermaid init failed:', e); }
