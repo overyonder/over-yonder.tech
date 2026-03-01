@@ -20,7 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
       marked.use(markedFootnote());
     }
     if (window.markedAlert) {
-      marked.use(markedAlert());
+      marked.use(markedAlert({
+        variants: [
+          { type: 'success', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm3.78-9.72a.751.751 0 0 0-1.06-1.06L6.5 9.44 5.28 8.22a.751.751 0 0 0-1.06 1.06l1.75 1.75a.75.75 0 0 0 1.06 0l4.75-4.75Z"></path></svg>', title: 'Success' },
+          { type: 'error', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1 1 13.658 2.343 8 8 0 0 1 2.343 13.657ZM6.03 4.97a.751.751 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.751.751 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.751.751 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.751.751 0 0 0-1.06-1.06L8 6.94 6.03 4.97Z"></path></svg>', title: 'Error' }
+        ]
+      }));
     }
   } catch (e) { console.error('marked extension init failed:', e); }
   try { mermaid.initialize({ startOnLoad: false, theme: 'dark' }); }
