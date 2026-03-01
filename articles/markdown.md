@@ -726,6 +726,18 @@ Callout blocks highlight warnings, tips, or important notes. The syntax varies b
 > increase flows through to margin.
 ```
 
+Which renders as:
+
+> [!warning] Liquidity risk
+> The current ratio of 0.57 means the firm cannot cover
+> current liabilities from current assets. This is the most
+> pressing concern regardless of profitability metrics.
+
+> [!note] Assumption
+> The price increase model assumes bill-rate elasticity only.
+> Pay rates to contractors are held constant, so the full
+> increase flows through to margin.
+
 In Obsidian and SilverBullet, these render as coloured boxes with icons -- yellow for warnings, blue for notes -- that visually separate important asides from the main text.
 
 *Supported by: Obsidian (built-in), SilverBullet (built-in), GitHub (partial). Pandoc uses a different div-based syntax for custom blocks.*
