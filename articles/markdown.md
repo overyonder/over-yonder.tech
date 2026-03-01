@@ -715,12 +715,12 @@ In Pandoc output, the terms appear in bold with indented definitions below -- si
 Callout blocks highlight warnings, tips, or important notes. The syntax varies by tool, but a common pattern uses a decorated blockquote:
 
 ```markdown
-> [!warning] Liquidity risk
+> [!WARNING] Liquidity risk
 > The current ratio of 0.57 means the firm cannot cover
 > current liabilities from current assets. This is the most
 > pressing concern regardless of profitability metrics.
 
-> [!note] Assumption
+> [!NOTE] Assumption
 > The price increase model assumes bill-rate elasticity only.
 > Pay rates to contractors are held constant, so the full
 > increase flows through to margin.
@@ -728,12 +728,12 @@ Callout blocks highlight warnings, tips, or important notes. The syntax varies b
 
 Which renders as:
 
-> [!warning] Liquidity risk
+> [!WARNING] Liquidity risk
 > The current ratio of 0.57 means the firm cannot cover
 > current liabilities from current assets. This is the most
 > pressing concern regardless of profitability metrics.
 
-> [!note] Assumption
+> [!NOTE] Assumption
 > The price increase model assumes bill-rate elasticity only.
 > Pay rates to contractors are held constant, so the full
 > increase flows through to margin.
@@ -834,7 +834,7 @@ A price increase of $p$ achieves target margin $PM_t$ when:
 
 $$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
 
-> [!note]
+> [!NOTE]
 > This assumes the pay rate to contractors is fixed, so the
 > full bill-rate increase flows to margin.
 
