@@ -728,15 +728,26 @@ Callout blocks highlight warnings, tips, or important notes. The syntax varies b
 
 Which renders as:
 
-> [!WARNING] Liquidity risk
-> The current ratio of 0.57 means the firm cannot cover
-> current liabilities from current assets. This is the most
-> pressing concern regardless of profitability metrics.
+> [!NOTE]
+> Highlights information the reader should be aware of.
 
-> [!NOTE] Assumption
-> The price increase model assumes bill-rate elasticity only.
-> Pay rates to contractors are held constant, so the full
-> increase flows through to margin.
+> [!TIP]
+> Helpful advice for getting the most out of something.
+
+> [!IMPORTANT]
+> Key information the reader needs to know.
+
+> [!WARNING]
+> Urgent information that demands immediate attention.
+
+> [!CAUTION]
+> Warns about risks or negative outcomes of an action.
+
+> [!SUCCESS]
+> Confirms something worked or a condition has been met.
+
+> [!ERROR]
+> Indicates a failure or something that went wrong.
 
 In Obsidian and SilverBullet, these render as coloured boxes with icons -- yellow for warnings, blue for notes -- that visually separate important asides from the main text.
 
