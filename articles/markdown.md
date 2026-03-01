@@ -12,7 +12,7 @@ tags: [markdown, pandoc, writing, productivity]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-<img src="assets/markdown-hero.webp" alt="A split view: markdown source on the left, polished PDF output on the right" class="hero-img" />
+<!-- TODO: hero image showing split markdown source / PDF output -->
 
 A few classmates have asked how I produce case write-ups that look like they came out of a typesetting studio. The secret is disappointingly simple: I write plain text files with a handful of formatting marks, and a tool turns them into polished PDFs. No Word, no Google Docs, no wrestling with margins at midnight.
 
@@ -64,7 +64,7 @@ vs.\ 4.6\% industry) offset by \textbf{exceptional asset efficiency}
 \end{document}
 ```
 
-<img src="assets/markdown-latex-doc.webp" alt="The LaTeX source above rendered as a PDF with professional typesetting" class="hero-img" />
+<!-- TODO: screenshot of the LaTeX source rendered as a typeset PDF -->
 
 And here's a financial comparison table:
 
@@ -84,7 +84,7 @@ $\times$ Asset Turnover & 10.66$\times$ & 2.66$\times$ & +8.0$\times$ \\
 \end{table}
 ```
 
-<img src="assets/markdown-latex-table.webp" alt="The LaTeX table rendered with professional rules and alignment" class="hero-img" />
+<!-- TODO: screenshot of the LaTeX table rendered with booktabs rules -->
 
 It works. The output is beautiful. But there's a lot of ceremony: `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins. You need to *compile* the document (often multiple passes) to see your output. The learning curve is steep, and the error messages are legendary in their unhelpfulness.
 
@@ -113,7 +113,7 @@ industry) offset by **exceptional asset efficiency** (10.66x vs.
 2.66x turnover).
 ```
 
-<img src="assets/markdown-basic-doc.webp" alt="The Markdown source above rendered as a clean document" class="hero-img" />
+*The source above is readable as-is -- and when rendered, it looks like the headings and bold text you see throughout this article.*
 
 And the table:
 
@@ -125,7 +125,13 @@ And the table:
 | x Asset Turnover | 10.66x | 2.66x | +8.0x |
 ```
 
-<img src="assets/markdown-basic-table.webp" alt="The Markdown table rendered with clean formatting" class="hero-img" />
+Renders as:
+
+| Metric | SR 2019 | Industry | Variance |
+|--------|---------|----------|----------|
+| Return on Assets | 14.57% | 12.17% | +2.4 pp |
+| = Profit Margin | 1.37% | 4.57% | -3.2 pp |
+| x Asset Turnover | 10.66x | 2.66x | +8.0x |
 
 Same information. A fraction of the syntax. Readable in its raw form. No compilation step -- just write and preview.
 
@@ -146,7 +152,7 @@ Use `#` symbols to create headings. More `#` signs mean deeper nesting.
 #### Sub-subsection
 ```
 
-<img src="assets/markdown-headings.webp" alt="Rendered heading hierarchy from H1 to H4" class="hero-img" />
+*The heading levels on this page demonstrate the hierarchy -- "Professional documents from plain text" is H1, "The essentials" is H2, and "Headings" is H3.*
 
 ### Emphasis
 
@@ -156,7 +162,9 @@ You can combine them for ***bold italic***.
 Use ~~strikethrough~~ to cross things out.
 ```
 
-<img src="assets/markdown-emphasis.webp" alt="Rendered bold, italic, bold-italic, and strikethrough text" class="hero-img" />
+Renders as:
+
+This text is **bold** and this is *italic*. You can combine them for ***bold italic***. Use ~~strikethrough~~ to cross things out.
 
 ### Lists
 
@@ -175,7 +183,18 @@ Unordered lists use `-`, `*`, or `+`. Ordered lists use numbers. Nest by indenti
 3. Compare to industry benchmarks
 ```
 
-<img src="assets/markdown-lists.webp" alt="Rendered unordered and ordered lists with nesting" class="hero-img" />
+Renders as:
+
+- Revenue recognition issues
+  - Premature recognition
+  - Channel stuffing
+- Expense timing concerns
+  - Capitalisation vs. expensing
+  - Depreciation method choice
+
+1. Calculate ROA
+2. Decompose using DuPont framework
+3. Compare to industry benchmarks
 
 ### Links and images
 
@@ -185,7 +204,9 @@ See [ASC 606](https://asc.fasb.org/606) for revenue recognition guidance.
 ![Company logo](assets/logo.webp)
 ```
 
-<img src="assets/markdown-links.webp" alt="A rendered hyperlink and an embedded image" class="hero-img" />
+Renders as:
+
+See [ASC 606](https://asc.fasb.org/606) for revenue recognition guidance.
 
 ### Blockquotes
 
@@ -198,7 +219,12 @@ Use `>` to quote sources or highlight key passages.
 > aggressively, sacrificing profitability for volume."
 ```
 
-<img src="assets/markdown-blockquote.webp" alt="A rendered blockquote with left border accent" class="hero-img" />
+Renders as:
+
+> "The 1.37% profit margin is dangerously thin for a staffing
+> business. The gap between target (10%) and actual (1.4%)
+> indicates the low-cost strategy is being executed too
+> aggressively, sacrificing profitability for volume."
 
 ### Code blocks
 
@@ -213,7 +239,14 @@ assert abs(roa - profit_margin * asset_turnover) < 0.001
 ```
 ````
 
-<img src="assets/markdown-code.webp" alt="A Python code block with syntax highlighting" class="hero-img" />
+Renders as:
+
+```python
+roa = net_income / total_assets
+profit_margin = net_income / revenue
+asset_turnover = revenue / total_assets
+assert abs(roa - profit_margin * asset_turnover) < 0.001
+```
 
 ### Tables
 
@@ -227,7 +260,13 @@ Pipes and dashes. Colons control alignment (`:---` left, `:---:` centre, `---:` 
 | Interest Cover  |   3.97x |    5.73x |  Adequate  |
 ```
 
-<img src="assets/markdown-table-align.webp" alt="A rendered table with left, right, and centre-aligned columns" class="hero-img" />
+Renders as:
+
+| Metric          | SR 2019 | Industry | Assessment |
+|:----------------|--------:|---------:|:----------:|
+| Current Ratio   |    0.57 |     1.72 |  Critical  |
+| Debt / Assets   |  78.64% |   61.33% |  Elevated  |
+| Interest Cover  |   3.97x |    5.73x |  Adequate  |
 
 ### Horizontal rules
 
@@ -237,7 +276,7 @@ Three dashes, asterisks, or underscores on their own line create a divider:
 ---
 ```
 
-<img src="assets/markdown-hr.webp" alt="A thin horizontal divider between sections" class="hero-img" />
+*The horizontal rules between sections on this page are all produced by `---`.*
 
 ---
 
@@ -247,7 +286,7 @@ Three dashes, asterisks, or underscores on their own line create a divider:
 
 LaTeX has come a long way from the command-line-only days. [Overleaf](https://www.overleaf.com/) provides a browser-based editor with real-time collaboration, live preview, and thousands of journal templates. If your programme requires LaTeX (common in quantitative finance or economics PhDs), Overleaf is the place to start. It eliminates the installation headache entirely.
 
-<img src="assets/markdown-overleaf.webp" alt="The Overleaf editor with a split source/preview view" class="hero-img" />
+<!-- TODO: screenshot of Overleaf's split source/preview editor -->
 
 ### Markdown: an ecosystem of choice
 
@@ -255,23 +294,23 @@ One of Markdown's greatest strengths is that you're never locked into a single t
 
 **[Obsidian](https://obsidian.md/)** -- A desktop and mobile app that stores notes as local Markdown files in a folder (a "vault"). Powerful linking between notes, a graph view that visualises connections, and a rich plugin ecosystem. Free for personal use. Popular with students who want a personal knowledge base that outlasts any single course.
 
-<img src="assets/markdown-obsidian.webp" alt="Obsidian's editor with a note graph visualisation" class="hero-img" />
+<!-- TODO: screenshot of Obsidian editor with graph view -->
 
 **[Notion](https://www.notion.so/)** -- A collaborative workspace that supports Markdown input shortcuts but stores content in its own database. Great for team projects and shared wikis. The trade-off: your content lives on Notion's servers, and export fidelity can vary.
 
-<img src="assets/markdown-notion.webp" alt="Notion's block-based editor with a database view" class="hero-img" />
+<!-- TODO: screenshot of Notion's block-based editor -->
 
 **[SilverBullet](https://silverbullet.md/)** -- A self-hosted, open-source note-taking platform that runs in the browser. Stores everything as Markdown files on your own server. Supports live queries, templates, and programmable automation. More technical to set up, but you own your data completely.
 
-<img src="assets/markdown-silverbullet.webp" alt="SilverBullet's browser-based editor with live preview" class="hero-img" />
+<!-- TODO: screenshot of SilverBullet's browser editor -->
 
 **[Markor](https://gsantner.net/project/markor.html)** -- An Android app for editing Markdown files on your phone. Lightweight, offline, and free. Useful for reviewing notes on the go or drafting sections during a commute.
 
-<img src="assets/markdown-markor.webp" alt="Markor's mobile editing interface on an Android device" class="hero-img" />
+<!-- TODO: screenshot of Markor on Android -->
 
 **[Pandoc](https://pandoc.org/)** -- Not an editor, but the Swiss Army knife of document conversion. Pandoc takes Markdown files and converts them to PDF, Word, LaTeX, HTML, slide decks, and dozens of other formats. If you want to write in Markdown and submit in `.docx` or `.pdf`, Pandoc is how you bridge the gap. Combined with a good template, the output is indistinguishable from a natively typeset document.
 
-<img src="assets/markdown-pandoc.webp" alt="Terminal showing Pandoc converting a Markdown file to PDF" class="hero-img" />
+<!-- TODO: terminal screenshot of Pandoc converting markdown to PDF -->
 
 | Tool | Platform | Collaboration | Data ownership | Cost |
 |:-----|:---------|:-------------:|:--------------:|:-----|
@@ -304,7 +343,7 @@ tags: [financial-analysis, dupont, liquidity]
 ---
 ```
 
-<img src="assets/markdown-frontmatter.webp" alt="A document with YAML frontmatter rendered as a title block" class="hero-img" />
+*Frontmatter is stripped during rendering -- it controls metadata like the title, author, and date shown at the top of this article, but doesn't appear in the body text.*
 
 Frontmatter is ignored during rendering (it doesn't appear in your document body) but is used by tools like Pandoc, Obsidian, and static site generators to populate title pages, generate indexes, and organise content. Think of it as structured metadata for your document.
 
@@ -321,7 +360,12 @@ GFM is a widely adopted superset of standard Markdown, originally created by Git
 - [ ] Prepare: Revenue Recognition Vignettes CASE
 ```
 
-<img src="assets/markdown-tasklist.webp" alt="Rendered task list with checked and unchecked boxes" class="hero-img" />
+Renders as:
+
+- [x] Read: Financial Statement Analysis notes (RCJMS Ch 6)
+- [x] Prepare: Systems Reliability CASE
+- [ ] Read: Revenue Recognition notes (RCJMS Ch 3)
+- [ ] Prepare: Revenue Recognition Vignettes CASE
 
 **Strikethrough** with `~~double tildes~~`, **tables** (as shown earlier), and **autolinked URLs** (plain URLs become clickable without explicit link syntax) are all GFM additions that have become effectively universal.
 
@@ -346,7 +390,7 @@ $$p = \frac{PM_{target} \cdot R - NI}{R \cdot (1 - PM_{target})}$$
 Substituting: $p = \frac{0.046 \times 4{,}091{,}673 - 55{,}955}{4{,}091{,}673 \times (1 - 0.046)} = 3.39\%$
 ```
 
-<img src="assets/markdown-math.webp" alt="Rendered mathematical equations with proper typesetting" class="hero-img" />
+*With KaTeX or MathJax enabled, the expressions above render as properly typeset equations with fractions, subscripts, and Greek letters -- indistinguishable from LaTeX output.*
 
 *Supported by: Obsidian (built-in KaTeX), Notion (built-in KaTeX), SilverBullet (KaTeX plugin), Pandoc (native LaTeX maths), and most static site generators with a plugin.*
 
@@ -366,7 +410,7 @@ graph TD
 ```
 ````
 
-<img src="assets/markdown-mermaid-flow.webp" alt="A rendered Mermaid flowchart showing a revenue recognition decision tree" class="hero-img" />
+*In tools with Mermaid support, this renders as a flowchart with decision diamonds and directional arrows -- no image editing required.*
 
 Mermaid also supports other diagram types that are useful for case analysis:
 
@@ -379,7 +423,7 @@ pie title Revenue Composition
 ```
 ````
 
-<img src="assets/markdown-mermaid-pie.webp" alt="A rendered Mermaid pie chart showing revenue composition" class="hero-img" />
+*Renders as a colour-coded pie chart with labelled segments and percentages.*
 
 *Supported by: Obsidian (built-in), Notion (built-in), GitHub (built-in), SilverBullet (plugin), and Pandoc (via mermaid-filter).*
 
@@ -398,7 +442,7 @@ which together create a fragile financial structure.
     Interest coverage of 3.97x provides limited buffer.
 ```
 
-<img src="assets/markdown-footnotes.webp" alt="Rendered text with superscript footnote markers and footnote definitions at the bottom" class="hero-img" />
+*In tools with footnote support, `[^1]` becomes a superscript link and the definitions are collected at the bottom of the page as numbered notes.*
 
 The footnote definitions don't need to be near the markers -- they can be collected at the bottom of your file. The renderer numbers them automatically and creates clickable links between the marker and the note.
 
@@ -447,7 +491,7 @@ And the corresponding `references.bib` file:
 }
 ```
 
-<img src="assets/markdown-citations.webp" alt="Rendered document with inline citations and a formatted APA reference list" class="hero-img" />
+*Pandoc replaces `[@revsine2021]` with "(Revsine et al., 2021)" and generates a formatted reference list at the end of the document, styled according to whatever CSL file you choose.*
 
 Pandoc supports [thousands of citation styles](https://www.zotero.org/styles) via CSL (Citation Style Language) files -- APA, Chicago, Harvard, journal-specific formats, and more. Switch styles by changing one line in your frontmatter.
 
@@ -471,7 +515,7 @@ In **Obsidian**, insert a dynamic table of contents with the `[[toc]]` command o
 
 In most **static site generators**, TOC generation is a built-in option or a one-line plugin.
 
-<img src="assets/markdown-toc.webp" alt="A rendered table of contents with clickable section links" class="hero-img" />
+*The renderer scans your headings and generates a clickable, indented table of contents that stays in sync as you edit.*
 
 The advantage over a manually typed contents list: it updates automatically as you add, remove, or reorder sections.
 
@@ -491,7 +535,7 @@ DuPont Decomposition
     of equity returns.
 ```
 
-<img src="assets/markdown-deflist.webp" alt="Rendered definition list with terms in bold and indented definitions" class="hero-img" />
+*In Pandoc output, the terms appear in bold with indented definitions below -- similar to a glossary format.*
 
 *Supported by: Pandoc (built-in), PHP Markdown Extra, and several Obsidian plugins. Not part of GFM or CommonMark.*
 
@@ -511,7 +555,7 @@ Callout blocks highlight warnings, tips, or important notes. The syntax varies b
 > increase flows through to margin.
 ```
 
-<img src="assets/markdown-callouts.webp" alt="Rendered callout boxes with warning and note styling" class="hero-img" />
+*In Obsidian and SilverBullet, these render as coloured boxes with icons -- yellow for warnings, blue for notes -- that visually separate important asides from the main text.*
 
 *Supported by: Obsidian (built-in), SilverBullet (built-in), GitHub (partial). Pandoc uses a different div-based syntax for custom blocks.*
 
@@ -547,7 +591,7 @@ theme: default
 | Current Ratio | 0.57 | 1.72 |
 ```
 
-<img src="assets/markdown-slides.webp" alt="A Marp slide deck rendered from Markdown with clean presentation styling" class="hero-img" />
+<!-- TODO: screenshot of a Marp slide deck rendered from the source above -->
 
 ---
 
@@ -602,7 +646,7 @@ $$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
 ## References
 ````
 
-<img src="assets/markdown-full-example.webp" alt="The complete example rendered as a professional PDF with title page, table of contents, formatted tables, equations, footnotes, and bibliography" class="hero-img" />
+<!-- TODO: screenshot of the complete example rendered as a professional PDF -->
 
 To convert this to a PDF:
 
