@@ -137,6 +137,43 @@ Same information. A fraction of the syntax. Readable in its raw form. No compila
 
 ---
 
+## From plain text to finished document
+
+Before diving into syntax, here's the punchline: one command turns a Markdown file into a professional PDF.
+
+```bash
+pandoc report.md -o report.pdf --pdf-engine=xelatex
+```
+
+That's it. [Pandoc](https://pandoc.org/) reads your Markdown, feeds it through a LaTeX engine, and produces a typeset PDF with proper fonts, page numbers, and layout. No LaTeX knowledge required -- Pandoc handles the translation.
+
+For tighter control over the output, a few flags go a long way:
+
+```bash
+pandoc report.md -o report.pdf \
+  --pdf-engine=xelatex \
+  -V geometry:margin=1in \
+  -V fontsize=11pt \
+  --toc
+```
+
+| Flag | What it does |
+|:-----|:-------------|
+| `--pdf-engine=xelatex` | Uses XeLaTeX for Unicode and modern font support |
+| `-V geometry:margin=1in` | Sets 1-inch margins on all sides |
+| `-V fontsize=11pt` | Sets the body text size |
+| `--toc` | Generates a table of contents from your headings |
+
+Need Word instead? Swap the extension:
+
+```bash
+pandoc report.md -o report.docx
+```
+
+Everything below teaches you the Markdown syntax that goes *into* that file. The rest is Pandoc's job.
+
+---
+
 ## The essentials
 
 Everything below is standard Markdown. These features work in virtually every tool that supports the format.
@@ -687,16 +724,14 @@ $$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
 
 ![The complete markdown example converted to a professional PDF by Pandoc](assets/markdown-pandoc-pdf.webp)
 
-To convert this to a PDF:
+Convert it using the same Pandoc command [from earlier](#from-plain-text-to-finished-document):
 
 ```bash
-pandoc case-analysis.md -o case-analysis.pdf --pdf-engine=xelatex
-```
-
-To convert to Word (for submission systems that require `.docx`):
-
-```bash
-pandoc case-analysis.md -o case-analysis.docx
+pandoc case-analysis.md -o case-analysis.pdf \
+  --pdf-engine=xelatex \
+  -V geometry:margin=1in \
+  -V fontsize=11pt \
+  --toc
 ```
 
 ---
