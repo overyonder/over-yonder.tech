@@ -12,282 +12,644 @@ tags: [markdown, pandoc, writing, productivity]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-Most professional documents -- executive memos, financial reports, case studies -- are drafted in Google Docs or Microsoft Word. These are applications that need a full browser engine or a multi-gigabyte desktop installation to let you type paragraphs of text, and they'll happily drain your laptop battery in the process. The formatting you carefully arranged will shift when someone opens the file on a different machine, and the version history is a list of timestamps with no indication of what actually changed.
+<img src="assets/markdown-hero.webp" alt="A split view: markdown source on the left, polished PDF output on the right" class="hero-img" />
 
-<div class="emphasis-block">
-This article is a Markdown file -- plain text, editable in Notepad, readable on any device. The same source produces this webpage and can generate a typeset PDF with a single command.
-</div>
+A few classmates have asked how I produce case write-ups that look like they came out of a typesetting studio. The secret is disappointingly simple: I write plain text files with a handful of formatting marks, and a tool turns them into polished PDFs. No Word, no Google Docs, no wrestling with margins at midnight.
 
-Markdown is plain text with a handful of formatting hints. You can write it in any editor on any device -- desktop, phone, browser, anything with a keyboard. A `.md` file opens instantly because there's nothing to load: no XML to unpack, no rendering engine to boot, no application to initialise. Google Docs needs a Chromium tab running just to let you *edit text*, and your battery pays for that privilege. Markdown could run on a toaster.
-
-What's changed since Markdown's creation in 2004 isn't the format itself -- it's the tooling around it. [Pandoc](https://pandoc.org/) can now produce PDFs with LaTeX-quality typesetting. [KaTeX](https://katex.org/) renders publication-grade mathematics in the browser. [Git](https://git-scm.com/) gives you line-by-line version control that no word processor can match. The same format that powers GitHub READMEs, Jupyter notebooks, and most technical documentation can produce boardroom-ready output with minimal ceremony.
+This article is a practical guide. By the end you'll know enough to write a complete case analysis -- tables, citations, equations -- in a plain text file and export it as a clean, professional document. You're reading a working example right now: this entire page is written in the same format.
 
 ---
 
-## Getting Started
+## Why plain text?
 
-Here's the entire workflow:
+Word processors store your writing in opaque binary formats full of layout metadata, revision history and embedded objects. The file *is* the rendered document, which means:
 
-1. Write a `.md` file in any text editor
-2. Run `pandoc` to convert it to PDF or HTML
+- **Collaboration is fragile.** Merging two people's edits in `.docx` is a coin flip. Track changes works until it doesn't, and then you're comparing PDFs side by side at 1 AM.
+- **Formatting fights back.** Paste something from a website and watch your carefully chosen styles dissolve. Bullet indentation becomes a negotiation.
+- **Lock-in is real.** Your document is only as portable as the application that created it. Export to PDF and you lose editability; export to another format and you lose fidelity.
 
-That's it. Everything below expands on these two steps.
+Plain text inverts this. The source file is human-readable in any text editor, on any operating system, forever. Formatting is expressed as simple, visible marks *in* the text. Layout is handled by a separate rendering step -- meaning you control content and presentation independently, the same way professional publishers have always worked.
 
 ---
 
-## Step 1: Write
+## A brief history of typesetting in plain text
 
-Open any text editor. Notepad will do, VS Code is fine, [Markor](https://github.com/gsantner/markor) works on your phone. The examples in this article come from [Neovim](https://neovim.io/), but it doesn't matter where you type -- it's just text.
+### TeX and LaTeX: the academic standard
 
-Markdown's formatting conventions are designed to be obvious even in their raw form. A `#` before a line makes it a heading. Pipes (`|`) define table columns. Dollar signs (`$`) wrap formulas. Here's how each of those looks in practice, using an executive memo as the running example.
+The idea of "coding" a document is older than most people realise. In 1978, the computer scientist Donald Knuth created **TeX** (pronounced "tech") because he was unhappy with how his textbooks were being typeset. His student Leslie Lamport extended it into **LaTeX** in 1984, adding higher-level commands for common document structures. By the 1990s, LaTeX had become the de facto standard for academic publishing in mathematics, physics, computer science and engineering.
+
+Career academics often write *every* paper in LaTeX. Its typographic output -- especially for mathematical notation -- is unmatched. But the syntax can be... confronting.
+
+Here's what a simple case analysis header looks like in LaTeX:
+
+```latex
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+
+\title{Systems Reliability, Inc.\ --- Case Analysis}
+\author{Your Name}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\section{Executive Summary}
+Systems Reliability is a high-volume, low-margin IT staffing firm
+with \textbf{critically weak profitability} (1.4\% profit margin
+vs.\ 4.6\% industry) offset by \textbf{exceptional asset efficiency}
+(10.66$\times$ vs.\ 2.66$\times$ turnover).
+
+\end{document}
+```
+
+<img src="assets/markdown-latex-doc.webp" alt="The LaTeX source above rendered as a PDF with professional typesetting" class="hero-img" />
+
+And here's a financial comparison table:
+
+```latex
+\begin{table}[h]
+\centering
+\caption{DuPont Decomposition}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Metric} & \textbf{SR 2019} & \textbf{Industry} & \textbf{Variance} \\
+\midrule
+Return on Assets   & 14.57\% & 12.17\% & +2.4 pp  \\
+= Profit Margin    &  1.37\% &  4.57\% & $-$3.2 pp \\
+$\times$ Asset Turnover & 10.66$\times$ & 2.66$\times$ & +8.0$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+<img src="assets/markdown-latex-table.webp" alt="The LaTeX table rendered with professional rules and alignment" class="hero-img" />
+
+It works. The output is beautiful. But there's a lot of ceremony: `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins. You need to *compile* the document (often multiple passes) to see your output. The learning curve is steep, and the error messages are legendary in their unhelpfulness.
+
+LaTeX is a power tool built for academics who write papers for a living. For the rest of us, there's a simpler option.
+
+---
+
+## Markdown: plain text for the rest of us
+
+In 2004, the writer John Gruber created **Markdown** -- a minimal set of formatting conventions designed to be readable as-is, even before rendering. The philosophy: if you've ever written an email with `*asterisks*` for emphasis or used dashes for bullet points, you already know the basics.
+
+Markdown stayed niche for years, mostly used by software developers for documentation. But around 2012, a wave of writing tools adopted it as their native format. GitHub standardised **GitHub Flavoured Markdown** (GFM) with tables and task lists. Note-taking applications like Obsidian and Notion built their entire experience around it. Today, Markdown is used for everything from academic papers to corporate wikis to this website.
+
+Here's that same case analysis header in Markdown:
+
+```markdown
+# Systems Reliability, Inc. -- Case Analysis
+
+**Your Name** | February 2026
+
+## Executive Summary
+
+Systems Reliability is a high-volume, low-margin IT staffing firm
+with **critically weak profitability** (1.4% profit margin vs. 4.6%
+industry) offset by **exceptional asset efficiency** (10.66x vs.
+2.66x turnover).
+```
+
+<img src="assets/markdown-basic-doc.webp" alt="The Markdown source above rendered as a clean document" class="hero-img" />
+
+And the table:
+
+```markdown
+| Metric | SR 2019 | Industry | Variance |
+|--------|---------|----------|----------|
+| Return on Assets | 14.57% | 12.17% | +2.4 pp |
+| = Profit Margin | 1.37% | 4.57% | -3.2 pp |
+| x Asset Turnover | 10.66x | 2.66x | +8.0x |
+```
+
+<img src="assets/markdown-basic-table.webp" alt="The Markdown table rendered with clean formatting" class="hero-img" />
+
+Same information. A fraction of the syntax. Readable in its raw form. No compilation step -- just write and preview.
+
+---
+
+## The essentials
+
+Everything below is standard Markdown. These features work in virtually every tool that supports the format.
 
 ### Headings
 
-```markdown
-# Quarterly Review: Widget Division
-
-## Executive Summary (BLUF)
-
-Revenue exceeded forecast by 8%.
-
----
-
-## 1) Revenue Analysis
-
-### a) Domestic markets
-
-Domestic revenue grew to $15.8M in Q2.
-
-### b) International markets
-
-International revenue declined 3%.
-```
-
-Each `#` level maps to a heading in the output -- `##` is a subheading, `###` is a sub-subheading. The `---` produces a horizontal rule between major sections. Bold uses `**double asterisks**`, italics use `*single*`.
-
-### Numbered lists
+Use `#` symbols to create headings. More `#` signs mean deeper nesting.
 
 ```markdown
-Key findings:
-
-1. Revenue exceeded forecast by 8%
-2. Customer acquisition cost decreased 12%
-3. Net promoter score improved from 42 to 57
+# Main Title
+## Section
+### Subsection
+#### Sub-subsection
 ```
 
-Numbered lists start with `1.`, `2.`, and so on. Bullets use `-` or `*`. Indent to nest them.
+<img src="assets/markdown-headings.webp" alt="Rendered heading hierarchy from H1 to H4" class="hero-img" />
+
+### Emphasis
+
+```markdown
+This text is **bold** and this is *italic*.
+You can combine them for ***bold italic***.
+Use ~~strikethrough~~ to cross things out.
+```
+
+<img src="assets/markdown-emphasis.webp" alt="Rendered bold, italic, bold-italic, and strikethrough text" class="hero-img" />
+
+### Lists
+
+Unordered lists use `-`, `*`, or `+`. Ordered lists use numbers. Nest by indenting with two or four spaces.
+
+```markdown
+- Revenue recognition issues
+  - Premature recognition
+  - Channel stuffing
+- Expense timing concerns
+  - Capitalisation vs. expensing
+  - Depreciation method choice
+
+1. Calculate ROA
+2. Decompose using DuPont framework
+3. Compare to industry benchmarks
+```
+
+<img src="assets/markdown-lists.webp" alt="Rendered unordered and ordered lists with nesting" class="hero-img" />
+
+### Links and images
+
+```markdown
+See [ASC 606](https://asc.fasb.org/606) for revenue recognition guidance.
+
+![Company logo](assets/logo.webp)
+```
+
+<img src="assets/markdown-links.webp" alt="A rendered hyperlink and an embedded image" class="hero-img" />
+
+### Blockquotes
+
+Use `>` to quote sources or highlight key passages.
+
+```markdown
+> "The 1.37% profit margin is dangerously thin for a staffing
+> business. The gap between target (10%) and actual (1.4%)
+> indicates the low-cost strategy is being executed too
+> aggressively, sacrificing profitability for volume."
+```
+
+<img src="assets/markdown-blockquote.webp" alt="A rendered blockquote with left border accent" class="hero-img" />
+
+### Code blocks
+
+Wrap code or raw data in triple backticks. Add a language name for syntax highlighting.
+
+````markdown
+```python
+roa = net_income / total_assets
+profit_margin = net_income / revenue
+asset_turnover = revenue / total_assets
+assert abs(roa - profit_margin * asset_turnover) < 0.001
+```
+````
+
+<img src="assets/markdown-code.webp" alt="A Python code block with syntax highlighting" class="hero-img" />
 
 ### Tables
 
-```markdown
-| Quarter | Revenue ($M) | Growth |
-|---------|-------------|--------|
-| Q1 2025 | 14.2        | 3.1%   |
-| Q2 2025 | 15.8        | 11.3%  |
-| Q3 2025 | 16.1        | 1.9%   |
-```
-
-Pipes define columns, and the dashed row separates the header from the data. The alignment doesn't need to be precise -- pandoc handles the layout.
-
-### Formulas
+Pipes and dashes. Colons control alignment (`:---` left, `:---:` centre, `---:` right).
 
 ```markdown
-The effective tax rate:
-
-$$\text{ETR} = \frac{\text{Tax Expense}}{\text{Pre-tax Income}}
-             = \frac{11{,}122}{41{,}332} = 26.9\%$$
+| Metric          | SR 2019 | Industry | Assessment |
+|:----------------|--------:|---------:|:----------:|
+| Current Ratio   |    0.57 |     1.72 |  Critical  |
+| Debt / Assets   |  78.64% |   61.33% |  Elevated  |
+| Interest Cover  |   3.97x |    5.73x |  Adequate  |
 ```
 
-The `$$` delimiters mark a display-mode equation (centred, on its own line). Inline math uses single `$` -- so `$x^2 + y^2 = r^2$` renders the formula right there in the paragraph. The syntax between the delimiters is standard LaTeX math notation, the same system used for mathematical typesetting in journals and textbooks. When pandoc converts this, you get a properly typeset fraction -- identical to what you'd see in a published paper.
+<img src="assets/markdown-table-align.webp" alt="A rendered table with left, right, and centre-aligned columns" class="hero-img" />
 
-<div class="info">
-<details>
-<summary>What is Markdown?</summary>
+### Horizontal rules
 
-Markdown is a lightweight markup language created by John Gruber and Aaron Swartz in 2004. It uses plain text formatting conventions -- `#` for headings, `**` for bold, `-` for lists -- that are readable in source form and convertible to structured formats like HTML and PDF.
+Three dashes, asterisks, or underscores on their own line create a divider:
 
-The `.md` file extension is standard. [CommonMark](https://commonmark.org/) (2014) and [GitHub Flavoured Markdown](https://github.github.com/gfm/) formalised the specification, resolving ambiguities in Gruber's original description. Most code hosting platforms, documentation tools, and note-taking applications use Markdown as their default format.
+```markdown
+---
+```
 
-</details>
-</div>
-
-<div class="info">
-<details>
-<summary>What is KaTeX?</summary>
-
-[KaTeX](https://katex.org/) is a math typesetting library created by [Khan Academy](https://www.khanacademy.org/). It renders LaTeX math notation directly in the browser, producing publication-quality formulas without server-side processing. It's significantly faster than the older [MathJax](https://www.mathjax.org/) library because it parses and renders in a single pass rather than doing multiple layout passes.
-
-Pandoc's `--katex` flag embeds the KaTeX library in HTML output, so math expressions like `$\frac{a}{b}$` render as properly typeset fractions in any modern browser.
-
-</details>
-</div>
+<img src="assets/markdown-hr.webp" alt="A thin horizontal divider between sections" class="hero-img" />
 
 ---
 
-## Step 2: Convert
+## Tooling
 
-Once the document's written, conversion is a single command.
+### LaTeX: Overleaf and friends
 
-**To PDF** (typeset with LaTeX):
+LaTeX has come a long way from the command-line-only days. [Overleaf](https://www.overleaf.com/) provides a browser-based editor with real-time collaboration, live preview, and thousands of journal templates. If your programme requires LaTeX (common in quantitative finance or economics PhDs), Overleaf is the place to start. It eliminates the installation headache entirely.
 
-```bash
-pandoc memo.md -o memo.pdf --pdf-engine=pdflatex -V geometry:margin=1in
-```
+<img src="assets/markdown-overleaf.webp" alt="The Overleaf editor with a split source/preview view" class="hero-img" />
 
-**To HTML** (with rendered math):
+### Markdown: an ecosystem of choice
 
-```bash
-pandoc memo.md -o memo.html --katex --standalone
-```
+One of Markdown's greatest strengths is that you're never locked into a single tool. Because the files are plain text, you can switch editors whenever you like and your content comes with you unchanged. Here are some popular options:
 
-`--pdf-engine=pdflatex` tells pandoc to typeset the PDF using LaTeX's engine -- the same system behind academic journals and textbooks. `--katex` renders math in the browser using [KaTeX](https://katex.org/). `--standalone` produces a complete HTML file with proper `<head>` and `<body>` tags rather than just a fragment.
+**[Obsidian](https://obsidian.md/)** -- A desktop and mobile app that stores notes as local Markdown files in a folder (a "vault"). Powerful linking between notes, a graph view that visualises connections, and a rich plugin ecosystem. Free for personal use. Popular with students who want a personal knowledge base that outlasts any single course.
 
-For finer control over the PDF's appearance:
+<img src="assets/markdown-obsidian.webp" alt="Obsidian's editor with a note graph visualisation" class="hero-img" />
 
-```bash
-pandoc memo.md -o memo.pdf \
-  --pdf-engine=pdflatex \
-  -V geometry:margin=1in \
-  -V fontsize=11pt \
-  -V mainfont="Palatino" \
-  --highlight-style=tango
-```
+**[Notion](https://www.notion.so/)** -- A collaborative workspace that supports Markdown input shortcuts but stores content in its own database. Great for team projects and shared wikis. The trade-off: your content lives on Notion's servers, and export fidelity can vary.
 
-These are variables passed to the underlying LaTeX template. Pandoc exposes a lot of knobs -- the full list is in the [pandoc manual](https://pandoc.org/MANUAL.html).
+<img src="assets/markdown-notion.webp" alt="Notion's block-based editor with a database view" class="hero-img" />
 
-<div class="info">
-<details>
-<summary>What is Pandoc?</summary>
+**[SilverBullet](https://silverbullet.md/)** -- A self-hosted, open-source note-taking platform that runs in the browser. Stores everything as Markdown files on your own server. Supports live queries, templates, and programmable automation. More technical to set up, but you own your data completely.
 
-[Pandoc](https://pandoc.org/) is a universal document converter written by John MacFarlane, a philosophy professor at UC Berkeley. It converts between dozens of formats: Markdown, LaTeX, HTML, DOCX, EPUB, PDF, reStructuredText, and more.
+<img src="assets/markdown-silverbullet.webp" alt="SilverBullet's browser-based editor with live preview" class="hero-img" />
 
-For PDF output, pandoc generates intermediate LaTeX and typesets it with an engine like `pdflatex`, `xelatex`, or `lualatex`. Pandoc's Markdown dialect extends CommonMark with tables, footnotes, citations, maths, and YAML metadata -- features that bring it close to LaTeX's capabilities while retaining Markdown's readability.
+**[Markor](https://gsantner.net/project/markor.html)** -- An Android app for editing Markdown files on your phone. Lightweight, offline, and free. Useful for reviewing notes on the go or drafting sections during a commute.
 
-Install: [pandoc.org/installing](https://pandoc.org/installing.html). Most Linux distributions include it in their package manager. On macOS: `brew install pandoc`. On Windows: the MSI installer or `choco install pandoc`.
+<img src="assets/markdown-markor.webp" alt="Markor's mobile editing interface on an Android device" class="hero-img" />
 
-</details>
-</div>
+**[Pandoc](https://pandoc.org/)** -- Not an editor, but the Swiss Army knife of document conversion. Pandoc takes Markdown files and converts them to PDF, Word, LaTeX, HTML, slide decks, and dozens of other formats. If you want to write in Markdown and submit in `.docx` or `.pdf`, Pandoc is how you bridge the gap. Combined with a good template, the output is indistinguishable from a natively typeset document.
+
+<img src="assets/markdown-pandoc.webp" alt="Terminal showing Pandoc converting a Markdown file to PDF" class="hero-img" />
+
+| Tool | Platform | Collaboration | Data ownership | Cost |
+|:-----|:---------|:-------------:|:--------------:|:-----|
+| Overleaf | Browser | Real-time | Cloud (Overleaf) | Free / paid tiers |
+| Obsidian | Desktop, mobile | Via sync plugin | Local files | Free / paid sync |
+| Notion | Browser, apps | Real-time | Cloud (Notion) | Free / paid tiers |
+| SilverBullet | Browser (self-hosted) | Single user | Self-hosted files | Free (open source) |
+| Markor | Android | None | Local files | Free (open source) |
+| Pandoc | Command line | None | Local files | Free (open source) |
 
 ---
 
-## Beyond Formatting
+## Power user features
 
-### Readable anywhere, no software required
+Standard Markdown covers 90% of what you'll need for case write-ups. But the format is extensible, and a rich ecosystem of add-ons handles the remaining 10% -- including features you'd normally associate with LaTeX or dedicated publishing tools.
 
-A `.md` file is plain text. It opens instantly in any editor on any operating system -- a 1990s terminal, a modern IDE, your phone's built-in text editor, anything. There's no proprietary format to decode, no rendering engine required. Anyone can read the raw source regardless of what tools they have installed.
+Not every tool supports every extension. Where it matters, I'll note which tools and renderers support each feature.
 
-The rendered output is just as portable. A pandoc-generated HTML page is static text and basic CSS -- it loads in milliseconds and works offline. The same content served through Google Docs requires downloading and bootstrapping an entire JavaScript application before the first sentence becomes visible. On a laptop, the difference shows up in your battery meter.
+### YAML frontmatter
 
-### Line-by-line version control
+Most Markdown tools support a metadata block at the top of your file, written in YAML (a simple key-value format). This controls how the document is rendered or exported -- title, author, date, export settings, and more.
 
-Word processors store documents as opaque binary blobs (`.doc`) or zipped XML archives (`.docx`, `.odt`). Version control systems like Git can tell you *that* the file changed, but not *what* changed -- diff tools produce unintelligible output because the format was designed for the application, not for human eyes.
-
-Because Markdown is line-oriented text, every change produces a clean, readable diff. This unlocks capabilities that are simply impossible with traditional document formats:
-
-- **Meaningful diffs** -- see exactly which sentence was reworded, which figure was updated, which section was added
-- **Attribution** -- `git blame` shows who wrote each line and when it was last modified
-- **Branching** -- draft two alternative versions in parallel and merge the preferred one
-- **Complete history** -- every edit, by every author, preserved with timestamps and commit messages
-
-For teams producing reports, proposals, or policy documents, this is the end of emailing `memo_v3_final_FINAL_jm-edits.docx`.
-
-<div class="detour">
-<details>
-<summary>Advanced: collaborative editing with Git</summary>
-
-When a Markdown document lives in a Git repository, the full power of version control applies to prose the same way it applies to code.
-
-**Commit history** shows who changed what and why:
-
-```
-$ git log --oneline memo.md
-a3f7c21 Update Q2 revenue figures    (Sarah Chen)
-e8b2d15 Draft executive summary      (James Miller)
-```
-
-**Diffs** reveal exactly what changed between versions:
-
-```diff
- | Quarter | Revenue ($M) | Growth |
- |---------|-------------|--------|
- | Q1 2025 | 14.2        | 3.1%   |
--| Q2 2025 | 15.1        | 6.3%   |
-+| Q2 2025 | 15.8        | 11.3%  |
- | Q3 2025 | 16.1        | 1.9%   |
-```
-
-Sarah corrected Q2's revenue from $15.1M to $15.8M and the growth rate from 6.3% to 11.3%. The diff shows exactly what changed, in context. Try getting that out of a `.docx`.
-
-**Blame** traces every line to its author:
-
-```
-$ git blame memo.md
-
-e8b2d15 (James Miller  2025-03-01) # Quarterly Review: Widget Division
-e8b2d15 (James Miller  2025-03-01)
-e8b2d15 (James Miller  2025-03-01) ## Executive Summary (BLUF)
-a3f7c21 (Sarah Chen    2025-03-03) Revenue exceeded forecast by 8%.
-e8b2d15 (James Miller  2025-03-01)
-a3f7c21 (Sarah Chen    2025-03-03) | Quarter | Revenue ($M) | Growth |
-a3f7c21 (Sarah Chen    2025-03-03) |---------|-------------|--------|
-e8b2d15 (James Miller  2025-03-01) | Q1 2025 | 14.2        | 3.1%   |
-a3f7c21 (Sarah Chen    2025-03-03) | Q2 2025 | 15.8        | 11.3%  |
-e8b2d15 (James Miller  2025-03-01) | Q3 2025 | 16.1        | 1.9%   |
-```
-
-James wrote the original structure and data. Sarah updated the executive summary and corrected Q2. Every line is attributed, timestamped, and linked to a commit message explaining *why* the change was made.
-
-This is standard workflow in software development, and it's increasingly showing up in document-heavy fields -- legal, finance, compliance -- where knowing who changed what and when isn't optional.
-
-</details>
-</div>
-
+```yaml
 ---
+title: "Systems Reliability, Inc. -- Case Analysis"
+author: "Your Name"
+date: 2026-02-05
+course: FRSA
+tags: [financial-analysis, dupont, liquidity]
+---
+```
 
-## Further Reading: LaTeX
+<img src="assets/markdown-frontmatter.webp" alt="A document with YAML frontmatter rendered as a title block" class="hero-img" />
 
-Markdown borrows its math syntax from a tool worth knowing about: [LaTeX](https://www.latex-project.org/).
+Frontmatter is ignored during rendering (it doesn't appear in your document body) but is used by tools like Pandoc, Obsidian, and static site generators to populate title pages, generate indexes, and organise content. Think of it as structured metadata for your document.
 
-LaTeX has been the standard typesetting system in academia since the 1980s -- journals, theses, textbooks. It produces byte-identical output from the same source on any machine, which is one of the same benefits Markdown inherits through pandoc. But where Markdown opts for lightweight conventions, LaTeX is a full document programming language, and its syntax reflects that.
+### GitHub Flavoured Markdown (GFM)
 
-The same content in both formats:
+GFM is a widely adopted superset of standard Markdown, originally created by GitHub. Most modern tools support its additions:
 
-**Markdown:**
+**Task lists** -- checkboxes for tracking progress:
 
 ```markdown
+- [x] Read: Financial Statement Analysis notes (RCJMS Ch 6)
+- [x] Prepare: Systems Reliability CASE
+- [ ] Read: Revenue Recognition notes (RCJMS Ch 3)
+- [ ] Prepare: Revenue Recognition Vignettes CASE
+```
+
+<img src="assets/markdown-tasklist.webp" alt="Rendered task list with checked and unchecked boxes" class="hero-img" />
+
+**Strikethrough** with `~~double tildes~~`, **tables** (as shown earlier), and **autolinked URLs** (plain URLs become clickable without explicit link syntax) are all GFM additions that have become effectively universal.
+
+### Mathematics with KaTeX and MathJax
+
+For quantitative courses, you'll often need proper mathematical notation. Two JavaScript libraries render LaTeX-style maths inside Markdown documents:
+
+- **[KaTeX](https://katex.org/)** -- Fast, lightweight, renders at page load. Preferred for most uses.
+- **[MathJax](https://www.mathjax.org/)** -- Broader LaTeX coverage, slightly heavier. Better if you need obscure symbols or environments.
+
+Both use the same syntax: `$...$` for inline maths, `$$...$$` for display (centred, block-level) equations.
+
+```markdown
+The required price increase $p$ satisfies:
+
+$$\frac{NI + R \cdot p}{R \cdot (1 + p)} = PM_{target}$$
+
+Solving for $p$:
+
+$$p = \frac{PM_{target} \cdot R - NI}{R \cdot (1 - PM_{target})}$$
+
+Substituting: $p = \frac{0.046 \times 4{,}091{,}673 - 55{,}955}{4{,}091{,}673 \times (1 - 0.046)} = 3.39\%$
+```
+
+<img src="assets/markdown-math.webp" alt="Rendered mathematical equations with proper typesetting" class="hero-img" />
+
+*Supported by: Obsidian (built-in KaTeX), Notion (built-in KaTeX), SilverBullet (KaTeX plugin), Pandoc (native LaTeX maths), and most static site generators with a plugin.*
+
+### Diagrams with Mermaid
+
+[Mermaid](https://mermaid.js.org/) lets you define diagrams in text. Flowcharts, sequence diagrams, Gantt charts and more -- all written inline in your Markdown file. No image editing software required.
+
+````markdown
+```mermaid
+graph TD
+    A[Revenue Recognised] --> B{Delivered?}
+    B -->|Yes| C[Check collectibility]
+    B -->|No| D[Defer recognition]
+    C --> E{Probable?}
+    E -->|Yes| F[Recognise in period]
+    E -->|No| D
+```
+````
+
+<img src="assets/markdown-mermaid-flow.webp" alt="A rendered Mermaid flowchart showing a revenue recognition decision tree" class="hero-img" />
+
+Mermaid also supports other diagram types that are useful for case analysis:
+
+````markdown
+```mermaid
+pie title Revenue Composition
+    "Major Customer" : 68
+    "Mid-size Clients" : 22
+    "Small Accounts" : 10
+```
+````
+
+<img src="assets/markdown-mermaid-pie.webp" alt="A rendered Mermaid pie chart showing revenue composition" class="hero-img" />
+
+*Supported by: Obsidian (built-in), Notion (built-in), GitHub (built-in), SilverBullet (plugin), and Pandoc (via mermaid-filter).*
+
+### Footnotes and endnotes
+
+Footnotes let you add references and asides without cluttering the main text. The syntax is simple: a marker in the text and a definition anywhere in the file.
+
+```markdown
+The firm faces severe liquidity risk[^1] and excessive leverage[^2],
+which together create a fragile financial structure.
+
+[^1]: Current ratio of 0.57 vs. industry average of 1.72. A ratio
+    below 1.0 indicates current liabilities exceed current assets.
+
+[^2]: Debt-to-assets of 78.64% vs. industry average of 61.33%.
+    Interest coverage of 3.97x provides limited buffer.
+```
+
+<img src="assets/markdown-footnotes.webp" alt="Rendered text with superscript footnote markers and footnote definitions at the bottom" class="hero-img" />
+
+The footnote definitions don't need to be near the markers -- they can be collected at the bottom of your file. The renderer numbers them automatically and creates clickable links between the marker and the note.
+
+*Supported by: Obsidian (built-in), Pandoc (built-in), GitHub (built-in), SilverBullet (built-in). Notion uses a different inline comment system.*
+
+### Bibliographies and citations
+
+For formal academic work, Pandoc supports full bibliography management using `.bib` files (the same BibTeX format used by LaTeX). You cite sources with `[@key]` syntax and Pandoc generates a formatted reference list automatically.
+
+```markdown
+---
+bibliography: references.bib
+csl: apa.csl
+---
+
+The DuPont framework decomposes ROE into three drivers
+[@revsine2021, pp. 241-245], providing a structured approach
+to identifying whether profitability, efficiency, or leverage
+is responsible for performance differences.
+
+According to @palepu2019 [ch. 9], firms with current ratios
+below 1.0 face heightened refinancing risk, particularly in
+cyclical industries.
+```
+
+And the corresponding `references.bib` file:
+
+```bibtex
+@book{revsine2021,
+  author    = {Revsine, Lawrence and Collins, Daniel W. and
+               Johnson, W. Bruce and Mittelstaedt, H. Fred
+               and Soffer, Leonard C.},
+  title     = {Financial Reporting and Analysis},
+  edition   = {8},
+  publisher = {McGraw-Hill},
+  year      = {2021}
+}
+
+@book{palepu2019,
+  author    = {Palepu, Krishna G. and Healy, Paul M. and
+               Peek, Erik},
+  title     = {Business Analysis and Valuation},
+  edition   = {6},
+  publisher = {Cengage},
+  year      = {2019}
+}
+```
+
+<img src="assets/markdown-citations.webp" alt="Rendered document with inline citations and a formatted APA reference list" class="hero-img" />
+
+Pandoc supports [thousands of citation styles](https://www.zotero.org/styles) via CSL (Citation Style Language) files -- APA, Chicago, Harvard, journal-specific formats, and more. Switch styles by changing one line in your frontmatter.
+
+*Supported by: Pandoc (built-in, the gold standard), Obsidian (via Citations plugin + Zotero), SilverBullet (via templates). Not natively supported by Notion or GitHub rendering.*
+
+### Table of contents
+
+Most renderers can auto-generate a table of contents from your headings.
+
+In **Pandoc**, add `toc: true` to your frontmatter:
+
+```yaml
+---
+title: "Case Analysis"
+toc: true
+toc-depth: 3
+---
+```
+
+In **Obsidian**, insert a dynamic table of contents with the `[[toc]]` command or a community plugin.
+
+In most **static site generators**, TOC generation is a built-in option or a one-line plugin.
+
+<img src="assets/markdown-toc.webp" alt="A rendered table of contents with clickable section links" class="hero-img" />
+
+The advantage over a manually typed contents list: it updates automatically as you add, remove, or reorder sections.
+
+### Definition lists
+
+Useful for glossaries or explaining key terms in a case:
+
+```markdown
+Current Ratio
+:   Current assets divided by current liabilities. Measures
+    short-term liquidity. A ratio below 1.0 indicates a firm
+    cannot cover its immediate obligations from liquid assets.
+
+DuPont Decomposition
+:   A framework that breaks ROE into profit margin, asset
+    turnover, and financial leverage, isolating the drivers
+    of equity returns.
+```
+
+<img src="assets/markdown-deflist.webp" alt="Rendered definition list with terms in bold and indented definitions" class="hero-img" />
+
+*Supported by: Pandoc (built-in), PHP Markdown Extra, and several Obsidian plugins. Not part of GFM or CommonMark.*
+
+### Admonitions and callouts
+
+Callout blocks highlight warnings, tips, or important notes. The syntax varies by tool, but a common pattern uses a decorated blockquote:
+
+```markdown
+> [!warning] Liquidity risk
+> The current ratio of 0.57 means the firm cannot cover
+> current liabilities from current assets. This is the most
+> pressing concern regardless of profitability metrics.
+
+> [!note] Assumption
+> The price increase model assumes bill-rate elasticity only.
+> Pay rates to contractors are held constant, so the full
+> increase flows through to margin.
+```
+
+<img src="assets/markdown-callouts.webp" alt="Rendered callout boxes with warning and note styling" class="hero-img" />
+
+*Supported by: Obsidian (built-in), SilverBullet (built-in), GitHub (partial). Pandoc uses a different div-based syntax for custom blocks.*
+
+### Slide presentations
+
+You can turn a Markdown file into a slide deck. Each heading becomes a new slide. This means the same source document can produce both a written report and a presentation.
+
+**[Marp](https://marp.app/)** and **[reveal.js](https://revealjs.com/)** are popular options. Pandoc can also output to Beamer (LaTeX slides) or reveal.js directly.
+
+```markdown
+---
+marp: true
+theme: default
+---
+
+# Systems Reliability
+## Case Analysis
+
+---
+
 ## Executive Summary
 
-Revenue grew **12%** year-over-year. The effective tax rate:
+- High-volume, low-margin IT staffing
+- **1.4% profit margin** vs. 4.6% industry
+- ROE of 68% driven by leverage, not operations
 
-$$\text{ETR} = \frac{11{,}122}{41{,}332} = 26.9\%$$
+---
+
+## Key Concern: Liquidity
+
+| Metric | SR 2019 | Industry |
+|--------|---------|----------|
+| Current Ratio | 0.57 | 1.72 |
 ```
 
-**LaTeX:**
+<img src="assets/markdown-slides.webp" alt="A Marp slide deck rendered from Markdown with clean presentation styling" class="hero-img" />
 
-```latex
-\section{Executive Summary}
+---
 
-Revenue grew \textbf{12\%} year-over-year. The effective tax rate:
+## Putting it together: a complete example
 
-\begin{equation}
-  \text{ETR} = \frac{11{,}122}{41{,}332} = 26.9\%
-\end{equation}
+Here's a condensed case write-up using the features above. This is a single Markdown file that Pandoc can convert to PDF, Word, or HTML.
+
+````markdown
+---
+title: "Systems Reliability, Inc. -- Case Analysis"
+author: "Your Name"
+date: 2026-02-05
+toc: true
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Executive Summary
+
+Systems Reliability is a high-volume, low-margin IT staffing firm
+with **critically weak profitability** (1.4% margin vs. 4.6%
+industry) offset by **exceptional asset efficiency** (10.66x
+turnover) [@revsine2021, ch. 6].
+
+## Key Performance Indicators
+
+| Metric | SR 2019 | Industry | Variance |
+|:-------|--------:|---------:|---------:|
+| ROA | 14.57% | 12.17% | +2.4 pp |
+| Profit Margin | 1.37% | 4.57% | -3.2 pp |
+| Asset Turnover | 10.66x | 2.66x | +8.0x |
+
+## Price Increase Analysis
+
+A price increase of $p$ achieves target margin $PM_t$ when:
+
+$$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
+
+> [!note]
+> This assumes the pay rate to contractors is fixed, so the
+> full bill-rate increase flows to margin.
+
+## Recommendations
+
+1. **Address liquidity immediately** -- renegotiate term loan[^1]
+2. **Selective price increases** of 3--4% on new contracts
+3. **Reduce customer concentration** to restore pricing power
+
+[^1]: Current ratio of 0.57 indicates inability to meet
+    short-term obligations from liquid assets.
+
+## References
+````
+
+<img src="assets/markdown-full-example.webp" alt="The complete example rendered as a professional PDF with title page, table of contents, formatted tables, equations, footnotes, and bibliography" class="hero-img" />
+
+To convert this to a PDF:
+
+```bash
+pandoc case-analysis.md -o case-analysis.pdf --pdf-engine=xelatex
 ```
 
-Both produce identical typeset output. The Markdown is readable at a glance; the LaTeX requires knowing the command vocabulary. For a one-page memo, the difference in verbosity is minor. For a fifty-page document, it compounds.
+To convert to Word (for submission systems that require `.docx`):
 
-LaTeX's advantages are real, especially at scale:
+```bash
+pandoc case-analysis.md -o case-analysis.docx
+```
 
-- **Automatic numbering** -- sections, figures, tables, and equations are numbered and cross-referenced automatically. Insert a new section and everything downstream renumbers itself.
-- **Citation management** -- [BibTeX](http://www.bibtex.org/) integrates bibliography databases, formatting citations across dozens of journal styles automatically.
-- **Collaborative editing** -- platforms like [Overleaf](https://www.overleaf.com/) provide real-time collaborative LaTeX editing with live preview, essentially Google Docs for LaTeX.
-- **Precision layout control** -- every dimension of the output -- margins, headers, footnotes, column widths, float placement -- is programmable.
+---
 
-Markdown, through pandoc, is steadily picking up these capabilities with simpler syntax:
+## Quick reference
 
-- `--citeproc` with a `.bib` file handles citations in common styles
-- [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref) adds numbered references to figures, tables, and equations
-- YAML metadata in the document header controls layout, numbering, and styling
-- Custom LaTeX templates give you full typographic control when the defaults aren't enough
+| You want... | You write... |
+|:------------|:-------------|
+| **Bold** | `**bold**` |
+| *Italic* | `*italic*` |
+| Heading | `## Section title` |
+| Bullet list | `- item` |
+| Numbered list | `1. item` |
+| Link | `[text](url)` |
+| Image | `![alt](path)` |
+| Table | pipes and dashes (see above) |
+| Code block | triple backticks |
+| Blockquote | `> quoted text` |
+| Footnote | `text[^1]` and `[^1]: note` |
+| Inline maths | `$x^2$` |
+| Display maths | `$$\sum_{i=1}^{n} x_i$$` |
+| Horizontal rule | `---` |
+| Task list | `- [x] done` |
+| Citation | `[@key]` |
 
-For most professional documents -- memos, reports, proposals, briefs -- Markdown with pandoc does the job at a fraction of the syntactic overhead. For a 300-page thesis with hundreds of citations and complex cross-references, LaTeX is still the right tool. But the gap is closing.
+---
+
+## Getting started
+
+You don't need to learn everything at once. The essentials section above -- headings, bold, lists, tables -- will carry you through most case submissions. Add features as you need them.
+
+My recommended starting path:
+
+1. **Pick a tool.** [Obsidian](https://obsidian.md/) if you want a free local app with live preview. [Notion](https://www.notion.so/) if you want cloud collaboration. A plain text editor if you're feeling brave.
+2. **Write your next case in Markdown.** Start simple: headings for sections, tables for financial data, bold for key findings.
+3. **Install [Pandoc](https://pandoc.org/).** When you need PDF or Word output, Pandoc handles the conversion. Your Markdown file stays clean; Pandoc handles the typesetting.
+4. **Add features incrementally.** Footnotes when you need references. Maths notation when you hit a quantitative case. Mermaid when a flowchart would help.
+
+The syntax is small enough to fit on an index card. The output is professional enough for any submission. And because it's plain text, your notes will still be readable in twenty years -- long after whatever version of Word we're using today has been forgotten.
