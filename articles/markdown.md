@@ -14,7 +14,7 @@ tags: [markdown, pandoc, writing, productivity]
 
 ![Plain-text markdown source on the left, typeset PDF output on the right](assets/markdown-hero.webp)
 
-A couple of classmates and at least one professor have asked how I produce my case write-ups. The formatting is apparently suspicious -- clean enough that it doesn't quite look like Word, which in an MBA programme is a bit like showing up to a potluck with a dish that's clearly not homemade. Rather than keep explaining it one conversation at a time, this is the full answer. I write plain text files with a handful of formatting marks, and a tool called [Pandoc](https://pandoc.org/) turns them into typeset PDFs. One command. No Word, no Google Docs, no wrestling with margins at midnight.
+A couple of classmates and at least one professor have asked how I produce my case write-ups -- and, more pointedly, how I manage it across 22 courses when the full-time load is 12. The formatting is apparently suspicious: clean enough that it doesn't quite look like Word, consistent enough across subjects that it doesn't look manual, which in an MBA programme is a bit like showing up to a potluck with a dish that's clearly not homemade. Rather than keep explaining it one conversation at a time, this is the full answer. I write plain text files with a handful of formatting marks, and a tool called [Pandoc](https://pandoc.org/) turns them into typeset PDFs. One command. No Word, no Google Docs, no wrestling with margins at midnight.
 
 You're reading a working example right now. This entire page is written in the same format it describes.
 
