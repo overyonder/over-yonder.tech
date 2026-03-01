@@ -106,7 +106,7 @@ html {
 
 .card-image.rstat-image {
   background-size: cover;
-  background-position: center 20%;
+  background-position: center;
   background-color: #1a1a1a;
 }
 
@@ -725,9 +725,14 @@ footer p {
 
 /* ==================== Hero image ==================== */
 
-.article-content .hero-img {
+.article-content img {
   max-width: 100%;
+  height: auto;
   border-radius: 8px;
-  margin: 0.5em 0 1em 0;
   display: block;
+  margin: 1.5em auto;
+}
+
+.article-content .hero-img {
+  margin: 0.5em 0 1em 0;
 }
