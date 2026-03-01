@@ -615,6 +615,42 @@ footer p {
   font-style: italic;
 }
 
+/* ==================== Mermaid diagram grid ==================== */
+
+.article-content .mermaid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 1.5em 0;
+}
+
+.article-content .mermaid-grid .mermaid {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.article-content .mermaid-grid .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+@media (max-width: 600px) {
+  .article-content .mermaid-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ==================== Inline SVG diagrams ==================== */
 
 .article-content svg:not(.stage-icon):not(.stage-breakdown) {
