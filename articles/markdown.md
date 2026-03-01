@@ -14,21 +14,21 @@ tags: [markdown, pandoc, writing, productivity]
 
 ![Plain-text markdown source on the left, typeset PDF output on the right](assets/markdown-hero.webp)
 
-A few classmates have asked how I produce case write-ups that look like they came out of a typesetting studio. The secret is disappointingly simple: I write plain text files with a handful of formatting marks, and a tool turns them into polished PDFs. No Word, no Google Docs, no wrestling with margins at midnight.
+A classmate sent me a case write-up last term that looked like it came out of a typesetting studio. Crisp headings, professional tables, a properly formatted equation. I assumed LaTeX -- maybe Overleaf -- so I asked. The answer was a plain text file and a tool I'd never heard of. One command, and the text file became a PDF that looked better than anything I'd produced in four years of fighting with Word.
 
-This article is a practical guide. By the end you'll know enough to write a complete case analysis -- tables, citations, equations -- in a plain text file and export it as a clean, professional document. You're reading a working example right now: this entire page is written in the same format.
+I've since written every assignment this way. This article is the guide I wish someone had handed me at the start -- and you're reading a working example right now, because this entire page is written in the same format.
 
 ---
 
 ## Why plain text?
 
-Word processors store your writing in opaque binary formats full of layout metadata, revision history and embedded objects. The file *is* the rendered document, which means:
+I should be upfront about the thing that actually pushed me over the edge, because it wasn't aesthetics. It was a group project.
 
-- **Collaboration is fragile.** Merging two people's edits in `.docx` is a coin flip. Track changes works until it doesn't, and then you're comparing PDFs side by side at 1 AM.
-- **Formatting fights back.** Paste something from a website and watch your carefully chosen styles dissolve. Bullet indentation becomes a negotiation.
-- **Lock-in is real.** Your document is only as portable as the application that created it. Export to PDF and you lose editability; export to another format and you lose fidelity.
+Four people editing a Word document on OneDrive. Track changes enabled, supposedly. By submission night we had three conflicting versions, a paragraph that appeared twice, and a table whose formatting had quietly dissolved when someone pasted data from Excel. We spent the last two hours before the deadline not *writing* but *merging* -- comparing PDFs side by side, trying to figure out whose edits had survived.
 
-Plain text inverts this. The source file is human-readable in any text editor, on any operating system, forever. Formatting is expressed as simple, visible marks *in* the text. Layout is handled by a separate rendering step -- meaning you control content and presentation independently, the same way professional publishers have always worked.
+The core problem is structural: Word stores your writing in an opaque binary format full of layout metadata, revision history, and embedded objects. The file *is* the rendered document. You can't meaningfully diff two versions. You can't merge concurrent edits with any confidence. Copy-paste from another source drags invisible formatting along for the ride, and the result is a document that looks fine on your machine and subtly wrong on everyone else's.
+
+Plain text inverts all of this. The source file is human-readable in any editor, on any operating system, forever. Formatting is expressed as simple, visible marks *in* the text -- so there's nothing hidden to break. And because they're just text files, they play beautifully with version control. Git can show you exactly what changed between two drafts, merge concurrent edits automatically, and roll back to any previous version. That matters more than you'd think when you're co-authoring at 2AM and someone overwrites your conclusion.
 
 ---
 
@@ -36,11 +36,9 @@ Plain text inverts this. The source file is human-readable in any text editor, o
 
 ### TeX and LaTeX: the academic standard
 
-The idea of "coding" a document is older than most people realise. In 1978, the computer scientist Donald Knuth created **TeX** (pronounced "tech") because he was unhappy with how his textbooks were being typeset. His student Leslie Lamport extended it into **LaTeX** in 1984, adding higher-level commands for common document structures. By the 1990s, LaTeX had become the de facto standard for academic publishing in mathematics, physics, computer science and engineering.
+The idea of writing documents in code is older than most people realise. In 1978, Donald Knuth -- a computer scientist who cared deeply about typography, which is either admirable or slightly unhinged depending on your perspective -- created **TeX** (pronounced "tech") because he was unhappy with how his textbooks were being typeset. His student Leslie Lamport extended it into **LaTeX** in 1984, adding higher-level commands for common structures like sections, tables of contents, and bibliographies. By the 1990s it had become the standard for academic publishing across mathematics, physics, computer science, and engineering. Career academics write *every* paper in it. The typographic output -- especially for equations -- is genuinely unmatched.
 
-Career academics often write *every* paper in LaTeX. Its typographic output -- especially for mathematical notation -- is unmatched. But the syntax can be... confronting.
-
-Here's what a simple case analysis header looks like in LaTeX:
+But the syntax is... confronting. Here's what a simple case analysis header looks like in LaTeX:
 
 ```latex
 \documentclass[12pt]{article}
@@ -86,17 +84,17 @@ $\times$ Asset Turnover & 10.66$\times$ & 2.66$\times$ & +8.0$\times$ \\
 
 ![The booktabs table rendered with professional horizontal rules](assets/markdown-latex-table.webp)
 
-It works. The output is beautiful. But there's a lot of ceremony: `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins. You need to *compile* the document (often multiple passes) to see your output. The learning curve is steep, and the error messages are legendary in their unhelpfulness.
+It works. The output is genuinely beautiful. But look at the cost: `\begin` and `\end` blocks, backslash-escaped special characters, package imports just to get sensible margins. You need to *compile* the document -- often multiple passes -- to see your output. The error messages are legendary in their unhelpfulness. I once spent twenty minutes debugging a missing `}` that LaTeX had decided to report as a problem on a completely different page.
 
-LaTeX is a power tool built for academics who write papers for a living. For the rest of us, there's a simpler option.
+For academics who write papers every week, the investment pays off. For the rest of us -- people who need a professional-looking case analysis by Thursday -- there's something better.
 
 ---
 
 ## Markdown: plain text for the rest of us
 
-In 2004, the writer John Gruber created **Markdown** -- a minimal set of formatting conventions designed to be readable as-is, even before rendering. The philosophy: if you've ever written an email with `*asterisks*` for emphasis or used dashes for bullet points, you already know the basics.
+In 2004, a writer named John Gruber created **Markdown** -- a minimal set of formatting conventions designed to be readable as-is, even before anything renders it. The idea is disarmingly simple: if you've ever written an email with `*asterisks*` for emphasis or used dashes for bullet points, you already know most of the syntax.
 
-Markdown stayed niche for years, mostly used by software developers for documentation. But around 2012, a wave of writing tools adopted it as their native format. GitHub standardised **GitHub Flavoured Markdown** (GFM) with tables and task lists. Note-taking applications like Obsidian and Notion built their entire experience around it. Today, Markdown is used for everything from academic papers to corporate wikis to this website.
+It stayed niche for years, quietly popular with software developers who used it for documentation. Then around 2012 something shifted. GitHub adopted **GitHub Flavoured Markdown** (GFM) as its standard, adding tables and task lists. Note-taking apps like Obsidian and Notion built their entire experience around it. Suddenly the format that programmers had been using to write READMEs was showing up in corporate wikis, academic papers, and -- eventually -- an MBA student's case submissions. It runs on every platform with a keyboard: desktop, laptop, phone, browser, even a terminal over SSH. The file is just text, so there's nothing to install and nothing to break.
 
 Here's that same case analysis header in Markdown:
 
@@ -113,7 +111,7 @@ industry) offset by **exceptional asset efficiency** (10.66x vs.
 2.66x turnover).
 ```
 
-*The source above is readable as-is -- and when rendered, it looks like the headings and bold text you see throughout this article.*
+You can read that without rendering it. You'd know exactly what the document says if someone emailed it to you as plain text. That's the entire point.
 
 And the table:
 
@@ -139,15 +137,15 @@ Same information. A fraction of the syntax. Readable in its raw form. No compila
 
 ## From plain text to finished document
 
-Before diving into syntax, here's the punchline: one command turns a Markdown file into a professional PDF.
+Before we get into syntax, here's the part that actually matters. One command turns a Markdown file into a professional PDF:
 
 ```bash
 pandoc report.md -o report.pdf --pdf-engine=xelatex
 ```
 
-That's it. [Pandoc](https://pandoc.org/) reads your Markdown, feeds it through a LaTeX engine, and produces a typeset PDF with proper fonts, page numbers, and layout. No LaTeX knowledge required -- Pandoc handles the translation.
+That's it. [Pandoc](https://pandoc.org/) reads your Markdown, quietly feeds it through LaTeX under the hood, and produces a typeset PDF with proper fonts, page numbers, and layout. You get all of LaTeX's typographic quality without ever having to look at a `\begin{document}`.
 
-For tighter control over the output, a few flags go a long way:
+A few flags give you tighter control:
 
 ```bash
 pandoc report.md -o report.pdf \
@@ -164,19 +162,19 @@ pandoc report.md -o report.pdf \
 | `-V fontsize=11pt` | Sets the body text size |
 | `--toc` | Generates a table of contents from your headings |
 
-Need Word instead? Swap the extension:
+Need Word instead? Change the extension. Pandoc figures out the rest.
 
 ```bash
 pandoc report.md -o report.docx
 ```
 
-Everything below teaches you the Markdown syntax that goes *into* that file. The rest is Pandoc's job.
+Everything below teaches you the Markdown syntax that goes *into* that file. Pandoc handles getting it out.
 
 ---
 
 ## The essentials
 
-Everything below is standard Markdown. These features work in virtually every tool that supports the format.
+This is the core syntax. Everything here works in virtually every tool that reads Markdown -- no plugins, no extensions, no special configuration.
 
 ### Headings
 
@@ -319,21 +317,17 @@ Three dashes, asterisks, or underscores on their own line create a divider:
 
 ## Where to write
 
-Because the files are plain text, you're never locked into a single editor. I've drifted between several over the past year and my content came with me every time -- that's the point.
+One of the quietly radical things about plain text is that you're never locked in. I've drifted between four different editors over the past year, and every time I switched, my entire library of notes came with me unchanged. No export wizard, no fidelity loss, no "Save As." Just files.
 
-If your programme requires LaTeX (common in quant finance or economics PhDs), [Overleaf](https://www.overleaf.com/) is the easiest on-ramp: browser-based, real-time collaboration, thousands of journal templates, no local install.
+I started in [Obsidian](https://obsidian.md/) -- a desktop and mobile app that stores everything as local Markdown files in a folder it calls a "vault." The linking between notes and the graph view are genuinely useful for building a knowledge base that outlasts any single course. Group project wikis ended up in [Notion](https://www.notion.so/), which supports Markdown shortcuts but stores your content in its own cloud database -- convenient for collaboration, less convenient if you ever want to leave. My personal notes have since migrated to [SilverBullet](https://silverbullet.md/), a self-hosted platform that runs in the browser and keeps everything as Markdown files on my own server. On my phone I use [Markor](https://gsantner.net/project/markor.html) for reviewing notes on the train. And if your programme requires LaTeX -- common in quant finance or economics PhDs -- [Overleaf](https://www.overleaf.com/) is the path of least resistance: browser-based, real-time collaboration, no install.
 
-For Markdown, I started in [Obsidian](https://obsidian.md/) -- a desktop app that stores notes as local files in a "vault" with powerful linking and a graph view. It's free for personal use and popular with students building a knowledge base that outlasts any single course. Group project wikis ended up in [Notion](https://www.notion.so/), which supports Markdown shortcuts but stores content in its own database (the trade-off is portability). My personal notes now live in [SilverBullet](https://silverbullet.md/), a self-hosted open-source platform that runs in the browser and keeps everything as Markdown files on my own server. On my phone I use [Markor](https://gsantner.net/project/markor.html) -- lightweight, offline, free.
-
-The common thread: every one of these tools reads and writes the same `.md` files. Switch whenever you like.
+The point is not which tool is best. The point is that it doesn't matter, because the files are the same everywhere.
 
 ---
 
 ## Power user features
 
-Standard Markdown covers 90% of what you'll need for case write-ups. But the format is extensible, and a rich ecosystem of add-ons handles the remaining 10% -- including features you'd normally associate with LaTeX or dedicated publishing tools.
-
-Not every tool supports every extension. Where it matters, I'll note which tools and renderers support each feature.
+The essentials above will carry you through most case write-ups. But Markdown is extensible, and there's a surprisingly rich ecosystem of add-ons for the remaining 10% -- the things you'd normally associate with LaTeX or dedicated publishing tools. Not every tool supports every extension, so I'll note compatibility where it matters.
 
 ### YAML frontmatter
 
@@ -727,13 +721,13 @@ pandoc case-analysis.md -o case-analysis.pdf \
 
 ## Getting started
 
-You don't need to learn everything at once. The essentials section above -- headings, bold, lists, tables -- will carry you through most case submissions. Add features as you need them.
+You don't need to learn all of this at once. Headings, bold, lists, and tables will carry you through most case submissions. Everything else is there when you need it.
 
-My recommended starting path:
+If I were starting over:
 
 1. **Pick a tool.** [Obsidian](https://obsidian.md/) if you want a free local app with live preview. [Notion](https://www.notion.so/) if you want cloud collaboration. A plain text editor if you're feeling brave.
-2. **Write your next case in Markdown.** Start simple: headings for sections, tables for financial data, bold for key findings.
-3. **Install [Pandoc](https://pandoc.org/).** When you need PDF or Word output, Pandoc handles the conversion. Your Markdown file stays clean; Pandoc handles the typesetting.
-4. **Add features incrementally.** Footnotes when you need references. Maths notation when you hit a quantitative case. Mermaid when a flowchart would help.
+2. **Write your next case in Markdown.** Headings for sections, a table for the financials, bold for key findings. That's enough.
+3. **Install [Pandoc](https://pandoc.org/).** When you need PDF or Word output, it handles the conversion. Your Markdown file stays clean; Pandoc does the typesetting.
+4. **Add features as the work demands them.** Footnotes for your next citation-heavy case. Maths notation when a quantitative problem requires it. Mermaid when a flowchart would actually clarify something.
 
-The syntax is small enough to fit on an index card. The output is professional enough for any submission. And because it's plain text, your notes will still be readable in twenty years -- long after whatever version of Word we're using today has been forgotten.
+The whole syntax fits on an index card. The output is professional enough for any submission. And because the files are just text, they'll version-control cleanly, sync across every device you own, and still be perfectly readable in twenty years -- long after whatever version of Word we're using today has been mercifully forgotten.
