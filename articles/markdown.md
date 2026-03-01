@@ -409,7 +409,18 @@ Substituting: $p = \frac{0.046 \times 4{,}091{,}673 - 55{,}955}{4{,}091{,}673 \t
 
 [Mermaid](https://mermaid.js.org/) lets you define diagrams in text. Flowcharts, sequence diagrams, Gantt charts and more -- all written inline in your Markdown file. No image editing software required.
 
-<div class="mermaid-grid">
+**Flowchart** -- decision trees, process flows, system architecture:
+
+````markdown
+```mermaid
+graph TD
+    A[Revenue] --> B{Delivered?}
+    B -->|Yes| C[Collectible?]
+    B -->|No| D[Defer]
+    C -->|Yes| E[Recognise]
+    C -->|No| D
+```
+````
 
 ```mermaid
 graph TD
@@ -420,6 +431,18 @@ graph TD
     C -->|No| D
 ```
 
+**Sequence diagram** -- interactions between systems or actors over time:
+
+````markdown
+```mermaid
+sequenceDiagram
+    Client->>Server: Request
+    Server->>DB: Query
+    DB-->>Server: Result
+    Server-->>Client: Response
+```
+````
+
 ```mermaid
 sequenceDiagram
     Client->>Server: Request
@@ -428,12 +451,39 @@ sequenceDiagram
     Server-->>Client: Response
 ```
 
+**Pie chart** -- proportional breakdowns:
+
+````markdown
 ```mermaid
 pie title Revenue Mix
     "Major Client" : 68
     "Mid-size" : 22
     "Small" : 10
 ```
+````
+
+```mermaid
+pie title Revenue Mix
+    "Major Client" : 68
+    "Mid-size" : 22
+    "Small" : 10
+```
+
+**Gantt chart** -- project timelines and dependencies:
+
+````markdown
+```mermaid
+gantt
+    title Project Timeline
+    dateFormat YYYY-MM-DD
+    section Phase 1
+    Research    :a1, 2026-01-01, 14d
+    Analysis    :a2, after a1, 10d
+    section Phase 2
+    Draft       :b1, after a2, 7d
+    Review      :b2, after b1, 5d
+```
+````
 
 ```mermaid
 gantt
@@ -447,12 +497,36 @@ gantt
     Review      :b2, after b1, 5d
 ```
 
+**Entity-relationship diagram** -- database schemas and data models:
+
+````markdown
 ```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE_ITEM : contains
     PRODUCT ||--o{ LINE_ITEM : "appears in"
 ```
+````
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    PRODUCT ||--o{ LINE_ITEM : "appears in"
+```
+
+**State diagram** -- workflow states and transitions:
+
+````markdown
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Review
+    Review --> Draft : Revisions
+    Review --> Approved
+    Approved --> [*]
+```
+````
 
 ```mermaid
 stateDiagram-v2
@@ -462,6 +536,21 @@ stateDiagram-v2
     Review --> Approved
     Approved --> [*]
 ```
+
+**Git graph** -- branch and merge history:
+
+````markdown
+```mermaid
+gitGraph
+    commit
+    branch feature
+    commit
+    commit
+    checkout main
+    merge feature
+    commit
+```
+````
 
 ```mermaid
 gitGraph
@@ -474,6 +563,9 @@ gitGraph
     commit
 ```
 
+**XY chart** -- bar and line charts with axes:
+
+````markdown
 ```mermaid
 xychart-beta
     title "Quarterly Revenue"
@@ -482,8 +574,16 @@ xychart-beta
     bar [12, 28, 35, 42]
     line [12, 28, 35, 42]
 ```
+````
 
-</div>
+```mermaid
+xychart-beta
+    title "Quarterly Revenue"
+    x-axis [Q1, Q2, Q3, Q4]
+    y-axis "Revenue ($M)" 0 --> 50
+    bar [12, 28, 35, 42]
+    line [12, 28, 35, 42]
+```
 
 *Supported by: Obsidian (built-in), Notion (built-in), GitHub (built-in), SilverBullet (plugin), and Pandoc (via mermaid-filter).*
 
