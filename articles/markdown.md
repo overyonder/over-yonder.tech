@@ -331,7 +331,7 @@ The essentials above will carry you through most case write-ups. But Markdown is
 
 ### YAML frontmatter
 
-Most Markdown tools support a metadata block at the top of your file, written in YAML (a simple key-value format). This controls how the document is rendered or exported -- title, author, date, export settings, and more.
+Most Markdown tools support a metadata block at the top of your file, written in YAML (YAML Ain't Markup Language -- a simple key-value format). This controls how the document is rendered or exported -- title, author, date, export settings, and more.
 
 ```yaml
 ---
