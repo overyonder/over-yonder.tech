@@ -12,7 +12,7 @@ tags: [markdown, pandoc, writing, productivity]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-<!-- TODO: hero image showing split markdown source / PDF output -->
+![Plain-text markdown source on the left, typeset PDF output on the right](assets/markdown-hero.webp)
 
 A few classmates have asked how I produce case write-ups that look like they came out of a typesetting studio. The secret is disappointingly simple: I write plain text files with a handful of formatting marks, and a tool turns them into polished PDFs. No Word, no Google Docs, no wrestling with margins at midnight.
 
@@ -64,7 +64,7 @@ vs.\ 4.6\% industry) offset by \textbf{exceptional asset efficiency}
 \end{document}
 ```
 
-<!-- TODO: screenshot of the LaTeX source rendered as a typeset PDF -->
+![The LaTeX source above compiled into a typeset PDF](assets/markdown-latex-body.webp)
 
 And here's a financial comparison table:
 
@@ -84,7 +84,7 @@ $\times$ Asset Turnover & 10.66$\times$ & 2.66$\times$ & +8.0$\times$ \\
 \end{table}
 ```
 
-<!-- TODO: screenshot of the LaTeX table rendered with booktabs rules -->
+![The booktabs table rendered with professional horizontal rules](assets/markdown-latex-table.webp)
 
 It works. The output is beautiful. But there's a lot of ceremony: `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins. You need to *compile* the document (often multiple passes) to see your output. The learning curve is steep, and the error messages are legendary in their unhelpfulness.
 
@@ -685,7 +685,7 @@ $$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
 ## References
 ````
 
-<!-- TODO: screenshot of the complete example rendered as a professional PDF -->
+![The complete markdown example converted to a professional PDF by Pandoc](assets/markdown-pandoc-pdf.webp)
 
 To convert this to a PDF:
 
