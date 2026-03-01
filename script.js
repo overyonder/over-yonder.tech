@@ -267,6 +267,54 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
+  // ── Auto-generate repo badges from GitHub API ──
+  var GITHUB_ACCOUNTS = ['rakelang', 'overyonder', 'hannigancooper', 'KaiStarkk'];
+
+  function loadRepoBadges() {
+    var container = document.querySelector('.repo-badges');
+    if (!container) return;
+
+    var fetches = GITHUB_ACCOUNTS.map(function (account) {
+      return fetch('https://api.github.com/users/' + account + '/repos?per_page=100&sort=updated')
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .catch(function () { return []; });
+    });
+
+    Promise.all(fetches).then(function (results) {
+      var seen = {};
+      var repos = [];
+
+      results.forEach(function (accountRepos) {
+        if (!Array.isArray(accountRepos)) return;
+        accountRepos.forEach(function (repo) {
+          if (repo.fork || repo.private) return;
+          if (seen[repo.name]) return;
+          seen[repo.name] = true;
+          repos.push(repo);
+        });
+      });
+
+      repos.sort(function (a, b) {
+        if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
+        return a.name.localeCompare(b.name);
+      });
+
+      container.innerHTML = '';
+      repos.forEach(function (repo) {
+        var a = document.createElement('a');
+        a.href = repo.html_url;
+        a.target = '_blank';
+        var img = document.createElement('img');
+        img.src = 'https://img.shields.io/github/stars/' + repo.full_name + '?style=flat-square&label=' + encodeURIComponent(repo.name);
+        img.alt = repo.name;
+        a.appendChild(img);
+        container.appendChild(a);
+      });
+    });
+  }
+
+  loadRepoBadges();
+
   function esc(s) {
     if (!s) return '';
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
