@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
 
+  // ── Configure marked extensions ──
+  if (window.markedKatex) {
+    marked.use(markedKatex({ throwOnError: false }));
+  }
+  if (window.markedFootnote) {
+    marked.use(markedFootnote());
+  }
+  mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
   // ── Placeholder for tab bar when it goes sticky ──
   var placeholder = document.createElement('div');
   placeholder.className = 'tab-bar-placeholder';
@@ -229,9 +238,23 @@ document.addEventListener('DOMContentLoaded', function () {
         var stripped = md.replace(/^---[\s\S]*?---\s*/, '');
         var meta = '<div class="article-meta">' + esc(author) + ' &middot; ' + esc(date) + '</div>';
         el.innerHTML = meta + marked.parse(stripped);
+
+        // Syntax highlighting (skip mermaid blocks)
         el.querySelectorAll('pre code').forEach(function (block) {
-          hljs.highlightElement(block);
+          if (!block.classList.contains('language-mermaid')) {
+            hljs.highlightElement(block);
+          }
         });
+
+        // Render mermaid diagrams
+        el.querySelectorAll('pre code.language-mermaid').forEach(function (block) {
+          var pre = block.parentElement;
+          var diagram = document.createElement('div');
+          diagram.className = 'mermaid';
+          diagram.textContent = block.textContent;
+          pre.replaceWith(diagram);
+        });
+        mermaid.run({ nodes: el.querySelectorAll('.mermaid') });
 
         // If accordion is open, uncap max-height so new content isn't clipped
         var item = el.closest('.accordion-item');

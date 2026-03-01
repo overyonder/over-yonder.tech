@@ -390,7 +390,17 @@ $$p = \frac{PM_{target} \cdot R - NI}{R \cdot (1 - PM_{target})}$$
 Substituting: $p = \frac{0.046 \times 4{,}091{,}673 - 55{,}955}{4{,}091{,}673 \times (1 - 0.046)} = 3.39\%$
 ```
 
-*With KaTeX or MathJax enabled, the expressions above render as properly typeset equations with fractions, subscripts, and Greek letters -- indistinguishable from LaTeX output.*
+Renders as:
+
+The required price increase $p$ satisfies:
+
+$$\frac{NI + R \cdot p}{R \cdot (1 + p)} = PM_{target}$$
+
+Solving for $p$:
+
+$$p = \frac{PM_{target} \cdot R - NI}{R \cdot (1 - PM_{target})}$$
+
+Substituting: $p = \frac{0.046 \times 4{,}091{,}673 - 55{,}955}{4{,}091{,}673 \times (1 - 0.046)} = 3.39\%$
 
 *Supported by: Obsidian (built-in KaTeX), Notion (built-in KaTeX), SilverBullet (KaTeX plugin), Pandoc (native LaTeX maths), and most static site generators with a plugin.*
 
@@ -410,7 +420,17 @@ graph TD
 ```
 ````
 
-*In tools with Mermaid support, this renders as a flowchart with decision diamonds and directional arrows -- no image editing required.*
+Renders as:
+
+```mermaid
+graph TD
+    A[Revenue Recognised] --> B{Delivered?}
+    B -->|Yes| C[Check collectibility]
+    B -->|No| D[Defer recognition]
+    C --> E{Probable?}
+    E -->|Yes| F[Recognise in period]
+    E -->|No| D
+```
 
 Mermaid also supports other diagram types that are useful for case analysis:
 
@@ -423,7 +443,14 @@ pie title Revenue Composition
 ```
 ````
 
-*Renders as a colour-coded pie chart with labelled segments and percentages.*
+Renders as:
+
+```mermaid
+pie title Revenue Composition
+    "Major Customer" : 68
+    "Mid-size Clients" : 22
+    "Small Accounts" : 10
+```
 
 *Supported by: Obsidian (built-in), Notion (built-in), GitHub (built-in), SilverBullet (plugin), and Pandoc (via mermaid-filter).*
 
@@ -442,7 +469,16 @@ which together create a fragile financial structure.
     Interest coverage of 3.97x provides limited buffer.
 ```
 
-*In tools with footnote support, `[^1]` becomes a superscript link and the definitions are collected at the bottom of the page as numbered notes.*
+Renders as:
+
+The firm faces severe liquidity risk[^1] and excessive leverage[^2],
+which together create a fragile financial structure.
+
+[^1]: Current ratio of 0.57 vs. industry average of 1.72. A ratio
+    below 1.0 indicates current liabilities exceed current assets.
+
+[^2]: Debt-to-assets of 78.64% vs. industry average of 61.33%.
+    Interest coverage of 3.97x provides limited buffer.
 
 The footnote definitions don't need to be near the markers -- they can be collected at the bottom of your file. The renderer numbers them automatically and creates clickable links between the marker and the note.
 
@@ -491,7 +527,7 @@ And the corresponding `references.bib` file:
 }
 ```
 
-*Pandoc replaces `[@revsine2021]` with "(Revsine et al., 2021)" and generates a formatted reference list at the end of the document, styled according to whatever CSL file you choose.*
+In Pandoc output, `[@revsine2021, pp. 241-245]` becomes "(Revsine et al., 2021, pp. 241-245)" and a formatted reference list appears at the end of the document, styled according to whichever CSL file you choose.
 
 Pandoc supports [thousands of citation styles](https://www.zotero.org/styles) via CSL (Citation Style Language) files -- APA, Chicago, Harvard, journal-specific formats, and more. Switch styles by changing one line in your frontmatter.
 
@@ -515,7 +551,7 @@ In **Obsidian**, insert a dynamic table of contents with the `[[toc]]` command o
 
 In most **static site generators**, TOC generation is a built-in option or a one-line plugin.
 
-*The renderer scans your headings and generates a clickable, indented table of contents that stays in sync as you edit.*
+The renderer scans your headings and generates a clickable, indented table of contents that stays in sync as you edit.
 
 The advantage over a manually typed contents list: it updates automatically as you add, remove, or reorder sections.
 
@@ -535,7 +571,7 @@ DuPont Decomposition
     of equity returns.
 ```
 
-*In Pandoc output, the terms appear in bold with indented definitions below -- similar to a glossary format.*
+In Pandoc output, the terms appear in bold with indented definitions below -- similar to a glossary format.
 
 *Supported by: Pandoc (built-in), PHP Markdown Extra, and several Obsidian plugins. Not part of GFM or CommonMark.*
 
@@ -555,7 +591,7 @@ Callout blocks highlight warnings, tips, or important notes. The syntax varies b
 > increase flows through to margin.
 ```
 
-*In Obsidian and SilverBullet, these render as coloured boxes with icons -- yellow for warnings, blue for notes -- that visually separate important asides from the main text.*
+In Obsidian and SilverBullet, these render as coloured boxes with icons -- yellow for warnings, blue for notes -- that visually separate important asides from the main text.
 
 *Supported by: Obsidian (built-in), SilverBullet (built-in), GitHub (partial). Pandoc uses a different div-based syntax for custom blocks.*
 
