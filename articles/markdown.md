@@ -787,6 +787,44 @@ theme: default
 
 ![Marp for VS Code showing markdown source alongside rendered slide preview](assets/markdown-marp.webp)
 
+#### Beyond Markdown: Typst + Polylux
+
+If you outgrow Markdown slides but don't want to return to LaTeX, **[Typst](https://typst.app/)** is worth knowing about. Typst is a modern typesetting system designed as a practical replacement for LaTeX -- it compiles in milliseconds, has a cleaner syntax, and handles maths natively. **[Polylux](https://polylux-typ.github.io/polylux/)** is its Beamer equivalent: a package for building slide decks in Typst.
+
+```typst
+#import "@preview/polylux:0.4.0": *
+
+#set page(paper: "presentation-16-9")
+#set text(size: 20pt)
+
+#slide[
+  = Portfolio Construction Under Fat Tails
+
+  - CAPM assumes Gaussian returns
+  - Empirical $alpha approx 1.55$ (Lévy stable)
+  - Variance is *infinite* for $alpha < 2$
+]
+
+#slide[
+  = The Recommendation
+
+  $ w^* prop bold(K)^(-1) (bold(mu) - R_f bold(1)) $
+
+  #table(
+    columns: 2,
+    [*Asset*], [*Weight*],
+    [Tulip bulbs], [8.5%],
+    [VOC shares], [91.5%],
+  )
+]
+```
+
+The syntax sits between Markdown and LaTeX -- less ceremony than `\begin{frame}`, more structure than plain Markdown. Maths uses a simplified notation (`$alpha$` rather than `$\alpha$`), and features like tables and layout are first-class rather than bolted on. Compilation is near-instant compared to LaTeX's multi-pass builds.
+
+Polylux includes theme ports of popular Beamer themes (including Metropolis), so the output looks familiar to anyone who's sat through an economics seminar. The ecosystem is younger than Beamer's -- fewer themes, fewer Stack Overflow answers -- but it's actively developed and closing the gap quickly.
+
+*Use Marp when your content is straightforward and you want to stay in Markdown. Use Typst + Polylux when you need proper maths, complex layouts, or academic conventions that Markdown can't cleanly express.*
+
 ### Publishing to the web
 
 The article you're reading right now is a Markdown file in a folder on my computer. The entire site is a handful of files:
