@@ -12,7 +12,11 @@ tags: [leadership, equity, culture]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-> Can you tell us a little about yourself -- your background, current role, why you did the MBA, and what drives you?
+*This article contains the full transcript from a recent interview on leadership and equity for the AGSM Student Association on International Women's Day.*
+
+---
+
+> **Can you tell us a little about yourself -- your background, current role, why you did the MBA, and what drives you?**
 
 I grew up in Perth, Western Australia. Studied electrical engineering and computer science, completed a Master of Professional Engineering at UWA, and went straight into the construction and infrastructure consulting industry at Stantec -- a global firm of about 32,000 people. I stayed for almost ten years and moved up fairly quickly, mostly by being willing to become whatever the organisation needed next. When they needed an ICT specialist, I became that. Then smart cities. Then audiovisual engineering. Then renewable energy. I ended up as a Principal leading the national solar and battery team, managing a multi-million dollar P&L.
 
@@ -22,7 +26,7 @@ The MBA was partly an expression of that impulse. Going to the top-ranked MBA in
 
 Flaubert would recognise the shape of it, actually. Emma Bovary's tragedy is that her cage is imposed entirely from the outside -- society cultivates her aspirations and then refuses her any agency to act on them. My version was less severe, more self-inflicted: I sensed a box being drawn slowly around me, competence in one domain being traded into a terminal identity, and felt suffocated by it. The MBA was partly about breaking out of that box, and partly about building a wider one.
 
-> How do you define gender equity in your own words?
+> **How do you define gender equity in your own words?**
 
 I've gone back and forth on this. The clean answer is something about removing structural barriers so that talent determines outcomes -- and I do believe that, but it's the kind of sentence that sounds right without asking very much at all of the person saying it.
 
@@ -30,7 +34,7 @@ The more honest answer is that equity is what's left when you strip away the thi
 
 So if I had to distil it: gender equity is the discipline of asking, before you accept any difference in outcome as natural, whether you've properly ruled out structural explanations. Most of the time, we haven't.
 
-> From your perspective, what are some of the most significant challenges women continue to face in business today?
+> **From your perspective, what are some of the most significant challenges women continue to face in business today?**
 
 The challenges that persist are the ones that present as neutral features of the environment. Overt exclusion is increasingly rare and easy to name when it occurs -- and naming something is half the work of addressing it. The harder problems are the ones that don't register as problems at all.
 
@@ -40,7 +44,7 @@ Plath's fig tree in [<cite>The Bell Jar</cite>](https://en.wikipedia.org/wiki/Th
 
 There's a related phenomenon I'd call meritocracy paradox. Organisations that believe most fervently that they are meritocracies tend to be the least likely to examine whether their systems actually produce meritocratic outcomes. The belief itself wards against scrutiny. That's worth sitting with, because most of us work in places that would describe themselves this way.
 
-> Who do you admire for how they're modelling inclusive leadership?
+> **Who do you admire for how they're modelling inclusive leadership?**
 
 Firstly, my high school literature teacher who had no hesitation answering a political question by telling his inquirer that, yes, his viewpoint was probably best described as Marxist-feminist, and no he wasn't particularly concerned if anyone had a problem with that because he'd learned back in England to check boys' knuckles when they walked in, and he'd already determined that nobody here was a threat to him. An early example of masculinity displayed in the form of strident rejection of unjustness everywhere even when only subtly insinuated; and a valuable lesson for a young man in the early 2010s to be sure.
 
@@ -50,7 +54,7 @@ To me, inclusive leadership means leading in a way that enables anyone -- regard
 
 Because you can't predict all the ways you might need to be inclusive, the only true strategy I think is being a person that is genuinely warm, affable, and trustworthy. That sounds simple, but it's surprisingly rare in leadership, because a lot of people in senior positions have internalised the idea that authority requires a degree of austerity -- that respect and approachability are in tension. I'd encourage anyone who holds that belief to question earnestly the true level of association between respect and harshness. I don't think they need to be connected. The leaders I've admired most were the ones who were easy to talk to like friends, and whose teams performed well precisely because people weren't spending energy managing around their manager's temperament (unless out of positive affect rather than negative).
 
-> How have you seen gender equity reflected (or not) in your workplace or in your studies?
+> **How have you seen gender equity reflected (or not) in your workplace or in your studies?**
 
 The honest answer is that for most of my engineering career, I didn't see it clearly at all -- and I think the not-seeing is more the point worth making.
 
@@ -60,7 +64,7 @@ The shift started the first time I interviewed a candidate. I didn't like her. A
 
 What followed from that doubt was more useful than any training module. Once you start questioning your own judgement in one context, you start noticing how many conclusions go unexamined in a uniform group -- how much intellectual debt a homogeneous team carries without knowing it, how many assumptions it treats as settled that are actually just uncontested. All of that arises out of doubt. Doubt, I think, is enormously useful -- and undervalued in professional cultures that reward decisiveness above almost everything else.
 
-> Can you share an example where you saw women being empowered in your field, and how you or others contributed as allies?
+> **Can you share an example where you saw women being empowered in your field, and how you or others contributed as allies?**
 
 Over my time at Stantec I mentored ten people, two of whom were women, about five years apart. They were a study in contrasts. One was an average candidate, who moved quickly toward opportunity -- assertive, visible, good at positioning herself. The other was exceptionally talented and performing well above her level -- but didn't go out of her way to highlight it. Regardless, each went on to reach a similar level of success on a similar timeline.
 
@@ -74,13 +78,13 @@ As her manager, I think the most useful thing I did was signpost it once, then d
 
 I'm cautious about making that a tidy story about mentorship that advises men not to answer metacognitive questions from women on their staff; the structural observation is more important than the specific personal one in this example. Self-advocacy mattered less than I'd been led to believe, and the narrative presuppositions we apply to women's experiences are often more distorting than clarifying, even the ones we thought were helpful.
 
-> If you could go back and talk to a younger version of yourself about gender equity, what advice would you share?
+> **If you could go back and talk to a younger version of yourself about gender equity, what advice would you share?**
 
 I'd tell him to pay closer attention to what his reading was actually telling him. I mentioned [<cite>Madame Bovary</cite>](https://en.wikipedia.org/wiki/Madame_Bovary) earlier -- it took me years to notice that Flaubert wrote a woman's constrained experience with more precision and empathy than most of the men in Emma's life could manage, and that this wasn't incidental to his talent but central to it. The capacity to inhabit someone else's structural reality, rather than just acknowledge it exists, is a specific skill. It requires sustained attention, not just sympathy.
 
 I'd also tell him to re-read [<cite>The Awakening</cite>](https://en.wikipedia.org/wiki/The_Awakening_(Chopin_novel)) after class, and this time sit with the discomfort of it instead of trying to assign literary meaning like the curriculum wanted him to. What's unsettling about Chopin's novel isn't the ending or the metaphor of the amniotic embrace of the ocean which seems to be a common motif in the feminist canon -- it's the absence of a villain. The system that constrains Edna Pontellier isn't malicious. Nobody is scheming against her. The people around her are, by their own lights, being perfectly reasonable. And yet the net effect is suffocating. That's closer to how structural inequity actually operates than any story with a clear antagonist or a moral. The uncomfortable realisation for men reading it is that you don't have to be the villain to be part of the architecture of wrong.
 
-> What is one practical action men can take this year to support gender equity?
+> **What is one practical action men can take this year to support gender equity?**
 
 I'd start by refuting, gently, the way this question typically gets answered. The standard advice tends toward monitoring who speaks in meetings, tracking interruptions and speaking up for people who weren't given their fair share of airtime. I understand the intent, and the argumentation around microaggression is cogent, but I've moved towards a view of many of these things as being a tyranny of low expectations.
 
@@ -88,7 +92,7 @@ I'm uneasy saying that, but I think it's true: it keeps the conversation at the 
 
 On the conceptual, a hard but valuable thing you could do is examine your perceptual scaffolding -- the tropes and frames you bring to a situation before conscious judgement begins. When you see a woman who's quiet in meetings, do you reach for "confidence issue"? When you see one who's assertive, do you pattern-match to a different set of assumptions? And are you blind to the same for men -- like Wallace's [fish oblivious to water](https://en.wikipedia.org/wiki/This_Is_Water). Those abstractions are harder to audit than surface behaviours, but they're where the real distortions live.
 
-> As we reflect on International Women's Day, is there a message or story you'd like to share about allyship and supporting women?
+> **As we reflect on International Women's Day, is there a message or story you'd like to share about allyship and supporting women?**
 
 The thing I keep returning to, having thought through all of these questions, is how much of the real damage is done by things we adopt in good faith. Biases get the attention because they're identifiable and actionable -- you can name them, train against them, build processes to counteract them. Not to mention that they're emotionally temptacious, coming prepackaged and prefixed with the "unconscious" excuse that readily assuages guilt through prophylactic absolution.
 
