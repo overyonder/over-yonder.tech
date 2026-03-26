@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Polymyth Model Capability Audit</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+  font-size: 12px;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  display: flex;
+}
+.sidebar {
+  width: 200px;
+  min-width: 200px;
+  padding: 16px;
+  background: #16213e;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  border-right: 1px solid #333;
+}
+.sidebar h3 { color: #c9a0dc; margin-bottom: 8px; font-size: 13px; }
+.sidebar label { display: block; padding: 2px 0; cursor: pointer; }
+.sidebar label:hover { color: #fff; }
+.sidebar input[type=checkbox] { margin-right: 6px; }
+.main { flex: 1; padding: 16px; overflow-x: auto; }
+h1 { text-align: center; font-size: 20px; margin-bottom: 4px; color: #c9a0dc; }
+.subtitle { text-align: center; font-size: 11px; color: #888; margin-bottom: 12px; }
+.legend { display: flex; justify-content: center; gap: 12px; margin-bottom: 10px; font-size: 10px; flex-wrap: wrap; }
+.legend span { padding: 2px 8px; border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; min-width: 1400px; }
+th { position: sticky; top: 0; background: #0f3460; padding: 6px 8px; text-align: left;
+     cursor: pointer; user-select: none; white-space: nowrap; border-bottom: 2px solid #c9a0dc; z-index: 10; }
+th:hover { background: #1a4a7a; }
+td { padding: 4px 8px; border-bottom: 1px solid #222; white-space: nowrap; }
+tr:hover { background: #1a2a4a; }
+.section-header td { background: #0f3460; color: #c9a0dc; font-weight: bold; padding: 8px; font-size: 13px; }
+.num { text-align: right; }
+.open { color: #4caf50; }
+.closed { color: #ff9800; }
+.notes { white-space: normal; max-width: 200px; font-size: 11px; color: #999; }
+/* Score colours (all tests) */
+.s-perfect { background: #2d5a27; color: #fff; }
+.s-hi { background: #3a6b35; }
+.s-mid { background: #6b6b35; }
+.s-low { background: #6b3535; }
+.s-unk { background: #333; }
+/* Disk colours */
+.d-sm { background: #2d5a27; }
+.d-md { background: #3a6b35; }
+.d-lg { background: #6b6b35; }
+.d-xl { background: #8b6b35; }
+.d-xxl { background: #6b3535; }
+/* Legend swatches */
+.leg-perfect { background: #2d5a27; padding: 2px 8px; border-radius: 3px; }
+.leg-hi { background: #3a6b35; padding: 2px 8px; border-radius: 3px; }
+.leg-mid { background: #6b6b35; padding: 2px 8px; border-radius: 3px; }
+.leg-low { background: #6b3535; padding: 2px 8px; border-radius: 3px; }
+.leg-unk { background: #333; padding: 2px 8px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <h3>Model Maker</h3>
+  <label><input type="checkbox" checked data-org="AI21"> AI21</label>
+<label><input type="checkbox" checked data-org="Aion Labs"> Aion Labs</label>
+<label><input type="checkbox" checked data-org="Alibaba"> Alibaba</label>
+<label><input type="checkbox" checked data-org="Allen AI"> Allen AI</label>
+<label><input type="checkbox" checked data-org="Anthropic"> Anthropic</label>
+<label><input type="checkbox" checked data-org="Arcee"> Arcee</label>
+<label><input type="checkbox" checked data-org="Baidu"> Baidu</label>
+<label><input type="checkbox" checked data-org="ByteDance"> ByteDance</label>
+<label><input type="checkbox" checked data-org="DeepCogito"> DeepCogito</label>
+<label><input type="checkbox" checked data-org="DeepSeek"> DeepSeek</label>
+<label><input type="checkbox" checked data-org="Google"> Google</label>
+<label><input type="checkbox" checked data-org="IBM"> IBM</label>
+<label><input type="checkbox" checked data-org="Liquid"> Liquid</label>
+<label><input type="checkbox" checked data-org="Meta"> Meta</label>
+<label><input type="checkbox" checked data-org="Microsoft"> Microsoft</label>
+<label><input type="checkbox" checked data-org="MiniMax"> MiniMax</label>
+<label><input type="checkbox" checked data-org="Mistral"> Mistral</label>
+<label><input type="checkbox" checked data-org="Moonshot"> Moonshot</label>
+<label><input type="checkbox" checked data-org="NVIDIA"> NVIDIA</label>
+<label><input type="checkbox" checked data-org="NousResearch"> NousResearch</label>
+<label><input type="checkbox" checked data-org="OpenAI"> OpenAI</label>
+<label><input type="checkbox" checked data-org="Prime Intellect"> Prime Intellect</label>
+<label><input type="checkbox" checked data-org="Qwen"> Qwen</label>
+<label><input type="checkbox" checked data-org="SDAIA"> SDAIA</label>
+<label><input type="checkbox" checked data-org="StepFun"> StepFun</label>
+<label><input type="checkbox" checked data-org="Tencent"> Tencent</label>
+<label><input type="checkbox" checked data-org="TheDrummer"> TheDrummer</label>
+<label><input type="checkbox" checked data-org="Upstage"> Upstage</label>
+<label><input type="checkbox" checked data-org="Writer"> Writer</label>
+<label><input type="checkbox" checked data-org="Xiaomi"> Xiaomi</label>
+<label><input type="checkbox" checked data-org="Zhipu"> Zhipu</label>
+
+  <br>
+  <h3>Open/Closed</h3>
+  <label><input type="checkbox" checked data-oc="Open"> Open</label>
+  <label><input type="checkbox" checked data-oc="Closed"> Closed</label>
+  <br>
+  <h3>Size Class</h3>
+  <label><input type="checkbox" checked data-size="lt1.5b"> &lt;1.5B</label>
+  <label><input type="checkbox" checked data-size="3-6b"> 3–6B</label>
+  <label><input type="checkbox" checked data-size="7-11b"> 7–11B</label>
+  <label><input type="checkbox" checked data-size="13-16b"> 13–16B</label>
+  <label><input type="checkbox" checked data-size="22-30b"> 22–30B</label>
+  <label><input type="checkbox" checked data-size="70b"> 70B</label>
+  <label><input type="checkbox" checked data-size="100-120b"> 100–120B</label>
+  <label><input type="checkbox" checked data-size="200-400b"> 200–400B</label>
+  <label><input type="checkbox" checked data-size="600b-1t"> 600B–1T</label>
+  <label><input type="checkbox" checked data-size="1t+"> 1T+</label>
+  <label><input type="checkbox" checked data-size="unknown"> Closed Large</label>
+  <label><input type="checkbox" checked data-size="closed-xl"> Closed XL</label>
+  <label><input type="checkbox" checked data-size="closed-xxl"> Closed XXL</label>
+  <br>
+  <h3>Other</h3>
+  <label><input type="checkbox" id="show-hidden"> Show hidden</label>
+  <br>
+  <h3>Min Tobias</h3>
+  <input type="range" id="min-tobias" min="0" max="20" value="0" style="width:100%">
+  <span id="min-tobias-val">0</span>/20
+  <br><br>
+  <h3>Min Booker</h3>
+  <input type="range" id="min-booker" min="0" max="7" value="0" style="width:100%">
+  <span id="min-booker-val">0</span>/7
+  <br><br>
+  <h3>Min Campbell</h3>
+  <input type="range" id="min-campbell" min="0" max="12" value="0" style="width:100%">
+  <span id="min-campbell-val">0</span>/12
+  <br><br>
+  <h3>Legend (Scores)</h3>
+  <span class="leg-perfect">Perfect</span><br>
+  <span class="leg-hi">≥70%</span><br>
+  <span class="leg-mid">35–69%</span><br>
+  <span class="leg-low">&lt;35%</span><br>
+  <span class="leg-unk">?</span>
+</div>
+<div class="main">
+<h1>Polymyth Model Capability Audit</h1>
+<div class="subtitle">Narrative knowledge tests across 80 models — sorted by composite score</div>
+
+<div style="margin-bottom: 24px;">
+<h2 style="color: #c9a0dc; text-align: center;">Score vs Output Cost (Efficient Frontier)</h2>
+<div id="chart" style="width: 100%; height: 550px;"></div>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+(function() {
+  const all = [{"name": "ERNIE 4.5 300B", "score": 60, "cost": 1.1, "open": true}, {"name": "Mistral Large", "score": 60, "cost": 1.5, "open": true}, {"name": "Aion 2.0", "score": 59, "cost": 1.6, "open": false}, {"name": "Cogito V2.1 671B", "score": 59, "cost": 1.25, "open": true}, {"name": "MiMo V2 Pro", "score": 59, "cost": 3.0, "open": true}, {"name": "Qwen 3.5 122B-A10B", "score": 59, "cost": 2.08, "open": true}, {"name": "Gemini 3.1 Flash Lite", "score": 58, "cost": 1.5, "open": false}, {"name": "Kimi K2.5", "score": 58, "cost": 2.2, "open": true}, {"name": "Gemini 3 Flash Preview", "score": 57, "cost": 3.0, "open": false}, {"name": "Jamba Large 1.7", "score": 57, "cost": 8.0, "open": true}, {"name": "DeepSeek V3.2", "score": 57, "cost": 0.38, "open": true}, {"name": "Claude Haiku 4.5", "score": 55, "cost": 5.0, "open": false}, {"name": "Hermes 4 405B", "score": 55, "cost": 3.0, "open": true}, {"name": "Hermes 4 70B", "score": 55, "cost": 0.4, "open": true}, {"name": "Palmyra X5", "score": 54, "cost": 6.0, "open": false}, {"name": "GLM-5 Turbo", "score": 53, "cost": 4.0, "open": true}, {"name": "Mistral Small 2603", "score": 51, "cost": 0.6, "open": true}, {"name": "Ministral 3 14B (local)", "score": 49, "cost": 0.2, "open": true}, {"name": "Intellect 3", "score": 48, "cost": 1.1, "open": true}, {"name": "MiniMax M2.7", "score": 48, "cost": 1.2, "open": true}, {"name": "Ministral 8B", "score": 48, "cost": 0.15, "open": true}, {"name": "Phi-4 14B", "score": 47, "cost": 0.14, "open": true}, {"name": "Qwen 3.5 27B Q4", "score": 47, "cost": 1.56, "open": true}, {"name": "Seed 2.0 Mini", "score": 46, "cost": 0.4, "open": false}, {"name": "Nemotron 3 Nano 30B", "score": 46, "cost": 0.2, "open": true}, {"name": "Qwen 3.5 35B-A3B Q4", "score": 45, "cost": 1.3, "open": true}, {"name": "Ministral 14B", "score": 45, "cost": 0.2, "open": true}, {"name": "Ministral 3 8B (local)", "score": 44, "cost": 0.15, "open": true}, {"name": "Solar Pro 3", "score": 44, "cost": 0.6, "open": true}, {"name": "Cydonia 24B", "score": 43, "cost": 0.5, "open": true}, {"name": "MiMo V2 Flash", "score": 43, "cost": 0.29, "open": true}, {"name": "Tongyi DeepResearch 30B", "score": 43, "cost": 0.45, "open": true}, {"name": "ERNIE 4.5 21B-A3B", "score": 42, "cost": 0.28, "open": true}, {"name": "Liquid LFM-2 24B-A2B", "score": 40, "cost": 0.12, "open": true}, {"name": "Ministral 3B", "score": 37, "cost": 0.1, "open": true}, {"name": "Qwen 3.5 9B Q4", "score": 37, "cost": 0.15, "open": true}, {"name": "Granite 4.0 H Micro", "score": 36, "cost": 0.11, "open": true}, {"name": "Qwen 3.5 27B IQ2_XXS", "score": 34, "cost": 1.56, "open": true}, {"name": "Ministral 3 3B (local)", "score": 34, "cost": 0.1, "open": true}, {"name": "Hunyuan A13B", "score": 27, "cost": 0.57, "open": true}, {"name": "Qwen 3.5 4B Q4", "score": 25, "cost": 0.1, "open": true}, {"name": "Nemotron 3 Nano 4B", "score": 24, "cost": 0.16, "open": true}, {"name": "Gemma 3 1B", "score": 23, "cost": 0.02, "open": true}, {"name": "Seed 2.0 Lite", "score": 22, "cost": 2.0, "open": false}, {"name": "Phi-4 Mini", "score": 21, "cost": 0.14, "open": true}, {"name": "Gemma 3 270M", "score": 4, "cost": 0.02, "open": true}, {"name": "Kimi K2", "score": 58, "open": true, "cost": 0}, {"name": "GLM 4.5 Air", "score": 57, "open": true, "cost": 0}, {"name": "Nemotron 3 Super 120B", "score": 57, "open": true, "cost": 0}, {"name": "Trinity Large", "score": 56, "open": true, "cost": 0}, {"name": "Trinity Mini", "score": 55, "open": true, "cost": 0}, {"name": "GPT-OSS 120B", "score": 52, "open": true, "cost": 0}, {"name": "Step 3.5 Flash", "score": 51, "open": true, "cost": 0}, {"name": "Llama 3.3 70B", "score": 48, "open": true, "cost": 0}, {"name": "Gemma 3 27B", "score": 44, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2 (local)", "score": 43, "open": true, "cost": 0}, {"name": "GPT-OSS 20B", "score": 41, "open": true, "cost": 0}, {"name": "Llama 3.1 8B Instant", "score": 41, "open": true, "cost": 0}, {"name": "Trinity Mini (local)", "score": 40, "open": true, "cost": 0}, {"name": "Gemma 3 12B", "score": 40, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2", "score": 38, "open": true, "cost": 0}, {"name": "Gemma 3n E4B", "score": 37, "open": true, "cost": 0}, {"name": "Gemma 3 4B", "score": 36, "open": true, "cost": 0}, {"name": "Llama 4 Scout", "score": 36, "open": true, "cost": 0}, {"name": "Gemma 3n E2B", "score": 34, "open": true, "cost": 0}, {"name": "ALLaM-2 7B", "score": 29, "open": true, "cost": 0}, {"name": "Liquid LFM-2.5 1.2B", "score": 19, "open": true, "cost": 0}];
+  const paid = all.filter(d => d.cost > 0);
+  const free = all.filter(d => d.cost === 0);
+
+  // Efficient frontier
+  const sorted = [...paid].sort((a, b) => a.cost - b.cost);
+  const frontier = [];
+  let best = -1;
+  for (const d of sorted) {
+    if (d.score > best) { frontier.push(d); best = d.score; }
+  }
+
+  const traces = [];
+
+  // Paid open
+  const po = paid.filter(d => d.open);
+  if (po.length) traces.push({
+    x: po.map(d => d.cost), y: po.map(d => d.score),
+    text: po.map(d => d.name), mode: 'markers+text', textposition: 'top right',
+    textfont: { size: 9, color: '#aaa' },
+    marker: { size: 8, color: '#4caf50', line: { width: 1, color: '#fff' } },
+    name: 'Open (paid)', type: 'scatter',
+  });
+
+  // Paid closed
+  const pc = paid.filter(d => !d.open);
+  if (pc.length) traces.push({
+    x: pc.map(d => d.cost), y: pc.map(d => d.score),
+    text: pc.map(d => d.name), mode: 'markers+text', textposition: 'top right',
+    textfont: { size: 9, color: '#aaa' },
+    marker: { size: 8, color: '#ff9800', line: { width: 1, color: '#fff' } },
+    name: 'Closed (paid)', type: 'scatter',
+  });
+
+  // Free open (squares on y axis)
+  const fo = free.filter(d => d.open);
+  if (fo.length) traces.push({
+    x: fo.map(() => 0.005), y: fo.map(d => d.score),
+    text: fo.map(d => d.name), mode: 'markers+text', textposition: 'middle right',
+    textfont: { size: 9, color: '#aaa' },
+    marker: { size: 8, color: '#4caf50', symbol: 'square', line: { width: 1, color: '#fff' } },
+    name: 'Open (free)', type: 'scatter',
+  });
+
+  // Free closed (squares on y axis)
+  const fc = free.filter(d => !d.open);
+  if (fc.length) traces.push({
+    x: fc.map(() => 0.005), y: fc.map(d => d.score),
+    text: fc.map(d => d.name), mode: 'markers+text', textposition: 'middle right',
+    textfont: { size: 9, color: '#aaa' },
+    marker: { size: 8, color: '#ff9800', symbol: 'square', line: { width: 1, color: '#fff' } },
+    name: 'Closed (free)', type: 'scatter',
+  });
+
+  // Frontier line
+  if (frontier.length > 1) traces.push({
+    x: frontier.map(d => d.cost), y: frontier.map(d => d.score),
+    mode: 'lines', line: { color: '#c9a0dc', width: 2, dash: 'dash' },
+    name: 'Efficient frontier', type: 'scatter',
+  });
+
+  Plotly.newPlot('chart', traces, {
+    paper_bgcolor: '#16213e', plot_bgcolor: '#16213e',
+    font: { family: 'JetBrains Mono, monospace', color: '#e0e0e0', size: 11 },
+    xaxis: {
+      title: 'Output Cost ($/M tokens)', type: 'log', color: '#888',
+      gridcolor: '#333', tickprefix: '$',
+      range: [Math.log10(0.003), Math.log10(30)],
+    },
+    yaxis: {
+      title: 'Composite Score', color: '#888', gridcolor: '#333',
+    },
+    legend: { bgcolor: 'rgba(0,0,0,0.3)', font: { size: 10 } },
+    margin: { l: 60, r: 30, t: 10, b: 50 },
+    hovermode: 'closest',
+  }, { responsive: true });
+})();
+</script>
+</div>
+<table id="audit">
+<thead>
+<tr>
+  <th data-col="0">Model</th>
+  <th data-col="1">Open</th>
+  <th data-col="2">Maker</th>
+  <th data-col="3">Released</th>
+  <th data-col="4">Total Params</th>
+  <th data-col="5">Active Params</th>
+  <th data-col="6">Disk (Q4)</th>
+  <th data-col="7">Cost (in/out $/M)</th>
+  <th data-col="8">Speed (tok/s)</th>
+  <th data-col="9">Campbell /12</th>
+  <th data-col="10">Booker /7</th>
+  <th data-col="11">Jung</th>
+  <th data-col="12">Tobias /20</th>
+  <th data-col="13">Score</th>
+  <th data-col="14">Notes</th>
+  <th data-col="15">Test Conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="section-header"><td colspan="16">Closed XXL (1 model)</td></tr>
+<tr data-org="Aion Labs" data-section="api" data-size="closed-xxl" data-hidden="false">
+  <td>Aion 2.0</td>
+  <td class="closed">Closed</td>
+  <td>Aion Labs</td>
+  <td>2026-02</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.8/1.6</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes">DeepSeek V3.2 fine-tune</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">1T+ (4 models)</td></tr>
+<tr data-org="Xiaomi" data-section="api" data-size="1t+" data-hidden="false">
+  <td>MiMo V2 Pro</td>
+  <td class="open">Open</td>
+  <td>Xiaomi</td>
+  <td>2026-03</td>
+  <td class="num">1T+</td>
+  <td class="num">42B</td>
+  <td class="num d-xxl">2000</td>
+  <td class="num">$1.0/3.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes">Categorised plots per book structure BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Moonshot" data-section="api" data-size="1t+" data-hidden="false">
+  <td>Kimi K2</td>
+  <td class="open">Open</td>
+  <td>Moonshot</td>
+  <td>2025-07</td>
+  <td class="num">1T</td>
+  <td class="num">32B</td>
+  <td class="num d-xxl">2000</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">58</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">2K tok</td>
+</tr>
+<tr data-org="Moonshot" data-section="api" data-size="1t+" data-hidden="false">
+  <td>Kimi K2.5</td>
+  <td class="open">Open</td>
+  <td>Moonshot</td>
+  <td>2025-12</td>
+  <td class="num">1T</td>
+  <td class="num">32B</td>
+  <td class="num d-xxl">2000</td>
+  <td class="num">$0.45/2.2</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">58</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepSeek" data-section="api" data-size="1t+" data-hidden="false">
+  <td>DeepSeek V3.2</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2025-12</td>
+  <td class="num">1.16T</td>
+  <td class="num">37B</td>
+  <td class="num d-xxl">2320</td>
+  <td class="num">$0.26/0.38</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-hi">18</td>
+  <td class="num">57</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">Closed XL (4 models)</td></tr>
+<tr data-org="Google" data-section="api" data-size="closed-xl" data-hidden="false">
+  <td>Gemini 3 Flash Preview</td>
+  <td class="closed">Closed</td>
+  <td>Google</td>
+  <td>2026-03</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.5/3.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">15</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">8</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">Used Campbell&#x27;s 17-stage, not Vogler&#x27;s 12</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Anthropic" data-section="api" data-size="closed-xl" data-hidden="false">
+  <td>Claude Haiku 4.5</td>
+  <td class="closed">Closed</td>
+  <td>Anthropic</td>
+  <td>2025-10</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$1.0/5.0</td>
+  <td class="num">—</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">55</td>
+  <td class="notes">Tested via agent, no file</td>
+  <td class="notes cond">agent (no limit)</td>
+</tr>
+<tr data-org="Writer" data-section="api" data-size="closed-xl" data-hidden="false">
+  <td>Palmyra X5</td>
+  <td class="closed">Closed</td>
+  <td>Writer</td>
+  <td>2025-11</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.6/6.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-hi">19</td>
+  <td class="num">54</td>
+  <td class="notes">Missing Forbidden Love</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="ByteDance" data-section="api" data-size="closed-xl" data-hidden="false">
+  <td>Seed 2.0 Lite</td>
+  <td class="closed">Closed</td>
+  <td>ByteDance</td>
+  <td>2026-01</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.25/2.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-low">1</td>
+  <td class="num">22</td>
+  <td class="notes">Refused to answer Tobias (overcautious copyright filter)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">600B–1T (6 models)</td></tr>
+<tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
+  <td>DeepSeek V3 0324</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2025-03</td>
+  <td class="num">685B</td>
+  <td class="num">?</td>
+  <td class="num d-xxl">1370</td>
+  <td class="num">$0.2/0.77</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-perfect">14</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">60</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Mistral" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>Mistral Large</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">675B</td>
+  <td class="num">41B</td>
+  <td class="num d-xxl">1350</td>
+  <td class="num">$0.5/1.5</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-perfect">14</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">60</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepCogito" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>Cogito V2.1 671B</td>
+  <td class="open">Open</td>
+  <td>DeepCogito</td>
+  <td>2026-01</td>
+  <td class="num">671B</td>
+  <td class="num">37B</td>
+  <td class="num d-xxl">1342</td>
+  <td class="num">$1.25/1.25</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
+  <td>DeepSeek V3.1 Terminus</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2025-09</td>
+  <td class="num">671B</td>
+  <td class="num">37B</td>
+  <td class="num d-xxl">1342</td>
+  <td class="num">$0.21/0.79</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
+  <td>DeepSeek V3.1</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2025-08</td>
+  <td class="num">671B</td>
+  <td class="num">37B</td>
+  <td class="num d-xxl">1342</td>
+  <td class="num">$0.15/0.75</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Zhipu" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>GLM-5 Turbo</td>
+  <td class="open">Open</td>
+  <td>Zhipu</td>
+  <td>2026-02</td>
+  <td class="num">745B</td>
+  <td class="num">44B</td>
+  <td class="num d-xxl">1490</td>
+  <td class="num">$1.2/4.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">53</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">Closed Large (assumed flagship) (4 models)</td></tr>
+<tr data-org="Google" data-section="api" data-size="unknown" data-hidden="false">
+  <td>Gemini 3.1 Flash Lite</td>
+  <td class="closed">Closed</td>
+  <td>Google</td>
+  <td>2026-03</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.25/1.5</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">58</td>
+  <td class="notes">1M context</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepSeek" data-section="api" data-size="unknown" data-hidden="true" style="display:none">
+  <td>DeepSeek V3.2 Exp</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2025-09</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.27/0.41</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Mistral" data-section="api" data-size="unknown" data-hidden="false">
+  <td>Mistral Small 2603</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2026-03</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.15/0.6</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-mid">12</td>
+  <td class="num">51</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="ByteDance" data-section="api" data-size="unknown" data-hidden="false">
+  <td>Seed 2.0 Mini</td>
+  <td class="closed">Closed</td>
+  <td>ByteDance</td>
+  <td>2026-01</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.1/0.4</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-mid">9</td>
+  <td class="num">46</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">200–400B (7 models)</td></tr>
+<tr data-org="Baidu" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>ERNIE 4.5 300B</td>
+  <td class="open">Open</td>
+  <td>Baidu</td>
+  <td>2025-06</td>
+  <td class="num">300B</td>
+  <td class="num">47B</td>
+  <td class="num d-xxl">600</td>
+  <td class="num">$0.28/1.1</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-perfect">14</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">60</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="AI21" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>Jamba Large 1.7</td>
+  <td class="open">Open</td>
+  <td>AI21</td>
+  <td>2025-09</td>
+  <td class="num">398B</td>
+  <td class="num">94B</td>
+  <td class="num d-xxl">796</td>
+  <td class="num">$2.0/8.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Arcee" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>Trinity Large</td>
+  <td class="open">Open</td>
+  <td>Arcee</td>
+  <td>2026-01</td>
+  <td class="num">400B</td>
+  <td class="num">13B</td>
+  <td class="num d-xxl">800</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">56</td>
+  <td class="notes">Free tier (temporary) BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="NousResearch" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>Hermes 4 405B</td>
+  <td class="open">Open</td>
+  <td>NousResearch</td>
+  <td>2026-02</td>
+  <td class="num">405B</td>
+  <td class="num">405B</td>
+  <td class="num d-xxl">810</td>
+  <td class="num">$1.0/3.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">55</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="StepFun" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>Step 3.5 Flash</td>
+  <td class="open">Open</td>
+  <td>StepFun</td>
+  <td>2026-01</td>
+  <td class="num">196B</td>
+  <td class="num">11B</td>
+  <td class="num d-xxl">394</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-mid">13</td>
+  <td class="num">51</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="MiniMax" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>MiniMax M2.7</td>
+  <td class="open">Open</td>
+  <td>MiniMax</td>
+  <td>2026-03</td>
+  <td class="num">230B</td>
+  <td class="num">10B</td>
+  <td class="num d-xxl">460</td>
+  <td class="num">$0.3/1.2</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-mid">9</td>
+  <td class="num">48</td>
+  <td class="notes">Tobias scored at 8K (reasoning burned 4K budget)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Xiaomi" data-section="api" data-size="200-400b" data-hidden="false">
+  <td>MiMo V2 Flash</td>
+  <td class="open">Open</td>
+  <td>Xiaomi</td>
+  <td>2026-03</td>
+  <td class="num">309B</td>
+  <td class="num">15B</td>
+  <td class="num ">—</td>
+  <td class="num">$0.09/0.29</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-low">6</td>
+  <td class="num">43</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">100–120B (7 models)</td></tr>
+<tr data-org="Qwen" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>Qwen 3.5 122B-A10B</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">122B</td>
+  <td class="num">10B</td>
+  <td class="num d-xxl">81</td>
+  <td class="num">$0.26/2.08</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Zhipu" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>GLM 4.5 Air</td>
+  <td class="open">Open</td>
+  <td>Zhipu</td>
+  <td>2025-06</td>
+  <td class="num">106B</td>
+  <td class="num">12B</td>
+  <td class="num d-xxl">73</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="NVIDIA" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>Nemotron 3 Super 120B</td>
+  <td class="open">Open</td>
+  <td>NVIDIA</td>
+  <td>2026-03</td>
+  <td class="num">120B</td>
+  <td class="num">12B</td>
+  <td class="num d-xxl">87</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">Free tier (temporary)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="OpenAI" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>GPT-OSS 120B</td>
+  <td class="open">Open</td>
+  <td>OpenAI</td>
+  <td>2025-12</td>
+  <td class="num">120B</td>
+  <td class="num">5.1B</td>
+  <td class="num d-xxl">70</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-hi">15</td>
+  <td class="num">52</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Prime Intellect" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>Intellect 3</td>
+  <td class="open">Open</td>
+  <td>Prime Intellect</td>
+  <td>2026-03</td>
+  <td class="num">106B</td>
+  <td class="num">12B</td>
+  <td class="num d-xxl">73</td>
+  <td class="num">$0.2/1.1</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-mid">9</td>
+  <td class="num">48</td>
+  <td class="notes">MoE from GLM-4.5 Air base</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Upstage" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>Solar Pro 3</td>
+  <td class="open">Open</td>
+  <td>Upstage</td>
+  <td>2025-12</td>
+  <td class="num">102B</td>
+  <td class="num">12B</td>
+  <td class="num d-xxl">204</td>
+  <td class="num">$0.15/0.6</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-mid">8</td>
+  <td class="num">44</td>
+  <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Meta" data-section="api" data-size="100-120b" data-hidden="false">
+  <td>Llama 4 Scout</td>
+  <td class="open">Open</td>
+  <td>Meta</td>
+  <td>2025-04</td>
+  <td class="num">109B</td>
+  <td class="num">17B</td>
+  <td class="num d-xxl">67</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">5</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-low">5</td>
+  <td class="num">36</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">70B (3 models)</td></tr>
+<tr data-org="NousResearch" data-section="api" data-size="70b" data-hidden="false">
+  <td>Hermes 4 70B</td>
+  <td class="open">Open</td>
+  <td>NousResearch</td>
+  <td>2026-02</td>
+  <td class="num">70.6B</td>
+  <td class="num">70.6B</td>
+  <td class="num d-xxl">42.5</td>
+  <td class="num">$0.13/0.4</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-hi">19</td>
+  <td class="num">55</td>
+  <td class="notes">Missing Rivalry</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Meta" data-section="api" data-size="70b" data-hidden="false">
+  <td>Llama 3.3 70B</td>
+  <td class="open">Open</td>
+  <td>Meta</td>
+  <td>2024-12</td>
+  <td class="num">70B</td>
+  <td class="num">70B</td>
+  <td class="num d-xxl">43</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-mid">12</td>
+  <td class="num">48</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="NousResearch" data-section="local" data-size="70b" data-hidden="false">
+  <td>Hermes 4 70B IQ2_XXS</td>
+  <td class="open">Open</td>
+  <td>NousResearch</td>
+  <td>2026-02</td>
+  <td class="num">70.6B</td>
+  <td class="num">70.6B</td>
+  <td class="num d-lg">19.1</td>
+  <td class="num">$0.13/0.4</td>
+  <td class="num">1.2</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-mid">3</td>
+  <td class="num s-unk">13(4f)</td>
+  <td class="num s-unk">?</td>
+  <td class="num">?</td>
+  <td class="notes">IQ2_XXS quantisation — testing dense 70B at extreme compression</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr class="section-header"><td colspan="16">22–30B (15 models)</td></tr>
+<tr data-org="Arcee" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>Trinity Mini</td>
+  <td class="open">Open</td>
+  <td>Arcee</td>
+  <td>2026-01</td>
+  <td class="num">26B</td>
+  <td class="num">3B</td>
+  <td class="num d-lg">16</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-hi">16</td>
+  <td class="num">55</td>
+  <td class="notes">Free tier (temporary)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Qwen 3.5 27B Q4</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">27.8B</td>
+  <td class="num">27.8B</td>
+  <td class="num d-lg">17</td>
+  <td class="num">$0.2/1.56</td>
+  <td class="num">1.5</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-mid">12</td>
+  <td class="num">47</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Zhipu" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>GLM 4.7 Flash</td>
+  <td class="open">Open</td>
+  <td>Zhipu</td>
+  <td>2025-08</td>
+  <td class="num">30B</td>
+  <td class="num">30B</td>
+  <td class="num d-lg">19</td>
+  <td class="num">?</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-mid">10</td>
+  <td class="num">47</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="NVIDIA" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Nemotron 3 Nano 30B</td>
+  <td class="open">Open</td>
+  <td>NVIDIA</td>
+  <td>2026-03</td>
+  <td class="num">30B</td>
+  <td class="num">3.2B</td>
+  <td class="num d-xl">24</td>
+  <td class="num">$0.05/0.2</td>
+  <td class="num">10.3</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-mid">8</td>
+  <td class="num">46</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Qwen 3.5 35B-A3B Q4</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">36B</td>
+  <td class="num">3B</td>
+  <td class="num d-xl">23</td>
+  <td class="num">$0.16/1.3</td>
+  <td class="num">5.6</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">8</td>
+  <td class="num s-mid">11</td>
+  <td class="num">45</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Gemma 3 27B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-03</td>
+  <td class="num">27B</td>
+  <td class="num">27B</td>
+  <td class="num d-lg">17</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-unk">9(1f)</td>
+  <td class="num s-mid">9</td>
+  <td class="num">44</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="TheDrummer" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>Cydonia 24B</td>
+  <td class="open">Open</td>
+  <td>TheDrummer</td>
+  <td>2025-10</td>
+  <td class="num">24B</td>
+  <td class="num">24B</td>
+  <td class="num d-lg">14.3</td>
+  <td class="num">$0.3/0.5</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-mid">12</td>
+  <td class="num">43</td>
+  <td class="notes">Community fine-tune</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Alibaba" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>Tongyi DeepResearch 30B</td>
+  <td class="open">Open</td>
+  <td>Alibaba</td>
+  <td>2026-02</td>
+  <td class="num">30.5B</td>
+  <td class="num">3.3B</td>
+  <td class="num d-lg">19</td>
+  <td class="num">$0.09/0.45</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-low">4</td>
+  <td class="num">43</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Baidu" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>ERNIE 4.5 21B-A3B</td>
+  <td class="open">Open</td>
+  <td>Baidu</td>
+  <td>2025-06</td>
+  <td class="num">21B</td>
+  <td class="num">3B</td>
+  <td class="num d-md">13</td>
+  <td class="num">$0.07/0.28</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-mid">9</td>
+  <td class="num">42</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Qwen" data-section="api" data-size="22-30b" data-hidden="true" style="display:none">
+  <td>Qwen 3.5 Flash</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-02</td>
+  <td class="num">35B</td>
+  <td class="num">3B</td>
+  <td class="num d-sm">3.4</td>
+  <td class="num">$0.07/0.26</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-low">5</td>
+  <td class="num">42</td>
+  <td class="notes">Same model as Qwen 3.5 35B-A3B (API name)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="OpenAI" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>GPT-OSS 20B</td>
+  <td class="open">Open</td>
+  <td>OpenAI</td>
+  <td>2025-12</td>
+  <td class="num">21B</td>
+  <td class="num">3.6B</td>
+  <td class="num d-md">13</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-low">5</td>
+  <td class="num">41</td>
+  <td class="notes">Reasoning burned all tokens</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Arcee" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Trinity Mini (local)</td>
+  <td class="open">Open</td>
+  <td>Arcee</td>
+  <td>2026-01</td>
+  <td class="num">26B</td>
+  <td class="num">3B</td>
+  <td class="num d-lg">15</td>
+  <td class="num">Free</td>
+  <td class="num">12.5</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-low">6</td>
+  <td class="num">40</td>
+  <td class="notes">ChatML template fix. Think blocks burn tokens — got 10/12 Campbell, ran out on Tobias.</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Liquid" data-section="api" data-size="22-30b" data-hidden="false">
+  <td>Liquid LFM-2 24B-A2B</td>
+  <td class="open">Open</td>
+  <td>Liquid</td>
+  <td>2026-02</td>
+  <td class="num">24B</td>
+  <td class="num">2.3B</td>
+  <td class="num d-lg">15</td>
+  <td class="num">$0.03/0.12</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-low">3</td>
+  <td class="num">40</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="22-30b" data-hidden="false">
+  <td>Qwen 3.5 27B IQ2_XXS</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">27.8B</td>
+  <td class="num">27.8B</td>
+  <td class="num d-md">7.8</td>
+  <td class="num">$0.2/1.56</td>
+  <td class="num">2.7</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">4</td>
+  <td class="num s-unk">7(2f)</td>
+  <td class="num s-mid">7</td>
+  <td class="num">34</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Mistral" data-section="api" data-size="22-30b" data-hidden="true" style="display:none">
+  <td>Dolphin Mistral 24B</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-06</td>
+  <td class="num">24B</td>
+  <td class="num">24B</td>
+  <td class="num d-lg">14.5</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-hi">15</td>
+  <td class="num">?</td>
+  <td class="notes">Venice free endpoint unreliable — 3/4 tests failed</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">13–16B (5 models)</td></tr>
+<tr data-org="Mistral" data-section="local" data-size="13-16b" data-hidden="false">
+  <td>Ministral 3 14B (local)</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">14B</td>
+  <td class="num">14B</td>
+  <td class="num d-md">8.7</td>
+  <td class="num">$0.2/0.2</td>
+  <td class="num">7.3</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-unk">9(4f)</td>
+  <td class="num s-hi">14</td>
+  <td class="num">49</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Microsoft" data-section="local" data-size="13-16b" data-hidden="false">
+  <td>Phi-4 14B</td>
+  <td class="open">Open</td>
+  <td>Microsoft</td>
+  <td>2024-12</td>
+  <td class="num">14B</td>
+  <td class="num">14B</td>
+  <td class="num d-md">9.1</td>
+  <td class="num">$0.07/0.14</td>
+  <td class="num">6.1</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">8</td>
+  <td class="num s-mid">13</td>
+  <td class="num">47</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Mistral" data-section="api" data-size="13-16b" data-hidden="false">
+  <td>Ministral 14B</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">14B</td>
+  <td class="num">14B</td>
+  <td class="num d-md">8.5</td>
+  <td class="num">$0.2/0.2</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-mid">8</td>
+  <td class="num">45</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="13-16b" data-hidden="false">
+  <td>Gemma 3 12B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-03</td>
+  <td class="num">12B</td>
+  <td class="num">12B</td>
+  <td class="num d-md">8.1</td>
+  <td class="num">Free</td>
+  <td class="num">11.3</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-low">5</td>
+  <td class="num">40</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Tencent" data-section="api" data-size="13-16b" data-hidden="false">
+  <td>Hunyuan A13B</td>
+  <td class="open">Open</td>
+  <td>Tencent</td>
+  <td>2025-11</td>
+  <td class="num">13B</td>
+  <td class="num">13B</td>
+  <td class="num d-md">8</td>
+  <td class="num">$0.14/0.57</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">3</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-low">2</td>
+  <td class="num">27</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">7–11B (11 models)</td></tr>
+<tr data-org="Mistral" data-section="api" data-size="7-11b" data-hidden="false">
+  <td>Ministral 8B</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">7.4B</td>
+  <td class="num">7.4B</td>
+  <td class="num d-sm">6.0</td>
+  <td class="num">$0.15/0.15</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-mid">9</td>
+  <td class="num">48</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Mistral" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>Ministral 3 8B (local)</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">7.4B</td>
+  <td class="num">7.4B</td>
+  <td class="num d-sm">6.0</td>
+  <td class="num">$0.15/0.15</td>
+  <td class="num">21</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-unk">9(5f)</td>
+  <td class="num s-mid">9</td>
+  <td class="num">44</td>
+  <td class="notes">Local verification of API results</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="NVIDIA" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>Nemotron Nano 9B V2 (local)</td>
+  <td class="open">Open</td>
+  <td>NVIDIA</td>
+  <td>2026-03</td>
+  <td class="num">9B</td>
+  <td class="num">9B</td>
+  <td class="num d-sm">6.1</td>
+  <td class="num">Free</td>
+  <td class="num">7.5</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-mid">8</td>
+  <td class="num">43</td>
+  <td class="notes">Garbled instruction following (generates homework alongside answers). Names present in output.</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Meta" data-section="api" data-size="7-11b" data-hidden="false">
+  <td>Llama 3.1 8B Instant</td>
+  <td class="open">Open</td>
+  <td>Meta</td>
+  <td>2024-07</td>
+  <td class="num">8B</td>
+  <td class="num">8B</td>
+  <td class="num d-sm">4.9</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">10</td>
+  <td class="num s-low">5</td>
+  <td class="num">41</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="NVIDIA" data-section="api" data-size="7-11b" data-hidden="false">
+  <td>Nemotron Nano 9B V2</td>
+  <td class="open">Open</td>
+  <td>NVIDIA</td>
+  <td>2026-03</td>
+  <td class="num">9B</td>
+  <td class="num">9B</td>
+  <td class="num d-sm">5.5</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-low">2</td>
+  <td class="num">38</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>Qwen 3.5 9B Q4</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">9.7B</td>
+  <td class="num">9.7B</td>
+  <td class="num d-sm">6.6</td>
+  <td class="num">$0.05/0.15</td>
+  <td class="num">14</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-unk">6(1f)</td>
+  <td class="num s-low">5</td>
+  <td class="num">37</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>Gemma 3n E4B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-06</td>
+  <td class="num">8B</td>
+  <td class="num">4B eff</td>
+  <td class="num d-md">7.5</td>
+  <td class="num">Free</td>
+  <td class="num">24</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-unk">10(1f)</td>
+  <td class="num s-low">1</td>
+  <td class="num">37</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Allen AI" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>OLMo 3 7B</td>
+  <td class="open">Open</td>
+  <td>Allen AI</td>
+  <td>2026-02</td>
+  <td class="num">7B</td>
+  <td class="num">7B</td>
+  <td class="num d-sm">4.5</td>
+  <td class="num">?</td>
+  <td class="num">32</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">4</td>
+  <td class="num s-unk">10(1f)</td>
+  <td class="num s-low">5</td>
+  <td class="num">35</td>
+  <td class="notes">All output in thinking field</td>
+  <td class="notes cond">2K tok, think:false (model ignored)</td>
+</tr>
+<tr data-org="Qwen" data-section="api" data-size="7-11b" data-hidden="true" style="display:none">
+  <td>Qwen 3.5 9B (API)</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">9.7B</td>
+  <td class="num">9.7B</td>
+  <td class="num d-sm">6.6</td>
+  <td class="num">$0.05/0.15</td>
+  <td class="num">—</td>
+  <td class="num s-low">1</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-mid">7</td>
+  <td class="num">34</td>
+  <td class="notes">Reasoning burned all tokens</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="7-11b" data-hidden="false">
+  <td>Gemma 3n E2B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-06</td>
+  <td class="num">8B</td>
+  <td class="num">2B eff</td>
+  <td class="num d-sm">5.6</td>
+  <td class="num">Free</td>
+  <td class="num">55</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">6</td>
+  <td class="num s-unk">7(2f)</td>
+  <td class="num s-low">3</td>
+  <td class="num">34</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="SDAIA" data-section="api" data-size="7-11b" data-hidden="false">
+  <td>ALLaM-2 7B</td>
+  <td class="open">Open</td>
+  <td>SDAIA</td>
+  <td>2025-08</td>
+  <td class="num">7B</td>
+  <td class="num">7B</td>
+  <td class="num d-sm">4.3</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-mid">8</td>
+  <td class="num s-low">2</td>
+  <td class="num s-mid">9</td>
+  <td class="num s-mid">8</td>
+  <td class="num">29</td>
+  <td class="notes">Arabic-focused</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr class="section-header"><td colspan="16">3–6B (10 models)</td></tr>
+<tr data-org="Mistral" data-section="api" data-size="3-6b" data-hidden="false">
+  <td>Ministral 3B</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">5.78B</td>
+  <td class="num">5.78B</td>
+  <td class="num d-sm">3.5</td>
+  <td class="num">$0.1/0.1</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">4</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-low">5</td>
+  <td class="num">37</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Gemma 3 4B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-03</td>
+  <td class="num">4B</td>
+  <td class="num">4B</td>
+  <td class="num d-sm">3.3</td>
+  <td class="num">Free</td>
+  <td class="num">50</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">4</td>
+  <td class="num s-unk">8(1f)</td>
+  <td class="num s-mid">8</td>
+  <td class="num">36</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="IBM" data-section="api" data-size="3-6b" data-hidden="false">
+  <td>Granite 4.0 H Micro</td>
+  <td class="open">Open</td>
+  <td>IBM</td>
+  <td>2026-03</td>
+  <td class="num">3B</td>
+  <td class="num">3B</td>
+  <td class="num d-sm">1.8</td>
+  <td class="num">$0.02/0.11</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-low">3</td>
+  <td class="num">36</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Mistral" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Ministral 3 3B (local)</td>
+  <td class="open">Open</td>
+  <td>Mistral</td>
+  <td>2025-12</td>
+  <td class="num">5.78B</td>
+  <td class="num">5.78B</td>
+  <td class="num d-sm">3.5</td>
+  <td class="num">$0.1/0.1</td>
+  <td class="num">60</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-hi">5</td>
+  <td class="num s-unk">9(1f)</td>
+  <td class="num s-low">3</td>
+  <td class="num">34</td>
+  <td class="notes">Tobias: fabricated Revenge X variants to fill 20 slots</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Qwen 3.5 4B Q4</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">4.7B</td>
+  <td class="num">4.7B</td>
+  <td class="num d-sm">3.4</td>
+  <td class="num">$0.02/0.1</td>
+  <td class="num">35</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-mid">3</td>
+  <td class="num s-unk">7(1f)</td>
+  <td class="num s-low">0</td>
+  <td class="num">25</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="NVIDIA" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Nemotron 3 Nano 4B</td>
+  <td class="open">Open</td>
+  <td>NVIDIA</td>
+  <td>2026-03</td>
+  <td class="num">4B</td>
+  <td class="num">4B</td>
+  <td class="num d-sm">2.8</td>
+  <td class="num">$0.04/0.16</td>
+  <td class="num">51</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-hi">5</td>
+  <td class="num s-unk">6(1f)</td>
+  <td class="num s-low">1</td>
+  <td class="num">24</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="3-6b" data-hidden="true" style="display:none">
+  <td>Qwen 3.5 4B Q8</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">4.7B</td>
+  <td class="num">4.7B</td>
+  <td class="num d-sm">5.3</td>
+  <td class="num">$0.02/0.1</td>
+  <td class="num">18</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-low">2</td>
+  <td class="num s-unk">6(4f)</td>
+  <td class="num s-low">0</td>
+  <td class="num">22</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Microsoft" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Phi-4 Mini</td>
+  <td class="open">Open</td>
+  <td>Microsoft</td>
+  <td>2025-01</td>
+  <td class="num">3.8B</td>
+  <td class="num">3.8B</td>
+  <td class="num d-sm">2.5</td>
+  <td class="num">$0.07/0.14</td>
+  <td class="num">56</td>
+  <td class="num s-mid">5</td>
+  <td class="num s-mid">4</td>
+  <td class="num s-mid">8</td>
+  <td class="num s-low">0</td>
+  <td class="num">21</td>
+  <td class="notes">Looping on long outputs</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Qwen" data-section="local" data-size="3-6b" data-hidden="true" style="display:none">
+  <td>Qwen 3.5 4B BF16</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-03</td>
+  <td class="num">4.7B</td>
+  <td class="num">4.7B</td>
+  <td class="num d-md">9.3</td>
+  <td class="num">$0.02/0.1</td>
+  <td class="num">5.7</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-low">2</td>
+  <td class="num s-unk">5(4f)</td>
+  <td class="num s-low">0</td>
+  <td class="num">21</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Arcee" data-section="local" data-size="3-6b" data-hidden="false">
+  <td>Trinity Nano</td>
+  <td class="open">Open</td>
+  <td>Arcee</td>
+  <td>2026-01</td>
+  <td class="num">6B</td>
+  <td class="num">1B</td>
+  <td class="num d-sm">3.8</td>
+  <td class="num">?</td>
+  <td class="num">68</td>
+  <td class="num s-low">0</td>
+  <td class="num s-mid">3</td>
+  <td class="num s-low">0</td>
+  <td class="num s-low">0</td>
+  <td class="num">6</td>
+  <td class="notes">Broken — looped on every test</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr class="section-header"><td colspan="16"><1.5B (3 models)</td></tr>
+<tr data-org="Google" data-section="local" data-size="lt1.5b" data-hidden="false">
+  <td>Gemma 3 1B</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-03</td>
+  <td class="num">1B</td>
+  <td class="num">1B</td>
+  <td class="num d-sm">0.82</td>
+  <td class="num">$0.01/0.02</td>
+  <td class="num">105</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-low">2</td>
+  <td class="num s-unk">7(1f)</td>
+  <td class="num s-low">0</td>
+  <td class="num">23</td>
+  <td class="notes"></td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+<tr data-org="Liquid" data-section="api" data-size="lt1.5b" data-hidden="false">
+  <td>Liquid LFM-2.5 1.2B</td>
+  <td class="open">Open</td>
+  <td>Liquid</td>
+  <td>2026-01</td>
+  <td class="num">1.2B</td>
+  <td class="num">1.2B</td>
+  <td class="num d-sm">0.8</td>
+  <td class="num">Free</td>
+  <td class="num">—</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-unk">?</td>
+  <td class="num s-mid">7</td>
+  <td class="num s-low">1</td>
+  <td class="num">19</td>
+  <td class="notes"></td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Google" data-section="local" data-size="lt1.5b" data-hidden="false">
+  <td>Gemma 3 270M</td>
+  <td class="open">Open</td>
+  <td>Google</td>
+  <td>2025-03</td>
+  <td class="num">270M</td>
+  <td class="num">270M</td>
+  <td class="num d-sm">0.29</td>
+  <td class="num">$0.01/0.02</td>
+  <td class="num">200</td>
+  <td class="num s-low">0</td>
+  <td class="num s-low">0</td>
+  <td class="num s-low">4</td>
+  <td class="num s-low">0</td>
+  <td class="num">4</td>
+  <td class="notes">Incoherent</td>
+  <td class="notes cond">2K tok, think:false</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<script>
+// Sort within each size-class group
+document.querySelectorAll('th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = +th.dataset.col;
+    const tbody = document.querySelector('#audit tbody');
+    const asc = th.dataset.dir !== 'asc';
+    th.dataset.dir = asc ? 'asc' : 'desc';
+
+    // Collect groups: each section header followed by its data rows
+    const allRows = Array.from(tbody.children);
+    const groups = [];
+    let current = null;
+    for (const row of allRows) {
+      if (row.classList.contains('section-header')) {
+        current = { header: row, rows: [] };
+        groups.push(current);
+      } else if (current) {
+        current.rows.push(row);
+      }
+    }
+
+    // Sort rows within each group
+    for (const g of groups) {
+      g.rows.sort((a, b) => {
+        let va = a.children[col]?.textContent.trim() || '';
+        let vb = b.children[col]?.textContent.trim() || '';
+        const na = parseNum(va);
+        const nb = parseNum(vb);
+        if (na >= 0 && nb >= 0) return asc ? na - nb : nb - na;
+        if (na >= 0) return asc ? -1 : 1;
+        if (nb >= 0) return asc ? 1 : -1;
+        return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+      });
+    }
+
+    // Rebuild tbody
+    tbody.innerHTML = '';
+    for (const g of groups) {
+      tbody.appendChild(g.header);
+      g.rows.forEach(r => tbody.appendChild(r));
+    }
+  });
+});
+// Filter by org
+document.querySelectorAll('[data-org]').forEach(cb => {
+  if (cb.tagName === 'INPUT') cb.addEventListener('change', applyFilters);
+});
+document.querySelectorAll('[data-oc]').forEach(cb => {
+  cb.addEventListener('change', applyFilters);
+});
+document.querySelectorAll('[data-size]').forEach(cb => {
+  if (cb.tagName === 'INPUT') cb.addEventListener('change', applyFilters);
+});
+document.getElementById('show-hidden').addEventListener('change', applyFilters);
+function parseNum(s) {
+  if (!s || s === '?' || s === '—') return -1;
+  // Handle params: 1T = 1000B, 270M = 0.27B
+  const t = s.match(/([\d.]+)\s*T/i); if (t) return parseFloat(t[1]) * 1000;
+  const b = s.match(/([\d.]+)\s*B/i); if (b) return parseFloat(b[1]);
+  const m = s.match(/([\d.]+)\s*M/i); if (m) return parseFloat(m[1]) / 1000;
+  const n = parseFloat(s.replace(/[^0-9.\-]/g, ''));
+  return isNaN(n) ? -1 : n;
+}
+
+function applyFilters() {
+  const orgs = new Set();
+  document.querySelectorAll('input[data-org]:checked').forEach(cb => orgs.add(cb.dataset.org));
+  const ocs = new Set();
+  document.querySelectorAll('[data-oc]:checked').forEach(cb => ocs.add(cb.dataset.oc));
+  const minTobias = +document.getElementById('min-tobias').value;
+  const minBooker = +document.getElementById('min-booker').value;
+  const minCampbell = +document.getElementById('min-campbell').value;
+  document.querySelectorAll('#audit tbody tr:not(.section-header)').forEach(row => {
+    const rowOrg = row.dataset.org || '';
+    const rowSize = row.dataset.size || '';
+    const oc = row.children[1]?.textContent.trim();
+    const tobias = parseNum(row.children[12]?.textContent);
+    const booker = parseNum(row.children[10]?.textContent);
+    const campbell = parseNum(row.children[9]?.textContent);
+    const sizes = new Set();
+    document.querySelectorAll('input[data-size]:checked').forEach(cb => sizes.add(cb.dataset.size));
+    const orgOk = orgs.has(rowOrg);
+    const sizeOk = sizes.has(rowSize);
+    const scoreOk = (tobias < 0 || tobias >= minTobias) &&
+                    (booker < 0 || booker >= minBooker) &&
+                    (campbell < 0 || campbell >= minCampbell);
+    const showHidden = document.getElementById('show-hidden').checked;
+    const isHidden = row.dataset.hidden === 'true';
+    const hiddenOk = showHidden || !isHidden;
+    row.style.display = (orgOk && ocs.has(oc) && sizeOk && scoreOk && hiddenOk) ? '' : 'none';
+  });
+}
+
+// Score sliders
+['tobias','booker','campbell'].forEach(name => {
+  const el = document.getElementById('min-' + name);
+  el.addEventListener('input', () => {
+    document.getElementById('min-' + name + '-val').textContent = el.value;
+    applyFilters();
+  });
+});
+</script>
+</body>
+</html>
+</body>
+</html>
