@@ -314,6 +314,14 @@ footer p {
   margin-bottom: 12px;
 }
 
+.accordion-item.hidden-article {
+  display: none;
+}
+
+.accordion-item.hidden-article.forced-visible {
+  display: block;
+}
+
 .accordion-header {
   width: 100%;
   display: flex;

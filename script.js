@@ -122,7 +122,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var route = parseHash();
     if (!route) return; // footnote anchor, not a route
     selectTab(route.tab);
-    if (route.tab === 'articles') openArticleBySlug(route.slug);
+    if (route.tab === 'articles') {
+      if (route.slug) {
+        openArticleBySlug(route.slug);
+      } else {
+        hideDirectOnlyArticles();
+      }
+    } else {
+      hideDirectOnlyArticles();
+    }
   });
 
   // ── Load articles eagerly on page load ──
@@ -154,7 +162,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var item = document.createElement('div');
       item.className = 'accordion-item';
       var slug = a.file.replace(/\.md$/, '');
+      var hidden = a.hidden === true;
       item.dataset.slug = slug;
+      item.dataset.hidden = hidden ? 'true' : 'false';
+      if (hidden) item.classList.add('hidden-article');
 
       var tags = '';
       if (a.tags && a.tags.length) {
@@ -198,41 +209,57 @@ document.addEventListener('DOMContentLoaded', function () {
   function openArticleBySlug(slug) {
     if (!slug) return;
     var item = panel.querySelector('.accordion-item[data-slug="' + slug + '"]');
+    if (item && isHiddenArticle(item)) revealHiddenArticle(item);
     if (!item || item.classList.contains('open')) return;
     toggleAccordion(item);
   }
 
   // ── Expand first (most recent) article ──
   function expandFirst() {
-    var first = panel.querySelector('.accordion-item');
+    var first = panel.querySelector('.accordion-item:not(.hidden-article)');
     if (first && !first.classList.contains('open')) {
       toggleAccordion(first);
     }
   }
 
+  function isHiddenArticle(item) {
+    return item && item.dataset.hidden === 'true';
+  }
+
+  function revealHiddenArticle(item) {
+    if (isHiddenArticle(item)) item.classList.add('forced-visible');
+  }
+
+  function hideHiddenArticle(item) {
+    if (!isHiddenArticle(item)) return;
+    item.classList.remove('forced-visible');
+  }
+
+  function hideDirectOnlyArticles() {
+    panel.querySelectorAll('.accordion-item.hidden-article').forEach(function (item) {
+      if (item.classList.contains('open')) {
+        closeAccordion(item);
+      } else {
+        hideHiddenArticle(item);
+      }
+    });
+  }
+
   // ── Accordion toggle ──
   function toggleAccordion(item) {
-    var body = item.querySelector('.accordion-body');
-
     if (item.classList.contains('open')) {
-      // Snap to scrollHeight first so the transition animates from content height to 0
-      body.style.maxHeight = body.scrollHeight + 'px';
-      // Force reflow
-      body.offsetHeight;
-      body.style.maxHeight = '0';
-      item.classList.remove('open');
+      closeAccordion(item);
       return;
     }
 
     // Close others
     document.querySelectorAll('.accordion-item.open').forEach(function (o) {
-      var ob = o.querySelector('.accordion-body');
-      ob.style.maxHeight = ob.scrollHeight + 'px';
-      ob.offsetHeight;
-      ob.style.maxHeight = '0';
-      o.classList.remove('open');
+      closeAccordion(o);
     });
 
+    revealHiddenArticle(item);
+
+    var body = item.querySelector('.accordion-body');
     item.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
 
@@ -244,6 +271,24 @@ document.addEventListener('DOMContentLoaded', function () {
       body.removeEventListener('transitionend', onEnd);
     }
     body.addEventListener('transitionend', onEnd);
+  }
+
+  function closeAccordion(item) {
+    var body = item.querySelector('.accordion-body');
+
+    // Snap to scrollHeight first so the transition animates from content height to 0
+    body.style.maxHeight = body.scrollHeight + 'px';
+    body.offsetHeight;
+    body.style.maxHeight = '0';
+    item.classList.remove('open');
+
+    if (isHiddenArticle(item)) {
+      function onEnd() {
+        if (!item.classList.contains('open')) hideHiddenArticle(item);
+        body.removeEventListener('transitionend', onEnd);
+      }
+      body.addEventListener('transitionend', onEnd);
+    }
   }
 
   // ── Fetch and render markdown ──

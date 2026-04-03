@@ -3,6 +3,7 @@ title: "Professional documents from plain text"
 date: 2026-02-13
 author: Kieran Hannigan
 tags: [markdown, pandoc, writing, productivity]
+hidden: true
 ---
 
 # Professional documents from plain text

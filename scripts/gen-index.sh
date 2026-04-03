@@ -18,6 +18,7 @@ while IFS= read -r f; do
   in_fm=0
   title="" date="" author=""
   tags_raw=""
+  hidden="false"
 
   while IFS= read -r line; do
     if [ "$in_fm" -eq 0 ] && [ "$line" = "---" ]; then
@@ -34,6 +35,14 @@ while IFS= read -r f; do
         date)   date="$val" ;;
         author) author="$val" ;;
         tags)   tags_raw="$val" ;;
+        hidden)
+          val="$(echo "$val" | tr '[:upper:]' '[:lower:]' | sed 's/^"//;s/"$//')"
+          if [ "$val" = "true" ]; then
+            hidden="true"
+          else
+            hidden="false"
+          fi
+          ;;
       esac
     fi
   done < "$f"
@@ -43,7 +52,7 @@ while IFS= read -r f; do
     awk '{gsub(/^ +| +$/,"",$0); if(length($0)>0) printf "%s\"%s\"", (NR>1?", ":""), $0}' | \
     awk '{print "["$0"]"}')"
 
-  entries+=("{\"file\":\"$fname\",\"title\":\"$title\",\"date\":\"$date\",\"author\":\"$author\",\"tags\":$tags_json}")
+  entries+=("{\"file\":\"$fname\",\"title\":\"$title\",\"date\":\"$date\",\"author\":\"$author\",\"tags\":$tags_json,\"hidden\":$hidden}")
 done < <(stat -c '%Y %n' "$DIR"/*.md 2>/dev/null | sort -rn | cut -d' ' -f2-)
 
 # Emit JSON array (already sorted by mtime)
