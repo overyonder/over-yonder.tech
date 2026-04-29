@@ -16,9 +16,9 @@ AI agents talk too much, and much of that talk is not warmth. It is padding. A
 useful answer often arrives wrapped in apology, preface, process notes, and soft
 phrases that do no work.
 
-[Caveman](https://github.com/JuliusBrussee/caveman) offers one fix: drop
+[Caveman](https://github.com/JuliusBrussee/caveman) takes one path: drop
 articles, break grammar, keep nouns and verbs. It is funny and memorable, and it
-saves tokens. It is also the wrong model for readable work.
+saves tokens. It is also a poor guide for readable work.
 
 Yes, the title uses antithesis: not this, but that. The old form still works
 when the contrast is real. It fails when it pretends to find depth where there is
@@ -28,13 +28,13 @@ Removing articles does not make writing easier to read. Brevity helps when the
 sentence still moves like thought, structure helps when it carries the reader
 forward, and concrete language helps because the reader can see what the sentence
 means. A sentence with articles can be short, clean, and fast. A sentence
-without them can still be ugly, vague, and hard to parse. The better model is
-Hemingway.
+without them can still be ugly, vague, and hard to parse. Hemingway gives us a
+better test.
 
-## What the Hemingway skill does
+## The useful part
 
-The Hemingway skill is a writing mode for AI agents. It keeps the discipline of
-short answers without turning the answer into grunts.
+The useful part is not a persona. It is a discipline: write short answers
+without turning them into grunts.
 
 It writes plain English. It prefers concrete nouns and active verbs, cuts
 throat-clearing, avoids corporate fog, and keeps articles where English needs
@@ -137,9 +137,9 @@ Even one short line shows the method: "He was an old man..." The sentence begins
 with the simplest possible claim. It does not perform intelligence. The reader
 can enter without effort.
 
-That is what an AI agent should learn from Hemingway: say the thing with the
-right nouns and verbs, but do not mistake bluntness for truth. The work is done
-when the reader sees clearly.
+That is the lesson for an AI agent: say the thing with the right nouns and verbs,
+but do not mistake bluntness for truth. The work is done when the reader sees
+clearly.
 
 ## The old Hemingway Editor had the right instinct
 
@@ -153,7 +153,7 @@ That was the good part. It showed where the reader might stumble.
 The lesson was never "obey every highlight." Passive voice is sometimes correct,
 an adverb can earn its keep, and a long sentence can carry a thought no short
 sentence can carry alone. The lesson was to revise for the reader. That is the
-Hemingway skill's job: remove friction and make the agent easier to understand.
+work here too: remove friction and make the agent easier to understand.
 
 ## Patterns worth knowing
 
@@ -240,9 +240,9 @@ work, and what remains should feel more human, not less.
 Caveman compression often makes prose shorter by damaging the sentence.
 Hemingway compression makes prose shorter by improving it.
 
-## The standard
+## The test
 
-The Hemingway skill should produce answers that are:
+An answer shaped this way should be:
 
 - brief, but grammatical
 - plain, but not childish
@@ -250,8 +250,8 @@ The Hemingway skill should produce answers that are:
 - complete, but not padded
 - technical, but readable
 
-It should preserve code, commands, filenames, errors, and exact terms, cut
-ceremony, and leave meaning intact. It should be brief enough to respect the
+It should preserve code, commands, filenames, errors, and exact terms. It should
+cut ceremony without cutting meaning. It should be brief enough to respect the
 reader and warm enough to remember that there is one.
 
 The answer is not caveman; it is Hemingway. Not fewer articles, but fewer wasted
