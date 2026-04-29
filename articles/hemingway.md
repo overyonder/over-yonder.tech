@@ -12,22 +12,24 @@ tags: [ai, writing, skills, readability]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-AI agents talk too much. That is the problem. Not grammar, not politeness, and
-not articles. A useful answer often arrives wrapped in apology, preface, process
-notes, and soft phrases that do no work.
+AI agents talk too much, and much of that talk is not warmth. It is padding. A
+useful answer often arrives wrapped in apology, preface, process notes, and soft
+phrases that do no work.
 
 [Caveman](https://github.com/JuliusBrussee/caveman) offers one fix: drop
-articles, break grammar, keep nouns and verbs. It is funny. It is memorable. It
+articles, break grammar, keep nouns and verbs. It is funny and memorable, and it
 saves tokens. It is also the wrong model for readable work.
 
 Yes, the title uses antithesis: not this, but that. The old form still works
 when the contrast is real. It fails when it pretends to find depth where there is
 only symmetry.
 
-Removing articles does not make writing easier to read. Brevity does. Structure
-does. Concrete language does. A sentence with articles can be short, clean, and
-fast. A sentence without them can still be ugly, vague, and hard to parse. The
-better model is Hemingway.
+Removing articles does not make writing easier to read. Brevity helps when the
+sentence still moves like thought, structure helps when it carries the reader
+forward, and concrete language helps because the reader can see what the sentence
+means. A sentence with articles can be short, clean, and fast. A sentence
+without them can still be ugly, vague, and hard to parse. The better model is
+Hemingway.
 
 ## What the Hemingway skill does
 
@@ -36,8 +38,8 @@ short answers without turning the answer into grunts.
 
 It writes plain English. It prefers concrete nouns and active verbs, cuts
 throat-clearing, avoids corporate fog, and keeps articles where English needs
-them. It does not ask the agent to sound primitive. It asks the agent to write
-clearly.
+them. It does not ask the agent to sound primitive, or cold, or clipped. It asks
+the agent to write clearly enough that the reader can relax.
 
 The difference matters:
 
@@ -53,7 +55,16 @@ small words do work.
 
 Ernest Hemingway's style is often reduced to "short sentences." That misses the
 point. His best prose is direct, physical, and plain. The words are common, and
-the sentences move.
+the sentences move. The surface can look brisk, but the effect is not brusque.
+The reader is drawn in because the prose does not get between the reader and the
+thing being seen.
+
+Orwell made the same point another way in [_Why I
+Write_](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/Why%20i%20write/):
+"Good prose is like a windowpane." That does not mean prose should have no
+personality. It means the prose should let the reader see through it. Sincerity
+and warmth come from that transparency. The writer is present because the work is
+honest, not because the sentence keeps pointing at the writer.
 
 In _The Old Man and the Sea_, Santiago's world is made from ordinary words: a
 skiff, a line, a fish, a hand, the sea. Hemingway lets concrete things carry the
@@ -117,15 +128,18 @@ weight. There is a passage that will stay with me forever:
 The passage does not come across as fake profundity, and it does not start a new
 paragraph each time it wants the reader to feel something. The hand cramps, the
 old man talks to it, and he eats because the body needs strength. The sentences
-stay with the body, the fish, the line, and the work. A passage has never struck
-me so deeply as this one where an old sailor is speaking to his failing hands.
+stay with the body, the fish, the line, and the work. That is why the passage is
+warm. It is not sentimental. It does not announce that it is about age, courage,
+or the betrayal of the body. It lets an old sailor speak to his failing hands,
+and the reader feels the rest.
 
 Even one short line shows the method: "He was an old man..." The sentence begins
 with the simplest possible claim. It does not perform intelligence. The reader
 can enter without effort.
 
 That is what an AI agent should learn from Hemingway: say the thing with the
-right nouns and verbs, then stop when the work is done.
+right nouns and verbs, but do not mistake bluntness for truth. The work is done
+when the reader sees clearly.
 
 ## The old Hemingway Editor had the right instinct
 
@@ -143,8 +157,8 @@ Hemingway skill's job: remove friction and make the agent easier to understand.
 
 ## Patterns worth knowing
 
-Bad AI prose is not only a vocabulary problem. It is a rhythm problem. The same
-shapes repeat until the reader distrusts them.
+Bad AI prose is not only a vocabulary problem. It is a rhythm problem and a
+sincerity problem. The same shapes repeat until the reader distrusts them.
 
 That does not make the shapes wrong. A writer who knows grammar and rhetoric
 would use them on purpose.
@@ -207,7 +221,8 @@ around it, keep it in the paragraph.
 
 Brevity is not staccato. Incomplete thoughts are not better thoughts. Short
 sentences can be clear, but a page full of short sentences starts to sound like a
-person tapping the table to prove they mean it.
+person tapping the table to prove they mean it. Clarity should invite the reader
+in. It should not poke the reader in the chest.
 
 The rule is not "never use these." The rule is: mean it.
 
@@ -220,7 +235,7 @@ that matters.
 When articles vanish, the reader has to infer relationships the sentence could
 have stated directly. That may save a token, but it may also spend attention.
 Good compression does not move work from the writer to the reader. It removes
-work.
+work, and what remains should feel more human, not less.
 
 Caveman compression often makes prose shorter by damaging the sentence.
 Hemingway compression makes prose shorter by improving it.
@@ -236,9 +251,10 @@ The Hemingway skill should produce answers that are:
 - technical, but readable
 
 It should preserve code, commands, filenames, errors, and exact terms, cut
-ceremony, and leave meaning intact.
+ceremony, and leave meaning intact. It should be brief enough to respect the
+reader and warm enough to remember that there is one.
 
-The answer is not caveman. It is Hemingway. Not fewer articles. Fewer wasted
+The answer is not caveman; it is Hemingway. Not fewer articles, but fewer wasted
 words.
 
 And yes: Hemingway the man was an insecure chauvinist. That was bad.
