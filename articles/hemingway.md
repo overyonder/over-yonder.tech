@@ -24,12 +24,13 @@ Yes, the title uses antithesis: not this, but that. The old form still works
 when the contrast is real. It fails when it pretends to find depth where there is
 only symmetry.
 
-Readability comes from movement, structure, and concrete language. Brevity helps
-when the sentence still moves like thought, structure helps when it carries the
-reader forward, and concrete language helps because the reader can see what the
-sentence means. A sentence with articles can be short, clean, and fast. A
-sentence stripped of articles can still be ugly, vague, and hard to parse.
-Hemingway gives us a better test.
+Removing articles does not make writing easier to read. Readability comes from
+movement, structure, and concrete language. Brevity helps when the sentence still
+moves like thought, structure helps when it carries the reader forward, and
+concrete language helps because the reader can see what the sentence means. A
+sentence with articles can be short, clean, and fast. A sentence stripped of
+articles can still be ugly, vague, and hard to parse. Hemingway gives us a
+better test.
 
 English uses articles because they carry meaning. "A fix" and "the fix" are
 different. "Open file" and "open the file" are different. In technical work,
@@ -61,11 +62,11 @@ The difference matters:
 The second version is almost as short, but it is easier to read because the
 small words do work.
 
-## Hemingway Was Brief
+## Hemingway Was Brief, Not Broken
 
 Ernest Hemingway's style is often reduced to "short sentences." That misses the
 point. His best prose is direct, physical, and plain. The words are common, and
-the sentences move. The surface can look brisk, while the effect stays warm.
+the sentences move. The surface can look brisk without becoming brusque.
 The reader is drawn in because the prose does not get between the reader and the
 thing being seen.
 
@@ -227,10 +228,10 @@ sentence to land. A strong point can earn that silence. A weak point standing
 alone under a spotlight only looks weaker. Keep it in the paragraph until it has
 earned the space around it.
 
-Brevity means carried meaning in fewer words. Staccato is chopped cadence.
-Incomplete thoughts are incomplete thoughts. Short sentences can be clear, but a
-page full of short sentences starts to sound like a person tapping the table to
-prove they mean it. Clarity should invite the reader in.
+Brevity is not staccato. Brevity means carried meaning in fewer words. Staccato
+is chopped cadence. Incomplete thoughts are incomplete thoughts. Short sentences
+can be clear, but a page full of short sentences starts to sound like a person
+tapping the table to prove they mean it. Clarity should invite the reader in.
 
 The rule is: mean it.
 
