@@ -31,6 +31,18 @@ means. A sentence with articles can be short, clean, and fast. A sentence
 without them can still be ugly, vague, and hard to parse. Hemingway gives us a
 better test.
 
+English uses articles because they carry meaning. "A fix" and "the fix" are
+different. "Open file" and "open the file" are different. In technical work,
+that matters.
+
+When articles vanish, the reader has to infer relationships the sentence could
+have stated directly. That may save a token, but it may also spend attention.
+Good compression does not move work from the writer to the reader. It removes
+work, and what remains should feel more human, not less.
+
+Caveman compression often makes prose shorter by damaging the sentence.
+Hemingway compression makes prose shorter by improving it.
+
 ## The useful part
 
 The useful part is not a persona. It is a discipline: write short answers
@@ -225,20 +237,6 @@ person tapping the table to prove they mean it. Clarity should invite the reader
 in. It should not poke the reader in the chest.
 
 The rule is not "never use these." The rule is: mean it.
-
-## Articles are not the enemy
-
-English uses articles because they carry meaning. "A fix" and "the fix" are
-different. "Open file" and "open the file" are different. In technical work,
-that matters.
-
-When articles vanish, the reader has to infer relationships the sentence could
-have stated directly. That may save a token, but it may also spend attention.
-Good compression does not move work from the writer to the reader. It removes
-work, and what remains should feel more human, not less.
-
-Caveman compression often makes prose shorter by damaging the sentence.
-Hemingway compression makes prose shorter by improving it.
 
 ## The test
 
