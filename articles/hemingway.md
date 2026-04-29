@@ -12,19 +12,17 @@ tags: [ai, writing, skills, readability]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-AI agents talk too much.
-
-That is the problem. Not grammar. Not politeness. Not articles. A useful answer
-often arrives wrapped in apology, preface, process notes, and soft phrases that
-do no work.
+AI agents talk too much. That is the problem. Not grammar, not politeness, and
+not articles. A useful answer often arrives wrapped in apology, preface, process
+notes, and soft phrases that do no work.
 
 [Caveman](https://github.com/JuliusBrussee/caveman) offers one fix: drop
 articles, break grammar, keep nouns and verbs. It is funny. It is memorable. It
 saves tokens. It is also the wrong model for readable work.
 
-Yes, the title uses antithesis: not this, but that. The old form still works. It
-fails when it pretends to find depth where there is only symmetry. False depth
-is bad. Clear contrast is good.
+Yes, the title uses antithesis: not this, but that. The old form still works
+when the contrast is real. It fails when it pretends to find depth where there is
+only symmetry.
 
 Removing articles does not make writing easier to read. Brevity does. Structure
 does. Concrete language does. A sentence with articles can be short, clean, and
@@ -36,11 +34,9 @@ better model is Hemingway.
 The Hemingway skill is a writing mode for AI agents. It keeps the discipline of
 short answers without turning the answer into grunts.
 
-It writes plain English. It prefers concrete nouns and active verbs. It cuts
-throat-clearing. It avoids corporate fog. It keeps articles where English needs
-them.
-
-It does not ask the agent to sound primitive. It asks the agent to write
+It writes plain English. It prefers concrete nouns and active verbs, cuts
+throat-clearing, avoids corporate fog, and keeps articles where English needs
+them. It does not ask the agent to sound primitive. It asks the agent to write
 clearly.
 
 The difference matters:
@@ -50,14 +46,14 @@ The difference matters:
 > Hemingway: "The bug is in the auth middleware. The expiry check uses `<`; it
 > should use `<=`."
 
-The second version is almost as short. It is easier to read. The small words do
-work.
+The second version is almost as short, but it is easier to read because the
+small words do work.
 
 ## Hemingway was brief, not broken
 
 Ernest Hemingway's style is often reduced to "short sentences." That misses the
-point. His best prose is direct, physical, and plain. The words are common. The
-sentences move.
+point. His best prose is direct, physical, and plain. The words are common, and
+the sentences move.
 
 In _The Old Man and the Sea_, Santiago's world is made from ordinary words: a
 skiff, a line, a fish, a hand, the sea. Hemingway lets concrete things carry the
@@ -118,18 +114,18 @@ weight. There is a passage that will stay with me forever:
 >
 > "He's coming up," he said. "Come on hand. Please come on."
 
-The passage does not come across as fake profundity. It does not start a new
-paragraph each time it wants the reader to feel something. The hand cramps. The
-old man talks to it. He eats because the body needs strength. The sentences stay
-with the body, the fish, the line, and the work. A passage has never struck me
-so deeply as this one where an old sailor is speaking to his failing hands.
+The passage does not come across as fake profundity, and it does not start a new
+paragraph each time it wants the reader to feel something. The hand cramps, the
+old man talks to it, and he eats because the body needs strength. The sentences
+stay with the body, the fish, the line, and the work. A passage has never struck
+me so deeply as this one where an old sailor is speaking to his failing hands.
 
 Even one short line shows the method: "He was an old man..." The sentence begins
 with the simplest possible claim. It does not perform intelligence. The reader
 can enter without effort.
 
-That is what an AI agent should learn from Hemingway. Say the thing. Use the
-right noun. Use the right verb. Stop when the work is done.
+That is what an AI agent should learn from Hemingway: say the thing with the
+right nouns and verbs, then stop when the work is done.
 
 ## The old Hemingway Editor had the right instinct
 
@@ -140,10 +136,10 @@ Yellow and red meant: look here; the reader may be working too hard.
 
 That was the good part. It showed where the reader might stumble.
 
-The lesson was never "obey every highlight." Passive voice is sometimes correct.
-An adverb can earn its keep. A long sentence can carry a thought no short
-sentence can carry alone. The lesson was: revise for the reader. That is the
-Hemingway skill's job. Remove friction. Make the agent easier to understand.
+The lesson was never "obey every highlight." Passive voice is sometimes correct,
+an adverb can earn its keep, and a long sentence can carry a thought no short
+sentence can carry alone. The lesson was to revise for the reader. That is the
+Hemingway skill's job: remove friction and make the agent easier to understand.
 
 ## Patterns worth knowing
 
@@ -194,19 +190,24 @@ hold a tree in memory.
 > is usually bad writing. The reader should not have to run a call stack to
 > finish a sentence.
 
-There are shibboleths too. They change. "Delve" was a tell for a while. Later
-tuning brushed it out. New ones appear: "name," "naming," and the habit of
+There are shibboleths too, and they change. "Delve" was a tell for a while.
+Later tuning brushed it out. New ones appear: "name," "naming," and the habit of
 turning every thought into an act of naming. Old ones persist: em dashes
 everywhere, semicolons used correctly but too often, and labeled bullet lists
 where the first phrase is bold and the rest of the sentence explains it. That
-last form is useful. It is also overused by machines, which annoys people who
-have written that way for twenty years and have the email archive to prove it.
+last form is useful, but it is also overused by machines, which annoys people
+who have written that way for twenty years and have the email archive to prove
+it.
 
 Line feeds can become a shibboleth too. Agents often put a conclusion in its own
-paragraph so it looks important. Humans do the same thing when they want a
+paragraph so it looks important, and humans do the same thing when they want a
 sentence to land. Sometimes it should land. Often it is just a weak sentence
 standing alone under a spotlight. If the point does not deserve the silence
 around it, keep it in the paragraph.
+
+Brevity is not staccato. Incomplete thoughts are not better thoughts. Short
+sentences can be clear, but a page full of short sentences starts to sound like a
+person tapping the table to prove they mean it.
 
 The rule is not "never use these." The rule is: mean it.
 
@@ -217,8 +218,7 @@ different. "Open file" and "open the file" are different. In technical work,
 that matters.
 
 When articles vanish, the reader has to infer relationships the sentence could
-have stated directly. That may save a token. It may also spend attention.
-
+have stated directly. That may save a token, but it may also spend attention.
 Good compression does not move work from the writer to the reader. It removes
 work.
 
@@ -235,8 +235,8 @@ The Hemingway skill should produce answers that are:
 - complete, but not padded
 - technical, but readable
 
-It should preserve code, commands, filenames, errors, and exact terms. It should
-cut ceremony. It should not cut meaning.
+It should preserve code, commands, filenames, errors, and exact terms, cut
+ceremony, and leave meaning intact.
 
 The answer is not caveman. It is Hemingway. Not fewer articles. Fewer wasted
 words.
