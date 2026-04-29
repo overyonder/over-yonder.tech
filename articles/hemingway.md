@@ -12,24 +12,24 @@ tags: [ai, writing, skills, readability]
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-AI agents talk too much, and much of that talk is not warmth. It is padding. A
+AI agents talk too much. Much of that talk is padding dressed as warmth. A
 useful answer often arrives wrapped in apology, preface, process notes, and soft
 phrases that do no work.
 
 [Caveman](https://github.com/JuliusBrussee/caveman) takes one path: drop
 articles, break grammar, keep nouns and verbs. It is funny and memorable, and it
-saves tokens. It is also a poor guide for readable work.
+saves tokens. For readable work, it gives the reader too little.
 
 Yes, the title uses antithesis: not this, but that. The old form still works
 when the contrast is real. It fails when it pretends to find depth where there is
 only symmetry.
 
-Removing articles does not make writing easier to read. Brevity helps when the
-sentence still moves like thought, structure helps when it carries the reader
-forward, and concrete language helps because the reader can see what the sentence
-means. A sentence with articles can be short, clean, and fast. A sentence
-without them can still be ugly, vague, and hard to parse. Hemingway gives us a
-better test.
+Readability comes from movement, structure, and concrete language. Brevity helps
+when the sentence still moves like thought, structure helps when it carries the
+reader forward, and concrete language helps because the reader can see what the
+sentence means. A sentence with articles can be short, clean, and fast. A
+sentence stripped of articles can still be ugly, vague, and hard to parse.
+Hemingway gives us a better test.
 
 English uses articles because they carry meaning. "A fix" and "the fix" are
 different. "Open file" and "open the file" are different. In technical work,
@@ -37,21 +37,19 @@ that matters.
 
 When articles vanish, the reader has to infer relationships the sentence could
 have stated directly. That may save a token, but it may also spend attention.
-Good compression does not move work from the writer to the reader. It removes
-work, and what remains should feel more human, not less.
+Good compression removes work for both writer and reader, and what remains should
+feel more human.
 
 Caveman compression often makes prose shorter by damaging the sentence.
 Hemingway compression makes prose shorter by improving it.
 
 ## The useful part
 
-The useful part is not a persona. It is a discipline: write short answers
-without turning them into grunts.
+The useful part is a discipline: write short answers that remain human.
 
 It writes plain English. It prefers concrete nouns and active verbs, cuts
 throat-clearing, avoids corporate fog, and keeps articles where English needs
-them. It does not ask the agent to sound primitive, or cold, or clipped. It asks
-the agent to write clearly enough that the reader can relax.
+them. It asks the agent to write clearly enough that the reader can relax.
 
 The difference matters:
 
@@ -63,20 +61,20 @@ The difference matters:
 The second version is almost as short, but it is easier to read because the
 small words do work.
 
-## Hemingway was brief, not broken
+## Hemingway Was Brief
 
 Ernest Hemingway's style is often reduced to "short sentences." That misses the
 point. His best prose is direct, physical, and plain. The words are common, and
-the sentences move. The surface can look brisk, but the effect is not brusque.
+the sentences move. The surface can look brisk, while the effect stays warm.
 The reader is drawn in because the prose does not get between the reader and the
 thing being seen.
 
 Orwell made the same point another way in [_Why I
 Write_](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/Why%20i%20write/):
-"Good prose is like a windowpane." That does not mean prose should have no
-personality. It means the prose should let the reader see through it. Sincerity
-and warmth come from that transparency. The writer is present because the work is
-honest, not because the sentence keeps pointing at the writer.
+"Good prose is like a windowpane." The prose has personality because the reader
+can see through it. Sincerity and warmth come from that transparency. The writer
+is present through honest work, rather than through sentences that point back at
+the writer.
 
 In _The Old Man and the Sea_, Santiago's world is made from ordinary words: a
 skiff, a line, a fish, a hand, the sea. Hemingway lets concrete things carry the
@@ -137,43 +135,41 @@ weight. There is a passage that will stay with me forever:
 >
 > "He's coming up," he said. "Come on hand. Please come on."
 
-The passage does not come across as fake profundity, and it does not start a new
-paragraph each time it wants the reader to feel something. The hand cramps, the
-old man talks to it, and he eats because the body needs strength. The sentences
-stay with the body, the fish, the line, and the work. That is why the passage is
-warm. It is not sentimental. It does not announce that it is about age, courage,
-or the betrayal of the body. It lets an old sailor speak to his failing hands,
-and the reader feels the rest.
+The passage stays clear of fake profundity. It keeps feeling inside the action:
+the hand cramps, the old man talks to it, and he eats because the body needs
+strength. The sentences stay with the body, the fish, the line, and the work.
+That is why the passage is warm. It lets an old sailor speak to his failing
+hands, and the reader feels age, courage, and bodily betrayal without being told
+to feel them.
 
 Even one short line shows the method: "He was an old man..." The sentence begins
-with the simplest possible claim. It does not perform intelligence. The reader
-can enter without effort.
+with the simplest possible claim. It gives the reader an open door.
 
 That is the lesson for an AI agent: say the thing with the right nouns and verbs,
-but do not mistake bluntness for truth. The work is done when the reader sees
-clearly.
+while remembering that bluntness and truth are different things. The work is done
+when the reader sees clearly.
 
 ## The old Hemingway Editor had the right instinct
 
 Before AI writing tools became rewrite engines, the old Hemingway Editor was
-useful because it was modest. It did not try to become the writer. It
-highlighted hard-to-read sentences, adverbs, passive voice, and dense phrasing.
-Yellow and red meant: look here; the reader may be working too hard.
+useful because it was modest. It highlighted hard-to-read sentences, adverbs,
+passive voice, and dense phrasing. Yellow and red meant: look here; the reader
+may be working too hard.
 
-That was the good part. It showed where the reader might stumble.
+That was the good part. It showed where the reader might stumble while leaving
+the writer in charge.
 
-The lesson was never "obey every highlight." Passive voice is sometimes correct,
-an adverb can earn its keep, and a long sentence can carry a thought no short
-sentence can carry alone. The lesson was to revise for the reader. That is the
-work here too: remove friction and make the agent easier to understand.
+The lesson was to revise for the reader. Passive voice is sometimes correct, an
+adverb can earn its keep, and a long sentence can carry a thought a short
+sentence cannot carry alone. That is the work here too: remove friction and make
+the agent easier to understand.
 
 ## Patterns worth knowing
 
-Bad AI prose is not only a vocabulary problem. It is a rhythm problem and a
-sincerity problem. The same shapes repeat until the reader distrusts them.
+Bad AI prose is a vocabulary problem, a rhythm problem, and a sincerity problem.
+The same shapes repeat until the reader distrusts them.
 
-That does not make the shapes wrong. A writer who knows grammar and rhetoric
-would use them on purpose.
+A writer who knows grammar and rhetoric uses those shapes on purpose.
 
 **Antithesis** sets one idea against another. "Not caveman; Hemingway" is
 antithesis. It works when the contrast is the argument. It fails when the
@@ -227,32 +223,32 @@ it.
 
 Line feeds can become a shibboleth too. Agents often put a conclusion in its own
 paragraph so it looks important, and humans do the same thing when they want a
-sentence to land. Sometimes it should land. Often it is just a weak sentence
-standing alone under a spotlight. If the point does not deserve the silence
-around it, keep it in the paragraph.
+sentence to land. A strong point can earn that silence. A weak point standing
+alone under a spotlight only looks weaker. Keep it in the paragraph until it has
+earned the space around it.
 
-Brevity is not staccato. Incomplete thoughts are not better thoughts. Short
-sentences can be clear, but a page full of short sentences starts to sound like a
-person tapping the table to prove they mean it. Clarity should invite the reader
-in. It should not poke the reader in the chest.
+Brevity means carried meaning in fewer words. Staccato is chopped cadence.
+Incomplete thoughts are incomplete thoughts. Short sentences can be clear, but a
+page full of short sentences starts to sound like a person tapping the table to
+prove they mean it. Clarity should invite the reader in.
 
-The rule is not "never use these." The rule is: mean it.
+The rule is: mean it.
 
 ## The test
 
 An answer shaped this way should be:
 
 - brief, but grammatical
-- plain, but not childish
-- direct, but not rude
-- complete, but not padded
+- plain and adult
+- direct and civil
+- complete and lean
 - technical, but readable
 
 It should preserve code, commands, filenames, errors, and exact terms. It should
-cut ceremony without cutting meaning. It should be brief enough to respect the
-reader and warm enough to remember that there is one.
+cut ceremony and keep meaning. It should be brief enough to respect the reader
+and warm enough to remember that there is one.
 
-The answer is not caveman; it is Hemingway. Not fewer articles, but fewer wasted
+The answer is not caveman; it is Hemingway. Keep the articles. Cut the wasted
 words.
 
 And yes: Hemingway the man was an insecure chauvinist. That was bad.
