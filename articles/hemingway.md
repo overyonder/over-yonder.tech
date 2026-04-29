@@ -16,15 +16,11 @@ AI agents talk too much.
 
 That is the problem. Not grammar. Not politeness. Not articles. A useful answer often arrives wrapped in apology, preface, process notes, and soft phrases that do no work.
 
-[Caveman](https://github.com/JuliusBrussee/caveman) offers one fix: drop articles, break grammar, keep nouns and verbs. It is funny. It is memorable. It saves tokens.
-
-It is also the wrong model for readable work.
+[Caveman](https://github.com/JuliusBrussee/caveman) offers one fix: drop articles, break grammar, keep nouns and verbs. It is funny. It is memorable. It saves tokens. It is also the wrong model for readable work.
 
 Yes, the title uses antithesis: not this, but that. The old form still works. It fails when it pretends to find depth where there is only symmetry. False depth is bad. Clear contrast is good.
 
-Removing articles does not make writing easier to read. Brevity does. Structure does. Concrete language does. A sentence with articles can be short, clean, and fast. A sentence without them can still be ugly, vague, and hard to parse.
-
-The better model is Hemingway.
+Removing articles does not make writing easier to read. Brevity does. Structure does. Concrete language does. A sentence with articles can be short, clean, and fast. A sentence without them can still be ugly, vague, and hard to parse. The better model is Hemingway.
 
 ## What the Hemingway skill does
 
@@ -58,11 +54,7 @@ Before AI writing tools became rewrite engines, the old Hemingway Editor was use
 
 That was the good part. It showed where the reader might stumble.
 
-The lesson was never "obey every highlight." Passive voice is sometimes correct. An adverb can earn its keep. A long sentence can carry a thought no short sentence can carry alone.
-
-The lesson was: revise for the reader.
-
-That is the Hemingway skill's job. Remove friction. Make the agent easier to understand.
+The lesson was never "obey every highlight." Passive voice is sometimes correct. An adverb can earn its keep. A long sentence can carry a thought no short sentence can carry alone. The lesson was: revise for the reader. That is the Hemingway skill's job. Remove friction. Make the agent easier to understand.
 
 ## Patterns worth knowing
 
@@ -116,10 +108,6 @@ The Hemingway skill should produce answers that are:
 
 It should preserve code, commands, filenames, errors, and exact terms. It should cut ceremony. It should not cut meaning.
 
-The answer is not caveman. It is Hemingway.
-
-Not fewer articles.
-
-Fewer wasted words.
+The answer is not caveman. It is Hemingway. Not fewer articles. Fewer wasted words.
 
 And yes: Hemingway the man was an insecure chauvinist. That was bad.
