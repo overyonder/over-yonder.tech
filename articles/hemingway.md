@@ -44,6 +44,10 @@ Ernest Hemingway's style is often reduced to "short sentences." That misses the 
 
 In *The Old Man and the Sea*, Santiago's world is made from ordinary words: a skiff, a line, a fish, a hand, the sea. Hemingway lets concrete things carry the weight.
 
+> [Insert the hand-cramp paragraph from *The Old Man and the Sea* here.]
+
+The passage does not come across as fake profundity. It does not start a new paragraph each time it wants the reader to feel something. The hand cramps. The old man talks to it. He eats because the body needs strength. The sentences stay with the body, the fish, the line, and the work.
+
 Even one short line shows the method: "He was an old man..." The sentence begins with the simplest possible claim. It does not perform intelligence. The reader can enter without effort.
 
 That is what an AI agent should learn from Hemingway. Say the thing. Use the right noun. Use the right verb. Stop when the work is done.
@@ -83,6 +87,8 @@ That does not make the shapes wrong. A writer who knows grammar and rhetoric wou
 > That is a natural expression for a thinker who does not serialize thoughts. It is usually bad writing. The reader should not have to run a call stack to finish a sentence.
 
 There are shibboleths too. They change. "Delve" was a tell for a while. Later tuning brushed it out. New ones appear: "name," "naming," and the habit of turning every thought into an act of naming. Old ones persist: em dashes everywhere, semicolons used correctly but too often, and labeled bullet lists where the first phrase is bold and the rest of the sentence explains it. That last form is useful. It is also overused by machines, which annoys people who have written that way for twenty years and have the email archive to prove it.
+
+Line feeds can become a shibboleth too. Agents often put a conclusion in its own paragraph so it looks important. Humans do the same thing when they want a sentence to land. Sometimes it should land. Often it is just a weak sentence standing alone under a spotlight. If the point does not deserve the silence around it, keep it in the paragraph.
 
 The rule is not "never use these." The rule is: mean it.
 
