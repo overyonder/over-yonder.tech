@@ -20,10 +20,6 @@ phrases that do no work.
 articles, break grammar, keep nouns and verbs. It is funny and memorable, and it
 saves tokens. For readable work, it gives the reader too little.
 
-Yes, the title uses antithesis: not this, but that. The old form still works
-when the contrast is real. It fails when it pretends to find depth where there is
-only symmetry.
-
 Removing articles does not make writing easier to read. Readability comes from
 movement, structure, and concrete language. Brevity helps when the sentence still
 moves like thought, structure helps when it carries the reader forward, and
@@ -174,9 +170,21 @@ Most readers know simile, metaphor, alliteration, assonance, and consonance. The
 more useful patterns here are the ones that shape the sentence itself. A writer
 who knows grammar and rhetoric uses those shapes on purpose.
 
+Yes, the title uses antithesis: not this, but that. The old form still works
+when the contrast is real. It fails when it pretends to find depth where there is
+only symmetry.
+
 **Antithesis** sets one idea against another. "Not caveman; Hemingway" is
 antithesis. It works when the contrast is the argument. It fails when the
 contrast is fake depth.
+
+**Isocolon** balances phrases of similar length and structure. "Brief, but
+grammatical; plain and adult; direct and civil." It can make prose feel ordered.
+Used too often, it sounds engineered.
+
+**Chiasmus** reverses structure across two clauses. "Ask not what your country
+can do for you..." is the famous example. It can make a sentence memorable, but
+it easily becomes a machine for fake depth.
 
 **Polysyndeton** repeats conjunctions: "the code and the tests and the docs and
 the release." It can create weight, rhythm, accumulation, or exhaustion. Used by
@@ -193,6 +201,10 @@ live here.
 **Anaphora** repeats the opening of clauses or sentences. "It should be brief.
 It should be clear. It should be true." This can build force. AI often overuses
 it to simulate conviction.
+
+**Epistrophe** repeats the ending of clauses or sentences. "Readable for the
+writer, readable for the agent, readable for the reader." It can close a rhythm
+tightly. Used by accident, it sounds like a slogan.
 
 **Parataxis** places clauses side by side without much subordination. "The test
 failed. The fixture was wrong. The parser never saw an id." It is direct. It is
