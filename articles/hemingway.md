@@ -254,5 +254,4 @@ words.
 
 Hemingway's prose is useful here. Hemingway the man is not a model. His
 chauvinism and insecurity shaped parts of his life and work, and they deserve
-plain judgment rather than a wink. Learn from the sentences. Do not excuse the
-man.
+plain judgment. Learn from the sentences. Do not excuse the man.
