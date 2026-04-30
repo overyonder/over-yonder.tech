@@ -267,10 +267,10 @@ and warm enough to remember that there is one.
 The answer is not caveman; it is Hemingway. Keep the articles. Cut the wasted
 words.
 
-The distinction matters. *The Old Man and the Sea* is a great book; *Across the
-River and into the Trees* is not. That late novel gives us the worse Hemingway:
-the aging colonel, the teenage Renata, and the fantasy of male importance
-returned through a young woman's devotion. Hemingway's prose is useful here, but
-Hemingway the man is not a model. His chauvinism and insecurity shaped parts of
-his life and work, and they deserve plain judgment. Learn from the sentences
-without excusing the man.
+A note on the man: this argument uses Hemingway's prose as a model, not
+Hemingway himself. *The Old Man and the Sea* is a great book; *Across the River
+and into the Trees* is not. That late novel gives us the worse Hemingway: the
+aging colonel, the teenage Renata, and the fantasy of male importance returned
+through a young woman's devotion. His chauvinism and insecurity were ugly parts
+of his character, and they shaped parts of his life and work. Learn from the
+sentences without excusing the man.
