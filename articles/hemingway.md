@@ -146,12 +146,12 @@ That is the lesson for an AI agent: say the thing with the right nouns and verbs
 while remembering that bluntness and truth are different things. The work is done
 when the reader sees clearly.
 
-## The old Hemingway Editor had the right instinct
+## The old [Hemingway Editor](https://hemingwayapp.com/) had the right instinct
 
-Before AI writing tools became rewrite engines, the old Hemingway Editor was
-useful because it was modest. It highlighted hard-to-read sentences, adverbs,
-passive voice, and dense phrasing. Yellow and red meant: look here; the reader
-may be working too hard.
+Before AI writing tools became rewrite engines, the old [Hemingway
+Editor](https://hemingwayapp.com/) was useful because it was modest. It
+highlighted hard-to-read sentences, adverbs, passive voice, and dense phrasing.
+Yellow and red meant: look here; the reader may be working too hard.
 
 That was the good part. It showed where the reader might stumble while leaving
 the writer in charge.
