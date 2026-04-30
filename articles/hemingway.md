@@ -49,13 +49,19 @@ enough that the reader can relax.
 
 The difference is small but material:
 
+> Default AI training priors: "I found the issue in the authentication
+> middleware. The token expiry comparison was using `<` instead of `<=`, which
+> meant tokens at the boundary were handled incorrectly. I updated the
+> comparison, verified the fix, and touched `auth/middleware.ts`. Let me know if
+> you want me to add broader regression coverage."
+
 > Caveman: "Bug in auth middleware. Token expiry check use `<` not `<=`. Fix."
 
 > Hemingway: "The bug is in the auth middleware. The expiry check uses `<`; it
 > should use `<=`."
 
-The second version is almost as short, but it is easier to read because the
-small words do work.
+The default version is tidy but padded, while the Hemingway version is almost as
+short as Caveman and easier to read because the small words do work.
 
 ## Hemingway Was Brief, Not Broken
 
