@@ -159,7 +159,7 @@ using yellow and red to show where the reader might stumble while leaving the
 writer in charge.
 
 The lesson was to revise for the reader. Passive voice is sometimes correct, an
-adverb can earn its keep, and a long sentence can carry a thought a short
+adverb can be the right word, and a long sentence can carry a thought a short
 sentence cannot carry alone. That is the work here too: remove friction and make
 the agent easier to understand.
 
@@ -197,9 +197,8 @@ release." It is faster and harder, which can feel clean or clipped depending on
 the sentence.
 
 **Syndetic listing** uses normal conjunctions: "the code, the tests, the docs,
-and the release." The Oxford comma earns its keep here because it matches how
-people pause when speaking, and most technical prose should live in this default
-rhythm.
+and the release." The Oxford comma helps here because it matches how people
+pause when speaking, and most technical prose should live in this default rhythm.
 
 **Anaphora** repeats the opening of clauses or sentences. "It should be brief.
 It should be clear. It should be true." This can build force, though AI often
@@ -235,9 +234,10 @@ later tuning brushed it out; newer ones include "name," "naming," and the habit
 of turning every thought into an act of naming; older ones persist, such as em
 dashes everywhere, semicolons used correctly but too often, and labeled bullet
 lists where the first phrase is bold and the rest of the sentence explains it.
-That last form is useful, but it is also overused by machines, which annoys
-people who have written that way for twenty years and have the email archive to
-prove it.
+Another current tell is the phrase "earns its keep," along with its cousin
+"earns its place." The labeled-list form is useful, but it is also overused by
+machines, which annoys people who have written that way for twenty years and
+have the email archive to prove it.
 
 Line feeds can become a shibboleth too. Agents often put a conclusion in its own
 paragraph so it looks important, and humans do the same thing when they want a
