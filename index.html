@@ -5,12 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>over|yonder</title>
-  <link rel="stylesheet" href="styles.css?v=22">
+  <script>
+    (function () {
+      var theme = localStorage.getItem('oy-theme');
+      if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
+    }());
+  </script>
+  <link rel="stylesheet" href="styles.css?v=23">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css">
 </head>
 
 <body>
+  <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">Dark</button>
+
   <div class="logo">
     <img src="assets/logo.webp" alt="over|yonder logo">
     <div class="scroll-arrow" aria-hidden="true">&#x2193;</div>
@@ -110,7 +118,7 @@
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/diff.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/latex.min.js"></script>
-  <script src="script.js?v=22"></script>
+  <script src="script.js?v=23"></script>
 </body>
 
 </html>

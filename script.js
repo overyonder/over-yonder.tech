@@ -4,8 +4,27 @@ document.addEventListener('DOMContentLoaded', function () {
   var tabBar = document.querySelector('.tab-bar');
   var tabs = document.querySelectorAll('.tab-btn');
   var panel = document.getElementById('articles-panel');
+  var themeToggle = document.querySelector('.theme-toggle');
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
+
+  function applyTheme(theme) {
+    var dark = theme === 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    localStorage.setItem('oy-theme', dark ? 'dark' : 'light');
+    if (themeToggle) {
+      themeToggle.textContent = dark ? 'Light' : 'Dark';
+      themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      themeToggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    }
+  }
+
+  applyTheme(localStorage.getItem('oy-theme') === 'dark' ? 'dark' : 'light');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+  }
 
   // ── Configure marked extensions (guarded so a CDN failure can't crash the page) ──
   try {
@@ -28,7 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }));
     }
   } catch (e) { console.error('marked extension init failed:', e); }
-  try { mermaid.initialize({ startOnLoad: false, theme: 'dark' }); }
+  try {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'neutral'
+    });
+  }
   catch (e) { console.error('mermaid init failed:', e); }
 
   // ── Placeholder for tab bar when it goes sticky ──
@@ -152,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
     .catch(function () {
-      panel.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Could not load articles.</p>';
+      panel.innerHTML = '<p class="load-state">Could not load articles.</p>';
     });
 
   // ── Build accordion and pre-render all articles ──
@@ -184,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="accordion-body">' +
           '<div class="article-content" data-file="' + esc(a.file) + '">' +
             '<div class="article-meta">' + esc(a.author) + ' &middot; ' + esc(a.date) + '</div>' +
-            '<p style="color:rgba(255,255,255,0.5)">Loading...</p>' +
+            '<p class="load-state">Loading...</p>' +
           '</div>' +
         '</div>';
 
@@ -336,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
       .catch(function () {
-        el.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Failed to load article.</p>';
+        el.innerHTML = '<p class="load-state">Failed to load article.</p>';
       });
   }
 

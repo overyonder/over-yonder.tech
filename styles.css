@@ -922,3 +922,294 @@ footer p {
 .article-content .hero-img {
   margin: 0.5em 0 1em 0;
 }
+
+/* ==================== Gruvbox sepia theme ==================== */
+
+:root {
+  color-scheme: light;
+  --bg: #fbf1c7;
+  --bg-soft: #f2e5bc;
+  --surface: rgba(249, 245, 215, 0.92);
+  --surface-solid: #f9f5d7;
+  --surface-raised: rgba(242, 229, 188, 0.94);
+  --text: #3c3836;
+  --text-soft: #504945;
+  --muted: #7c6f64;
+  --border: rgba(124, 111, 100, 0.28);
+  --shadow: rgba(60, 56, 54, 0.16);
+  --accent: #af3a03;
+  --accent-soft: rgba(175, 58, 3, 0.14);
+  --accent-2: #79740e;
+  --code-bg: rgba(213, 196, 161, 0.38);
+  --pre-bg: #282828;
+  --pre-text: #ebdbb2;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #282828;
+  --bg-soft: #32302f;
+  --surface: rgba(40, 40, 40, 0.92);
+  --surface-solid: #32302f;
+  --surface-raised: rgba(60, 56, 54, 0.94);
+  --text: #ebdbb2;
+  --text-soft: #d5c4a1;
+  --muted: #a89984;
+  --border: rgba(168, 153, 132, 0.28);
+  --shadow: rgba(0, 0, 0, 0.35);
+  --accent: #fe8019;
+  --accent-soft: rgba(254, 128, 25, 0.16);
+  --accent-2: #b8bb26;
+  --code-bg: rgba(80, 73, 69, 0.65);
+  --pre-bg: #1d2021;
+  --pre-text: #ebdbb2;
+}
+
+body,
+html {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(215, 153, 33, 0.12), transparent 30rem),
+    linear-gradient(180deg, var(--bg), var(--bg-soft));
+  color: var(--text);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 300;
+  min-width: 54px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 0.78rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--shadow);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.load-state {
+  color: var(--muted);
+}
+
+.logo img {
+  filter: drop-shadow(0 8px 24px var(--shadow));
+}
+
+:root[data-theme="dark"] .logo img {
+  filter: invert(88%) sepia(18%) saturate(520%) hue-rotate(6deg) brightness(103%) drop-shadow(0 8px 24px var(--shadow));
+}
+
+.scroll-arrow,
+.content h2,
+.content p,
+footer p {
+  color: var(--text);
+  text-shadow: none;
+}
+
+footer {
+  background: linear-gradient(180deg, transparent, var(--bg));
+}
+
+.project-card,
+.tab-btn,
+.accordion-header,
+.article-content {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.project-card:hover {
+  box-shadow: 0 14px 34px var(--shadow);
+}
+
+.project-card h3,
+.project-card .subtitle,
+.project-card .desc,
+.project-card .year,
+.accordion-header,
+.article-date,
+.accordion-chevron,
+.article-tag,
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content p,
+.article-content ul,
+.article-content ol,
+.article-content li,
+.article-content strong,
+.article-content em,
+.article-content q,
+.article-content cite,
+.article-content .article-meta,
+.article-content .author-badge a {
+  color: var(--text);
+  text-shadow: none;
+}
+
+.project-card .subtitle,
+.project-card .desc,
+.project-card .year,
+.article-date,
+.accordion-chevron,
+.article-tag,
+.article-content .article-meta,
+.article-content em,
+.article-content q,
+.article-content cite,
+.article-content .author-badge a {
+  color: var(--muted);
+}
+
+.tab-btn {
+  color: var(--text-soft);
+}
+
+.tab-btn:hover,
+.tab-btn.active,
+.accordion-header:hover {
+  background: var(--surface-raised);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.tab-btn.active {
+  box-shadow: 0 6px 20px var(--shadow), inset 0 -2px 0 var(--accent);
+}
+
+.visit-btn {
+  background: var(--accent-soft);
+  border-color: rgba(175, 58, 3, 0.32);
+  color: var(--accent);
+}
+
+:root[data-theme="dark"] .visit-btn {
+  border-color: rgba(254, 128, 25, 0.34);
+}
+
+.visit-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.article-content {
+  background: var(--surface-solid);
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  letter-spacing: 0;
+}
+
+.article-content a {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+.article-content a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.article-content code {
+  background: var(--code-bg);
+  color: var(--accent);
+}
+
+.article-content pre,
+.article-content .mermaid-grid .mermaid,
+.article-content svg:not(.stage-icon):not(.stage-breakdown):not(.octicon),
+.article-content .stage-breakdown {
+  background: var(--pre-bg) !important;
+  border-color: var(--border);
+  color: var(--pre-text);
+}
+
+.article-content pre code,
+.article-content pre code.hljs {
+  color: var(--pre-text);
+}
+
+.article-content th,
+.article-content td,
+.article-content hr,
+.article-meta {
+  border-color: var(--border);
+}
+
+.article-content th {
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.article-content td {
+  color: var(--text);
+}
+
+.article-tag,
+.article-content .emphasis-block,
+.article-content .markdown-alert-tip {
+  background: var(--accent-soft);
+}
+
+.article-content blockquote,
+.article-content .emphasis-block,
+.article-content .markdown-alert-tip,
+.article-content .pull-quote {
+  border-color: var(--accent);
+}
+
+.article-content blockquote,
+.article-content .pull-quote {
+  color: var(--text-soft);
+}
+
+.article-content .pull-quote .attribution,
+.article-content .markdown-alert-tip .markdown-alert-title,
+.article-content .markdown-alert-tip .markdown-alert-title svg {
+  color: var(--accent);
+  fill: var(--accent);
+}
+
+.article-content .markdown-alert p,
+.article-content .detour summary,
+.article-content .dead-ends summary,
+.article-content .info summary,
+.article-content .dead-ends h3 {
+  color: var(--text-soft);
+}
+
+.memory-comparison,
+.comparison-bad,
+.comparison-good {
+  border-color: var(--border);
+}
+
+.comparison-label,
+.comparison-stats {
+  color: var(--text);
+}
+
+.article-content .author-badge img {
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+}
