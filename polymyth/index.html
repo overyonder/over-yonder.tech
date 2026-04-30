@@ -143,7 +143,7 @@ tr:hover { background: #1a2a4a; }
 </div>
 <div class="main">
 <h1>Polymyth Model Capability Audit</h1>
-<div class="subtitle">Narrative knowledge tests across 86 models — sorted by composite score</div>
+<div class="subtitle">Narrative knowledge tests across 93 models — sorted by composite score</div>
 
 <div style="margin-bottom: 24px;">
 <h2 style="color: #c9a0dc; text-align: center;">Score vs Output Cost (Efficient Frontier)</h2>
@@ -151,7 +151,7 @@ tr:hover { background: #1a2a4a; }
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <script>
 (function() {
-  const all = [{"name": "ERNIE 4.5 300B", "score": 60, "cost": 1.1, "open": true}, {"name": "Mistral Large", "score": 60, "cost": 1.5, "open": true}, {"name": "Aion 2.0", "score": 59, "cost": 1.6, "open": false}, {"name": "Cogito V2.1 671B", "score": 59, "cost": 1.25, "open": true}, {"name": "MiMo V2 Pro", "score": 59, "cost": 3.0, "open": true}, {"name": "Qwen 3.5 122B-A10B", "score": 59, "cost": 2.08, "open": true}, {"name": "Gemini 3.1 Flash Lite", "score": 58, "cost": 1.5, "open": false}, {"name": "Kimi K2.5", "score": 58, "cost": 2.2, "open": true}, {"name": "Gemini 3 Flash Preview", "score": 57, "cost": 3.0, "open": false}, {"name": "Jamba Large 1.7", "score": 57, "cost": 8.0, "open": true}, {"name": "DeepSeek V3.2", "score": 57, "cost": 0.38, "open": true}, {"name": "Claude Haiku 4.5", "score": 55, "cost": 5.0, "open": false}, {"name": "Hermes 4 405B", "score": 55, "cost": 3.0, "open": true}, {"name": "Hermes 4 70B", "score": 55, "cost": 0.4, "open": true}, {"name": "Palmyra X5", "score": 54, "cost": 6.0, "open": false}, {"name": "GLM-5 Turbo", "score": 53, "cost": 4.0, "open": true}, {"name": "Mistral Small 2603", "score": 51, "cost": 0.6, "open": true}, {"name": "Ministral 3 14B (local)", "score": 49, "cost": 0.2, "open": true}, {"name": "Gemma 4 26B-A4B Q4", "score": 49, "cost": 0.02, "open": true}, {"name": "Intellect 3", "score": 48, "cost": 1.1, "open": true}, {"name": "MiniMax M2.7", "score": 48, "cost": 1.2, "open": true}, {"name": "Ministral 8B", "score": 48, "cost": 0.15, "open": true}, {"name": "Phi-4 14B", "score": 47, "cost": 0.14, "open": true}, {"name": "Seed 2.0 Mini", "score": 46, "cost": 0.4, "open": false}, {"name": "Nemotron 3 Nano 30B", "score": 46, "cost": 0.2, "open": true}, {"name": "Ministral 14B", "score": 45, "cost": 0.2, "open": true}, {"name": "Ministral 3 8B (local)", "score": 44, "cost": 0.15, "open": true}, {"name": "Solar Pro 3", "score": 44, "cost": 0.6, "open": true}, {"name": "Cydonia 24B", "score": 43, "cost": 0.5, "open": true}, {"name": "MiMo V2 Flash", "score": 43, "cost": 0.29, "open": true}, {"name": "Tongyi DeepResearch 30B", "score": 43, "cost": 0.45, "open": true}, {"name": "ERNIE 4.5 21B-A3B", "score": 42, "cost": 0.28, "open": true}, {"name": "Liquid LFM-2 24B-A2B", "score": 40, "cost": 0.12, "open": true}, {"name": "Gemma 4 E4B Q4", "score": 38, "cost": 0.02, "open": true}, {"name": "Qwen 3.6 35B-A3B", "score": 38, "cost": 0.965, "open": true}, {"name": "Ministral 3B", "score": 37, "cost": 0.1, "open": true}, {"name": "Qwen 3.5 9B Q4", "score": 37, "cost": 0.15, "open": true}, {"name": "Granite 4.0 H Micro", "score": 36, "cost": 0.11, "open": true}, {"name": "Ministral 3 3B (local)", "score": 34, "cost": 0.1, "open": true}, {"name": "Gemma 4 E2B Q4", "score": 28, "cost": 0.02, "open": true}, {"name": "Hunyuan A13B", "score": 27, "cost": 0.57, "open": true}, {"name": "Nemotron 3 Nano 4B", "score": 24, "cost": 0.16, "open": true}, {"name": "Gemma 3 1B", "score": 23, "cost": 0.02, "open": true}, {"name": "Seed 2.0 Lite", "score": 22, "cost": 2.0, "open": false}, {"name": "Phi-4 Mini", "score": 21, "cost": 0.14, "open": true}, {"name": "Qwen 3.6 27B", "score": 21, "cost": 3.25, "open": true}, {"name": "Gemma 3 270M", "score": 4, "cost": 0.02, "open": true}, {"name": "Ling 2.6 1T", "score": 60, "open": true, "cost": 0}, {"name": "Kimi K2", "score": 58, "open": true, "cost": 0}, {"name": "GLM 4.5 Air", "score": 57, "open": true, "cost": 0}, {"name": "Nemotron 3 Super 120B", "score": 57, "open": true, "cost": 0}, {"name": "Trinity Large", "score": 56, "open": true, "cost": 0}, {"name": "Trinity Mini", "score": 55, "open": true, "cost": 0}, {"name": "GPT-OSS 120B", "score": 52, "open": true, "cost": 0}, {"name": "Step 3.5 Flash", "score": 51, "open": true, "cost": 0}, {"name": "Llama 3.3 70B", "score": 48, "open": true, "cost": 0}, {"name": "Gemma 3 27B", "score": 44, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2 (local)", "score": 43, "open": true, "cost": 0}, {"name": "GPT-OSS 20B", "score": 41, "open": true, "cost": 0}, {"name": "Llama 3.1 8B Instant", "score": 41, "open": true, "cost": 0}, {"name": "Trinity Mini (local)", "score": 40, "open": true, "cost": 0}, {"name": "Gemma 3 12B", "score": 40, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2", "score": 38, "open": true, "cost": 0}, {"name": "Gemma 3n E4B", "score": 37, "open": true, "cost": 0}, {"name": "Gemma 3 4B", "score": 36, "open": true, "cost": 0}, {"name": "Llama 4 Scout", "score": 36, "open": true, "cost": 0}, {"name": "Gemma 3n E2B", "score": 34, "open": true, "cost": 0}, {"name": "ALLaM-2 7B", "score": 29, "open": true, "cost": 0}, {"name": "Liquid LFM-2.5 1.2B", "score": 19, "open": true, "cost": 0}];
+  const all = [{"name": "ERNIE 4.5 300B", "score": 60, "cost": 1.1, "open": true}, {"name": "MiMo V2.5 Pro", "score": 60, "cost": 3.0, "open": true}, {"name": "Mistral Large", "score": 60, "cost": 1.5, "open": true}, {"name": "Aion 2.0", "score": 59, "cost": 1.6, "open": false}, {"name": "Cogito V2.1 671B", "score": 59, "cost": 1.25, "open": true}, {"name": "Qwen 3.6 Plus", "score": 59, "cost": 1.95, "open": true}, {"name": "DeepSeek V4 Flash", "score": 58, "cost": 0.28, "open": true}, {"name": "Gemini 3.1 Flash Lite", "score": 58, "cost": 1.5, "open": false}, {"name": "Kimi K2.6", "score": 58, "cost": 3.5, "open": true}, {"name": "DeepSeek V4 Pro", "score": 57, "cost": 0.87, "open": true}, {"name": "GLM 5.1", "score": 57, "cost": 3.5, "open": true}, {"name": "Gemini 3 Flash Preview", "score": 57, "cost": 3.0, "open": false}, {"name": "Jamba Large 1.7", "score": 57, "cost": 8.0, "open": true}, {"name": "Qwen 3.6 Max Preview", "score": 57, "cost": 6.24, "open": true}, {"name": "Claude Haiku 4.5", "score": 55, "cost": 5.0, "open": false}, {"name": "Hermes 4 405B", "score": 55, "cost": 3.0, "open": true}, {"name": "Hermes 4 70B", "score": 55, "cost": 0.4, "open": true}, {"name": "Palmyra X5", "score": 54, "cost": 6.0, "open": false}, {"name": "Mistral Small 2603", "score": 51, "cost": 0.6, "open": true}, {"name": "Ministral 3 14B (local)", "score": 49, "cost": 0.2, "open": true}, {"name": "Gemma 4 26B-A4B Q4", "score": 49, "cost": 0.02, "open": true}, {"name": "Intellect 3", "score": 48, "cost": 1.1, "open": true}, {"name": "MiniMax M2.7", "score": 48, "cost": 1.2, "open": true}, {"name": "Ministral 8B", "score": 48, "cost": 0.15, "open": true}, {"name": "Phi-4 14B", "score": 47, "cost": 0.14, "open": true}, {"name": "Seed 2.0 Mini", "score": 46, "cost": 0.4, "open": false}, {"name": "Nemotron 3 Nano 30B", "score": 46, "cost": 0.2, "open": true}, {"name": "Ministral 14B", "score": 45, "cost": 0.2, "open": true}, {"name": "Ministral 3 8B (local)", "score": 44, "cost": 0.15, "open": true}, {"name": "Solar Pro 3", "score": 44, "cost": 0.6, "open": true}, {"name": "Cydonia 24B", "score": 43, "cost": 0.5, "open": true}, {"name": "MiMo V2 Flash", "score": 43, "cost": 0.29, "open": true}, {"name": "Tongyi DeepResearch 30B", "score": 43, "cost": 0.45, "open": true}, {"name": "ERNIE 4.5 21B-A3B", "score": 42, "cost": 0.28, "open": true}, {"name": "Liquid LFM-2 24B-A2B", "score": 40, "cost": 0.12, "open": true}, {"name": "Gemma 4 E4B Q4", "score": 38, "cost": 0.02, "open": true}, {"name": "Qwen 3.6 35B-A3B", "score": 38, "cost": 0.965, "open": true}, {"name": "Ministral 3B", "score": 37, "cost": 0.1, "open": true}, {"name": "Qwen 3.5 9B Q4", "score": 37, "cost": 0.15, "open": true}, {"name": "Granite 4.0 H Micro", "score": 36, "cost": 0.11, "open": true}, {"name": "Ministral 3 3B (local)", "score": 34, "cost": 0.1, "open": true}, {"name": "Gemma 4 E2B Q4", "score": 28, "cost": 0.02, "open": true}, {"name": "Hunyuan A13B", "score": 27, "cost": 0.57, "open": true}, {"name": "Nemotron 3 Nano 4B", "score": 24, "cost": 0.16, "open": true}, {"name": "Gemma 3 1B", "score": 23, "cost": 0.02, "open": true}, {"name": "Seed 2.0 Lite", "score": 22, "cost": 2.0, "open": false}, {"name": "Phi-4 Mini", "score": 21, "cost": 0.14, "open": true}, {"name": "Qwen 3.6 27B", "score": 21, "cost": 3.25, "open": true}, {"name": "Gemma 3 270M", "score": 4, "cost": 0.02, "open": true}, {"name": "Ling 2.6 1T", "score": 60, "open": true, "cost": 0}, {"name": "Kimi K2", "score": 58, "open": true, "cost": 0}, {"name": "GLM 4.5 Air", "score": 57, "open": true, "cost": 0}, {"name": "Nemotron 3 Super 120B", "score": 57, "open": true, "cost": 0}, {"name": "Trinity Large", "score": 56, "open": true, "cost": 0}, {"name": "Trinity Mini", "score": 55, "open": true, "cost": 0}, {"name": "GPT-OSS 120B", "score": 52, "open": true, "cost": 0}, {"name": "Step 3.5 Flash", "score": 51, "open": true, "cost": 0}, {"name": "Llama 3.3 70B", "score": 48, "open": true, "cost": 0}, {"name": "Gemma 3 27B", "score": 44, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2 (local)", "score": 43, "open": true, "cost": 0}, {"name": "GPT-OSS 20B", "score": 41, "open": true, "cost": 0}, {"name": "Llama 3.1 8B Instant", "score": 41, "open": true, "cost": 0}, {"name": "Trinity Mini (local)", "score": 40, "open": true, "cost": 0}, {"name": "Gemma 3 12B", "score": 40, "open": true, "cost": 0}, {"name": "Nemotron Nano 9B V2", "score": 38, "open": true, "cost": 0}, {"name": "Gemma 3n E4B", "score": 37, "open": true, "cost": 0}, {"name": "Gemma 3 4B", "score": 36, "open": true, "cost": 0}, {"name": "Llama 4 Scout", "score": 36, "open": true, "cost": 0}, {"name": "Gemma 3n E2B", "score": 34, "open": true, "cost": 0}, {"name": "ALLaM-2 7B", "score": 29, "open": true, "cost": 0}, {"name": "Liquid LFM-2.5 1.2B", "score": 19, "open": true, "cost": 0}];
   const paid = all.filter(d => d.cost > 0);
   const free = all.filter(d => d.cost === 0);
 
@@ -271,7 +271,7 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">DeepSeek V3.2 fine-tune</td>
   <td class="notes cond">4K tok</td>
 </tr>
-<tr class="section-header"><td colspan="16">1T+ (5 models)</td></tr>
+<tr class="section-header"><td colspan="16">1T+ (7 models)</td></tr>
 <tr data-org="InclusionAI" data-section="api" data-size="1t+" data-hidden="false">
   <td>Ling 2.6 1T</td>
   <td class="open">Open</td>
@@ -291,6 +291,24 @@ tr:hover { background: #1a2a4a; }
   <td class="notes cond">4K tok</td>
 </tr>
 <tr data-org="Xiaomi" data-section="api" data-size="1t+" data-hidden="false">
+  <td>MiMo V2.5 Pro</td>
+  <td class="open">Open</td>
+  <td>Xiaomi</td>
+  <td>2026-04</td>
+  <td class="num">1T+</td>
+  <td class="num">42B</td>
+  <td class="num d-xxl">2000</td>
+  <td class="num">$1.0/3.0</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-perfect">14</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">60</td>
+  <td class="notes">Supersedes MiMo V2 Pro; perfect phase-1 score</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Xiaomi" data-section="api" data-size="1t+" data-hidden="true" style="display:none">
   <td>MiMo V2 Pro</td>
   <td class="open">Open</td>
   <td>Xiaomi</td>
@@ -326,7 +344,7 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">BF16 size (no Q4 GGUF)</td>
   <td class="notes cond">2K tok</td>
 </tr>
-<tr data-org="Moonshot" data-section="api" data-size="1t+" data-hidden="false">
+<tr data-org="Moonshot" data-section="api" data-size="1t+" data-hidden="true" style="display:none">
   <td>Kimi K2.5</td>
   <td class="open">Open</td>
   <td>Moonshot</td>
@@ -344,7 +362,25 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">BF16 size (no Q4 GGUF)</td>
   <td class="notes cond">4K tok</td>
 </tr>
-<tr data-org="DeepSeek" data-section="api" data-size="1t+" data-hidden="false">
+<tr data-org="Moonshot" data-section="api" data-size="1t+" data-hidden="false">
+  <td>Kimi K2.6</td>
+  <td class="open">Open</td>
+  <td>Moonshot</td>
+  <td>2026-04</td>
+  <td class="num">1T</td>
+  <td class="num">32B</td>
+  <td class="num d-xxl">2000</td>
+  <td class="num">$0.75/3.5</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">58</td>
+  <td class="notes">Supersedes Kimi K2.5; matched its score in this audit</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="DeepSeek" data-section="api" data-size="1t+" data-hidden="true" style="display:none">
   <td>DeepSeek V3.2</td>
   <td class="open">Open</td>
   <td>DeepSeek</td>
@@ -435,7 +471,7 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">Refused to answer Tobias (overcautious copyright filter)</td>
   <td class="notes cond">4K tok</td>
 </tr>
-<tr class="section-header"><td colspan="16">600B–1T (6 models)</td></tr>
+<tr class="section-header"><td colspan="16">600B–1T (9 models)</td></tr>
 <tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
   <td>DeepSeek V3 0324</td>
   <td class="open">Open</td>
@@ -508,6 +544,24 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">BF16 size (no Q4 GGUF)</td>
   <td class="notes cond">4K tok</td>
 </tr>
+<tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>DeepSeek V4 Flash</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2026-04</td>
+  <td class="num">671B</td>
+  <td class="num">37B</td>
+  <td class="num ">—</td>
+  <td class="num">$0.14/0.28</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">12</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">58</td>
+  <td class="notes">Supersedes DeepSeek V3.2 on this audit</td>
+  <td class="notes cond">4K tok</td>
+</tr>
 <tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
   <td>DeepSeek V3.1</td>
   <td class="open">Open</td>
@@ -526,7 +580,43 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">BF16 size (no Q4 GGUF)</td>
   <td class="notes cond">4K tok</td>
 </tr>
+<tr data-org="DeepSeek" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>DeepSeek V4 Pro</td>
+  <td class="open">Open</td>
+  <td>DeepSeek</td>
+  <td>2026-04</td>
+  <td class="num">671B</td>
+  <td class="num">37B</td>
+  <td class="num ">—</td>
+  <td class="num">$0.435/0.87</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">Matched DeepSeek V3.2 score; V4 Flash was stronger value</td>
+  <td class="notes cond">4K tok</td>
+</tr>
 <tr data-org="Zhipu" data-section="api" data-size="600b-1t" data-hidden="false">
+  <td>GLM 5.1</td>
+  <td class="open">Open</td>
+  <td>Zhipu</td>
+  <td>2026-04</td>
+  <td class="num">745B</td>
+  <td class="num">44B</td>
+  <td class="num d-xxl">1490</td>
+  <td class="num">$1.05/3.5</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">Supersedes GLM-5 Turbo on this audit</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Zhipu" data-section="api" data-size="600b-1t" data-hidden="true" style="display:none">
   <td>GLM-5 Turbo</td>
   <td class="open">Open</td>
   <td>Zhipu</td>
@@ -544,7 +634,25 @@ tr:hover { background: #1a2a4a; }
   <td class="notes">BF16 size (no Q4 GGUF)</td>
   <td class="notes cond">4K tok</td>
 </tr>
-<tr class="section-header"><td colspan="16">Closed Large (assumed flagship) (4 models)</td></tr>
+<tr class="section-header"><td colspan="16">Closed Large (assumed flagship) (6 models)</td></tr>
+<tr data-org="Qwen" data-section="api" data-size="unknown" data-hidden="false">
+  <td>Qwen 3.6 Plus</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-04</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$0.325/1.95</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">13</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">59</td>
+  <td class="notes">Supersedes Qwen 3.5 122B-A10B on this audit</td>
+  <td class="notes cond">4K tok</td>
+</tr>
 <tr data-org="Google" data-section="api" data-size="unknown" data-hidden="false">
   <td>Gemini 3.1 Flash Lite</td>
   <td class="closed">Closed</td>
@@ -579,6 +687,24 @@ tr:hover { background: #1a2a4a; }
   <td class="num s-perfect">20</td>
   <td class="num">57</td>
   <td class="notes">BF16 size (no Q4 GGUF)</td>
+  <td class="notes cond">4K tok</td>
+</tr>
+<tr data-org="Qwen" data-section="api" data-size="unknown" data-hidden="false">
+  <td>Qwen 3.6 Max Preview</td>
+  <td class="open">Open</td>
+  <td>Qwen</td>
+  <td>2026-04</td>
+  <td class="num">?</td>
+  <td class="num">?</td>
+  <td class="num ">—</td>
+  <td class="num">$1.04/6.24</td>
+  <td class="num">—</td>
+  <td class="num s-perfect">12</td>
+  <td class="num s-perfect">7</td>
+  <td class="num s-hi">11</td>
+  <td class="num s-perfect">20</td>
+  <td class="num">57</td>
+  <td class="notes">Verbose/costly relative to Qwen 3.6 Plus on this audit</td>
   <td class="notes cond">4K tok</td>
 </tr>
 <tr data-org="Mistral" data-section="api" data-size="unknown" data-hidden="false">
@@ -745,7 +871,7 @@ tr:hover { background: #1a2a4a; }
   <td class="notes cond">4K tok</td>
 </tr>
 <tr class="section-header"><td colspan="16">100–120B (7 models)</td></tr>
-<tr data-org="Qwen" data-section="api" data-size="100-120b" data-hidden="false">
+<tr data-org="Qwen" data-section="api" data-size="100-120b" data-hidden="true" style="display:none">
   <td>Qwen 3.5 122B-A10B</td>
   <td class="open">Open</td>
   <td>Qwen</td>
