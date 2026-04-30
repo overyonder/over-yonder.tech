@@ -170,7 +170,9 @@ the agent easier to understand.
 Bad AI prose is a vocabulary problem, a rhythm problem, and a sincerity problem.
 The same shapes repeat until the reader distrusts them.
 
-A writer who knows grammar and rhetoric uses those shapes on purpose.
+Most readers know simile, metaphor, alliteration, assonance, and consonance. The
+more useful patterns here are the ones that shape the sentence itself. A writer
+who knows grammar and rhetoric uses those shapes on purpose.
 
 **Antithesis** sets one idea against another. "Not caveman; Hemingway" is
 antithesis. It works when the contrast is the argument. It fails when the
