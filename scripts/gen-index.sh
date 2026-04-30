@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Scans articles/*.md, extracts YAML front matter, emits articles/index.json
-# sorted by modification time (newest first).
+# sorted by front matter date (newest first).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,7 +9,7 @@ OUT="$DIR/index.json"
 
 entries=()
 
-# Iterate newest-first by mtime
+# Read articles, then sort by front matter date newest-first.
 while IFS= read -r f; do
   [ -f "$f" ] || continue
   fname="$(basename "$f")"
@@ -52,13 +52,15 @@ while IFS= read -r f; do
     awk '{gsub(/^ +| +$/,"",$0); if(length($0)>0) printf "%s\"%s\"", (NR>1?", ":""), $0}' | \
     awk '{print "["$0"]"}')"
 
-  entries+=("{\"file\":\"$fname\",\"title\":\"$title\",\"date\":\"$date\",\"author\":\"$author\",\"tags\":$tags_json,\"hidden\":$hidden}")
-done < <(stat -c '%Y %n' "$DIR"/*.md 2>/dev/null | sort -rn | cut -d' ' -f2-)
+  entries+=("$date	{\"file\":\"$fname\",\"title\":\"$title\",\"date\":\"$date\",\"author\":\"$author\",\"tags\":$tags_json,\"hidden\":$hidden}")
+done < <(printf '%s\n' "$DIR"/*.md)
 
-# Emit JSON array (already sorted by mtime)
+# Emit JSON array (sorted by date)
 if [ ${#entries[@]} -eq 0 ]; then
   echo "[]" > "$OUT"
 else
   printf '%s\n' "${entries[@]}" | \
+    sort -r | \
+    cut -f2- | \
     awk 'BEGIN{printf "[\n"} NR>1{printf ",\n"} {printf "  %s",$0} END{printf "\n]\n"}' > "$OUT"
 fi
