@@ -167,12 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (route) selectTab(route.tab);
       if (route && route.slug) {
         openArticleBySlug(route.slug);
-      } else if (route && route.tab === 'articles') {
-        // On articles tab with no specific slug, expand first (most recent)
-        expandFirst();
-      } else {
-        // Default: expand most recent article so it's ready when user switches
-        expandFirst();
       }
     })
     .catch(function () {
@@ -236,14 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (item && isHiddenArticle(item)) revealHiddenArticle(item);
     if (!item || item.classList.contains('open')) return;
     toggleAccordion(item);
-  }
-
-  // ── Expand first (most recent) article ──
-  function expandFirst() {
-    var first = panel.querySelector('.accordion-item:not(.hidden-article)');
-    if (first && !first.classList.contains('open')) {
-      toggleAccordion(first);
-    }
   }
 
   function isHiddenArticle(item) {

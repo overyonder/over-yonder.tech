@@ -1,33 +1,32 @@
 ---
-title: "Professional documents from plain text"
+title: "Documents from plain text"
 date: 2026-02-13
 author: Kieran Hannigan
 tags: [markdown, pandoc, writing, productivity]
-hidden: true
 ---
 
-# Professional documents from plain text
+# Documents from plain text
 
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
 
-![Plain-text markdown source on the left, typeset PDF output on the right](assets/markdown-hero.webp)
+![Plain-text markdown source on the left, PDF output on the right](assets/markdown-hero.webp)
 
-A couple of classmates and at least one professor have asked how I produce my case write-ups -- and, more pointedly, how I manage it across 22 courses when the full-time load is 12. The formatting is apparently suspicious: clean enough that it doesn't quite look like Word, consistent enough across subjects that it doesn't look manual, which in an MBA programme is a bit like showing up to a potluck with a dish that's clearly not homemade. Rather than keep explaining it one conversation at a time, this is the full answer. I write plain text files with a handful of formatting marks, and a tool called [Pandoc](https://pandoc.org/) turns them into typeset PDFs. One command. No Word, no Google Docs, no wrestling with margins at midnight.
+A few classmates and a professor have asked how I produce case write-ups, and how I managed that across 22 courses when the full-time load is 12. The answer is plain text. I write the document with a small set of formatting marks, then use [Pandoc](https://pandoc.org/) to produce a PDF. No Word template. No Google Docs cleanup. No margin repair at midnight.
 
-You're reading a working example right now. This entire page is written in the same format it describes.
+This page is a working example. It is written in the same format it describes.
 
 ---
 
 ## Why plain text?
 
-Word processors store your writing in opaque binary formats full of layout metadata, revision history, and embedded objects. The file *is* the rendered document, which means you can't meaningfully separate what you wrote from how it looks. In practice, this produces a specific kind of misery that most people have learned to treat as normal:
+Word processors store your writing in opaque binary formats full of layout metadata, revision history, and embedded objects. The file *is* the rendered document, so you cannot cleanly separate what you wrote from how it looks. In practice, that creates a common failure mode:
 
-Four people editing a `.docx` on OneDrive. Track changes enabled, supposedly. By submission night you have three conflicting versions, a paragraph that appears twice, and a table whose formatting has quietly dissolved because someone pasted data from Excel. The last two hours before the deadline are spent not *writing* but *merging* -- comparing PDFs side by side, trying to figure out whose edits survived.
+Four people edit a `.docx` on OneDrive. Track changes is enabled, supposedly. By submission night you have three conflicting versions, a paragraph that appears twice, and a table whose formatting broke when someone pasted data from Excel. The last two hours go into merging: comparing PDFs side by side, trying to work out whose edits survived.
 
-Plain text doesn't have any of this. The source file is readable in any editor, on any operating system, forever. There's no hidden formatting to break. It runs on everything with a keyboard -- desktop, laptop, phone, a terminal over SSH -- because the file is just text. And because it's just text, it plays naturally with version control: `git diff` will show you exactly what changed between two drafts, concurrent edits merge automatically, and you can roll back to any previous version. That matters more than you'd expect when someone overwrites your conclusion at 2AM.
+Plain text avoids most of this. The source file is readable in any editor, on any operating system. There is no hidden formatting to break. It works on a desktop, a laptop, a phone, or a terminal over SSH because the file is text. It also works well with version control: `git diff` shows exactly what changed between drafts, concurrent edits can merge automatically, and you can roll back to an earlier version when someone overwrites your conclusion at 2AM.
 
 ---
 
@@ -35,7 +34,7 @@ Plain text doesn't have any of this. The source file is readable in any editor, 
 
 ### TeX and LaTeX: the academic standard
 
-The idea of writing documents in code is older than most people realise. In 1978, Donald Knuth created **TeX** (pronounced "tech") because he was unhappy with how his textbooks were being typeset. His student Leslie Lamport extended it into **LaTeX** in 1984, adding higher-level commands for sections, bibliographies, tables of contents. By the 1990s it was the standard for academic publishing in mathematics, physics, computer science, and engineering. Career academics write *every* paper in it. The typographic output -- especially for equations -- is genuinely unmatched.
+The idea of writing documents in code is older than most people realise. In 1978, Donald Knuth created **TeX** (pronounced "tech") because he was unhappy with how his textbooks were being typeset. His student Leslie Lamport extended it into **LaTeX** in 1984, adding higher-level commands for sections, bibliographies, and tables of contents. By the 1990s it was the standard for academic publishing in mathematics, physics, computer science, and engineering. The output, especially for equations, is excellent.
 
 The syntax, on the other hand, looks like this:
 
@@ -81,11 +80,11 @@ $\times$ Asset Turnover & 10.66$\times$ & 2.66$\times$ & +8.0$\times$ \\
 \end{table}
 ```
 
-![The booktabs table rendered with professional horizontal rules](assets/markdown-latex-table.webp)
+![The booktabs table rendered with horizontal rules](assets/markdown-latex-table.webp)
 
-The output is beautiful. The cost is `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins, a compilation step (often multiple passes), and error messages that are legendary in their unhelpfulness. LaTeX once told me about a missing `}` by complaining about a completely different page.
+The output is good. The cost is `\begin` and `\end` blocks, backslash-escaped special characters, package imports for basic features like sensible margins, a compilation step, and error messages that can be hard to trace. LaTeX once told me about a missing `}` by complaining about a different page.
 
-For academics who write papers every week, the investment is worth it. For someone who needs a case analysis by Thursday, there's a better option.
+For academics who write papers every week, the investment is often worth it. For a case analysis due Thursday, Markdown is usually enough.
 
 ---
 
@@ -130,19 +129,19 @@ Renders as:
 | = Profit Margin | 1.37% | 4.57% | -3.2 pp |
 | x Asset Turnover | 10.66x | 2.66x | +8.0x |
 
-Same information. A fraction of the syntax. Readable in its raw form. No compilation step -- just write and preview.
+Same information. Less syntax. Readable in its raw form. No compilation step for the draft: write and preview.
 
 ---
 
 ## From plain text to finished document
 
-Before the syntax reference, here's the part that actually matters. One command turns a Markdown file into a typeset PDF:
+Before the syntax reference, here is the useful part. One command turns a Markdown file into a PDF:
 
 ```bash
 pandoc report.md -o report.pdf --pdf-engine=xelatex
 ```
 
-[Pandoc](https://pandoc.org/) reads the Markdown, feeds it through LaTeX under the hood, and produces a typeset PDF with proper fonts, page numbers, and layout. All of LaTeX's typographic quality, none of the `\begin{document}`.
+[Pandoc](https://pandoc.org/) reads the Markdown, feeds it through LaTeX under the hood, and produces a PDF with proper fonts, page numbers, and layout. You get LaTeX output without writing `\begin{document}`.
 
 A few flags give you tighter control:
 
@@ -172,9 +171,9 @@ Everything below teaches you the Markdown syntax that goes *into* that file. Pan
 
 ---
 
-## The essentials
+## The basics
 
-This is the core syntax. Everything here works in virtually every tool that reads Markdown -- no plugins, no extensions, no special configuration.
+This is the core syntax. It works in most tools that read Markdown, without plugins or special configuration.
 
 ### Headings
 
@@ -187,7 +186,7 @@ Use `#` symbols to create headings. More `#` signs mean deeper nesting.
 #### Sub-subsection
 ```
 
-*The heading levels on this page demonstrate the hierarchy -- "Professional documents from plain text" is H1, "The essentials" is H2, and "Headings" is H3.*
+*The heading levels on this page demonstrate the hierarchy -- "Documents from plain text" is H1, "The basics" is H2, and "Headings" is H3.*
 
 ### Emphasis
 
@@ -317,23 +316,23 @@ Three dashes, asterisks, or underscores on their own line create a divider:
 
 ## Where to write
 
-Because the files are plain text, you're never locked into a single editor. I've moved through more of them than I'd care to admit and my content came with me every time -- no export wizard, no fidelity loss. Just files.
+Because the files are plain text, the editor matters less. I have moved through several of them, and the content came with me each time. No export wizard. No format loss. Just files.
 
-I originally wrote everything in [Sublime Text](https://www.sublimetext.com/), which is fast and stays out of the way. Then I spent a while using [VS Code](https://code.visualstudio.com/) and similar IDEs, which have excellent Markdown preview panes but bring a lot of weight for what is essentially text editing. Group projects ended up in [Notion](https://www.notion.so/), which supports Markdown shortcuts but stores content in its own cloud database -- convenient for real-time collaboration, less convenient if you ever want to leave. For a while I kept personal notes in [Obsidian](https://obsidian.md/), a desktop and mobile app that stores everything as local Markdown files with linking between notes and a graph view. Those notes have since migrated to [SilverBullet](https://silverbullet.md/), a self-hosted platform that keeps everything as Markdown on my own server. On my phone I use [Markor](https://gsantner.net/project/markor.html). If your programme requires LaTeX -- common in quant finance or economics PhDs -- [Overleaf](https://www.overleaf.com/) is the path of least resistance: browser-based, real-time collaboration, no install.
+I originally wrote in [Sublime Text](https://www.sublimetext.com/), which is fast and stays out of the way. Then I spent a while using [VS Code](https://code.visualstudio.com/) and similar IDEs, which have good Markdown preview panes but bring a lot of weight for text editing. Group projects ended up in [Notion](https://www.notion.so/), which supports Markdown shortcuts but stores content in its own cloud database. That helps real-time collaboration and makes leaving harder. For a while I kept personal notes in [Obsidian](https://obsidian.md/), a desktop and mobile app that stores notes as local Markdown files with links between them. Those notes have since moved to [SilverBullet](https://silverbullet.md/), a self-hosted platform that keeps Markdown files on my own server. On my phone I use [Markor](https://gsantner.net/project/markor.html). If your programme requires LaTeX -- common in quant finance or economics PhDs -- [Overleaf](https://www.overleaf.com/) is the easy browser option.
 
-I've since landed on a terminal-only workflow: [Neovim](https://neovim.io/) for editing, Pandoc for output, git for version control. No GUI, no preview pane, no electron. The files are the same ones I started with in Sublime Text years ago.
+I have since landed on a terminal workflow: [Neovim](https://neovim.io/) for editing, Pandoc for output, git for version control. No GUI, no preview pane, no Electron. The files are the same ones I started with in Sublime Text years ago.
 
-Which tool is best is not really the interesting question. The interesting part is that it doesn't matter.
+The tool matters less than the file format.
 
 ---
 
-## Power user features
+## Extra features
 
-The essentials above will carry you through most case write-ups. But Markdown is extensible, and there's a surprisingly rich ecosystem of add-ons for the remaining 10% -- the things you'd normally associate with LaTeX or dedicated publishing tools. Not every tool supports every extension, so I'll note compatibility where it matters.
+The basics above will carry you through most case write-ups. Markdown also has extensions for the remaining cases: metadata, task lists, maths, diagrams, citations, and slides. Not every tool supports every extension, so I will note compatibility where it matters.
 
 ### YAML frontmatter
 
-Most Markdown tools support a metadata block at the top of your file, written in YAML (YAML Ain't Markup Language -- a simple key-value format). This controls how the document is rendered or exported -- title, author, date, export settings, and more.
+Most Markdown tools support a metadata block at the top of your file, written in YAML (YAML Ain't Markup Language -- a plain key-value format). This controls how the document is rendered or exported: title, author, date, export settings, and more.
 
 ```yaml
 ---
@@ -347,11 +346,11 @@ tags: [financial-analysis, dupont, liquidity]
 
 *Frontmatter is stripped during rendering -- it controls metadata like the title, author, and date shown at the top of this article, but doesn't appear in the body text.*
 
-Frontmatter is ignored during rendering (it doesn't appear in your document body) but is used by tools like Pandoc, Obsidian, and static site generators to populate title pages, generate indexes, and organise content. Think of it as structured metadata for your document.
+Frontmatter is ignored during rendering, so it does not appear in the document body. Tools like Pandoc, Obsidian, and static site generators use it to populate title pages, generate indexes, and organise content.
 
 ### GitHub Flavoured Markdown (GFM)
 
-GFM is a widely adopted superset of standard Markdown, originally created by GitHub. Most modern tools support its additions:
+GFM is a widely adopted superset of standard Markdown, originally created by GitHub. Most current tools support its additions:
 
 **Task lists** -- checkboxes for tracking progress:
 
@@ -790,7 +789,7 @@ theme: default
 
 #### Beyond Markdown: Typst + Polylux
 
-If you outgrow Markdown slides but don't want to return to LaTeX, **[Typst](https://typst.app/)** is worth knowing about. Typst is a modern typesetting system designed as a practical replacement for LaTeX -- it compiles in milliseconds, has a cleaner syntax, and handles maths natively. **[Polylux](https://polylux-typ.github.io/polylux/)** is its Beamer equivalent: a package for building slide decks in Typst.
+If Markdown slides are too limited but LaTeX is too heavy, **[Typst](https://typst.app/)** is worth knowing about. Typst is a newer typesetting system that compiles quickly, has lighter syntax than LaTeX, and handles maths natively. **[Polylux](https://polylux-typ.github.io/polylux/)** is its Beamer equivalent: a package for building slide decks in Typst.
 
 ```typst
 #import "@preview/polylux:0.4.0": *
@@ -820,9 +819,9 @@ If you outgrow Markdown slides but don't want to return to LaTeX, **[Typst](http
 ]
 ```
 
-The syntax sits between Markdown and LaTeX -- less ceremony than `\begin{frame}`, more structure than plain Markdown. Maths uses a simplified notation (`$alpha$` rather than `$\alpha$`), and features like tables and layout are first-class rather than bolted on. Compilation is near-instant compared to LaTeX's multi-pass builds.
+The syntax sits between Markdown and LaTeX. It has less ceremony than `\begin{frame}` and more structure than plain Markdown. Maths uses a simplified notation (`$alpha$` rather than `$\alpha$`), and tables and layout are built in. Compilation is fast compared to LaTeX's multi-pass builds.
 
-Polylux includes theme ports of popular Beamer themes (including Metropolis), so the output looks familiar to anyone who's sat through an economics seminar. The ecosystem is younger than Beamer's -- fewer themes, fewer Stack Overflow answers -- but it's actively developed and closing the gap quickly.
+Polylux includes ports of popular Beamer themes, including Metropolis, so the output looks familiar to anyone who has sat through an economics seminar. It has fewer themes and fewer Stack Overflow answers than Beamer, but it is usable.
 
 *Use Marp when your content is straightforward and you want to stay in Markdown. Use Typst + Polylux when you need proper maths, complex layouts, or academic conventions that Markdown can't cleanly express.*
 
@@ -843,13 +842,13 @@ over-yonder.tech/
 └── styles.css
 ```
 
-There's no CMS, no database, no build step. The browser loads each `.md` file, renders it with [marked](https://marked.js.org/), and applies syntax highlighting and maths rendering client-side. If I want to publish another article, I open a text editor, write a Markdown file, drop it in the `articles/` folder, add a line to `index.json`, and push. That's it.
+There is no CMS, no database, and no build step. The browser loads each `.md` file, renders it with [marked](https://marked.js.org/), and applies syntax highlighting and maths rendering client-side. To add an article, I write a Markdown file, put it in the `articles/` folder, add a line to `index.json`, and push.
 
-Static site generators like [Hugo](https://gohugo.io/), [Jekyll](https://jekyllrb.com/), and [Astro](https://astro.build/) take this further -- they pre-render your Markdown into HTML at build time, generate RSS feeds, handle templating, and deploy to any static host. Most technical blogs, documentation sites, and personal wikis work this way. The source files are still just Markdown. The publishing pipeline is `git push`.
+Static site generators like [Hugo](https://gohugo.io/), [Jekyll](https://jekyllrb.com/), and [Astro](https://astro.build/) add build-time rendering, RSS feeds, templates, and deployment hooks. Many technical blogs, documentation sites, and personal wikis work this way. The source files are still Markdown. The publishing pipeline is `git push`.
 
 ---
 
-## Putting it together: a complete example
+## Putting it together: a worked example
 
 Here's a condensed case write-up using the features above. This is a single Markdown file that Pandoc can convert to PDF, Word, or HTML.
 
@@ -900,7 +899,7 @@ $$p = \frac{PM_t \cdot R - NI}{R(1 - PM_t)} = 3.39\%$$
 ## References
 ````
 
-![The complete markdown example converted to a professional PDF by Pandoc](assets/markdown-pandoc-pdf.webp)
+![The worked Markdown example converted to a PDF by Pandoc](assets/markdown-pandoc-pdf.webp)
 
 Convert it using the same Pandoc command [from earlier](#from-plain-text-to-finished-document):
 
@@ -944,10 +943,6 @@ You don't need to learn all of this at once. Headings, bold, lists, and tables w
 1. **Pick a tool.** [Obsidian](https://obsidian.md/) for a free local app with live preview. [Notion](https://www.notion.so/) for cloud collaboration. A plain text editor if you're feeling brave.
 2. **Write your next case in Markdown.** Headings for sections, a table for the financials, bold for key findings. That's enough.
 3. **Install [Pandoc](https://pandoc.org/).** One command for PDF or Word output.
-4. **Add features as you need them.** Footnotes for citations. Maths notation for quantitative cases. Mermaid when a diagram would genuinely help.
+4. **Add features as you need them.** Footnotes for citations. Maths notation for quantitative cases. Mermaid when a diagram helps.
 
-The whole syntax fits on an index card. The output is professional enough that people will ask how you did it. And because the files are just text, they version-control cleanly, sync across every device you own, and will still be perfectly readable in twenty years -- long after whatever version of Word we're using today has been quietly put down.
-
----
-
-*Watch this space -- and let me know if you'd find an article about using [openpyxl](https://openpyxl.readthedocs.io/) in Python to create Excel spreadsheets from plain text too.*
+The syntax you need most often is small. The files are text, so they version-control cleanly, sync across devices, and stay readable without a specific app.

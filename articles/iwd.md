@@ -3,7 +3,6 @@ title: "International Women's Day 2026"
 date: 2026-03-08
 author: Kieran Hannigan
 tags: [leadership, equity, culture]
-hidden: true
 ---
 
 # International Women's Day 2026
