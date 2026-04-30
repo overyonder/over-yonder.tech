@@ -252,4 +252,7 @@ and warm enough to remember that there is one.
 The answer is not caveman; it is Hemingway. Keep the articles. Cut the wasted
 words.
 
-And yes: Hemingway the man was an insecure chauvinist. That was bad.
+Hemingway's prose is useful here. Hemingway the man is not a model. His
+chauvinism and insecurity shaped parts of his life and work, and they deserve
+plain judgment rather than a wink. Learn from the sentences. Do not excuse the
+man.
