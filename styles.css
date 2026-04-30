@@ -969,7 +969,9 @@ body,
 html {
   background:
     radial-gradient(circle at 20% 0%, rgba(215, 153, 33, 0.12), transparent 30rem),
-    linear-gradient(180deg, var(--bg), var(--bg-soft));
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 88%, transparent), color-mix(in srgb, var(--bg-soft) 88%, transparent)),
+    url('assets/bg.avif') no-repeat center center fixed;
+  background-size: auto, auto, cover;
   color: var(--text);
 }
 
