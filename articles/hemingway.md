@@ -188,7 +188,7 @@ it easily becomes a machine for fake depth.
 
 **Polysyndeton** repeats conjunctions: "the code and the tests and the docs and
 the release." It can create weight, rhythm, accumulation, or exhaustion. Used by
-accident, it sounds breathless.
+accident, it sounds breathless. Thankfully, training priors already avoid this.
 
 **Asyndeton** removes conjunctions: "the code, the tests, the docs, the
 release." It is faster and harder. It can feel clean. It can also feel clipped.
