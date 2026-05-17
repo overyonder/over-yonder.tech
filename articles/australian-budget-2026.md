@@ -404,6 +404,28 @@ sit above procurement, planning and delivery, staffed well enough to buy ships,
 substations, software and hospitals without being led around by consultants with
 PowerPoint decks and a day rate.
 
+### The golden country
+
+This is the terrifying but grand version of the argument. Australia has to become
+capable of imagining a golden future again: a shining city on a hill with the
+institutional muscle to defend its own prosperity, instead of a property
+portfolio with a flag and a quarry with cafes.
+
+Discipline matters as much as ambition. Breaking up Coles and Woolworths is
+satisfying only if it breaks the bottleneck: sites, leases, logistics, supplier
+terms, zoning and acquisitions. Land tax works only if the transition is credible:
+pensioner deferral, federal funding, no fake grandfathering and a visible cut to
+stamp duty. Industrial policy works only if subsidy comes with procurement
+competence, export discipline, capability benchmarks and failure rules. A country
+unable to cancel a dud project will decorate press releases instead of building a
+strategic industry.
+
+The real wealth of nations is productive capacity: skills, energy,
+infrastructure, institutions, scientific capability, military resilience, social
+trust and the tax base to maintain them. Not GDP vibes. Not house prices. Not the
+paper wealth of scarcity rents dressed up as national success. The budget gestures
+toward parts of that future. The task is to build a country able to choose it.
+
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
