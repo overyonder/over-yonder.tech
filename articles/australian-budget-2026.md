@@ -145,7 +145,8 @@ agree with them.
   *Assessment:* Direction: useful candour. Magnitude: central. The headline
   path depends on courts, legislation, global shocks, NDIS and aged-care demand,
   tax compliance and climate costs not landing badly at the same time. The
-  budget is saying, plainly enough, that several things can break at once.
+  surplus/deficit path is exposed across several fronts, so one bad year can
+  make the fiscal repair look much thinner.
 
 ## Tax, work and housing
 
@@ -280,16 +281,17 @@ agree with them.
 - **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
   territories in 2026-27.**[^states]
   *Assessment:* Direction: unavoidable. Magnitude: politically underexplained.
-  Many promises in health, housing, schools, skills and infrastructure pass
-  through governments Canberra does not control. That matters because blame is
-  simple and delivery is not. Voters see one failure; the budget sees a
-  federation.
+  Canberra books the money, but much of the actual work in health, housing,
+  schools, skills and infrastructure passes through states and territories.
+  National promises run through divided machinery, and the blame comes back
+  shared.
 
 - **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
   delivery complexity and material disruption.**[^states]
-  *Assessment:* Direction: realistic. Magnitude: important. Announced spending
-  is not completed work. Admitting delivery friction is better than pretending a
-  press release pours concrete.
+  *Assessment:* Direction: realistic. Magnitude: important. This is the same
+  point from the delivery end. Announced spending is not completed work, and
+  infrastructure programs are where neat federal promises go to meet weather,
+  contractors, approvals and state capacity.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
