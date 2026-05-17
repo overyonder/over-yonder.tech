@@ -344,13 +344,15 @@ leaving consumption-tax design frozen.
 I would build a tax mix that admits Australia is older, wealthier and more
 asset-heavy than the tax system pretends. Lift the GST to 15 per cent, broaden it
 across currently exempt consumption, and legislate the compensation in the same
-bill. GST is regressive on its own; that is why the first claim on the revenue
-goes to the bottom half through higher pensions, JobSeeker, rent assistance,
-family payments and an automatic low-income tax credit. If the compensation is
-not automatic, the reform is a mugging with a spreadsheet. Tax super balances
-above $3 million at 30 per cent on earnings, above $10 million at the top
-marginal rate, and stop pretending nine-figure retirement accounts are retirement
-policy. Use the remaining revenue to cut taxes on labour, then fund care,
+bill. GST is regressive on its own, so the compensation has to arrive before the
+price rise: higher pensions, JobSeeker, rent assistance and family payments, plus
+an automatic low-income tax credit large enough to leave the bottom half whole.
+If the compensation is delayed, discretionary or left for a later parliament, the
+reform is a mugging with a spreadsheet. Tax super balances above $3 million at
+30 per cent on earnings, above $10 million at the top marginal rate, and apply
+the rates to realised gains with no dynasty loophole for trusts, companies or
+related-party assets. Super is retirement policy, not an unlimited dynastic tax
+shelter. Use the remaining revenue to cut taxes on labour, then fund care,
 defence, housing infrastructure and research. Adam Smith was not sentimental
 about rentiers. A country that taxes nurses harder than protected asset income is
 choosing slower growth, thinner services and worse politics.
@@ -372,17 +374,35 @@ tax-free threshold, so extra work pays immediately. Fund 100,000 additional
 TAFE, apprenticeship and university places a year in construction, care, defence,
 engineering, energy and advanced manufacturing, tied to completion and placement
 rather than brochure enrolments. Give the ACCC divestiture powers and point them
-at supermarkets, banks, airlines, digital platforms, energy retail and any
-infrastructure owner using bottleneck control to extract tolls from the rest of
-the economy. The test should be conduct and structure: price coordination,
-self-preferencing, land banking, loyalty traps, killer acquisitions, access
-denial and margins that survive because customers cannot practically leave. Put
-infrastructure through a published return test, with congestion, housing yield,
-energy reliability and defence logistics weighted explicitly. Keating's old
-settlement linked openness, bargaining, superannuation and competition into one
-argument: high wages require high productivity. The modern version needs the same
-spine, plus energy security, sovereign capability and a state competent enough to
-buy what it says it wants.
+straight at supermarkets, banks, airlines, digital platforms, energy retail and
+infrastructure bottlenecks. Coles and Woolworths should face structural
+separation if site control, supplier terms and local market power keep blocking
+real competition. Break up supermarket land banks. Ban exclusionary leases. Force
+open access where airports, ports, grids and platforms tax everyone else for
+passing through. The test should be conduct and structure: price coordination,
+self-preferencing, loyalty traps, killer acquisitions, access denial and margins
+that survive because customers cannot practically leave. Put infrastructure
+through a published return test, with congestion, housing yield, energy
+reliability and defence logistics weighted explicitly. Keating's old settlement
+linked openness, bargaining, superannuation and competition into one argument:
+high wages require high productivity. The modern version needs the same spine,
+plus energy security, sovereign capability and a state competent enough to buy
+what it says it wants.
+
+### The Rooseveltian version
+
+That program would be serious tax and productivity reform. Deep social
+restoration needs institution-building. A lion-statesman would add a national
+housing builder with balance-sheet capacity, a sovereign industrial bank
+for long-horizon capability projects, public equity stakes or golden shares in
+strategic energy, minerals processing, defence and platform infrastructure, and
+sectoral wage boards in care, logistics, construction and other low-power labour
+markets. Climate adaptation would become hard infrastructure: flood works, grid
+hardening, water security, heat-resilient housing and sovereign insurance for
+places private markets will abandon first. A permanent state-capacity unit would
+sit above procurement, planning and delivery, staffed well enough to buy ships,
+substations, software and hospitals without being led around by consultants with
+PowerPoint decks and a day rate.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
