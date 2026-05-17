@@ -22,6 +22,8 @@ resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 
 Unfortunately for everyone involved, I did not have dinner plans.
 
+<small>This is political commentary, not legal or financial advice.</small>
+
 > [!NOTE] Source note:
 > I treated the four Budget Papers as the spine, then checked the overview,
 > Women's Budget Statement, tax explainers, fact sheets and Portfolio Budget
