@@ -57,7 +57,7 @@ and periodic rupture. The middle-class world we take for granted was built,
 fairly recently, by policy:
 [disciplined banking](https://en.wikipedia.org/wiki/Glass%E2%80%93Steagall_legislation)
 (and, later,
-[Dodd-Frank](https://en.wikipedia.org/wiki/Dodd%E2%80%93Frank_Wall_Street_Reform_and_Consumer_Protection_Act)),
+[more of it](https://en.wikipedia.org/wiki/Dodd%E2%80%93Frank_Wall_Street_Reform_and_Consumer_Protection_Act)),
 [public investment](https://en.wikipedia.org/wiki/Public_Works_Administration),
 [antitrust](https://en.wikipedia.org/wiki/Sherman_Antitrust_Act),
 [high marginal tax rates](https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/),
