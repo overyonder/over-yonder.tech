@@ -422,9 +422,10 @@ strategic industry.
 
 The real wealth of nations is productive capacity: skills, energy,
 infrastructure, institutions, scientific capability, military resilience, social
-trust and the tax base to maintain them. Not GDP vibes. Not house prices. Not the
-paper wealth of scarcity rents dressed up as national success. The budget gestures
-toward parts of that future. The task is to build a country able to choose it.
+trust and the tax base to maintain them. Not GDP mood music. Not house prices.
+Not the paper wealth of scarcity rents dressed up as national success. The budget
+gestures toward parts of that future. The task is to build a country able to
+choose it.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
