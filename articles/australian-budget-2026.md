@@ -519,6 +519,8 @@ current
 powers. The prize is not moral vanity. It is a compassionate world order that
 can restrain them before other countries become their battlefield.
 
+...
+
 That's as long as the old lion doesn't get
 [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal)
 by the contemporaneous
