@@ -406,7 +406,7 @@ PowerPoint decks and a day rate.
 
 ### The golden country
 
-This is the terrifying but grand version of the argument. Australia has to become
+This is the terrifying but grand vision of the argument. Australia has to become
 capable of imagining a golden future again: a shining city on a hill with the
 institutional muscle to defend its own prosperity, instead of a property
 portfolio with a flag and a quarry with cafes.
