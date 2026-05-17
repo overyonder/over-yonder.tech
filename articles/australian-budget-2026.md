@@ -43,8 +43,8 @@ period kept much of that market-opening settlement, but also entrenched a
 different political bargain: the GST, middle-class tax relief, family transfers,
 a larger role for private housing wealth, and the 1999 capital gains tax
 discount. This budget pushes against part of the Howard-era asset bargain, though
-it doesn't revive Keating's deeper question: how do high wages get earned
-through productivity, rather than protected by asset inflation?
+it doesn't revive Keating's deeper question: how does Australia get richer by
+building capacity, rather than revaluing the same dirt?
 
 ## Cards on the table
 
