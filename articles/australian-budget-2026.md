@@ -34,7 +34,7 @@ in who the tax system favours: less preference for leveraged asset ownership,
 more visible preference for labour income, service delivery, defence capacity
 and domestic energy security.
 
-That puts it in an old Australian argument. The
+That puts it in the centre of an old Australian argument. The
 [Hawke-Keating reforms](https://en.wikipedia.org/wiki/Hawke%E2%80%93Keating_government)
 opened and modernised the economy: the dollar floated, finance was deregulated,
 tariffs fell, enterprise bargaining grew, and superannuation became a central
