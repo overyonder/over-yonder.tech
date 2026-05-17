@@ -515,8 +515,8 @@ tradition: capable enough to matter, independent enough to broker peace, and
 civilised enough to want something better than managed barbarism between the
 current
 [Thucydidean](https://apnews.com/article/a1d63a711a037472f5c1c330c2120bd5)
-powers. The prize is not moral vanity. It is a compassionate world order sturdy
-enough to stop great powers making graveyards of everyone else's geography.
+powers. The prize is not moral vanity. It is a compassionate world order that
+refuses to let great powers turn everyone else's geography into their graveyard.
 
 That's as long as the old lion doesn't get
 [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal)
