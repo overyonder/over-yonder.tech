@@ -89,8 +89,8 @@ is why, a not-so-small part of me thinks, so many of history's socialist messiah
 [Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
 [Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
 [Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels), et alia. (In my
-mind, FDR tells his peers: listen, I'm one of you; if you don't listen to me,
-they'll be rolling out the guillotines.)
+mind, FDR tells his peers: "Listen, I'm one of you; if you don't listen to me,
+they'll be rolling out the guillotines.")
 
 [Hayek](https://en.wikipedia.org/wiki/Friedrich_Hayek) matters because the state
 can also get drunk on its own cleverness. The
