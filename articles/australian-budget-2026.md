@@ -105,8 +105,8 @@ migrants, workers against welfare recipients, young against old. The
 [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
 current franchise.
 
-That is why I judge budgets by a simple standard: do they make the capitalist
-bargain more durable, or do they help the already-secure pull up the ladder?
+That is why I judge budgets by a simple standard: do they repair capitalism's
+uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
