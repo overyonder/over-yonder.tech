@@ -43,7 +43,7 @@ period kept much of that market-opening settlement, but also entrenched a
 different political bargain: the GST, middle-class tax relief, family transfers,
 a larger role for private housing wealth, and the 1999 capital gains tax
 discount. This budget pushes against part of the Howard-era asset bargain, though
-it doesn't revive a Keating-style productivity program.
+it doesn't revive a Keating-style productivity program.[^keating-productivity]
 
 The short version: **serious, not solved**.
 
@@ -321,6 +321,8 @@ appear narrowly; the question is whether they appear as structural reform.
   selection.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
+
+[^keating-productivity]: By that I mean the Hawke-Keating reform settlement: floating the dollar, financial deregulation, tariff cuts, enterprise bargaining, the Prices and Incomes Accord, compulsory superannuation, tax-base broadening and microeconomic reform. The point was to pay high wages from productivity, not protection, inflation or asset churn.
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
