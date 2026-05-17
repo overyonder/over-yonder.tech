@@ -46,88 +46,94 @@ tax discount. This budget pushes against part of the Howard-era asset bargain,
 though it doesn't revive Keating's deeper question: how does Australia get
 richer by building capacity, rather than revaluing the same dirt?
 
-> [!IMPORTANT] Cards on the table
-> I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
-> political-economy sense: capitalism can create broad prosperity, but only when
-> the state disciplines rentiers, invests in capacity, protects bargaining power
-> and stops private wealth from turning public institutions into toll booths. Most
-> of history is kings, landlords, creditors, peasants, servants, wars, extraction
-> and periodic rupture. The middle-class world we take for granted was built,
-> fairly recently, by policy:
-> [banking discipline](https://en.wikipedia.org/wiki/Glass%E2%80%93Steagall_legislation)
-> ([and later, more of it](https://en.wikipedia.org/wiki/Dodd%E2%80%93Frank_Wall_Street_Reform_and_Consumer_Protection_Act)),
-> [public investment](https://en.wikipedia.org/wiki/Public_Works_Administration),
-> [antitrust](https://en.wikipedia.org/wiki/Sherman_Antitrust_Act),
-> [high marginal tax rates](https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/),
-> [strong unions](https://en.wikipedia.org/wiki/National_Labor_Relations_Act_of_1935),
-> [Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
-> rents, and a bargain: enough redistribution to make capitalism worth defending
-> for people without capital.
->
-> The theory is not complicated. Real national wealth is the capacity to make,
-> build, care, defend, discover and adapt. Wages rise when workers produce more
-> and have enough power to claim a fair share of it. Asset inflation is different:
-> it lets owners get richer because land, licences, monopolies and tax shelters
-> become harder for everyone else to access. A good budget moves money and talent
-> from the second column to the first. Tax rents. Fund capacity. Keep markets
-> competitive. Stop pretending a higher house price is the same thing as a richer
-> country.
->
-> That bargain needed capital to be clever as well as powerful.
-> [Standard Oil](https://en.wikipedia.org/wiki/Standard_Oil) was broken up. The
-> [New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
-> [robber barons](https://en.wikipedia.org/wiki/Robber_baron_(industrialist)) and
-> their heirs gave ground because the alternative was uglier. When elites get too
-> brazen, history doesn't usually reward them for their efficiency. It gives them
-> [Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
-> [Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
-> [Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre). Maybe that
-> is why, a not-so-small part of me thinks, so many of history's socialist messiahs
-> (read: class traitors) come from the bourgeoisie:
-> [Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
-> [Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
-> [Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels), et alia. (In my
-> mind, FDR tells his peers: "Look, I'm one of you; if you don't listen to me,
-> they'll be rolling out the guillotines.")
->
-> [Hayek](https://en.wikipedia.org/wiki/Friedrich_Hayek) matters because the state
-> can also get drunk on its own cleverness. The
-> [1970s](https://en.wikipedia.org/wiki/1970s_energy_crisis) showed what happens
-> when full-employment Keynesianism loses price discipline, lets insiders capture
-> the institutions, and treats inflation as someone else's problem (usually, a
-> [Volckerite hero](https://www.federalreserve.gov/aboutthefed/bios/board/powell.htm)
-> or one in the making). Markets do carry information no ministry can fully see,
-> and any serious social democrat should know that in their bones, but the neoliberal
-> correction overlearned the lesson.
-> [Thatcherite](https://en.wikipedia.org/wiki/Thatcherism) privatisation,
-> [Reaganism](https://en.wikipedia.org/wiki/Reaganomics) and later
-> [Blairist](https://en.wikipedia.org/wiki/Blairism) managerialism restored price
-> discipline, then too often treated public assets as a garage sale.
-> ["Selling the family silver"](https://en.wikipedia.org/wiki/Harold_Macmillan#Later_life_and_death)
-> works once. After that, citizens still need rail, power, ports, housing, water,
-> telecommunications and care, only now the rent stream belongs to someone else.
->
-> The throughline runs straight into the modern diseases:
-> [regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture),
-> [corporate personhood](https://en.wikipedia.org/wiki/Corporate_personhood)
-> treated as democratic citizenship, and each country's local version of
-> [Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC) money
-> politics.
-> [Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
-> rebrand too, helped along by
-> [panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with
-> [infinite scroll](https://www.instagram.com/). Where class solidarity might once have threatened
-> concentrated wealth, the newer trick is to keep people fighting sideways on
-> multiple axes:
-> [gender against gender](https://www.youtube.com/watch?v=x8hAFHB54gE),
-> [renters against migrants](https://www.foxbusiness.com/economy/elon-musk-weighs-economic-impacts-illegal-immigration),
-> [workers against welfare recipients](https://www.gov.uk/government/speeches/welfare-speech),
-> [young against old](https://capitalpost.uk/politics/political-parties/farage-suggests-cutting-minimum-wage-for-young-workers.html).
-> The [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
-> current franchise.
->
-> That is why I judge budgets by a simple standard: do they repair capitalism's
-> uneasy bargain, or do they help the already-secure pull up the ladder?
+<div class="info">
+<details>
+<summary>Cards on the table</summary>
+
+I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
+political-economy sense: capitalism can create broad prosperity, but only when
+the state disciplines rentiers, invests in capacity, protects bargaining power
+and stops private wealth from turning public institutions into toll booths. Most
+of history is kings, landlords, creditors, peasants, servants, wars, extraction
+and periodic rupture. The middle-class world we take for granted was built,
+fairly recently, by policy:
+[banking discipline](https://en.wikipedia.org/wiki/Glass%E2%80%93Steagall_legislation)
+([and later, more of it](https://en.wikipedia.org/wiki/Dodd%E2%80%93Frank_Wall_Street_Reform_and_Consumer_Protection_Act)),
+[public investment](https://en.wikipedia.org/wiki/Public_Works_Administration),
+[antitrust](https://en.wikipedia.org/wiki/Sherman_Antitrust_Act),
+[high marginal tax rates](https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/),
+[strong unions](https://en.wikipedia.org/wiki/National_Labor_Relations_Act_of_1935),
+[Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
+rents, and a bargain: enough redistribution to make capitalism worth defending
+for people without capital.
+
+The theory is not complicated. Real national wealth is the capacity to make,
+build, care, defend, discover and adapt. Wages rise when workers produce more
+and have enough power to claim a fair share of it. Asset inflation is different:
+it lets owners get richer because land, licences, monopolies and tax shelters
+become harder for everyone else to access. A good budget moves money and talent
+from the second column to the first. Tax rents. Fund capacity. Keep markets
+competitive. Stop pretending a higher house price is the same thing as a richer
+country.
+
+That bargain needed capital to be clever as well as powerful.
+[Standard Oil](https://en.wikipedia.org/wiki/Standard_Oil) was broken up. The
+[New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
+[robber barons](https://en.wikipedia.org/wiki/Robber_baron_(industrialist)) and
+their heirs gave ground because the alternative was uglier. When elites get too
+brazen, history doesn't usually reward them for their efficiency. It gives them
+[Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
+[Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
+[Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre). Maybe that
+is why, a not-so-small part of me thinks, so many of history's socialist messiahs
+(read: class traitors) come from the bourgeoisie:
+[Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
+[Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
+[Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels), et alia. (In my
+mind, FDR tells his peers: "Look, I'm one of you; if you don't listen to me,
+they'll be rolling out the guillotines.")
+
+[Hayek](https://en.wikipedia.org/wiki/Friedrich_Hayek) matters because the state
+can also get drunk on its own cleverness. The
+[1970s](https://en.wikipedia.org/wiki/1970s_energy_crisis) showed what happens
+when full-employment Keynesianism loses price discipline, lets insiders capture
+the institutions, and treats inflation as someone else's problem (usually, a
+[Volckerite hero](https://www.federalreserve.gov/aboutthefed/bios/board/powell.htm)
+or one in the making). Markets do carry information no ministry can fully see,
+and any serious social democrat should know that in their bones, but the neoliberal
+correction overlearned the lesson.
+[Thatcherite](https://en.wikipedia.org/wiki/Thatcherism) privatisation,
+[Reaganism](https://en.wikipedia.org/wiki/Reaganomics) and later
+[Blairist](https://en.wikipedia.org/wiki/Blairism) managerialism restored price
+discipline, then too often treated public assets as a garage sale.
+["Selling the family silver"](https://en.wikipedia.org/wiki/Harold_Macmillan#Later_life_and_death)
+works once. After that, citizens still need rail, power, ports, housing, water,
+telecommunications and care, only now the rent stream belongs to someone else.
+
+The throughline runs straight into the modern diseases:
+[regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture),
+[corporate personhood](https://en.wikipedia.org/wiki/Corporate_personhood)
+treated as democratic citizenship, and each country's local version of
+[Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC) money
+politics.
+[Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
+rebrand too, helped along by
+[panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with
+[infinite scroll](https://www.instagram.com/). Where class solidarity might once have threatened
+concentrated wealth, the newer trick is to keep people fighting sideways on
+multiple axes:
+[gender against gender](https://www.youtube.com/watch?v=x8hAFHB54gE),
+[renters against migrants](https://www.foxbusiness.com/economy/elon-musk-weighs-economic-impacts-illegal-immigration),
+[workers against welfare recipients](https://www.gov.uk/government/speeches/welfare-speech),
+[young against old](https://capitalpost.uk/politics/political-parties/farage-suggests-cutting-minimum-wage-for-young-workers.html).
+The [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
+current franchise.
+
+That is why I judge budgets by a simple standard: do they repair capitalism's
+uneasy bargain, or do they help the already-secure pull up the ladder?
+
+</details>
+</div>
 
 ## Bottom line
 
