@@ -505,7 +505,8 @@ infrastructure, institutions, scientific capability, military resilience, social
 trust and the tax base to maintain them. Not GDP mood music. Not house prices.
 Not the paper wealth of scarcity rents dressed up as national success. The budget
 gestures toward parts of that future. Australia needs to remember that countries
-are built, not passively inherited from house prices and holes in the ground.
+are built, not passively inherited from parcels of ground with things built on
+them or holes dug in them once in the distant past.
 
 Then the horizon gets larger. A richer Australia should choose global leadership,
 not loyal lieutenantship. It should revive the Carr-Evans
