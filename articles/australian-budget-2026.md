@@ -138,8 +138,9 @@ money behind housing bottlenecks, and takes state capacity seriously. The budget
 is still too small for the debt, housing, health, climate, defence and delivery
 pressures visible in the papers.[^tax-strategy][^fiscal]
 
-I would go further. Australia probably wouldn't. The choice at the next election
-is not this budget or a clean Georgist-social-democratic settlement. It is this
+Now I would go further. But Australia probably wouldn't. The choice at the next
+election is not this budget or a clean Georgist-social-democratic settlement. It
+is this
 budget or a stunningly unqualified
 [Nigel Farage aspirant](https://www.theguardian.com/australia-news/video/2016/sep/14/pauline-hanson-australia-in-danger-of-being-swamped-by-muslims-video)
 egged on by a [Pilbara plutocrat](https://en.wikipedia.org/wiki/Gina_Rinehart),
