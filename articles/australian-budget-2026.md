@@ -153,9 +153,9 @@ agree with them.
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
   climate change and unlegislated policy.**[^risks]
-  *Assessment:* Useful candour; the trapdoors are everywhere. The headline path
-  depends on courts, legislation, global shocks, NDIS and aged-care demand, tax
-  compliance and climate costs not landing badly at the same time. The
+  *Assessment:* Useful candour, with system-wide fiscal exposure. The headline
+  path depends on courts, legislation, global shocks, NDIS and aged-care demand,
+  tax compliance and climate costs not landing badly at the same time. The
   surplus/deficit path is exposed across several fronts, so one bad year can
   make the fiscal repair look much thinner.
 
