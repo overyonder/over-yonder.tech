@@ -20,7 +20,7 @@ probably hadn't read it. Fair enough. The budget papers are a small obstacle
 course: macro frame in Paper No. 1, measures in No. 2, states in No. 3, agency
 resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 
-I went through the Treasury paperwork. The rest of this stays in English.
+I read the papers so you don't have to.
 
 > [!NOTE] Source note:
 > I treated the four Budget Papers as the spine, then checked the overview,
