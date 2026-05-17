@@ -46,7 +46,7 @@ tax discount. This budget pushes against part of the Howard-era asset bargain,
 though it doesn't revive Keating's deeper question: how does Australia get
 richer by building capacity, rather than revaluing the same dirt?
 
-> [!IMPORTANT]- Cards on the table
+> [!IMPORTANT] Cards on the table
 > I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
 > political-economy sense: capitalism can create broad prosperity, but only when
 > the state disciplines rentiers, invests in capacity, protects bargaining power
