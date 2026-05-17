@@ -336,26 +336,26 @@ The papers discuss GST distribution and superannuation receipts, then leave GST
 design and retirement-savings tax mostly outside the reform
 perimeter.[^tax-strategy][^gst-super]
 This leaves a tax-base gap too large to ignore. A durable tax settlement cannot
-keep relying on income tax while sheltering large pools of asset wealth and
-leaving consumption-tax design frozen.
+keep relying on income tax while sheltering large pools of asset wealth, monopoly
+profits and economic rents.
 
 #### King for a day
 
 I would build a tax mix that admits Australia is older, wealthier and more
-asset-heavy than the tax system pretends. Lift the GST to 15 per cent, broaden it
-across currently exempt consumption, and legislate the compensation in the same
-bill. GST is regressive on its own, so the compensation has to arrive before the
-price rise: higher pensions, JobSeeker, rent assistance and family payments, plus
-an automatic low-income tax credit large enough to leave the bottom half whole.
-If the compensation is delayed, discretionary or left for a later parliament, the
-reform is a mugging with a spreadsheet. Tax super balances above $3 million at
-30 per cent on earnings, above $10 million at the top marginal rate, and apply
-the rates to realised gains with no dynasty loophole for trusts, companies or
-related-party assets. Super is retirement policy, not an unlimited dynastic tax
-shelter. Use the remaining revenue to cut taxes on labour, then fund care,
-defence, housing infrastructure and research. Adam Smith was not sentimental
-about rentiers. A country that taxes nurses harder than protected asset income is
-choosing slower growth, thinner services and worse politics.
+asset-heavy than the tax system pretends. Scrap the GST. Replace the revenue with
+taxes on land rent, very large super balances, inheritances above a high
+threshold, monopoly profits and resource rents. Consumption taxes hit people when
+they spend to live. A serious reform taxes wealth where it pools and power where
+it hides. Tax super balances above $3 million at 30 per cent on earnings, above
+$10 million at the top marginal rate, and apply the rates to realised gains with
+no dynasty loophole for trusts, companies or related-party assets. Super is
+retirement policy, not an unlimited dynastic tax shelter. Add an inheritance tax
+above $5 million per estate, with family homes deferred until sale and genuine
+small-business succession protected by instalment rules. Use the revenue to cut
+taxes on labour, then fund care, defence, housing infrastructure and research.
+Adam Smith was not sentimental about rentiers. A country that taxes nurses harder
+than protected asset income is choosing slower growth, thinner services and worse
+politics.
 
 ### Productivity
 
