@@ -318,13 +318,17 @@ increase supply, while the scarcity rent remains mostly private.
 #### King for a day
 
 I would trade Commonwealth money for state land-tax reform, and I would make the
-trade shamelessly explicit. Replace stamp duty with a broad land-value tax, fund
-the transition federally, and let states keep more upside when they permit
-density around transport, jobs and services. Henry George had the basic point
-right: the unearned lift in land value comes from public permission and public
-investment. Tax that rent and lower the taxes on work and building. Australia
-gets more homes, less deadweight loss, a deeper construction pipeline and a
-housing market that rewards adding capacity rather than squatting on scarcity.
+trade shamelessly explicit. Stamp duty goes. In its place: an annual land-value
+tax on unimproved land, starting around 0.25 per cent and rising over a decade to
+about 1 per cent for owner-occupied land, higher for vacant land and investor
+holdings. Pensioners can defer against the estate, because forcing old people out
+of homes is bad politics and worse policy. The Commonwealth funds the transition
+and gives states a density dividend when they permit homes near transport, jobs
+and services. Henry George had the basic point right: the unearned lift in land
+value comes from public permission and public investment. Tax that rent and lower
+the taxes on work and building. Australia gets more homes, less deadweight loss,
+a deeper construction pipeline and a housing market that rewards adding capacity
+rather than squatting on scarcity.
 
 ### Tax base
 
@@ -338,13 +342,16 @@ leaving consumption-tax design frozen.
 #### King for a day
 
 I would build a tax mix that admits Australia is older, wealthier and more
-asset-heavy than the tax system pretends. Broaden the GST, compensate the bottom
-half automatically through the transfer system, tax very large super balances
-more like inherited private treasuries, and use the revenue to cut taxes on
-labour and fund care, defence, housing infrastructure and research. Adam Smith
-was not sentimental about rentiers. A country that taxes nurses harder than
-protected asset income is choosing slower growth, thinner services and worse
-politics.
+asset-heavy than the tax system pretends. Lift the GST to 15 per cent, broaden it
+across currently exempt consumption, and return the first claim on the revenue to
+the bottom half through higher pensions, JobSeeker, rent assistance, family
+payments and an automatic low-income tax credit. Tax super balances above
+$3 million at 30 per cent on earnings, above $10 million at the top marginal rate,
+and stop pretending nine-figure retirement accounts are retirement policy. Use
+the remaining revenue to cut taxes on labour, then fund care, defence, housing
+infrastructure and research. Adam Smith was not sentimental about rentiers. A
+country that taxes nurses harder than protected asset income is choosing slower
+growth, thinner services and worse politics.
 
 ### Productivity
 
@@ -357,15 +364,18 @@ infrastructure selection.
 
 #### King for a day
 
-I would treat productivity as a national bargain. Cut taxes on marginal work and
-investment, fund vocational and university places where bottlenecks are real,
-make competition policy bite in sectors that have learned to enjoy cosy margins,
-and choose infrastructure by economic return rather than electoral cartography.
-Keating's old settlement
-linked openness, bargaining, superannuation and competition into one argument:
-high wages require high productivity. The modern version needs the same spine,
-plus energy security, sovereign capability and a state competent enough to buy
-what it says it wants.
+I would treat productivity as a national bargain. Use the land and tax-base
+reforms to cut the bottom two income-tax rates by several points and raise the
+tax-free threshold, so extra work pays immediately. Fund 100,000 additional
+TAFE, apprenticeship and university places a year in construction, care, defence,
+engineering, energy and advanced manufacturing, tied to completion and placement
+rather than brochure enrolments. Give the ACCC divestiture powers for markets
+that have turned concentration into a business model. Put infrastructure through
+a published return test, with congestion, housing yield, energy reliability and
+defence logistics weighted explicitly. Keating's old settlement linked openness,
+bargaining, superannuation and competition into one argument: high wages require
+high productivity. The modern version needs the same spine, plus energy security,
+sovereign capability and a state competent enough to buy what it says it wants.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
