@@ -107,6 +107,15 @@ capacity as an economic question. By scale, it is still too small for the debt,
 housing, health, climate, defence and delivery pressures visible in the
 papers.[^tax-strategy][^fiscal]
 
+That does not mean it goes as far as I would like. It means it probably goes
+about as far as the current Australian political weather allows. The live
+alternative is not a fully formed Georgist-social-democratic settlement waiting
+politely at the dispatch box. It is a stunningly unqualified Nigel Farage
+aspirant trying to turn resentment into statecraft. People further left can
+cry for more, and often should. But they also do so from the pleasant distance
+of not having to win democratic consent from people who do not already agree
+with them.
+
 ## Fiscal and macro settings
 
 - **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
