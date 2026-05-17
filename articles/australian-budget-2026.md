@@ -133,9 +133,9 @@ agree with them.
 - **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
   1 April 2026 and Budget Paper 1 puts the net revenue cost around
   $2.5 billion.**[^fuel]
-  *Assessment:* Directionally poor; too small and short-lived to sink the
-  budget, but large enough to show bad priorities. Public money should expand
-  productive capacity. This briefly cheapens fossil-fuel consumption instead.
+  *Assessment:* Directionally poor; too small and short-lived to sink the budget.
+  The priority is wrong. Public money should expand productive capacity. This
+  briefly cheapens fossil-fuel consumption instead.
 
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
@@ -173,8 +173,8 @@ agree with them.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
   new builds from 1 July 2027.**[^asset-tax]
-  *Assessment:* Directionally very good; large enough to change established
-  housing incentives, incomplete on land rents. The measure points private rental
+  *Assessment:* Directionally very good; material for established housing,
+  incomplete on land rents. The measure points private rental
   investment toward new supply instead of bidding for existing dwellings. For
   established residential properties caught by the new rule, net rental losses
   can no longer be deducted against wages or other unrelated income. They can be
@@ -189,8 +189,7 @@ agree with them.
 
 - **Budget Papers 1 and 2 introduce a 30 per cent minimum tax on discretionary
   trusts from 1 July 2028.**[^trusts]
-  *Assessment:* Directionally good; large enough to change the tax-planning
-  calculus.
+  *Assessment:* Directionally good; trust tax planning becomes less attractive.
   The tax applies to the taxable income of discretionary trusts, not to the
   trust's asset value. The trustee pays it, because the trustee controls who
   receives distributions.
@@ -216,8 +215,8 @@ agree with them.
 
 - **Budget Paper 2 creates a domestic gas reservation mechanism equal to
   20 per cent of LNG export volumes from 1 July 2027.**[^gas]
-  *Assessment:* Directionally good; large enough to matter for domestic gas
-  users, not large enough to settle energy policy. Energy is an input to national
+  *Assessment:* Directionally good; material for domestic gas users, inadequate
+  as an energy settlement. Energy is an input to national
   production before it is an export rent stream. Domestic energy security and
   local production costs are being preferred over pure export-parity pricing. It
   cuts against old market-liberal instincts, but the last few years have made the
@@ -226,8 +225,8 @@ agree with them.
 
 - **The budget funds gas reservation but does not offer a comparable structural
   settlement for climate transition or fossil-fuel rents.**[^gas]
-  *Assessment:* Directionally poor; this is the hole large enough to define the
-  energy package. Reservation may
+  *Assessment:* Directionally poor; the hole defines the energy package.
+  Reservation may
   protect domestic users, but it is not a carbon policy, a resource-rent policy
   or a clean-power investment strategy. The budget is willing to discipline gas
   exports for domestic security, but not willing to make the same hard claim
@@ -261,14 +260,14 @@ agree with them.
 - **The Women's Budget Statement treats care, safety, health and women's labour
   force participation as economic infrastructure, not side issues.**[^wbs]
   *Assessment:* Directionally good; intellectually broad, fiscally unfinished.
-  This is old social democracy: care work reproduces the labour force the
+  Old social democracy understood that care work reproduces the labour force the
   market depends on. The hard question is whether the care economy can keep
   expanding without a larger tax base and a deeper workforce plan.
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
   growth while still saying NDIS payments grow each year.**[^ndis]
-  *Assessment:* Directionally good if integrity means integrity; large enough to
-  carry real social risk if it becomes rationing. Support must be generous enough
+  *Assessment:* Directionally good if integrity means integrity; fiscally huge
+  and socially risky if it becomes rationing. Support must be generous enough
   to matter and controlled enough to survive. If integrity reform works, this is
   one of the budget's biggest wins. If it suppresses legitimate support, the
   fiscal repair is bought by weakening the social contract.
@@ -406,7 +405,7 @@ PowerPoint decks and a day rate.
 
 ### The golden country
 
-This is the terrifying but grand version of the argument. Australia has to become
+Here is the terrifying, grand version of the argument. Australia has to become
 capable of imagining a golden future again: a shining city on a hill with the
 institutional muscle to defend its own prosperity, instead of a property
 portfolio with a flag and a quarry with cafes.
@@ -422,9 +421,9 @@ strategic industry.
 
 The real wealth of nations is productive capacity: skills, energy,
 infrastructure, institutions, scientific capability, military resilience, social
-trust and the tax base to maintain them. Not GDP vibes. Not house prices. Not the
-paper wealth of scarcity rents dressed up as national success. The budget gestures
-toward parts of that future. The task is to build a country able to choose it.
+trust and the tax base to maintain them. GDP alone is too thin; house prices are
+worse. Scarcity rents dressed up as national success are paper wealth. The budget
+gestures toward parts of that future. Build the country able to choose it.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
