@@ -343,15 +343,17 @@ leaving consumption-tax design frozen.
 
 I would build a tax mix that admits Australia is older, wealthier and more
 asset-heavy than the tax system pretends. Lift the GST to 15 per cent, broaden it
-across currently exempt consumption, and return the first claim on the revenue to
-the bottom half through higher pensions, JobSeeker, rent assistance, family
-payments and an automatic low-income tax credit. Tax super balances above
-$3 million at 30 per cent on earnings, above $10 million at the top marginal rate,
-and stop pretending nine-figure retirement accounts are retirement policy. Use
-the remaining revenue to cut taxes on labour, then fund care, defence, housing
-infrastructure and research. Adam Smith was not sentimental about rentiers. A
-country that taxes nurses harder than protected asset income is choosing slower
-growth, thinner services and worse politics.
+across currently exempt consumption, and legislate the compensation in the same
+bill. GST is regressive on its own; that is why the first claim on the revenue
+goes to the bottom half through higher pensions, JobSeeker, rent assistance,
+family payments and an automatic low-income tax credit. If the compensation is
+not automatic, the reform is a mugging with a spreadsheet. Tax super balances
+above $3 million at 30 per cent on earnings, above $10 million at the top
+marginal rate, and stop pretending nine-figure retirement accounts are retirement
+policy. Use the remaining revenue to cut taxes on labour, then fund care,
+defence, housing infrastructure and research. Adam Smith was not sentimental
+about rentiers. A country that taxes nurses harder than protected asset income is
+choosing slower growth, thinner services and worse politics.
 
 ### Productivity
 
@@ -369,13 +371,18 @@ reforms to cut the bottom two income-tax rates by several points and raise the
 tax-free threshold, so extra work pays immediately. Fund 100,000 additional
 TAFE, apprenticeship and university places a year in construction, care, defence,
 engineering, energy and advanced manufacturing, tied to completion and placement
-rather than brochure enrolments. Give the ACCC divestiture powers for markets
-that have turned concentration into a business model. Put infrastructure through
-a published return test, with congestion, housing yield, energy reliability and
-defence logistics weighted explicitly. Keating's old settlement linked openness,
-bargaining, superannuation and competition into one argument: high wages require
-high productivity. The modern version needs the same spine, plus energy security,
-sovereign capability and a state competent enough to buy what it says it wants.
+rather than brochure enrolments. Give the ACCC divestiture powers and point them
+at supermarkets, banks, airlines, digital platforms, energy retail and any
+infrastructure owner using bottleneck control to extract tolls from the rest of
+the economy. The test should be conduct and structure: price coordination,
+self-preferencing, land banking, loyalty traps, killer acquisitions, access
+denial and margins that survive because customers cannot practically leave. Put
+infrastructure through a published return test, with congestion, housing yield,
+energy reliability and defence logistics weighted explicitly. Keating's old
+settlement linked openness, bargaining, superannuation and competition into one
+argument: high wages require high productivity. The modern version needs the same
+spine, plus energy security, sovereign capability and a state competent enough to
+buy what it says it wants.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
