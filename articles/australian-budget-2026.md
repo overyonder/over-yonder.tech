@@ -57,11 +57,22 @@ discipline, lets insiders capture the machinery, and treats inflation as someone
 else's problem. Markets carry information no ministry can fully see. A serious
 social democrat should know that in their bones.
 
-But the neoliberal correction overlearned the lesson. It restored price
-discipline while letting housing, finance, monopoly rents and inherited
-advantage outrun wages. That is why I judge budgets by a simple standard: do they
-make the capitalist bargain more durable, or do they help the already-secure pull
-up the ladder?
+But the neoliberal correction overlearned the lesson. Thatcherite privatisation,
+Reaganism and later Blairist managerialism restored price discipline, then too
+often treated public assets as a garage sale. "Selling the family silver" works
+once. After that, citizens still need rail, power, ports, housing, water,
+telecommunications and care, only now the rent stream belongs to someone else.
+
+The throughline runs straight into the modern diseases: regulatory capture,
+money politics, corporate personhood treated as democratic citizenship, and each
+country's local version of Citizens United. Divide et impera has had a rebrand
+too. Where class solidarity might once have threatened concentrated wealth, the
+newer trick is to keep people fighting sideways: gender against gender, renters
+against migrants, workers against welfare recipients, young against old. The
+manosphere is only the loudest current franchise.
+
+That is why I judge budgets by a simple standard: do they make the capitalist
+bargain more durable, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
