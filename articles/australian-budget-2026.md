@@ -494,6 +494,21 @@ Not the paper wealth of scarcity rents dressed up as national success. The budge
 gestures toward parts of that future. Australia needs to remember that countries
 are built, not passively inherited from house prices and holes in the ground.
 
+Then the horizon gets larger. A richer Australia should choose global leadership,
+not loyal lieutenantship. It should revive the Carr-Evans
+[creative middle power](https://www.gevans.org/speeches/speech465.html)
+tradition: capable enough to matter, independent enough to broker peace, and
+civilised enough to want something better than managed barbarism between the
+current
+[Thucydidean](https://apnews.com/article/a1d63a711a037472f5c1c330c2120bd5)
+powers. The prize is not moral vanity. It is a compassionate world order sturdy
+enough to stop great powers making graveyards of everyone else's geography.
+
+Or get [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal),
+by the contemporaneous
+["our man"](https://en.wikipedia.org/wiki/John_Kerr_%28governor-general%29)
+after I've made one too many speeches.
+
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
