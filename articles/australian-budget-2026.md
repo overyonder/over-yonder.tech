@@ -40,11 +40,11 @@ opened and modernised the economy: the dollar floated, finance was deregulated,
 tariffs fell, enterprise bargaining grew, and superannuation became a central
 savings institution. The [Howard](https://en.wikipedia.org/wiki/Howard_government)
 period kept much of that market-opening settlement, but also entrenched a
-different political bargain: the GST, middle-class tax relief, family transfers,
-a larger role for private housing wealth, and the 1999 capital gains tax
-discount. This budget pushes against part of the Howard-era asset bargain, though
-it doesn't revive Keating's deeper question: how does Australia get richer by
-building capacity, rather than revaluing the same dirt?
+different distributional order: the GST, middle-class tax relief, family
+transfers, a larger role for private housing wealth, and the 1999 capital gains
+tax discount. This budget pushes against part of the Howard-era asset bargain,
+though it doesn't revive Keating's deeper question: how does Australia get
+richer by building capacity, rather than revaluing the same dirt?
 
 ## Cards on the table
 
