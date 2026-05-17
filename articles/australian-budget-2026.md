@@ -153,9 +153,9 @@ agree with them.
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
   climate change and unlegislated policy.**[^risks]
-  *Assessment:* Useful candour, with system-wide fiscal exposure. The headline
-  path depends on courts, legislation, global shocks, NDIS and aged-care demand,
-  tax compliance and climate costs not landing badly at the same time. The
+  *Assessment:* Useful candour; the trapdoors are everywhere. The headline path
+  depends on courts, legislation, global shocks, NDIS and aged-care demand, tax
+  compliance and climate costs not landing badly at the same time. The
   surplus/deficit path is exposed across several fronts, so one bad year can
   make the fiscal repair look much thinner.
 
@@ -220,10 +220,10 @@ agree with them.
 
 - **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
   creates a $1,000 instant deduction for work expenses.**[^deductions]
-  *Assessment:* Directionally mixed; too small to matter much either way. Simpler
-  deductions reduce compliance friction. That helps productivity. They also leak
-  precision: rough justice is cheaper to administer, but it gives up on asking
-  whether the expense was actually incurred.
+  *Assessment:* Fine as paperwork relief; irrelevant as reform. Simpler
+  deductions reduce compliance friction, which helps productivity at the margin.
+  They also leak precision: rough justice is cheaper to administer, but it gives
+  up on asking whether the expense was actually incurred.
 
 ## Energy and industry
 
@@ -293,16 +293,16 @@ agree with them.
   *Assessment:* Directionally good; the dollars are large, the capability is
   still unproven. Defence spending protects the domestic economic bargain. The
   return is deterrence, resilience and domestic industrial depth. Budget
-  announcements don't prove capability; ships, yards, workers, maintenance schedules and
-  contracts that survive contact with reality do.
+  announcements don't prove capability; ships, yards, workers, maintenance
+  schedules and contracts that survive contact with reality do.
 
 - **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
   territories in 2026-27.**[^states]
-  *Assessment:* The magnitude is enormous; the direction depends on execution.
-  Canberra books the money, but
-  much of the actual work in health, housing, schools, skills and infrastructure
-  passes through states and territories. National promises run through divided
-  authority, and the blame comes back shared.
+  *Assessment:* The money is enormous; the direction depends on execution.
+  Canberra books the spending, but much of the actual work in health, housing,
+  schools, skills and infrastructure passes through states and territories.
+  National promises run through divided authority, and the blame comes back
+  shared.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
@@ -423,20 +423,20 @@ and a state competent enough to buy what it says it wants.
 ### The Rooseveltian version
 
 That would be real tax reform and a serious productivity bargain. Still not
-enough. Deep social restoration needs institution-building. A lion-statesman
-would add a national housing builder delivering 50,000 mixed-tenure dwellings a
-year for a decade; a $250 billion sovereign industrial bank for long-horizon
-capability projects; public equity stakes or golden shares in strategic energy,
-minerals processing, defence and platform infrastructure; and sectoral wage
-boards in care, logistics, construction and other low-power labour markets.
-Climate adaptation would become
-hard infrastructure: at least $20 billion a year for flood works, grid hardening,
-water security, heat-resilient housing and sovereign insurance for places private
-markets will abandon first. A permanent state-capacity unit would sit above
-procurement, planning and delivery: 5,000 engineers, lawyers, commercial
-specialists, economists and project directors paid well enough to buy ships,
-substations, software and hospitals without being led around by consultants with
-PowerPoint decks and a day rate.
+enough. Deep social restoration needs institution-building. A leader with
+Roosevelt's nerve would add a national housing builder delivering 50,000
+mixed-tenure dwellings a year for a decade; a $250 billion sovereign industrial
+bank for long-horizon capability projects; public equity stakes or golden shares
+in strategic energy, minerals processing, defence and platform infrastructure;
+and sectoral wage boards in care, logistics, construction and other low-power
+labour markets. Climate adaptation would become hard infrastructure: at least
+$20 billion a year for flood works, grid hardening, water security,
+heat-resilient housing and sovereign insurance for places private markets will
+abandon first. A permanent state-capacity unit would sit above procurement,
+planning and delivery: 5,000 engineers, lawyers, commercial specialists,
+economists and project directors paid well enough to buy ships, substations,
+software and hospitals without being led around by consultants with PowerPoint
+decks and a day rate.
 
 ### The golden country
 
