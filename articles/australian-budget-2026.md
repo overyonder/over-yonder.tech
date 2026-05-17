@@ -84,7 +84,7 @@ brazen, history doesn't usually reward them for their efficiency. It gives them
 [Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
 [Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
 [Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre). Maybe that
-is why a not-so-small part of me thinks so many of history's socialist messiahs
+is why, a not-so-small part of me thinks, so many of history's socialist messiahs
 (read: class traitors) come from the bourgeoisie:
 [Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
 [Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
