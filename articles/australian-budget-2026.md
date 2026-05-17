@@ -229,25 +229,29 @@ visible in the papers.[^tax-strategy][^fiscal]
 
 ## Notable absences
 
-- **The budget changes housing investor tax settings but does not attempt a broad
-  land-tax or zoning bargain with the states.**[^housing-infra]
-  *Assessment:* Direction: weak. Magnitude: major omission. This is the Georgist
-  gap. Negative gearing and CGT reform affect investor demand; land tax and
-  planning throughput would attack the scarcity rent more directly.
+- **The budget changes housing investor tax settings and uses planning
+  conditions, but does not attempt a broad land-tax bargain with the
+  states.**[^housing-infra][^productivity]
+  *Assessment:* Direction: partial. Magnitude: major omission. Zoning is not
+  absent; it appears through housing-enabling infrastructure, National
+  Competition Policy and productivity work. The Georgist gap is land rent:
+  planning throughput can increase supply, but without land-tax reform the
+  scarcity rent mostly remains private.
 
-- **The tax package leaves superannuation and the GST mostly outside the reform
-  perimeter.**[^tax-strategy]
+- **The papers discuss GST distribution and superannuation receipts, but leave
+  GST design and retirement-savings tax mostly outside the reform perimeter.**[^tax-strategy][^gst-super]
   *Assessment:* Direction: politically understandable. Magnitude: analytically
   insufficient. A durable tax settlement cannot keep relying on income tax while
   sheltering large pools of asset wealth and leaving consumption-tax design
   frozen.
 
-- **The budget includes Better Regulation funding, but not a new productivity
-  compact across competition, skills, infrastructure selection, tax mix and
-  workplace capability.**[^regulation]
-  *Assessment:* Direction: good start. Magnitude: too small. The $198.1 million
-  regulatory package is useful machinery. It is not a Hawke-Keating-scale renewal
-  of productivity institutions.
+- **The budget has a productivity program, but not an integrated productivity
+  compact at reform-era scale.**[^regulation][^productivity]
+  *Assessment:* Direction: good start. Magnitude: too small. Better regulation,
+  competition enforcement, skills recognition and Productivity Commission
+  inquiries are real measures. They remain a bundle of instruments, not a
+  settlement across tax, skills, workplace institutions, competition and
+  infrastructure selection.
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
@@ -284,3 +288,7 @@ visible in the papers.[^tax-strategy][^fiscal]
 [^asl]: Australian Government, *Budget Paper No. 4: Agency Resourcing 2026-27*, Part 2, Staffing of Agencies, p. 162. <https://budget.gov.au/content/bp4/download/bp4_2026_27_consolidated.pdf>
 
 [^regulation]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Boosting Productivity - Better Regulation", p. 139. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+
+[^productivity]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 1, productivity, competition, planning and zoning discussion, pp. 17-21. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
+
+[^gst-super]: Australian Government, *Budget Paper No. 3: Federal Financial Relations 2026-27*, Part 3, GST payments, pp. 133-134; *Budget Paper No. 1*, Statement 10, receipts table, p. 381. <https://budget.gov.au/content/bp3/download/bp3_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
