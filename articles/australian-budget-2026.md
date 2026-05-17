@@ -525,7 +525,7 @@ That's as long as the old lion doesn't get
 [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal)
 by the contemporaneous
 ["our man"](https://en.wikipedia.org/wiki/John_Kerr_%28governor-general%29)
-before I've made one too many speeches.
+after giving one too many ardent polemics.
 
 </details>
 </div>
