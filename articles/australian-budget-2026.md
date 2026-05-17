@@ -14,7 +14,7 @@ tags: [australia, budget, politics, economics]
 
 If someone in your feed had a fully formed budget take before today, they
 probably hadn't read it. Fair enough. The budget papers are a small obstacle
-course: macro story in Paper No. 1, measures in No. 2, states in No. 3, agency
+course: macro frame in Paper No. 1, measures in No. 2, states in No. 3, agency
 resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 
 So: read first, argue second, keep it short enough that nobody needs a Treasury
@@ -24,7 +24,7 @@ Source note: I treated the four Budget Papers as the spine, then checked the
 overview, Women's Budget Statement, tax explainers, fact sheets and Portfolio
 Budget Statements against them.[^source-set] The PBS documents are mostly
 delivery documents. They don't replace the macro story, but they test whether
-the budget has enough machinery behind the promises.
+the budget can carry its promises through departments and programs.
 
 The 2026-27 Federal Budget is a political economy budget. Its centre is a shift
 in who the tax system favours: less preference for leveraged asset ownership,
@@ -69,7 +69,7 @@ brazen, history doesn't usually reward them for their efficiency. It gives them
 can also get drunk on its own cleverness. The
 [1970s](https://en.wikipedia.org/wiki/1970s_energy_crisis) showed what happens
 when full-employment Keynesianism loses price discipline, lets insiders capture
-the machinery, and treats inflation as someone else's problem. Markets carry
+the institutions, and treats inflation as someone else's problem. Markets carry
 information no ministry can fully see. A serious social democrat should know
 that in their bones.
 
@@ -100,11 +100,11 @@ bargain more durable, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
-Overall judgement: **B-**. Directionally, this is a serious Labor budget: it
-taxes asset income more coherently, puts some money behind housing bottlenecks,
-and treats state capacity as an economic question. Magnitudinally, it is still
-too small for the debt, housing, health, climate, defence and delivery pressures
-visible in the papers.[^tax-strategy][^fiscal]
+Overall judgement: **B-**. This is a serious Labor budget: it taxes asset income
+more coherently, puts some money behind housing bottlenecks, and treats state
+capacity as an economic question. By scale, it is still too small for the debt,
+housing, health, climate, defence and delivery pressures visible in the
+papers.[^tax-strategy][^fiscal]
 
 ## Fiscal and macro settings
 
@@ -125,26 +125,24 @@ visible in the papers.[^tax-strategy][^fiscal]
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
   climate change and unlegislated policy.**[^risks]
-  *Assessment:* Direction: honest. Magnitude: central. This is the budget's
-  fine print doing real work: the headline path depends on courts, legislation,
-  global shocks, NDIS and aged-care demand, tax compliance and climate costs not
-  landing badly at the same time.
+  *Assessment:* Direction: useful candour. Magnitude: central. The headline
+  path depends on courts, legislation, global shocks, NDIS and aged-care demand,
+  tax compliance and climate costs not landing badly at the same time.
 
 ## Tax, work and housing
 
 - **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
   from 2027-28.**[^wato]
   *Assessment:* Direction: good. Magnitude: modest. It deliberately favours
-  labour income over asset income, which fits the article's Keynesian bias: work
-  should buy security. But $250 is a political bridge, not a wage-productivity
-  settlement.
+  labour income over asset income. That is the right priority: work should buy
+  security. But $250 is a political bridge, not a wage-productivity settlement.
 
 - **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
   and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
-  *Assessment:* Direction: very good. Magnitude: meaningful but incomplete. This
-  is the clearest structural reform in the budget. It attacks the Howard-era
-  preference for nominal asset gains and moves closer to taxing real income.
-  It still leaves owner-occupied housing and superannuation largely protected.
+  *Assessment:* Direction: very good. Magnitude: large but incomplete. This is
+  the clearest structural reform in the budget. It attacks the Howard-era
+  preference for nominal asset gains and moves closer to taxing real income. It
+  still leaves owner-occupied housing and superannuation largely protected.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
   new builds from 1 July 2027.**[^asset-tax]
@@ -171,7 +169,7 @@ visible in the papers.[^tax-strategy][^fiscal]
 
 - **Budget Paper 2 creates a domestic gas reservation mechanism equal to
   20 per cent of LNG export volumes from 1 July 2027.**[^gas]
-  *Assessment:* Direction: good under current conditions. Magnitude: meaningful.
+  *Assessment:* Direction: good under current conditions. Magnitude: substantial.
   This is industrial policy: domestic energy security and local production costs
   are being preferred over pure export-parity pricing. It cuts against old
   market-liberal instincts, but resilience now has a real economic value.
@@ -238,8 +236,8 @@ visible in the papers.[^tax-strategy][^fiscal]
 
 - **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
   delivery complexity and material disruption.**[^states]
-  *Assessment:* Direction: honest. Magnitude: important. Announced spending is
-  not completed work. A budget that admits delivery friction is better than a
+  *Assessment:* Direction: realistic. Magnitude: important. Announced spending
+  is not completed work. A budget that admits delivery friction is better than a
   budget pretending a press release pours concrete.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
@@ -253,8 +251,8 @@ visible in the papers.[^tax-strategy][^fiscal]
 
 ## Notable absences
 
-These are searched absences, not vibes. Some topics appear in narrow form; the
-point is whether they appear as structural reform.
+I checked these topics because they matter to the budget's reform story. Some
+appear in narrow form; the point is whether they appear as structural reform.
 
 - **The budget changes housing investor tax settings and uses planning
   conditions, but does not attempt a broad land-tax bargain with the
