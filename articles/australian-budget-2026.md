@@ -424,22 +424,21 @@ and a state competent enough to buy what it says it wants.
 
 That would be real tax reform and a serious productivity bargain. Still not
 enough. Deep social restoration needs institution-building. A true
-[old lion](https://www.theodorerooseveltcenter.org/Learn-About-TR/TR-Brief-Biography.aspx)
-in the
-[brawler-statesman](https://openresearch-repository.anu.edu.au/items/b582da33-8f37-402d-83e2-9b437bcd2fb6/full)
-tradition would add a national housing builder delivering 50,000 mixed-tenure
-dwellings a year for a decade; a $250 billion sovereign industrial bank for
-long-horizon capability projects; public equity stakes or golden shares in
-strategic energy, minerals processing, defence and platform infrastructure; and
-sectoral wage boards in care, logistics, construction and other low-power labour
-markets. Climate adaptation would become hard infrastructure: at least
-$20 billion a year for flood works, grid hardening, water security,
-heat-resilient housing and sovereign insurance for places private markets will
-abandon first. A permanent state-capacity unit would sit above procurement,
-planning and delivery: 5,000 engineers, lawyers, commercial specialists,
-economists and project directors paid well enough to buy ships, substations,
-software and hospitals without being led around by consultants with PowerPoint
-decks and a day rate.
+"[old lion](https://www.theodorerooseveltcenter.org/Learn-About-TR/TR-Brief-Biography.aspx)"
+(or
+"[brawler-statesman](https://openresearch-repository.anu.edu.au/items/b582da33-8f37-402d-83e2-9b437bcd2fb6/full)")
+would add a national housing builder delivering 50,000 mixed-tenure dwellings a
+year for a decade; a $250 billion sovereign industrial bank for long-horizon
+capability projects; public equity stakes or golden shares in strategic energy,
+minerals processing, defence and platform infrastructure; and sectoral wage
+boards in care, logistics, construction and other low-power labour markets.
+Climate adaptation would become hard infrastructure: at least $20 billion a year
+for flood works, grid hardening, water security, heat-resilient housing and
+sovereign insurance for places private markets will abandon first. A permanent
+state-capacity unit would sit above procurement, planning and delivery: 5,000
+engineers, lawyers, commercial specialists, economists and project directors paid
+well enough to buy ships, substations, software and hospitals without being led
+around by consultants with PowerPoint decks and a day rate.
 
 ### The golden country
 
