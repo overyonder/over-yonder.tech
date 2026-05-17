@@ -122,6 +122,14 @@ visible in the papers.[^tax-strategy][^fiscal]
   drivers now, but it subsidises petrol use, weakens revenue and does almost
   nothing for the economy's productive capacity.
 
+- **Budget Paper 1's risk statement says the forecasts are exposed to global
+  conflict, energy prices, demand-driven programs, tax-base uncertainty,
+  climate change and unlegislated policy.**[^risks]
+  *Assessment:* Direction: honest. Magnitude: central. This is the budget's
+  fine print doing real work: the headline path depends on courts, legislation,
+  global shocks, NDIS and aged-care demand, tax compliance and climate costs not
+  landing badly at the same time.
+
 ## Tax, work and housing
 
 - **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
@@ -196,6 +204,14 @@ visible in the papers.[^tax-strategy][^fiscal]
   buys access and bulk-billed pressure relief. It does not solve the deeper
   equation of ageing, workforce scarcity, expensive medicines and rising public
   expectations.
+
+- **The Women's Budget Statement treats care, safety, health and women's labour
+  force participation as economic infrastructure, not side issues.**[^wbs]
+  *Assessment:* Direction: right. Magnitude: still contested. This is where the
+  budget is most Keynesian in the older social-democratic sense: paid parental
+  leave, care wages, child care, Medicare and violence prevention are presented
+  as productivity policy. The hard question is whether the care economy can keep
+  expanding without a larger tax base and a deeper workforce plan.
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
   growth while still saying NDIS payments grow each year.**[^ndis]
@@ -284,6 +300,8 @@ point is whether they appear as structural reform.
 
 [^fuel]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Taking Pressure Off Australians - temporary reduction of fuel excise and heavy vehicle road user charge", p. 15; *Budget Paper No. 1*, Statement 5, fuel excise discussion, pp. 202-203. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
+[^risks]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 9, risk overview and Australian Government loans, pp. 291-293 and 347-349. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
+
 [^gas]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Energy Sovereignty - Establishing a Domestic Gas Reservation", p. 66. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
 [^housing-infra]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Boosting Home Ownership", p. 138. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
@@ -291,6 +309,8 @@ point is whether they appear as structural reform.
 [^youth-housing]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Supporting Youth into Community Housing", p. 144. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
 [^health]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Strengthening Medicare", p. 109. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+
+[^wbs]: Australian Government, *Women's Budget Statement 2026-27*, foreword and priority areas, pp. 1-6; unpaid and paid care and economic equality sections, pp. 25-45. <https://budget.gov.au/content/womens-statement/download/womens-budget-statement-2026-27.pdf>
 
 [^ndis]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Securing the National Disability Insurance Scheme for Future Generations", pp. 106-108. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
