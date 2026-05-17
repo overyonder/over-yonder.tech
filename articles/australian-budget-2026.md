@@ -20,8 +20,7 @@ probably hadn't read it. Fair enough. The budget papers are a small obstacle
 course: macro frame in Paper No. 1, measures in No. 2, states in No. 3, agency
 resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 
-I read the papers first. You should not need a Treasury cadetship to follow the
-argument.
+I read the PDFs. Keep your dinner plans.
 
 > [!NOTE] Source note:
 > I treated the four Budget Papers as the spine, then checked the overview,
@@ -104,20 +103,17 @@ bargain more durable, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
-Overall judgement: **B-**. This is a serious Labor budget: it taxes asset income
-more coherently, puts some money behind housing bottlenecks, and treats state
-capacity as an economic question. By scale, it is still too small for the debt,
-housing, health, climate, defence and delivery pressures visible in the
-papers.[^tax-strategy][^fiscal]
+Overall judgement: **B-**. Labor taxes asset income more coherently, puts some
+money behind housing bottlenecks, and takes state capacity seriously. The budget
+is still too small for the debt, housing, health, climate, defence and delivery
+pressures visible in the papers.[^tax-strategy][^fiscal]
 
-That does not mean it goes as far as I would like. It means it probably goes
-about as far as the current Australian political weather allows. The live
-alternative is not a fully formed Georgist-social-democratic settlement waiting
-politely at the dispatch box. It is a stunningly unqualified Nigel Farage
-aspirant trying to turn resentment into statecraft. People further left can
-cry for more, and often should. But they also do so from the pleasant distance
-of not having to win democratic consent from people who do not already agree
-with them.
+I would go further. Australia probably wouldn't. The choice at the next election
+is not this budget or a clean Georgist-social-democratic settlement. It is this
+budget or a stunningly unqualified Nigel Farage aspirant trying to turn
+resentment into statecraft. People further left can cry for more, and often
+should. They also get to do it without persuading the voters who do not already
+agree with them.
 
 ## Fiscal and macro settings
 
@@ -160,8 +156,8 @@ with them.
   2027 value as the new cost base, set by valuation or an ATO-supported
   apportionment formula. Pre-1985 assets are brought in only for gains after the
   start date. Investors buying new builds can still choose the old 50 per cent
-  discount instead of indexation and the minimum tax when they sell. This is tax
-  on the gain, not the inflation, but it still leaves owner-occupied housing and
+  discount instead of indexation and the minimum tax when they sell. Good:
+  taxing the gain, not the inflation. Bad: owner-occupied housing and
   superannuation largely protected.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
@@ -187,9 +183,9 @@ with them.
   trustee pays it, because the trustee controls who receives distributions.
   Beneficiaries still declare trust income in their own tax returns, and
   non-corporate beneficiaries receive non-refundable credits for tax payable by
-  the trustee. That means discretion over distributions remains, but the tax
-  benefit of streaming income to low-rate beneficiaries is capped. The minimum
-  tax does not apply to primary production income of farms, certain income for
+  the trustee. Discretion over distributions remains, but the tax benefit of
+  streaming income to low-rate beneficiaries is capped. The minimum
+  tax does not apply to primary production income from farms, certain income for
   vulnerable minors, amounts subject to non-resident withholding tax, or income
   from assets of testamentary trusts that existed at announcement. Fixed trusts,
   widely held trusts, complying super funds, special disability trusts, deceased
@@ -231,26 +227,23 @@ with them.
 
 - **Budget Paper 2 provides $59.4 million for community housing support for
   more than 4,000 young people.**[^youth-housing]
-  *Assessment:* Direction: good. Magnitude: targeted, not systemic. A durable
-  capitalist bargain needs a floor beneath people who cannot yet bargain in the
-  market. This helps a vulnerable cohort but does not change the housing price
-  mechanism.
+  *Assessment:* Direction: good. Magnitude: targeted, not systemic. Capitalism
+  needs a floor under people who cannot yet bargain in the market. This helps a
+  vulnerable cohort but does not change the housing price mechanism.
 
 - **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
   and ongoing Urgent Care Clinics.**[^health]
   *Assessment:* Direction: good. Magnitude: serviceable but not structural.
-  Illness should not remove a person's bargaining power in work or family life.
-  This buys access and bulk-billed pressure relief, but not a deeper settlement
-  on ageing, workforce scarcity, expensive medicines and rising public
-  expectations.
+  Illness should not wreck a person's leverage at work or at home. This buys
+  access and bulk-billed pressure relief, but not a deeper settlement on ageing,
+  workforce scarcity, expensive medicines and rising public expectations.
 
 - **The Women's Budget Statement treats care, safety, health and women's labour
   force participation as economic infrastructure, not side issues.**[^wbs]
-  *Assessment:* Direction: right. Magnitude: still contested. This is where the
-  budget is most Keynesian in the older social-democratic sense. Care work
-  reproduces the labour force the market depends on. The hard question is
-  whether the care economy can keep expanding without a larger tax base and a
-  deeper workforce plan.
+  *Assessment:* Direction: right. Magnitude: still contested. This is old social
+  democracy: care work reproduces the labour force the market depends on. The
+  hard question is whether the care economy can keep expanding without a larger
+  tax base and a deeper workforce plan.
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
   growth while still saying NDIS payments grow each year.**[^ndis]
