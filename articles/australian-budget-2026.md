@@ -132,7 +132,7 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
-Overall judgement: **B-**. Labor taxes asset income more coherently, puts some
+Overall judgement: **B+**. Labor taxes asset income more coherently, puts some
 money behind housing bottlenecks, and takes state capacity seriously. The budget
 is still too small for the debt, housing, health, climate, defence and delivery
 pressures visible in the papers.[^tax-strategy][^fiscal]
@@ -156,13 +156,6 @@ not already agree with them.
   outlook is more cautious, which makes the budget look more exposed if growth
   undershoots.[^rba]
 
-- **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
-  1 April 2026 and Budget Paper 1 puts the net revenue cost around
-  $2.5 billion.**[^fuel]
-  *Assessment:* Directionally poor; too small and short-lived to sink the
-  budget, but large enough to show bad priorities. Public money should expand
-  productive capacity. This briefly cheapens fossil-fuel consumption instead.
-
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
   climate change and unlegislated policy.**[^risks]
@@ -172,13 +165,14 @@ not already agree with them.
   surplus/deficit path is exposed across several fronts, so one bad year can
   make the fiscal repair look much thinner.
 
-## Tax, work and housing
+- **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
+  1 April 2026 and Budget Paper 1 puts the net revenue cost around
+  $2.5 billion.**[^fuel]
+  *Assessment:* Directionally poor; too small and short-lived to sink the
+  budget, but large enough to show bad priorities. Public money should expand
+  productive capacity. This briefly cheapens fossil-fuel consumption instead.
 
-- **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
-  from 2027-28.**[^wato]
-  *Assessment:* Directionally good; nowhere near enough. It puts labour ahead of
-  passive asset income. Work should buy security before ownership buys tax
-  shelter. But $250 does not change wages, bargaining power or productivity.
+## Tax, work and housing
 
 - **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
   and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
@@ -231,6 +225,12 @@ not already agree with them.
   estates and charitable trusts are excluded. The same income should not get a
   lower tax rate because it can pass through a better legal wrapper.
 
+- **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
+  from 2027-28.**[^wato]
+  *Assessment:* Directionally good; nowhere near enough. It puts labour ahead of
+  passive asset income. Work should buy security before ownership buys tax
+  shelter. But $250 does not change wages, bargaining power or productivity.
+
 - **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
   creates a $1,000 instant deduction for work expenses.**[^deductions]
   *Assessment:* Fine as paperwork relief; irrelevant as reform. Simpler
@@ -239,6 +239,15 @@ not already agree with them.
   up on asking whether the expense was actually incurred.
 
 ## Energy and industry
+
+- **The budget funds gas reservation but does not offer a comparable structural
+  settlement for climate transition or fossil-fuel rents.**[^gas]
+  *Assessment:* Directionally poor; this is the hole large enough to define the
+  energy package. Reservation may
+  protect domestic users, but it is not a carbon policy, a resource-rent policy
+  or a clean-power investment strategy. The budget is willing to discipline gas
+  exports for domestic security, but not willing to make the same hard claim
+  about who pays for decarbonisation or who captures fossil-fuel rents.
 
 - **Budget Paper 2 creates a domestic gas reservation mechanism equal to
   20 per cent of LNG export volumes from 1 July 2027.**[^gas]
@@ -250,46 +259,7 @@ not already agree with them.
   lesson hard to dodge: cheap theory is not much use when households and
   factories are price-takers in their own country.
 
-- **The budget funds gas reservation but does not offer a comparable structural
-  settlement for climate transition or fossil-fuel rents.**[^gas]
-  *Assessment:* Directionally poor; this is the hole large enough to define the
-  energy package. Reservation may
-  protect domestic users, but it is not a carbon policy, a resource-rent policy
-  or a clean-power investment strategy. The budget is willing to discipline gas
-  exports for domestic security, but not willing to make the same hard claim
-  about who pays for decarbonisation or who captures fossil-fuel rents.
-
 ## Housing and social services
-
-- **Budget Paper 2 provides $2.0 billion for local housing-enabling
-  infrastructure through states and territories.**[^housing-infra]
-  *Assessment:* Directionally good; too small against the national shortfall.
-  Pipes, roads, substations, approvals and utility connections often decide
-  whether homes get built. The money is correctly aimed because it funds the
-  bottlenecks builders can't solve by themselves, but the housing shortage is a
-  stock-flow problem at national scale.
-
-- **Budget Paper 2 provides $59.4 million for community housing support for
-  more than 4,000 young people.**[^youth-housing]
-  *Assessment:* Directionally good; small and properly targeted. Capitalism
-  needs a floor under people who cannot yet bargain in the market. This helps a
-  vulnerable cohort but does not change the housing price mechanism: rents and
-  land values can keep rising around a better safety net.
-
-- **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
-  and ongoing Urgent Care Clinics.**[^health]
-  *Assessment:* Directionally good; solid service funding, not structural
-  reform. Illness should not wreck a person's leverage at work or at
-  home. This buys access and bulk-billed pressure relief, but not a deeper
-  settlement on ageing, workforce scarcity, expensive medicines and rising
-  public expectations.
-
-- **The Women's Budget Statement treats care, safety, health and women's labour
-  force participation as economic infrastructure, not side issues.**[^wbs]
-  *Assessment:* Directionally good; intellectually broad, fiscally unfinished.
-  This is old social democracy: care work reproduces the labour force the
-  market depends on. The hard question is whether the care economy can keep
-  expanding without a larger tax base and a deeper workforce plan.
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
   growth while still saying NDIS payments grow each year.**[^ndis]
@@ -299,15 +269,37 @@ not already agree with them.
   one of the budget's biggest wins. If it suppresses legitimate support, the
   fiscal repair is bought by weakening the social contract.
 
-## Defence, federalism and state capacity
+- **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
+  and ongoing Urgent Care Clinics.**[^health]
+  *Assessment:* Directionally good; solid service funding, not structural
+  reform. Illness should not wreck a person's leverage at work or at
+  home. This buys access and bulk-billed pressure relief, but not a deeper
+  settlement on ageing, workforce scarcity, expensive medicines and rising
+  public expectations.
 
-- **Budget Paper 2 adds $6.8 billion over four years, $35.6 billion over ten
-  years and part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
-  *Assessment:* Directionally good; the dollars are large, the capability is
-  still unproven. Defence spending protects the domestic economic bargain. The
-  return is deterrence, resilience and domestic industrial depth. Budget
-  announcements don't prove capability; ships, yards, workers, maintenance
-  schedules and contracts that survive contact with reality do.
+- **Budget Paper 2 provides $2.0 billion for local housing-enabling
+  infrastructure through states and territories.**[^housing-infra]
+  *Assessment:* Directionally good; too small against the national shortfall.
+  Pipes, roads, substations, approvals and utility connections often decide
+  whether homes get built. The money is correctly aimed because it funds the
+  bottlenecks builders can't solve by themselves, but the housing shortage is a
+  stock-flow problem at national scale.
+
+- **The Women's Budget Statement treats care, safety, health and women's labour
+  force participation as economic infrastructure, not side issues.**[^wbs]
+  *Assessment:* Directionally good; intellectually broad, fiscally unfinished.
+  This is old social democracy: care work reproduces the labour force the
+  market depends on. The hard question is whether the care economy can keep
+  expanding without a larger tax base and a deeper workforce plan.
+
+- **Budget Paper 2 provides $59.4 million for community housing support for
+  more than 4,000 young people.**[^youth-housing]
+  *Assessment:* Directionally good; small and properly targeted. Capitalism
+  needs a floor under people who cannot yet bargain in the market. This helps a
+  vulnerable cohort but does not change the housing price mechanism: rents and
+  land values can keep rising around a better safety net.
+
+## Defence, federalism and state capacity
 
 - **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
   territories in 2026-27.**[^states]
@@ -316,6 +308,14 @@ not already agree with them.
   schools, skills and infrastructure passes through states and territories.
   National promises run through divided authority, and the blame comes back
   shared.
+
+- **Budget Paper 2 adds $6.8 billion over four years, $35.6 billion over ten
+  years and part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
+  *Assessment:* Directionally good; the dollars are large, the capability is
+  still unproven. Defence spending protects the domestic economic bargain. The
+  return is deterrence, resilience and domestic industrial depth. Budget
+  announcements don't prove capability; ships, yards, workers, maintenance
+  schedules and contracts that survive contact with reality do.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
