@@ -144,29 +144,27 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   *Assessment:* Weak, not disastrous; fiscally exposed. The budget is already
   working with low growth, so there isn't much upside buffer. If growth misses,
   revenue falls while indexed spending keeps walking uphill. The RBA's May
-  outlook is more cautious, which makes the budget look more exposed if growth
-  undershoots.[^rba]
+  outlook is more cautious, with GDP growth expected to stay below potential.
+  That makes the budget look more exposed if growth undershoots.[^rba]
 
-- **Budget Paper 1's risk statement says the forecasts are exposed to global
-  conflict, energy prices, demand-driven programs, tax-base uncertainty,
-  climate change and unlegislated policy.**[^risks]
+- **The forecasts are exposed to global conflict, energy prices, demand-driven
+  programs, tax-base uncertainty, climate change and unlegislated policy.**[^risks]
   *Assessment:* Useful candour, with system-wide fiscal exposure. The headline
   path depends on courts, legislation, global shocks, NDIS and aged-care demand,
   tax compliance and climate costs not landing badly at the same time. The
   surplus/deficit path is exposed across several fronts, so one bad year can
   make the fiscal repair look much thinner.
 
-- **Budget Paper 2's fuel excise cut reduces fuel tax for three months from
-  1 April 2026 and Budget Paper 1 puts the net Commonwealth cost at
-  $2.5 billion.**[^fuel]
+- **The fuel excise cut reduces fuel tax for three months from 1 April 2026, at
+  a net Commonwealth cost of $2.5 billion.**[^fuel]
   *Assessment:* Directionally poor; too small and short-lived to sink the
   budget, but large enough to show bad priorities. Public money should expand
   productive capacity. This briefly cheapens fossil-fuel consumption instead.
 
 ## Tax, work and housing
 
-- **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
-  and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
+- **The budget replaces the 50 per cent CGT discount with indexation and a
+  30 per cent minimum tax on real capital gains.**[^asset-tax]
   *Assessment:* Directionally very good; big enough to matter, still designed
   around the assets politics refuses to touch.
   From 1 July 2027, individuals, trusts and partnerships move from the
@@ -182,8 +180,8 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   owner-occupied housing and superannuation, so the reform still swerves around
   the assets most politically protected by the middle class.
 
-- **Budget Papers 1 and 2 restrict negative gearing on residential property to
-  new builds from 1 July 2027.**[^asset-tax]
+- **Negative gearing on residential property is restricted to new builds from
+  1 July 2027.**[^asset-tax]
   *Assessment:* Directionally very good; large enough to change established
   housing incentives, incomplete on land rents. The measure points private rental
   investment toward new supply instead of bidding for existing dwellings. For
@@ -198,8 +196,8 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   should add homes, not capitalise into land prices. The budget narrows a tax
   asymmetry around land rents, but does not tax the underlying land rent itself.
 
-- **Budget Papers 1 and 2 introduce a 30 per cent minimum tax on discretionary
-  trusts from 1 July 2028.**[^trusts]
+- **Discretionary trusts face a 30 per cent minimum tax from
+  1 July 2028.**[^trusts]
   *Assessment:* Directionally good; large enough to change the tax-planning
   calculus.
   The tax applies to the taxable income of discretionary trusts, not to the
@@ -216,15 +214,15 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   estates and charitable trusts are excluded. The same income should not get a
   lower tax rate because it can pass through a better legal wrapper.
 
-- **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
-  from 2027-28.**[^wato]
+- **The Working Australians Tax Offset gives workers up to $250 from
+  2027-28.**[^wato]
   *Assessment:* Directionally good; nowhere near enough. It puts labour ahead of
   passive asset income. Work should buy security before ownership buys tax
   shelter. But $250 does not change wages, bargaining power or productivity.
 
-- **Budget Paper 2 makes the $20,000 instant asset write-off permanent for
-  small businesses with turnover up to $10 million, and creates a $1,000
-  instant deduction for work expenses.**[^deductions]
+- **The $20,000 instant asset write-off becomes permanent for small businesses
+  with turnover up to $10 million, and workers get a $1,000 instant deduction
+  for work expenses.**[^deductions]
   *Assessment:* Fine as paperwork relief; irrelevant as reform. Simpler
   deductions reduce compliance friction, which helps productivity at the margin.
   They also leak precision: rough justice is cheaper to administer, but it gives
@@ -241,8 +239,8 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   exports for domestic security, but not willing to make the same hard claim
   about who pays for decarbonisation or who captures fossil-fuel rents.
 
-- **Budget Paper 2 creates a domestic gas reservation mechanism equal to
-  20 per cent of gas exports from 1 July 2027.**[^gas]
+- **A domestic gas reservation mechanism equal to 20 per cent of gas exports
+  begins on 1 July 2027.**[^gas]
   *Assessment:* Directionally good; large enough to matter for domestic gas
   users, not large enough to settle energy policy. Energy is an input to national
   production before it is an export rent stream. Domestic energy security and
@@ -253,25 +251,25 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Housing and social services
 
-- **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
-  growth over four years, relative to the NDIS Actuary's updated projections,
-  while still saying NDIS payments grow each year.**[^ndis]
+- **The budget books a projected $37.8 billion reduction in NDIS payment growth
+  over four years, relative to the NDIS Actuary's updated projections, while
+  still saying NDIS payments grow each year.**[^ndis]
   *Assessment:* Directionally good if integrity means integrity; large enough to
   carry real social risk if it becomes rationing. Support must be generous enough
   to matter and controlled enough to survive. If integrity reform works, this is
   one of the budget's biggest wins. If it suppresses legitimate support, the
   fiscal repair is bought by weakening the social contract.
 
-- **Budget Paper 2 spends $2.1 billion over five years on Strengthening
-  Medicare, including ongoing Urgent Care Clinics.**[^health]
+- **Strengthening Medicare gets $2.1 billion over five years, including ongoing
+  Urgent Care Clinics.**[^health]
   *Assessment:* Directionally good; solid service funding, not structural
   reform. Illness should not wreck a person's leverage at work or at
   home. This buys access and bulk-billed pressure relief, but not a deeper
   settlement on ageing, workforce scarcity, expensive medicines and rising
   public expectations.
 
-- **Budget Paper 2 provides $2.0 billion for local housing-enabling
-  infrastructure through states and territories.**[^housing-infra]
+- **Local housing-enabling infrastructure gets $2.0 billion through states and
+  territories.**[^housing-infra]
   *Assessment:* Directionally good; too small against the national shortfall.
   Pipes, roads, substations, approvals and utility connections often decide
   whether homes get built. The money is correctly aimed because it funds the
@@ -285,8 +283,8 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   market depends on. The hard question is whether the care economy can keep
   expanding without a larger tax base and a deeper workforce plan.
 
-- **Budget Paper 2 provides $59.4 million for community housing support for
-  more than 4,000 young people.**[^youth-housing]
+- **Community housing support gets $59.4 million for more than 4,000 young
+  people.**[^youth-housing]
   *Assessment:* Directionally good; small and properly targeted. Capitalism
   needs a floor under people who cannot yet bargain in the market. This helps a
   vulnerable cohort but does not change the housing price mechanism: rents and
@@ -294,24 +292,24 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Defence, federalism and state capacity
 
-- **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
-  territories in 2026-27.**[^states]
+- **Commonwealth payments to states and territories reach $207.8 billion in
+  2026-27.**[^states]
   *Assessment:* The money is enormous; the direction depends on execution.
   Canberra books the spending, but much of the actual work in health, housing,
   schools, skills and infrastructure passes through states and territories.
   National promises run through divided authority, and the blame comes back
   shared.
 
-- **Budget Paper 2 adds $6.8 billion over four years, $35.6 billion over ten
-  years and part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
+- **Defence gets $6.8 billion over four years, $35.6 billion over ten years and
+  part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
   *Assessment:* Directionally good; the dollars are large, the capability is
   still unproven. Defence spending protects the domestic economic bargain. The
   return is deterrence, resilience and domestic industrial depth. Budget
   announcements don't prove capability; ships, yards, workers, maintenance
   schedules and contracts that survive contact with reality do.
 
-- **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
-  above the revised 2025-26 estimate.**[^asl]
+- **Average staffing reaches 217,256 in 2026-27, only 0.6 per cent above the
+  revised 2025-26 estimate.**[^asl]
   *Assessment:* Directionally mixed; 0.6 per cent staffing growth is too thin
   against the workload. The budget asks the state to run harder: tax reform, NDIS
   integrity, procurement, energy regulation, housing agreements. The Portfolio
