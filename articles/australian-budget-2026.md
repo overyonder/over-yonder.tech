@@ -83,9 +83,9 @@ their heirs gave ground because the alternative was uglier. When elites get too
 brazen, history doesn't usually reward them for their efficiency. It gives them
 [Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
 [Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
-[Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre). That is
-why a not small part of me thinks so many of history's socialist messiahs (read:
-class traitors) come from the bourgeoisie:
+[Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre). Maybe that
+is why a not small part of me thinks so many of history's socialist messiahs
+(read: class traitors) come from the bourgeoisie:
 [Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
 [Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
 [Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels). (In my
@@ -98,9 +98,7 @@ can also get drunk on its own cleverness. The
 when full-employment Keynesianism loses price discipline, lets insiders capture
 the institutions, and treats inflation as someone else's problem. Markets carry
 information no ministry can fully see. A serious social democrat should know
-that in their bones.
-
-But the neoliberal correction overlearned the lesson.
+that in their bones. But the neoliberal correction overlearned the lesson.
 [Thatcherite](https://en.wikipedia.org/wiki/Thatcherism) privatisation,
 [Reaganism](https://en.wikipedia.org/wiki/Reaganomics) and later
 [Blairist](https://en.wikipedia.org/wiki/Blairism) managerialism restored price
