@@ -117,8 +117,8 @@ treated as democratic citizenship, and each country's local version of
 politics.
 [Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
 rebrand too, helped along by
-[panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with a
-notification badge. Where class solidarity might once have threatened
+[panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with
+infinite scroll. Where class solidarity might once have threatened
 concentrated wealth, the newer trick is to keep people fighting sideways:
 [gender against gender](https://www.youtube.com/watch?v=x8hAFHB54gE),
 [renters against migrants](https://www.foxbusiness.com/economy/elon-musk-weighs-economic-impacts-illegal-immigration),
