@@ -310,27 +310,24 @@ appear narrowly; the question is whether they appear as structural reform.
 - **The budget changes housing investor tax settings and uses planning
   conditions, but does not attempt a broad land-tax bargain with the
   states.**[^housing-infra][^productivity]
-  *Assessment:* Directionally mixed; the omission is large. Zoning is not absent;
-  it appears through housing-enabling infrastructure, National Competition
-  Policy and productivity work. Land rent is still the gap: planning throughput
-  can increase supply, but without land-tax reform the scarcity rent mostly
-  remains private.
+  Zoning is not absent; it appears through housing-enabling infrastructure,
+  National Competition Policy and productivity work. Land rent is still the gap:
+  planning throughput can increase supply, but without land-tax reform the
+  scarcity rent mostly remains private.
 
 - **The papers discuss GST distribution and superannuation receipts, but leave
   GST design and retirement-savings tax mostly outside the reform
   perimeter.**[^tax-strategy][^gst-super]
-  *Assessment:* Directionally evasive; the tax-base gap is too large to ignore.
-  A durable tax settlement cannot keep relying on income tax while sheltering
-  large pools of asset wealth and leaving consumption-tax design frozen.
+  This leaves a tax-base gap too large to ignore. A durable tax settlement cannot
+  keep relying on income tax while sheltering large pools of asset wealth and
+  leaving consumption-tax design frozen.
 
 - **The budget has a productivity program, but not an integrated productivity
   compact at reform-era scale.**[^regulation][^productivity]
-  *Assessment:* Directionally good; small relative to the reform-era task. Better
-  regulation, competition enforcement, skills recognition and Productivity
-  Commission inquiries are useful because they attack frictions that make labour
-  and capital less productive. They remain a bundle of instruments, not a
-  settlement across tax, skills, workplace institutions, competition and
-  infrastructure selection.
+  Better regulation, competition enforcement, skills recognition and Productivity
+  Commission inquiries attack frictions that make labour and capital less
+  productive. The missing piece is integration across tax, skills, workplace
+  institutions, competition and infrastructure selection.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
