@@ -139,10 +139,11 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Policy Context: Fiscal and macro settings
 
-- **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
-  2026-27 and unemployment stays near 4.5 per cent.**[^macro]
-  *Assessment:* Plausible, but fiscally sensitive. If growth misses, the budget
-  loses revenue while indexed spending keeps walking uphill. The RBA's May
+- **Treasury's forecasts assume real GDP growth of 1.75 per cent in
+  2026-27 and unemployment at 4.5 per cent.**[^macro]
+  *Assessment:* Weak, not disastrous; fiscally exposed. The budget is already
+  working with low growth, so there isn't much upside buffer. If growth misses,
+  revenue falls while indexed spending keeps walking uphill. The RBA's May
   outlook is more cautious, which makes the budget look more exposed if growth
   undershoots.[^rba]
 
@@ -155,8 +156,8 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   surplus/deficit path is exposed across several fronts, so one bad year can
   make the fiscal repair look much thinner.
 
-- **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
-  1 April 2026 and Budget Paper 1 puts the net revenue cost around
+- **Budget Paper 2's fuel excise cut reduces fuel tax for three months from
+  1 April 2026 and Budget Paper 1 puts the net Commonwealth cost at
   $2.5 billion.**[^fuel]
   *Assessment:* Directionally poor; too small and short-lived to sink the
   budget, but large enough to show bad priorities. Public money should expand
@@ -221,8 +222,9 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   passive asset income. Work should buy security before ownership buys tax
   shelter. But $250 does not change wages, bargaining power or productivity.
 
-- **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
-  creates a $1,000 instant deduction for work expenses.**[^deductions]
+- **Budget Paper 2 makes the $20,000 instant asset write-off permanent for
+  small businesses with turnover up to $10 million, and creates a $1,000
+  instant deduction for work expenses.**[^deductions]
   *Assessment:* Fine as paperwork relief; irrelevant as reform. Simpler
   deductions reduce compliance friction, which helps productivity at the margin.
   They also leak precision: rough justice is cheaper to administer, but it gives
@@ -240,7 +242,7 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
   about who pays for decarbonisation or who captures fossil-fuel rents.
 
 - **Budget Paper 2 creates a domestic gas reservation mechanism equal to
-  20 per cent of LNG export volumes from 1 July 2027.**[^gas]
+  20 per cent of gas exports from 1 July 2027.**[^gas]
   *Assessment:* Directionally good; large enough to matter for domestic gas
   users, not large enough to settle energy policy. Energy is an input to national
   production before it is an export rent stream. Domestic energy security and
@@ -252,15 +254,16 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 ## Housing and social services
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
-  growth while still saying NDIS payments grow each year.**[^ndis]
+  growth over four years, relative to the NDIS Actuary's updated projections,
+  while still saying NDIS payments grow each year.**[^ndis]
   *Assessment:* Directionally good if integrity means integrity; large enough to
   carry real social risk if it becomes rationing. Support must be generous enough
   to matter and controlled enough to survive. If integrity reform works, this is
   one of the budget's biggest wins. If it suppresses legitimate support, the
   fiscal repair is bought by weakening the social contract.
 
-- **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
-  and ongoing Urgent Care Clinics.**[^health]
+- **Budget Paper 2 spends $2.1 billion over five years on Strengthening
+  Medicare, including ongoing Urgent Care Clinics.**[^health]
   *Assessment:* Directionally good; solid service funding, not structural
   reform. Illness should not wreck a person's leverage at work or at
   home. This buys access and bulk-billed pressure relief, but not a deeper
