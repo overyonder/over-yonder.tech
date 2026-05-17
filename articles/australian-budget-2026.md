@@ -63,8 +63,8 @@ That bargain needed capital to be clever as well as powerful.
 [New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
 [robber barons](https://en.wikipedia.org/wiki/Robber_baron_(industrialist)) and
 their heirs gave ground because the alternative was uglier. That is why a not
-small part of me thinks history's more useful class traitors often come from the
-bourgeoisie:
+small part of me thinks so many of history's socialist messiahs (read: class
+traitors) come from the bourgeoisie:
 [Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
 [Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
 [Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels). In my head,
