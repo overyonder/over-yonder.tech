@@ -140,25 +140,49 @@ papers.[^tax-strategy][^fiscal]
 
 - **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
   and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
-  *Assessment:* Direction: very good. Magnitude: large but incomplete. This is
-  tax on the gain, not the inflation. It attacks the Howard-era preference for
-  nominal asset gains and moves closer to taxing real income. It still leaves
-  owner-occupied housing and superannuation largely protected.
+  *Assessment:* Direction: very good. Magnitude: large but incomplete. From
+  1 July 2027, individuals, trusts and partnerships move from the 50 per cent
+  discount to cost-base indexation, with a 30 per cent minimum tax on real gains.
+  Existing assets are not fully grandfathered. Gains accrued before 1 July 2027
+  keep the 50 per cent discount; gains after that date use the asset's 1 July
+  2027 value as the new cost base, set by valuation or an ATO-supported
+  apportionment formula. Pre-1985 assets are brought in only for gains after the
+  start date. Investors buying new builds can still choose the old 50 per cent
+  discount instead of indexation and the minimum tax when they sell. This is tax
+  on the gain, not the inflation, but it still leaves owner-occupied housing and
+  superannuation largely protected.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
   new builds from 1 July 2027.**[^asset-tax]
   *Assessment:* Direction: very good. Magnitude: not enough alone. The measure
   points private rental investment toward new supply instead of bidding for
-  existing dwellings. Public subsidy should add homes, not capitalise into land
-  prices. The budget narrows a tax asymmetry around land rents, but does not tax
-  the underlying land rent itself.
+  existing dwellings. For established residential properties caught by the new
+  rule, net rental losses can no longer be deducted against wages or other
+  unrelated income. They can be deducted only against residential rent or
+  residential property capital gains, with excess losses carried forward. New
+  builds are exempt, and commercial property and shares stay under existing
+  rules. Existing investment decisions before 7:30pm AEST on 12 May 2026 are
+  protected, including contracts entered but not settled. Properties bought after
+  that time and before 30 June 2027 may be negatively geared during that window,
+  but not in later years. Public subsidy should add homes, not capitalise into
+  land prices. The budget narrows a tax asymmetry around land rents, but does
+  not tax the underlying land rent itself.
 
 - **Budget Papers 1 and 2 introduce a 30 per cent minimum tax on discretionary
   trusts from 1 July 2028.**[^trusts]
-  *Assessment:* Direction: good. Magnitude: serious. Trusts can be legitimate
-  business and family structures, but the budget papers explicitly describe
-  income splitting and lower-rate distributions. The same income should not get
-  a lower tax rate because it can pass through a better legal wrapper.
+  *Assessment:* Direction: good. Magnitude: serious. The tax applies to the
+  taxable income of discretionary trusts, not to the trust's asset value. The
+  trustee pays it, because the trustee controls who receives distributions.
+  Beneficiaries still declare trust income in their own tax returns, and
+  non-corporate beneficiaries receive non-refundable credits for tax payable by
+  the trustee. That means discretion over distributions remains, but the tax
+  benefit of streaming income to low-rate beneficiaries is capped. The minimum
+  tax does not apply to primary production income of farms, certain income for
+  vulnerable minors, amounts subject to non-resident withholding tax, or income
+  from assets of testamentary trusts that existed at announcement. Fixed trusts,
+  widely held trusts, complying super funds, special disability trusts, deceased
+  estates and charitable trusts are excluded. The same income should not get a
+  lower tax rate because it can pass through a better legal wrapper.
 
 - **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
   creates a $1,000 instant deduction for work expenses.**[^deductions]
@@ -296,7 +320,7 @@ appear narrowly; the question is whether they appear as structural reform.
 
 [^wato]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - cutting taxes with a Working Australians Tax Offset", p. 16; *Budget Paper No. 1*, Statement 4, pp. 163-165. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
-[^asset-tax]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - Boosting Home Ownership - reforming negative gearing and capital gains tax", p. 21; *Budget Paper No. 1*, Statement 4, pp. 144-156. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
+[^asset-tax]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - Boosting Home Ownership - reforming negative gearing and capital gains tax", p. 21; *Budget Paper No. 1*, Statement 4, pp. 144-158. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
 [^trusts]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - introducing a minimum tax on discretionary trusts", p. 22; *Budget Paper No. 1*, Statement 4, pp. 158-162. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
