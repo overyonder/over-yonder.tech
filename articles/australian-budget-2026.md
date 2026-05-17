@@ -48,7 +48,7 @@ richer by building capacity, rather than revaluing the same dirt?
 
 <div class="info">
 <details>
-<summary>Cards on the table</summary>
+<summary>Caveat: cards on the table</summary>
 
 I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
 political-economy sense: capitalism can create broad prosperity, but only when
