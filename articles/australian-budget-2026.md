@@ -509,7 +509,7 @@ gestures toward parts of that future. Australia needs to remember that countries
 are built, not passively inherited from parcels of ground with things built on
 them or holes dug in them once in the distant past.
 
-Then the horizon gets larger. A richer Australia should choose global leadership,
+Then the horizon gets larger. A richer Australia could, and must, choose global leadership,
 not loyal lieutenantship. It should revive the Carr-Evans
 [creative middle power](https://www.gevans.org/speeches/speech465.html)
 tradition: capable enough to matter, independent enough to broker peace, and
