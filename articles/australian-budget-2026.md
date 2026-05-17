@@ -98,9 +98,9 @@ can also get drunk on its own cleverness. The
 when full-employment Keynesianism loses price discipline, lets insiders capture
 the institutions, and treats inflation as someone else's problem (usually, a
 [Volckerite hero](https://www.federalreserve.gov/aboutthefed/bios/board/powell.htm)
-or one in the making). Markets carry
-information no ministry can fully see. A serious social democrat should know
-that in their bones. But the neoliberal correction overlearned the lesson.
+or one in the making). Markets do carry information no ministry can fully see,
+and any serious social democrat should know that in their bones; the neoliberal
+correction overlearned the lesson.
 [Thatcherite](https://en.wikipedia.org/wiki/Thatcherism) privatisation,
 [Reaganism](https://en.wikipedia.org/wiki/Reaganomics) and later
 [Blairist](https://en.wikipedia.org/wiki/Blairism) managerialism restored price
