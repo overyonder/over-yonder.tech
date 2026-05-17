@@ -43,7 +43,8 @@ period kept much of that market-opening settlement, but also entrenched a
 different political bargain: the GST, middle-class tax relief, family transfers,
 a larger role for private housing wealth, and the 1999 capital gains tax
 discount. This budget pushes against part of the Howard-era asset bargain, though
-it doesn't revive a Keating-style productivity program.[^keating-productivity]
+it doesn't revive Keating's deeper question: how do high wages get earned
+through productivity, rather than protected by asset inflation?
 
 The short version: **serious, not solved**.
 
@@ -143,7 +144,9 @@ agree with them.
   climate change and unlegislated policy.**[^risks]
   *Assessment:* Direction: useful candour. Magnitude: central. The headline
   path depends on courts, legislation, global shocks, NDIS and aged-care demand,
-  tax compliance and climate costs not landing badly at the same time.
+  tax compliance and climate costs not landing badly at the same time. This is
+  not a tidy spreadsheet risk; it is the budget admitting that several open tabs
+  can all start playing music at once.
 
 ## Tax, work and housing
 
@@ -164,8 +167,9 @@ agree with them.
   apportionment formula. Pre-1985 assets are brought in only for gains after the
   start date. Investors buying new builds can still choose the old 50 per cent
   discount instead of indexation and the minimum tax when they sell. Good:
-  taxing the gain, not the inflation. Bad: owner-occupied housing and
-  superannuation largely protected.
+  taxing the gain, not the inflation. Bad: the largest shelters remain
+  owner-occupied housing and superannuation, so the reform still swerves around
+  the assets most politically protected by the middle class.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
   new builds from 1 July 2027.**[^asset-tax]
@@ -203,8 +207,8 @@ agree with them.
   creates a $1,000 instant deduction for work expenses.**[^deductions]
   *Assessment:* Direction: mixed. Magnitude: modest. Simpler deductions reduce
   compliance friction. That helps productivity. They also leak precision: rough
-  justice is cheaper to administer, but it weakens the link between actual
-  expense and tax benefit.
+  justice is cheaper to administer, but it gives up on asking whether the
+  expense was actually incurred.
 
 ## Energy and industry
 
@@ -214,14 +218,16 @@ agree with them.
   Energy is an input to national production before it is an export rent stream.
   Domestic energy security and local production costs are being preferred over
   pure export-parity pricing. It cuts against old market-liberal instincts, but
-  resilience now has a real economic value.
+  the last few years have made the lesson hard to dodge: cheap theory is not
+  much use when households and factories are price-takers in their own country.
 
 - **The budget funds gas reservation but does not offer a comparable structural
   settlement for climate transition or fossil-fuel rents.**[^gas]
   *Assessment:* Direction: incomplete. Magnitude: too small. Reservation may
   protect domestic users, but it is not a carbon policy, a resource-rent policy
-  or a clean-power investment strategy. The energy-security chapter is louder
-  than the transition chapter.
+  or a clean-power investment strategy. The budget is willing to discipline gas
+  exports for domestic security, but not willing to make the same hard claim
+  about who pays for decarbonisation or who captures fossil-fuel rents.
 
 ## Housing and social services
 
@@ -229,14 +235,16 @@ agree with them.
   infrastructure through states and territories.**[^housing-infra]
   *Assessment:* Direction: good. Magnitude: probably too small. Pipes, roads,
   substations, approvals and utility connections often decide whether homes get
-  built. The money is correctly aimed, but the housing shortage is a stock-flow
-  problem at national scale.
+  built. The money is correctly aimed because it funds the bottlenecks builders
+  can't solve by themselves, but the housing shortage is a stock-flow problem at
+  national scale.
 
 - **Budget Paper 2 provides $59.4 million for community housing support for
   more than 4,000 young people.**[^youth-housing]
   *Assessment:* Direction: good. Magnitude: targeted, not systemic. Capitalism
   needs a floor under people who cannot yet bargain in the market. This helps a
-  vulnerable cohort but does not change the housing price mechanism.
+  vulnerable cohort but does not change the housing price mechanism: rents and
+  land values can keep rising around a better safety net.
 
 - **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
   and ongoing Urgent Care Clinics.**[^health]
@@ -267,14 +275,16 @@ agree with them.
   *Assessment:* Direction: necessary. Magnitude: not proven sufficient. Defence
   spending protects the domestic economic bargain. The return is deterrence,
   resilience and domestic industrial depth. Budget announcements don't prove
-  capability; procurement discipline does.
+  capability; ships, yards, workers, maintenance schedules and contracts that
+  survive contact with reality do.
 
 - **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
   territories in 2026-27.**[^states]
   *Assessment:* Direction: unavoidable. Magnitude: politically underexplained.
   Many promises in health, housing, schools, skills and infrastructure pass
-  through governments Canberra does not control. Voters see one failure; the
-  budget sees a federation.
+  through governments Canberra does not control. That matters because blame is
+  simple and delivery is not. Voters see one failure; the budget sees a
+  federation.
 
 - **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
   delivery complexity and material disruption.**[^states]
@@ -288,8 +298,9 @@ agree with them.
   state to run harder: tax reform, NDIS integrity, procurement, energy
   regulation, housing agreements. The Portfolio Budget Statements sharpen this
   point: the work is spread across many agencies, not one heroic line item.
-  Headcount is not capability, but thin capacity makes sophisticated policy
-  fragile.
+  Headcount is not capability. But sophisticated policy still needs people who
+  can audit claims, write contracts, run procurement, enforce rules and manage
+  projects after the minister has left the lectern.
 
 ## Notable absences
 
@@ -316,13 +327,12 @@ appear narrowly; the question is whether they appear as structural reform.
   compact at reform-era scale.**[^regulation][^productivity]
   *Assessment:* Direction: good start. Magnitude: too small. Better regulation,
   competition enforcement, skills recognition and Productivity Commission
-  inquiries are useful. They remain a bundle of instruments, not a settlement
+  inquiries are useful because they attack frictions that make labour and
+  capital less productive. They remain a bundle of instruments, not a settlement
   across tax, skills, workplace institutions, competition and infrastructure
   selection.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
-
-[^keating-productivity]: By that I mean the Hawke-Keating reform settlement: floating the dollar, financial deregulation, tariff cuts, enterprise bargaining, the Prices and Incomes Accord, compulsory superannuation, tax-base broadening and microeconomic reform. The point was to pay high wages from productivity, not protection, inflation or asset churn.
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
