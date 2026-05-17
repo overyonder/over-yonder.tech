@@ -304,8 +304,7 @@ agree with them.
 
 ## Notable absences
 
-I checked these topics because they matter to the budget's reform story. Some
-appear narrowly; the question is whether they appear as structural reform.
+These are the places where the budget's reform story stops short.
 
 - **The budget changes housing investor tax settings and uses planning
   conditions, but does not attempt a broad land-tax bargain with the
