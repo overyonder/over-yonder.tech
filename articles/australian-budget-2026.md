@@ -487,7 +487,7 @@ behind outsourced chaos.
 This is the terrifying but grand vision of the argument. Australia has to become
 capable of imagining a golden future again. Reagan's
 [shining city upon a hill](https://www.reaganlibrary.gov/archives/speech/farewell-address-nation)
-looked outward from private affluence and imperial confidence. The Australian
+looked outward from private affluence and imperial arrogance. The Australian
 inversion is a golden country with the institutional muscle to defend shared
 prosperity, instead of a property portfolio with a flag and a quarry with cafes.
 
