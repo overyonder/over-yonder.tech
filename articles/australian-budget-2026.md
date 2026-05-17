@@ -20,11 +20,12 @@ resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 So: read first, argue second, keep it short enough that nobody needs a Treasury
 cadetship.
 
-Source note: I treated the four Budget Papers as the spine, then checked the
-overview, Women's Budget Statement, tax explainers, fact sheets and Portfolio
-Budget Statements against them.[^source-set] The PBS documents are mostly
-delivery documents. They don't replace the macro story, but they test whether
-the budget can carry its promises through departments and programs.
+> [!NOTE] Source note
+> I treated the four Budget Papers as the spine, then checked the overview,
+> Women's Budget Statement, tax explainers, fact sheets and Portfolio Budget
+> Statements against them.[^source-set] The PBS documents are mostly delivery
+> documents. They don't replace the macro story, but they test whether the
+> budget can carry its promises through departments and programs.
 
 The 2026-27 Federal Budget is a political economy budget. Its centre is a shift
 in who the tax system favours: less preference for leveraged asset ownership,
@@ -110,17 +111,17 @@ papers.[^tax-strategy][^fiscal]
 
 - **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
   2026-27 and unemployment stays near 4.5 per cent.**[^macro]
-  *Assessment:* Direction: plausible. Magnitude: fragile. These forecasts do
-  fiscal work: receipts, payments and inflation-indexed spending all depend on
-  the growth path. The RBA's May outlook is more cautious, which makes the
-  budget look more exposed if growth undershoots.[^rba]
+  *Assessment:* Direction: plausible. Magnitude: fragile. The forecast affects
+  receipts, payments and inflation-indexed spending. The RBA's May outlook is
+  more cautious, which makes the budget look more exposed if growth
+  undershoots.[^rba]
 
 - **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
   1 April 2026 and Budget Paper 1 puts the net revenue cost around
   $2.5 billion.**[^fuel]
-  *Assessment:* Direction: poor. Magnitude: too large for what it buys. It helps
-  drivers now, but it subsidises petrol use, weakens revenue and does almost
-  nothing for the economy's productive capacity.
+  *Assessment:* Direction: poor. Magnitude: too large for what it buys. Public
+  money should expand productive capacity. This briefly cheapens fossil-fuel
+  consumption instead.
 
 - **Budget Paper 1's risk statement says the forecasts are exposed to global
   conflict, energy prices, demand-driven programs, tax-base uncertainty,
@@ -133,36 +134,37 @@ papers.[^tax-strategy][^fiscal]
 
 - **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
   from 2027-28.**[^wato]
-  *Assessment:* Direction: good. Magnitude: modest. It deliberately favours
-  labour income over asset income. That is the right priority: work should buy
-  security. But $250 is a political bridge, not a wage-productivity settlement.
+  *Assessment:* Direction: good. Magnitude: modest. It puts labour ahead of
+  passive asset income. Work should buy security before ownership buys tax
+  shelter. But $250 is a political bridge, not a wage-productivity settlement.
 
 - **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
   and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
   *Assessment:* Direction: very good. Magnitude: large but incomplete. This is
-  the clearest structural reform in the budget. It attacks the Howard-era
-  preference for nominal asset gains and moves closer to taxing real income. It
-  still leaves owner-occupied housing and superannuation largely protected.
+  tax on the gain, not the inflation. It attacks the Howard-era preference for
+  nominal asset gains and moves closer to taxing real income. It still leaves
+  owner-occupied housing and superannuation largely protected.
 
 - **Budget Papers 1 and 2 restrict negative gearing on residential property to
   new builds from 1 July 2027.**[^asset-tax]
   *Assessment:* Direction: very good. Magnitude: not enough alone. The measure
   points private rental investment toward new supply instead of bidding for
-  existing dwellings. The Georgist critique remains: the budget narrows a tax
-  asymmetry around land rents, but does not tax the underlying land rent itself.
+  existing dwellings. Public subsidy should add homes, not capitalise into land
+  prices. The budget narrows a tax asymmetry around land rents, but does not tax
+  the underlying land rent itself.
 
 - **Budget Papers 1 and 2 introduce a 30 per cent minimum tax on discretionary
   trusts from 1 July 2028.**[^trusts]
   *Assessment:* Direction: good. Magnitude: serious. Trusts can be legitimate
   business and family structures, but the budget papers explicitly describe
-  income splitting and lower-rate distributions. This is a direct attack on
-  private tax planning that turns family structure into fiscal advantage.
+  income splitting and lower-rate distributions. The same income should not get
+  a lower tax rate because it can pass through a better legal wrapper.
 
 - **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
   creates a $1,000 instant deduction for work expenses.**[^deductions]
   *Assessment:* Direction: mixed. Magnitude: modest. Simpler deductions reduce
-  compliance friction, which is real productivity. They also leak precision:
-  rough justice is cheaper to administer, but it weakens the link between actual
+  compliance friction. That helps productivity. They also leak precision: rough
+  justice is cheaper to administer, but it weakens the link between actual
   expense and tax benefit.
 
 ## Energy and industry
@@ -170,9 +172,10 @@ papers.[^tax-strategy][^fiscal]
 - **Budget Paper 2 creates a domestic gas reservation mechanism equal to
   20 per cent of LNG export volumes from 1 July 2027.**[^gas]
   *Assessment:* Direction: good under current conditions. Magnitude: substantial.
-  This is industrial policy: domestic energy security and local production costs
-  are being preferred over pure export-parity pricing. It cuts against old
-  market-liberal instincts, but resilience now has a real economic value.
+  Energy is an input to national production before it is an export rent stream.
+  Domestic energy security and local production costs are being preferred over
+  pure export-parity pricing. It cuts against old market-liberal instincts, but
+  resilience now has a real economic value.
 
 - **The budget funds gas reservation but does not offer a comparable structural
   settlement for climate transition or fossil-fuel rents.**[^gas]
@@ -192,40 +195,43 @@ papers.[^tax-strategy][^fiscal]
 
 - **Budget Paper 2 provides $59.4 million for community housing support for
   more than 4,000 young people.**[^youth-housing]
-  *Assessment:* Direction: good. Magnitude: targeted, not systemic. This is
-  humane safety-net spending. It helps a vulnerable cohort but does not change
-  the housing price mechanism.
+  *Assessment:* Direction: good. Magnitude: targeted, not systemic. A durable
+  capitalist bargain needs a floor beneath people who cannot yet bargain in the
+  market. This helps a vulnerable cohort but does not change the housing price
+  mechanism.
 
 - **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
   and ongoing Urgent Care Clinics.**[^health]
-  *Assessment:* Direction: good. Magnitude: serviceable but not structural. It
-  buys access and bulk-billed pressure relief. It does not solve the deeper
-  equation of ageing, workforce scarcity, expensive medicines and rising public
+  *Assessment:* Direction: good. Magnitude: serviceable but not structural.
+  Illness should not remove a person's bargaining power in work or family life.
+  This buys access and bulk-billed pressure relief, but not a deeper settlement
+  on ageing, workforce scarcity, expensive medicines and rising public
   expectations.
 
 - **The Women's Budget Statement treats care, safety, health and women's labour
   force participation as economic infrastructure, not side issues.**[^wbs]
   *Assessment:* Direction: right. Magnitude: still contested. This is where the
-  budget is most Keynesian in the older social-democratic sense: paid parental
-  leave, care wages, child care, Medicare and violence prevention are presented
-  as productivity policy. The hard question is whether the care economy can keep
-  expanding without a larger tax base and a deeper workforce plan.
+  budget is most Keynesian in the older social-democratic sense. Care work
+  reproduces the labour force the market depends on. The hard question is
+  whether the care economy can keep expanding without a larger tax base and a
+  deeper workforce plan.
 
 - **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
   growth while still saying NDIS payments grow each year.**[^ndis]
   *Assessment:* Direction: necessary. Magnitude: fiscally large and socially
-  risky. If integrity reform works, this is one of the budget's biggest wins. If
-  it suppresses legitimate support, the fiscal repair is bought by weakening the
-  social contract.
+  risky. Support must be generous enough to matter and controlled enough to
+  survive. If integrity reform works, this is one of the budget's biggest wins.
+  If it suppresses legitimate support, the fiscal repair is bought by weakening
+  the social contract.
 
 ## Defence, federalism and state capacity
 
 - **Budget Paper 2 adds $6.8 billion over four years, $35.6 billion over ten
   years and part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
   *Assessment:* Direction: necessary. Magnitude: not proven sufficient. Defence
-  spending is insurance: the return is deterrence, resilience and domestic
-  industrial depth. Budget announcements don't prove capability; procurement
-  discipline does.
+  spending protects the domestic economic bargain. The return is deterrence,
+  resilience and domestic industrial depth. Budget announcements don't prove
+  capability; procurement discipline does.
 
 - **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
   territories in 2026-27.**[^states]
@@ -237,8 +243,8 @@ papers.[^tax-strategy][^fiscal]
 - **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
   delivery complexity and material disruption.**[^states]
   *Assessment:* Direction: realistic. Magnitude: important. Announced spending
-  is not completed work. A budget that admits delivery friction is better than a
-  budget pretending a press release pours concrete.
+  is not completed work. Admitting delivery friction is better than pretending a
+  press release pours concrete.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
@@ -252,16 +258,16 @@ papers.[^tax-strategy][^fiscal]
 ## Notable absences
 
 I checked these topics because they matter to the budget's reform story. Some
-appear in narrow form; the point is whether they appear as structural reform.
+appear narrowly; the question is whether they appear as structural reform.
 
 - **The budget changes housing investor tax settings and uses planning
   conditions, but does not attempt a broad land-tax bargain with the
   states.**[^housing-infra][^productivity]
   *Assessment:* Direction: partial. Magnitude: major omission. Zoning is not
   absent; it appears through housing-enabling infrastructure, National
-  Competition Policy and productivity work. The Georgist gap is land rent:
-  planning throughput can increase supply, but without land-tax reform the
-  scarcity rent mostly remains private.
+  Competition Policy and productivity work. Land rent is still the gap: planning
+  throughput can increase supply, but without land-tax reform the scarcity rent
+  mostly remains private.
 
 - **The papers discuss GST distribution and superannuation receipts, but leave
   GST design and retirement-savings tax mostly outside the reform perimeter.**[^tax-strategy][^gst-super]
@@ -274,9 +280,9 @@ appear in narrow form; the point is whether they appear as structural reform.
   compact at reform-era scale.**[^regulation][^productivity]
   *Assessment:* Direction: good start. Magnitude: too small. Better regulation,
   competition enforcement, skills recognition and Productivity Commission
-  inquiries are real measures. They remain a bundle of instruments, not a
-  settlement across tax, skills, workplace institutions, competition and
-  infrastructure selection.
+  inquiries are useful. They remain a bundle of instruments, not a settlement
+  across tax, skills, workplace institutions, competition and infrastructure
+  selection.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
