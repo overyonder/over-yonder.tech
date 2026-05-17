@@ -294,9 +294,9 @@ agree with them.
 - **Budget Paper 3 explicitly allows infrastructure payments to slip when
   milestones are missed, projects prove more complex than expected, or materials
   are disrupted.**[^states]
-  *Assessment:* Useful disclosure, not a policy achievement. Slippage shifts cash
-  into later years and delays the roads, water, schools and hospitals the budget
-  is counting on for housing and service capacity.
+  *Assessment:* This is a delivery caveat. Slippage shifts cash into later years
+  and delays the roads, water, schools and hospitals the budget is counting on
+  for housing and service capacity.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
