@@ -62,9 +62,16 @@ That bargain needed capital to be clever as well as powerful.
 [Standard Oil](https://en.wikipedia.org/wiki/Standard_Oil) was broken up. The
 [New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
 [robber barons](https://en.wikipedia.org/wiki/Robber_baron_(industrialist)) and
-their heirs gave ground because the alternative was uglier. When elites get too
-brazen, history doesn't usually reward them for their efficiency. It gives them
-[Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
+their heirs gave ground because the alternative was uglier. That is why a not
+small part of me thinks history's more useful class traitors often come from the
+bourgeoisie:
+[Franklin Roosevelt](https://en.wikipedia.org/wiki/Franklin_D._Roosevelt),
+[Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx),
+[Friedrich Engels](https://en.wikipedia.org/wiki/Friedrich_Engels). In my head,
+Roosevelt sits in a private room and tells his class: listen, I'm one of you; if
+you don't listen to me, they'll be rolling out the guillotines. When elites get
+too brazen, history doesn't usually reward them for their efficiency. It gives
+them [Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
 [Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
 [Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre).
 
