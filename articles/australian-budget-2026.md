@@ -25,374 +25,229 @@ in who the tax system favours: less preference for leveraged asset ownership,
 more visible preference for labour income, service delivery, defence capacity
 and domestic energy security.
 
-That puts it in an old Australian argument. The Hawke-Keating reforms opened and
-modernised the economy: the dollar floated, finance was deregulated, tariffs
-fell, enterprise bargaining grew, and superannuation became a central savings
-institution. The Howard period kept much of that market-opening settlement, but
-also entrenched a different political bargain: the GST, middle-class tax relief,
-family transfers, a larger role for private housing wealth, and the 1999 capital
-gains tax discount. This budget pushes against part of the Howard-era asset
-bargain, though it doesn't revive a Keating-style productivity program.
+That puts it in an old Australian argument. The
+[Hawke-Keating reforms](https://en.wikipedia.org/wiki/Hawke%E2%80%93Keating_government)
+opened and modernised the economy: the dollar floated, finance was deregulated,
+tariffs fell, enterprise bargaining grew, and superannuation became a central
+savings institution. The [Howard](https://en.wikipedia.org/wiki/Howard_government)
+period kept much of that market-opening settlement, but also entrenched a
+different political bargain: the GST, middle-class tax relief, family transfers,
+a larger role for private housing wealth, and the 1999 capital gains tax
+discount. This budget pushes against part of the Howard-era asset bargain, though
+it doesn't revive a Keating-style productivity program.
 
 The short version: **serious, not solved**.
 
 ## Cards on the table
 
-I lean Keynesian because broad prosperity is rare. Most of history is kings,
-landlords, creditors, peasants, servants, wars, extraction and periodic rupture.
-The middle-class world we take for granted was built, fairly recently, by policy:
-disciplined banking, public investment, antitrust, high marginal tax rates,
-strong unions, Georgist instincts about taxing land rents, and enough
-redistribution to make capitalism worth defending for people without capital.
+I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) because
+broad prosperity is rare. Most of history is kings, landlords, creditors,
+peasants, servants, wars, extraction and periodic rupture. The middle-class world
+we take for granted was built, fairly recently, by policy: disciplined banking,
+public investment, antitrust, high marginal tax rates, strong unions,
+[Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
+rents, and enough redistribution to make capitalism worth defending for people
+without capital.
 
-That bargain needed capital to be clever as well as powerful. Standard Oil was
-broken up. The New Deal was accepted. The robber barons and their heirs gave
-ground because the alternative was uglier. When elites get too brazen, history
-doesn't usually reward them for their efficiency. It gives them Romanovs,
-Bourbons and Robespierres.
+That bargain needed capital to be clever as well as powerful.
+[Standard Oil](https://en.wikipedia.org/wiki/Standard_Oil) was broken up. The
+[New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
+[robber barons](https://en.wikipedia.org/wiki/Robber_baron_(industrialist)) and
+their heirs gave ground because the alternative was uglier. When elites get too
+brazen, history doesn't usually reward them for their efficiency. It gives them
+[Romanovs](https://en.wikipedia.org/wiki/House_of_Romanov),
+[Bourbons](https://en.wikipedia.org/wiki/House_of_Bourbon) and
+[Robespierres](https://en.wikipedia.org/wiki/Maximilien_Robespierre).
 
-Hayek matters because the state can also get drunk on its own cleverness. The
-1970s showed what happens when full-employment Keynesianism loses price
-discipline, lets insiders capture the machinery, and treats inflation as someone
-else's problem. Markets carry information no ministry can fully see. A serious
-social democrat should know that in their bones.
+[Hayek](https://en.wikipedia.org/wiki/Friedrich_Hayek) matters because the state
+can also get drunk on its own cleverness. The
+[1970s](https://en.wikipedia.org/wiki/1970s_energy_crisis) showed what happens
+when full-employment Keynesianism loses price discipline, lets insiders capture
+the machinery, and treats inflation as someone else's problem. Markets carry
+information no ministry can fully see. A serious social democrat should know
+that in their bones.
 
-But the neoliberal correction overlearned the lesson. Thatcherite privatisation,
-Reaganism and later Blairist managerialism restored price discipline, then too
-often treated public assets as a garage sale. "Selling the family silver" works
-once. After that, citizens still need rail, power, ports, housing, water,
+But the neoliberal correction overlearned the lesson.
+[Thatcherite](https://en.wikipedia.org/wiki/Thatcherism) privatisation,
+[Reaganism](https://en.wikipedia.org/wiki/Reaganomics) and later
+[Blairist](https://en.wikipedia.org/wiki/Blairism) managerialism restored price
+discipline, then too often treated public assets as a garage sale.
+["Selling the family silver"](https://en.wikipedia.org/wiki/Harold_Macmillan#Later_life_and_death)
+works once. After that, citizens still need rail, power, ports, housing, water,
 telecommunications and care, only now the rent stream belongs to someone else.
 
-The throughline runs straight into the modern diseases: regulatory capture,
-money politics, corporate personhood treated as democratic citizenship, and each
-country's local version of Citizens United. Divide et impera has had a rebrand
-too. Where class solidarity might once have threatened concentrated wealth, the
-newer trick is to keep people fighting sideways: gender against gender, renters
-against migrants, workers against welfare recipients, young against old. The
-manosphere is only the loudest current franchise.
+The throughline runs straight into the modern diseases:
+[regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture), money
+politics,
+[corporate personhood](https://en.wikipedia.org/wiki/Corporate_personhood)
+treated as democratic citizenship, and each country's local version of
+[Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC).
+[Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
+rebrand too. Where class solidarity might once have threatened concentrated
+wealth, the newer trick is to keep people fighting sideways: gender against
+gender, renters against migrants, workers against welfare recipients, young
+against old. The [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only
+the loudest current franchise.
 
 That is why I judge budgets by a simple standard: do they make the capitalist
 bargain more durable, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
-- **Overall judgement: B-.**[^fiscal]
-  *Meaning:* The budget makes real distributional choices. It narrows the
-  deficit path relative to the last update, but still leaves higher debt, higher
-  interest costs and reform promises whose fiscal value appears mainly in later
-  years.
+Overall judgement: **B-**. Directionally, this is a serious Labor budget: it
+taxes asset income more coherently, puts some money behind housing bottlenecks,
+and treats state capacity as an economic question. Magnitudinally, it is still
+too small for the debt, housing, health, climate, defence and delivery pressures
+visible in the papers.[^tax-strategy][^fiscal]
 
-- **The budget is structurally more interesting than its cost-of-living
-  packaging.**[^tax]
-  *Meaning:* The fuel cut and worker offset are the public-facing relief. The
-  deeper move is the attempt to tax capital gains, property losses and trust
-  income more neutrally. That matters because tax systems shape where savings go:
-  into productive capital, shares, superannuation, businesses, or bidding up
-  scarce housing.
+## Fiscal and macro settings
 
-- **It borrows from Keating-style reform without matching its scale.**[^keating]
-  *Meaning:* Keating-era reform aimed at economy-wide productivity by changing
-  prices, competition and capital allocation. This budget is narrower: it tries
-  to correct distortions in housing and trust taxation while avoiding a broader
-  confrontation with superannuation, GST, payroll tax, land tax or federal-state
-  revenue design.
+- **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
+  2026-27 and unemployment stays near 4.5 per cent.**[^macro]
+  *Assessment:* Direction: plausible. Magnitude: fragile. These forecasts do
+  fiscal work: receipts, payments and inflation-indexed spending all depend on
+  the growth path. The RBA's May outlook is more cautious, which makes the
+  budget look more exposed if growth undershoots.[^rba]
 
-- **The main risk is that the budget books institutional competence.**[^ndis]
-  *Meaning:* The fiscal story depends less on one heroic tax measure than on the
-  state becoming better at execution: NDIS integrity, tax administration, housing
-  agreements, Defence procurement, gas market regulation and health compliance.
-  That's plausible. It isn't automatic.
+- **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
+  1 April 2026 and Budget Paper 1 puts the net revenue cost around
+  $2.5 billion.**[^fuel]
+  *Assessment:* Direction: poor. Magnitude: too large for what it buys. It helps
+  drivers now, but it subsidises petrol use, weakens revenue and does almost
+  nothing for the economy's productive capacity.
 
-## The budget position
+## Tax, work and housing
 
-- **The budget remains in deficit.**[^fiscal]
-  *Meaning:* Deficits can support demand or fund investment. Composition is the
-  test. Australia is running deficits while health, care, defence, interest and
-  ageing keep adding structural pressure. The quality of each new dollar matters
-  more.
+- **Budget Paper 2 introduces a Working Australians Tax Offset of up to $250
+  from 2027-28.**[^wato]
+  *Assessment:* Direction: good. Magnitude: modest. It deliberately favours
+  labour income over asset income, which fits the article's Keynesian bias: work
+  should buy security. But $250 is a political bridge, not a wage-productivity
+  settlement.
 
-- **The deficit improves compared with MYEFO, but mostly against a moving
-  baseline.**[^fiscal]
-  *Meaning:* The Government can fairly claim improvement, but voters should
-  separate "better than the last forecast" from "good in absolute terms." The
-  former is budget management; the latter would require a more durable match
-  between spending promises and the tax base.
+- **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
+  and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
+  *Assessment:* Direction: very good. Magnitude: meaningful but incomplete. This
+  is the clearest structural reform in the budget. It attacks the Howard-era
+  preference for nominal asset gains and moves closer to taxing real income.
+  It still leaves owner-occupied housing and superannuation largely protected.
 
-- **Debt keeps rising across the forward estimates.**[^fiscal]
-  *Meaning:* Gross debt rises from **$982 billion** to **$1.249 trillion**.
-  Government debt doesn't work like household credit-card debt: governments roll
-  debt and tax in perpetuity. The macro question is whether debt buys future
-  capacity. Borrowing for housing bottlenecks, defence capability or tax
-  compliance is easier to defend than borrowing for temporary price relief.
+- **Budget Papers 1 and 2 restrict negative gearing on residential property to
+  new builds from 1 July 2027.**[^asset-tax]
+  *Assessment:* Direction: very good. Magnitude: not enough alone. The measure
+  points private rental investment toward new supply instead of bidding for
+  existing dwellings. The Georgist critique remains: the budget narrows a tax
+  asymmetry around land rents, but does not tax the underlying land rent itself.
 
-- **Interest costs are now a policy constraint.**[^fiscal]
-  *Meaning:* Net interest payments rising to **$31.7 billion** by 2029-30 means
-  fiscal space is being pre-committed. Higher interest costs don't cause one
-  visible service failure. They quietly narrow every later government's room to
-  move.
+- **Budget Papers 1 and 2 introduce a 30 per cent minimum tax on discretionary
+  trusts from 1 July 2028.**[^trusts]
+  *Assessment:* Direction: good. Magnitude: serious. Trusts can be legitimate
+  business and family structures, but the budget papers explicitly describe
+  income splitting and lower-rate distributions. This is a direct attack on
+  private tax planning that turns family structure into fiscal advantage.
 
-- **This is stabilisation before repair.**[^fiscal]
-  *Meaning:* "Budget repair" means the permanent spending base and the
-  permanent revenue base are moving into alignment. This budget starts that work
-  through tax-base measures, but still relies heavily on future growth, future
-  savings and future discipline.
+- **Budget Paper 2 makes the $20,000 instant asset write-off permanent and
+  creates a $1,000 instant deduction for work expenses.**[^deductions]
+  *Assessment:* Direction: mixed. Magnitude: modest. Simpler deductions reduce
+  compliance friction, which is real productivity. They also leak precision:
+  rough justice is cheaper to administer, but it weakens the link between actual
+  expense and tax benefit.
 
-## The economic assumptions
+## Energy and industry
 
-- **Treasury's growth path is doing fiscal work.**[^macro]
-  *Meaning:* Stronger GDP growth lifts company tax, income tax and employment,
-  while lowering pressure on payments. If growth disappoints, the same policy
-  package produces a weaker budget result without Parliament changing a single
-  law.
+- **Budget Paper 2 creates a domestic gas reservation mechanism equal to
+  20 per cent of LNG export volumes from 1 July 2027.**[^gas]
+  *Assessment:* Direction: good under current conditions. Magnitude: meaningful.
+  This is industrial policy: domestic energy security and local production costs
+  are being preferred over pure export-parity pricing. It cuts against old
+  market-liberal instincts, but resilience now has a real economic value.
 
-- **The Reserve Bank is more cautious than Treasury.**[^rba]
-  *Meaning:* The RBA's weaker growth and higher unemployment profile matters
-  because fiscal forecasts are macro forecasts in disguise. Tax receipts,
-  welfare payments and inflation-indexed spending all move with the economy.
+- **The budget funds gas reservation but does not offer a comparable structural
+  settlement for climate transition or fossil-fuel rents.**[^gas]
+  *Assessment:* Direction: incomplete. Magnitude: too small. Reservation may
+  protect domestic users, but it is not a carbon policy, a resource-rent policy
+  or a clean-power investment strategy. The energy-security chapter is louder
+  than the transition chapter.
 
-- **Inflation relief and disinflation are different jobs.**[^rba]
-  *Meaning:* A fuel excise cut or a clinic subsidy can reduce prices faced by
-  households, but it doesn't necessarily reduce underlying inflation pressure.
-  The RBA cares about persistent demand, wages, services prices and expectations,
-  more than a few temporary headline price drops.
+## Housing and social services
 
-- **The budget sits between social insurance and inflation management.**[^macro]
-  *Meaning:* Labor budgets often try to protect households from shocks. The
-  macro risk is that broad relief can support demand when the central bank wants
-  restraint. This budget is less dangerous than a universal cash splash, but it
-  is still expansionary in politically visible places.
+- **Budget Paper 2 provides $2.0 billion for local housing-enabling
+  infrastructure through states and territories.**[^housing-infra]
+  *Assessment:* Direction: good. Magnitude: probably too small. Pipes, roads,
+  substations, approvals and utility connections often decide whether homes get
+  built. The money is correctly aimed, but the housing shortage is a stock-flow
+  problem at national scale.
 
-## The major political economy shift
+- **Budget Paper 2 provides $59.4 million for community housing support for
+  more than 4,000 young people.**[^youth-housing]
+  *Assessment:* Direction: good. Magnitude: targeted, not systemic. This is
+  humane safety-net spending. It helps a vulnerable cohort but does not change
+  the housing price mechanism.
 
-- **Negative gearing is the housing fight, but the real issue is tax symmetry.**[^housing-tax]
-  *Meaning:* Negative gearing lets investors deduct losses now while expecting
-  gains later. When losses are deducted at full marginal rates and gains receive
-  concessional treatment, the tax system can reward leverage and patience more
-  than productive investment. The Georgist point is sharper: gains from scarce
-  land often come from community growth, not the owner's effort. Limiting losses
-  on established homes narrows the asymmetry.
+- **Budget Paper 2 spends $2.1 billion over five years on Strengthening Medicare
+  and ongoing Urgent Care Clinics.**[^health]
+  *Assessment:* Direction: good. Magnitude: serviceable but not structural. It
+  buys access and bulk-billed pressure relief. It does not solve the deeper
+  equation of ageing, workforce scarcity, expensive medicines and rising public
+  expectations.
 
-- **The new negative gearing rule is supply-selective.**[^housing-tax]
-  *Meaning:* Labor keeps investment deductions, but points the concession toward
-  new dwellings. That's the compromise: preserve private rental investment while
-  admitting that bidding for already-built houses does little for supply.
+- **Budget Paper 2 books a projected $37.8 billion reduction in NDIS payment
+  growth while still saying NDIS payments grow each year.**[^ndis]
+  *Assessment:* Direction: necessary. Magnitude: fiscally large and socially
+  risky. If integrity reform works, this is one of the budget's biggest wins. If
+  it suppresses legitimate support, the fiscal repair is bought by weakening the
+  social contract.
 
-- **The capital gains change partly reverses the Howard-era settlement.**[^housing-tax]
-  *Meaning:* Howard's 1999 reform replaced indexation with a 50 per cent
-  discount for individuals. That made nominal gains easier to realise and helped
-  normalise capital-gains-led investment strategies. Returning to indexation
-  says only real gains should be privileged; adding a minimum tax says very large
-  gains shouldn't escape too lightly.
+## Defence, federalism and state capacity
 
-- **The investment argument is really a distortion argument.**[^henry]
-  *Meaning:* The Henry review tradition doesn't punish capital. It asks why
-  different forms of saving face wildly different effective tax rates. Housing
-  has been unusually favoured because owner-occupied housing sits outside the
-  income tax base, land rents are lightly captured, and leveraged rental
-  property can receive concessional treatment.
+- **Budget Paper 2 adds $6.8 billion over four years, $35.6 billion over ten
+  years and part of the $12 billion Henderson Defence Precinct commitment.**[^defence]
+  *Assessment:* Direction: necessary. Magnitude: not proven sufficient. Defence
+  spending is insurance: the return is deterrence, resilience and domestic
+  industrial depth. Budget announcements don't prove capability; procurement
+  discipline does.
 
-- **The trust tax change targets private tax planning more than broad
-  entrepreneurship.**[^trusts]
-  *Meaning:* Discretionary trusts are useful commercial and family structures,
-  but they also let income be distributed across beneficiaries. A 30 per cent
-  minimum tax reduces the ability to turn personal income into lightly taxed
-  family income while leaving many fixed, charitable, superannuation and special
-  disability trusts outside the measure.
+- **Budget Paper 3 shows $207.8 billion in Commonwealth payments to states and
+  territories in 2026-27.**[^states]
+  *Assessment:* Direction: unavoidable. Magnitude: politically underexplained.
+  Many promises in health, housing, schools, skills and infrastructure pass
+  through governments Canberra does not control. Voters see one failure; the
+  budget sees a federation.
 
-- **The worker tax offset is the political bridge.**[^wato]
-  *Meaning:* The Government is taking on asset and trust concessions while
-  giving workers a visible offset. Economically, that shifts the tax mix a
-  little from labour toward capital income. Politically, it gives the reform a
-  simple story: less tax sheltering, more reward for work.
+- **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
+  delivery complexity and material disruption.**[^states]
+  *Assessment:* Direction: honest. Magnitude: important. Announced spending is
+  not completed work. A budget that admits delivery friction is better than a
+  budget pretending a press release pours concrete.
 
-- **The $1,000 instant deduction trades precision for simplicity.**[^tax]
-  *Meaning:* A perfect deduction system asks people to prove actual work
-  expenses. A simple deduction accepts some rough justice to cut compliance
-  costs. The economic question is whether reduced paperwork is worth the revenue
-  leakage and the weaker link between actual expenses and deductions.
-
-## Gas, fuel and energy security
-
-- **Gas reservation is industrial policy.**[^gas]
-  *Meaning:* Requiring LNG exporters to reserve the equivalent of **20 per cent**
-  of export volumes for Australian users is a decision to privilege domestic
-  production costs and energy security over pure export-market pricing. It's
-  closer to resource nationalism than to textbook market liberalism.
-
-- **Reservation changes prices without booking a big tax receipt.**[^gas]
-  *Meaning:* A tax captures revenue for the state. A reservation changes access
-  and domestic price dynamics. It can help local users while shifting costs and
-  risks into investment decisions and contracts.
-
-- **The gas measure cuts against the old reform instinct.**[^keating]
-  *Meaning:* Hawke-Keating reform generally trusted exposed markets, competition
-  and price signals. Gas reservation says some strategic goods can't be left
-  entirely to export parity pricing. In the post-pandemic and post-Ukraine world,
-  resilience now competes with efficiency.
-
-- **Fuel excise relief is macroeconomically weak but politically legible.**[^fuel]
-  *Meaning:* A three-month fuel tax cut helps drivers immediately. It also
-  subsidises petrol use, reduces revenue and blunts the price signal from global
-  scarcity. It works as emergency relief. It doesn't work as structural policy.
-
-## Housing
-
-- **The housing package attacks a stock-flow problem.**[^housing-infra]
-  *Meaning:* Australia has too few well-located dwellings and too many frictions
-  slowing new supply: approvals, infrastructure, labour and finance. Tax reform
-  affects demand for the existing stock; infrastructure funding affects the flow
-  of new homes.
-
-- **The $2 billion local infrastructure fund is small but correctly aimed.**[^housing-infra]
-  *Meaning:* The binding constraint on housing is often pipes, roads,
-  substations, approvals and local sequencing. This money is useful if it buys
-  genuine throughput instead of another grant program with slow milestones.
-
-- **State and local bottlenecks still set the pace.**[^states]
-  *Meaning:* Housing is the classic Australian federalism problem: Canberra has
-  money and political blame, states have planning systems, councils have local
-  approvals, utilities have connection queues, and builders face labour and
-  material constraints.
-
-- **Targeted youth housing is social policy, not market repair.**[^youth-housing]
-  *Meaning:* The **$59.4 million** youth housing measure can help a vulnerable
-  group, but it doesn't change the overall housing price mechanism. It belongs
-  in the safety-net category rather than the supply-reform category.
-
-## Health and NDIS
-
-- **The health package buys access, not long-term cost control.**[^health]
-  *Meaning:* Urgent Care Clinics and PBS listings reduce pain points for
-  patients. They don't solve the deeper health equation: an ageing population,
-  expensive medicines, workforce shortages and public expectations that care
-  should keep improving.
-
-- **The NDIS reform is the budget's largest state-capacity test.**[^ndis]
-  *Meaning:* Saying "fraud and waste" is easy. Distinguishing waste from
-  legitimate support in a complex disability system is hard. The fiscal saving
-  only counts as good policy if it preserves dignity and function for
-  participants.
-
-- **The $37.8 billion projected reduction in NDIS payment growth is
-  macro-significant.**[^ndis]
-  *Meaning:* **$37.8 billion** changes the fiscal path. If the saving fails, the
-  budget weakens. If it succeeds by crudely suppressing access, the social
-  contract weakens. The hard version is targeted integrity plus better adjacent
-  supports outside the NDIS.
-
-- **Foundational supports are a federalism bet.**[^ndis]
-  *Meaning:* Moving some supports outside the NDIS only works if states and
-  community systems actually provide alternatives. Otherwise, the budget shifts
-  pressure from one line item to another service gap.
-
-## Defence
-
-- **Defence spending is a delayed-productivity claim.**[^defence]
-  *Meaning:* Defence doesn't raise living standards the way housing supply,
-  skills or infrastructure can. Its economic case is insurance: if deterrence,
-  sovereign industry and resilience work, the return is the crisis that doesn't
-  happen.
-
-- **The Henderson Defence Precinct is regional industrial strategy.**[^defence]
-  *Meaning:* The **$12 billion** Henderson commitment is a bet on Western
-  Australian shipbuilding, sustainment, skilled labour, supply chains and the
-  idea that national security requires domestic industrial depth.
-
-- **Defence is where budget numbers are least sufficient.**[^defence]
-  *Meaning:* Announcing billions doesn't prove capability. The real variables
-  are procurement discipline, workforce, project sequencing, allied technology
-  access and whether Defence can stop money from disappearing into delay.
-
-## States and service delivery
-
-- **The Commonwealth-state system is the hidden machinery of the budget.**[^states]
-  *Meaning:* The Commonwealth gives states and territories **$207.8 billion** in
-  2026-27. That means many federal promises pass through governments the
-  Commonwealth doesn't directly control.
-
-- **Federal money often buys negotiation before delivery.**[^states]
-  *Meaning:* Hospitals, schools, housing, skills and infrastructure depend on
-  agreements, milestones and state implementation. The citizen sees one
-  government failure; the budget sees several layers of responsibility.
-
-- **Slippage assumptions are a quiet admission of reality.**[^states]
-  *Meaning:* The budget explicitly allows for infrastructure delays caused by
-  milestones, delivery complexity and material disruption. That's honest, and it
-  means announced spending shouldn't be confused with completed work.
-
-## Public service capacity
-
-- **Public service staffing is broadly steady while the policy load rises.**[^asl]
-  *Meaning:* Average staffing is forecast at **217,256** in 2026-27, only **0.6
-  per cent** above the revised 2025-26 estimate. That can be disciplined, but it
-  can also mean the state is being asked to do more complex work without much
-  extra capacity.
-
-- **Insourcing is the right instinct if capability follows.**[^asl]
-  *Meaning:* Bringing contractor work back into the public service can rebuild
-  institutional memory. Headcount isn't capability by itself. Tax reform,
-  NDIS integrity, procurement and energy regulation require specialised skill,
-  not more positions alone.
+- **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
+  above the revised 2025-26 estimate.**[^asl]
+  *Assessment:* Direction: disciplined. Magnitude: tight. The budget asks the
+  state to run harder: tax reform, NDIS integrity, procurement, energy
+  regulation, housing agreements. Headcount is not capability, but thin capacity
+  makes sophisticated policy fragile.
 
 ## Notable absences
 
-- **No broad land-tax or zoning bargain appears.**[^housing-infra]
-  *Meaning:* Negative gearing and capital gains reform affect investor demand,
-  but the deepest housing tax distortion remains the under-taxation of scarce
-  urban land. That's the Georgist absence. A serious federal-state bargain would
-  trade Commonwealth money for planning throughput and state tax reform. This
-  budget moves around the edge of that problem.
+- **The budget changes housing investor tax settings but does not attempt a broad
+  land-tax or zoning bargain with the states.**[^housing-infra]
+  *Assessment:* Direction: weak. Magnitude: major omission. This is the Georgist
+  gap. Negative gearing and CGT reform affect investor demand; land tax and
+  planning throughput would attack the scarcity rent more directly.
 
-- **Superannuation remains mostly outside the fight.**[^henry]
-  *Meaning:* Australia taxes work, housing, super and business income through
-  different political settlements. Leaving super largely untouched makes the
-  housing reforms easier to sell, but it also means the budget doesn't attempt
-  a full savings-tax settlement across the lifecycle.
+- **The tax package leaves superannuation and the GST mostly outside the reform
+  perimeter.**[^tax-strategy]
+  *Assessment:* Direction: politically understandable. Magnitude: analytically
+  insufficient. A durable tax settlement cannot keep relying on income tax while
+  sheltering large pools of asset wealth and leaving consumption-tax design
+  frozen.
 
-- **The GST is absent as a serious reform lever.**[^keating]
-  *Meaning:* The Howard-era GST broadened the tax base but left Australia with a
-  relatively low rate and many exclusions. Reopening it would be politically
-  brutal and distributionally sensitive, but ignoring it leaves income tax doing
-  too much of the long-run revenue work.
-
-- **Productivity policy is mostly implied.**[^macro]
-  *Meaning:* The budget talks through housing, care, defence and state capacity,
-  but it doesn't amount to a new productivity compact on competition, skills,
-  infrastructure selection, tax mix and workplace capability. That's why it
-  feels corrective rather than renewing.
-
-- **Climate policy is quieter than the energy politics.**[^gas]
-  *Meaning:* Gas reservation treats energy security as a domestic supply
-  problem. That may be defensible in the short run, but it leaves the larger
-  transition question less developed: how Australia prices carbon risk, builds
-  firmed clean power, and manages fossil-fuel rents over time.
-
-- **Intergenerational fairness is present but incomplete.**[^housing-tax]
-  *Meaning:* Housing tax reform helps younger buyers at the margin, but the
-  budget doesn't fully confront the wider bargain between asset-rich older
-  households and wage-dependent younger households. That bargain runs through
-  housing, super, health, aged care, inheritance and the tax base.
-
-## Final take
-
-- **This is a coherent Labor budget.**
-  *Meaning:* It favours work over some forms of asset sheltering, services over
-  across-the-board cash, and state capacity over pure market allocation.
-
-- **It partially reopens Australia's old reform debate.**
-  *Meaning:* The question is whether Australia wants another productivity-era
-  reform agenda or a narrower fairness agenda inside the existing model. This
-  budget chooses the second path.
-
-- **Its best measures are structural; its weakest measures are temporary.**
-  *Meaning:* Housing tax, trust tax, gas reservation and NDIS integrity matter
-  because they alter incentives. Fuel excise relief and some cost-of-living
-  measures matter politically, but they do less to improve the economy's
-  long-run capacity.
-
-- **Short version: serious, not solved.**
-  *Meaning:* The budget improves the path, but it doesn't remove the pressure
-  from debt, inflation, health, housing, NDIS, defence, and state delivery.
+- **The budget includes Better Regulation funding, but not a new productivity
+  compact across competition, skills, infrastructure selection, tax mix and
+  workplace capability.**[^regulation]
+  *Assessment:* Direction: good start. Magnitude: too small. The $198.1 million
+  regulatory package is useful machinery. It is not a Hawke-Keating-scale renewal
+  of productivity institutions.
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
@@ -400,32 +255,32 @@ bargain more durable, or do they help the already-secure pull up the ladder?
 
 [^rba]: Reserve Bank of Australia, *Statement on Monetary Policy*, May 2026, Outlook. <https://www.rba.gov.au/publications/smp/2026/may/outlook.html>
 
-[^keating]: Australian Treasury, "The Australian economy and challenges of change"; Australian Treasury, "A brief history of Australia's tax system"; Australian Government, *Tax Reform: not a new tax, a new tax system*, overview. <https://treasury.gov.au/speech/the-australian-economy-and-challenges-of-change> <https://treasury.gov.au/publication/economic-roundup-winter-2006/a-brief-history-of-australias-tax-system> <https://treasury.gov.au/publication/tax-reform-not-a-new-tax-a-new-tax-system/overview>
+[^tax-strategy]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 4, pp. 144-166; Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, tax reform measures, pp. 16, 19, 21-22. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf> <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
-[^wato]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - cutting taxes with a Working Australians Tax Offset", p. 16. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+[^wato]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - cutting taxes with a Working Australians Tax Offset", p. 16; *Budget Paper No. 1*, Statement 4, pp. 163-165. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
-[^tax]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, tax reform measures, pp. 16, 19, 21-22. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+[^asset-tax]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - Boosting Home Ownership - reforming negative gearing and capital gains tax", p. 21; *Budget Paper No. 1*, Statement 4, pp. 144-156. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
-[^housing-tax]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - Boosting Home Ownership - reforming negative gearing and capital gains tax", p. 21; Treasury Ministers, "Tax reform for workers, businesses and future generations", 12 May 2026. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://ministers.treasury.gov.au/ministers/jim-chalmers-2022/media-releases/tax-reform-workers-businesses-and-future-generations>
+[^trusts]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - introducing a minimum tax on discretionary trusts", p. 22; *Budget Paper No. 1*, Statement 4, pp. 158-162. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
-[^henry]: Australian Treasury, *Australia's Future Tax System*, final report material on savings and investment housing; Treasury, "Towards a better taxation of savings". <https://treasury.gov.au/sites/default/files/2019-10/afts_final_report_part_2_vol_2_consolidated.pdf> <https://treasury.gov.au/speech/towards-a-better-taxation-of-savings>
+[^deductions]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - standard deduction for work-related expenses" and "Tax Reform - making the instant asset write-off permanent", pp. 18-20. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
-[^trusts]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Tax Reform - introducing a minimum tax on discretionary trusts", p. 22. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+[^fuel]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Taking Pressure Off Australians - temporary reduction of fuel excise and heavy vehicle road user charge", p. 15; *Budget Paper No. 1*, Statement 5, fuel excise discussion, pp. 202-203. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf> <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
 [^gas]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Energy Sovereignty - Establishing a Domestic Gas Reservation", p. 66. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
-
-[^fuel]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 1, "Taking Pressure Off Australians - temporary reduction of fuel excise and heavy vehicle road user charge", p. 15. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
-
-[^ndis]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Securing the National Disability Insurance Scheme for Future Generations", pp. 106-107. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
 [^housing-infra]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Boosting Home Ownership", p. 138. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
 [^youth-housing]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Supporting Youth into Community Housing", p. 144. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
-[^health]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Strengthening Medicare" and "Pharmaceutical Benefits Scheme New and Amended Listings", pp. 102, 109. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+[^health]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Strengthening Medicare", p. 109. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
+
+[^ndis]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Securing the National Disability Insurance Scheme for Future Generations", pp. 106-108. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
 [^defence]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "2026 National Defence Strategy and Integrated Investment Program", p. 71. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
 
-[^states]: Australian Government, *Budget Paper No. 3: Federal Financial Relations 2026-27*, Part 1, Tables 1.1 and 1.2, pp. 5-6. <https://budget.gov.au/content/bp3/download/bp3_2026-27.pdf>
+[^states]: Australian Government, *Budget Paper No. 3: Federal Financial Relations 2026-27*, Part 1, Tables 1.1 and 1.2, pp. 5-6, and infrastructure slippage assumptions, p. 4. <https://budget.gov.au/content/bp3/download/bp3_2026-27.pdf>
 
 [^asl]: Australian Government, *Budget Paper No. 4: Agency Resourcing 2026-27*, Part 2, Staffing of Agencies, p. 162. <https://budget.gov.au/content/bp4/download/bp4_2026_27_consolidated.pdf>
+
+[^regulation]: Australian Government, *Budget Paper No. 2: Budget Measures 2026-27*, Part 2, "Boosting Productivity - Better Regulation", p. 139. <https://budget.gov.au/content/bp2/download/bp2_2026-27.pdf>
