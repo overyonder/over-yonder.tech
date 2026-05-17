@@ -1,11 +1,11 @@
 ---
-title: "A plain-English review of the 2026-27 Australian Budget"
+title: "The Euthanasia of Howard's Rentiers"
 date: 2026-05-17
 author: Kieran Hannigan
 tags: [australia, budget, politics, economics]
 ---
 
-# A plain-English review of the 2026-27 Australian Budget
+# The Euthanasia of Howard's Rentiers
 
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
@@ -20,7 +20,7 @@ resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 So: read first, argue second, keep it short enough that nobody needs a Treasury
 cadetship.
 
-> [!NOTE] Source note
+> [!NOTE] Source note:
 > I treated the four Budget Papers as the spine, then checked the overview,
 > Women's Budget Statement, tax explainers, fact sheets and Portfolio Budget
 > Statements against them.[^source-set] The PBS documents are mostly delivery
