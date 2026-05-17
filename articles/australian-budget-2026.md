@@ -17,8 +17,8 @@ probably hadn't read it. Fair enough. The budget papers are a small obstacle
 course: macro frame in Paper No. 1, measures in No. 2, states in No. 3, agency
 resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 
-So: read first, argue second, keep it short enough that nobody needs a Treasury
-cadetship.
+I read the papers first. You should not need a Treasury cadetship to follow the
+argument.
 
 > [!NOTE] Source note:
 > I treated the four Budget Papers as the spine, then checked the overview,
