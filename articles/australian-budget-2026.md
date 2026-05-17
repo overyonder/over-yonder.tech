@@ -144,9 +144,8 @@ agree with them.
   climate change and unlegislated policy.**[^risks]
   *Assessment:* Direction: useful candour. Magnitude: central. The headline
   path depends on courts, legislation, global shocks, NDIS and aged-care demand,
-  tax compliance and climate costs not landing badly at the same time. This is
-  not a tidy spreadsheet risk; it is the budget admitting that several open tabs
-  can all start playing music at once.
+  tax compliance and climate costs not landing badly at the same time. The
+  budget is saying, plainly enough, that several things can break at once.
 
 ## Tax, work and housing
 
@@ -154,7 +153,7 @@ agree with them.
   from 2027-28.**[^wato]
   *Assessment:* Direction: good. Magnitude: modest. It puts labour ahead of
   passive asset income. Work should buy security before ownership buys tax
-  shelter. But $250 is a political bridge, not a wage-productivity settlement.
+  shelter. But $250 does not change wages, bargaining power or productivity.
 
 - **Budget Papers 1 and 2 replace the 50 per cent CGT discount with indexation
   and a 30 per cent minimum tax on real capital gains.**[^asset-tax]
