@@ -138,9 +138,9 @@ agree with them.
 
 - **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
   2026-27 and unemployment stays near 4.5 per cent.**[^macro]
-  *Assessment:* Plausible, but fiscally sensitive. The forecast affects
-  receipts, payments and inflation-indexed spending. The RBA's May outlook is
-  more cautious, which makes the budget look more exposed if growth
+  *Assessment:* Plausible, but fiscally sensitive. If growth misses, the budget
+  loses revenue while indexed spending keeps walking uphill. The RBA's May
+  outlook is more cautious, which makes the budget look more exposed if growth
   undershoots.[^rba]
 
 - **Budget Paper 2's fuel excise cut reduces petrol tax for three months from
@@ -422,13 +422,14 @@ and a state competent enough to buy what it says it wants.
 
 ### The Rooseveltian version
 
-That program would be serious tax and productivity reform. Deep social
-restoration needs institution-building. A lion-statesman would add a national
-housing builder delivering 50,000 mixed-tenure dwellings a year for a decade, a
-$250 billion sovereign industrial bank for long-horizon capability projects,
-public equity stakes or golden shares in strategic energy, minerals processing,
-defence and platform infrastructure, and sectoral wage boards in care, logistics,
-construction and other low-power labour markets. Climate adaptation would become
+That would be real tax reform and a serious productivity bargain. Still not
+enough. Deep social restoration needs institution-building. A lion-statesman
+would add a national housing builder delivering 50,000 mixed-tenure dwellings a
+year for a decade; a $250 billion sovereign industrial bank for long-horizon
+capability projects; public equity stakes or golden shares in strategic energy,
+minerals processing, defence and platform infrastructure; and sectoral wage
+boards in care, logistics, construction and other low-power labour markets.
+Climate adaptation would become
 hard infrastructure: at least $20 billion a year for flood works, grid hardening,
 water security, heat-resilient housing and sovereign insurance for places private
 markets will abandon first. A permanent state-capacity unit would sit above
@@ -457,8 +458,8 @@ The real wealth of nations is productive capacity: skills, energy,
 infrastructure, institutions, scientific capability, military resilience, social
 trust and the tax base to maintain them. Not GDP mood music. Not house prices.
 Not the paper wealth of scarcity rents dressed up as national success. The budget
-gestures toward parts of that future. Australia needs the courage and competence
-to build it.
+gestures toward parts of that future. Australia needs to remember that countries
+are built, not passively inherited from house prices and holes in the ground.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
