@@ -7,6 +7,9 @@ tags: [australia, budget, politics, economics]
 
 # The Euthanasia of Howard's Rentiers
 
+*First of all, relax. It's a [Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes)
+quote.*
+
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
