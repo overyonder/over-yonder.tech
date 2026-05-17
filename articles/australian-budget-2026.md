@@ -452,8 +452,9 @@ would add a national housing builder delivering 50,000 mixed-tenure dwellings a
 year for a decade; a $250 billion sovereign industrial bank for long-horizon
 capability projects; public equity stakes or
 [golden shares in strategic energy and minerals](https://www.naa.gov.au/help-your-research/fact-sheets/loans-affair-1974-75),
-a cleaner descendant of Whitlam and Connor's $4 billion attempt to buy back the
-farm; and sectoral wage boards in care, logistics, construction and other
+a [constitutionally sober](https://everything.explained.today/Loans_affair/)
+descendant of Whitlam and Connor's $4 billion attempt to buy back the farm; and
+sectoral wage boards in care, logistics, construction and other
 low-power labour markets.
 Climate adaptation would become hard infrastructure: at least $20 billion a year
 for flood works, grid hardening, water security, heat-resilient housing and
