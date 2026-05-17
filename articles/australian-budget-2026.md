@@ -320,15 +320,21 @@ increase supply, while the scarcity rent remains mostly private.
 I would trade Commonwealth money for state land-tax reform, and I would make the
 trade shamelessly explicit. Stamp duty goes. In its place: an annual land-value
 tax on unimproved land, starting around 0.25 per cent and rising over a decade to
-about 1 per cent for owner-occupied land, higher for vacant land and investor
-holdings. Pensioners can defer against the estate, because forcing old people out
-of homes is bad politics and worse policy. The Commonwealth funds the transition
-and gives states a density dividend when they permit homes near transport, jobs
-and services. Henry George had the basic point right: the unearned lift in land
-value comes from public permission and public investment. Tax that rent and lower
-the taxes on work and building. Australia gets more homes, less deadweight loss,
-a deeper construction pipeline and a housing market that rewards adding capacity
-rather than squatting on scarcity.
+about 1 per cent for owner-occupied land, 1.5 per cent for investors and
+3 per cent for vacant residential land. Pensioners can defer against the estate,
+because forcing old people out of homes is bad politics and worse policy.
+
+The Commonwealth puts up a $100 billion, ten-year transition facility for the
+states. It replaces lost transfer-duty revenue while the land tax matures, then
+steps down automatically. At maturity, the land-tax bargain should replace
+transfer duty and contribute about $60 billion a year to the GST-replacement
+pool. States get the bridge only if stamp-duty rates fall on a published
+schedule, rezoning uplift is taxed from the first valuation year, and new homes
+are permitted near transport, jobs and services. Henry George had the basic point
+right: the unearned lift in land value comes from public permission and public
+investment. Tax that rent and lower the taxes on work and building. Australia
+gets more homes, less deadweight loss, a deeper construction pipeline and a
+housing market that rewards adding capacity rather than squatting on scarcity.
 
 ### Tax base
 
@@ -342,19 +348,30 @@ profits and economic rents.
 #### King for a day
 
 I would build a tax mix that admits Australia is older, wealthier and more
-asset-heavy than the tax system pretends. Scrap the GST. Replace the revenue with
-taxes on land rent, very large super balances, inheritances above a high
-threshold, monopoly profits and resource rents. Consumption taxes hit people when
-they spend to live. A serious reform taxes wealth where it pools and power where
-it hides. Tax super balances above $3 million at 30 per cent on earnings, above
-$10 million at the top marginal rate, and apply the rates to realised gains with
-no dynasty loophole for trusts, companies or related-party assets. Super is
+asset-heavy than the tax system pretends. Scrap the GST, which means replacing
+more than $100 billion a year. Budget Paper 3 puts GST entitlements at
+$104.2 billion in 2026-27 and $121.3 billion by 2029-30.[^gst-super] The package
+has to clear that bar: about $60 billion a year from mature land-value taxation,
+$20 billion to $30 billion from resource and monopoly rents in ordinary years,
+and the rest from very large super balances, inheritances and anti-avoidance.
+
+Consumption taxes hit people when they spend to live. A serious reform taxes
+wealth where it pools and power where it hides. Tax super balances above
+$3 million at 30 per cent on realised earnings, above $10 million at the top
+marginal rate, and apply the rates to trusts, companies and related-party assets
+so the money cannot be laundered through a family-office costume change. Super is
 retirement policy, not an unlimited dynastic tax shelter. Add an inheritance tax
-above $5 million per estate, with family homes deferred until sale and genuine
-small-business succession protected by instalment rules. Use the revenue to cut
-taxes on labour, then fund care, defence, housing infrastructure and research.
-Adam Smith was not sentimental about rentiers. A country that taxes nurses harder
-than protected asset income is choosing slower growth, thinner services and worse
+of 20 per cent above $5 million per estate and 40 per cent above $20 million,
+with family homes deferred until sale and genuine small-business succession
+protected by instalment rules. Add a 40 per cent resource-rent tax above a normal
+return, with no transferred deductions and no uplift-rate holiday for projects
+that have already made their money back. Levy monopoly rents by sector: a
+10 per cent surcharge on profits above a normal return in designated concentrated
+markets, reviewable by the ACCC and creditable against ordinary company tax so
+normal business income is not taxed twice. Use the revenue to cut taxes on
+labour, then fund care, defence, housing infrastructure and research. Adam Smith
+was not sentimental about rentiers. A country that taxes nurses harder than
+protected asset income is choosing slower growth, thinner services and worse
 politics.
 
 ### Productivity
@@ -369,38 +386,41 @@ infrastructure selection.
 #### King for a day
 
 I would treat productivity as a national bargain. Use the land and tax-base
-reforms to cut the bottom two income-tax rates by several points and raise the
-tax-free threshold, so extra work pays immediately. Fund 100,000 additional
-TAFE, apprenticeship and university places a year in construction, care, defence,
-engineering, energy and advanced manufacturing, tied to completion and placement
-rather than brochure enrolments. Give the ACCC divestiture powers and point them
-straight at supermarkets, banks, airlines, digital platforms, energy retail and
-infrastructure bottlenecks. Coles and Woolworths should face structural
-separation if site control, supplier terms and local market power keep blocking
-real competition. Break up supermarket land banks. Ban exclusionary leases. Force
-open access where airports, ports, grids and platforms tax everyone else for
-passing through. The test should be conduct and structure: price coordination,
-self-preferencing, loyalty traps, killer acquisitions, access denial and margins
-that survive because customers cannot practically leave. Put infrastructure
-through a published return test, with congestion, housing yield, energy
-reliability and defence logistics weighted explicitly. Keating's old settlement
-linked openness, bargaining, superannuation and competition into one argument:
-high wages require high productivity. The modern version needs the same spine,
-plus energy security, sovereign capability and a state competent enough to buy
-what it says it wants.
+reforms to lift the tax-free threshold to $30,000 and cut the bottom two income
+tax rates by three points, so extra work pays immediately. Fund 100,000
+additional TAFE, apprenticeship and university places a year in construction,
+care, defence, engineering, energy and advanced manufacturing. Pay providers for
+completion and placement, not brochure enrolments.
+
+Give the ACCC divestiture powers and point them straight at supermarkets, banks,
+airlines, digital platforms, energy retail and infrastructure bottlenecks. Coles
+and Woolworths should face structural separation if site control, supplier terms
+and local market power keep blocking real competition. Break up supermarket land
+banks. Ban exclusionary leases. Force open access where airports, ports, grids
+and platforms tax everyone else for passing through. The test should be conduct
+and structure: price coordination, self-preferencing, loyalty traps, killer
+acquisitions, access denial and margins that survive because customers cannot
+practically leave. Put infrastructure through a published return test, with
+congestion, housing yield, energy reliability and defence logistics weighted
+explicitly. Keating's old settlement linked openness, bargaining, superannuation
+and competition into one argument: high wages require high productivity. The
+modern version needs the same spine, plus energy security, sovereign capability
+and a state competent enough to buy what it says it wants.
 
 ### The Rooseveltian version
 
 That program would be serious tax and productivity reform. Deep social
 restoration needs institution-building. A lion-statesman would add a national
-housing builder with balance-sheet capacity, a sovereign industrial bank
-for long-horizon capability projects, public equity stakes or golden shares in
-strategic energy, minerals processing, defence and platform infrastructure, and
-sectoral wage boards in care, logistics, construction and other low-power labour
-markets. Climate adaptation would become hard infrastructure: flood works, grid
-hardening, water security, heat-resilient housing and sovereign insurance for
-places private markets will abandon first. A permanent state-capacity unit would
-sit above procurement, planning and delivery, staffed well enough to buy ships,
+housing builder delivering 50,000 mixed-tenure dwellings a year for a decade, a
+$250 billion sovereign industrial bank for long-horizon capability projects,
+public equity stakes or golden shares in strategic energy, minerals processing,
+defence and platform infrastructure, and sectoral wage boards in care, logistics,
+construction and other low-power labour markets. Climate adaptation would become
+hard infrastructure: at least $20 billion a year for flood works, grid hardening,
+water security, heat-resilient housing and sovereign insurance for places private
+markets will abandon first. A permanent state-capacity unit would sit above
+procurement, planning and delivery: 5,000 engineers, lawyers, commercial
+specialists, economists and project directors paid well enough to buy ships,
 substations, software and hospitals without being led around by consultants with
 PowerPoint decks and a day rate.
 
@@ -424,8 +444,8 @@ The real wealth of nations is productive capacity: skills, energy,
 infrastructure, institutions, scientific capability, military resilience, social
 trust and the tax base to maintain them. Not GDP mood music. Not house prices.
 Not the paper wealth of scarcity rents dressed up as national success. The budget
-gestures toward parts of that future. The task is to build a country able to
-choose it.
+gestures toward parts of that future. Australia needs the courage and competence
+to build it.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
