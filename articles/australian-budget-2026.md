@@ -104,17 +104,21 @@ works once. After that, citizens still need rail, power, ports, housing, water,
 telecommunications and care, only now the rent stream belongs to someone else.
 
 The throughline runs straight into the modern diseases:
-[regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture), money
-politics,
+[regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture),
 [corporate personhood](https://en.wikipedia.org/wiki/Corporate_personhood)
 treated as democratic citizenship, and each country's local version of
-[Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC).
+[Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC) money
+politics.
 [Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
-rebrand too, helped along by panem et circenses with a notification badge. Where
-class solidarity might once have threatened concentrated wealth, the newer trick
-is to keep people fighting sideways: gender against gender, renters against
-migrants, workers against welfare recipients, young against old. The
-[manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
+rebrand too, helped along by
+[panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with a
+notification badge. Where class solidarity might once have threatened
+concentrated wealth, the newer trick is to keep people fighting sideways:
+[gender against gender](https://www.youtube.com/watch?v=x8hAFHB54gE),
+[renters against migrants](https://www.foxbusiness.com/economy/elon-musk-weighs-economic-impacts-illegal-immigration),
+[workers against welfare recipients](https://www.gov.uk/government/speeches/welfare-speech),
+[young against old](https://capitalpost.uk/politics/political-parties/farage-suggests-cutting-minimum-wage-for-young-workers.html).
+The [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
 current franchise.
 
 That is why I judge budgets by a simple standard: do they repair capitalism's
@@ -129,10 +133,11 @@ pressures visible in the papers.[^tax-strategy][^fiscal]
 
 I would go further. Australia probably wouldn't. The choice at the next election
 is not this budget or a clean Georgist-social-democratic settlement. It is this
-budget or a stunningly unqualified Nigel Farage aspirant trying to turn
-resentment into statecraft. People further left can cry for more, and often
-should. They also get to do it without persuading the voters who do not already
-agree with them.
+budget or a stunningly unqualified
+[Nigel Farage aspirant](https://www.theguardian.com/australia-news/video/2016/sep/14/pauline-hanson-australia-in-danger-of-being-swamped-by-muslims-video)
+trying to turn resentment into statecraft. People further left can cry for more,
+and often should. They also get to do it without persuading the voters who do
+not already agree with them.
 
 ## Fiscal and macro settings
 
