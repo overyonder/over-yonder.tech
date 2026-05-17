@@ -98,11 +98,12 @@ politics,
 treated as democratic citizenship, and each country's local version of
 [Citizens United](https://en.wikipedia.org/wiki/Citizens_United_v._FEC).
 [Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
-rebrand too. Where class solidarity might once have threatened concentrated
-wealth, the newer trick is to keep people fighting sideways: gender against
-gender, renters against migrants, workers against welfare recipients, young
-against old. The [manosphere](https://en.wikipedia.org/wiki/Manosphere) is only
-the loudest current franchise.
+rebrand too, helped along by panem et circenses with a notification badge. Where
+class solidarity might once have threatened concentrated wealth, the newer trick
+is to keep people fighting sideways: gender against gender, renters against
+migrants, workers against welfare recipients, young against old. The
+[manosphere](https://en.wikipedia.org/wiki/Manosphere) is only the loudest
+current franchise.
 
 That is why I judge budgets by a simple standard: do they make the capitalist
 bargain more durable, or do they help the already-secure pull up the ladder?
