@@ -306,27 +306,66 @@ agree with them.
 
 These are the places where the budget's reform story stops short.
 
-- **The budget changes housing investor tax settings and uses planning
-  conditions, but does not attempt a broad land-tax bargain with the
-  states.**[^housing-infra][^productivity]
-  Zoning is not absent; it appears through housing-enabling infrastructure,
-  National Competition Policy and productivity work. Land rent is still the gap:
-  planning throughput can increase supply, but without land-tax reform the
-  scarcity rent mostly remains private.
+### Land rent
 
-- **The papers discuss GST distribution and superannuation receipts, but leave
-  GST design and retirement-savings tax mostly outside the reform
-  perimeter.**[^tax-strategy][^gst-super]
-  This leaves a tax-base gap too large to ignore. A durable tax settlement cannot
-  keep relying on income tax while sheltering large pools of asset wealth and
-  leaving consumption-tax design frozen.
+The budget changes housing investor tax settings and uses planning conditions,
+then stops before a broad land-tax bargain with the
+states.[^housing-infra][^productivity]
+Zoning appears through housing-enabling infrastructure, National Competition
+Policy and productivity work. Land rent is still the gap: planning throughput can
+increase supply, while the scarcity rent remains mostly private.
 
-- **The budget has a productivity program, but not an integrated productivity
-  compact at reform-era scale.**[^regulation][^productivity]
-  Better regulation, competition enforcement, skills recognition and Productivity
-  Commission inquiries attack frictions that make labour and capital less
-  productive. The missing piece is integration across tax, skills, workplace
-  institutions, competition and infrastructure selection.
+#### King for a day
+
+I would trade Commonwealth money for state land-tax reform, and I would make the
+trade shamelessly explicit. Replace stamp duty with a broad land-value tax, fund
+the transition federally, and let states keep more upside when they permit
+density around transport, jobs and services. Henry George had the basic point
+right: the unearned lift in land value comes from public permission and public
+investment. Tax that rent and lower the taxes on work and building. Australia
+gets more homes, less deadweight loss, a deeper construction pipeline and a
+housing market that rewards adding capacity rather than squatting on scarcity.
+
+### Tax base
+
+The papers discuss GST distribution and superannuation receipts, then leave GST
+design and retirement-savings tax mostly outside the reform
+perimeter.[^tax-strategy][^gst-super]
+This leaves a tax-base gap too large to ignore. A durable tax settlement cannot
+keep relying on income tax while sheltering large pools of asset wealth and
+leaving consumption-tax design frozen.
+
+#### King for a day
+
+I would build a tax mix that admits Australia is older, wealthier and more
+asset-heavy than the tax system pretends. Broaden the GST, compensate the bottom
+half automatically through the transfer system, tax very large super balances
+more like inherited private treasuries, and use the revenue to cut taxes on
+labour and fund care, defence, housing infrastructure and research. Adam Smith
+was not sentimental about rentiers. A country that taxes nurses harder than
+protected asset income is choosing slower growth, thinner services and worse
+politics.
+
+### Productivity
+
+The budget has a productivity program without an integrated productivity compact
+at reform-era scale.[^regulation][^productivity] Better regulation, competition
+enforcement, skills recognition and Productivity Commission inquiries attack
+frictions that make labour and capital less productive. The missing piece is
+integration across tax, skills, workplace institutions, competition and
+infrastructure selection.
+
+#### King for a day
+
+I would treat productivity as a national bargain. Cut taxes on marginal work and
+investment, fund vocational and university places where bottlenecks are real,
+make competition policy bite in sectors that have learned to enjoy cosy margins,
+and choose infrastructure by economic return rather than electoral cartography.
+Keating's old settlement
+linked openness, bargaining, superannuation and competition into one argument:
+high wages require high productivity. The modern version needs the same spine,
+plus energy security, sovereign capability and a state competent enough to buy
+what it says it wants.
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
