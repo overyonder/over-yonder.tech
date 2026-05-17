@@ -463,6 +463,13 @@ state-capacity unit would sit above procurement, planning and delivery: 5,000
 engineers, lawyers, commercial specialists, economists and project directors paid
 well enough to buy ships, substations, software and hospitals without being led
 around by consultants with PowerPoint decks and a day rate.
+The
+[Pink Batts](https://en.wikipedia.org/wiki/Royal_Commission_into_the_Home_Insulation_Program)
+comparison dies only if the machinery exists before the money moves: staged
+pilots before national rollout, licensed delivery bodies, named project owners,
+published risk registers, worker-safety accreditation, random inspections,
+stop-go gates, blacklisting for unsafe contractors and ministers who cannot hide
+behind outsourced chaos.
 
 ### The golden country
 
