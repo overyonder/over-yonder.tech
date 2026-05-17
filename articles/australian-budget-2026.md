@@ -132,7 +132,7 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 
 ## Bottom line
 
-Overall judgement: **B+**. Labor taxes asset income more coherently, puts some
+Overall judgement: **B-**. Labor taxes asset income more coherently, puts some
 money behind housing bottlenecks, and takes state capacity seriously. The budget
 is still too small for the debt, housing, health, climate, defence and delivery
 pressures visible in the papers.[^tax-strategy][^fiscal]
@@ -377,9 +377,10 @@ I would build a tax mix that admits Australia is older, wealthier and more
 asset-heavy than the tax system pretends. Scrap the GST, which means replacing
 more than $100 billion a year. Budget Paper 3 puts GST entitlements at
 $104.2 billion in 2026-27 and $121.3 billion by 2029-30.[^gst-super] The package
-has to clear that bar: about $60 billion a year from mature land-value taxation,
-$20 billion to $30 billion from resource and monopoly rents in ordinary years,
-and the rest from very large super balances, inheritances and anti-avoidance.
+has to clear that bar before anything else gets spent: about $60 billion a year
+from mature land-value taxation, $20 billion to $30 billion from resource and
+monopoly rents in ordinary years, and the rest from very large super balances,
+inheritances, net wealth and anti-avoidance.
 
 Consumption taxes hit people when they spend to live. A serious reform taxes
 wealth where it pools and power where it hides. Tax super balances above
@@ -394,11 +395,17 @@ return, with no transferred deductions and no uplift-rate holiday for projects
 that have already made their money back. Levy monopoly rents by sector: a
 10 per cent surcharge on profits above a normal return in designated concentrated
 markets, reviewable by the ACCC and creditable against ordinary company tax so
-normal business income is not taxed twice. Use the revenue to cut taxes on
-labour, then fund care, defence, housing infrastructure and research. Adam Smith
-was not sentimental about rentiers. A country that taxes nurses harder than
-protected asset income is choosing slower growth, thinner services and worse
-politics.
+normal business income is not taxed twice. Add a net wealth tax of 1 per cent a
+year above $20 million and 2 per cent above $100 million, with owner-occupied
+housing counted, closely held companies valued on rolling assessments, and an
+exit tax on unrealised gains for anyone who discovers a sudden philosophical
+attachment to Monaco after the bill arrives. Spare me the capital-flight
+melodrama. You can't bring the land, the mines, the ports, the courts, the
+educated workforce or the Australian customer base with you. The first call on
+this money replaces the GST; only the surplus cuts taxes on labour and funds
+care, defence, housing infrastructure and research. Adam Smith was not
+sentimental about rentiers. A country that taxes nurses harder than protected
+asset income is choosing slower growth, thinner services and worse politics.
 
 ### Productivity
 
@@ -412,11 +419,12 @@ infrastructure selection.
 #### King for a day
 
 I would treat productivity as a national bargain. Use the land and tax-base
-reforms to lift the tax-free threshold to $30,000 and cut the bottom two income
-tax rates by three points, so extra work pays immediately. Fund 100,000
-additional TAFE, apprenticeship and university places a year in construction,
-care, defence, engineering, energy and advanced manufacturing. Pay providers for
-completion and placement, not brochure enrolments.
+reforms to replace the GST first, then use the remaining wealth and rent revenue
+to lift the tax-free threshold to $30,000 and cut the bottom two income tax rates
+by three points, so extra work pays immediately. Fund 100,000 additional TAFE,
+apprenticeship and university places a year in construction, care, defence,
+engineering, energy and advanced manufacturing. Pay providers for completion and
+placement, not brochure enrolments.
 
 Give the ACCC divestiture powers and point them straight at supermarkets, banks,
 airlines, digital platforms, energy retail and infrastructure bottlenecks. Coles
