@@ -135,23 +135,6 @@ uneasy bargain, or do they help the already-secure pull up the ladder?
 </details>
 </div>
 
-## Bottom line
-
-Overall judgement: **B-**. Labor taxes asset income more coherently, puts some
-money behind housing bottlenecks, and takes state capacity seriously. The budget
-is still too small for the debt, housing, health, climate, defence and delivery
-pressures visible in the papers.[^tax-strategy][^fiscal]
-
-Now I would go further. But Australia probably wouldn't. The choice at the next
-election is not this budget or a clean Georgist-social-democratic settlement. It
-is this
-budget or a stunningly unqualified
-[Nigel Farage aspirant](https://www.theguardian.com/australia-news/video/2016/sep/14/pauline-hanson-australia-in-danger-of-being-swamped-by-muslims-video)
-egged on by a [Pilbara plutocrat](https://en.wikipedia.org/wiki/Gina_Rinehart),
-trying to turn resentment into statecraft. People further left can cry for more,
-and often should. They also get to do it without persuading the voters who do
-not already agree with them.
-
 ## Policy Context: Fiscal and macro settings
 
 - **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
@@ -332,6 +315,23 @@ not already agree with them.
   Headcount is not capability. But sophisticated policy still needs people who
   can audit claims, write contracts, run procurement, enforce rules and manage
   projects after the minister has left the lectern.
+
+## Bottom line
+
+Overall judgement: **B-**. Labor taxes asset income more coherently, puts some
+money behind housing bottlenecks, and takes state capacity seriously. The budget
+is still too small for the debt, housing, health, climate, defence and delivery
+pressures visible in the papers.[^tax-strategy][^fiscal]
+
+Now I would go further. But Australia probably wouldn't. The choice at the next
+election is not this budget or a clean Georgist-social-democratic settlement. It
+is this
+budget or a stunningly unqualified
+[Nigel Farage aspirant](https://www.theguardian.com/australia-news/video/2016/sep/14/pauline-hanson-australia-in-danger-of-being-swamped-by-muslims-video)
+egged on by a [Pilbara plutocrat](https://en.wikipedia.org/wiki/Gina_Rinehart),
+trying to turn resentment into statecraft. People further left can cry for more,
+and often should. They also get to do it without persuading the voters who do
+not already agree with them.
 
 ## Notable absences
 
