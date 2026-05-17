@@ -118,7 +118,7 @@ politics.
 [Divide et impera](https://en.wikipedia.org/wiki/Divide_and_rule) has had a
 rebrand too, helped along by
 [panem et circenses](https://en.wikipedia.org/wiki/Bread_and_circuses) with
-infinite scroll. Where class solidarity might once have threatened
+[infinite scroll](https://www.instagram.com/). Where class solidarity might once have threatened
 concentrated wealth, the newer trick is to keep people fighting sideways on
 multiple axes:
 [gender against gender](https://www.youtube.com/watch?v=x8hAFHB54gE),
