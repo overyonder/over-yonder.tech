@@ -291,12 +291,12 @@ agree with them.
   passes through states and territories. National promises run through divided
   authority, and the blame comes back shared.
 
-- **Budget Paper 3 explicitly allows for infrastructure slippage from milestones,
-  delivery complexity and material disruption.**[^states]
-  *Assessment:* Directionally useful; large enough to lower confidence in the
-  headline numbers. Announced spending is
-  not completed work, and infrastructure programs are where neat federal
-  promises go to meet weather, contractors, approvals and state capacity.
+- **Budget Paper 3 explicitly allows infrastructure payments to slip when
+  milestones are missed, projects prove more complex than expected, or materials
+  are disrupted.**[^states]
+  *Assessment:* Useful disclosure, not a policy achievement. Slippage shifts cash
+  into later years and delays the roads, water, schools and hospitals the budget
+  is counting on for housing and service capacity.
 
 - **Budget Paper 4 puts 2026-27 average staffing at 217,256, only 0.6 per cent
   above the revised 2025-26 estimate.**[^asl]
