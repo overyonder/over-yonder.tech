@@ -516,7 +516,7 @@ civilised enough to want something better than managed barbarism between the
 current
 [Thucydidean](https://apnews.com/article/a1d63a711a037472f5c1c330c2120bd5)
 powers. The prize is not moral vanity. It is a compassionate world order that
-can restrain great powers before other countries become their battlefield.
+can restrain them before other countries become their battlefield.
 
 That's as long as the old lion doesn't get
 [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal)
