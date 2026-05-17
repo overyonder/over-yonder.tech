@@ -48,11 +48,14 @@ through productivity, rather than protected by asset inflation?
 
 ## Cards on the table
 
-I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) because
-broad prosperity is rare. Most of history is kings, landlords, creditors,
-peasants, servants, wars, extraction and periodic rupture. The middle-class world
-we take for granted was built, fairly recently, by policy: disciplined banking,
-public investment, antitrust, high marginal tax rates, strong unions,
+I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
+political-economy sense: capitalism can create broad prosperity, but only when
+the state disciplines rentiers, invests in capacity, protects bargaining power
+and stops private wealth from turning public institutions into toll booths. Most
+of history is kings, landlords, creditors, peasants, servants, wars, extraction
+and periodic rupture. The middle-class world we take for granted was built,
+fairly recently, by policy: disciplined banking, public investment, antitrust,
+high marginal tax rates, strong unions,
 [Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
 rents, and enough redistribution to make capitalism worth defending for people
 without capital.
