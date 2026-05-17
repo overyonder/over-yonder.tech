@@ -20,6 +20,12 @@ resourcing in No. 4, then the glossy overview for anyone with dinner plans.
 So: read first, argue second, keep it short enough that nobody needs a Treasury
 cadetship.
 
+Source note: I treated the four Budget Papers as the spine, then checked the
+overview, Women's Budget Statement, tax explainers, fact sheets and Portfolio
+Budget Statements against them.[^source-set] The PBS documents are mostly
+delivery documents. They don't replace the macro story, but they test whether
+the budget has enough machinery behind the promises.
+
 The 2026-27 Federal Budget is a political economy budget. Its centre is a shift
 in who the tax system favours: less preference for leveraged asset ownership,
 more visible preference for labour income, service delivery, defence capacity
@@ -224,10 +230,15 @@ visible in the papers.[^tax-strategy][^fiscal]
   above the revised 2025-26 estimate.**[^asl]
   *Assessment:* Direction: disciplined. Magnitude: tight. The budget asks the
   state to run harder: tax reform, NDIS integrity, procurement, energy
-  regulation, housing agreements. Headcount is not capability, but thin capacity
-  makes sophisticated policy fragile.
+  regulation, housing agreements. The Portfolio Budget Statements sharpen this
+  point: the work is spread across many agencies, not one heroic line item.
+  Headcount is not capability, but thin capacity makes sophisticated policy
+  fragile.
 
 ## Notable absences
+
+These are searched absences, not vibes. Some topics appear in narrow form; the
+point is whether they appear as structural reform.
 
 - **The budget changes housing investor tax settings and uses planning
   conditions, but does not attempt a broad land-tax bargain with the
@@ -252,6 +263,8 @@ visible in the papers.[^tax-strategy][^fiscal]
   inquiries are real measures. They remain a bundle of instruments, not a
   settlement across tax, skills, workplace institutions, competition and
   infrastructure selection.
+
+[^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
 [^fiscal]: Australian Government, *Budget Paper No. 1: Budget Strategy and Outlook 2026-27*, Statement 3, Table 3.1, p. 83. <https://budget.gov.au/content/bp1/download/bp1_2026-27.pdf>
 
