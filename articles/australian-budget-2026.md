@@ -326,17 +326,20 @@ money behind housing bottlenecks, and takes state capacity seriously. The budget
 is still too small for the debt, housing, health, climate, defence and delivery
 pressures visible in the papers.[^tax-strategy][^fiscal]
 
+## Notable absences
+
+<div class="info">
+<details>
+<summary>King for a day</summary>
+
 Now I would go further. But Australia probably wouldn't. The choice at the next
 election is not this budget or a clean Georgist-social-democratic settlement. It
-is this
-budget or a stunningly unqualified
+is this budget or a stunningly unqualified
 [Nigel Farage aspirant](https://www.theguardian.com/australia-news/video/2016/sep/14/pauline-hanson-australia-in-danger-of-being-swamped-by-muslims-video)
 egged on by a [Pilbara plutocrat](https://en.wikipedia.org/wiki/Gina_Rinehart),
 trying to turn resentment into statecraft. People further left can cry for more,
 and often should. They also get to do it without persuading the voters who do
 not already agree with them.
-
-## Notable absences
 
 These are the places where the budget's reform story stops short.
 
@@ -349,7 +352,7 @@ Zoning appears through housing-enabling infrastructure, National Competition
 Policy and productivity work. Land rent is still the gap: planning throughput can
 increase supply, while the scarcity rent remains mostly private.
 
-#### King for a day
+#### Reform
 
 I would trade Commonwealth money for state land-tax reform, and I would make the
 trade shamelessly explicit. Stamp duty goes. In its place: an annual land-value
@@ -379,7 +382,7 @@ This leaves a tax-base gap too large to ignore. A durable tax settlement cannot
 keep relying on income tax while sheltering large pools of asset wealth, monopoly
 profits and economic rents.
 
-#### King for a day
+#### Reform
 
 I would build a tax mix that admits Australia is older, wealthier and more
 asset-heavy than the tax system pretends. Scrap the GST, which means replacing
@@ -424,7 +427,7 @@ frictions that make labour and capital less productive. The missing piece is
 integration across tax, skills, workplace institutions, competition and
 infrastructure selection.
 
-#### King for a day
+#### Reform
 
 I would treat productivity as a national bargain. Use the land and tax-base
 reforms to replace the GST first, then use the remaining wealth and rent revenue
@@ -482,9 +485,11 @@ behind outsourced chaos.
 ### The golden country
 
 This is the terrifying but grand vision of the argument. Australia has to become
-capable of imagining a golden future again: a shining city on a hill with the
-institutional muscle to defend its own prosperity, instead of a property
-portfolio with a flag and a quarry with cafes.
+capable of imagining a golden future again. Reagan's
+[shining city upon a hill](https://www.reaganlibrary.gov/archives/speech/farewell-address-nation)
+looked outward from private affluence and imperial confidence. The Australian
+inversion is a golden country with the institutional muscle to defend shared
+prosperity, instead of a property portfolio with a flag and a quarry with cafes.
 
 Discipline matters as much as ambition. Breaking up Coles and Woolworths is
 satisfying only if it breaks the bottleneck: sites, leases, logistics, supplier
@@ -516,6 +521,9 @@ Or get [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Wh
 by the contemporaneous
 ["our man"](https://en.wikipedia.org/wiki/John_Kerr_%28governor-general%29)
 after I've made one too many speeches.
+
+</details>
+</div>
 
 [^source-set]: Australian Government, *Budget 2026-27*, Budget documents and Portfolio Budget Statements indexes. <https://budget.gov.au/content/documents.htm> <https://budget.gov.au/content/pbs/index.htm>
 
