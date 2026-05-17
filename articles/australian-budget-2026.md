@@ -54,8 +54,14 @@ the state disciplines rentiers, invests in capacity, protects bargaining power
 and stops private wealth from turning public institutions into toll booths. Most
 of history is kings, landlords, creditors, peasants, servants, wars, extraction
 and periodic rupture. The middle-class world we take for granted was built,
-fairly recently, by policy: disciplined banking, public investment, antitrust,
-high marginal tax rates, strong unions,
+fairly recently, by policy:
+[disciplined banking](https://en.wikipedia.org/wiki/Glass%E2%80%93Steagall_legislation)
+(and, later,
+[Dodd-Frank](https://en.wikipedia.org/wiki/Dodd%E2%80%93Frank_Wall_Street_Reform_and_Consumer_Protection_Act)),
+[public investment](https://en.wikipedia.org/wiki/Public_Works_Administration),
+[antitrust](https://en.wikipedia.org/wiki/Sherman_Antitrust_Act),
+[high marginal tax rates](https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/),
+[strong unions](https://en.wikipedia.org/wiki/National_Labor_Relations_Act_of_1935),
 [Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
 rents, and enough redistribution to make capitalism worth defending for people
 without capital.
