@@ -503,8 +503,8 @@ strategic industry.
 The real wealth of nations is productive capacity: skills, energy,
 infrastructure, institutions, scientific capability, military resilience, social
 trust and the tax base to maintain them. Not a bigger national income number
-with the foundations rotting underneath. Not house prices.
-Not the paper wealth of scarcity rents dressed up as national success. The budget
+with the foundations rotting underneath. Not the paper wealth of scarcity rents
+dressed up as national success. The budget
 gestures toward parts of that future. Australia needs to remember that countries
 are built, not passively inherited from parcels of ground with things built on
 them or holes dug in them once in the distant past.
