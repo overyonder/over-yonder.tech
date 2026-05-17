@@ -60,6 +60,15 @@ high marginal tax rates, strong unions,
 rents, and enough redistribution to make capitalism worth defending for people
 without capital.
 
+The theory is not complicated. Real national wealth is the capacity to make,
+build, care, defend, discover and adapt. Wages rise when workers produce more
+and have enough power to claim a fair share of it. Asset inflation is different:
+it lets owners get richer because land, licences, monopolies and tax shelters
+become harder for everyone else to access. A good budget moves money and talent
+from the second column to the first. Tax rents. Fund capacity. Keep markets
+competitive. Stop pretending a higher house price is the same thing as a richer
+country.
+
 That bargain needed capital to be clever as well as powerful.
 [Standard Oil](https://en.wikipedia.org/wiki/Standard_Oil) was broken up. The
 [New Deal](https://en.wikipedia.org/wiki/New_Deal) was accepted. The
