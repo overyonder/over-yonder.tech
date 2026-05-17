@@ -7,13 +7,13 @@ tags: [australia, budget, politics, economics]
 
 # The Euthanasia of Howard's Rentiers
 
-*First of all, relax. It's a [Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes)
-quote.*
-
 <div class="author-badge">
   <img src="https://github.com/KaiStarkk.png?size=64" alt="Kieran Hannigan" />
   <a href="https://github.com/KaiStarkk">Kieran Hannigan</a>
 </div>
+
+*First of all, relax. It's a [Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes)
+quote.*
 
 If someone in your feed had a fully formed budget take before today, they
 probably hadn't read it. Fair enough. The budget papers are a small obstacle
