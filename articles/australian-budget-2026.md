@@ -518,10 +518,11 @@ current
 powers. The prize is not moral vanity. It is a compassionate world order sturdy
 enough to stop great powers making graveyards of everyone else's geography.
 
-Or get [deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal),
+That's as long as the old lion doesn't get
+[deposed](https://en.wikipedia.org/wiki/Alleged_CIA_involvement_in_the_Whitlam_dismissal)
 by the contemporaneous
 ["our man"](https://en.wikipedia.org/wiki/John_Kerr_%28governor-general%29)
-after I've made one too many speeches.
+before I've made one too many speeches.
 
 </details>
 </div>
