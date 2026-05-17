@@ -147,7 +147,7 @@ trying to turn resentment into statecraft. People further left can cry for more,
 and often should. They also get to do it without persuading the voters who do
 not already agree with them.
 
-## Fiscal and macro settings
+## Policy Context: Fiscal and macro settings
 
 - **Treasury's forecasts assume real GDP growth recovers to 2.75 per cent in
   2026-27 and unemployment stays near 4.5 per cent.**[^macro]
