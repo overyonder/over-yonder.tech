@@ -63,8 +63,8 @@ fairly recently, by policy:
 [high marginal tax rates](https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/),
 [strong unions](https://en.wikipedia.org/wiki/National_Labor_Relations_Act_of_1935),
 [Georgist](https://en.wikipedia.org/wiki/Georgism) instincts about taxing land
-rents, and enough redistribution to make capitalism worth defending for people
-without capital.
+rents, and a bargain: enough redistribution to make capitalism worth defending
+for people without capital.
 
 The theory is not complicated. Real national wealth is the capacity to make,
 build, care, defend, discover and adapt. Wages rise when workers produce more
