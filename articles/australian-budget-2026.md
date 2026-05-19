@@ -49,7 +49,7 @@ though it doesn't revive Keating's deeper question: how does Australia get
 richer by building capacity, rather than revaluing the same dirt?
 
 <div class="info">
-<details>
+<details open>
 <summary>Caveat: cards on the table</summary>
 
 I lean [Keynesian](https://en.wikipedia.org/wiki/Keynesian_economics) in the old
@@ -329,7 +329,7 @@ pressures visible in the papers.[^tax-strategy][^fiscal]
 ## Notable absences
 
 <div class="info">
-<details>
+<details open>
 <summary>King for a day</summary>
 
 Now I would go further. But Australia probably wouldn't. The choice at the next
