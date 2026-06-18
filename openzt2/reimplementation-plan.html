@@ -27,11 +27,6 @@ th{background:var(--soft)}
 .modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
 .modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
 .modal-box iframe{flex:1;border:0;width:100%}
-
-</style>
-<style>
-@media (min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(116px,1fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px!important;width:min(calc(100vw - 24px),1380px)!important}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}
-@media (max-width:880px){body{padding-bottom:62px}.tabs{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:50!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:5px!important;width:100%!important;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border)!important;font:11px/1 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{min-height:48px!important;padding:0!important;white-space:normal!important;border-radius:4px!important;min-width:0!important}.tabs a.gstart{margin-left:0!important}.tabs a.gstart::before{display:none!important}.nav-icon{display:block!important;font:22px/1 system-ui,sans-serif!important}.nav-label{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}.tabs .theme-toggle{width:48px!important;height:48px!important;font-size:22px!important;justify-self:stretch!important}}
 </style>
 <script>
 (()=>{
@@ -65,6 +60,164 @@ materials, models, textures, audio, saves, and packages. It does not need to
 preserve the original C++ memory layout, allocator behaviour, STL container
 choices, pointer graph, vtable mechanics, or duplicate transient trees unless
 one of those mechanics is part of an observable or persisted contract.</p>
+<h2>Implementation Completion Tracker</h2>
+<p>The raw binary perimeter is evidence, not the implementation checklist. Each
+reconstruction surface should be tracked by the original contract it proves and
+by the Rust work needed to preserve that contract.</p>
+<pre class="mermaid">flowchart LR
+  Evidence["Binary/source evidence"] --> Contract["Original contract"]
+  Contract --> Game["Game/domain behavior"]
+  Contract --> Format["Source format"]
+  Contract --> Adapter["Replaceable adapter"]
+  Contract --> Unknown["Unknown relevance"]
+  Game --> Rust["Rust implementation"]
+  Format --> Rust
+  Adapter --> Bevy["Bevy / library replacement"]
+  Unknown --> Recover["Recover or classify"]
+
+  classDef evidence fill:#504945,stroke:#a89984,color:#ebdbb2
+  classDef contract fill:#076678,stroke:#83a598,color:#fbf1c7
+  classDef work fill:#79740e,stroke:#b8bb26,color:#fbf1c7
+  classDef adapter fill:#7c6f64,stroke:#a89984,color:#fbf1c7
+  classDef unknown fill:#8f3f71,stroke:#d3869b,color:#fbf1c7
+  class Evidence evidence
+  class Contract contract
+  class Game,Format,Rust work
+  class Adapter,Bevy adapter
+  class Unknown,Recover unknown</pre>
+<p>Status badges:</p>
+<table>
+<thead>
+<tr>
+  <th>Badge</th>
+  <th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">implemented</span></td>
+  <td>Rust currently executes the recovered contract for the named surface.</td>
+</tr>
+<tr>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span></td>
+  <td>The source/type/message surface exists, but important behavior remains open.</td>
+</tr>
+<tr>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span></td>
+  <td>The primary work is parsing, validating, indexing, or projecting source data.</td>
+</tr>
+<tr>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span></td>
+  <td>Original middleware/platform mechanics are intentionally replaced by Bevy or a modern library.</td>
+</tr>
+<tr>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">unknown</span></td>
+  <td>Evidence exists, but the implementation burden is not yet classified.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+  <th>Surface</th>
+  <th>Implementation burden</th>
+  <th>Current Rust status</th>
+  <th>Open work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Z2F archive addressing and asset paths</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> <code>content</code> parses archives/paths; <code>bevy</code> owns mounted archive state and lazy asset lookup.</td>
+  <td>Finish replacing extraction bridges with archive-backed Bevy loaders for every shipped asset class.</td>
+</tr>
+<tr>
+  <td>XML/BFXML/MAXML documents</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Generic document parsing and many domain hydrators exist.</td>
+  <td>Move toward arena/range storage, complete schema-specific validation, and preserve mixed-content/source references where needed.</td>
+</tr>
+<tr>
+  <td>UI layout, messages, value handlers</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Source UI loads, event dispatch, modal/toggle projection, localization, and several original <code>ZT_*</code> handlers exist.</td>
+  <td>Complete widget behavior, focus/input/modal edge cases, full value-handler coverage, and remaining native UI message semantics.</td>
+</tr>
+<tr>
+  <td>App lifecycle, shell, modes</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Startup, splash/title/menu transitions, mode manager state, and several mode commands are modeled.</td>
+  <td>Recover full <code>ZTMode</code> message handling, tool transitions, placement/delete/download/file/training/gesture decisions, and per-mode runtime policy.</td>
+</tr>
+<tr>
+  <td>Entity catalog and source definitions</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Entity definitions, component refs, binder schema, safe-handle refs, and source/runtime registry split exist.</td>
+  <td>Complete shared-data schema, type/property inheritance, binder command semantics, and source validation.</td>
+</tr>
+<tr>
+  <td>World entities and simulation storage</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Loaded source entities and runtime spawns project into Bevy ECS from domain component records.</td>
+  <td>Move more per-instance mutable state into ECS components, recover update order, placement effects, deletion/sale effects, and save/load coupling.</td>
+</tr>
+<tr>
+  <td>Terrain, paths, fences, placement</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Source terrain/path/fence concepts, validation meanings, placement commands, and Bevy terrain projection exist.</td>
+  <td>Recover exact grid units, footprint/slope/topology rules, elevated path behavior, terrain visual mechanism, and command side effects.</td>
+</tr>
+<tr>
+  <td>Economy, fame, status, research, disease</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Cash state, admission price index, transaction polarity, status/fame/research/disease source surfaces are modeled.</td>
+  <td>Recover full transaction aggregation/commit, fame formulas, donation weighting, research tree dependencies, disease spread/cure cadence, and open UI commands.</td>
+</tr>
+<tr>
+  <td>AI tasks, behavior, staff, animals</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Task/behavior source parsing, fixed-score subset, entity-aware task roots, staff manager surfaces, and animal state surfaces exist.</td>
+  <td>Recover evaluator/controller scoring, qualifiers, tie-break/scheduling, multi-behavior advancement, completion/failure effects, staff member ECS state, needs, and training policy.</td>
+</tr>
+<tr>
+  <td>Scenarios, scripts, Lua/BFS API</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span> + <span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Scenario rule/action/script surfaces, <code>BFScriptContextMgr</code>, <code>BFLua*</code> value types, and recovered script effects exist.</td>
+  <td>Use a modern Lua runtime while preserving <code>BFS_*</code> API semantics, rule evaluation order, argument/result marshalling, and compiled script/package formats.</td>
+</tr>
+<tr>
+  <td>Renderer, Gamebryo/NIF, materials, animation, particles</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span> + <span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Renderer source/resource/model/material/Gamebryo value surfaces exist; Bevy owns projection, handles, and render entities.</td>
+  <td>Replace Gamebryo/D3D execution with Bevy while preserving NIF/model/material/effect/animation/particle source semantics and visual binding rules.</td>
+</tr>
+<tr>
+  <td>Audio and sound managers</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span> + <span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Domain sound tags, <code>BFSND_*</code> commands, world/ambient managers, and Bevy playback bridge exist.</td>
+  <td>Complete category/mixing policy, 3D attachment, ambient/world sound rules, stop/volume semantics, and source-backed coverage for all authored sounds.</td>
+</tr>
+<tr>
+  <td>Persistence, profiles, saves, packages</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">format</span> + <span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">game</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">partial</span> Profile/options, save/load request/result, loaded-game context, and package/source refs are modeled.</td>
+  <td>Recover <code>.z2s</code>/profile/package field layouts, serialization order, load-after-save flow, and persisted manager/component coverage.</td>
+</tr>
+<tr>
+  <td>Platform, CRT, allocator, Win32, D3D, Bink, networking</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">replace</span> Bevy, Rust libraries, OS APIs, and selected crates should replace original implementation mechanics.</td>
+  <td>Preserve only observable contracts: graphics/options/profile mapping, video playback behavior, network/MOTD/download semantics, timing, file paths, and user-visible error handling.</td>
+</tr>
+<tr>
+  <td>Unclassified binary function surface</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">unknown</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">unknown</span> Many perimeter rows are rough domain bands or unidentified.</td>
+  <td>Classify rows only when they prove a source/domain contract, a source format requirement, or an adapter behavior that affects the Rust runtime.</td>
+</tr>
+</tbody>
+</table>
 <h2>Workspace Crate Boundaries</h2>
 <p><code>content</code> owns source-file boundaries: shipped Z2F archive addressing, asset
 paths, XML/MAXML-like data documents, localization documents, parser support,
@@ -841,5 +994,5 @@ original game's source compatibility and semantic contracts. The original files
 and domain meanings stay canonical; the original C++ heap mechanics do not.</p>
 
 </main>
-
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
 </html>
