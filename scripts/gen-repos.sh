@@ -21,6 +21,28 @@ done
 jq -s '
   flatten
   | map(select((.fork | not) and (.private | not)))
+  | map(select(
+      .name as $name
+      | .full_name as $full_name
+      | (
+          [
+            "3DPrintMe",
+            "CITS3003",
+            "CITS3200",
+            "Tennis-Ball-Collecting-Robot",
+            "aea",
+            "hannigancooper.github.io",
+            "langs",
+            "nixup",
+            "unity-copilot-docker-demo"
+          ] | index($name)
+        ) == null
+      and (
+          [
+            "hannigancooper/hannigancooper.github.io"
+          ] | index($full_name)
+        ) == null
+    ))
   | unique_by(.name)
   | sort_by(-.stargazers_count, .name)
   | map({

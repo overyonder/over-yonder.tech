@@ -3,6 +3,7 @@ title: "Gild the Tulip"
 date: 2026-05-16
 author: Kieran Hannigan
 tags: [finance, investing, mba, qip]
+hidden: true
 ---
 
 # Gild the Tulip

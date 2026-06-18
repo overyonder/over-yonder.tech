@@ -3,6 +3,7 @@ title: "The Euthanasia of Howard's Rentiers"
 date: 2026-05-17
 author: Kieran Hannigan
 tags: [australia, budget, politics, economics]
+hidden: true
 ---
 
 # The Euthanasia of Howard's Rentiers

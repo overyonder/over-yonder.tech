@@ -3,6 +3,7 @@ title: "Buy the Tulip"
 date: 2026-05-15
 author: Kieran Hannigan
 tags: [finance, investing, mba, capm]
+hidden: true
 ---
 
 # Buy the Tulip
