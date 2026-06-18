@@ -387,17 +387,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ensureArticleLoaded(item).finally(function () {
       if (!item.classList.contains('open')) return;
-      body.style.maxHeight = body.scrollHeight + 'px';
-
-      function onEnd() {
-        if (item.classList.contains('open')) {
-          body.style.maxHeight = 'none';
-        }
-        body.removeEventListener('transitionend', onEnd);
-      }
-
-      body.addEventListener('transitionend', onEnd);
+      expandAccordionBody(item);
     });
+  }
+
+  function expandAccordionBody(item) {
+    var body = item.querySelector('.accordion-body');
+    var fallback;
+
+    function releaseHeight(e) {
+      if (e && e.target !== body) return;
+      if (e && e.propertyName !== 'max-height') return;
+
+      window.clearTimeout(fallback);
+      if (item.classList.contains('open')) {
+        body.style.maxHeight = 'none';
+      }
+      body.removeEventListener('transitionend', releaseHeight);
+    }
+
+    body.addEventListener('transitionend', releaseHeight);
+    body.style.maxHeight = body.scrollHeight + 'px';
+
+    fallback = window.setTimeout(releaseHeight, 520);
   }
 
   function closeAccordion(item) {
