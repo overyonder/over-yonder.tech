@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Reimplementation Plan</title>
 <style>
-/* shared-site-nav */.tabs{box-sizing:border-box;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px!important;transform:none!important;font:12px/1.05 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;min-height:24px;padding:2px 6px!important;text-align:center;white-space:nowrap;color:var(--fg)!important;text-decoration:none!important;border:1px solid var(--line)!important;border-radius:4px;background:var(--panel)!important;font:inherit!important;cursor:pointer}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}.nav-icon{display:none}.nav-label{display:inline}@media(max-width:720px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;width:100%;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{min-height:48px;padding:0!important;white-space:normal;border-radius:4px!important}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.tabs .theme-toggle{width:48px;height:48px;font-size:22px;justify-self:stretch}main{padding-bottom:74px}}/* end-shared-site-nav */
+/* shared-site-nav */.tabs{box-sizing:border-box;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px!important;transform:none!important;font:12px/1.05 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;min-height:24px;padding:2px 6px!important;text-align:center;white-space:nowrap;color:var(--fg)!important;text-decoration:none!important;border:1px solid var(--line)!important;border-radius:4px;background:var(--panel)!important;font:inherit!important;cursor:pointer}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}.nav-icon{display:none}.nav-label{display:inline}@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(116px,1fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px!important;width:min(calc(100vw - 24px),1380px)!important}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:50!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:5px!important;width:100%!important;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border)!important;font:11px/1 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{min-height:48px!important;padding:0!important;white-space:normal!important;border-radius:4px!important;min-width:0!important}.tabs a.gstart{margin-left:0!important}.tabs a.gstart::before{display:none!important}.nav-icon{display:block!important;font:22px/1 system-ui,sans-serif!important}.nav-label{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}.tabs .theme-toggle{width:48px!important;height:48px!important;font-size:22px!important;justify-self:stretch!important}main{padding-bottom:74px}}/* end-shared-site-nav */
 /* shared-gruvbox-theme */
 :root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--ok:#79740e;--warn:#b57614;--bad:#9d0006;--unk:#8f3f71;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--code-kw:#9d0006;--code-ty:#076678;--code-st:#79740e;--code-cm:#7c6f64;--code-at:#8f3f71}
 :root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--ok:#98971a;--warn:#d79921;--bad:#cc241d;--unk:#b16286;--control:#3c3836;--control-border:#665c54;--active:#504945;--code-kw:#cc241d;--code-ty:#458588;--code-st:#98971a;--code-cm:#928374;--code-at:#b16286}
@@ -61,9 +61,10 @@ preserve the original C++ memory layout, allocator behaviour, STL container
 choices, pointer graph, vtable mechanics, or duplicate transient trees unless
 one of those mechanics is part of an observable or persisted contract.</p>
 <h2>Implementation Completion Tracker</h2>
-<p>The raw binary perimeter is evidence, not the implementation checklist. Each
-reconstruction surface should be tracked by the original contract it proves and
-by the Rust work needed to preserve that contract.</p>
+<p>Use original contracts, source formats, and runtime responsibilities as the
+implementation checklist. The raw binary perimeter supplies evidence for those
+contracts, and each reconstruction surface should track the Rust work needed to
+preserve them.</p>
 <pre class="mermaid">flowchart LR
   Evidence["Binary/source evidence"] --> Contract["Original contract"]
   Contract --> Game["Game/domain behavior"]
@@ -112,7 +113,7 @@ by the Rust work needed to preserve that contract.</p>
 </tr>
 <tr>
   <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">unknown</span></td>
-  <td>Evidence exists, but the implementation burden is not yet classified.</td>
+  <td>Evidence exists; the implementation burden remains unclassified.</td>
 </tr>
 </tbody>
 </table>
@@ -236,8 +237,8 @@ rules, and pure transforms over loaded source data. It must not own the live
 loaded asset set: generic loaded-document collections, mounted archive mirrors,
 asset path indexes, Bevy handles, loader queues, or duplicate caches of Bevy
 asset values belong outside <code>domain</code>. Preserving an original <code>ZT*</code>, <code>BF*</code>, or
-<code>BFG*</code> symbol means naming the source/domain value type and its semantics, not
-making <code>domain</code> the runtime storage owner.</p>
+<code>BFG*</code> symbol means naming the source/domain value type and its semantics.
+Runtime storage ownership still belongs at the boundary defined for that value.</p>
 <p><code>bevy</code> owns the executable runtime adapter: windowing, app lifecycle, task
 pools, mounted archive state, Bevy asset sources, asset extraction, resources,
 ECS entities/components, Bevy messages, input, rendering, audio playback, and
@@ -268,14 +269,13 @@ bevy
   Resources/components containing domain types
   render/UI/audio/input adapters
 </code></pre>
-<p><code>StartupDomainResources</code> is a Bevy-adapter boot publication bundle, not the
-target runtime store and not a domain-layer owner. Startup code may assemble
-source-derived values there, then immediately publish the result into Bevy
-resources/components without a second transfer bucket. The player-facing runtime
-should operate on the published resources directly.</p>
+<p><code>StartupDomainResources</code> publishes source-derived values during Bevy-adapter
+boot. Startup code may assemble values there, then immediately publish the
+result into Bevy resources/components without a second transfer bucket. The
+player-facing runtime should operate on the published resources directly.</p>
 <p>Original singleton-like managers and runtime domains should live in coherent
-Bevy resources that match real runtime boundaries, not in one Bevy resource per
-old singleton unless that singleton is itself the recovered boundary:</p>
+Bevy resources that match real runtime boundaries. Use one Bevy resource per
+old singleton only when that singleton is itself the recovered boundary:</p>
 <pre><code class="language-text">ZTAppRuntime
 ZTModeMgr
 UiRuntimeContext
@@ -301,12 +301,11 @@ domain-defined state:</p>
 handlers live in <code>domain</code>. The running storage is Bevy because Bevy is the
 engine's ECS, scheduler, change tracker, and asset-handle store.</p>
 <h2>Bevy Runtime Primitives</h2>
-<p>Bevy is not just the rendering adapter. In the running executable it should be
-the primary runtime substrate: storage, scheduling, change detection, asset
-handles, presentation, and host I/O. The original game contracts still live in
-domain types and handlers, but those types should be stored and executed through
-Bevy primitives where that improves locality, parallelism, and incremental
-updates.</p>
+<p>In the running executable, Bevy should provide the primary runtime substrate:
+storage, scheduling, change detection, asset handles, presentation, and host
+I/O. The original game contracts still live in domain types and handlers, but
+those types should be stored and executed through Bevy primitives where that
+improves locality, parallelism, and incremental updates.</p>
 <h3>App, Plugins, And World</h3>
 <p><code>App</code> is the boot container. It wires plugins, resources, schedules, assets,
 states, diagnostics, windows, and render pipelines. OpenZT2 should use plugins
@@ -323,9 +322,8 @@ AudioPlugin
 DiagnosticsPlugin
 </code></pre>
 <p>Each plugin should install the resources, components, systems, asset loaders,
-events/messages, and schedules for one original responsibility. A plugin is not
-where domain meaning is invented; it is where domain meaning is registered into
-the runtime.</p>
+events/messages, and schedules for one original responsibility. Plugins
+register recovered domain meaning into the runtime.</p>
 <p><code>World</code> is Bevy's entity/resource storage. In the game executable, the Bevy
 world should hold the live runtime state directly. A separate domain graph that
 is copied into the world every frame is a performance smell. Headless tests may
@@ -343,8 +341,7 @@ runtime state should be normal Bevy components when they are per-instance.</p>
 map naturally to resources: mode manager, world manager, status/economy manager,
 locale manager, archive repository, document store, UI layout registry, material
 registry, input focus state, and render configuration.</p>
-<p>Bundles are spawn/update ergonomics, not semantic owners. Use bundles to create
-coherent Bevy entities quickly:</p>
+<p>Use bundles as spawn/update ergonomics for coherent Bevy entities:</p>
 <pre><code class="language-text">UiWidgetBundle
 WorldEntityBundle
 TerrainChunkBundle
@@ -365,7 +362,7 @@ Query&lt;(&amp;TerrainChunkId, &amp;mut MeshHandle), With&lt;DirtyTerrainChunk&g
 </code></pre>
 <p>Commands are deferred structural mutations: spawning/despawning entities,
 adding/removing components, and inserting/removing resources. Use them for
-lifetime changes, not ordinary field updates that can be done through mutable
+lifetime changes. Ordinary field updates should go through mutable
 queries/resources.</p>
 <p>System params, including <code>Res</code>, <code>ResMut</code>, <code>Query</code>, <code>EventReader</code>,
 <code>EventWriter</code>, <code>MessageReader</code>, <code>MessageWriter</code>, <code>Local</code>, <code>Commands</code>, and
@@ -373,8 +370,8 @@ queries/resources.</p>
 where an original handler needs mutually exclusive query shapes that Rust's
 borrow checker cannot otherwise express in one system.</p>
 <h3>Schedules, System Sets, Run Conditions, And States</h3>
-<p>Schedules should model execution phases, not product meaning. Product meaning
-belongs in domain state. Useful schedules/sets are:</p>
+<p>Schedules should model execution phases. Product meaning belongs in domain
+state. Useful schedules/sets are:</p>
 <pre><code class="language-text">StartupSourceMount
 StartupDocumentHydration
 InputCollection
@@ -423,7 +420,7 @@ full-tree and full-world rebuilds.</p>
 <p>Bevy assets should store decoded immutable artifacts: parsed BFXML documents,
 textures, sounds, models, materials, shader modules, scene fragments, and
 possibly compiled UI templates. Domain/runtime records should store ids or
-handles, not copied payloads.</p>
+handles instead of copied payloads.</p>
 <p>Handles are cheap references. They are the right representation for repeated
 texture/model/sound/material references across UI, entities, terrain, and
 effects.</p>
@@ -442,9 +439,8 @@ and thumbnail/icon preparation can run off the main thread, then report compact
 results back through messages or asset handles.</p>
 <p>Parallel ECS systems should own normal frame work: AI ticks, animation state,
 dirty UI updates, terrain projection, audio command preparation, and visibility
-or culling data. The design target is not to reproduce the original
-single-threaded update loop; it is to preserve the same results while using
-Bevy's dependency graph to run independent work concurrently.</p>
+or culling data. The target is result compatibility with the original update
+loop, using Bevy's dependency graph to run independent work concurrently.</p>
 <h2>Bevy 0.19 Capability Map</h2>
 <p>This section treats the full Bevy 0.19 feature surface as the planning map,
 not just the subset currently enabled in <code>bevy</code>. Each feature family below
@@ -488,7 +484,7 @@ hotpatching
 <p>Use this surface for the engine frame loop, window/backend integration, task
 pools, app/schedule registration, time, transform propagation, and platform
 ports. Desktop OpenZT2 should prefer native Wayland/X11/wgpu paths. Web and
-Android are portability targets, not core constraints for the first faithful
+Android remain portability targets for later work after the first faithful
 desktop reconstruction.</p>
 <h3>ECS, Scheduling, Reflection, Debug Storage</h3>
 <p>Relevant features:</p>
@@ -641,8 +637,8 @@ documents. The authored UI layout remains the source contract. Bevy entities
 carry source node ids, visual state, text/image handles, layout components,
 focus/picking components, and dirty markers. Text/font handling must preserve
 the original font selection, localization, sizing, alignment, and color
-semantics; default/system fonts are fallback or development aids, not the final
-look when original fonts are available.</p>
+semantics. Default/system fonts only cover fallback and development use while
+original fonts are available.</p>
 <h3>2D Sprites, Atlases, Tiles, And UI Imagery</h3>
 <p>Relevant features:</p>
 <pre><code class="language-text">2d
@@ -800,8 +796,8 @@ trace_tracy_memory
 terrain chunk rebuilds, UI dirty updates, draw-call pressure, memory use, and
 audio/asset queues. Gizmos should be standard for reconstruction debugging:
 camera frustums, placement grids, path/fence routes, terrain chunks, selection
-rays, AI targets, and nav/path queries. Remote/devtools are developer aids, not
-runtime dependencies.</p>
+rays, AI targets, and nav/path queries. Keep remote/devtools in the development
+tooling surface.</p>
 <h3>Logging And Settings</h3>
 <p>Relevant features:</p>
 <pre><code class="language-text">bevy_log
@@ -857,10 +853,9 @@ behaviour. CI testing should exercise source loading, deterministic domain
 handlers, and representative Bevy app schedules without needing the full
 interactive shell for every check.</p>
 <h2>Source Documents</h2>
-<p>Source parsing should produce one compact representation of a document, not
-multiple recursive owned trees. The XML/BFXML model must preserve ordered mixed
-content and attributes, but it should not duplicate children as <code>children</code>,
-<code>content</code>, and <code>text</code> views.</p>
+<p>Source parsing should produce one compact representation of a document. The
+XML/BFXML model must preserve ordered mixed content and attributes while
+avoiding duplicate owned <code>children</code>, <code>content</code>, and <code>text</code> trees.</p>
 <p>The near-term shape is:</p>
 <pre><code class="language-rust">pub struct DataNode {
     pub name: String,
@@ -923,10 +918,9 @@ Projection systems update only changed entities.
 the original UI message contract into domain code, then Bevy should reflect the
 result by changing visibility, text, images, layout state, cursor, audio, or
 other presentation components.</p>
-<p>The Bevy entity tree is the projection cache. A separate generic
-<code>BevyProjectionCache</code> object is not the right abstraction. Specific lookup
-indexes are acceptable when they are concrete and useful, such as
-<code>UiNodeId -&gt; Entity</code> or <code>AssetPathId -&gt; Handle&lt;Image&gt;</code>.</p>
+<p>Use the Bevy entity tree as the projection cache. Prefer concrete lookup
+indexes such as <code>UiNodeId -&gt; Entity</code> or <code>AssetPathId -&gt; Handle&lt;Image&gt;</code> when
+they solve a specific runtime problem.</p>
 <h2>World, Terrain, And Simulation</h2>
 <p>World entities fit Bevy ECS naturally. Animals, guests, staff, placed objects,
 vehicles, and interactable world objects should be Bevy entities with
