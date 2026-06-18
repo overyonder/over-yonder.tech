@@ -61,11 +61,14 @@ preserve the original C++ memory layout, allocator behaviour, STL container
 choices, pointer graph, vtable mechanics, or duplicate transient trees unless
 one of those mechanics is part of an observable or persisted contract.</p>
 <h2>Implementation Completion Tracker</h2>
-<p>This tracker is a work board for the Rust overhaul. It separates evidence
-coverage, executable runtime paths, source parsers, record-only models,
-recovery blockers, and replaceable middleware adapters. A row is ready for
-assignment when its <code>Unlock</code> cell names the first concrete source file family,
-handler group, binary contract, or runtime path to inspect or implement.</p>
+<p>This tracker is a work board for the Rust overhaul, with status assigned from
+the accepted functional specification, live Rust modules/loaders/systems, and
+the classified binary perimeter. It tracks current evidence state rather than
+percentage complete. A <code>recorded</code> row means Rust has records for a source/domain
+surface; source hydration and runtime execution are stated only when the
+capability cell names them. A row is ready for assignment when its <code>Unlock</code> cell
+names the first concrete source file family, handler group, binary contract, or
+runtime path to inspect or implement.</p>
 <p>Badge meanings:</p>
 <table>
 <thead>
@@ -88,8 +91,8 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
   <td>Source data or file format parses/hydrates into Rust values.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
-  <td>Rust records the original concept, fields, and messages. Player behavior is pending.</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
+  <td>Rust records fields, types, messages, or state shapes for the original surface.</td>
 </tr>
 <tr>
   <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
@@ -161,7 +164,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Shared entity-data maps</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td><code>BFAIEntityDataShared</code> maps <code>b_*</code>, <code>s_*</code>, <code>f_*</code>, and <code>p_*</code> property families.</td>
   <td>Descriptor-table fields per component family are incomplete.</td>
   <td>Enumerate descriptors from native readers and representative entity XML.</td>
@@ -198,7 +201,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
   <td>Bevy shell boot</td>
   <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
   <td><code>openzt2_shell</code>, <code>launch</code>, task pools, archive registration, plugins, window setup, and startup loading run.</td>
-  <td>Original <code>ZT2Client</code>/<code>BFApp</code> manager order is modeled with many startup <code>todo!()</code> points.</td>
+  <td>Original <code>ZT2Client</code>/<code>BFApp</code> manager order is represented with many startup <code>todo!()</code> points.</td>
   <td>Replace startup placeholders with recovered app/bootstrap order.</td>
 </tr>
 <tr>
@@ -217,7 +220,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>UI messages and value handlers</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td><code>BFMessageBus</code>, typed UI payloads, value-handler registry, hotkeys, timed events, and named routes exist.</td>
   <td>Most <code>UI_*</code> and <code>ZT_*</code> handlers lack recovered side effects.</td>
   <td>Pick one panel, list its emitted tokens, then implement handlers owned by the target manager.</td>
@@ -238,21 +241,21 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Profile selection and user options</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td><code>BFUserProfileMgr</code>, profile commands, options records, graphics/audio/Vince fields, and safe graphics state exist.</td>
   <td>Read/write order, profile directories, registry mapping, and safe-mode restore are open.</td>
   <td>Recover profile/options XML readers and write-back paths.</td>
 </tr>
 <tr>
   <td>Campaign, scenario, map-selection panels</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Campaign index, globe dots, map data, movie list, populated menu lists, and cached map data exist.</td>
   <td>UI population handlers and scenario launch effects are incomplete.</td>
   <td>Read the authored menu layouts and implement <code>ZT_POPULATE_*</code>, <code>ZT_CACHE_MAPDATA</code>, and selection messages.</td>
 </tr>
 <tr>
   <td>File/load/save modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>File mode state, file rows, load/save requests, screenshots, and alerts exist.</td>
   <td>Directory enumeration, delete/preview, screenshot capture, and <code>.z2s</code> read/write are open.</td>
   <td>Recover <code>ZTFileMode</code> handlers and the save package format.</td>
@@ -266,28 +269,28 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Options and graphics mode</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Graphics/audio/Vince snapshot, sliders, selected settings, float messages, and acceptance records exist.</td>
   <td>Confirmation, safe restore, slider binding, and persistence are incomplete.</td>
   <td>Recover <code>ZTGfxOptionsMode</code> value handlers and profile writes.</td>
 </tr>
 <tr>
   <td>General mode manager</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td><code>ZTModeMgr</code>, mode records, hotkeys, event blocks, shell mode catalogue, stack, and requests exist.</td>
   <td>Per-mode input/tick/message handlers are mostly pending.</td>
   <td>Choose one mode row below and recover its vtable/message body.</td>
 </tr>
 <tr>
   <td>Selection, delete, overview, guest-view modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>State records cover selection cursors, delete groups, overview filters/icons, and guest-view camera binding.</td>
   <td>Entity queries, confirmations, map projection, highlighting, and commands are incomplete.</td>
   <td>Implement one mode against live ECS entity state.</td>
 </tr>
 <tr>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Mode state covers camera, training result feedback, gesture traces, fossil sonar, cloning score, and tranquilize target/range.</td>
   <td>Reward buckets, pointer math, target selection, and completion effects are open.</td>
   <td>Recover the relevant <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
@@ -314,22 +317,22 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
   <td>Recover component readers by binder family, starting with one animal and one scenery/building type.</td>
 </tr>
 <tr>
-  <td>Live Bevy entity runtime</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
-  <td>World runtime resources, entity command records, transforms, events, and Bevy world projection scaffolding exist.</td>
-  <td>Spawn/despawn, component storage, mutation order, and ECS ownership need execution.</td>
+  <td>Loaded-world ECS bootstrap</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
+  <td>Loaded-world records can queue Bevy projection/bootstrap resources and spawn source-derived entity components.</td>
+  <td>Original spawn/despawn, component mutation order, and full ECS ownership are incomplete.</td>
   <td>Convert one <code>BFGEntity</code> instance path into Bevy components and systems.</td>
 </tr>
 <tr>
   <td>Entity selection and info panels</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Selection requests, info panels, action controls, needs/training/inventory/family/donation rows exist.</td>
   <td>Panels lack live data bindings and action side effects.</td>
   <td>Wire selected entity ECS components to panel value handlers.</td>
 </tr>
 <tr>
   <td>Animal type definitions</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Species, family, biome, endangerment, lifecycle, variant, habitat, adoption, release, crate, disease, conservation, and training records exist.</td>
   <td>Source hydration per species and live need/status updates are incomplete.</td>
   <td>Hydrate one species family from binder plus AI/entity data, then generalize.</td>
@@ -357,14 +360,14 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Guest viewing and donations</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>View memory, donation candidates, score factors, donation task state, and contribution history exist.</td>
   <td>Eligibility, scoring, pruning, and task dispatch are <code>todo!()</code> surfaces.</td>
   <td>Recover <code>ZTBehViewAnimals</code>, <code>ZTBehViewEvent</code>, and <code>ZTAIGuestMgr</code> donation callsites.</td>
 </tr>
 <tr>
   <td>Terrain heightfield, biome, water</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Terrain grid, biome definitions, mesh patches, water edits, brush state, and map config records exist.</td>
   <td>Grid units, file layouts, water/biome edit algorithms, and charges are open.</td>
   <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit command readers.</td>
@@ -385,28 +388,28 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Paths and elevated supports</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Path/elevated path records, placement commands, validation, support state, and curb mode exist.</td>
   <td>Segment joins, height rules, support topology, traversability updates, and undo need recovery.</td>
   <td>Recover path placement mode and <code>BFGElevatedSupportTracker</code> behavior.</td>
 </tr>
 <tr>
   <td>Fences, gates, and portals</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Fence types, segments, gate undo, portal segments, topology events, and mode state exist.</td>
   <td>Placement geometry, rotation, health, sale/delete, and traversal effects are pending.</td>
   <td>Implement <code>ZTFenceMode</code> command decisions against placement grid.</td>
 </tr>
 <tr>
   <td>Tanks and aquatic construction</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Tank manager, topology, walls, gates, portals, supports, links, water volume, cleanliness, and commands exist.</td>
   <td>Height speeds, tank topology edits, animal containment, show-tank edges, and validation feedback are open.</td>
   <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, and tank-gate behavior.</td>
 </tr>
 <tr>
   <td>Transport rides</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Circuits, tracks, stations, vehicles, crossings, query set, tour recorder, and command records exist.</td>
   <td>Route generation, boarding, capacity, vehicle motion, circuit direction, and station limits are open.</td>
   <td>Recover <code>ZTTransportationMgr</code> and <code>ZTBehVehicle*</code>/transport route behaviors.</td>
@@ -435,8 +438,8 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 <tr>
   <td>AI task template source</td>
   <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Task template keys, create/eval/completion/failure records, selectors, qualifiers, and token records exist.</td>
-  <td>Full authored <code>.tsk</code>/<code>.beh</code> hydration and sibling component attachment are incomplete.</td>
+  <td>Startup reads <code>.tsk</code>/<code>.beh</code> documents into <code>BFAITaskCatalog</code>; template parsing and basic fixed-score selection exist.</td>
+  <td>Full authored behavior scheduling, sibling component attachment, scoring, and side effects are incomplete.</td>
   <td>Hydrate one task document end to end and instantiate <code>BFAITaskRoot</code>.</td>
 </tr>
 <tr>
@@ -448,7 +451,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Behavior verbs</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td><code>BFBehavior</code> base and many <code>ZTBeh*</code> records exist; many methods name exact <code>todo!()</code> contracts.</td>
   <td>Movement, docking, animation, events, scripts, use-gate, ride, tour, view, cure, dig, morph, and splash effects are pending.</td>
   <td>Pick one verb family and implement XML read plus runtime side effect.</td>
@@ -462,28 +465,28 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Staff jobs and assignment UI</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Staff manager, request controller, job queue, role handles, candidates, assignments, time categories, trainer, and cleaning records exist.</td>
   <td>Request evaluation, job claiming/stealing, assignment targeting, water cleaning, and trainer behavior are pending.</td>
   <td>Implement <code>ZT_STAFF_REQUEST</code>, assignment selection, and one staff role lifecycle.</td>
 </tr>
 <tr>
   <td>Shows and trick training</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Show manager, scheduler, states, songs, score/size bands, effects, tricks, targets, mixer, timer, and UI commands exist.</td>
   <td>Timeslot choice, trick difficulty/popularity, animal eligibility, guest feedback, and show effects are open.</td>
   <td>Recover show scheduler and one trick execution path.</td>
 </tr>
 <tr>
   <td>Tours and guest viewing</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Tour taker data, recorder waypoints, viewable object managers, station view sets, and viewing behaviors exist.</td>
   <td>Tour star rating, route feedback, and view scoring are open.</td>
   <td>Recover <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, and tour star rating queries.</td>
 </tr>
 <tr>
   <td>Gesture recognition and minigames</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Gesture definitions, traces, recognizer, spline editor, projection frame, event textures, and score bands exist.</td>
   <td>Projection math, trace scoring, texture events, reward dispatch, and editor commands are open.</td>
   <td>Recover <code>ZTGestureMgr</code> and gesture trace component callsites.</td>
@@ -504,21 +507,21 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 <tbody>
 <tr>
   <td>Cash and admission price</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Economy runtime, cash grant routing, transaction polarity, and admission price/index validation are recovered.</td>
-  <td>General transaction commit/history and several UI/status forwarding effects remain.</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
+  <td>Startup hydrates economy/status configs; domain methods apply cash deltas, transaction polarity, and admission price/index values when called.</td>
+  <td>Live UI/simulation transaction routing, commit history, and several status forwarding effects remain.</td>
   <td>Implement <code>ZTTransaction</code> aggregation and <code>BFGTransactionTracker</code> commit.</td>
 </tr>
 <tr>
   <td>Economy components and cost factors</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Economy components, context configs, transaction configs, cost factors, frequency/period/cost types, and user-count transactions exist.</td>
   <td>Authored component execution on live entities is pending.</td>
   <td>Hydrate economy config into ECS/domain components and execute one transaction category.</td>
 </tr>
 <tr>
   <td>Donation boxes and guest spending</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Donation totals, buckets, boxes, contribution history, guest donation state, and info-panel rows exist.</td>
   <td>Weighting, target choice, box routing, and spend timing are open.</td>
   <td>Recover <code>edDonate</code>, donation candidate scoring, and box contribution handlers.</td>
@@ -539,7 +542,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Disease and cure mode</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Disease manager, disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, and clue records exist.</td>
   <td>Spread cadence, force application, sampling, cure scoring, rewards, and vet/staff interactions are open.</td>
   <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code>, and <code>ZTCureDiseaseMode</code>.</td>
@@ -560,7 +563,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Zoopedia and catalog lists</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Zoopedia TOC entries, pages, navigation, type lists, filters, buy info panel, and catalog entries exist.</td>
   <td>Page loading, list population, filters, loc/text rendering, and navigation handlers are incomplete.</td>
   <td>Implement one source-driven catalog panel from layout through value handlers.</td>
@@ -581,14 +584,14 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 <tbody>
 <tr>
   <td>Scenario rule tree</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Rules, groups, tests, actions, objectives, challenge state, globals/user vars, and typed BFS commands exist.</td>
   <td>Evaluation order, trigger cadence, campaign graph, and objective progression are open.</td>
   <td>Recover <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
 </tr>
 <tr>
   <td>Script context and BFS API</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Script context manager, Lua context records, function bindings, script action records, effects, cache, args, and responses exist.</td>
   <td>Argument marshalling, return semantics, error handling, and every <code>BFS_*</code> side effect need implementation.</td>
   <td>Map <code>BFS_*</code> commands by family, then bind them to owning managers.</td>
@@ -623,14 +626,14 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Photo albums and camera</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Photo manager, albums, capture requests/results, photo info, subject bounds, analysis context, and UI tokens exist.</td>
   <td>Capture, album file behavior, move/delete/enlarge/shrink, and HTML export are pending.</td>
   <td>Implement <code>ZTPhotoManager</code> against Bevy camera/render output.</td>
 </tr>
 <tr>
   <td>Photo challenges</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Challenge sets, score thresholds, parse trees, getters, abstractions, and results exist.</td>
   <td>Subject detection, scoring, challenge stars, and submission side effects are open.</td>
   <td>Recover <code>ZTPA*</code> getter bindings and photo analysis scoring.</td>
@@ -665,7 +668,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Scene graph and actor components</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Scene graph, actor, camera, decal, LOD, resource cache, model manager, texture manager, and particle manager records exist.</td>
   <td>Live graph update, culling, bounds, attachment, and visibility rules are open.</td>
   <td>Implement one visible entity projection from <code>BFSceneGraphComponent</code> to Bevy.</td>
@@ -686,7 +689,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Camera</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Camera command reader, active commands, command events, rail/follow cameras, frustum, output states, and Bevy window camera source exist.</td>
   <td>Curves, timing, first-person/overhead/guest-view coupling, and projection math are open.</td>
   <td>Implement <code>ZT_CAMERA_*</code> commands against Bevy camera state.</td>
@@ -700,7 +703,7 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
 </tr>
 <tr>
   <td>Audio playback and ambients</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">modeled</span></td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
   <td>Sound manager, stages, categories, tags, ambient docs, water sound stages, requests, and commands exist.</td>
   <td>Real playback, 3D attachment, category mix, ducking, random/stage selection, and cross-fade timing are open.</td>
   <td>Implement <code>BFSND_*</code> through Bevy/audio backend and recover sound-tag selection.</td>
@@ -746,6 +749,13 @@ handler group, binary contract, or runtime path to inspect or implement.</p>
   <td>292 function entries remain opaque, mostly small leaf thunks plus tank/map geometry helpers and dispatchers.</td>
   <td>Their relevance is unknown until a product row points at them.</td>
   <td>Inspect only when a feature slice reaches one of these addresses.</td>
+</tr>
+<tr>
+  <td>Section-local other unknowns</td>
+  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#9d0006;color:#fbf1c7;font-weight:700">map</span></td>
+  <td>Rows above cover the currently named work packages from the spec, Rust modules, and binary perimeter.</td>
+  <td>Any registered class, function band, source file family, or manager outside these rows lacks a project owner.</td>
+  <td>Add a row before implementing that evidence.</td>
 </tr>
 <tr>
   <td>Tracker expansion rule</td>
