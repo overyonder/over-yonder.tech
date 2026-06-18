@@ -117,6 +117,13 @@ html {
   background-color: #000;
 }
 
+.card-image.openzt2-image {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #555;
+}
+
 .card-content {
   padding: 20px 24px;
   position: relative;
@@ -284,28 +291,54 @@ footer p {
 /* ==================== Tab viewport & slider ==================== */
 
 .tab-viewport {
+  position: relative;
   overflow: hidden;
 }
 
 .tab-slider {
-  display: flex;
-  width: 200%;
-  transition: transform 0.5s ease;
-}
-
-.tab-slider.show-articles {
-  transform: translateX(-50%);
+  position: relative;
 }
 
 .tab-panel {
-  width: 50%;
+  width: 100%;
   min-height: 200px;
-  flex-shrink: 0;
+  transition: transform 0.5s ease, opacity 0.35s ease;
   overflow: hidden;
 }
 
+#projects-panel {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
 #articles-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6%);
+}
+
+.tab-slider.show-articles #projects-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-6%);
+}
+
+.tab-slider.show-articles #articles-panel {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
 }
 
 /* ==================== Accordion ==================== */

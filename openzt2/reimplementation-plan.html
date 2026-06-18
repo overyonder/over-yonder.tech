@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoo Tycoon 2 Reconstruction - Reimplementation Plan</title>
+<style>
+/* shared-site-nav */.tabs{box-sizing:border-box;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px!important;transform:none!important;font:12px/1.05 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;min-height:24px;padding:2px 6px!important;text-align:center;white-space:nowrap;color:var(--fg)!important;text-decoration:none!important;border:1px solid var(--line)!important;border-radius:4px;background:var(--panel)!important;font:inherit!important;cursor:pointer}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}.nav-icon{display:none}.nav-label{display:inline}@media(max-width:720px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;width:100%;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif!important}.tabs a,.tabs button.nav-tab{min-height:48px;padding:0!important;white-space:normal;border-radius:4px!important}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.tabs .theme-toggle{width:48px;height:48px;font-size:22px;justify-self:stretch}main{padding-bottom:74px}}/* end-shared-site-nav */
+/* shared-gruvbox-theme */
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--ok:#79740e;--warn:#b57614;--bad:#9d0006;--unk:#8f3f71;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--code-kw:#9d0006;--code-ty:#076678;--code-st:#79740e;--code-cm:#7c6f64;--code-at:#8f3f71}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--ok:#98971a;--warn:#d79921;--bad:#cc241d;--unk:#b16286;--control:#3c3836;--control-border:#665c54;--active:#504945;--code-kw:#cc241d;--code-ty:#458588;--code-st:#98971a;--code-cm:#928374;--code-at:#b16286}
+html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif}a{color:var(--link)}button,input,select,textarea{background:var(--control)!important;color:var(--fg)!important;border-color:var(--control-border)!important}.tabs a,.tabs button.nav-tab{color:var(--fg)!important;background:var(--panel)!important;border-color:var(--control-border)!important}.tabs a.active{background:var(--active)!important}.theme-toggle{position:static;z-index:20;width:24px;height:24px;display:flex;align-items:center;justify-content:center;justify-self:center;align-self:center;background:var(--control)!important;color:var(--fg)!important;border:1px solid var(--control-border)!important;border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+/* end-shared-gruvbox-theme */
+main{max-width:1120px;margin:0 auto;padding:14px 20px 60px}
+h1{font-size:26px;line-height:1.15;margin:8px 0 4px}h2{font-size:20px;margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:3px}h3{font-size:16px;margin:20px 0 6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:var(--soft);padding:.05em .35em;border-radius:3px}
+pre{background:var(--soft);padding:10px 12px;border:1px solid var(--line);border-radius:4px;overflow:auto}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.spec-diagram{display:block;width:100%;height:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg)}
+.mermaid{margin:14px 0 22px;text-align:center;background:transparent}.mermaid svg{max-width:100%;height:auto}
+.spec-diagram text{font-family:system-ui,sans-serif}
+.doc-source{max-width:980px;margin:0 auto 4px;padding:0 20px;color:var(--muted);font-size:12px}
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:50}
+.modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
+.modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
+.modal-box iframe{flex:1;border:0;width:100%}
+</style>
+<script>
+(()=>{
+ const key="zt2-theme";
+ const storedTheme=()=>{try{return localStorage.getItem(key)}catch(_){return null}};
+ const saveTheme=theme=>{try{localStorage.setItem(key,theme)}catch(_){ }};
+ const root=document.documentElement;
+ const syncFrames=theme=>{for(const frame of document.querySelectorAll("iframe.legal-frame")){try{if(frame.contentDocument)frame.contentDocument.documentElement.dataset.theme=theme}catch(_){ }}};
+ const apply=(theme,persist=false)=>{root.dataset.theme=theme;if(persist)saveTheme(theme);const b=document.querySelector(".theme-toggle");if(b){b.textContent=theme==="dark"?"☀":"☾";b.title=theme==="dark"?"Switch to light mode":"Switch to dark mode";b.setAttribute("aria-label",b.title)};syncFrames(theme)};
+ const initial=storedTheme()==="light"?"light":"dark";
+ apply(initial);
+ window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);const nav=document.querySelector(".tabs");if(nav)nav.append(b);for(const frame of document.querySelectorAll("iframe.legal-frame"))frame.addEventListener("load",()=>syncFrames(root.dataset.theme||initial));apply(root.dataset.theme||initial)});
+})();
+</script>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="zt-registrar-ledger.html"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Type Registry</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart " href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart active" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<div class="doc-source">Rendered from <code>reconstruction/REIMPLEMENTATION-PLAN.md</code></div>
+<main>
+<h1>OpenZT2 Reimplementation Plan</h1>
+<p><code>ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code> describes the original game domain:
+the source-owned files, native managers, object types, message contracts, state
+transitions, and behaviours the reconstruction must preserve. This document
+describes the engineering shape of the Rust runtime: how those contracts should
+be stored, loaded, indexed, simulated, and presented efficiently in a modern
+Bevy engine.</p>
+<p>The specification answers &quot;what did Zoo Tycoon 2 mean and require?&quot; This file
+answers &quot;how do we execute those same meanings without building a slow facade
+over a 2008 single-threaded C++ heap model?&quot;</p>
+<p>The reconstruction must remain backwards-compatible with the original source
+formats: Z2F archives, XML/MAXML/BFXML documents, localization files,
+materials, models, textures, audio, saves, and packages. It does not need to
+preserve the original C++ memory layout, allocator behaviour, STL container
+choices, pointer graph, vtable mechanics, or duplicate transient trees unless
+one of those mechanics is part of an observable or persisted contract.</p>
+<h2>Workspace Crate Boundaries</h2>
+<p><code>content</code> owns source-file boundaries: shipped Z2F archive addressing, asset
+paths, XML/MAXML-like data documents, localization documents, parser support,
+and source references needed to recover where a value came from. Content code
+can parse, decode, normalize, and validate source documents; it does not own
+live game state or host projection state.</p>
+<p><code>domain</code> owns host-independent source-derived game concepts and original
+contracts: UI/document semantics, manager configuration, entity definitions,
+catalog values, rules, state transitions, command/event meaning, and
+invariants. Domain code receives loaded source documents and original-game
+messages, then returns values/results or mutates original-game state. It does
+not own Bevy resources, ECS entities, renderer buffers, mounted archives, asset
+caches, task pools, audio playback, or generic host registries.</p>
+<p>Domain may define original-game semantic asset value types, tokens, validation
+rules, and pure transforms over loaded source data. It must not own the live
+loaded asset set: generic loaded-document collections, mounted archive mirrors,
+asset path indexes, Bevy handles, loader queues, or duplicate caches of Bevy
+asset values belong outside <code>domain</code>. Preserving an original <code>ZT*</code>, <code>BF*</code>, or
+<code>BFG*</code> symbol means naming the source/domain value type and its semantics, not
+making <code>domain</code> the runtime storage owner.</p>
+<p><code>bevy</code> owns the executable runtime adapter: windowing, app lifecycle, task
+pools, mounted archive state, Bevy asset sources, asset extraction, resources,
+ECS entities/components, Bevy messages, input, rendering, audio playback, and
+projection of source/domain values into the live Bevy world.</p>
+<h2>Runtime Shape</h2>
+<p>The running game should use Bevy as the runtime world, scheduler, asset system,
+and presentation store. <code>domain</code> defines original semantic types, invariants,
+source-derived values, and mutation rules; <code>bevy</code> stores live state as Bevy resources/components and
+connects them to input, rendering, audio, assets, and schedules.</p>
+<pre><code class="language-text">content
+  Z2F/archive/path lookup
+  source bytes
+  BFXML/XML/MAXML parsed document assets
+
+domain
+  original semantic types and mutation rules:
+    UI nodes/widgets/messages
+    app lifecycle states
+    managers
+    modes
+    entity/type records
+    AI tasks
+    terrain/world/camera concepts
+
+bevy
+  Bevy plugins, schedules, systems
+  Bevy Assets for decoded source artifacts
+  Resources/components containing domain types
+  render/UI/audio/input adapters
+</code></pre>
+<p><code>StartupDomainResources</code> is a Bevy-adapter boot publication bundle, not the
+target runtime store and not a domain-layer owner. Startup code may assemble
+source-derived values there, then immediately publish the result into Bevy
+resources/components without a second transfer bucket. The player-facing runtime
+should operate on the published resources directly.</p>
+<p>Original singleton-like managers and runtime domains should live in coherent
+Bevy resources that match real runtime boundaries, not in one Bevy resource per
+old singleton unless that singleton is itself the recovered boundary:</p>
+<pre><code class="language-text">ZTAppRuntime
+ZTModeMgr
+UiRuntimeContext
+UiLayoutRegistry
+BFGWorldRuntime
+EconomyRuntime
+BFLocaleMgr
+EntityTypeRegistry
+RendererRuntime
+RuntimeSupport
+</code></pre>
+<p>Many-instance runtime objects should become Bevy entities/components carrying
+domain-defined state:</p>
+<pre><code class="language-text">World entity:
+  ZTEntityInstance
+  EntityTypeRef
+  BFPhysObj-derived transform/state
+  AI runtime state
+  mutable needs/disease/staff/etc. components as recovered
+  render/audio/UI marker components where needed
+</code></pre>
+<p>The domain model remains intelligible outside Bevy because the types and
+handlers live in <code>domain</code>. The running storage is Bevy because Bevy is the
+engine's ECS, scheduler, change tracker, and asset-handle store.</p>
+<h2>Bevy Runtime Primitives</h2>
+<p>Bevy is not just the rendering adapter. In the running executable it should be
+the primary runtime substrate: storage, scheduling, change detection, asset
+handles, presentation, and host I/O. The original game contracts still live in
+domain types and handlers, but those types should be stored and executed through
+Bevy primitives where that improves locality, parallelism, and incremental
+updates.</p>
+<h3>App, Plugins, And World</h3>
+<p><code>App</code> is the boot container. It wires plugins, resources, schedules, assets,
+states, diagnostics, windows, and render pipelines. OpenZT2 should use plugins
+as real subsystem boundaries:</p>
+<pre><code class="language-text">SourceArchivePlugin
+BfxmlPlugin
+LocalizationPlugin
+UiRuntimePlugin
+ShellModePlugin
+WorldRuntimePlugin
+TerrainPlugin
+RendererBridgePlugin
+AudioPlugin
+DiagnosticsPlugin
+</code></pre>
+<p>Each plugin should install the resources, components, systems, asset loaders,
+events/messages, and schedules for one original responsibility. A plugin is not
+where domain meaning is invented; it is where domain meaning is registered into
+the runtime.</p>
+<p><code>World</code> is Bevy's entity/resource storage. In the game executable, the Bevy
+world should hold the live runtime state directly. A separate domain graph that
+is copied into the world every frame is a performance smell. Headless tests may
+still create domain structures without Bevy, but the player-facing runtime
+should treat <code>World</code> as the canonical mutable store for resources/components.</p>
+<h3>Entities, Components, Resources, And Bundles</h3>
+<p>Entities are ids for runtime instances. Animals, guests, staff, vehicles, placed
+objects, UI widgets, cameras, terrain chunks, effect emitters, and audio emitters
+can all be entities when they have independent lifetime or per-instance state.</p>
+<p>Components are the runtime fields attached to those ids. Original concepts such
+as entity type references, component properties, AI task state, disease state,
+physics/object state, selection state, renderable model refs, and UI widget
+runtime state should be normal Bevy components when they are per-instance.</p>
+<p>Resources are singleton or registry state. Original managers and global tables
+map naturally to resources: mode manager, world manager, status/economy manager,
+locale manager, archive repository, document store, UI layout registry, material
+registry, input focus state, and render configuration.</p>
+<p>Bundles are spawn/update ergonomics, not semantic owners. Use bundles to create
+coherent Bevy entities quickly:</p>
+<pre><code class="language-text">UiWidgetBundle
+WorldEntityBundle
+TerrainChunkBundle
+CameraRigBundle
+AudioEmitterBundle
+</code></pre>
+<p>The bundle should contain domain components and Bevy presentation components; it
+should not hide a second copy of the source record.</p>
+<h3>Systems, Queries, Commands, And Params</h3>
+<p>Systems are the runtime functions. Domain handlers should be called from systems
+that gather input from Bevy resources/components and write results back into
+Bevy storage.</p>
+<p>Queries are how systems access entity sets. They are the right way to avoid
+linear scans of a giant session object:</p>
+<pre><code class="language-text">Query&lt;(&amp;EntityTypeRef, &amp;mut AiRuntimeState, &amp;Transform), With&lt;Animal&gt;&gt;
+Query&lt;(&amp;UiSourceNode, &amp;mut Visibility), Changed&lt;UiWidgetRuntimeState&gt;&gt;
+Query&lt;(&amp;TerrainChunkId, &amp;mut MeshHandle), With&lt;DirtyTerrainChunk&gt;&gt;
+</code></pre>
+<p>Commands are deferred structural mutations: spawning/despawning entities,
+adding/removing components, and inserting/removing resources. Use them for
+lifetime changes, not ordinary field updates that can be done through mutable
+queries/resources.</p>
+<p>System params, including <code>Res</code>, <code>ResMut</code>, <code>Query</code>, <code>EventReader</code>,
+<code>EventWriter</code>, <code>MessageReader</code>, <code>MessageWriter</code>, <code>Local</code>, <code>Commands</code>, and
+<code>ParamSet</code>, are the way to make dependencies explicit. <code>ParamSet</code> is useful
+where an original handler needs mutually exclusive query shapes that Rust's
+borrow checker cannot otherwise express in one system.</p>
+<h3>Schedules, System Sets, Run Conditions, And States</h3>
+<p>Schedules should model execution phases, not product meaning. Product meaning
+belongs in domain state. Useful schedules/sets are:</p>
+<pre><code class="language-text">StartupSourceMount
+StartupDocumentHydration
+InputCollection
+DomainMessageDispatch
+Simulation
+PresentationSync
+RenderPreparation
+Diagnostics
+</code></pre>
+<p>System sets give stable ordering and parallelism boundaries inside those phases.
+Use them to separate source loading, message dispatch, simulation mutation,
+dirty projection, and diagnostics. Systems within a set should run in parallel
+when their data access permits it.</p>
+<p>Run conditions are cheap gates. They should prevent inactive systems from
+touching irrelevant data:</p>
+<pre><code class="language-text">run_if(in_shell_ui)
+run_if(in_loaded_world)
+run_if(resource_changed::&lt;UiRuntimeContext&gt;)
+run_if(any_dirty_terrain_chunks)
+</code></pre>
+<p>Bevy states can control schedule activation such as <code>Loading</code>, <code>ShellUi</code>, and
+<code>InGame3d</code>. They must remain host scheduling state. Original app/mode state
+should remain explicit domain resources such as <code>ZTAppRuntime</code>, <code>ZTModeMgr</code>, or
+the recovered manager type.</p>
+<h3>Events, Messages, Observers, And Change Detection</h3>
+<p>Use Bevy events/messages for short-lived runtime facts:</p>
+<pre><code class="language-text">OriginalUiProjectionCommandQueued
+OriginalUiMessageQueued
+TerrainRegionEdited
+BFAudioCommandQueued
+</code></pre>
+<p>Original UI commands and game messages should be represented in domain terms,
+then transported through Bevy messages/events when the runtime needs decoupled
+delivery. Do not convert an original domain message into a Bevy-only callback
+that loses the original sender, target, payload, or ordering.</p>
+<p>Observers are appropriate for local reactions to component or entity changes
+when they express host mechanics: attach a render child when a renderable
+component appears, start an animation when a UI visual state changes, or emit a
+diagnostic marker when a terrain chunk becomes dirty. They should not replace
+the original native message handlers.</p>
+<p>Bevy change detection is central to performance. UI, terrain, world entities,
+materials, animation, audio, and cameras should update presentation only from
+<code>Changed&lt;T&gt;</code>, dirty sets, generation counters, or explicit messages. Avoid
+full-tree and full-world rebuilds.</p>
+<h3>Assets, Handles, Reflection, Scenes, And Serialization</h3>
+<p>Bevy assets should store decoded immutable artifacts: parsed BFXML documents,
+textures, sounds, models, materials, shader modules, scene fragments, and
+possibly compiled UI templates. Domain/runtime records should store ids or
+handles, not copied payloads.</p>
+<p>Handles are cheap references. They are the right representation for repeated
+texture/model/sound/material references across UI, entities, terrain, and
+effects.</p>
+<p>Reflection and world serialization are developer/runtime tools. Use reflection
+for inspectors, diagnostics, and save/debug tooling where it helps, but do not
+let reflection schemas replace the original source formats or type registries.</p>
+<p>Scenes are useful for Bevy-native debug/test fixtures and imported GLTF content.
+Original Zoo Tycoon 2 layouts, entities, maps, and assets should still hydrate
+from their recovered source formats rather than being converted into Bevy scenes
+as the source of truth.</p>
+<h3>Tasks And Parallelism</h3>
+<p>The <code>multi_threaded</code>, <code>async_executor</code>, <code>async-io</code>, and task-pool surfaces are
+how expensive loading and hydration work should stop blocking the frame. Archive
+mounting, document parse, model/material decode, terrain chunk mesh generation,
+and thumbnail/icon preparation can run off the main thread, then report compact
+results back through messages or asset handles.</p>
+<p>Parallel ECS systems should own normal frame work: AI ticks, animation state,
+dirty UI updates, terrain projection, audio command preparation, and visibility
+or culling data. The design target is not to reproduce the original
+single-threaded update loop; it is to preserve the same results while using
+Bevy's dependency graph to run independent work concurrently.</p>
+<h2>Bevy 0.19 Capability Map</h2>
+<p>This section treats the full Bevy 0.19 feature surface as the planning map,
+not just the subset currently enabled in <code>bevy</code>. Each feature family below
+should be considered when it improves either performance or fidelity to the
+original game. Feature flags are named explicitly so no major Bevy surface is
+lost in a vague &quot;renderer&quot; bucket.</p>
+<h3>Core Runtime And Platform</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">default
+default_app
+std
+default_no_std
+default_platform
+common_api
+critical-section
+libm
+ff
+multi_threaded
+async_executor
+async-io
+bevy_app
+bevy_ecs
+bevy_tasks
+bevy_time
+bevy_state
+bevy_transform
+bevy_window
+bevy_winit
+wayland
+x11
+web
+webgl2
+webgpu
+android-game-activity
+android-native-activity
+bevy_android
+raw_vulkan_init
+dynamic_linking
+hotpatching
+</code></pre>
+<p>Use this surface for the engine frame loop, window/backend integration, task
+pools, app/schedule registration, time, transform propagation, and platform
+ports. Desktop OpenZT2 should prefer native Wayland/X11/wgpu paths. Web and
+Android are portability targets, not core constraints for the first faithful
+desktop reconstruction.</p>
+<h3>ECS, Scheduling, Reflection, Debug Storage</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_ecs
+bevy_ecs_macros
+bevy_state
+bevy_state_macros
+schedule_data
+bevy_reflect
+bevy_reflect_derive
+reflect_auto_register
+reflect_auto_register_static
+reflect_documentation
+reflect_functions
+bevy_world_serialization
+serialize
+track_location
+type_label_buffers
+debug
+debug_glam_assert
+glam_assert
+detailed_trace
+trace
+trace_chrome
+trace_tracy
+trace_tracy_memory
+bevy_debug_stepping
+</code></pre>
+<p>Use ECS/scheduling features for the canonical runtime layout. Use reflection and
+serialization for debugging, inspectors, automated validation, and save-tool
+helpers. Use tracing/debug stepping when investigating frame stalls, bad
+ordering, or runaway systems. Do not use reflection or serialized worlds as a
+replacement for original source formats.</p>
+<h3>Assets, File Watching, And External Formats</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_asset
+bevy_asset_macros
+asset_processor
+embedded_watcher
+file_watcher
+bevy_asset_loader
+standard_dynamic_assets
+progress_tracking
+web_asset_cache
+http
+https
+compressed_image_saver
+zlib
+zstd_c
+zstd_rust
+</code></pre>
+<p>The target is a Z2F-backed asset path: mounted archives feed Bevy asset readers
+and loaders lazily. File watchers and the asset processor are useful for
+development rebuilds and generated/debug assets. Web cache and HTTP(S) are
+secondary surfaces. Compression features matter for archived payloads and
+future save/package handling.</p>
+<h3>Images And Texture Containers</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_image
+png
+jpeg
+tga
+dds
+ktx2
+basis-universal
+bmp
+gif
+hdr
+exr
+ico
+pnm
+qoi
+tiff
+webp
+zlib
+zstd_c
+zstd_rust
+</code></pre>
+<p>Use Bevy image assets and GPU texture upload for UI skins, icons, terrain
+textures, decals, sky/lighting resources, particles, and model materials.
+Original texture references should hydrate to asset ids/handles; image bytes
+should not be copied into domain records. DDS/KTX2/Basis are important for GPU
+friendly compressed paths if original or converted assets justify them.</p>
+<h3>Audio</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">audio
+audio-all-formats
+bevy_audio
+wav
+vorbis
+flac
+mp3
+mp4
+aac
+symphonia-wav
+symphonia-vorbis
+symphonia-flac
+</code></pre>
+<p>Use Bevy audio for playback, handles, sinks, volume, looping, and eventually
+spatial attachment to world entities. Domain managers should produce original
+audio commands; Bevy owns the concrete sink/player state. WAV is currently
+closest to the shipped audio path, while broader formats remain available for
+tooling or later asset compatibility.</p>
+<h3>Input, Focus, Picking, And Interaction</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_input
+keyboard
+mouse
+touch
+gestures
+gamepad
+bevy_gilrs
+bevy_input_focus
+bevy_picking
+picking
+mesh_picking
+sprite_picking
+ui_picking
+bevy_clipboard
+system_clipboard
+clipboard_image
+custom_cursor
+</code></pre>
+<p>Input systems should translate host events into original UI/game commands.
+Picking should replace ad hoc screen-coordinate scans for UI and world
+selection while preserving the original target/message semantics. Mesh picking
+is central for terrain/object placement, entity selection, and camera/world
+queries. Input focus is important for UI modal behaviour. Clipboard/gamepad are
+optional surfaces until an original behaviour requires them or they improve
+debug tooling.</p>
+<h3>UI, Text, Fonts, And Accessibility</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">ui
+ui_api
+ui_bevy_render
+bevy_ui
+bevy_ui_render
+bevy_ui_widgets
+bevy_ui_debug
+bevy_feathers
+ghost_nodes
+bevy_text
+default_font
+system_font_discovery
+bevy_a11y
+accesskit_unix
+</code></pre>
+<p>Use Bevy UI as the presentation and interaction backend for original UI
+documents. The authored UI layout remains the source contract. Bevy entities
+carry source node ids, visual state, text/image handles, layout components,
+focus/picking components, and dirty markers. Text/font handling must preserve
+the original font selection, localization, sizing, alignment, and color
+semantics; default/system fonts are fallback or development aids, not the final
+look when original fonts are available.</p>
+<h3>2D Sprites, Atlases, Tiles, And UI Imagery</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">2d
+2d_api
+2d_bevy_render
+bevy_sprite
+bevy_sprite_render
+sprite_picking
+bevy_color
+</code></pre>
+<p>Use 2D rendering for UI art, cursors, overlays, icons, previews, debug maps, and
+possibly tile-like minimap or editor layers. Sprite picking helps pointer
+dispatch. Atlas-style batching should be considered for UI skins and icon sets
+so the menu/frontend does not become thousands of independent texture binds.</p>
+<h3>3D Rendering, Meshes, Materials, And Models</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">3d
+3d_api
+3d_bevy_render
+bevy_render
+bevy_core_pipeline
+bevy_mesh
+bevy_material
+bevy_material_macros
+bevy_shader
+bevy_pbr
+bevy_mikktspace
+bevy_gltf
+gltf_animation
+scene
+bevy_scene
+bevy_scene_macros
+bevy_world_serialization
+</code></pre>
+<p>Use Bevy mesh/material/render assets for terrain, water, paths, fences, animals,
+guests, buildings, vegetation, particles, and placement previews. Original BFB,
+NIF, BFMat, texture, and animation formats should hydrate through source/domain
+loaders into Bevy mesh/material/animation assets. GLTF scenes are useful for
+developer fixtures or converted inspection assets, but not as the canonical
+replacement for original files.</p>
+<h3>Terrain Editing And Mesh Mutation</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_mesh
+bevy_render
+bevy_pbr
+mesh_picking
+bevy_gizmos
+bevy_gizmos_render
+</code></pre>
+<p>Terrain raise/lower/paint/flatten/path/fence placement should operate on
+domain terrain chunks and dirty regions, then update Bevy mesh assets for only
+the affected chunks. Mesh picking supplies brush hits and placement queries.
+Gizmos should visualize brush radius, selected cells, path/fence segments,
+surface normals, and dirty chunk boundaries during development.</p>
+<h3>Lighting, Shadows, Fog, Sky, And PBR</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_light
+bevy_pbr
+area_light_luts
+dfg_lut
+bluenoise_texture
+tonemapping_luts
+pbr_anisotropy_texture
+pbr_clustered_decals
+pbr_light_textures
+pbr_multi_layer_material_textures
+pbr_specular_textures
+pbr_transmission_textures
+experimental_pbr_pcss
+bevy_solari
+</code></pre>
+<p>Use these surfaces to approximate or surpass the original renderer while
+preserving visual intent: sun/ambient setup, time-of-day colour, shadows,
+terrain/object materials, decals, water/material effects, skybox/atmosphere
+presentation, and fog. The original renderer's material and lighting contracts
+must drive the inputs; Bevy can supply a modern implementation.</p>
+<h3>Post-Processing, Anti-Alias, Tone Mapping, Bloom, Blur, Color</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_post_process
+bevy_anti_alias
+smaa_luts
+tonemapping_luts
+dlss
+force_disable_dlss
+hdr
+bevy_color
+</code></pre>
+<p>Use post-processing to match the original game's visible output: gamma/color
+space, bloom-like effects, fog/color grading, anti-aliasing, and any screen
+effects recovered from renderer contracts. DLSS/HDR are optional modern
+capabilities; they must not change the default fidelity target unless exposed as
+explicit graphics options.</p>
+<h3>Shaders And GPU Pipeline Control</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_shader
+shader_format_glsl
+shader_format_spirv
+shader_format_wesl
+spirv_shader_passthrough
+statically-linked-dxc
+raw_vulkan_init
+meshlet
+meshlet_processor
+</code></pre>
+<p>Use custom shaders for original-specific terrain blending, water, decals,
+foliage, UI effects, particle effects, and material features that standard PBR
+cannot represent. Meshlet features are a future optimization path for dense
+world geometry if profiling shows classic chunked meshes are insufficient.</p>
+<h3>Animation, Easing, Morphs, Timelines, And Effects</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_animation
+bevy_animation_macros
+morph
+morph_animation
+gltf_animation
+bevy_time
+</code></pre>
+<p>Use Bevy animation assets/systems for skeletal/model animation once original
+animation formats are mapped. Morph support is relevant for facial/body morphs
+or converted model data if the source assets require it. UI easing, tweening,
+and timeline behaviour can be implemented as domain/runtime components driven
+by Bevy time and systems; do not invent animation semantics that conflict with
+recovered UI or renderer handlers.</p>
+<h3>Cameras And Projection</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_camera
+bevy_camera_controller
+free_camera
+pan_camera
+bevy_transform
+</code></pre>
+<p>Camera concepts and legal transitions should be domain-defined where they
+represent original game concepts: shell camera, world camera, panning, zooming,
+rotation, training/cinematic views, and selection focus. Bevy owns the live
+camera components/resources and implements the host view. Free/pan camera
+helpers are useful for development and may inform player controls only where
+they match recovered behaviour.</p>
+<h3>Devtools, Diagnostics, Gizmos, Remote, And Inspectors</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_dev_tools
+bevy_debug_stepping
+bevy_diagnostic
+sysinfo_plugin
+bevy_gizmos
+bevy_gizmos_render
+bevy_remote
+bevy_ui_debug
+bevy_log
+trace
+trace_chrome
+trace_tracy
+trace_tracy_memory
+</code></pre>
+<p>Use diagnostics for frame time, asset loading, system cost, entity counts,
+terrain chunk rebuilds, UI dirty updates, draw-call pressure, memory use, and
+audio/asset queues. Gizmos should be standard for reconstruction debugging:
+camera frustums, placement grids, path/fence routes, terrain chunks, selection
+rays, AI targets, and nav/path queries. Remote/devtools are developer aids, not
+runtime dependencies.</p>
+<h3>Logging And Settings</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_log
+bevy_settings
+sysinfo_plugin
+</code></pre>
+<p>Use logging for source loading failures, missing assets, contract mismatches,
+performance warnings, and validation diagnostics. Settings can back modern
+graphics/audio/input preferences only when mapped cleanly to original options
+or explicitly separated as host settings.</p>
+<h3>Windowing, Cursor, And Host Shell</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_window
+bevy_winit
+custom_cursor
+wayland
+x11
+web
+webgl2
+webgpu
+</code></pre>
+<p>Use Bevy windowing for fullscreen/windowed mode, resize handling, cursor
+projection, DPI handling, input capture, and platform backend selection. The
+original graphics options and startup/window behaviour define the domain
+contract; Bevy implements the host mechanics.</p>
+<h3>Scene, GLTF, Serialization, And Tooling Imports</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_scene
+scene
+bevy_gltf
+gltf_animation
+bevy_world_serialization
+serialize
+</code></pre>
+<p>Use scenes/GLTF for tooling, visual regression fixtures, converted inspection
+assets, or temporary developer views. The canonical game data path remains the
+original Z2F/source formats. World serialization can support debugging and
+test snapshots; original saves/packages remain their own compatibility surface.</p>
+<h3>Platform, CI, And Build-Time Features</h3>
+<p>Relevant features:</p>
+<pre><code class="language-text">bevy_ci_testing
+dev
+dynamic_linking
+hotpatching
+embedded_watcher
+file_watcher
+asset_processor
+reflect_documentation
+</code></pre>
+<p>Use these to speed development, CI, and introspection. Dynamic linking and
+hotpatching can shorten iteration but should not become assumptions in release
+behaviour. CI testing should exercise source loading, deterministic domain
+handlers, and representative Bevy app schedules without needing the full
+interactive shell for every check.</p>
+<h2>Source Documents</h2>
+<p>Source parsing should produce one compact representation of a document, not
+multiple recursive owned trees. The XML/BFXML model must preserve ordered mixed
+content and attributes, but it should not duplicate children as <code>children</code>,
+<code>content</code>, and <code>text</code> views.</p>
+<p>The near-term shape is:</p>
+<pre><code class="language-rust">pub struct DataNode {
+    pub name: String,
+    pub attributes: Vec&lt;DataAttribute&gt;,
+    pub children: Vec&lt;DataChild&gt;,
+}
+
+pub enum DataChild {
+    Element(DataNode),
+    Text(String),
+}
+</code></pre>
+<p>Convenience APIs can expose <code>element_children()</code> or <code>text()</code> views. They should
+not own a second recursive tree.</p>
+<p>The fuller performance target is an arena/range representation:</p>
+<pre><code class="language-rust">struct BfxmlDocument {
+    nodes: Vec&lt;BfxmlNode&gt;,
+    children: Vec&lt;BfxmlChild&gt;,
+    attrs: Vec&lt;BfxmlAttr&gt;,
+    text: Vec&lt;Arc&lt;str&gt;&gt;,
+}
+</code></pre>
+<p>Nodes refer to child and attribute ranges. That preserves source semantics,
+reduces allocation overhead, allows stable node ids, and gives UI/domain
+hydrators cheap references into the parsed document.</p>
+<h2>Asset Loading</h2>
+<p>The source-compatible path is:</p>
+<pre><code class="language-text">ZT2 path -&gt; mounted archive entry -&gt; lazy bytes -&gt; Bevy AssetLoader -&gt; Handle&lt;T&gt;
+domain-defined asset type -&gt; Bevy AssetLoader -&gt; Assets&lt;T&gt; -&gt; Handle&lt;T&gt;
+</code></pre>
+<p>The runtime should avoid extracting every asset into a temp directory as the
+main architecture. A temporary extraction bridge may exist while loaders are
+being replaced, but the final engine should use archive-backed asset readers and
+Bevy loaders for images, models, materials, audio, UI documents, and other
+decoded artifacts.</p>
+<p>Domain records should store source ids, path ids, type ids, or asset ids.
+Bevy presentation should store cheap <code>Handle&lt;T&gt;</code> values. Bitmap/model/audio
+bytes should not be copied into every UI node, material, entity definition, or
+world instance that refers to them.</p>
+<p>Loaded asset instances should live in Bevy asset storage or Bevy-owned runtime
+resources/components. A domain collection of loaded values is valid only when
+evidence shows an original-game manager owns that collection as gameplay state
+with special behaviour. Otherwise it is a duplicate asset store and should be
+moved to Bevy, replaced by handles/references, or deleted.</p>
+<h2>UI Runtime</h2>
+<p>The UI should be a data-authored structure with domain-defined runtime contracts
+and Bevy-owned live state/presentation:</p>
+<pre><code class="language-text">UiDocument asset owns authored structure.
+UiLayoutRegistry indexes document/node ids.
+Bevy entity tree is spawned from source node ids.
+Each UI entity carries:
+  UiSourceNode { document_id, node_id }
+  UiWidgetRuntimeState or a reference to domain widget state
+  Bevy Node/Image/Text/etc. presentation components
+Input converts Bevy Interaction -&gt; original UI message/event.
+Domain handlers mutate UI/app/runtime state.
+Projection systems update only changed entities.
+</code></pre>
+<p>Clicking a button should not execute invented Bevy behaviour. It should dispatch
+the original UI message contract into domain code, then Bevy should reflect the
+result by changing visibility, text, images, layout state, cursor, audio, or
+other presentation components.</p>
+<p>The Bevy entity tree is the projection cache. A separate generic
+<code>BevyProjectionCache</code> object is not the right abstraction. Specific lookup
+indexes are acceptable when they are concrete and useful, such as
+<code>UiNodeId -&gt; Entity</code> or <code>AssetPathId -&gt; Handle&lt;Image&gt;</code>.</p>
+<h2>World, Terrain, And Simulation</h2>
+<p>World entities fit Bevy ECS naturally. Animals, guests, staff, placed objects,
+vehicles, and interactable world objects should be Bevy entities with
+domain-defined components and ids tied back to the original entity/type system.</p>
+<p>Terrain should not be represented as one entity per tile. Terrain wants packed
+arrays, chunks, dirty regions, and generated mesh assets:</p>
+<pre><code class="language-text">terrain/map source data -&gt; Bevy terrain resources/chunks using domain-defined data
+dirty chunk/region -&gt; generated Bevy mesh/material update
+camera domain state -&gt; Bevy Camera transform/projection
+</code></pre>
+<p>Simulation systems should mutate domain components/resources directly in Bevy
+storage. Presentation systems should observe changes and update render/UI/audio
+components. This avoids the pattern of continuing to mutate a boot-time session
+graph after the domain has been published into ECS.</p>
+<h2>Runtime Memory Rules</h2>
+<p>Immutable authored data should be stored once and shared by id/handle:</p>
+<pre><code class="language-text">archive index
+parsed document arena
+localization table
+entity/type registries
+material/model/audio metadata
+mode/config registries
+</code></pre>
+<p>Mutable runtime state should be stored once in Bevy resources/components:</p>
+<pre><code class="language-text">app lifecycle
+active UI/widget state
+mode/world/app state
+entity instance state
+AI task state
+terrain edit state
+camera/input state
+economy/status/progression state
+</code></pre>
+<p>Presentation should be derived and dirty-updated:</p>
+<pre><code class="language-text">Bevy UI entities
+text/image/layout components
+mesh/material handles
+audio players/sinks
+camera transforms
+animation/particle projections
+</code></pre>
+<p>Transient caches are valid only when they are indexes, handles, generations, or
+dirty sets over one owner. They must not become a second truth:</p>
+<pre><code class="language-text">allowed: UiNodeId -&gt; Entity
+allowed: Assets&lt;ZT...&gt; storing loaded source/domain value types
+allowed: AssetPathId -&gt; Handle&lt;Image&gt;
+allowed: dirty terrain chunks
+allowed: changed widget ids
+not allowed: copied UI document tree with independent state
+not allowed: domain-owned loaded document collections duplicating Assets&lt;T&gt;
+not allowed: domain-owned asset registries or caches mirroring Bevy asset storage
+not allowed: duplicated entity definition records in presentation code
+not allowed: copied world object graph plus ECS object graph
+</code></pre>
+<h2>System Connection Pattern</h2>
+<p>The bridge between source/domain and Bevy should be ordinary Bevy systems:</p>
+<pre><code class="language-text">load source asset -&gt; hydrate domain registry resource
+input event -&gt; domain message handler
+domain state changed -&gt; update presentation components
+asset handle ready -&gt; attach image/mesh/material/audio
+simulation tick -&gt; mutate domain components/resources
+</code></pre>
+<p>This gives the reconstruction Rust/Bevy performance while retaining the
+original game's source compatibility and semantic contracts. The original files
+and domain meanings stay canonical; the original C++ heap mechanics do not.</p>
+
+</main>
+
+</html>

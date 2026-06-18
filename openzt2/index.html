@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenZT2 — Reconstruction Dashboard</title>
+<style>
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--ok:#79740e;--warn:#b57614;--bad:#9d0006}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--bad:#cc241d}
+*{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
+button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
+.nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px}.card .big{font-size:30px;font-weight:700;line-height:1.05}.card .lbl{color:var(--muted);font-size:12px;margin-top:2px}.card .det{font-size:12px;margin-top:8px;line-height:1.5}
+.bar{height:8px;border-radius:4px;background:var(--control-border);overflow:hidden;display:flex;margin-top:6px}.bar i{display:block;height:100%}.seg-ok{background:var(--ok)}.seg-warn{background:var(--warn)}.seg-bad{background:var(--bad)}.seg-mut{background:var(--muted)}
+h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
+.phases{display:grid;gap:14px;margin:10px 0}
+.phase{border:1px solid var(--line);border-left:4px solid var(--accent,var(--control-border));border-radius:6px;background:var(--soft);padding:12px 16px}
+.phase.red{--accent:var(--bad)}.phase.green{--accent:var(--ok)}.phase.blue{--accent:var(--link)}
+.phase h3{margin:0 0 6px;font-size:15px;display:flex;align-items:baseline;gap:8px}.phase h3 .tag{font-size:11px;color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.04em}
+.phase h4{margin:12px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.phase p{margin:0;font-size:13px;line-height:1.6}.phase p+p{margin-top:8px}
+.perimeter-link{display:inline-flex;align-items:center;gap:6px;margin:2px 0 4px;font-size:13px}
+.legalrow{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.legalrow button{font-size:12px}
+.modal[hidden]{display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:60}
+.modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
+.modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
+.modal-box iframe{flex:1;border:0;width:100%}
+@media(max-width:720px){.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr)) 48px;width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border)}.tabs a{min-height:48px}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:20px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.theme-toggle{width:48px;height:48px}main{padding:8px 10px 74px}}
+</style>
+<body>
+<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="zt-registrar-ledger.html"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Type Registry</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<main>
+ <h1>OpenZT2 Reconstruction Dashboard</h1>
+ <p class="sub">The outer perimeter of the original Zoo Tycoon 2 binary and the reconstruction's coverage of it — the denominator. Counts from the stripped executable; full tables on the <a href="perimeter.html">Binary Perimeter</a>.</p>
+ <div class="cards" id="cards"></div>
+ <p class="perimeter-link">→ <a href="perimeter.html">Browse the full binary perimeter tables</a></p>
+
+ <h2>How the project is structured</h2>
+ <div class="phases">
+  <div class="phase red">
+   <h3>Phase 1 <span class="tag">Red team — adversarial analysis</span></h3>
+   <p>The project began as an adversarial reverse-engineering investigation of the retail <code>zt.exe</code>, captured across ~11 sub-phase records. Cursory triage (PE-structure dump, section walk, string extraction) exposed the executable's shape and large runs of human-readable strings that seeded the first focus; <strong>radare2</strong> disassembly showed several sections were obfuscated/encrypted, and <strong>GDB</strong> dynamic analysis recovered the execution flow and identified the packer as <strong>Macrovision SafeDisc 4.90.10</strong> (the “SecServ” wrapper family). A legal moratorium then identified the rights-holders — copyright and patents — for SafeDisc (summarized in <code>legal.md</code>) and concluded the investigation could continue.</p>
+   <p>The protection was fully characterized (see the Byte Range Map): a SafeDisc <strong>overlay appended to the PE on disc</strong>, a <strong>record scanner</strong> that carves protected records, <strong>unpacking</strong> of those records into temporary files (the SecServ <code>~df394b.tmp</code> and AuthServ <code>~de37fc.tmp</code> services and the <code>PfdRun.pfd</code> sidecar), and <strong>decryption + decompression</strong> of the encrypted sections into the true runtime static image. The packing algorithms were reverse-engineered into a <strong>freestanding, independent unpacker</strong>: <strong>AES</strong> for the encrypted <code>.text</code> and SecServ <code>.txt</code>/<code>.txt2</code> sections, <strong>PKWARE DCL</strong> (implode/explode) and <strong>zlib</strong> inflate/deflate for compressed payloads, and <strong>TEA</strong> for the <code>PfdRun.pfd</code> heap-trampoline package.</p>
+   <p>Five indirection mechanisms were characterized — direct <code>.stxt774</code> function-pointer obfuscation; <code>.rdata</code> import-slot indirection (<code>call [slot]</code>); heap trampolines built from the <code>PfdRun.pfd</code> sidecar record tables; a cookie-parameterized SecServ dispatcher; and the <code>.stxt</code> table-routed call path. The <strong>11-pronged anti-debug block</strong> was neutralized to permit dynamic analysis, and every indirected call was traced from callsite to final API. Each caller was then rewritten to a <strong>freestanding resolver installed in a code cave</strong> at the back of the <code>.stxt</code> sections (leaving PE record sizes unchanged); an independent import loader and IAT thunk table were reconstructed into the same cave to replace the wrapper's import loading; the wrapper overlay was <strong>resected entirely</strong> and the PE header pointers rewritten to begin execution directly at the CRT/WinMain entrypoint; finally each callsite was stepped through to reconcile the stack-frame and return contract for every resolver until functionality was restored — yielding the freestanding <strong>unwrapped → depeppered → stripped</strong> image used for all further analysis.</p>
+   <h4>Prior Art</h4>
+   <p>Before treating the red-team archive as original recovery work, we checked the relevant public reference projects. <a href="https://github.com/ZtModArchive/Zoo-Tycoon-2-Libraries">Zoo-Tycoon-2-Libraries</a> is useful as an archive of decompiled compiled-Lua scenario, UI, photo, and gameplay helper scripts. It preserves script-facing names such as <code>queryObject</code>, <code>BFGManager</code>, <code>BFScenarioMgr</code>, <code>UI_*</code>, and <code>BFAI_*</code> messages, and it helps identify authored scenario logic. It does not recover the native managers behind those calls, the executable wrapper, type registries, vtables, object ownership, runtime message implementations, or the SecServ materialization path; many recovered scripts also retain decompiler gaps.</p>
+   <p><a href="https://github.com/nckstwrt/SafeDiscLoader2">SafeDiscLoader2</a> is likewise a helpful SafeDisc-family runtime loader and comparison reference. It provided orientation for version detection, the SecServ/AuthServ naming pattern, temporary service DLLs, and some SafeDisc table-repair idioms. It is not a Zoo Tycoon 2 engine reconstruction and did not supply the ZT2-specific SafeDisc 4.90.10 contract: <code>PfdRun.pfd</code> sidecar semantics, slot/trampoline/<code>.stxt</code> call paths, callsite-by-callsite resolver contracts, stripped import reconstruction, or the BlueFang/Gamebryo class and manager perimeter. These projects were useful landmarks, but they left the deep wrapper and engine architecture to be recovered locally.</p>
+   <p>Subsequent campaigns used <strong>r2ghidra</strong> to recover the original BlueFang and Zoo Tycoon 2 classes — from the polymorphic <strong>vtables</strong>, the <code>register_type</code> <strong>global type-getter cache</strong>, and constructor/reference topology (<strong>MSVC RTTI could not be used</strong>: the linker stripped the Complete Object Locators and class-hierarchy descriptors, leaving only 99 type-descriptor strings) — together with inheritance graphs, the type system, the <strong>BFXML</strong> document model, and per-domain reference indexes. The <strong>binary perimeter</strong> tracked understanding across the full function and global/static surfaces, and the search space was reduced by de-duplicating polymorphic functions and bounding middleware that did not require decompilation: the <strong>NetImmerse/Gamebryo</strong> engine identified by <code>NiSystem NetImmerse Version 10.0.1.0</code>, <code>NiAnimation NetImmerse Version 10.0.1.0</code>, <code>NiDX9 NetImmerse Version 10.0.1.0</code>, <code>$NiCollision NetImmerse Version 10.0.1.0</code>, and <code>NiMain NetImmerse Version 10.0.1.0</code>, plus the <strong>Lua</strong> runtime. All original binary artifacts were then removed, presenting a clean red-team ledger to the green team.</p>
+  </div>
+  <div class="phase green">
+   <h3>Phase 2 <span class="tag">Green team — specification</span></h3>
+   <p>From that red-team archive — and nothing else — the green team authored the detailed <strong>functional specification</strong> (<code>specification.md</code>). Working only from the recovered structure (classes, fields, vtable shapes, the type registry, the document model, and the per-domain reference indexes), it describes what each subsystem <em>does</em> — the entity/component model, economy, AI, terrain, UI, scripting, and save formats — as concept models rather than transcribed code. The deliverable is a specification carrying <strong>zero content derived from the original implementation</strong>, establishing the clean-room boundary that separates analysis from re-implementation.</p>
+  </div>
+  <div class="phase blue">
+   <h3>Phase 3 <span class="tag">Blue team — re-implementation</span></h3>
+   <p>The blue team rebuilds the game from the specification in a different language, target, and paradigm: <strong>Rust</strong> instead of C++, a <strong>64-bit</strong> target instead of 32-bit, a data-oriented <strong>ECS</strong> architecture instead of the original's polymorphic object graph, and the <strong>Bevy</strong> engine as the foundation instead of Gamebryo. The <a href="reimplementation-plan.html">Reimplementation Plan</a> covers how the 2008 single-threaded object model is adapted to a parallel, cache-friendly ECS while preserving the game's observable behaviour.</p>
+  </div>
+ </div>
+
+ <div class="legalrow">
+  <span>Clean-room project — analysis and re-implementation are kept strictly separated.</span>
+  <button type="button" id="legal-open">§ Legal &amp; clean-room roadmap</button>
+ </div>
+</main>
+<div class="modal" id="legal-modal" hidden>
+ <div class="modal-box">
+  <header><strong>Clean-Room Legal Roadmap</strong><button type="button" id="legal-close">Close</button></header>
+  <iframe class="legal-frame" src="clean-room-legal-roadmap.html" title="Legal Roadmap"></iframe>
+ </div>
+</div>
+<script>
+(()=>{const key="zt2-theme";const root=document.documentElement;const stored=()=>{try{return localStorage.getItem(key)}catch(_){return null}};const save=t=>{try{localStorage.setItem(key,t)}catch(_){}};const syncFrames=t=>{for(const f of document.querySelectorAll("iframe.legal-frame")){try{if(f.contentDocument)f.contentDocument.documentElement.dataset.theme=t}catch(_){}}};const apply=(t,p=false)=>{root.dataset.theme=t;if(p)save(t);const b=document.querySelector(".theme-toggle");if(b){b.textContent=t==="dark"?"☀":"☾";b.title="Toggle theme"}syncFrames(t)};apply(stored()==="light"?"light":"dark");window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);document.querySelector(".tabs").append(b);for(const f of document.querySelectorAll("iframe.legal-frame"))f.addEventListener("load",()=>syncFrames(root.dataset.theme||"dark"));apply(root.dataset.theme||"dark")})})();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function tsv(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok){const t=await r.text();const L=t.trim().split(/\r?\n/);const h=L.shift().split("\t");return L.filter(Boolean).map(l=>{const c=l.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]||"");return o})}last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
+function counts(rows,key){const c={};for(const r of rows)c[r[key]]=(c[r[key]]||0)+1;return c}
+function card(big,lbl,det,segs){const total=segs.reduce((a,s)=>a+s[1],0)||1;const bar=segs.map(s=>`<i class="seg-${s[2]}" style="width:${100*s[1]/total}%"></i>`).join("");return `<div class="card"><div class="big">${big}</div><div class="lbl">${lbl}</div><div class="bar">${bar}</div><div class="det">${det}</div></div>`}
+(()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
+Promise.all([
+ tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
+ tsv(["zt-global-perimeter.tsv","../reconstruction/global-perimeter.tsv"]),
+ tsv(["zt-registrar-ledger.tsv","../reconstruction/registrar-ledger.tsv"])
+]).then(([fp,gp,led])=>{
+ const fs=counts(fp,"status"),gs=counts(gp,"status");
+ const idedF=(fs["named"]||0)+(fs["type-getter"]||0);
+ const tierOf=r=>r.status==="named"?"named":r.status==="type-getter"?"type-getter":r.provenance?"library":r.vtable?"vtable-method":r.domain?"domain-only":"uncharacterized";
+ const ct=counts(fp.map(r=>({status:tierOf(r)})),"status");
+ const unch=ct["uncharacterized"]||0, characterized=fp.length-unch;
+ const prov=counts(fp.filter(r=>r.provenance),"provenance");
+ document.getElementById("cards").innerHTML=[
+   card(led.length,"registered native types","100% named in the specification",[["",led.length,"ok"]]),
+   card(idedF.toLocaleString(),"functions with exact names",`${fs["named"]||0} named · ${fs["type-getter"]||0} type-getters · of ${fp.length.toLocaleString()} entries`,
+     [["",idedF,"ok"],["",fp.length-idedF,"mut"]]),
+   card(((100*characterized/fp.length).toFixed(1))+"%","structurally characterized",`${ct["library"]||0} library · ${ct["vtable-method"]||0} vtable-method · ${ct["domain-only"]||0} domain-only · <b>${unch}</b> opaque`,
+     [["",idedF,"ok"],["",ct["library"]||0,"ok"],["",(ct["vtable-method"]||0)+(ct["domain-only"]||0),"warn"],["",unch,"bad"]]),
+   card((prov["gamebryo"]||0).toLocaleString(),"Gamebryo engine fns (0x58d–0x7ca)",`middleware: ${prov["gamebryo"]||0} gamebryo · ${prov["lua"]||0} lua · ${prov["zlib"]||0} zlib · ${prov["d3d9"]||0} d3d9 — the rest is ZT/BlueFang`,
+     [["",prov["gamebryo"]||0,"warn"],["",fp.length-(prov["gamebryo"]||0),"ok"]]),
+   card(gp.length.toLocaleString(),"globals / statics",`${gs["type-cache"]||0} type-cache · ${gs["identified"]||0} identified · ${gs["unidentified"]||0} unidentified`,
+     [["",gs["type-cache"]||0,"ok"],["",gs["identified"]||0,"ok"],["",gs["unidentified"]||0,"bad"]]),
+   card("861","class vtables enumerated","47,166 method slots → 14k functions mapped to a vtable; MSVC RTTI names were stripped from the image",[["",861,"ok"]]),
+ ].join("");
+}).catch(e=>{document.getElementById("cards").insertAdjacentHTML("afterend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
+</script>
+</html>

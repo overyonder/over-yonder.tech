@@ -1,0 +1,545 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Legal Roadmap Fragment</title><style>
+:root{--fg:CanvasText;--muted:GrayText;--line:ButtonBorder}*{box-sizing:border-box}body{margin:0;padding:10px 12px;font:12px/1.45 system-ui,sans-serif;color:var(--fg);background:Canvas}h1{font-size:18px;margin:0 0 10px}h2{font-size:15px;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}h3{font-size:13px}table{border-collapse:collapse;width:100%;margin:10px 0}th,td{border:1px solid var(--line);padding:4px 5px;vertical-align:top}th{text-align:left}pre{border:1px solid var(--line);padding:8px;overflow:auto}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}blockquote{border-left:3px solid var(--line);margin-left:0;padding-left:10px;color:var(--muted)}
+/* shared-site-nav */.tabs{box-sizing:border-box;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px!important;transform:none!important;font:12px/1.05 system-ui,sans-serif!important}.tabs a{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;min-height:24px;padding:2px 6px!important;text-align:center;white-space:nowrap;color:CanvasText!important;text-decoration:none!important;border:1px solid var(--line,ButtonBorder)!important;border-radius:4px;background:Canvas!important;font:inherit!important}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}.nav-icon{display:none}.nav-label{display:inline}@media(max-width:720px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;width:100%;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif!important}.tabs a{min-height:48px;padding:0!important;white-space:normal;border-radius:4px!important}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.tabs .theme-toggle{width:48px;height:48px;font-size:22px;justify-self:stretch}}/* end-shared-site-nav */
+
+
+
+/* shared-gruvbox-theme */
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--ok:#79740e;--warn:#b57614;--bad:#9d0006;--unk:#8f3f71;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--code-kw:#9d0006;--code-ty:#076678;--code-st:#79740e;--code-cm:#7c6f64;--code-at:#8f3f71}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--ok:#b8bb26;--warn:#fabd2f;--bad:#fb4934;--unk:#d3869b;--control:#3c3836;--control-border:#665c54;--active:#504945;--code-kw:#fb4934;--code-ty:#83a598;--code-st:#b8bb26;--code-cm:#928374;--code-at:#d3869b}
+html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}
+main,article,section,aside{color:var(--fg)}
+a{color:var(--link)}
+.tabs a{color:var(--fg)!important;background:var(--panel)!important;border-color:var(--control-border)!important}
+.tabs a.active{background:var(--active)!important}
+.theme-toggle{position:static;z-index:20;width:24px;height:24px;display:flex;align-items:center;justify-content:center;justify-self:center;align-self:center;background:var(--control)!important;color:var(--fg)!important;border:1px solid var(--control-border)!important;border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+button,input,select,textarea,.jump input{background:var(--control)!important;color:var(--fg)!important;border-color:var(--control-border)!important}
+button:disabled{color:var(--muted)!important;background:var(--soft)!important}
+table{border-color:var(--line)}
+th,td{border-color:var(--line)}
+th{background:var(--soft);color:var(--fg)}
+td{background:var(--panel);color:var(--fg)}
+pre,code{color:var(--fg)}
+pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important;border-color:var(--line)!important}
+.repo-switch button[aria-selected="true"]{background:var(--active)!important;border-color:var(--control-border)!important}
+.meta,.muted,.filters label,.filter-count,.top-legend{color:var(--muted)!important}
+.title,.axis,.legend-title{color:var(--fg)!important}
+.bar,.bytebar{background:var(--panel);border-color:var(--control-border)}
+.info-table th,.def-table th,#recovery-table th{background:var(--soft);color:var(--fg)}
+#recovery-table td{background:var(--panel);color:var(--fg)}
+.status-functioning{color:var(--ok)}.status-removed,.status-failed{color:var(--bad)}.status-untested{color:var(--warn)}.status-blocked{color:var(--warn)}
+.kw{color:var(--code-kw)}.ty{color:var(--code-ty)}.st{color:var(--code-st)}.cm{color:var(--code-cm)}.at{color:var(--code-at)}
+.legal-frame{background:var(--panel);border-color:var(--line)}
+@media(max-width:980px){.theme-toggle{margin:0;display:flex}}
+/* end-shared-gruvbox-theme */
+</style><body><h1 id="clean-room-legal-roadmap">Clean-Room Legal Roadmap</h1>
+<p>This record is part of the red-team investigation archive. It records
+investigator-side observations and evidence for later green-team
+filtration into implementation-neutral specifications; it is not
+blue-team implementation material.</p>
+<p>Date: 2026-05-18.</p>
+<p>This record states known facts, open gaps, and project rules for a
+future clean-room reimplementation. It is not legal advice.</p>
+<p>The governing focus is United States and Australian law. The project
+is not being undertaken in Europe. The EU decompilation regime is
+included only as a comparison.</p>
+<h2 id="current-project-classification">Current Project
+Classification</h2>
+<p>Known facts:</p>
+<ul>
+<li>This repository contains red-team investigation work.</li>
+<li>The investigation has used a lawfully held copy of Zoo Tycoon
+2.</li>
+<li>Investigators have run the game under Wine.</li>
+<li>Investigators have inspected memory, disassembled executable images,
+decompiled runtime images, named functions and data, carved executable
+material, patched local experimental binaries, and studied the
+wrapper/protection boundary.</li>
+<li>The repository contains records, analysis scripts, symbol/name
+ledgers, wrapper notes, SecServ trampoline evidence, and local
+experimental artifacts.</li>
+</ul>
+<p>Classification:</p>
+<ul>
+<li>This repository is the red-team investigation database.</li>
+<li>It is not the future blue-team implementation repository.</li>
+<li>Records in this repository may contain facts that can be filtered
+into a green-team specification.</li>
+<li>Records in this repository are not automatically blue-team material
+because many of them were written from direct binary inspection.</li>
+</ul>
+<p>Project rules:</p>
+<ol type="1">
+<li>Keep this repository private as the red-team investigation
+database.</li>
+<li>Do not publish original files, carved executables, patched binaries,
+memory dumps containing original code, SecServ bypasses, wrapper
+bypasses, or asset archives.</li>
+<li>Present red-team findings to a green/spec team for filtration.</li>
+<li>Give blue-team implementers only green-team specifications.</li>
+<li>Require users to supply their own legally obtained game files and
+assets.</li>
+<li>Use Zoo Tycoon, Microsoft, Blue Fang, SafeDisc, C-Dilla,
+Macrovision, Rovi, TiVo, and Xperi names only for factual or nominative
+reference.</li>
+<li>Do not use those names, logos, title art, screenshots, or trade
+dress as project branding.</li>
+<li>Treat copyright, anti-circumvention, patent, and trademark questions
+as separate questions.</li>
+</ol>
+<h2 id="current-effort-to-date">Current Effort To Date</h2>
+<p>The project has produced or used:</p>
+<ul>
+<li>runtime memory dumps and Wine execution logs;</li>
+<li>Ghidra/Rizin analysis of executable images;</li>
+<li>symbol/name ledgers, including hundreds of function names and many
+data labels;</li>
+<li>wrapper-boundary analysis of SecServ trampolines and runtime slot
+tables;</li>
+<li>carved or patched executable artifacts for local
+experimentation;</li>
+<li>asset and XML investigations used to infer domain schemas and game
+semantics;</li>
+<li>records describing the known binary layout, resource inventory,
+wrapper layout, SecServ <code>.txt</code> transform, and unresolved
+regions.</li>
+</ul>
+<p>This is red-team reverse engineering for understanding,
+interoperability, and possible future reimplementation.</p>
+<p>This repository is not a distributable replacement engine.</p>
+<h2 id="united-states-law">United States Law</h2>
+<h3 id="copyright-and-intermediate-copying">Copyright And Intermediate
+Copying</h3>
+<p>Known authorities:</p>
+<ul>
+<li>Sega v. Accolade: the Ninth Circuit treated disassembly as fair use
+where it was needed to inspect unprotected ideas and functional concepts
+for a legitimate compatibility purpose.</li>
+<li>Sony v. Connectix: the Ninth Circuit held that intermediate copying
+of the PlayStation BIOS during development of a compatible emulator
+could be fair use.</li>
+<li>Atari v. Nintendo: the Federal Circuit recognized that reverse
+engineering object code in lawfully possessed chips could be legitimate;
+Atari's use of a source-code copy obtained from the Copyright Office
+under false pretenses created a provenance problem.</li>
+<li>Computer Associates v. Altai: software infringement analysis filters
+out ideas, processes, facts, public-domain material, efficiency
+constraints, external constraints, and standard techniques before
+comparing protected expression.</li>
+<li>Google v. Oracle: reuse of software interface material for a new
+compatible program can be fair use in context; that case does not
+authorize wholesale copying of implementation code.</li>
+</ul>
+<p>Rules derived for this project:</p>
+<ul>
+<li>Red-team work may document facts, behavior, file formats, schemas,
+interoperability boundaries, and runtime interfaces.</li>
+<li>Green-team specifications may use filtered factual material.</li>
+<li>Blue-team code must not copy original source, decompiled pseudocode,
+instruction sequences, recovered function bodies, or expressive game
+content.</li>
+<li>Provenance records matter. Keep red, green, and blue materials
+separated.</li>
+</ul>
+<h3 id="dmca-section-1201">DMCA Section 1201</h3>
+<p>Known rule:</p>
+<p>17 U.S.C. § 1201(f) permits a person who has lawfully obtained the
+right to use a copy of a computer program to circumvent access controls
+for the sole purpose of identifying and analyzing elements necessary to
+achieve interoperability of an independently created program, when those
+elements are not otherwise readily available. It also permits necessary
+means and limited sharing for interoperability, subject to the statutory
+conditions.</p>
+<p>Project rules:</p>
+<ul>
+<li>Wrapper/protection analysis must remain tied to interoperability of
+an independently created program.</li>
+<li>Do not publish a crack, patched original game executable, wrapper
+bypass, game asset archive, or general-purpose circumvention
+package.</li>
+<li>Do not distribute SecServ or SafeDisc code or binaries.</li>
+</ul>
+<h2 id="australian-law">Australian Law</h2>
+<p>Known provisions:</p>
+<ul>
+<li>Copyright Act 1968 (Cth) section 21 treats deriving source code from
+object code by decompilation as a reproduction of the program.</li>
+<li>Section 47D permits reproduction or adaptation by or for the owner
+or licensee of a copy where it is for obtaining information necessary to
+make an independent program or article interoperate with the original
+program or another program, only to the extent reasonably necessary, and
+only where the information is not readily available elsewhere.</li>
+<li>Sections 47E and related provisions address error correction and
+other limited computer-program purposes.</li>
+<li>Section 47G can remove the benefit of the exception if copies or
+information made under those provisions are later used or supplied for
+another purpose.</li>
+<li>Australia also has anti-circumvention provisions with
+interoperability exceptions for access-control technological protection
+measures, subject to statutory conditions.</li>
+<li>Stevens v. Sony construed an earlier TPM definition narrowly in the
+PlayStation mod-chip context. It is not a current general rule
+permitting game-protection bypasses.</li>
+</ul>
+<p>Project rules:</p>
+<ul>
+<li>Keep Australian-facing reverse-engineering work tied to
+independent-program interoperability.</li>
+<li>Do not distribute original code, copied assets, patched executables,
+memory dumps, carved binaries, or general-purpose circumvention
+tooling.</li>
+<li>Do not reuse information obtained for interoperability for unrelated
+purposes.</li>
+</ul>
+<h2 id="eu-comparison">EU Comparison</h2>
+<p>Known rule:</p>
+<p>Directive 2009/24/EC, Article 6 addresses decompilation for
+interoperability where reproduction or translation of code is
+indispensable to obtain necessary interoperability information, subject
+to conditions.</p>
+<p>Project fact:</p>
+<ul>
+<li>The project is not being undertaken in Europe.</li>
+</ul>
+<p>Use in this record:</p>
+<ul>
+<li>The EU rule is a comparison point only.</li>
+<li>It illustrates the same operational boundary used here: decompile
+only for necessary interoperability information, do not use the
+information for unrelated purposes, and do not copy protected expression
+into the independent program.</li>
+</ul>
+<h2 id="comparable-projects">Comparable Projects</h2>
+<p>Known facts:</p>
+<ul>
+<li>OpenMW is a replacement engine for Morrowind. It does not ship the
+original proprietary Morrowind content; users supply their own game
+data.</li>
+<li>OpenRCT2 is an open-source reimplementation of RollerCoaster Tycoon
+2. Its documentation states that original RCT2 files are required to
+play.</li>
+<li>OpenGOAL is a decompilation/recompilation project for Jak and
+Daxter's GOAL code. It openly describes recovering source-like GOAL code
+from the original game.</li>
+</ul>
+<p>Project rule:</p>
+<ul>
+<li>The public-distribution model for a future blue-team project is
+replacement engine plus user-supplied assets, not distribution of
+original executable code, original assets, carved binaries, or patched
+binaries.</li>
+</ul>
+<h2 id="copyright-boundaries">Copyright Boundaries</h2>
+<p>Known rules:</p>
+<ul>
+<li>Facts, ideas, systems, procedures, file-format facts, protocol
+behavior, observed input/output behavior, and functional requirements
+are not the same as copyrightable implementation expression.</li>
+<li>Original implementation code, source-like decompiled structure,
+expressive text, art, audio, video, missions, scenarios, and asset
+content are copyright material unless another legal basis applies.</li>
+</ul>
+<p>Green-team material may include:</p>
+<ul>
+<li>asset container structure;</li>
+<li>XML schemas and field names present in user-supplied data;</li>
+<li>file-format records and value ranges;</li>
+<li>observed UI/gameplay behavior;</li>
+<li>black-box input/output behavior;</li>
+<li>high-level state machines;</li>
+<li>compatibility requirements.</li>
+</ul>
+<p>Green-team material must exclude:</p>
+<ul>
+<li>original source or decompiled pseudocode;</li>
+<li>function bodies or instruction sequences;</li>
+<li>exact recovered control flow;</li>
+<li>copied implementation constants, tables, or data layouts unless they
+are functional facts needed for interoperability and are documented as
+such;</li>
+<li>inferred original source-tree or module structure;</li>
+<li>patched or carved executable bytes;</li>
+<li>wrapper-bypass methods;</li>
+<li>expressive game text, art, audio, missions, scenarios, or UI layouts
+except as references to user-supplied assets.</li>
+</ul>
+<p>Blue-team code must be written from filtered specifications, public
+facts, independently authored tests, and user-supplied assets.</p>
+<h2 id="trademark-boundaries">Trademark Boundaries</h2>
+<p>Known marks and trade identifiers include:</p>
+<ul>
+<li>Zoo Tycoon;</li>
+<li>Zoo Tycoon 2;</li>
+<li>Microsoft;</li>
+<li>Blue Fang;</li>
+<li>SafeDisc;</li>
+<li>C-Dilla;</li>
+<li>Macrovision;</li>
+<li>Rovi;</li>
+<li>TiVo;</li>
+<li>Xperi;</li>
+<li>associated logos, title art, and trade dress.</li>
+</ul>
+<p>Project rules:</p>
+<ul>
+<li>Do not use those names as project names, logos, or branding.</li>
+<li>Use nominative wording only where needed to describe compatibility,
+for example "compatible with user-supplied Zoo Tycoon 2 game
+files".</li>
+<li>Do not imply sponsorship, endorsement, or official status.</li>
+<li>Do not ship screenshots, logos, title art, or game UI assets as
+promotional material unless a separate legal basis is identified.</li>
+</ul>
+<h2 id="patent-boundaries">Patent Boundaries</h2>
+<p>Known rules:</p>
+<ul>
+<li>Copyright cleanliness does not answer patent questions.</li>
+<li>Patents protect claimed methods, systems, and apparatus.</li>
+<li>A separately written implementation can still infringe an unexpired
+patent if it practices the claimed invention.</li>
+</ul>
+<p>Known project facts:</p>
+<ul>
+<li>Zoo Tycoon 2 is old enough that many patents relevant to the
+original product may have expired.</li>
+<li>Expiration cannot be assumed for every potentially relevant
+patent.</li>
+<li>A public release plan needs a targeted patent search for the
+mechanisms the replacement engine intentionally implements.</li>
+</ul>
+<p>Project rule:</p>
+<ul>
+<li>Before public release, perform a targeted patent search covering
+game-simulation, UI, asset-streaming, pathfinding, and
+protection-wrapper mechanisms that the project intentionally implements
+or replaces.</li>
+</ul>
+<h3 id="safedisc-originators-and-rights-to-observe">SafeDisc Originators
+And Rights To Observe</h3>
+<p>Known facts:</p>
+<ul>
+<li>The protection wrapper is a separate legal object from the Zoo
+Tycoon 2 game logic and assets.</li>
+<li>SafeDisc began as C-Dilla/Macrovision technology.</li>
+<li>Macrovision and C-Dilla jointly developed and marketed SafeDisc in
+the late 1990s.</li>
+<li>C-Dilla was acquired by Macrovision in 1999.</li>
+<li>Macrovision later became Rovi, then TiVo Corporation, then merged
+into the Xperi corporate chain.</li>
+<li>Macrovision sold substantially all Trymedia assets to RealNetworks
+in 2008.</li>
+<li>SafeDisc operations ended around 2009.</li>
+</ul>
+<p>Known gap:</p>
+<ul>
+<li>The present copyright owner of particular SafeDisc program code has
+not been established from the public sources reviewed here. Depending on
+asset-transfer documents, ownership may sit in the Xperi/Rovi line, the
+RealNetworks/Trymedia line, or another successor/assignee.</li>
+</ul>
+<p>Patent facts:</p>
+<ul>
+<li>SafeDisc had patent coverage.</li>
+<li>The clearest public SafeDisc-linked patent is U.S. Patent 6,353,890,
+"Method for copy protecting a record carrier, copy protected record
+carrier and means for detecting access control information."</li>
+<li>The patent record lists Peter A. Newman as inventor, C-Dilla Ltd as
+original assignee, later Macrovision/Rovi assignments, and a current
+listed Rovi-family assignee.</li>
+<li>The patent is listed as expired for lifetime, with an anticipated
+expiration date of 29 May 2018.</li>
+<li>A 2002 Macrovision announcement described that patent as fundamental
+to SafeDisc and SafeAuthenticate.</li>
+</ul>
+<p>Trademark fact:</p>
+<ul>
+<li>The U.S. SAFEDISC trademark registration appears dead/cancelled for
+failure to file continued-use paperwork in 2011.</li>
+</ul>
+<p>Rules:</p>
+<ul>
+<li>Do not distribute SafeDisc, SecServ, C-Dilla, or related wrapper
+code.</li>
+<li>Do not distribute carved DLLs, patched binaries, runtime dumps,
+bypasses, or replacement components derived from protected wrapper
+implementation code.</li>
+<li>Red-team records may document that SafeDisc/SecServ/C-Dilla wrapper
+material was observed.</li>
+<li>Green-team specifications treat wrapper behavior as an
+interoperability boundary.</li>
+<li>Blue-team work must not include copied SecServ logic, copied wrapper
+tables, SafeDisc-compatible circumvention code, or binaries derived from
+the original wrapper.</li>
+<li>Patent expiration for U.S. Patent 6,353,890 does not make SafeDisc
+software implementation code public domain.</li>
+<li>The dead/cancelled SAFEDISC trademark record does not answer
+copyright or anti-circumvention questions.</li>
+</ul>
+<h2 id="red-green-and-blue-roles">Red, Green, And Blue Roles</h2>
+<p>Definitions:</p>
+<ul>
+<li>Red team: anyone or any agent that has seen the original executable,
+disassembly, decompiler output, memory dumps, carved binaries, patched
+binaries, wrapper traces, SecServ trampoline ledgers, or other raw
+reverse-engineering evidence.</li>
+<li>Green/spec team: a non-implementation review function that may read
+red-team records and findings solely to filter them into factual,
+implementation-neutral specifications.</li>
+<li>Blue team: anyone or any agent writing a replacement engine or
+reusable public tooling from filtered specifications only, without
+access to original code, decompiler output, dumps, carved binaries, or
+red-team implementation notes.</li>
+</ul>
+<p>Operational rules:</p>
+<ul>
+<li>Green-team exposure to red-team findings is for filtration
+only.</li>
+<li>Green-team specifications are blue-side inputs only after
+code-shaped detail and expressive material are removed.</li>
+<li>The green team does not inspect original binaries, traces, dumps,
+disassembly, decompiler output, carved binaries, or patched binaries
+directly.</li>
+<li>If a human or agent has worked in the red repository on a subsystem,
+classify that human or agent as red for that subsystem.</li>
+<li>A red participant does not later implement the same subsystem on the
+blue side from memory and call it clean.</li>
+<li>Blue agents start from a clean context.</li>
+<li>Blue agents receive only filtered specification files.</li>
+<li>Blue work happens in a separate repository.</li>
+<li>Prompts, inputs, outputs, and review decisions are preserved as
+clean-room logs.</li>
+<li>Blue patches that reproduce red-side code structure without an
+independent functional reason are rejected.</li>
+</ul>
+<h2 id="roadmap">Roadmap</h2>
+<h3 id="milestone-1-freeze-and-label-the-red-investigation-database">Milestone
+1: Freeze And Label The Red Investigation Database</h3>
+<p>Rules:</p>
+<ul>
+<li>Keep this repository private as the red investigation database.</li>
+<li>Label analysis documents by role:
+<ul>
+<li>red-team binary analysis;</li>
+<li>factual interface/specification;</li>
+<li>blue-team implementation;</li>
+<li>user-supplied original asset requirement.</li>
+</ul></li>
+<li>Do not publish carved executables, patched binaries, memory dumps
+containing original code, asset archives, wrapper bypasses, or
+decompiler output.</li>
+</ul>
+<h3 id="milestone-2-produce-filtered-specifications">Milestone 2: Produce
+Filtered Specifications</h3>
+<p>For each subsystem, write a filtered specification containing:</p>
+<ul>
+<li>file formats and schemas;</li>
+<li>field names and types inferred from assets;</li>
+<li>state machines and behavior tables;</li>
+<li>public or user-visible mechanics;</li>
+<li>black-box test cases;</li>
+<li>compatibility requirements;</li>
+<li>error handling and edge cases observed through execution.</li>
+</ul>
+<p>Do not include:</p>
+<ul>
+<li>decompiled pseudocode;</li>
+<li>instruction listings except small addresses used as evidence
+references;</li>
+<li>original function body structure;</li>
+<li>copied strings unless they are required identifiers from
+user-supplied data;</li>
+<li>proprietary assets or expressive text.</li>
+</ul>
+<h3 id="milestone-3-build-a-replacement-engine">Milestone 3: Build A Replacement
+Engine</h3>
+<p>Rules:</p>
+<ul>
+<li>Create a separate blue-team repository.</li>
+<li>Use a different programming language from the original Windows x86
+executable.</li>
+<li>Use a different software architecture and module layout.</li>
+<li>Target a different instruction/machine architecture.</li>
+<li>Do not use recovered function order as an architectural guide.</li>
+<li>Do not directly translate decompiled routines.</li>
+<li>Do not compile, link, embed, patch, or load original executable
+code.</li>
+<li>Implement against user-supplied assets, XML/Z2F schemas, black-box
+behavior tests, public gameplay facts, and filtered specifications.</li>
+</ul>
+<h3 id="milestone-4-compatibility-and-distribution">Milestone 4: Compatibility
+And Distribution</h3>
+<p>Distributable artifacts may contain:</p>
+<ul>
+<li>original replacement engine source;</li>
+<li>independently authored tools;</li>
+<li>schema descriptions;</li>
+<li>test fixtures that do not contain copyrighted game content;</li>
+<li>scripts that locate user-owned game files without copying them into
+the repo.</li>
+</ul>
+<p>Distributable artifacts must not contain:</p>
+<ul>
+<li>Zoo Tycoon 2 executables or DLLs;</li>
+<li>SecServ or wrapper bypass code designed to run the original binary
+without authorization;</li>
+<li>packed assets, music, videos, models, textures, campaigns, or
+scenarios from the game;</li>
+<li>memory dumps or carved binaries;</li>
+<li>trademarked logos or title art.</li>
+</ul>
+<h3 id="milestone-5-release-checklist">Milestone 5: Release Checklist</h3>
+<p>Before public release:</p>
+<ul>
+<li>audit the repository for copied strings, assets, binaries, dumps,
+and decompiler output;</li>
+<li>document that users need a legally obtained copy of the game;</li>
+<li>add a trademark disclaimer;</li>
+<li>add a contributor certificate requiring original contributions and
+no copied proprietary code;</li>
+<li>preserve clean-room review logs;</li>
+<li>complete the targeted patent search;</li>
+<li>have counsel review the release package.</li>
+</ul>
+<h2 id="source-notes">Source Notes</h2>
+<ul>
+<li>17 U.S.C. § 1201(f), reverse-engineering interoperability exception:
+<a
+href="https://www.law.cornell.edu/uscode/text/17/1201">https://www.law.cornell.edu/uscode/text/17/1201</a></li>
+<li>Sega Enterprises Ltd. v. Accolade, Inc., 977 F.2d 1510: <a
+href="https://www.bitlaw.com/source/cases/copyright/Sega-Accolade.html">https://www.bitlaw.com/source/cases/copyright/Sega-Accolade.html</a></li>
+<li>Sony Computer Entertainment, Inc. v. Connectix Corp., 203 F.3d 596:
+<a
+href="https://caselaw.findlaw.com/court/us-9th-circuit/1452245.html">https://caselaw.findlaw.com/court/us-9th-circuit/1452245.html</a></li>
+<li>Atari Games Corp. v. Nintendo of America Inc., 975 F.2d 832: <a
+href="https://law.justia.com/cases/federal/appellate-courts/F2/975/832/163650/">https://law.justia.com/cases/federal/appellate-courts/F2/975/832/163650/</a></li>
+<li>Computer Associates International, Inc. v. Altai, Inc.: <a
+href="https://www.bitlaw.com/source/cases/copyright/altai.html">https://www.bitlaw.com/source/cases/copyright/altai.html</a></li>
+<li>Google LLC v. Oracle America, Inc.: <a
+href="https://www.law.cornell.edu/supct/cert/18-956">https://www.law.cornell.edu/supct/cert/18-956</a></li>
+<li>Australia Copyright Act 1968, including sections 21, 47D, 47E, 47G
+and TPM interoperability provisions: <a
+href="https://www.legislation.gov.au/C1968A00063/2024-03-20/2024-03-20/text/original/epub/OEBPS/document_1/document_1.html">https://www.legislation.gov.au/C1968A00063/2024-03-20/2024-03-20/text/original/epub/OEBPS/document_1/document_1.html</a></li>
+<li>Stevens v. Kabushiki Kaisha Sony Computer Entertainment: <a
+href="https://www.hcourt.gov.au/cases-and-judgments/judgments/judgments-1998-current/stevens-v-kabushiki-kaisha-sony-computer-entertainment">https://www.hcourt.gov.au/cases-and-judgments/judgments/judgments-1998-current/stevens-v-kabushiki-kaisha-sony-computer-entertainment</a></li>
+<li>Directive 2009/24/EC, Article 6 decompilation comparison: <a
+href="https://eur-lex.europa.eu/eli/dir/2009/24/oj">https://eur-lex.europa.eu/eli/dir/2009/24/oj</a></li>
+<li>OpenMW FAQ: <a
+href="https://openmw.org/faq/">https://openmw.org/faq/</a></li>
+<li>OpenRCT2 repository documentation: <a
+href="https://github.com/OpenRCT2/OpenRCT2">https://github.com/OpenRCT2/OpenRCT2</a></li>
+<li>OpenGOAL FAQ: <a
+href="https://opengoal.dev/docs/faq/">https://opengoal.dev/docs/faq/</a></li>
+<li>SafeDisc patent, U.S. Patent 6,353,890: <a
+href="https://patents.google.com/patent/US6353890B1/en">https://patents.google.com/patent/US6353890B1/en</a></li>
+<li>Macrovision announcement describing U.S. Patent 6,353,890 as
+fundamental to SafeDisc and SafeAuthenticate: <a
+href="https://www.cdrinfo.com/d7/content/macrovision-awarded-cd-copy-protection-patent">https://www.cdrinfo.com/d7/content/macrovision-awarded-cd-copy-protection-patent</a></li>
+<li>RealNetworks acquisition of substantially all Trymedia assets from
+Macrovision: <a
+href="https://realnetworks.com/press/releases/2008/realnetworks-acquire-trymedia-macrovision">https://realnetworks.com/press/releases/2008/realnetworks-acquire-trymedia-macrovision</a></li>
+<li>Rovi completion of TiVo acquisition and TiVo rebrand: <a
+href="https://investor.xperi.com/news/news-details/2016/Rovi-Completes-Acquisition-of-TiVo-New-TiVo-Poised-to-Lead-Media-and-Entertainment-Transformation/default.aspx">https://investor.xperi.com/news/news-details/2016/Rovi-Completes-Acquisition-of-TiVo-New-TiVo-Poised-to-Lead-Media-and-Entertainment-Transformation/default.aspx</a></li>
+<li>SafeDisc trademark status record: <a
+href="https://www.trademarkelite.com/trademark/trademark-detail/75480951/SAFEDISC">https://www.trademarkelite.com/trademark/trademark-detail/75480951/SAFEDISC</a></li>
+</ul>
+</body></html>

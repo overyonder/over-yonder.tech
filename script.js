@@ -3,73 +3,58 @@ document.addEventListener('DOMContentLoaded', function () {
   var slider = document.querySelector('.tab-slider');
   var tabBar = document.querySelector('.tab-bar');
   var tabs = document.querySelectorAll('.tab-btn');
-  var panel = document.getElementById('articles-panel');
-  var themeToggle = document.querySelector('.theme-toggle');
+  var articlesPanel = document.getElementById('articles-panel');
   var initialLogoTop = window.innerHeight / 2;
   var finalLogoTop = 50;
+  var currentTab = 'projects';
+  var articleToolsPromise = null;
+  var articleToolsConfigured = false;
+  var articlesIndexPromise = null;
+  var articleRuntimeFailed = false;
+  var projectFadeEls = [];
+  var animationQueued = false;
 
-  function applyTheme(theme) {
-    var dark = theme === 'dark';
-    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-    localStorage.setItem('oy-theme', dark ? 'dark' : 'light');
-    if (themeToggle) {
-      themeToggle.textContent = dark ? 'Light' : 'Dark';
-      themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-      themeToggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
-    }
-  }
+  var ARTICLE_STYLES = [
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css',
+    'https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css'
+  ];
 
-  applyTheme(localStorage.getItem('oy-theme') === 'dark' ? 'dark' : 'light');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function () {
-      applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
-    });
-  }
+  var ARTICLE_SCRIPTS = [
+    'https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.js',
+    'https://cdn.jsdelivr.net/npm/marked@15/marked.min.js',
+    'https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js',
+    'https://cdn.jsdelivr.net/npm/marked-footnote/dist/index.umd.js',
+    'https://cdn.jsdelivr.net/npm/marked-smartypants/lib/index.umd.js',
+    'https://cdn.jsdelivr.net/npm/marked-alert@2/dist/index.umd.js',
+    'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/rust.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/c.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/bash.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/nix.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/diff.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/latex.min.js'
+  ];
 
-  // ── Configure marked extensions (guarded so a CDN failure can't crash the page) ──
-  try {
-    if (window.markedSmartypants) {
-      var sp = window.markedSmartypants.markedSmartypants || window.markedSmartypants;
-      if (typeof sp === 'function') marked.use(sp());
-    }
-    if (window.markedKatex) {
-      marked.use(markedKatex({ throwOnError: false }));
-    }
-    if (window.markedFootnote) {
-      marked.use(markedFootnote());
-    }
-    if (window.markedAlert) {
-      marked.use(markedAlert({
-        variants: [
-          { type: 'success', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm3.78-9.72a.751.751 0 0 0-1.06-1.06L6.5 9.44 5.28 8.22a.751.751 0 0 0-1.06 1.06l1.75 1.75a.75.75 0 0 0 1.06 0l4.75-4.75Z"></path></svg>', title: 'Success' },
-          { type: 'error', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1 1 13.658 2.343 8 8 0 0 1 2.343 13.657ZM6.03 4.97a.751.751 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.751.751 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.751.751 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.751.751 0 0 0-1.06-1.06L8 6.94 6.03 4.97Z"></path></svg>', title: 'Error' }
-        ]
-      }));
-    }
-  } catch (e) { console.error('marked extension init failed:', e); }
-  try {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'neutral'
-    });
-  }
-  catch (e) { console.error('mermaid init failed:', e); }
+  refreshProjectFadeEls();
 
-  // ── Placeholder for tab bar when it goes sticky ──
+  // Placeholder for tab bar when it goes sticky
   var placeholder = document.createElement('div');
   placeholder.className = 'tab-bar-placeholder';
   tabBar.parentNode.insertBefore(placeholder, tabBar.nextSibling);
   var tabBarOffset = null;
 
-  // ── Scroll animation (logo + section fade + sticky tabs) ──
   function animate() {
+    animationQueued = false;
+
     var scrollY = window.scrollY;
     logo.style.top = Math.max(finalLogoTop, initialLogoTop - scrollY) + 'px';
 
-    // Sticky tab bar
     if (tabBarOffset === null && !tabBar.classList.contains('sticky')) {
       tabBarOffset = tabBar.offsetTop;
     }
+
     if (tabBarOffset !== null) {
       if (scrollY >= tabBarOffset - 20) {
         if (!tabBar.classList.contains('sticky')) {
@@ -77,22 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
           placeholder.classList.add('visible');
           tabBar.classList.add('sticky');
         }
-      } else {
-        if (tabBar.classList.contains('sticky')) {
-          tabBar.classList.remove('sticky');
-          placeholder.classList.remove('visible');
-          tabBarOffset = null;
-        }
+      } else if (tabBar.classList.contains('sticky')) {
+        tabBar.classList.remove('sticky');
+        placeholder.classList.remove('visible');
+        tabBarOffset = null;
       }
     }
 
-    var els = document.querySelectorAll(
-      '#projects-panel h2, #projects-panel .about > p, ' +
-      '#projects-panel .project-card, #projects-panel .repo-badges'
-    );
-    els.forEach(function (el) {
+    if (currentTab !== 'projects') return;
+
+    var vh = window.innerHeight;
+    projectFadeEls.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      var vh = window.innerHeight;
       var mid = (r.top + r.bottom) / 2 / vh * 100;
       var o;
       if (mid > 95) o = 0;
@@ -104,16 +85,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  window.addEventListener('scroll', function () {
+  function queueAnimate() {
+    if (animationQueued) return;
+    animationQueued = true;
     window.requestAnimationFrame(animate);
-  });
-  window.requestAnimationFrame(animate);
+  }
 
-  // ── Hash routing ──
+  window.addEventListener('scroll', queueAnimate, { passive: true });
+  window.addEventListener('resize', function () {
+    initialLogoTop = window.innerHeight / 2;
+    tabBarOffset = null;
+    queueAnimate();
+  });
+  queueAnimate();
+
+  function refreshProjectFadeEls() {
+    projectFadeEls = Array.prototype.slice.call(document.querySelectorAll(
+      '#projects-panel h2, #projects-panel .about > p, ' +
+      '#projects-panel .project-card, #projects-panel .repo-badges'
+    ));
+  }
+
   function parseHash() {
     var h = window.location.hash.replace(/^#\/?/, '');
     if (!h) return { tab: 'projects', slug: null };
-    // Ignore footnote anchors -- not a route change
     if (h.indexOf('footnote-') === 0) return null;
     var parts = h.split('/');
     if (parts[0] === 'articles') return { tab: 'articles', slug: parts[1] || null };
@@ -122,70 +117,191 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function selectTab(name) {
-    tabs.forEach(function (b) { b.classList.remove('active'); });
+    currentTab = name;
     tabs.forEach(function (b) {
-      if (b.dataset.tab === name) b.classList.add('active');
+      b.classList.toggle('active', b.dataset.tab === name);
     });
-    if (name === 'articles') {
-      slider.classList.add('show-articles');
-    } else {
-      slider.classList.remove('show-articles');
-    }
+    slider.classList.toggle('show-articles', name === 'articles');
+    queueAnimate();
   }
 
-  // ── Tab switching (updates hash) ──
+  function loadStylesheet(href) {
+    var existing = Array.prototype.some.call(
+      document.querySelectorAll('link[data-article-asset]'),
+      function (node) { return node.dataset.articleAsset === href; }
+    );
+    if (existing) {
+      return Promise.resolve();
+    }
+
+    return new Promise(function (resolve, reject) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.dataset.articleAsset = href;
+      link.onload = resolve;
+      link.onerror = function () { reject(new Error('Failed to load stylesheet: ' + href)); };
+      document.head.appendChild(link);
+    });
+  }
+
+  function loadScript(src) {
+    var existing = Array.prototype.some.call(
+      document.querySelectorAll('script[data-article-asset]'),
+      function (node) { return node.dataset.articleAsset === src; }
+    );
+    if (existing) {
+      return Promise.resolve();
+    }
+
+    return new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = src;
+      script.async = false;
+      script.dataset.articleAsset = src;
+      script.onload = resolve;
+      script.onerror = function () { reject(new Error('Failed to load script: ' + src)); };
+      document.body.appendChild(script);
+    });
+  }
+
+  function configureArticleTools() {
+    if (articleToolsConfigured) return;
+
+    try {
+      if (window.markedSmartypants) {
+        var sp = window.markedSmartypants.markedSmartypants || window.markedSmartypants;
+        if (typeof sp === 'function') marked.use(sp());
+      }
+      if (window.markedKatex) {
+        marked.use(markedKatex({ throwOnError: false }));
+      }
+      if (window.markedFootnote) {
+        marked.use(markedFootnote());
+      }
+      if (window.markedAlert) {
+        marked.use(markedAlert({
+          variants: [
+            { type: 'success', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm3.78-9.72a.751.751 0 0 0-1.06-1.06L6.5 9.44 5.28 8.22a.751.751 0 0 0-1.06 1.06l1.75 1.75a.75.75 0 0 0 1.06 0l4.75-4.75Z"></path></svg>', title: 'Success' },
+            { type: 'error', icon: '<svg class="octicon" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1 1 13.658 2.343 8 8 0 0 1 2.343 13.657ZM6.03 4.97a.751.751 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.751.751 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.751.751 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.751.751 0 0 0-1.06-1.06L8 6.94 6.03 4.97Z"></path></svg>', title: 'Error' }
+          ]
+        }));
+      }
+    } catch (e) {
+      console.error('marked extension init failed:', e);
+    }
+
+    try {
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+      }
+    } catch (e) {
+      console.error('mermaid init failed:', e);
+    }
+
+    articleToolsConfigured = true;
+  }
+
+  function ensureArticleRuntime() {
+    if (articleRuntimeFailed) {
+      return Promise.reject(new Error('Article runtime previously failed to load.'));
+    }
+    if (articleToolsPromise) return articleToolsPromise;
+
+    articleToolsPromise = Promise.all(ARTICLE_STYLES.map(loadStylesheet))
+      .then(function () {
+        return ARTICLE_SCRIPTS.reduce(function (promise, src) {
+          return promise.then(function () { return loadScript(src); });
+        }, Promise.resolve());
+      })
+      .then(function () {
+        configureArticleTools();
+      })
+      .catch(function (err) {
+        articleRuntimeFailed = true;
+        throw err;
+      });
+
+    return articleToolsPromise;
+  }
+
+  function ensureArticlesIndex() {
+    if (articlesIndexPromise) return articlesIndexPromise;
+
+    articlesIndexPromise = fetch('articles/index.json')
+      .then(function (r) {
+        if (!r.ok) throw new Error('Could not load articles index.');
+        return r.json();
+      })
+      .then(function (articles) {
+        buildAccordion(articles);
+      })
+      .catch(function (err) {
+        articlesPanel.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Could not load articles.</p>';
+        throw err;
+      });
+
+    return articlesIndexPromise;
+  }
+
+  function ensureArticlesReady() {
+    return Promise.all([ensureArticleRuntime(), ensureArticlesIndex()]);
+  }
+
+  function handleRoute(route) {
+    if (!route) return;
+
+    selectTab(route.tab);
+
+    if (route.tab !== 'articles') {
+      hideDirectOnlyArticles();
+      return;
+    }
+
+    ensureArticlesReady()
+      .then(function () {
+        if (route.slug) {
+          openArticleBySlug(route.slug);
+        } else {
+          hideDirectOnlyArticles();
+          expandFirst();
+        }
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  }
+
   tabs.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      selectTab(btn.dataset.tab);
       history.replaceState(null, '', '#' + btn.dataset.tab);
+      handleRoute({ tab: btn.dataset.tab, slug: null });
     });
   });
 
-  // Listen for hash changes (back/forward)
   window.addEventListener('hashchange', function () {
     var route = parseHash();
-    if (!route) return; // footnote anchor, not a route
-    selectTab(route.tab);
-    if (route.tab === 'articles') {
-      if (route.slug) {
-        openArticleBySlug(route.slug);
-      } else {
-        hideDirectOnlyArticles();
-      }
-    } else {
-      hideDirectOnlyArticles();
-    }
+    if (!route) return;
+    handleRoute(route);
   });
 
-  // ── Load articles eagerly on page load ──
-  fetch('articles/index.json')
-    .then(function (r) { return r.json(); })
-    .then(function (articles) {
-      buildAccordion(articles);
-      // Apply initial route after articles are built
-      var route = parseHash();
-      if (route) selectTab(route.tab);
-      if (route && route.slug) {
-        openArticleBySlug(route.slug);
-      }
-    })
-    .catch(function () {
-      panel.innerHTML = '<p class="load-state">Could not load articles.</p>';
-    });
+  handleRoute(parseHash());
+  loadRepoBadges();
 
-  // ── Build accordion and pre-render all articles ──
   function buildAccordion(articles) {
-    panel.innerHTML = '';
+    articlesPanel.innerHTML = '';
+
     articles.forEach(function (a) {
       var item = document.createElement('div');
-      item.className = 'accordion-item';
       var slug = a.file.replace(/\.md$/, '');
       var hidden = a.hidden === true;
+      var tags = '';
+
+      item.className = 'accordion-item';
       item.dataset.slug = slug;
       item.dataset.hidden = hidden ? 'true' : 'false';
       if (hidden) item.classList.add('hidden-article');
 
-      var tags = '';
       if (a.tags && a.tags.length) {
         tags = '<span class="article-tags">' +
           a.tags.map(function (t) { return '<span class="article-tag">' + esc(t) + '</span>'; }).join('') +
@@ -200,36 +316,35 @@ document.addEventListener('DOMContentLoaded', function () {
           '<span class="accordion-chevron">&#9662;</span>' +
         '</button>' +
         '<div class="accordion-body">' +
-          '<div class="article-content" data-file="' + esc(a.file) + '">' +
+          '<div class="article-content" data-file="' + esc(a.file) + '" data-loaded="false">' +
             '<div class="article-meta">' + esc(a.author) + ' &middot; ' + esc(a.date) + '</div>' +
-            '<p class="load-state">Loading...</p>' +
+            '<p style="color:rgba(255,255,255,0.5)">Open article to load content.</p>' +
           '</div>' +
         '</div>';
 
-      panel.appendChild(item);
+      articlesPanel.appendChild(item);
 
       item.querySelector('.accordion-header').addEventListener('click', function () {
         toggleAccordion(item);
-        // Update hash when an article is toggled
-        if (item.classList.contains('open')) {
-          history.replaceState(null, '', '#articles/' + slug);
-        } else {
-          history.replaceState(null, '', '#articles');
-        }
+        history.replaceState(null, '', item.classList.contains('open') ? '#articles/' + slug : '#articles');
       });
-
-      // Eagerly fetch and render markdown
-      loadArticle(item.querySelector('.article-content'), a.author, a.date);
     });
   }
 
-  // ── Open article by slug ──
   function openArticleBySlug(slug) {
     if (!slug) return;
-    var item = panel.querySelector('.accordion-item[data-slug="' + slug + '"]');
+
+    var item = articlesPanel.querySelector('.accordion-item[data-slug="' + slug + '"]');
     if (item && isHiddenArticle(item)) revealHiddenArticle(item);
     if (!item || item.classList.contains('open')) return;
     toggleAccordion(item);
+  }
+
+  function expandFirst() {
+    var first = articlesPanel.querySelector('.accordion-item:not(.hidden-article)');
+    if (first && !first.classList.contains('open')) {
+      toggleAccordion(first);
+    }
   }
 
   function isHiddenArticle(item) {
@@ -241,12 +356,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function hideHiddenArticle(item) {
-    if (!isHiddenArticle(item)) return;
-    item.classList.remove('forced-visible');
+    if (isHiddenArticle(item)) item.classList.remove('forced-visible');
   }
 
   function hideDirectOnlyArticles() {
-    panel.querySelectorAll('.accordion-item.hidden-article').forEach(function (item) {
+    articlesPanel.querySelectorAll('.accordion-item.hidden-article').forEach(function (item) {
       if (item.classList.contains('open')) {
         closeAccordion(item);
       } else {
@@ -255,16 +369,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ── Accordion toggle ──
   function toggleAccordion(item) {
     if (item.classList.contains('open')) {
       closeAccordion(item);
       return;
     }
 
-    // Close others
-    document.querySelectorAll('.accordion-item.open').forEach(function (o) {
-      closeAccordion(o);
+    articlesPanel.querySelectorAll('.accordion-item.open').forEach(function (openItem) {
+      closeAccordion(openItem);
     });
 
     revealHiddenArticle(item);
@@ -273,20 +385,23 @@ document.addEventListener('DOMContentLoaded', function () {
     item.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
 
-    // After transition, remove the cap so content is never clipped
-    function onEnd() {
-      if (item.classList.contains('open')) {
-        body.style.maxHeight = 'none';
+    ensureArticleLoaded(item).finally(function () {
+      if (!item.classList.contains('open')) return;
+      body.style.maxHeight = body.scrollHeight + 'px';
+
+      function onEnd() {
+        if (item.classList.contains('open')) {
+          body.style.maxHeight = 'none';
+        }
+        body.removeEventListener('transitionend', onEnd);
       }
-      body.removeEventListener('transitionend', onEnd);
-    }
-    body.addEventListener('transitionend', onEnd);
+
+      body.addEventListener('transitionend', onEnd);
+    });
   }
 
   function closeAccordion(item) {
     var body = item.querySelector('.accordion-body');
-
-    // Snap to scrollHeight first so the transition animates from content height to 0
     body.style.maxHeight = body.scrollHeight + 'px';
     body.offsetHeight;
     body.style.maxHeight = '0';
@@ -301,35 +416,56 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ── Fetch and render markdown ──
-  function loadArticle(el, author, date) {
-    var file = el.dataset.file;
+  function ensureArticleLoaded(item) {
+    var el = item.querySelector('.article-content');
+    if (!el || el.dataset.loaded === 'true' || el.dataset.loading === 'true') {
+      return Promise.resolve();
+    }
 
-    fetch('articles/' + file)
-      .then(function (r) { return r.text(); })
+    el.dataset.loading = 'true';
+    return loadArticle(el)
+      .catch(function () {
+        el.innerHTML = '<p style="color:rgba(255,255,255,0.6)">Failed to load article.</p>';
+      })
+      .finally(function () {
+        delete el.dataset.loading;
+      });
+  }
+
+  function loadArticle(el) {
+    var file = el.dataset.file;
+    var meta = el.querySelector('.article-meta');
+    var metaHtml = meta ? meta.outerHTML : '';
+
+    el.innerHTML = metaHtml + '<p style="color:rgba(255,255,255,0.5)">Loading...</p>';
+
+    return fetch('articles/' + file)
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load article: ' + file);
+        return r.text();
+      })
       .then(function (md) {
         var stripped = md.replace(/^---[\s\S]*?---\s*/, '');
-        var meta = '<div class="article-meta">' + esc(author) + ' &middot; ' + esc(date) + '</div>';
-        el.innerHTML = meta + marked.parse(stripped);
+        el.innerHTML = metaHtml + marked.parse(stripped);
+        el.dataset.loaded = 'true';
 
-        // Syntax highlighting (skip mermaid blocks)
         el.querySelectorAll('pre code').forEach(function (block) {
-          if (!block.classList.contains('language-mermaid')) {
+          if (!block.classList.contains('language-mermaid') && window.hljs) {
             hljs.highlightElement(block);
           }
         });
 
-        // Render mermaid diagrams
-        el.querySelectorAll('pre code.language-mermaid').forEach(function (block) {
-          var pre = block.parentElement;
-          var diagram = document.createElement('div');
-          diagram.className = 'mermaid';
-          diagram.textContent = block.textContent;
-          pre.replaceWith(diagram);
-        });
-        mermaid.run({ nodes: el.querySelectorAll('.mermaid') });
+        if (window.mermaid) {
+          el.querySelectorAll('pre code.language-mermaid').forEach(function (block) {
+            var pre = block.parentElement;
+            var diagram = document.createElement('div');
+            diagram.className = 'mermaid';
+            diagram.textContent = block.textContent;
+            pre.replaceWith(diagram);
+          });
+          mermaid.run({ nodes: el.querySelectorAll('.mermaid') });
+        }
 
-        // Wire footnote links to scroll within the article instead of changing hash
         el.querySelectorAll('a[data-footnote-ref], a[data-footnote-backref]').forEach(function (link) {
           link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -339,67 +475,54 @@ document.addEventListener('DOMContentLoaded', function () {
           });
         });
 
-        // If accordion is open, uncap max-height so new content isn't clipped
         var item = el.closest('.accordion-item');
         if (item && item.classList.contains('open')) {
           item.querySelector('.accordion-body').style.maxHeight = 'none';
         }
-      })
-      .catch(function () {
-        el.innerHTML = '<p class="load-state">Failed to load article.</p>';
       });
   }
-
-  // ── Auto-generate repo badges from GitHub API ──
-  var GITHUB_ACCOUNTS = ['rakelang', 'overyonder', 'hannigancooper', 'KaiStarkk'];
 
   function loadRepoBadges() {
     var container = document.querySelector('.repo-badges');
     if (!container) return;
 
-    var fetches = GITHUB_ACCOUNTS.map(function (account) {
-      return fetch('https://api.github.com/users/' + account + '/repos?per_page=100&sort=updated')
-        .then(function (r) { return r.ok ? r.json() : []; })
-        .catch(function () { return []; });
-    });
+    fetch('data/repos.json')
+      .then(function (r) {
+        if (!r.ok) throw new Error('Could not load repo manifest.');
+        return r.json();
+      })
+      .then(function (repos) {
+        container.innerHTML = '';
+        repos.forEach(function (repo) {
+          var a = document.createElement('a');
+          var img = document.createElement('img');
 
-    Promise.all(fetches).then(function (results) {
-      var seen = {};
-      var repos = [];
+          a.href = repo.html_url;
+          a.target = '_blank';
+          a.rel = 'noreferrer';
 
-      results.forEach(function (accountRepos) {
-        if (!Array.isArray(accountRepos)) return;
-        accountRepos.forEach(function (repo) {
-          if (repo.fork || repo.private) return;
-          if (seen[repo.name]) return;
-          seen[repo.name] = true;
-          repos.push(repo);
+          img.src = 'https://img.shields.io/github/stars/' + repo.full_name + '?style=flat-square&label=' + encodeURIComponent(repo.name);
+          img.alt = repo.name;
+
+          a.appendChild(img);
+          container.appendChild(a);
         });
+        refreshProjectFadeEls();
+        queueAnimate();
+      })
+      .catch(function () {
+        container.innerHTML = '<p style="margin:0;color:rgba(40,46,38,0.8)">Could not load project badges.</p>';
+        refreshProjectFadeEls();
+        queueAnimate();
       });
-
-      repos.sort(function (a, b) {
-        if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
-        return a.name.localeCompare(b.name);
-      });
-
-      container.innerHTML = '';
-      repos.forEach(function (repo) {
-        var a = document.createElement('a');
-        a.href = repo.html_url;
-        a.target = '_blank';
-        var img = document.createElement('img');
-        img.src = 'https://img.shields.io/github/stars/' + repo.full_name + '?style=flat-square&label=' + encodeURIComponent(repo.name);
-        img.alt = repo.name;
-        a.appendChild(img);
-        container.appendChild(a);
-      });
-    });
   }
-
-  loadRepoBadges();
 
   function esc(s) {
     if (!s) return '';
-    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   }
 });

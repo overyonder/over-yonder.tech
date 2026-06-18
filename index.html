@@ -5,20 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>over|yonder</title>
-  <script>
-    (function () {
-      var theme = localStorage.getItem('oy-theme');
-      if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
-    }());
-  </script>
   <link rel="stylesheet" href="styles.css?v=23">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css">
 </head>
 
 <body>
-  <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">Dark</button>
-
   <div class="logo">
     <img src="assets/logo.webp" alt="over|yonder logo">
     <div class="scroll-arrow" aria-hidden="true">&#x2193;</div>
@@ -41,6 +31,16 @@
           <section class="projects">
             <h2>Recent Projects</h2>
             <div class="project-cards">
+              <div class="project-card">
+                <div class="card-image openzt2-image" style="background-image: url('assets/openzt2-logo.webp')"></div>
+                <div class="card-content">
+                  <span class="year">2026</span>
+                  <h3>OpenZT2</h3>
+                  <p class="subtitle">Clean-Room Game Launcher</p>
+                  <p class="desc">Clean-room design reimplementation of the original 2008 game launcher, rebuilt for compatibility with 64-bit architectures</p>
+                  <a href="openzt2/" class="visit-btn">View Dashboard →</a>
+                </div>
+              </div>
               <div class="project-card">
                 <div class="card-image polymyth-image" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); display: flex; align-items: center; justify-content: center;"><span style="font-size: 2.5rem; opacity: 0.6;">⚔️</span></div>
                 <div class="card-content">
@@ -103,21 +103,6 @@
     <p class="copyright">&copy; 2025 over|yonder</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@15/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked-footnote/dist/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked-smartypants/lib/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked-alert@2/dist/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/rust.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/c.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/bash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/nix.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/diff.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/latex.min.js"></script>
   <script src="script.js?v=23"></script>
 </body>
 

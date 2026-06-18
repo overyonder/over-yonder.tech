@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenZT2 — Binary Perimeter</title>
+<style>
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--ok:#79740e;--warn:#b57614;--bad:#9d0006}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--bad:#cc241d}
+*{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
+button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
+.nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 12px}
+h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
+h3{font-size:14px;margin:16px 0 4px}
+.narrative{max-width:1000px}.narrative p,.narrative li{font-size:13px;line-height:1.6}.narrative p{margin:6px 0}.narrative table{margin:8px 0;font-size:12.5px}.narrative code{background:var(--soft);padding:.05em .35em;border-radius:3px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
+.controls{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}.controls input.search{width:260px;font:400 12px/1.2 ui-monospace,Menlo,Consolas,monospace}
+table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}th{background:var(--soft);position:sticky;top:0;cursor:pointer;user-select:none}td code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}tr:hover{background:var(--soft)}
+.pill{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;border:1px solid var(--control-border)}.s-named,.s-type-getter,.s-identified,.s-type-cache{background:color-mix(in srgb,var(--ok) 22%,transparent)}.s-region-tagged{background:color-mix(in srgb,var(--warn) 22%,transparent)}.s-unidentified,.s-thunk,.s-small-unidentified{background:color-mix(in srgb,var(--bad) 16%,transparent)}
+.tablewrap{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:4px}
+@media(max-width:720px){.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr)) 48px;width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border)}.tabs a{min-height:48px}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:20px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.theme-toggle{width:48px;height:48px}main{padding:8px 10px 74px}}
+</style>
+<body>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="zt-registrar-ledger.html"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Type Registry</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<main>
+ <h1>Binary Perimeter</h1>
+ <p class="sub">The stripped Zoo Tycoon 2 binary's function and global/static inventory, with per-function name, status, library provenance, vtable membership, and inferred domain. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>.</p>
+
+ <section class="narrative">
+  <h2>The denominator — outer code &amp; global perimeter</h2>
+  <p>This page measures the original game's outer code and state perimeter from the <strong>stripped</strong> executable (<code>build/unpacker/zt-stripped.exe</code>) using radare2 prelude+call analysis. It is the red-team denominator against which the reconstruction is measured. The Type Registry is the semantic view of the <code>register_type</code> slice of this perimeter; the tables below carry the full function and global/static enumeration.</p>
+
+  <h3>Functions — 19,145 entries</h3>
+  <p>radare2's raw <code>afl</code> count (~18.5k) is <em>real</em> function entries, not vtable pollution (vtables live in <code>.rdata</code>); but it is dominated by boilerplate — 341 thunks, ~6,257 getters/leaf accessors (17–64&nbsp;B), ~11,289 medium methods (mostly STL/template and component <code>read/write_xml_node</code>), and only <strong>1,258 large (&gt;512&nbsp;B) substantial-logic</strong> functions. Identification status (function granularity, not “falls in a region”):</p>
+  <table><thead><tr><th>Status</th><th>Count</th><th>Meaning</th></tr></thead><tbody>
+   <tr><td>named</td><td>626 (3%)</td><td>a byte-map row (or <code>function-names.tsv</code>) <strong>starts exactly at this function's entry</strong> and identifies it</td></tr>
+   <tr><td>type-getter</td><td>707 (4%)</td><td>contains a <code>register_type</code> (<code>0x005b46fc</code>) call — a registered-type accessor</td></tr>
+   <tr><td>unidentified</td><td>17,812 (93%)</td><td>distinct function, not individually identified; ~99% carry a <em>region</em> locality hint</td></tr>
+  </tbody></table>
+  <p>Naming is by <strong>exact entry anchor only</strong> — a byte-map row expanded from one symbol anchor over a multi-KB span (e.g. <code>get_type_ZTBiomeMode</code> covering 6&nbsp;KB / ~13 functions) names <strong>only</strong> the one function at its anchor; the others in that span are distinct and unidentified, carrying the nearest descriptive <em>region</em> band as a locality hint, not that symbol's name. So function-granular identification is <strong>~7.0%</strong> (1,333 of 19,145). The identification campaign (<code>tools/decompile-batch.py</code> → <code>function-names.tsv</code>) has swept the string-bearing substantial-logic surface to <strong>full-binary exhaustion</strong>: a corrected-display pass over <em>every</em> 0x40000-byte span of <code>.text</code> returns <strong>zero</strong> unidentified functions carrying ≥5 real string literals. Every UI panel, XML/config reader, dialog handler, shader binder, attribute/token registrar, state read/write pair, and the telemetry/IME/Lua plumbing is named. What remains is <strong>string-poor engine math</strong> (NetImmerse/Gamebryo geometry &amp; collision, D3D, AI scoring, mesh processing, STL boilerplate) — region-tagged, not exact-named — plus three jump-table dispatchers whose apparent “strings” are misread code bytes (<code>0x0044df15</code>, <code>0x006c1ffe</code>, <code>0x006d5355</code>).</p>
+
+  <h3>Beyond exact names: structural characterization — 98.5%</h3>
+  <p>Exact behavioural names only cover the string-bearing surface (~7%). To understand the rest without strings, three companion analyses attach orthogonal, address-keyed facts to every function entry (the <code>provenance</code>, <code>vtable</code>, <code>domain</code> columns below):</p>
+  <ul>
+   <li><strong>Library provenance</strong> (<code>tools/fingerprint-libs.py</code>) — third-party middleware bounded by identity strings, imports, magic constants, and surviving RTTI type-descriptor strings. <strong>Gamebryo/NetImmerse is one contiguous block <code>0x58dadb–0x7ca2fd</code></strong> (the D3D9 renderer), ~9,160 functions, with <strong>zlib 1.1.4 nested inside it</strong> (<code>0x67bda5–0x67ffb2</code>) and <strong>Lua 5.0.2</strong> at <code>0x873–0x893</code>. CRT/STL are dynamically linked (MSVCR80, a <code>/MD</code> build), so there is no static CRT span. Everything outside these spans is ZT/BlueFang code; the boundary is corroborated by a one-way call gradient — 5,788 outside functions call inward to 1,838 engine targets.</li>
+   <li><strong>Vtable membership</strong> (<code>tools/build-rtti-vtables.py</code>) — MSVC RTTI's COL/CHD/BaseClassArray were <strong>stripped</strong> from this image (only 99 TypeDescriptors survive), so class <em>names</em> and the inheritance graph are not RTTI-recoverable. But <strong>861 real vtables</strong> were enumerated as <code>.rdata</code> pointer runs → <strong>47,166 method slots → 14,375 previously-unidentified functions</strong> marked as polymorphic methods (slot 0 = destructor).</li>
+   <li><strong>Inferred domain</strong> (<code>tools/propagate-domains.py</code> over a 74,608-edge call graph + 557 import edges) — each unidentified function inherits a functional domain from its named neighbours and dominant API imports; 17,270 of 17,809 received one (clusters: ui 8.5k, renderer 3.3k, game-entities 1.9k, economy 1.9k).</li>
+  </ul>
+  <p>Net: <strong>18,853 / 19,145 (98.5%)</strong> of function entries now carry a name, type-getter role, library provenance, vtable-method membership, or an inferred domain. Only <strong>292 are fully opaque</strong> — 253 of them &lt;128&nbsp;B leaf thunks with no edges/strings/vtable, ~20 larger string-poor tank/map geometry helpers, and the 3 dispatchers. A further 8,156 are ZT/BlueFang code with an inferred functional area but no exact behavioural name yet (3,536 high-confidence) — the remaining frontier, now <em>scoped by domain</em> rather than opaque.</p>
+
+  <h3>Globals / statics — 5,236 cells</h3>
+  <p>Distinct global addresses referenced from <code>.text</code>: <strong>2,068 type-cache cells</strong> (the registered-type singletons), 179 otherwise byte-map-identified, and <strong>2,989 unidentified</strong> (~57%). Init-guard cells (<code>cache+4</code>) and the broader <code>.bss</code> are partial.</p>
+
+  <h3>Per-class method perimeter</h3>
+  <p>The <strong>property</strong> perimeter per class is the reconstructed field set; the <strong>method</strong> perimeter is the class's <strong>vtable slots</strong>. All <strong>861 vtables are now enumerated</strong> slot-by-slot (<code>reconstruction/vtable-methods-full.tsv</code>, 47,166 slots → 14,465 distinct method functions), but only <strong>5 are class-<em>named</em></strong> — because MSVC RTTI was stripped, the vtable→class-name link is gone. So the per-class method <em>shape</em> is fully recovered; the <em>labels</em> (which vtable is which class) await type-getter/constructor topology analysis.</p>
+
+  <h3>Recovered Scope</h3>
+  <ul>
+   <li><strong>Established:</strong> complete type/class ontology (1,967/1,967), their fields, relationships, the message vocabulary, the function/global <em>address</em> inventory, and region-level coverage of nearly all code.</li>
+   <li><strong>Open:</strong> function-granular identification beyond ~7%, the per-class vtable→class labelling, the behaviour/algorithms of most functions, and ~57% of globals' meaning.</li>
+  </ul>
+ </section>
+
+ <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
+ <div class="controls"><input class="search" id="fsearch" placeholder="filter by name / status / address / provenance / domain"><select id="fstatus"><option value="">all statuses</option></select><span class="sub" id="fshown"></span></div>
+ <div class="tablewrap"><table><thead><tr><th data-k="address">address</th><th data-k="size">size</th><th data-k="name">name</th><th data-k="region">region</th><th data-k="status">status</th><th data-k="provenance">provenance</th><th data-k="vtable">vtable slot</th><th data-k="domain">inferred domain</th></tr></thead><tbody id="frows"></tbody></table></div>
+
+ <h2>Global / static perimeter <span class="sub" id="gcount"></span></h2>
+ <div class="controls"><input class="search" id="gsearch" placeholder="filter globals"><select id="gstatus"><option value="">all statuses</option></select><span class="sub" id="gshown"></span></div>
+ <div class="tablewrap"><table><thead><tr><th data-k="address">address</th><th data-k="section">section</th><th data-k="name">name</th><th data-k="status">status</th></tr></thead><tbody id="grows"></tbody></table></div>
+</main>
+<script>
+(()=>{const key="zt2-theme";const root=document.documentElement;const stored=()=>{try{return localStorage.getItem(key)}catch(_){return null}};const save=t=>{try{localStorage.setItem(key,t)}catch(_){}};const apply=(t,p=false)=>{root.dataset.theme=t;if(p)save(t);const b=document.querySelector(".theme-toggle");if(b){b.textContent=t==="dark"?"☀":"☾";b.title="Toggle theme"}};apply(stored()==="light"?"light":"dark");window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);document.querySelector(".tabs").append(b);apply(root.dataset.theme||"dark")})})();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function tsv(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok){const t=await r.text();const L=t.trim().split(/\r?\n/);const h=L.shift().split("\t");return L.filter(Boolean).map(l=>{const c=l.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]||"");return o})}last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
+function pill(s){return `<span class="pill s-${esc(s)}">${esc(s)}</span>`}
+function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
+ let sortK=cols[0],desc=false;
+ const sel=document.getElementById(statusId);[...new Set(rows.map(r=>r.status))].sort().forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;sel.append(o)});
+ function render(){const q=document.getElementById(searchId).value.trim().toLowerCase();const sf=sel.value;
+  let r=rows.filter(x=>(!sf||x.status===sf)&&(!q||cols.some(k=>(x[k]||"").toLowerCase().includes(q))));
+  r.sort((a,b)=>{const x=(a[sortK]||""),y=(b[sortK]||"");return (x<y?-1:x>y?1:0)*(desc?-1:1)});
+  document.getElementById(shownId).textContent=r.length+" / "+rows.length;
+  const N=2000;const body=document.getElementById(bodyId);
+  body.innerHTML=r.slice(0,N).map(x=>"<tr>"+cols.map(k=>k==="status"?`<td>${pill(x[k])}</td>`:(k==="address"||k==="size"?`<td><code>${esc(x[k])}</code></td>`:`<td>${esc(x[k])}</td>`)).join("")+"</tr>").join("")+(r.length>N?`<tr><td colspan="${cols.length}" class="sub">… ${r.length-N} more (filter to narrow)</td></tr>`:"");
+ }
+ document.querySelectorAll(`#${bodyId}`)[0].closest("table").querySelectorAll("th").forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)desc=!desc;else{sortK=k;desc=false}render()});
+ document.getElementById(searchId).addEventListener("input",render);sel.addEventListener("change",render);
+ document.getElementById(countId).textContent=`(${rows.length})`;render();
+}
+Promise.all([
+ tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
+ tsv(["zt-global-perimeter.tsv","../reconstruction/global-perimeter.tsv"])
+]).then(([fp,gp])=>{
+ table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");
+ table(gp,"grows",["address","section","name","status"],"gsearch","gstatus","gshown","gcount");
+}).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
+</script>
+</html>
