@@ -756,12 +756,9 @@ is largely <code>todo!()</code>.</li>
 Individual mode method bodies are not yet reconstructed.</li>
 </ul>
 <h2>Entities, Animals, Catalog, and Selection</h2>
-<p><strong>An entity is a component aggregate.</strong> <code>BFGEntity</code> (parent
-<code>BFComponentNameMap</code>) is a named component map. Its single native C++ subtype in
-the binary is <code>ZTFenceEntity</code>.</p>
 <pre class="mermaid">classDiagram
   class BFGEntity {
-    name-keyed component map
+    component aggregate / name-keyed component map
     mainObjName component (cached)
     read_instance_xml_node()
     resolve_main_object_name_value()
