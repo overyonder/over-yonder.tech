@@ -2190,19 +2190,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <pre class="mermaid">classDiagram
   DataDocument "1" --> DataRoot : root</pre>
 <h4>Runtime Managers</h4>
-<p><strong>App relationships.</strong></p>
-<pre class="mermaid">classDiagram
-  UiListRowChildProjection "0..1" --> BFUITextDocument : rich_text
-  UiListRowChildProjection "*" --> UiEvent : activate_events
-  UiListRowProjection "*" --> UiListRowChildProjection : children
-  UiListRowProjection "*" --> UiEvent : on_events
-  UiRuntimeValues "*" --> UiNamedTextValue : named_text
-  UiTemplateDocument "1" --> UiDocument : document
-  UiNode "0..1" --> UiRegion : source_region
-  UiNode "1" --> UiState : authored_state
-  UISliderState "0..1" --> UiRegion : thumb_region
-  UISliderState "1" --> UIDragAxis : axis
-  ZTConfirmationRuntime "0..1" --> ZTExitConfirmation : exit_confirmation</pre>
 <p><strong>Manager relationships.</strong></p>
 <pre class="mermaid">classDiagram
   BFGPathRequest "0..1" --> BFGPathResult : result
@@ -2284,6 +2271,19 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTWebRequestQueue "*" --> ZTWebRequest : completed
   ZTWebRequest "1" --> ZTWebRequestKind : kind</pre>
 <h4>App, UI, and Modes</h4>
+<p><strong>App relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  UiListRowChildProjection "0..1" --> BFUITextDocument : rich_text
+  UiListRowChildProjection "*" --> UiEvent : activate_events
+  UiListRowProjection "*" --> UiListRowChildProjection : children
+  UiListRowProjection "*" --> UiEvent : on_events
+  UiRuntimeValues "*" --> UiNamedTextValue : named_text
+  UiTemplateDocument "1" --> UiDocument : document
+  UiNode "0..1" --> UiRegion : source_region
+  UiNode "1" --> UiState : authored_state
+  UISliderState "0..1" --> UiRegion : thumb_region
+  UISliderState "1" --> UIDragAxis : axis
+  ZTConfirmationRuntime "0..1" --> ZTExitConfirmation : exit_confirmation</pre>
 <p><strong>UI contract relationships.</strong></p>
 <pre class="mermaid">classDiagram
   BFLocaleMgrConfig "1" --> BFLocaleDateFormats : date_formats
