@@ -480,7 +480,9 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
     +183 UI_* interned tokens
     +registered through register_type
   }
-  class BFMessageBus { +listeners : Vec~BFMessageListener~; +queued_events : BFEventList }
+  class BFMessageBus { +listeners : Vec~BFMessageListener~; +next_sequence : u64 }
+  class BevyBFEventDispatched { +record : BevyBFEventDispatchRecord }
+  class BevyBFEventDelivered { +record : BevyBFEventDeliveryRecord }
   class BFMessageListener { +owner; +message; +callback_name }
   class UITreeLifecycleMessages {
     +UI_CHILD; +UI_GET_CHILD; +UI_DESTROY_CHILD_DELAYED
@@ -504,6 +506,8 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   UIMessageRegistry *-- UIRegionAspectMessages
   BFMessageBus "*" --> BFMessageListener : listeners
   BFMessageBus "*" --> UIInlineTypedValue : value payloads
+  BFMessageBus "*" --> BevyBFEventDispatched : dispatch_messages
+  BFMessageBus "*" --> BevyBFEventDelivered : delivery_messages
   UIInlineTypedValue --> UIPayloadValues</pre>
 <h3>UI Animation State Model</h3>
 <pre class="mermaid">classDiagram
@@ -595,7 +599,7 @@ reconstructed; only the message set and inheritance are established.</li>
   }</pre>
 <h4>Gesture System</h4>
 <pre class="mermaid">classDiagram
-  class ZTGestureMgr { +cloning/training minigame; +gestures; +committed_traces; +definitions; +tracer_visuals; +editing_directory }
+  class ZTGestureMgr { +cloning/training minigame; +gestures; +definitions; +tracer_visuals; +editing_directory }
   class ZTGestureDefinition {
     +gesture_type; +parent_obj; +parent_node
     +camera_pos; +plane_normal; +bounding_box_scale
@@ -656,13 +660,13 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTPuzzleMode "*" --> ZTModeColor : colors</pre>
 <pre class="mermaid">classDiagram
   class ZTFirstPersonMode { +common; +carrying_avatar_token; +camera_set; +help_flags; +action_mode; +prompt_delay_seconds; +screen_dither; +keyboard_rotate_speed; +move_speed; +turn_speed; +center_mouse_on_hide; +native_state }
-  class ZTFirstPersonModeNativeState { +mouse_look_active; +mouse_prompt_visible; +yaw; +pitch; +strafe; +forward; +transitions; +resource_updates; +movement_events; +camera_moved_messages }
+  class ZTFirstPersonModeNativeState { +mouse_look_active; +mouse_prompt_visible; +yaw; +pitch; +strafe; +forward }
   class ZTFPClimbLadderMode { +base; +ladder_entity; +direction; +time_per_meter; +target_platform; +native_state }
   class ZTTrainingNativeUiBinding { +field; +lookup_name; +native_field; +projection }
   class ZTTrainingNativePresentation { +reset_message; +player_training_layout; +player_training_activate_message; +player_training_show_message; +player_training_master_listbox; +player_training_item_layout; +player_training_trick_button; +training_complete_trick_image_layout; +training_complete_trick_image; +training_locked_icon; +new_trick_border; +reward_message_control; +reward_message_show_message; +reward_message_hide_message }
   class ZTSuperStaffMode { +common; +staff_entity; +active_usage_object; +max_usage_object_distance; +usage_object_labels; +user_prompt }
   class ZTFPTrainingResultFeedbackAdvance { +crowd_cheer_token; +show_reward_message; +apply_reward; +cleanup_result_ui }
-  class ZTFPTrainingModeState { +active_task_token; +selected_gesture_token; +active_learning_delta; +active_keyboard_tokens; +last_keyboard_action; +event_count; +gesture_trace; +score_percent; +final_score; +result_bucket; +result_feedback_token; +result_feedback_phase; +result_feedback_elapsed_seconds; +crowd_feedback_sent }
+  class ZTFPTrainingModeState { +active_task_token; +selected_gesture_token; +active_learning_delta; +active_keyboard_tokens; +event_count; +gesture_trace; +score_percent; +final_score; +result_bucket; +result_feedback_token; +result_feedback_phase; +result_feedback_elapsed_seconds; +crowd_feedback_sent }
   ZTFirstPersonMode --> ZTFirstPersonModeNativeState
   ZTFPClimbLadderMode --> ZTFirstPersonModeNativeState
   ZTFPTrainingModeState --> ZTTrainingNativePresentation
@@ -678,29 +682,35 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTOverviewModeState "*" --> ZTOverviewVisibleObject : visible_objects
   ZTDeleteModeState "0..1" --> ZTDeleteRequest : pending_request</pre>
 <pre class="mermaid">classDiagram
-  class ZTDownloadModeState { +index; +items; +queue; +selected_item; +document; +items_list; +confirmation }
+  class ZTDownloadModeState { +index; +items; +selected_item; +document; +items_list; +confirmation }
   class ZTDownloadModeDocument { +base_url_template; +index_file; +downloads_root; +version }
   class ZTDownloadItemsListRow { +item_id; +ui_name; +site_name; +enabled; +viewable; +status }
   class ZTDownloadItem { +item_id; +ui_name; +site_name; +file_path; +enabled; +viewable; +version; +status }
-  class ZTDownloadQueue { +requests; +active_request; +completed_requests; +cancelled_requests }
   class ZTDownloadRequest { +item_id; +url; +target_path; +cancel_message }
   class ZTDownloadConfirmation { +item_id; +confirm_exit_token; +cancel_downloads_token; +confirmed }
   ZTDownloadModeState "1" --> ZTDownloadModeDocument : document
   ZTDownloadModeState "*" --> ZTDownloadItem : items
   ZTDownloadModeState "*" --> ZTDownloadItemsListRow : items_list
-  ZTDownloadModeState "1" --> ZTDownloadQueue : queue
-  ZTDownloadModeState "0..1" --> ZTDownloadConfirmation : confirmation
-  ZTDownloadQueue "*" --> ZTDownloadRequest : requests</pre>
+  ZTDownloadModeState "*" --> ZTDownloadRequest : transfer_requests
+  ZTDownloadModeState "0..1" --> ZTDownloadConfirmation : confirmation</pre>
 <pre class="mermaid">classDiagram
   class ZTGfxOptionsModeSnapshot { +graphics; +audio; +vince; +selected_detail_level; +selected_detail_token; +custom_detail_active; +display_mode_dirty; +detail_settings_dirty; +sound_settings_dirty; +free_mouse_look; +use_low_mem_defaults; +native_float_controls; +selected_settings; +pending_value_writes }
   class ZTGfxOptionsNativeFloatControls { +sound_volume; +music_volume; +two_d_sound_fx_volume; +three_d_sound_fx_volume }
   class ZTGfxOptionsFloatMessage { +control; +slider_widget; +value; +native_field; +descriptor; +route }
+  class ZTGfxOptionsFloatMessageRecorded { +message }
+  class ZTGfxOptionsNativeEventEffect { +updated; +accepted; +back_reverted }
+  class ZTGfxOptionsBackRevert { +dispatched_float_messages }
   class ZTGfxOptionsAcceptance { +profile_writes; +safe_graphics_writes; +motd_enabled; +confirmation_message; +save_profile_options }
+  class ZTOptionsValueWrite { +key; +value_type; +value }
   class ZTGraphicsSafeMode { +fullscreen; +screen_width; +screen_height; +screen_depth }
   class ZTOptionsSelectedSetting { +token; +label_locid; +setting_widget; +preset_attribute; +selected_index; +locid; +values }
   class ZTOptionsTypedValue { +name; +value_type; +value; +attributes }
   ZTGfxOptionsModeSnapshot --> ZTGfxOptionsNativeFloatControls
-  ZTGfxOptionsModeSnapshot "*" --> ZTGfxOptionsFloatMessage : pending_value_writes
+  ZTGfxOptionsModeSnapshot "*" --> ZTOptionsValueWrite : pending_value_writes
+  ZTGfxOptionsNativeEventEffect --> ZTGfxOptionsAcceptance : accepted
+  ZTGfxOptionsNativeEventEffect --> ZTGfxOptionsBackRevert : back_reverted
+  ZTGfxOptionsBackRevert "*" --> ZTGfxOptionsFloatMessage : dispatched_float_messages
+  ZTGfxOptionsFloatMessageRecorded "1" --> ZTGfxOptionsFloatMessage : message
   ZTGfxOptionsAcceptance --> ZTGraphicsSafeMode : safe graphics restore
   ZTOptionsSelectedSetting "*" --> ZTOptionsTypedValue : values</pre>
 <p><strong>Open contracts.</strong></p>
@@ -1475,6 +1485,10 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +disease_name; +target_entity
     +cause_entity; +cure_entity; +research_state
   }
+  class ZTDiseasePropagationObservation {
+    +disease_name; +source_entity; +target_entity
+    +contact_entity; +source_message; +result_token
+  }
   class ZTDiseaseQualifier {
     +ZTEntityTypePredicate; +ZTZooFamePredicate
     +ZTAnimalAttributeFilter attribute/boolValue/stringValue
@@ -1491,6 +1505,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
   ZTDiseaseQualifier *-- ZTDiseaseZooTest
   ZTDiseaseQualifier *-- ZTDiseaseAnimalFilter
   ZTDiseaseCase ..> ZTCureDiseaseMode : sample/cure
+  ZTDiseasePropagationObservation ..> ZTDiseaseCase : propagation fact
   ZTBehCureDisease ..> ZTCureDiseaseMode
   ZTBehAddSubjectAsDiseaseTarget ..> ZTCureDiseaseMode</pre>
 <pre class="mermaid">stateDiagram-v2
@@ -1625,7 +1640,8 @@ context:</p>
     +campaign_documents : Vec~BFCampaign~
     +campaign_state : ZTCampaignState
     +event_root : BFScenarioEventRoot
-    +pending_script_actions
+    +fired_actions
+    +Bevy action/command/result messages
   }
   class BFScenarioMgr { +groups[]; +rules_by_name : Vec~BFScenarioRuleState~; +active_challenge }
   class Campaign {
@@ -1640,7 +1656,7 @@ context:</p>
   }
   class BFScriptContext {
     +context_name; +script : AssetPath
-    +exported_functions[]; +function_bindings[]; +actions[]; +loaded
+    +exported_functions[]; +function_bindings[]; +loaded
   }
   class BFScriptFunctionBinding { +function_name; +command_name; +argument_signature[]; +return_signature[] }
   ZTScenarioMgr *-- BFScenarioMgr
@@ -1823,10 +1839,18 @@ autosave cadence are open.</li>
     +ZT_CAMERA_PAN; +ZT_CAMERA_POSITION; +ZT_CAMERA_MOVED
     +ZT_BLIT frame blit
   }
+  class ZTCameraCommandReaderEffect { +state_event; +native }
   ZTCameraCommandReader "*" --> ZTCameraCommandStateBinding : bindings
   ZTCameraCommandReader "*" --> ZTCameraCommandEvent : events
   ZTCameraActiveCommands "*" --> ZTCameraActiveCommandState : live states
-  ZTCameraCommandEvent ..> CameraMessages : messages</pre>
+  ZTCameraCommandReaderEffect "1" --> ZTCameraCommandStateEvent : state_event
+  ZTCameraCommandReaderEffect "1" --> ZTCameraCommandReaderNativeEffect : native
+  ZTCameraCommandEvent ..> CameraMessages : messages
+  ZTCameraCommandReaderEffect ..> ZTCameraActiveCommands : updates</pre>
+<p>The command reader consumes authored command events and returns
+<code>ZTCameraCommandReaderEffect</code> values; Bevy publishes those effects through
+runtime message writers. <code>ZT_CAMERA_MOVED</code> is emitted as a BF app message after
+loaded-world camera state or transform changes.</p>
 <h3>Audio</h3>
 <pre class="mermaid">classDiagram
   BFSnd <|-- BF2DSnd
@@ -1871,7 +1895,7 @@ autosave cadence are open.</li>
   class BFSoundMgr {
     +categories : Vec~SoundCategory~
     +options : BFSoundOptions
-    +sound_tags; +pending_events
+    +sound_dirs; +sound_tags
   }
   class BFSoundOptions { +want_sound; +sample_rate; +bits; +channels; +mixer_channels }
   BFDX9Renderer *-- BFDX9RendererConfig
@@ -2097,11 +2121,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFGPathGraph "*" --> BFGPathNode : nodes
   BFGPathGraph "*" --> BFGPathEdge : edges
   BFGTraversabilityMgr "*" --> BFGTraversableArea : viewing_areas
-  BFGTraversabilityMgr "*" --> ChangedTriangleRecord : changed_triangles
-  BFGTraversabilityMgr "*" --> ChangedTriangleRecord : immediate_changed_triangles
-  BFGTraversabilityMgr "1" --> BFGTraversabilityInvalidationQueue : invalidation_queue
-  BFGTraversabilityInvalidationQueue "*" --> ChangedTriangleRecord : delayed
-  BFGTraversabilityInvalidationQueue "*" --> ChangedTriangleRecord : immediate
   BFGTraversabilityCollisionTest "1" --> BFGCollisionTesterConfig : tester
   BFGTraversabilityCollisionTest "0..1" --> BFGTraversabilityCollisionResult : result
   ZTFeedbackGlobalThought "0..1" --> ZTMessageInfo : message
@@ -2119,16 +2138,14 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFLuaConfig "0..1" --> BFLuaLogConfig : log
   BFLuaLogConfig "*" --> BFLuaLogChannelConfig : channels
   BFNamedBinder "1" --> BFBinder : binder
-  BFPerformanceCommandQueue "*" --> BFPerformanceCommand : pending
-  BFPerformanceCommandQueue "*" --> BFPerformanceCommand : completed
-  BFPerformanceMonitor "1" --> BFPerformanceCommandQueue : commands
   BFRefCountedXMLObj "1" --> BFXMLObj : object
   BFTypedBinderDescriptor "*" --> BFTypedBinderDataRoot : data_roots
   BFTypedBinderDescriptor "*" --> BFTypedBinderTypeRule : type_rules
   BFTypedBinderCommandDispatcher "*" --> BFTypedBinderCommand : commands
   BFTypedBinderCommandDispatcher "0..1" --> BFTypedBinderCommandResult : last_result</pre>
 <pre class="mermaid">classDiagram
-  BFUndoEventRoot "0..1" --> BFUndoActivateTransaction : active_transaction
+  BFUndoEventRoot "0..1" --> ZTUndoRuntimeCommand : event_token
+  ZTUndoRuntimeCommandRecorded "1" --> ZTUndoRuntimeCommand : command
   BFUserOptions "1" --> BFGraphicsOptions : graphics
   BFUserOptions "1" --> BFAudioOptions : audio
   BFUserProfileEventRoot "*" --> BFUserProfileCommand : commands
@@ -2144,14 +2161,13 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <pre class="mermaid">classDiagram
   VinceLog "0..1" --> VinceLogGuid : guid
   ZT2Client "1" --> BF3DApp : app
-  ZTCommandStateSet "*" --> ZTCommandStateEvent : history
-  ZTDebugCommandQueue "*" --> ZTDebugCommand : pending
-  ZTDebugCommandQueue "*" --> ZTDebugCommand : completed
+  ZTCommandStateSet "*" --> ZTCommandStateEvent : active
+  ZTDebugCommandRecorded "1" --> ZTDebugCommand : command
+  ZTDevConsoleCommandRecorded "1" --> ZTDevConsoleMessageCommand : command
   ZTDevConsole "*" --> ZTDevConsoleCommand : commands
   ZTDevConsole "*" --> ZTDevConsoleAlias : aliases
   ZTDevConsole "*" --> ZTDevConsoleResponse : bad_word_responses
-  ZTDevConsole "*" --> ZTDevConsoleMessageCommand : pending_messages
-  ZTDownloadsState "*" --> ZTWebFileTransfer : active_downloads
+  ZTDevConsole "*" --> ZTDevConsoleMessageCommand : message_commands
   ZTEULACheckAppConfig "*" --> ZTEulaConfig : eulas</pre>
 <pre class="mermaid">classDiagram
   ZTFilePathResolver "0..1" --> ZTAbsoluteFilePathRequest : last_request
@@ -2159,17 +2175,13 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTHardwareRequirementSet "1" --> ZTGraphicsRequirement : graphics
   ZTWEB "*" --> ZTWebEvent : events
   ZTWEB "*" --> ZTWebFileTransfer : transfers
-  ZTWEB "1" --> ZTWebRequestQueue : requests
-  ZTWEB "1" --> ZTWebCommandQueue : commands
+  ZTWEB "*" --> ZTWebRequest : requests
+  ZTWEB "*" --> ZTWebCommand : commands
   ZTWEB "1" --> ZTWebMotdState : motd
-  ZTWebCommandQueue "*" --> ZTWebCommand : pending
-  ZTWebCommandQueue "*" --> ZTWebCommand : completed
   ZTWebFileTransfer "1" --> ZTWebRequestKind : request_kind
   ZTWebMotdState "0..1" --> ZTWebMotdDefaultIconResource : default_icon
   ZTWebMotdState "*" --> ZTWebMotdMessage : messages
   ZTWebMotdMessage "1" --> BFUITextDocument : content
-  ZTWebRequestQueue "*" --> ZTWebRequest : pending
-  ZTWebRequestQueue "*" --> ZTWebRequest : completed
   ZTWebRequest "1" --> ZTWebRequestKind : kind</pre>
 <h4>App, UI, and Modes</h4>
 <p><strong>App relationships.</strong></p>
@@ -2184,7 +2196,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   UiNode "1" --> UiState : authored_state
   UISliderState "0..1" --> UiRegion : thumb_region
   UISliderState "1" --> UIDragAxis : axis
-  ZTConfirmationRuntime "0..1" --> ZTExitConfirmation : exit_confirmation</pre>
+  ZTAppMessageEffect "*" --> UiPresentationCommand : presentation_commands</pre>
 <p><strong>UI contract relationships.</strong></p>
 <pre class="mermaid">classDiagram
   BFLocaleMgrConfig "1" --> BFLocaleDateFormats : date_formats
@@ -2275,15 +2287,17 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   UITextCommand "1" --> UICommandTarget : target
   UIVisibilityCommand "1" --> UICommandTarget : target</pre>
 <pre class="mermaid">classDiagram
+  class ZTZoopediaNavigationRecorded { +record : ZTZoopediaNavigationRuntimeRecord }
   UiBindingDomain "1" --> UiValueHandlerRegistry : handler_registry
   UiBindingDomain "1" --> BFMessageBus : message_bus
+  UiBindingDomain "*" --> BevyBFEventDispatched : dispatch_messages
+  UiBindingDomain "*" --> BevyBFEventDelivered : delivery_messages
   UiBindingDomain "1" --> UiNamedValueAssignmentList : named_assignments
   UiBindingDomain "1" --> ZTUITimedEvents : timed_events
   UiBindingDomain "1" --> UIHotKeyDocument : hotkeys
   UiBindingDomain "1" --> ZTMessagesDocument : messages
   UiBindingDomain "1" --> ZTEntriesDocument : entries
   UiBindingDomain "1" --> ZTChallengesDocument : challenges
-  UiBindingDomain "*" --> UiMoneyEvent : money_events
   UiBindingDomain "*" --> ZTUITypeList : type_lists
   UiBindingDomain "*" --> ZTUIResearchButton : research_buttons
   UiBindingDomain "*" --> ZTUIAdoptionButton : adoption_buttons
@@ -2296,14 +2310,13 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   UiBindingDomain "*" --> ZTGenericConfirmation : confirmations
   UiBindingDomain "*" --> ZTNamedEventRoute : named_event_routes
   UiBindingDomain "*" --> ZTUIAutoPopulateList : auto_populate_lists
-  UiBindingDomain "*" --> ZTUITypeFilterCommand : type_filter_commands
+  UiBindingDomain "*" --> ZTUITypeFilterCommandApplied : type_filter_command_messages
   UiBindingDomain "*" --> ZTUIActivateButtonCommand : activate_button_commands
   UiBindingDomain "*" --> ZTMultiListCommand : multi_list_commands
-  UiBindingDomain "*" --> ZTZoopediaNavigation : zoopedia_navigation
+  UiBindingDomain "*" --> ZTZoopediaNavigationRecorded : zoopedia_navigation_messages
   UiBindingDomain "1" --> ZTLogEntitySelection : log_entity_selection</pre>
 <pre class="mermaid">classDiagram
-  UiMoneyEvent "1" --> UiMoneyEventKind : kind
-  UiMoneyEvent "1" --> UIFloatPayloadValue : amount_payload
+  ZTUITypeFilterCommandApplied "1" --> ZTUITypeFilterCommand : command
   UiNamedValueAssignment "1" --> UiValueTypeHandle : value_type
   UiNamedValueAssignment "1" --> UiValueAssignmentBase : base
   UiNamedValueAssignmentList "*" --> UiNamedValueAssignment : assignments
@@ -2315,7 +2328,8 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   UiValueHandlerEntry "1" --> UiHandlerOwner : owner
   UiValueHandlerRegistry "*" --> UiValueHandlerEntry : entries
   ZTAwardPanel "*" --> ZTAwardPanelEntry : current_awards
-  ZTAwardPanel "*" --> ZTAwardPanelEntry : persistent_awards</pre>
+  ZTAwardPanel "*" --> ZTAwardPanelEntry : persistent_awards
+  ZTZoopediaNavigationRecorded "1" --> ZTZoopediaNavigation : record</pre>
 <pre class="mermaid">classDiagram
   ZTBuyInfoPanel "0..1" --> ZTBuyInfoKind : info_kind
   ZTBuyInfoPanel "*" --> ZTBuyInfoFilter : filters
@@ -2343,14 +2357,15 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   GestureDomain "1" --> ZTGestureSplineEditor : editor
   GestureDomain "0..1" --> ZTGestureComponent : active_gesture
   GestureDomain "0..1" --> ZTGestureTrace : active_trace
-  GestureDomain "*" --> ZTGestureEventFail : failed_events
+  GestureDomain "*" --> ZTGestureTraceEventFailureRecorded : failed_event_messages
+  GestureDomain "*" --> ZTGestureBegunRecorded : begun_messages
+  GestureDomain "*" --> ZTGestureTraceCommitted : committed_trace_messages
   GesturesDocument "*" --> ZTGestureDefinition : definitions
   GesturesDocument "0..1" --> ZTGestureEditingConfig : editing
   GesturesDocument "0..1" --> ZTGestureEventFail : failed_event
   ZTGestureComponentNativeContract "1" --> ZTGestureProjectionFrame : projection_frame
   ZTGestureComponentNativeContract "*" --> ZTGestureTraceEventTextureBinding : event_textures
   ZTGestureRecognizer "*" --> ZTGestureDefinition : definitions
-  ZTGestureRecognizer "0..1" --> ZTGestureMatch : last_match
   ZTGestureSplineEditor "0..1" --> ZTEditableGestureSpline : active_spline
   ZTGestureSplineEditor "*" --> ZTGestureSplineCommand : commands</pre>
 <pre class="mermaid">classDiagram
@@ -2394,20 +2409,26 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ModesDomain "1" --> ZTCloningGestureModeState : cloning_gesture_state
   ModesDomain "1" --> ZTSuperStaffModeState : super_staff_state
   ModesDomain "*" --> ZTModeCommand : commands
-  ModesDomain "*" --> ZTKeyboardAction : keyboard_actions</pre>
+  ModesDomain "*" --> ZTKeyboardAction : keyboard_actions
+  ModesDomain "*" --> ZTFirstPersonMouseLookTransitionRecorded : first_person_mouse_look_transition_messages
+  ModesDomain "*" --> ZTFirstPersonResourceUpdateRecorded : first_person_resource_update_messages
+  ModesDomain "*" --> ZTModeAudioHookRecorded : mode_audio_hook_messages</pre>
 <pre class="mermaid">classDiagram
   ZTDownloadIndex "*" --> ZTDownloadItem : items
   ZTFPClimbLadderModeNativeState "*" --> ZTFPClimbLadderDurationRequest : duration_requests
   ZTFileInfoList "*" --> FileInfo : rows
+  ZTFirstPersonMouseLookTransitionRecorded "1" --> ZTFirstPersonMouseLookTransition : transition
+  ZTFirstPersonResourceUpdateRecorded "1" --> ZTFirstPersonResourceUpdate : update
   ZTFirstPersonResourceUpdate "1" --> ZTFirstPersonResourceValue : value
-  ZTFirstPersonMovementEvent "1" --> ZTFirstPersonMovementAxis : axis
   ZTFirstPersonModeState "0..1" --> ZTModeKind : entered_from_mode
+  ZTModeAudioHookRecorded "1" --> ZTModeAudioHook : hook
   ZTGestureCreationMode "1" --> ZTModeClassSurface : surface
-  ZTGestureCreationMode "1" --> ZTGestureCreationBounds : trick_bounds
-  ZTGestureTraceModeBaseNativeState "0..1" --> ZTGestureTraceScore : last_trace_score</pre>
+  ZTGestureCreationMode "1" --> ZTGestureCreationBounds : trick_bounds</pre>
 <pre class="mermaid">classDiagram
-  ZTGfxOptionsBackRevert "1" --> ZTGfxOptionsModeSnapshot : restored
+  ZTGfxOptionsNativeEventEffect --> ZTGfxOptionsAcceptance : accepted
+  ZTGfxOptionsNativeEventEffect --> ZTGfxOptionsBackRevert : back_reverted
   ZTGfxOptionsBackRevert "*" --> ZTGfxOptionsFloatMessage : dispatched_float_messages
+  ZTGfxOptionsFloatMessageRecorded "1" --> ZTGfxOptionsFloatMessage : message
   ZTGfxOptionsSafeGraphicsRestore "1" --> ZTGraphicsSafeMode : restored
   ZTGfxOptionsSettingsDocument "*" --> ZTOptionsSettingDefinition : settings
   ZTMainMode "1" --> ZTModeClassSurface : surface
@@ -2433,7 +2454,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   AnimalDomain "1" --> ZTAdoptionSlotMgr : adoption_slot_mgr
   AnimalDomain "1" --> ZTFavoriteAnimalMgr : favorite_animal_mgr
   BFGEntity ..> ZTAnimal : component-derived animal view
-  AnimalDomain "*" --> ZTAnimalSourceIdentity : source_resolutions
   AnimalDomain "*" --> ZTAnimalBirthEvent : birth_events
   AnimalDomain "*" --> ZTAnimalUiAction : user_actions
   ZTAnimalFamilyTree "*" --> ZTAnimalLineageRecord : relation_rows
@@ -2474,10 +2494,14 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   TransportDomain "*" --> ZTTransportStation : stations
   TransportDomain "1" --> ZTGroundTrackModeState : ground_track_mode
   TransportDomain "1" --> ZTTransportQuerySet : queries
+  TransportDomain "*" --> ZTTransportCommandRecorded : command_messages
+  TransportDomain "*" --> ZTTransportCommandResultRecorded : command_result_messages
   ZTChangeCircuitDirectionCommand "0..1" --> RouteDirection : requested_direction
+  ZTTransportCommandRecorded "1" --> ZTTransportCommand : command
+  ZTTransportCommandResultRecorded "1" --> TransportRuntimeCommandResult : result
   ZTTourData "*" --> ZTTourDataAttr : tours
   ZTTourData "*" --> ZTTourDataFeedback : feedback
-  ZTTourRecorderData "*" --> ZTTourWaypoint : waypoints
+  ZTTourRecorderData "*" --> ZTTourRatingRange : rating_ranges
   ZTTransportQuerySet "1" --> ZTGetCircuitQuery : circuit_query
   ZTTransportQuerySet "1" --> ZTClosedCircuitQuery : closed_circuit_query
   ZTTransportQuerySet "1" --> ZTConnectedSkyPieceQuery : connected_sky_piece_query
@@ -2496,7 +2520,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   FenceDomain "1" --> ZTFenceModeState : placement_mode
   FenceDomain "*" --> ZTFenceTopologyEvent : topology_events
   ZTFenceModeState "1" --> FencePlacementShape : shape
-  ZTFenceModeState "0..1" --> ZTFenceModeRotation : last_rotation
   ZTFenceModeCommandDecision "0..1" --> FencePlacementShape : shape
   ZTFenceModeCommandDecision "0..1" --> FencePlacementShape : previous_shape
   ZTFenceModeCommandDecision "0..1" --> ZTFenceModeRotation : rotation
@@ -2535,16 +2558,17 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <pre class="mermaid">classDiagram
   BFGWorld "*" --> BFGEntity : entities
   BFGWorld "1" --> BFGPlacementGrid : placement_grid
-  BFGWorld "1" --> BFGWorldMutationQueue : mutation_queue
+  BFGWorld "*" --> ZTWorldRuntimeEvent : runtime_events
   BFGWorld "1" --> BFGGameAttachment : attached_game
   BFGWorld "1" --> BFGWorldAttachment : attached_world
   BFGWorld "1" --> BFGEntityTypeIndex : entity_type_index
   BFGWorld "1" --> BFGEventRoot : event_root
-  BFGWorldMutationQueue "*" --> BFGSpawnEntityRequest : spawn_requests
-  BFGWorldMutationQueue "*" --> BFGRemoveEntityBatch : remove_batches
-  BFGWorldMutationQueue "*" --> BFGEntityColorCommand : color_commands
-  BFGWorldMutationQueue "*" --> BFGComponentLookup : component_lookups
-  BFGWorldMutationQueue "*" --> BFGEntityBatchActionEvent : batch_events
+  BFGWorld "*" --> BFGSpawnEntityRequest : spawn_requests
+  BFGWorld "*" --> BFGRemoveEntityBatch : remove_batches
+  BFGWorld "*" --> BFGEntityColorCommand : color_commands
+  BFGWorld "*" --> BFGComponentLookup : component_lookups
+  BFGWorld "*" --> BFGEntityBatchActionEvent : batch_events
+  ZTWorldRuntimeEvent "0..1" --> BFGSpawnedEntity : spawned_entity
   BFGestureSplineComponent "1" --> BFEntityComponentCommon : common
   BFHasParticleComponent "1" --> BFEntityComponentCommon : common
   BFHelpComponent "1" --> BFEntityComponentCommon : common
@@ -2606,18 +2630,21 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTOverviewComponent "1" --> BFEntityComponentCommon : common
   ZTOverviewComponent "*" --> ZTOverviewLayer : layers
   ZTOverviewComponent "1" --> ZTOverviewExport : export
-  ZTTriggeredEventsComponent "*" --> ZTTriggeredEventRecord : pending_events</pre>
+  ZTTriggeredEventsComponent "*" --> ZTTriggeredEventRecord : zt_event_records
+  ZTTriggeredEventsComponent "*" --> ZTWorldEventHookRecord : event_hooks</pre>
 <p><strong>Terrain relationships.</strong></p>
 <pre class="mermaid">classDiagram
   BFTerrainEvent "*" --> ZTChangedTriangle : changed_triangles
   BFTerrainEvent "0..1" --> BFTerrainChargeCommand : charge
   BFTerrainMeshPatch "*" --> BFTerrainVertex : vertices
   BFTerrainMeshPatch "*" --> BFTerrainTriangle : triangles
-  BFTerrainUndoData "*" --> BFTerrainUndoRecord : records
-  BFTerrainUndoData "0..1" --> BFTerrainChargeCommand : final_charge
-  BFTerrainUndoData "*" --> BFTerrainUndoBoundary : boundaries
+  BFTerrainUndoData "*" --> BFTerrainUndoRecord : active_records
+  BFTerrainUndoData "*" --> BFTerrainUndoBoundary : active_boundaries
   BFTerrainUndoRecord "0..1" --> BFTerrainMeshPatch : before_patch
   BFTerrainUndoRecord "0..1" --> BFTerrainMeshPatch : after_patch
+  BFTerrainUndoTransactionRecord "*" --> BFTerrainUndoRecord : records
+  BFTerrainUndoTransactionRecord "0..1" --> BFTerrainChargeCommand : final_charge
+  BFTerrainUndoTransactionRecord "*" --> BFTerrainUndoBoundary : boundaries
   BiomeOptions "*" --> BiomeBrushSet : brush_sets
   MapsConfig "*" --> MapConfigEntry : entries
   TerrDeformationUI "*" --> TerrDeformationCursorTexture : cursor_textures
@@ -2628,7 +2655,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   TerrainDomain "1" --> BFTerrain : bf_terrain
   TerrainDomain "*" --> BFTerrainMeshPatch : mesh_patches
   TerrainDomain "1" --> BFTerrainUndoData : undo_data
-  TerrainDomain "*" --> BFTerrainChargeCommand : charge_queue
   TerrainDomain "1" --> BiomeOptions : biome_options
   TerrainDomain "1" --> TerrDeformationUI : deformation_ui
   TerrainDomain "1" --> TerrPaintUI : paint_ui
@@ -2639,28 +2665,33 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   TerrainDomain "1" --> ZTTerrainModeState : terrain_mode
   TerrainDomain "0..1" --> ZTTerrainCommandReader : active_command_reader
   TerrainDomain "*" --> ZTChangedTriangle : changed_triangles
-  TerrainDomain "*" --> ZTBiomeObjectEvent : biome_events
-  TerrainDomain "*" --> BFTerrainEvent : events
   TerrainDomain "1" --> ZTTerrainBrushPreview : brush_preview
-  TerrainDomain "*" --> BFTerrainWaterEdit : water_edits
-  TerrainDomain "*" --> ZTBiomeUndoDeleteFlattening : flattening_deletions
-  TerrainDomain "0..1" --> BFTerrainWorldSurface : loaded_world_surface</pre>
+  TerrainDomain "0..1" --> BFTerrainWorldSurface : loaded_world_surface
+  TerrainDomain "*" --> ZTTerrainRuntimeCommandRecorded : command_messages
+  TerrainDomain "*" --> BFTerrainChargeCommandRecorded : charge_messages
+  TerrainDomain "*" --> BFTerrainUndoTransactionRecorded : undo_transaction_messages
+  TerrainDomain "*" --> BFTerrainEventRecorded : terrain_messages
+  TerrainDomain "*" --> BFTerrainWaterEditRecorded : water_edit_messages
+  TerrainDomain "*" --> ZTBiomeFlatteningDeletionRecorded : flattening_delete_messages
+  TerrainDomain "*" --> ZTAutoPlacementObjectSpawnRecorded : autoplacement_spawn_messages</pre>
 <pre class="mermaid">classDiagram
   ZTAutoPlacementController "*" --> ZTAutoPlacementVariation : variations
-  ZTAutoPlacementController "*" --> ZTAutoPlacementObjectSpawn : pending_spawns
-  ZTAutoPlacementController "*" --> ZTAutoPlacementObjectSpawn : pending_removals
   ZTAutoPlacementVariation "1" --> ZTAutoPlacementObjectMask : object_mask
   ZTAutoPlacementVariation "*" --> ZTAutoPlacementWeightedObject : weighted_objects
-  ZTBiomeModeState "0..1" --> BiomeBrushSet : brush_set
-  ZTBiomeModeState "*" --> ZTAutoPlacementObjectSpawn : added_objects
-  ZTBiomeModeState "*" --> ZTAutoPlacementObjectSpawn : removed_objects
+  ZTBiomeModeState "0..1" --> BFGBiome : selected_biome
   ZTBiomeModeState "*" --> ZTBiomeCommand : commands
+  ZTTerrainRuntimeCommandRecorded "1" --> ZTTerrainCommandRecord : record
+  BFTerrainChargeCommandRecorded "1" --> BFTerrainChargeCommand : command
+  BFTerrainEventRecorded "1" --> BFTerrainEvent : record
+  BFTerrainWaterEditRecorded "1" --> BFTerrainWaterEdit : record
+  ZTBiomeFlatteningDeletionRecorded "1" --> ZTBiomeUndoDeleteFlattening : record
+  ZTAutoPlacementObjectSpawnRecorded "1" --> ZTAutoPlacementObjectSpawn : spawn
   ZTTerrainCommandRecord "1" --> ZTTerrainCommand : command
   ZTTerrainCommandRecord "0..1" --> BFTerrainUndoRecord : undo_record
   ZTTerrainCommandRecord "0..1" --> BFTerrainChargeCommand : charge
+  BFTerrainUndoTransactionRecorded "1" --> BFTerrainUndoTransactionRecord : transaction
   ZTTerrainModeState "0..1" --> TerrainBrush : active_brush
   ZTTerrainModeState "0..1" --> ZTTerrainCommandReader : command_reader
-  ZTTerrainModeState "0..1" --> ZTTerrainCommandRecord : last_command
   ZTTerrainModeState "0..1" --> BFTerrainMeshPatch : preview_patch</pre>
 <p><strong>Tank relationships.</strong></p>
 <pre class="mermaid">classDiagram
@@ -2673,12 +2704,14 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   TankDomain "*" --> ZTTankPortal : portals
   TankDomain "*" --> ZTTankSupport : supports
   TankDomain "*" --> ZTTankLinkDetachRecord : link_detach_records
-  TankDomain "1" --> ZTTankCommandQueue : commands
+  TankDomain "*" --> ZTTankRuntimeCommandRecorded : command_messages
+  TankDomain "*" --> ZTTankRuntimeCommandResultRecorded : command_result_messages
+  TankDomain "*" --> ZTTankCleanlinessUpdated : cleanliness_update_messages
   TankDomain "1" --> ZTTankCommandReader : command_reader
   TankDomain "1" --> ZTTankQuerySet : queries
   ZTTankAlternateLink "0..1" --> ZTTankLink : link
-  ZTTankCommandQueue "*" --> ZTTankCommand : pending
-  ZTTankCommandQueue "*" --> ZTTankCommand : completed
+  ZTTankRuntimeCommandRecorded "1" --> ZTTankRuntimeCommand : command
+  ZTTankRuntimeCommandResultRecorded "1" --> ZTTankRuntimeCommandResult : result
   ZTTankManipulationUi "*" --> ZTTankManipulationCursorTexture : cursor_textures</pre>
 <pre class="mermaid">classDiagram
   ZTTankPrimaryLink "0..1" --> ZTTankLink : link
@@ -2702,15 +2735,14 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   PlacementDomain "0..1" --> ZTPlacementConfirmation : pending_confirmation
   PlacementDomain "1" --> ZTPlacementPreview : preview
   PlacementDomain "1" --> ZTPlacementCursor : cursor
-  PlacementDomain "*" --> ZTPlacementFailure : failure_history
   PlacementDomain "1" --> ZTPlacementRuleSet : rules
-  PlacementDomain "1" --> ZTPlacementCommandQueue : commands
-  PlacementDomain "1" --> ZTToolCommandQueue : tool_commands
+  PlacementDomain "*" --> ZTPlacementRuntimeCommandRecorded : command_messages
+  PlacementDomain "*" --> BFGTraversabilityCommandRecorded : traversability_messages
   PlacementDomain "1" --> ZTUserDraggingState : user_dragging
   PlacementDomain "1" --> ZTClickableObjectSelection : clickable_object
   ZTPlaceEntityComponent "1" --> ZTPlacementFlags : placement_flags
-  ZTPlacementCommandQueue "*" --> ZTPlacementCommand : pending
-  ZTPlacementCommandQueue "*" --> ZTPlacementCommand : completed
+  ZTPlacementRuntimeCommandRecorded "1" --> ZTPlacementRuntimeCommand : command
+  BFGTraversabilityCommandRecorded "1" --> BFGTraversabilityCommand : command
   ZTPlacementCommand "0..1" --> FencePlacementShape : fence_shape
   ZTPlacementCommand "0..1" --> ZTFenceModeUndoAction : fence_undo_action
   ZTPlacementPreview "0..1" --> ZTFootprintPreview : footprint
@@ -2721,17 +2753,22 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTPlacementRuleSet "0..1" --> ZTPlacementFenceRule : fence
   ZTPlacementRuleSet "0..1" --> ZTPlacementPathRule : path
   ZTPlacementRuleSet "0..1" --> ZTTankPlacementRule : tank
-  ZTPlacementRuleSet "0..1" --> ZTElevatedPathPlacementRule : elevated_path
-  ZTToolCommandQueue "*" --> ZTToolCommand : pending
-  ZTToolCommandQueue "*" --> ZTToolCommand : completed</pre>
+  ZTPlacementRuleSet "0..1" --> ZTElevatedPathPlacementRule : elevated_path</pre>
 <p><strong>Path relationships.</strong></p>
 <pre class="mermaid">classDiagram
   PathDomain "*" --> ZTPath : paths
   PathDomain "*" --> ZTPathElevated : elevated_paths
-  PathDomain "*" --> ZTPathPlacementCommand : placement_commands
-  PathDomain "*" --> ZTElevatedPathCommand : elevated_commands
-  PathDomain "*" --> ZTConnectedPathQuery : connected_queries
+  PathDomain "*" --> ZTPathPlacementCommandRecorded : placement_command_messages
+  PathDomain "*" --> ZTElevatedPathCommandRecorded : elevated_command_messages
+  PathDomain "*" --> ZTPathValidationRecorded : validation_messages
+  PathDomain "*" --> BFGPathRequestRecorded : path_request_messages
+  PathDomain "*" --> BFGPathResultRecorded : path_result_messages
   PathDomain "1" --> ZTElevatedCurbModeState : elevated_curb_mode
+  ZTPathPlacementCommandRecorded "1" --> ZTPathPlacementCommand : command
+  ZTElevatedPathCommandRecorded "1" --> ZTElevatedPathCommand : command
+  ZTPathValidationRecorded "1" --> ZTPathValidation : validation
+  BFGPathRequestRecorded "1" --> BFGPathRequest : request
+  BFGPathResultRecorded "1" --> BFGPathResult : result
   ZTElevatedPathSegment "1" --> ZTPathSegment : path
   ZTElevatedPathSegment "0..1" --> ZTElevatedCurbPlacement : curb_mode
   ZTPathPlacementCommand "0..1" --> ZTPathValidation : validation</pre>
@@ -2744,10 +2781,8 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ShowDomain "1" --> ZTAITrickPopularityMgr : popularity_manager
   ShowDomain "1" --> ZTShowMixerManager : mixer_manager
   ShowDomain "1" --> ZTShowTimerManager : timer_manager
-  ShowDomain "*" --> ZTAIShow : active_shows
-  ShowDomain "*" --> ZTShowMixerEvent : mixer_events
-  ShowDomain "*" --> ZTShowSchedulerEvent : scheduler_events
-  ShowDomain "1" --> ZTShowSelectionState : show_selection
+  ShowDomain "*" --> ZTAIShowCommandRecorded : command_messages
+  ShowDomain "*" --> ZTShowMixerActivationRecorded : mixer_activation_messages
   ShowEffectSet "*" --> ShowEffect : effects
   ZTAITrickTrainingRequest "0..1" --> ZTAITrickLevel : selected_level
   ZTAITrickData "0..1" --> ZTAITrickPrerequisite : prerequisite
@@ -2759,8 +2794,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTShowMixerManager "0..1" --> ZTShowMixerHighlightColor : highlight_color
   ZTShowMixerManager "*" --> ZTShowMix : mixes
   ZTShowMixerManager "*" --> ZTShowMixerChannel : channels
-  ZTShowTimerManager "*" --> ZTShowTimer : timers
-  ZTShowTimerManager "*" --> ZTShowTimerState : active_timers</pre>
+  ZTShowTimerManager "*" --> ZTShowTimer : timers</pre>
 <p><strong>AI relationships.</strong></p>
 <pre class="mermaid">classDiagram
   AiDomain "1" --> BFAITaskCatalog : task_catalog
@@ -2856,7 +2890,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTAIStaffMgr "*" --> ZTStaffRequestData : request_templates
   ZTAIStaffMgr "*" --> ZTStaffTimeCategory : time_categories
   ZTAIStaffMgr "1" --> ZTStaffRoleTypeIntern : role_types
-  ZTAIStaffMgr "1" --> ZTAIStaffRequestController : request_controller
   ZTAIStaffMgr "1" --> ZTAIStaffJobQueue : job_queue
   ZTAIStaffMgr "1" --> ZTAIStaffJobStealPolicy : job_steal_policy
   ZTAIStaffMgr "1" --> ZTAIStaffCandidateSet : candidate_cache
@@ -2866,19 +2899,16 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTAIStaffMgr "1" --> ZTAIStaffWaterCleaningMgr : water_cleaning
   ZTAIStaffMgr "*" --> ZTStaffTypeRef : source_type_refs
   ZTAIStaffMgr "*" --> ZTUserStaffAction : user_actions
-  ZTAIStaffMgr "*" --> ZTStaffWorkOrderRecord : work_order_history
-  ZTAIStaffMgr "*" --> ZTStaffAssignmentRecord : assignment_history
-  ZTAIStaffMgr "*" --> ZTStaffActionRecord : action_history
+  ZTAIStaffMgr "*" --> ZTStaffWorkOrderRecorded : work_order_messages
+  ZTAIStaffMgr "*" --> ZTStaffAssignmentRecorded : assignment_messages
+  ZTAIStaffMgr "*" --> ZTStaffActionRecorded : action_messages
   ZTAIStaffMgr "*" --> ZTStaffStatusSnapshot : status_snapshots
-  ZTAIStaffRequestController "*" --> ZTStaffRequestData : pending
-  ZTAIStaffRequestController "*" --> ZTStaffRequestData : accepted
-  ZTAIStaffRequestController "*" --> ZTAIStaffRequestEvaluation : rejected
-  ZTAIStaffRequestController "*" --> ZTAIStaffBadEntityRecord : bad_entities
   ZTAIStaffJobQueue "*" --> ZTAIStaffJob : pending_jobs
   ZTAIStaffJobQueue "*" --> ZTAIStaffJob : active_jobs
-  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : completed_jobs
-  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : failed_jobs
   ZTAIStaffJobQueue "*" --> ZTStaffTimeCategory : time_categories
+  ZTStaffWorkOrderRecorded "1" --> ZTStaffWorkOrderRecord : record
+  ZTStaffAssignmentRecorded "1" --> ZTStaffAssignmentRecord : record
+  ZTStaffActionRecorded "1" --> ZTStaffActionRecord : record
   ZTAIStaffJob "0..1" --> ZTStaffTimeCategory : time_category
   ZTAIStaffJob "1" --> ZTAIStaffJobStatus : status
   ZTAIStaffAssignmentComponent "*" --> ZTAIStaffAssignment : assignments
@@ -2906,16 +2936,26 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTEconomyMgr "*" --> ZTEconomyComponent : components
   ZTEconomyMgr "*" --> ZTTransaction : zt_transactions
   ZTEconomyMgr "*" --> BFGEconomyComponent : bfg_components
-  ZTEconomyMgr "1" --> BFGTransactionTracker : transaction_tracker
   ZTEconomyMgr "*" --> MoneyEvent : money_events
-  ZTEconomyMgr "*" --> ZTPriceIndexSelection : ui_price_selections
+  ZTEconomyMgr "*" --> ZTPriceIndexRuntimeSelection : price_index_selections
+  EconomyDomain "*" --> ZTEconomyRuntimeCommandDispatched : command_messages
+  EconomyDomain "*" --> ZTEconomyRuntimeCommandResultRecorded : command_result_messages
+  EconomyDomain "*" --> BFGEconomyTransactionProcessed : transaction_messages
+  EconomyDomain "*" --> ZTFameValueAccepted : fame_value_messages
+  ZTEconomyRuntimeCommandDispatched "1" --> ZTEconomyRuntimeCommand : command
+  ZTEconomyRuntimeCommandResultRecorded "1" --> ZTEconomyRuntimeCommandResult : result
+  ZTEconomyRuntimeCommandResult "1" --> ZTEconomyRuntimeCommandStatus : status
+  ZTEconomyRuntimeCommandResult "*" --> BFGEconomyTransactionRecord : transactions
+  ZTEconomyRuntimeCommandResult "*" --> ZTFameTypedValue : fame_values
+  BFGEconomyTransactionProcessed "1" --> BFGEconomyTransactionRecord : record
+  BFGEconomyTransactionRecord "1" --> BFGTransaction : transaction
+  BFGEconomyTransactionRecord "0..1" --> MoneyEvent : money_event
+  ZTFameValueAccepted "1" --> ZTFameTypedValue : value
   ZTEconomyComponent "*" --> TransactionConfig : transactions
   ZTTransaction "0..1" --> TransactionConfig : config
   ZTEconomyComponentHistoryBase "*" --> FameHistoryEntry : history
   BFGEconomyComponent "1" --> BFGEconomyData : data
   BFGEconomyComponent "*" --> BFGTransaction : transactions
-  BFGTransactionTracker "*" --> BFGTransaction : pending
-  BFGTransactionTracker "*" --> BFGTransaction : completed
   EconomyConfig "0..1" --> EconomyComponentConfig : general_component
   EconomyConfig "*" --> EconomyComponentConfig : components
   EconomyConfig "*" --> CostFactor : cost_factors
@@ -2949,7 +2989,10 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <pre class="mermaid">classDiagram
   DiseaseDomain "1" --> ZTDiseaseMgr : manager
   DiseaseDomain "*" --> ZTDiseaseCase : cases
-  DiseaseDomain "*" --> ZTDiseaseUiCommand : ui_commands</pre>
+  DiseaseDomain "*" --> ZTDiseaseUiCommand : ui_commands
+  DiseaseDomain "*" --> ZTDiseaseTransitionApplied : component_transition_messages
+  DiseaseDomain "*" --> ZTDiseasePropagationObservationRecorded : propagation_observation_messages
+  ZTDiseasePropagationObservationRecorded "1" --> ZTDiseasePropagationObservation : observation</pre>
 <p><strong>Fame and donation status relationships.</strong></p>
 <pre class="mermaid">classDiagram
   DonationTotals "*" --> DonationByAnimalType : by_animal_type
@@ -2962,22 +3005,24 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFScenarioChallengeState "*" --> BFScenarioChallenge : challenges
   BFScenarioCommand "1" --> BFScenarioCommandKind : kind
   BFScenarioCommand "0..1" --> BFScenarioTypedCommand : typed
-  BFScenarioCommandResult "1" --> BFScenarioCommandStatus : status
+  BFScenarioActionFired "1" --> BFScenarioAction : action
+  BFScenarioCommandDispatched "1" --> BFScenarioCommand : command
+  BFScenarioCommandResultRecorded "1" --> BFScenarioRuntimeCommandResult : result
+  BFScenarioRuntimeCommandResult "1" --> BFScenarioRuntimeCommandStatus : status
   BFScenarioGlobalVars "*" --> BFScenarioVar : values
-  BFScenarioScriptActionPendingRecords "*" --> BFScenarioScriptActionPendingRecord : records
-  BFScenarioScriptActionPendingRecord "1" --> BFScenarioScriptAction : action
   BFScenarioUserVars "*" --> BFScenarioVar : values
+  ScenarioDomain "*" --> BFScenarioActionFired : fired_action_messages
+  ScenarioDomain "*" --> BFScenarioCommandDispatched : command_messages
+  ScenarioDomain "*" --> BFScenarioCommandResultRecorded : command_result_messages
   ScenarioDomain "1" --> ZTScenarioMgr : manager
   ZTScenarioMgr "1" --> BFScenarioMgr : bf_manager
   ZTScenarioMgr "*" --> BFScenarioGroup : scenario_groups
+  ZTScenarioMgr "*" --> BFScenarioRuleState : rule_states
   ZTScenarioMgr "*" --> BFCampaign : campaign_documents
   ZTScenarioMgr "1" --> ZTCampaignState : campaign_state
-  ZTScenarioMgr "1" --> ZTScenarioRuntimeState : runtime
-  ZTScenarioMgr "*" --> BFScenarioAction : pending_actions
+  ZTScenarioMgr "*" --> BFScenarioAction : fired_actions
   ZTScenarioMgr "1" --> BFScenarioEventRoot : event_root
-  ZTScenarioMgr "1" --> BFScenarioChallengeState : challenge_state
-  ZTScenarioRuntimeState "0..1" --> BFScenarioRuntimeRef : active_scenario
-  ZTScenarioRuntimeState "*" --> BFScenarioObjectiveProgress : objective_progress</pre>
+  ZTScenarioMgr "1" --> BFScenarioChallengeState : challenge_state</pre>
 <p><strong>Scripting relationships.</strong></p>
 <pre class="mermaid">classDiagram
   BFResourceCacheFlush "*" --> BFResourceCacheRecord : copied_records
@@ -2996,10 +3041,16 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   PhotoDomain "*" --> ZTPhotoAnalysisComponent : analysis_components
   PhotoDomain "*" --> ZTPAParseTree : parse_trees
   PhotoDomain "1" --> ZTPhotoModeState : mode
-  ZTPhotoManager "*" --> ZTPhotoCaptureRequest : capture_requests
-  ZTPhotoManager "*" --> ZTPhotoCaptureResult : capture_results
-  ZTPhotoChallengeMgr "*" --> ZTPhotoEventCommand : event_history
-  ZTPhotoChallengeMgr "*" --> ZTPhotoEventResult : event_results
+  PhotoDomain "*" --> ZTPhotoCaptureRequested : capture_request_messages
+  PhotoDomain "*" --> ZTPhotoCaptureResultRecorded : capture_result_messages
+  PhotoDomain "*" --> ZTPhotoEventCommandRecorded : event_command_messages
+  PhotoDomain "*" --> ZTPhotoEventResultRecorded : event_result_messages
+  PhotoDomain "*" --> ZTPhotoAnalysisPassRecorded : analysis_pass_messages
+  ZTPhotoCaptureRequested "1" --> ZTPhotoCaptureRequest : request
+  ZTPhotoCaptureResultRecorded "1" --> ZTPhotoCaptureResult : result
+  ZTPhotoEventCommandRecorded "1" --> ZTPhotoEventCommand : command
+  ZTPhotoEventResultRecorded "1" --> ZTPhotoEventResult : result
+  ZTPhotoAnalysisPassRecorded "1" --> ZTPhotoAnalysisPass : pass
   ZTPAPTPhotoAnalysisComponent "*" --> ZTPAParseTree : queries
   ZTPAParseTree "*" --> ZTPAParseNode : nodes
   ZTPAParseTree "*" --> ZTPAGetterBinding : getters
@@ -3037,11 +3088,12 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   SaveDomain "1" --> ZTSaveModeState : save_mode
   SaveDomain "0..1" --> ZTSavedGame : current_game
   SaveDomain "0..1" --> ZTLoadRequest : pending_load_request
-  SaveDomain "0..1" --> ZTSaveRequest : pending_save
-  SaveDomain "0..1" --> ZTDeleteGameRequest : pending_delete
-  SaveDomain "*" --> BFUserProfileEvent : profile_events
-  SaveDomain "0..1" --> ZTLoadAfterSave : load_after_save
-  ZTSaveModeState "*" --> ZTSaveLoadAlert : alerts</pre>
+  SaveDomain "*" --> ZTSaveLoadRuntimeCommandRecorded : command_messages
+  SaveDomain "*" --> ZTSaveLoadRuntimeResultRecorded : result_messages
+  ZTSaveModeState "*" --> ZTSaveLoadAlert : alerts
+  ZTSaveLoadRuntimeCommandRecorded "1" --> ZTSaveLoadRuntimeCommand : command
+  ZTSaveLoadRuntimeResultRecorded "1" --> ZTSaveLoadRuntimeResult : result
+  ZTSaveLoadRuntimeCommand "0..1" --> BFUserProfileEvent : profile_event</pre>
 <h4>Presentation: Renderer, Animation, Camera, and Audio</h4>
 <p><strong>Camera relationships.</strong></p>
 <pre class="mermaid">classDiagram
@@ -3050,10 +3102,11 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   CameraDomain "0..1" --> BFPhysObj : startup_phys_obj
   CameraDomain "*" --> ZTRailCam : rail_cams
   CameraDomain "1" --> ZTCameraActiveCommands : active_commands
-  CameraDomain "*" --> ZTCameraCommandEvent : command_events
+  CameraDomain "*" --> ZTCameraCommandReaderEffectRecorded : command_reader_effects
   CameraDomain "1" --> ZTFollowCameraState : follow_camera
   ZTCameraActiveCommands "*" --> ZTCameraActiveCommandState : states
   ZTCameraActiveCommandState "1" --> ZTCameraCommandKind : kind
+  ZTCameraCommandReaderEffectRecorded "1" --> ZTCameraCommandReaderEffect : effect
   ZTCameraCommandReaderNativeState "*" --> ZTCameraFreeMouseLookRequest : free_mouse_look_requests
   ZTCameraCommandReaderNativeState "*" --> ZTCameraCrouchRequest : crouch_requests
   ZTCameraCommandReaderNativeState "*" --> ZTCameraOutputCommandState : output_command_states
@@ -3080,7 +3133,9 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   AudioDomain "1" --> BF3DSndFactory : three_d_factory
   AudioDomain "1" --> BFAmbient2DSndFactory : ambient_two_d_factory
   AudioDomain "1" --> BFAmbient3DSndFactory : ambient_three_d_factory
-  AudioDomain "*" --> BFSoundEvent : sound_events
+  AudioDomain "*" --> BFAudioCommandRequested : command_messages
+  BFAudioCommandRequested "1" --> BFAudioCommand : command
+  BFAudioPlaybackRequest "0..1" --> BFSoundEvent : source_event
   BFAmbient3DSndFactory "*" --> BFAmbient3DSndGenerator : generators
   BFAmbient3DSndGenerator "0..1" --> BF3DSnd : active_sound
   SoundTag "0..1" --> BF2DSndFactory : two_d_factory
