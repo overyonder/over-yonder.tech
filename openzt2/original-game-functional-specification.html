@@ -989,7 +989,6 @@ undo stack can reverse.</p>
     +circuits : Vec~ZTTransportCircuit~
     +route_direction; +paused_circuits; +selected_vehicle_type
   }
-  class BFGTransportationMgr { +stations; +vehicles; +tracks }
   class ZTTransportCircuit { +station_ids[]; +track_ids[]; +vehicle_ids[]; +closed }
   class ZTTransportVehicle { +entity_type; +seat_count; +occupied_seats; +route_token }
   class ZTTransportStation { +station_kind; +capacity; +occupancy }
@@ -1240,10 +1239,6 @@ completion/failure side effects for mutations, feedback, follow-up behaviors, an
   BFBehavior <|-- ZTBehVehicleBase
   ZTBehVehicleBase <|-- ZTBehVehicleGround
   ZTBehVehicleBase <|-- ZTBehVehicleSky
-  BFBehavior <|-- BFBehGotoPos
-  BFBehavior <|-- BFBehFollowEntity
-  BFBehavior <|-- BFBehAnimate
-  BFBehavior <|-- BFBehSendEvent
   BFBehavior <|-- BFBehSendToken
   BFBehavior <|-- BFBehSendTrigger
   BFBehavior <|-- BFBehSetAttribute
