@@ -1889,7 +1889,6 @@ below.</p>
   BFPhysComponent <|-- BFAnimatedObjectControllerComponent
   class BFAnimController { +selects animation }
   class BFAnimTable { +animation lookup }
-  class BFAnimGraph { +node/transition machine }
   class BFAnimRequestData { +animation request }
   class BFAnimManager { +coordinates animation }
   BFAnimController ..> BFAnimTable
@@ -1899,7 +1898,7 @@ below.</p>
   BFLocoAnimate ..> BFAnimController
   BFAITextureController ..> BFAnimController</pre>
 <pre class="mermaid">classDiagram
-  class BFAnimGraph { +graph_name; +nodes : Vec~BFAnimGraphNode~; +transitions : Vec~BFAnimGraphTransition~ }
+  class BFAnimGraph { +node/transition machine; +graph_name; +nodes : Vec~BFAnimGraphNode~; +transitions : Vec~BFAnimGraphTransition~ }
   class BFAnimGraphNode { +node_name; +animation_name; +looped; +blend_seconds }
   class BFAnimGraphTransition { +from; +to; +condition }
   class BFAnimationSequence { +sequence_name; +current_node; +elapsed_seconds }
