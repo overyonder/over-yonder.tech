@@ -2129,9 +2129,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   PlacementAffordance "1" --> CrateVisibility : crate_visibility
   SelectedEntityState "1" --> EntityInfoPanel : panel
   SharedEntityData "*" --> EntityDataNode : nodes
-  SharedEntityData "*" --> EntityAuthoredEvent : authored_events</pre>
-<p><strong>Data-document relationships.</strong></p>
-<pre class="mermaid">classDiagram
+  SharedEntityData "*" --> EntityAuthoredEvent : authored_events
   DataDocument "1" --> DataRoot : root</pre>
 <h4>Runtime Managers</h4>
 <p><strong>Manager relationships.</strong></p>
@@ -2315,8 +2313,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   UIRegionCommand "0..1" --> UIRectObj : rect
   UIScrollCommand "1" --> UICommandTarget : target
   UISizeCommand "1" --> UICommandTarget : target
-  UITextCommand "1" --> UICommandTarget : target</pre>
-<pre class="mermaid">classDiagram
+  UITextCommand "1" --> UICommandTarget : target
   UIVisibilityCommand "1" --> UICommandTarget : target</pre>
 <pre class="mermaid">classDiagram
   UiBindingDomain "1" --> UiValueHandlerRegistry : handler_registry
@@ -2503,8 +2500,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTEntityInfoPanel "1" --> ZTInventoryPanel : inventory
   ZTEntityInfoPanel "1" --> ZTGenderDisplay : gender
   ZTEntityInfoPanel "1" --> ZTQuantityDisplay : quantity
-  ZTEntityNeedsPanel "*" --> ZTEntityNeedRow : rows</pre>
-<pre class="mermaid">classDiagram
+  ZTEntityNeedsPanel "*" --> ZTEntityNeedRow : rows
   ZTEntitySelectionRequest "0..1" --> ZTEntitySelectionQuery : query
   ZTInventoryPanel "*" --> ZTInventoryRow : rows
   ZTTrainingAreaListPanel "*" --> ZTTrainingAreaRow : rows</pre>
@@ -2524,8 +2520,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTChangeCircuitDirectionCommand "0..1" --> RouteDirection : requested_direction
   ZTTourData "*" --> ZTTourDataAttr : tours
   ZTTourData "*" --> ZTTourDataFeedback : feedback
-  ZTTourRecorderData "*" --> ZTTourWaypoint : waypoints</pre>
-<pre class="mermaid">classDiagram
+  ZTTourRecorderData "*" --> ZTTourWaypoint : waypoints
   ZTTransportQuerySet "1" --> ZTGetCircuitQuery : circuit_query
   ZTTransportQuerySet "1" --> ZTClosedCircuitQuery : closed_circuit_query
   ZTTransportQuerySet "1" --> ZTConnectedSkyPieceQuery : connected_sky_piece_query
@@ -2761,8 +2756,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTPlacementCommandQueue "*" --> ZTPlacementCommand : completed
   ZTPlacementCommand "0..1" --> FencePlacementShape : fence_shape
   ZTPlacementCommand "0..1" --> ZTFenceModeUndoAction : fence_undo_action
-  ZTPlacementPreview "0..1" --> ZTFootprintPreview : footprint</pre>
-<pre class="mermaid">classDiagram
+  ZTPlacementPreview "0..1" --> ZTFootprintPreview : footprint
   ZTPlacementRuleSet "0..1" --> ZTPlacementAffordabilityRule : affordability
   ZTPlacementRuleSet "0..1" --> ZTPlacementResearchRule : research
   ZTPlacementRuleSet "0..1" --> ZTPlacementFootprintRule : footprint
@@ -2798,8 +2792,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ShowDomain "*" --> ZTShowSchedulerEvent : scheduler_events
   ShowDomain "1" --> ZTShowSelectionState : show_selection
   ShowEffectSet "*" --> ShowEffect : effects
-  ZTAITrickTrainingRequest "0..1" --> ZTAITrickLevel : selected_level</pre>
-<pre class="mermaid">classDiagram
+  ZTAITrickTrainingRequest "0..1" --> ZTAITrickLevel : selected_level
   ZTAITrickData "0..1" --> ZTAITrickPrerequisite : prerequisite
   ZTAITrickData "0..1" --> ZTAITrickTargetData : target
   ZTAITrickData "*" --> ZTAITrickLevel : levels
