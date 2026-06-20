@@ -2764,7 +2764,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTTankCommandQueue "*" --> ZTTankCommand : completed
   ZTTankManipulationUi "*" --> ZTTankManipulationCursorTexture : cursor_textures</pre>
 <pre class="mermaid">classDiagram
-  ZTTankSegment <|-- ZTTankGateSegment
   ZTTankPrimaryLink "0..1" --> ZTTankLink : link
   ZTTankQuerySet "1" --> ZTIsTankInWorldQuery : world_query
   ZTTankQuerySet "1" --> ZTTankFloorHeightQuery : floor_height_query
