@@ -583,7 +583,7 @@ remain in the functional specification.</p>
   <td>File/options modes</td>
   <td>File, load, save, download, options, graphics modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile command/result messages, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages rather than polling save-runtime request state, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save commands into host-status records, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
+  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages rather than polling save-runtime request state, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into host-status records, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
   <td>Recover exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
 <tr>
@@ -679,7 +679,7 @@ remain in the functional specification.</p>
   <td>Selection/UI</td>
   <td>Entity selection and info panels</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Selected entity state, action controls, needs/training/inventory/family/donation rows, source panel bindings, and row-record effects project through Bevy UI/runtime messages.</td>
+  <td>Selected entity state, action controls, needs/training/inventory/family/donation rows, source panel bindings, guest need values, and donation panel snapshots live in <code>EntityInfoRuntime</code>.</td>
   <td>Add animal value bindings and action side effects.</td>
 </tr>
 <tr>
@@ -1015,7 +1015,7 @@ remain in the functional specification.</p>
   <td>Persistence</td>
   <td>Profile/options persistence</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Graphics, audio, user settings, profile commands, safe graphics state, registry/path behavior, and options-file values load or record through recovered records.</td>
+  <td>Graphics, audio, user settings, profile events, safe graphics state, registry/path behavior, and options-file values load into <code>RuntimeSupport</code> and record through <code>SaveRuntime</code> effects.</td>
   <td>Recover <code>BFUserProfileMgr</code> directory resolution and write order.</td>
 </tr>
 <tr>
