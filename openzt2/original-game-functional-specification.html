@@ -3423,8 +3423,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   NetImmerseNiMaterialProperty "1" --> NetImmerseNiObjectNet : object
   NetImmerseNiNode "1" --> NetImmerseNiAvObject : av_object
   NetImmerseNiParticleColorModifier "1" --> NetImmerseNiParticleModifier : modifier
-  NetImmerseNiParticleGrowFade "1" --> NetImmerseNiParticleModifier : modifier</pre>
-<pre class="mermaid">classDiagram
+  NetImmerseNiParticleGrowFade "1" --> NetImmerseNiParticleModifier : modifier
   NetImmerseNiParticleRotation "1" --> NetImmerseNiParticleModifier : modifier
   NetImmerseNiParticleSystemController "1" --> NetImmerseNiTimeController : controller
   NetImmerseNiParticleSystemController "*" --> NetImmerseNiParticleInfo : particles
@@ -3441,8 +3440,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : decal_0_texture
   NetImmerseNiTexturingProperty "*" --> NetImmerseShaderTextureSlot : shader_textures
   NetImmerseNiVertexColorProperty "1" --> NetImmerseNiObjectNet : object
-  NetImmerseNiZBufferProperty "1" --> NetImmerseNiObjectNet : object</pre>
-<pre class="mermaid">classDiagram
+  NetImmerseNiZBufferProperty "1" --> NetImmerseNiObjectNet : object
   NetImmerseNifDocument "1" --> NetImmerseNifHeader : header
   NetImmerseNifDocument "1" --> NetImmerseNifFooter : footer
   NetImmerseNifDocument "*" --> ModelBlockRecord : block_records
