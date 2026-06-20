@@ -655,12 +655,10 @@ reconstructed; only the message set and inheritance are established.</li>
   class ZTFileModeNativeSchema { +record_type; +name_field; +display_name_field; +file_time_low_field; +file_time_high_field; +zip_kind; +dir_kind }
   class ZTLoadModeNativeContract { +save_glob; +row_layout; +list_control; +name_control; +preview_control; +delete_button; +saved_root }
   class ZTUILayoutModeNativeCommands { +set_background; +load_ui; +clear_ui; +reload; +send; +quit }
-  class ZTSkyTrackModeNativeContract { +first_trip_token; +return_trip_token; +construction_marker_3; +construction_marker_4; +tower_type_token; +test_rope_object }
   ZTDownloadModeNativeContract ..> ZTDownloadModeState
   ZTFileModeNativeSchema ..> ZTFileModeState
   ZTLoadModeNativeContract ..> ZTFileModeState
-  ZTUILayoutModeNativeCommands ..> ZTModeRecord
-  ZTSkyTrackModeNativeContract ..> ZTGroundTrackModeState</pre>
+  ZTUILayoutModeNativeCommands ..> ZTModeRecord</pre>
 <pre class="mermaid">classDiagram
   class ZTOverheadMode { +surface; +camera; +cursor; +stars_display }
   class ZTStarsDisplay { +animation_delay_seconds; +appear_animation_token; +disappear_animation_token; +visuals }
@@ -698,9 +696,7 @@ reconstructed; only the message set and inheritance are established.</li>
   class ZTDeleteModeState { +mode_value; +delete_groups; +selected_entities; +pending_request; +confirmation }
   class ZTDeleteRequest { +target_entity; +target_type; +return_station; +first_station; +destroy_command }
   class ZTFileModeState { +root_path; +file_mode; +files; +selected_file; +file_info_list }
-  class ZTGroundTrackModeState { +construction_markers; +selected_endpoint; +circuit; +conservation_state }
   class ZTGuestViewModeState { +tag_file; +ground_cursor; +highlight_alpha; +target; +camera_binding }
-  class ZTElevatedCurbModeState { +place_no; +replace; +anchor; +locked }
   ZTOverviewModeState "*" --> ZTOverviewVisibleObject : visible_objects
   ZTDeleteModeState "0..1" --> ZTDeleteRequest : pending_request</pre>
 <pre class="mermaid">classDiagram
@@ -944,7 +940,7 @@ undo stack can reverse.</p>
   BFGTransportationMgr "*" --> ZTTransportStation : stations
   BFGTransportationMgr "*" --> ZTTransportVehicle : vehicles
   BFGTransportationMgr "*" --> ZTTransportTrack : tracks</pre>
-<h3>Terrain, Placement, Tank, and Fence State Model</h3>
+<h3>Terrain, Placement, Tank, Fence, Transport, and Path State Model</h3>
 <pre class="mermaid">classDiagram
   class BFTerrain {
     +grid_width / grid_height
@@ -966,11 +962,15 @@ undo stack can reverse.</p>
   class ZTFence { +fence_id; +fence_type; +entities : Vec~ZTFenceEntity~ }
   class ZTFenceEntity { +entity_id; +segment_info; +health }
   class ZTFenceType { +entity_type; +segment_entity; +gate_entities[]; +cost }
+  class ZTGroundTrackModeState { +construction_markers; +selected_endpoint; +circuit; +conservation_state }
+  class ZTElevatedCurbModeState { +place_no; +replace; +anchor; +locked }
+  class ZTSkyTrackModeNativeContract { +first_trip_token; +return_trip_token; +construction_marker_3; +construction_marker_4; +tower_type_token; +test_rope_object }
   class ZTPlacementFailureCatalog { token to UI message map }
   ZTFence "1" *-- "*" ZTFenceEntity
   ZTFenceType ..> ZTFence : authors
   ZTPlacementData *-- ZTFootprintPreview
-  ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages</pre>
+  ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages
+  ZTSkyTrackModeNativeContract ..> ZTGroundTrackModeState</pre>
 <h3>Editing Modes</h3>
 <pre class="mermaid">classDiagram
   class ZTModeRuntimeFields {
