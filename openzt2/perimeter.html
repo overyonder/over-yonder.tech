@@ -4,92 +4,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenZT2 — Binary Perimeter</title>
 <style>
-:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--ok:#79740e;--warn:#b57614;--bad:#9d0006}
-:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--bad:#cc241d}
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--ok:#79740e;--warn:#b57614;--frontier:#8f3f71;--bad:#9d0006}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--frontier:#b16286;--bad:#cc241d}
 *{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
 button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
-.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
 .tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
 .nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
 main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 12px}
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
 h3{font-size:14px;margin:16px 0 4px}
 .narrative{max-width:1000px}.narrative p,.narrative li{font-size:13px;line-height:1.6}.narrative p{margin:6px 0}.narrative table{margin:8px 0;font-size:12.5px}.narrative code{background:var(--soft);padding:.05em .35em;border-radius:3px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
-.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-exact{background:#79740e}.seg-struct{background:#076678}.seg-opaque{background:#9d0006}.seg-mid{background:#7c6f64}.seg-zt{background:#b57614}.legend{display:grid;grid-template-columns:1fr;gap:3px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
+.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card.primary{grid-column:1/-1}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-identified{background:#076678}.seg-opaque{background:#9d0006}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}.metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.metric-list dt{color:var(--muted)}.metric-list dd{margin:0;font-weight:700}
 .controls{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}.controls input.search{width:260px;font:400 12px/1.2 ui-monospace,Menlo,Consolas,monospace}
 table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}th{background:var(--soft);position:sticky;top:0;cursor:pointer;user-select:none}td code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}tr:hover{background:var(--soft)}
-.pill{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;border:1px solid var(--control-border)}.s-named,.s-type-getter,.s-identified,.s-type-cache{background:color-mix(in srgb,var(--ok) 22%,transparent)}.s-region-tagged{background:color-mix(in srgb,var(--warn) 22%,transparent)}.s-unidentified,.s-thunk,.s-small-unidentified{background:color-mix(in srgb,var(--bad) 16%,transparent)}
+.pill{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;border:1px solid var(--control-border)}.s-confirmed,.s-identified,.s-type-cache,.s-generated-support-code,.s-generated-import-data,.s-mapped-data{background:color-mix(in srgb,var(--ok) 22%,transparent)}.s-candidate,.s-region-tagged{background:color-mix(in srgb,var(--warn) 22%,transparent)}.s-unidentified,.s-thunk,.s-small-unidentified{background:color-mix(in srgb,var(--bad) 16%,transparent)}
 .tablewrap{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:4px}
-@media(max-width:720px){.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr)) 48px;width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border)}.tabs a{min-height:48px}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:20px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.theme-toggle{width:48px;height:48px}main{padding:8px 10px 74px}.coverage-grid{grid-template-columns:1fr}.seg{font-size:10px}}
+@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px;width:min(calc(100vw - 24px),1380px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.coverage-grid{grid-template-columns:1fr}.seg{font-size:10px}}
 </style>
 <body>
-<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="zt-registrar-ledger.html"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Type Registry</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
  <p class="sub">The stripped Zoo Tycoon 2 binary's function and global/static inventory, with per-function name, status, library provenance, vtable membership, and inferred domain. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>.</p>
 
  <section class="narrative">
-  <h2>The denominator — outer code &amp; global perimeter</h2>
-  <p>This page measures the original game's outer code and state perimeter from the <strong>stripped</strong> executable (<code>build/unpacker/zt-stripped.exe</code>) using radare2 prelude+call analysis. It is the red-team denominator against which the reconstruction is measured. The Type Registry is the semantic view of the <code>register_type</code> slice of this perimeter; the tables below carry the full function and global/static enumeration.</p>
+  <h2>Authority Model</h2>
+  <p>The byte map is the address-fact archive. A function has an exact identity record when a <code>runtime-parent</code> row in <code>web/zt-byte-range-map.tsv</code> starts at that function entry. Native type getters are ordinary confirmed byte-map identities named <code>get_type_*</code>.</p>
+  <p>The function perimeter is a generated view over the stripped executable's function entries. It joins byte-map exact anchors with structural overlays: library provenance, vtable membership, and inferred domain. Detector proposals are produced live by <code>tools/detect-address-id-candidates.py</code>; durable review candidates and accepted identities live in the byte map.</p>
 
-  <h3>Functions — 19,145 entries</h3>
-  <p>radare2's raw <code>afl</code> count (~18.5k) is <em>real</em> function entries, not vtable pollution (vtables live in <code>.rdata</code>); but it is dominated by boilerplate — 341 thunks, ~6,257 getters/leaf accessors (17–64&nbsp;B), ~11,289 medium methods (mostly STL/template and component <code>read/write_xml_node</code>), and only <strong>1,258 large (&gt;512&nbsp;B) substantial-logic</strong> functions. Identification status (function granularity, not “falls in a region”):</p>
-  <table><thead><tr><th>Status</th><th>Count</th><th>Meaning</th></tr></thead><tbody>
-   <tr><td>named</td><td>627 (3%)</td><td>a byte-map row (or <code>function-names.tsv</code>) <strong>starts exactly at this function's entry</strong> and identifies it</td></tr>
-   <tr><td>type-getter</td><td>707 (4%)</td><td>contains a <code>register_type</code> (<code>0x005b46fc</code>) call — a registered-type accessor</td></tr>
-   <tr><td>unidentified</td><td>17,811 (93%)</td><td>distinct function, not individually identified; most carry structural characterization through provenance, vtable membership, or inferred domain</td></tr>
+  <h3>Current Work State</h3>
+  <div id="coverage-summary" class="coverage-grid" aria-label="Function perimeter coverage charts"></div>
+
+  <h3>Status Vocabulary</h3>
+  <table><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody>
+   <tr><td>confirmed</td><td>accepted exact function identity from a byte-map row whose start equals the function entry</td></tr>
+   <tr><td>candidate</td><td>exact function identity proposal recorded in the byte map and awaiting manual review</td></tr>
+   <tr><td>generated-support-code</td><td>generated runtime support code outside the stripped game <code>.text</code> surface</td></tr>
+   <tr><td>generated-import-data</td><td>generated import-support entries outside the stripped game <code>.text</code> surface</td></tr>
+   <tr><td>mapped-data</td><td>non-<code>.text</code> mapped support entries with a byte-map owner</td></tr>
+   <tr><td>unidentified</td><td>no accepted exact function identity yet; structural overlays may still assign middleware, vtable, or domain context</td></tr>
   </tbody></table>
-  <p>Naming is by <strong>exact entry anchor only</strong> — a byte-map row expanded from one symbol anchor over a multi-KB span (e.g. <code>get_type_ZTBiomeMode</code> covering 6&nbsp;KB / ~13 functions) names <strong>only</strong> the one function at its anchor; the others in that span are distinct and unidentified, carrying the nearest descriptive <em>region</em> band as a locality hint, not that symbol's name. So function-granular identification is <strong>~7.0%</strong> (1,334 of 19,145). The identification campaign (<code>tools/decompile-batch.py</code> → <code>function-names.tsv</code>) has swept the string-bearing substantial-logic surface to <strong>full-binary exhaustion</strong>: a corrected-display pass over <em>every</em> 0x40000-byte span of <code>.text</code> returns <strong>zero</strong> unidentified functions carrying ≥5 real string literals. Every UI panel, XML/config reader, dialog handler, shader binder, attribute/token registrar, state read/write pair, and the telemetry/IME/Lua plumbing is named. What remains is <strong>string-poor engine math</strong> (NetImmerse/Gamebryo geometry &amp; collision, D3D, AI scoring, mesh processing, STL boilerplate) — region-tagged, not exact-named — plus three jump-table dispatchers whose apparent “strings” are misread code bytes (<code>0x0044df15</code>, <code>0x006c1ffe</code>, <code>0x006d5355</code>).</p>
 
-  <h3>Beyond exact names: structural characterization — 98.5%</h3>
-  <div class="coverage-grid" aria-label="Function perimeter coverage charts">
-   <div class="coverage-card">
-    <h3>Recognition coverage</h3>
-    <div class="stacked-bar" role="img" aria-label="Exact name or type getter 1,334 functions, structural only 17,519 functions, fully opaque 292 functions">
-     <div class="seg seg-exact" style="width:7.0%" title="Exact name or type-getter: 1,334">7.0%</div>
-     <div class="seg seg-struct" style="width:91.5%" title="Structural characterization only: 17,519">91.5%</div>
-     <div class="seg seg-opaque" style="width:1.5%" title="Fully opaque: 292"></div>
-    </div>
-    <div class="legend">
-     <div class="legend-row"><span class="swatch seg-exact"></span>Exact name or type-getter: 1,334</div>
-     <div class="legend-row"><span class="swatch seg-struct"></span>Structural only: 17,519</div>
-     <div class="legend-row"><span class="swatch seg-opaque"></span>Fully opaque: 292</div>
-    </div>
-   </div>
-   <div class="coverage-card">
-    <h3>Implementation burden proxy</h3>
-    <div class="stacked-bar" role="img" aria-label="Proven middleware or library 9,483 functions, classified ZT or BlueFang 9,370 functions, fully opaque 292 functions">
-     <div class="seg seg-mid" style="width:49.5%" title="Proven middleware/library: 9,483">49.5%</div>
-     <div class="seg seg-zt" style="width:48.9%" title="Classified ZT/BlueFang: 9,370">48.9%</div>
-     <div class="seg seg-opaque" style="width:1.5%" title="Fully opaque: 292"></div>
-    </div>
-    <div class="legend">
-     <div class="legend-row"><span class="swatch seg-mid"></span>Proven middleware/library: 9,483</div>
-     <div class="legend-row"><span class="swatch seg-zt"></span>Classified ZT/BlueFang: 9,370</div>
-     <div class="legend-row"><span class="swatch seg-opaque"></span>Fully opaque: 292</div>
-    </div>
-   </div>
-  </div>
-  <p class="coverage-note">The perimeter is mostly characterized, but exact behavioral naming is selective. Reconstruction tracks original-game contracts and source compatibility, not raw function count; proven middleware/runtime spans are replacement surfaces unless their asset formats, scripting APIs, or observable behavior define a game contract.</p>
-  <p>Exact behavioural names only cover the string-bearing surface (~7%). To understand the rest without strings, three companion analyses attach orthogonal, address-keyed facts to every function entry (the <code>provenance</code>, <code>vtable</code>, <code>domain</code> columns below):</p>
-  <ul>
-   <li><strong>Library provenance</strong> (<code>tools/fingerprint-libs.py</code>) — third-party middleware bounded by identity strings, imports, magic constants, and surviving RTTI type-descriptor strings. <strong>Gamebryo/NetImmerse is one contiguous block <code>0x58dadb–0x7ca2fd</code></strong> (the D3D9 renderer), ~9,160 functions, with <strong>zlib 1.1.4 nested inside it</strong> (<code>0x67bda5–0x67ffb2</code>) and <strong>Lua 5.0.2</strong> at <code>0x873–0x893</code>. CRT/STL are dynamically linked (MSVCR80, a <code>/MD</code> build), so there is no static CRT span. Everything outside these spans is ZT/BlueFang code; the boundary is corroborated by a one-way call gradient — 5,788 outside functions call inward to 1,838 engine targets.</li>
-   <li><strong>Vtable membership</strong> (<code>tools/build-rtti-vtables.py</code>) — MSVC RTTI's COL/CHD/BaseClassArray were <strong>stripped</strong> from this image (only 99 TypeDescriptors survive), so class <em>names</em> and the inheritance graph are not RTTI-recoverable. But <strong>861 real vtables</strong> were enumerated as <code>.rdata</code> pointer runs → <strong>47,166 method slots → 14,375 previously-unidentified functions</strong> marked as polymorphic methods (slot 0 = destructor).</li>
-   <li><strong>Inferred domain</strong> (<code>tools/propagate-domains.py</code> over a 74,608-edge call graph + 557 import edges) — each unidentified function inherits a functional domain from its named neighbours and dominant API imports; 17,270 of 17,809 received one (clusters: ui 8.5k, renderer 3.3k, game-entities 1.9k, economy 1.9k).</li>
-  </ul>
-  <p>Net: <strong>18,853 / 19,145 (98.5%)</strong> of function entries now carry a name, type-getter role, library provenance, vtable-method membership, or an inferred domain. Only <strong>292 are fully opaque</strong> — 253 of them &lt;128&nbsp;B leaf thunks with no edges/strings/vtable, ~20 larger string-poor tank/map geometry helpers, and the 3 dispatchers. A further 8,156 are ZT/BlueFang code with an inferred functional area but no exact behavioural name yet (3,536 high-confidence) — the remaining frontier, now <em>scoped by domain</em> rather than opaque.</p>
+  <h3>Reading The Work Queue</h3>
+  <p><strong>Closed/support</strong> rows are confirmed exact identities or generated/mapped support. <strong>Exact-ID candidates</strong> are recorded byte-map proposals awaiting review. <strong>Adapter-owned middleware</strong> rows carry third-party provenance such as Gamebryo, Lua, D3D9, zlib, libjpeg, or CRT. <strong>Product recovery frontier</strong> rows are remaining ZT/BlueFang functions that have vtable or domain context but still lack exact behavior names. <strong>Opaque</strong> rows have none of those facts.</p>
 
-  <h3>Globals / statics — 5,236 cells</h3>
-  <p>Distinct global addresses referenced from <code>.text</code>: <strong>2,068 type-cache cells</strong> (the registered-type singletons), 179 otherwise byte-map-identified, and <strong>2,989 unidentified</strong> (~57%). Init-guard cells (<code>cache+4</code>) and the broader <code>.bss</code> are partial.</p>
+  <h3>Globals / Statics</h3>
+  <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
 
-  <h3>Per-class method perimeter</h3>
-  <p>The <strong>property</strong> perimeter per class is the reconstructed field set; the <strong>method</strong> perimeter is the class's <strong>vtable slots</strong>. All <strong>861 vtables are now enumerated</strong> slot-by-slot (<code>reconstruction/vtable-methods-full.tsv</code>, 47,166 slots → 14,465 distinct method functions), but only <strong>5 are class-<em>named</em></strong> — because MSVC RTTI was stripped, the vtable→class-name link is gone. So the per-class method <em>shape</em> is fully recovered; the <em>labels</em> (which vtable is which class) await type-getter/constructor topology analysis.</p>
-
-  <h3>Recovered Scope</h3>
-  <ul>
-   <li><strong>Established:</strong> complete type/class ontology (1,967/1,967), their fields, relationships, the message vocabulary, the function/global <em>address</em> inventory, and region-level coverage of nearly all code.</li>
-   <li><strong>Open:</strong> function-granular identification beyond ~7%, the per-class vtable→class labelling, the behaviour/algorithms of most functions, and ~57% of globals' meaning.</li>
-  </ul>
+  <h3>Per-Class Method Perimeter</h3>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, constructor/vptr-store evidence, and the function perimeter. They are a method-shape view, not a second accepted function-name archive.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
@@ -105,6 +69,56 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 async function tsv(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok){const t=await r.text();const L=t.trim().split(/\r?\n/);const h=L.shift().split("\t");return L.filter(Boolean).map(l=>{const c=l.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]||"");return o})}last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
 function pill(s){return `<span class="pill s-${esc(s)}">${esc(s)}</span>`}
+function counts(rows,key){const c={};for(const r of rows)c[r[key]]=(c[r[key]]||0)+1;return c}
+function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
+function seg(cls,n,total,label){return `<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${n?pct(n,total):""}</div>`}
+function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
+function coverageSummary(fp,gp){
+ const fs=counts(fp,"status"), gs=counts(gp,"status");
+ const confirmed=fs.confirmed||0, candidates=fs.candidate||0, without=fp.length-confirmed-candidates;
+ const typeGetters=fp.filter(r=>r.status==="confirmed"&&(r.name||"").startsWith("get_type_")).length;
+ const closedStatuses=["confirmed","generated-support-code","generated-import-data","mapped-data"];
+ const closed=(fs.confirmed||0)+(fs["generated-support-code"]||0)+(fs["generated-import-data"]||0)+(fs["mapped-data"]||0);
+ const library=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&r.provenance).length;
+ const frontier=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&!r.provenance&&(r.vtable||r.domain)).length;
+ const opaque=fp.length-closed-candidates-library-frontier;
+ document.getElementById("coverage-summary").innerHTML=`
+  <div class="coverage-card primary">
+   <h3>Function Work Queue</h3>
+   <div class="stacked-bar" role="img" aria-label="Closed or support ${closed}, candidates ${candidates}, adapter-owned middleware ${library}, product frontier ${frontier}, opaque ${opaque}">
+    ${seg("seg-exact",closed,fp.length,`Closed/support: ${closed}`)}
+    ${seg("seg-candidate",candidates,fp.length,`Exact-ID candidates: ${candidates}`)}
+    ${seg("seg-mid",library,fp.length,`Adapter-owned middleware: ${library}`)}
+    ${seg("seg-zt",frontier,fp.length,`Product recovery frontier: ${frontier}`)}
+    ${seg("seg-opaque",opaque,fp.length,`Opaque: ${opaque}`)}
+   </div>
+   <div class="legend">
+    ${legend("seg-exact",`Closed/support: ${closed.toLocaleString()}`)}
+    ${legend("seg-candidate",`Exact-ID candidates: ${candidates.toLocaleString()}`)}
+    ${legend("seg-mid",`Adapter-owned middleware: ${library.toLocaleString()}`)}
+    ${legend("seg-zt",`Product recovery frontier: ${frontier.toLocaleString()}`)}
+    ${legend("seg-opaque",`Opaque: ${opaque.toLocaleString()}`)}
+   </div>
+   <p class="coverage-note">${frontier.toLocaleString()} product functions remain in the recovery queue. ${candidates.toLocaleString()} exact-ID candidates need review before promotion.</p>
+  </div>
+  <div class="coverage-card">
+   <h3>Exact Address Names</h3>
+   <dl class="metric-list">
+    <dt>Confirmed exact IDs</dt><dd>${confirmed.toLocaleString()}</dd>
+    <dt>Exact-ID candidates</dt><dd>${candidates.toLocaleString()}</dd>
+    <dt>Without exact ID</dt><dd>${without.toLocaleString()}</dd>
+    <dt>Confirmed type-getter accessors</dt><dd>${typeGetters.toLocaleString()}</dd>
+   </dl>
+  </div>
+  <div class="coverage-card">
+   <h3>Globals / Statics</h3>
+   <dl class="metric-list">
+    <dt>Type-cache globals</dt><dd>${(gs["type-cache"]||0).toLocaleString()}</dd>
+    <dt>Identified globals</dt><dd>${(gs.identified||0).toLocaleString()}</dd>
+    <dt>Unidentified globals</dt><dd>${(gs.unidentified||0).toLocaleString()}</dd>
+   </dl>
+  </div>`;
+}
 function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
  let sortK=cols[0],desc=false;
  const sel=document.getElementById(statusId);[...new Set(rows.map(r=>r.status))].sort().forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;sel.append(o)});
@@ -123,6 +137,7 @@ Promise.all([
  tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
  tsv(["zt-global-perimeter.tsv","../reconstruction/global-perimeter.tsv"])
 ]).then(([fp,gp])=>{
+ coverageSummary(fp,gp);
  table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
