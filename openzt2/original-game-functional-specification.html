@@ -1792,6 +1792,10 @@ and components. Save and load are file-mode tools.</p>
     +options.xml; +config/options.xml; +lang/
   }
   class ZTSavedGame { +name; +path; +preview thumbnail; +file_time_low/high; +scenario_name }
+  class BFUserOptions { +graphics : BFGraphicsOptions; +audio : BFAudioOptions; +startup_window : BFStartupWindow }
+  class BFGraphicsOptions { +full_screen; +screen_width; +height; +depth; +graphics_detail; +anti_aliasing }
+  class BFAudioOptions { +want_sound; +sample_rate; +bits; +channels; +mixer_channels; +master_volume; +music_volume }
+  class BFStartupWindow { +class_name; +title; +width; +height; +icon; +dialog_resource; +role : Win32 startup window }
   class SavePayload {
     +profile/options; +selected map/scenario/campaign
     +cash/economy history/fame/research/status
@@ -1803,7 +1807,12 @@ and components. Save and load are file-mode tools.</p>
     +photos/challenges
   }
   ZTSavedGame *-- SavePayload
+  BFUserProfileMgr *-- BFUserOptions : options.xml
+  BFUserOptions *-- BFGraphicsOptions : graphics
+  BFUserOptions *-- BFAudioOptions : audio
+  BFUserOptions *-- BFStartupWindow : startup window
   SavePayload ..> BFUserProfileMgr
+  SavePayload ..> BFUserOptions
   SavePayload ..> BFGElevatedTileSerializer</pre>
 <h4>Save and Load Flow</h4>
 <pre class="mermaid">sequenceDiagram
@@ -1823,11 +1832,8 @@ and components. Save and load are file-mode tools.</p>
 unrecovered. The recovered contract is the <code>write_xml_node</code> tree.</li>
 <li>The transient-vs-persisted boundary per component (which members serialize) is not
 enumerated.</li>
-<li>Profile/<code>options.xml</code> schema is partly modeled: <code>BFGraphicsOptions</code>
-(<code>full_screen</code>/<code>screen_width</code>/<code>height</code>/<code>depth</code>/<code>graphics_detail</code>/<code>anti_aliasing</code>) and
-<code>BFAudioOptions</code> (<code>want_sound</code>/<code>sample_rate</code>/<code>bits</code>/<code>channels</code>/<code>mixer_channels</code>/
-<code>master_volume</code>/<code>music_volume</code>); <code>BFStartupWindow</code> (<code>class_name</code>/<code>title</code>/<code>width</code>/<code>height</code>/
-<code>icon</code>/<code>dialog_resource</code>) is the Win32 startup window. Autosave cadence is open.</li>
+<li>Profile/<code>options.xml</code> fields are partly modeled above; remaining fields and
+autosave cadence are open.</li>
 </ul>
 <h2>Presentation: Renderer, Animation, Camera, and Audio</h2>
 <h3>Scene Graph and Render Components</h3>
