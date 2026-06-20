@@ -417,10 +417,6 @@ singleton lifetime, then stack in three layers under the application.</p>
   Domain --> Proj
   Tools --> Domain
   Other --> Domain</pre>
-<h3>Registration and Lifetime Contract</h3>
-<p>Every manager is obtained through its lazy type getter (guarded cache global, parent via
-the parent getter, name interned by <code>register_type</code>). The application root
-(<code>ZTApp</code>) constructs and owns them; their state is what Persistence serializes.</p>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li>Manager construction order and inter-manager update sequencing per frame/tick are not yet
