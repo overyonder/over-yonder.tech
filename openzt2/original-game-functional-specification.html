@@ -2929,8 +2929,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTAIStaffRequestEvaluation "0..1" --> ZTStaffRequestData : request
   ZTAIStaffRequestEvaluation "*" --> ZTAIStaffCandidate : candidates
   ZTAIStaffCandidateSet "*" --> ZTAIStaffCandidate : candidates
-  ZTAIStaffCandidate "0..1" --> StaffRole : role</pre>
-<pre class="mermaid">classDiagram
+  ZTAIStaffCandidate "0..1" --> StaffRole : role
   ZTDinoRecoveryTargetSet "*" --> ZTDinoRecoveryTarget : active_targets
   ZTStaffAssignmentUi "1" --> ZTStaffAssignmentCursor : cursor
   ZTStaffAssignmentUi "*" --> ZTStaffAssignmentPanel : panels
@@ -3010,8 +3009,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFScenarioGlobalVars "*" --> BFScenarioVar : values
   BFScenarioScriptActionPendingRecords "*" --> BFScenarioScriptActionPendingRecord : records
   BFScenarioScriptActionPendingRecord "1" --> BFScenarioScriptAction : action
-  BFScenarioUserVars "*" --> BFScenarioVar : values</pre>
-<pre class="mermaid">classDiagram
+  BFScenarioUserVars "*" --> BFScenarioVar : values
   ScenarioDomain "1" --> ZTScenarioMgr : manager
   ZTScenarioMgr "1" --> BFScenarioMgr : bf_manager
   ZTScenarioMgr "*" --> BFScenarioGroup : scenario_groups
@@ -3056,8 +3054,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTPhotoAnalysisComponent "*" --> ZTPhotoAnalysisResult : results
   ZTPhotoAnalysisContext "*" --> ZTPhotoAnalysisEntity : entities
   ZTPhotoAnalysisContext "*" --> ZTPhotoAbstraction : abstractions
-  ZTPhotoAnalysisEntity "*" --> ZTPhotoAnalysisProperty : properties</pre>
-<pre class="mermaid">classDiagram
+  ZTPhotoAnalysisEntity "*" --> ZTPhotoAnalysisProperty : properties
   ZTPhotoEventCommand "1" --> ZTPhotoEvent : event
   ZTPhotoOptions "0..1" --> ZTPhotoCaptionScript : caption_script</pre>
 <p><strong>Menu/profile/campaign/scenario relationships.</strong></p>
@@ -3113,8 +3110,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   AmbientSoundSet "*" --> AmbientSoundCue : cues
   AudioAmbientDocuments "*" --> AmbientSoundDocument : ambient
   AudioAmbientDocuments "*" --> AmbientBiomeDocument : ambient_biomes
-  AudioAmbientDocuments "*" --> AmbientAllowedDocument : ambients_allowed</pre>
-<pre class="mermaid">classDiagram
+  AudioAmbientDocuments "*" --> AmbientAllowedDocument : ambients_allowed
   AudioDomain "1" --> BFSoundMgr : sound_mgr
   AudioDomain "1" --> BFSoundStageMgr : sound_stage_mgr
   AudioDomain "1" --> ZTWorldSndMgr : world_sound_mgr
@@ -3129,8 +3125,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   AudioDomain "1" --> BFAmbient3DSndFactory : ambient_three_d_factory
   AudioDomain "*" --> BFSoundEvent : sound_events
   BFAmbient3DSndFactory "*" --> BFAmbient3DSndGenerator : generators
-  BFAmbient3DSndGenerator "0..1" --> BF3DSnd : active_sound</pre>
-<pre class="mermaid">classDiagram
+  BFAmbient3DSndGenerator "0..1" --> BF3DSnd : active_sound
   SoundTag "0..1" --> BF2DSndFactory : two_d_factory
   SoundTag "*" --> SoundTagVariant : variants
   SoundTag "1" --> SoundTagPlaybackPolicy : playback
