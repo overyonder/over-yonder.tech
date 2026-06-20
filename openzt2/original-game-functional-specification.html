@@ -2511,7 +2511,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <h4>Entities, Animals, Catalog, and Selection</h4>
 <p><strong>Animal relationships.</strong></p>
 <pre class="mermaid">classDiagram
-  ZTAdoptionMgr <|-- ZTAdoptionSlotMgr
   AnimalDomain "1" --> ZTAdoptionMgr : adoption_mgr
   AnimalDomain "1" --> ZTAdoptionSlotMgr : adoption_slot_mgr
   AnimalDomain "1" --> ZTFavoriteAnimalMgr : favorite_animal_mgr
