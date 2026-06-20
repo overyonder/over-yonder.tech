@@ -12,9 +12,12 @@ button,input,select{background:var(--control);color:var(--fg);border:1px solid v
 .tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
 .nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
 main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
-.card{border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px}.card.primary{grid-column:1/-1}.card .big{font-size:30px;font-weight:700;line-height:1.05}.card.primary .big{font-size:42px}.card .lbl{color:var(--muted);font-size:12px;margin-top:2px}.card .det{font-size:12px;margin-top:8px;line-height:1.5}
-.bar{height:8px;border-radius:4px;background:var(--control-border);overflow:hidden;display:flex;margin-top:6px}.bar i{display:block;height:100%}.seg-ok{background:var(--ok)}.seg-warn{background:var(--warn)}.seg-frontier{background:var(--frontier)}.seg-bad{background:var(--bad)}.seg-mut{background:var(--muted)}
+.progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 18px}
+.progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:10px 12px}.progress-card h3{margin:0 0 7px;font-size:15px}.progress-card h3 a{text-decoration:none}
+.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
+.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.seg-opaque{background:#9d0006}
+.seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-recover{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
 .phases{display:grid;gap:14px;margin:10px 0}
 .phase{border:1px solid var(--line);border-left:4px solid var(--accent,var(--control-border));border-radius:6px;background:var(--soft);padding:12px 16px}
@@ -31,14 +34,14 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 .modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
 .modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
 .modal-box iframe{flex:1;border:0;width:100%}
-@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px;width:min(calc(100vw - 24px),1380px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}}
+@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px;width:min(calc(100vw - 24px),1380px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
 </style>
 <body>
 <nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
- <p class="sub">A map of the reconstruction evidence, original-game contract, and implementation strategy. Counts below summarize the stripped executable's current function/global coverage.</p>
- <div class="cards" id="cards"></div>
+ <p class="sub">A map of the reconstruction evidence, original-game contract, and implementation strategy.</p>
+ <div class="progress-grid" id="progress-bars" aria-label="Project progress summary"></div>
 
  <h2>Pages</h2>
  <div class="doc-grid" aria-label="Project page guide">
@@ -97,35 +100,82 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 (()=>{const key="zt2-theme";const root=document.documentElement;const stored=()=>{try{return localStorage.getItem(key)}catch(_){return null}};const save=t=>{try{localStorage.setItem(key,t)}catch(_){}};const syncFrames=t=>{for(const f of document.querySelectorAll("iframe.legal-frame")){try{if(f.contentDocument)f.contentDocument.documentElement.dataset.theme=t}catch(_){}}};const apply=(t,p=false)=>{root.dataset.theme=t;if(p)save(t);const b=document.querySelector(".theme-toggle");if(b){b.textContent=t==="dark"?"☀":"☾";b.title="Toggle theme"}syncFrames(t)};apply(stored()==="light"?"light":"dark");window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);document.querySelector(".tabs").append(b);for(const f of document.querySelectorAll("iframe.legal-frame"))f.addEventListener("load",()=>syncFrames(root.dataset.theme||"dark"));apply(root.dataset.theme||"dark")})})();
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 async function tsv(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok){const t=await r.text();const L=t.trim().split(/\r?\n/);const h=L.shift().split("\t");return L.filter(Boolean).map(l=>{const c=l.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]||"");return o})}last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
+async function text(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok)return await r.text();last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
 function counts(rows,key){const c={};for(const r of rows)c[r[key]]=(c[r[key]]||0)+1;return c}
-function card(big,lbl,det,segs){const total=segs.reduce((a,s)=>a+s[1],0)||1;const bar=segs.map(s=>`<i class="seg-${s[2]}" style="width:${100*s[1]/total}%"></i>`).join("");return `<div class="card"><div class="big">${big}</div><div class="lbl">${lbl}</div><div class="bar">${bar}</div><div class="det">${det}</div></div>`}
-function primaryCard(big,lbl,det,segs){const total=segs.reduce((a,s)=>a+s[1],0)||1;const bar=segs.map(s=>`<i class="seg-${s[2]}" style="width:${100*s[1]/total}%"></i>`).join("");return `<div class="card primary"><div class="big">${big}</div><div class="lbl">${lbl}</div><div class="bar">${bar}</div><div class="det">${det}</div></div>`}
+function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
+function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${pct(n,total)}</div>`:""}
+function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
 (()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
 Promise.all([
  tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
- tsv(["zt-global-perimeter.tsv","../reconstruction/global-perimeter.tsv"])
-]).then(([fp,gp])=>{
- const fs=counts(fp,"status"),gs=counts(gp,"status");
- const exactConfirmed=fs["confirmed"]||0;
- const exactCandidates=fs["candidate"]||0;
- const withoutExact=fp.length-exactConfirmed-exactCandidates;
- const confirmedTypeGetters=fp.filter(r=>r.status==="confirmed"&&(r.name||"").startsWith("get_type_")).length;
- const closedStatus=new Set(["confirmed","generated-support-code","generated-import-data","mapped-data"]);
- const tierOf=r=>closedStatus.has(r.status)?"closed-support":r.status==="candidate"?"candidate":r.provenance?"library":r.vtable?"vtable-method":r.domain?"domain-only":"uncharacterized";
- const ct=counts(fp.map(r=>({status:tierOf(r)})),"status");
- const unch=ct["uncharacterized"]||0, characterized=fp.length-unch;
- const closed=ct["closed-support"]||0, candidates=ct["candidate"]||0, library=ct["library"]||0, frontier=(ct["vtable-method"]||0)+(ct["domain-only"]||0);
- const prov=counts(fp.filter(r=>r.provenance),"provenance");
- document.getElementById("cards").innerHTML=[
-   primaryCard(frontier.toLocaleString(),"product functions to recover",`${closed.toLocaleString()} closed/support · ${candidates.toLocaleString()} exact-ID candidates awaiting review · ${library.toLocaleString()} adapter-owned middleware · ${unch.toLocaleString()} opaque`,
-     [["",closed,"ok"],["",candidates,"warn"],["",library,"mut"],["",frontier,"frontier"],["",unch,"bad"]]),
-   card(candidates.toLocaleString(),"exact-ID candidates",`${exactConfirmed.toLocaleString()} confirmed exact IDs · ${withoutExact.toLocaleString()} without exact ID · ${confirmedTypeGetters.toLocaleString()} type-getter accessors folded into confirmed`,
-     [["",exactConfirmed,"ok"],["",candidates,"warn"],["",withoutExact,"mut"]]),
-   card(library.toLocaleString(),"adapter-owned middleware",`${prov["gamebryo"]||0} Gamebryo · ${prov["lua"]||0} Lua · ${prov["zlib"]||0} zlib · ${prov["d3d9"]||0} D3D9`,
-     [["",library,"mut"],["",fp.length-library,"ok"]]),
-   card(gp.length.toLocaleString(),"globals / statics",`${gs["type-cache"]||0} type-cache · ${gs["identified"]||0} identified · ${gs["unidentified"]||0} unidentified`,
-     [["",gs["type-cache"]||0,"ok"],["",gs["identified"]||0,"ok"],["",gs["unidentified"]||0,"bad"]]),
+ text(["reimplementation-plan.html","../reconstruction/REIMPLEMENTATION-PLAN.md"])
+]).then(([fp,planText])=>{
+ const fs=counts(fp,"status");
+ const closedStatuses=["confirmed","generated-support-code","generated-import-data","mapped-data"];
+ const closed=(fs.confirmed||0)+(fs["generated-support-code"]||0)+(fs["generated-import-data"]||0)+(fs["mapped-data"]||0);
+ const candidates=fs.candidate||0;
+ const library=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&r.provenance).length;
+ const frontier=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&!r.provenance&&(r.vtable||r.domain)).length;
+ const opaque=fp.length-closed-candidates-library-frontier;
+ const plan=planProgress(planText);
+ document.getElementById("progress-bars").innerHTML=[
+   `<div class="progress-card">
+    <h3><a href="perimeter.html">Binary Perimeter</a></h3>
+    <div class="stacked-bar" role="img" aria-label="Closed or support ${closed}, candidates ${candidates}, adapter-owned middleware ${library}, product frontier ${frontier}, opaque ${opaque}">
+     ${seg("seg-exact",closed,fp.length,`Closed/support: ${closed}`)}
+     ${seg("seg-candidate",candidates,fp.length,`Exact-ID candidates: ${candidates}`)}
+     ${seg("seg-mid",library,fp.length,`Adapter-owned middleware: ${library}`)}
+     ${seg("seg-zt",frontier,fp.length,`Product recovery frontier: ${frontier}`)}
+     ${seg("seg-opaque",opaque,fp.length,`Opaque: ${opaque}`)}
+    </div>
+    <div class="legend">
+     ${legend("seg-exact",`Closed/support: ${closed.toLocaleString()}`)}
+     ${legend("seg-candidate",`Exact-ID candidates: ${candidates.toLocaleString()}`)}
+     ${legend("seg-mid",`Adapter-owned middleware: ${library.toLocaleString()}`)}
+     ${legend("seg-zt",`Product frontier: ${frontier.toLocaleString()}`)}
+     ${legend("seg-opaque",`Opaque: ${opaque.toLocaleString()}`)}
+    </div>
+    <p class="progress-note">${frontier.toLocaleString()} product functions remain in the recovery queue.</p>
+   </div>`,
+   `<div class="progress-card">
+    <h3><a href="reimplementation-plan.html">Reconstruction Work Board</a></h3>
+    <div class="stacked-bar" role="img" aria-label="${esc(plan.aria)}">
+     ${plan.segments}
+    </div>
+    <div class="legend">${plan.legend}</div>
+    <p class="progress-note">${plan.note}</p>
+   </div>`
  ].join("");
-}).catch(e=>{document.getElementById("cards").insertAdjacentHTML("afterend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
+}).catch(e=>{document.getElementById("progress-bars").insertAdjacentHTML("afterend",`<p class="sub">Failed to load progress data: ${esc(e.message)}</p>`)});
+function planProgress(source){
+ const order=[["done","Done"],["runs","Runs"],["loaded","Loaded"],["recorded","Recorded"],["recover","Recover"],["map","Map"],["adapter","Adapter"]];
+ const counts=Object.fromEntries(order.map(([s])=>[s,0]));
+ let domains=0;
+ const aria=source.match(/class="plan-stacked-bar"[^>]*aria-label="([^"]+)"/);
+ if(aria){
+  for(const m of aria[1].matchAll(/([a-z-]+)\s+([0-9]+)/g))if(m[1] in counts)counts[m[1]]=Number(m[2]);
+  const note=source.match(/([0-9,]+) work-board rows across ([0-9,]+) top-level domains/);
+  if(note)domains=Number(note[2].replace(/,/g,""));
+ }else{
+  let inBoard=false;const seen=new Set();
+  for(const line of source.split(/\r?\n/)){
+   if(line.startsWith("| Domain | Feature | Subfeature | Status |")){inBoard=true;continue}
+   if(!inBoard)continue;
+   if(!line.startsWith("| "))break;
+   const cells=line.trim().replace(/^\||\|$/g,"").split("|").map(s=>s.trim());
+   if(cells.length<6||cells[0]==="---")continue;
+   const status=cells[3].replace(/[` ]/g,"");
+   if(status in counts){counts[status]++;seen.add(cells[0])}
+  }
+  domains=seen.size;
+ }
+ const total=Object.values(counts).reduce((a,n)=>a+n,0);
+ return {
+  aria:order.filter(([s])=>counts[s]).map(([s])=>`${s} ${counts[s]}`).join(", "),
+  segments:order.map(([s,l])=>seg(`seg-${s}`,counts[s],total,`${l}: ${counts[s]}`)).join(""),
+  legend:order.filter(([s])=>counts[s]).map(([s,l])=>legend(`seg-${s}`,`${l}: ${counts[s].toLocaleString()}`)).join(""),
+  note:domains?`${total.toLocaleString()} work-board rows across ${domains.toLocaleString()} top-level domains.`:`${total.toLocaleString()} work-board rows.`
+ };
+}
 </script>
 </html>
