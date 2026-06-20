@@ -984,9 +984,7 @@ undo stack can reverse.</p>
   BFComponent <|-- ZTTransportStationBase
   ZTTransportStationBase <|-- ZTTransportStationGround
   ZTTransportStationBase <|-- ZTTransportStationSky
-  class ZTTransportationMgr { circuits + tracks + stations + vehicles }</pre>
-<h3>Transport State Model</h3>
-<pre class="mermaid">classDiagram
+  class BFGTransportationMgr { +stations; +vehicles; +tracks }
   class ZTTransportationMgr {
     +circuits : Vec~ZTTransportCircuit~
     +route_direction; +paused_circuits; +selected_vehicle_type
