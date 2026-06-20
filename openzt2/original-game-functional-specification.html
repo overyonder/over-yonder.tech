@@ -1756,15 +1756,14 @@ context:</p>
   BFScriptContextMgr "1" *-- "*" BFScriptContext
   BFScriptContext *-- BFScriptFunctionBinding
   BFScriptFunctionBinding ..> BFSMessage : exported BFS_* command binding</pre>
-<h3>Campaigns, Maps, Photo Challenges, and Profile</h3>
+<h3>Campaigns, Maps, and Photo Challenges</h3>
 <p><code>ZTMapData</code> (<code>&lt; BFComponent</code>) holds map/campaign list data; <code>ZTGameMode</code> (<code>&lt; ZTMode</code>)
 is the in-game interaction mode; <code>ZTGoalPanel</code> (<code>&lt; UIListBox</code>) shows goals. Photo
 challenges are their own cluster: <code>ZTPhotoChallenge</code>, <code>ZTPhotoChallengeSet</code>,
 <code>ZTPhotoChallengeMgr</code>, <code>ZTPhotoChallengesComponent</code> (<code>&lt; BFScriptComponent</code>). Photo capture: <code>ZTPhotoManager</code> holds <code>active_album</code>, <code>abstractions</code>
 (<code>ZTPhotoAbstraction</code>: <code>matched_subjects</code>, <code>subject_bounds</code>, <code>score</code>), <code>pending_photo</code>,
 and <code>options</code>; <code>ZTPhotoSubjectBounds</code> records <code>entity_id</code>/<code>screen_rect</code>/<code>percent_seen</code>
-for challenge scoring. Player
-profile is owned by <code>BFUserProfileMgr</code> (<code>&lt; BFComponent</code>).</p>
+for challenge scoring.</p>
 <h3>Lifecycle and Data Flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant Menu as main menu / ZTGameMode
