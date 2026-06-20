@@ -1302,7 +1302,10 @@ completion/failure side effects for mutations, feedback, follow-up behaviors, an
   BFAIComponent <|-- ZTAITrickPopularityMgr
   BFAIComponent <|-- BFAIRelationshipMgr
   class ZTAIMgr { owns AI world }
-  class BFAIEntityMgr { per-entity-type cognition managers }</pre>
+  class BFAIEntityMgr { per-entity-type cognition managers }
+  class ZTAIStaffMgr { +job_safe_distance; +steal_job_threshold; +time_category_duration_seconds }
+  class StaffRoleTypeHandle { +role; +type_token; +runtime_handle }
+  ZTAIStaffMgr "*" --> StaffRoleTypeHandle : staff_roles</pre>
 <h3>Shows, Tricks, and Tours</h3>
 <p>Shows are a scheduled state machine (<code>ZTAIShowMgr</code>/<code>ZTAIShowScheduler</code>/<code>ZTAIShow</code>/
 <code>ZTAIShowComponent</code>/<code>ZTAIShowEvent</code>):</p>
@@ -1317,9 +1320,7 @@ completion/failure side effects for mutations, feedback, follow-up behaviors, an
 <code>min_tricks</code>/<code>min_score</code>/<code>show_score</code>. <code>ZTAIShow</code> carries
 <code>show_token_name</code>, <code>state : ShowState</code>, <code>animal_data</code>, <code>guests_invited</code>,
 <code>ran_to_completion</code>; <code>ZTAIShowScheduler</code> holds <code>queued_shows</code>, <code>between_shows_time_block</code>,
-<code>pre_show_time_seconds</code>, <code>post_show_time_seconds</code>. Staff: <code>ZTAIStaffMgr</code>
-adds <code>job_safe_distance</code>, <code>steal_job_threshold</code>, <code>time_category_duration_seconds</code>; staff roles are interned as
-<code>StaffRoleTypeHandle</code> (<code>role</code>/<code>type_token</code>/<code>runtime_handle</code>).</p>
+<code>pre_show_time_seconds</code>, <code>post_show_time_seconds</code>.</p>
 <p>Tricks: <code>ZTAITrickComponent</code>/<code>Data</code>/<code>Level</code>/<code>Mgr</code>/<code>TargetComponent</code>/<code>PopularityMgr</code>.
 Tours: <code>ZTAITourTaker</code>/<code>Data</code>/<code>TourTaskThinker</code>/<code>ZTAISharedTourTaker</code>. Guest viewing
 and donations are behavior-driven (<code>ZTBehViewAnimals</code>, <code>ZTBehViewEvent</code>,
