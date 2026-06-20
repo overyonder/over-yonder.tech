@@ -159,7 +159,7 @@ function planProgress(source){
  }else{
   let inBoard=false;const seen=new Set();
   for(const line of source.split(/\r?\n/)){
-   if(line.startsWith("| Domain | Feature | Subfeature | Status |")){inBoard=true;continue}
+   if(line.startsWith("| Owner | Subdomain | Feature | Status |")){inBoard=true;continue}
    if(!inBoard)continue;
    if(!line.startsWith("| "))break;
    const cells=line.trim().replace(/^\||\|$/g,"").split("|").map(s=>s.trim());

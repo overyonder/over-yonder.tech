@@ -94,16 +94,11 @@ authority.</p>
   <td><code>bevy</code> crate</td>
   <td>Own ECS resources/entities, schedules, current app/session state, asset handles, Kira/mlua/renderer/window adapters, input routing, and presentation.</td>
 </tr>
-<tr>
-  <td>Evidence inputs</td>
-  <td><code>web/zt-byte-range-map.tsv</code>, perimeter TSVs, source documents, Rust source</td>
-  <td>Supply facts for contract recovery. These inputs feed owning domains and boundaries.</td>
-</tr>
 </tbody>
 </table>
 <p>The work board below uses actual owners. Product/runtime domains, source-format
-families, host boundaries, and evidence frontiers may all own rows when they
-carry real work. Aggregate progress buckets are invalid owners.</p>
+families, and host boundaries may all own rows when they carry real
+implementation work. Aggregate progress buckets are invalid owners.</p>
 <h2>Status Values</h2>
 <table>
 <thead>
@@ -143,11 +138,49 @@ carry real work. Aggregate progress buckets are invalid owners.</p>
 </tr>
 </tbody>
 </table>
+
+<section class="plan-progress-grid" aria-label="Implementation work-board status summary">
+ <div class="plan-progress-card primary">
+  <h3>Implementation Work Board Progress</h3>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 16, loaded 20, recorded 50, recover 22, map 3, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:13.793103%" title="Runs: 16">13.8%</div>
+    <div class="plan-seg plan-seg-loaded" style="width:17.241379%" title="Loaded: 20">17.2%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:43.103448%" title="Recorded: 50">43.1%</div>
+    <div class="plan-seg plan-seg-recover" style="width:18.965517%" title="Recover: 22">19.0%</div>
+    <div class="plan-seg plan-seg-map" style="width:2.586207%" title="Map: 3">2.6%</div>
+    <div class="plan-seg plan-seg-adapter" style="width:4.310345%" title="Adapter: 5">4.3%</div>
+  </div>
+  <div class="plan-legend">
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 16</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 20</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 50</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recover"></span>Recover: 22</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-map"></span>Map: 3</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
+  </div>
+  <p class="plan-progress-note">116 work-board rows across 67 top-level domains.</p>
+ </div>
+ <div class="plan-progress-card">
+  <h3>Delivery Shape</h3>
+  <dl class="plan-metric-list">
+   <dt>Live / loaded / recorded</dt><dd>86</dd>
+   <dt>Open recovery / mapping</dt><dd>25</dd>
+   <dt>Adapter-backed</dt><dd>5</dd>
+  </dl>
+ </div>
+ <div class="plan-progress-card">
+  <h3>Rows By Status</h3>
+  <dl class="plan-metric-list">
+   <dt>Runs</dt><dd>16</dd><dt>Loaded</dt><dd>20</dd><dt>Recorded</dt><dd>50</dd><dt>Recover</dt><dd>22</dd><dt>Map</dt><dd>3</dd><dt>Adapter</dt><dd>5</dd>
+  </dl>
+ </div>
+</section>
+
 <h2>Implementation Work Board</h2>
 <p>The <code>Owner</code>, <code>Subdomain</code>, and <code>Feature</code> hierarchy is the active task axis.
 <code>Owner</code> names the real product domain, runtime boundary, source-format family,
-or evidence source that owns the work. Detailed original type surfaces remain
-in the functional specification.</p>
+or host boundary that owns implementation work. Detailed original type surfaces
+remain in the functional specification.</p>
 <table>
 <thead>
 <tr>
@@ -223,38 +256,6 @@ in the functional specification.</p>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
   <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts.</td>
   <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support.</td>
-</tr>
-<tr>
-  <td>Evidence inputs</td>
-  <td>Native type roster</td>
-  <td>2,068 native types and parent edges</td>
-  <td><span class="plan-status plan-status-done">done</span></td>
-  <td>The registered native type roster supplies type-handle/factory input.</td>
-  <td>Attach factories and handlers through owning feature rows.</td>
-</tr>
-<tr>
-  <td>Evidence inputs</td>
-  <td>Message token registry</td>
-  <td>1,084 registered message/event tokens</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Token facts remain evidence inputs for dispatch, source-authored events, and native handler recovery.</td>
-  <td>Restore the exact token registry surface in the specification and bind each side effect to the owning runtime domain.</td>
-</tr>
-<tr>
-  <td>Evidence inputs</td>
-  <td>Binary perimeter classification</td>
-  <td>Classified functions, globals, and vtable methods</td>
-  <td><span class="plan-status plan-status-done">done</span></td>
-  <td>Binary perimeter rows are inputs for recovering product contracts.</td>
-  <td>Select frontier functions from the owning feature row.</td>
-</tr>
-<tr>
-  <td>Native contract recovery</td>
-  <td>Product contract frontier</td>
-  <td>ZT/BlueFang domain-only and vtable-method rows</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Classified rows have owners while selected exact behavior contracts remain unrecovered.</td>
-  <td>Recover each contract as owner, entry message/call, data read, mutation, callee surface, visible effect, and unknowns before implementation.</td>
 </tr>
 <tr>
   <td>Archive assets</td>
@@ -1184,12 +1185,13 @@ backends.</p>
 </tbody>
 </table>
 <h2>Expansion Rule</h2>
-<p>Add or split a row when evidence gives a distinct owner: a manager, native class
-family, source file family with a consumer, state transition, message handler
-group, formula, persisted surface, evidence frontier, or adapter boundary.
-Attach unresolved methods, globals, payloads, functions, and formulae to that
-owning row. If the owner is unclear, leave the fact in the byte map or
-functional specification until source, code, or binary evidence gives it a home.</p>
+<p>Add or split a row when the specification, source data, or Rust code gives a
+distinct implementation owner: a manager, native class family, source file
+family with a consumer, state transition, message handler group, formula,
+persisted surface, or adapter boundary. Attach unresolved behavior, payloads,
+and formulae to that owning row. If the owner is unclear, keep the fact in the
+functional specification until source, code, or accepted contract evidence gives
+it a blue-team implementation home.</p>
 
 </main>
 
