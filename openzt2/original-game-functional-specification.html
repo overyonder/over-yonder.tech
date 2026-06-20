@@ -1735,7 +1735,8 @@ every component already implements. A save is the serialized component/entity
 tree written into a <code>.z2s</code> container; load replays it back into the same binders
 and components. Save and load are file-mode tools.</p>
 <pre class="mermaid">classDiagram
-  ZTMode <|-- ZTDownloadMode
+  ZTFileMode <|-- ZTSaveMode
+  ZTFileMode <|-- ZTLoadMode
   BFComponent <|-- BFUserProfileMgr
   BFComponent <|-- BFGElevatedTileSerializer
   class BFUserProfileMgr {
