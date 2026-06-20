@@ -1996,15 +1996,15 @@ below.</p>
   BFRMaterialResource "*" --> BFRTextureResource : textures
   BFREffectResource "1" *-- "*" BFREffectEmitter
   BFParticleDictionary "*" --> BFParticleDictionaryEntry : entries</pre>
-<p>Mode visual-effect requests are transient renderer command values; the renderer
-domain defines their semantic fields, while the host adapter owns their live
-message transport, model loading, and projection lifetime.</p>
 <h3>Adapter Boundary</h3>
 <pre class="mermaid">flowchart LR
   Domain["entities / world / UI / status (native runtime state)"]
+  ModeVfx["Mode visual-effect requests<br/>transient renderer command values<br/>semantic fields defined by renderer domain"]
   Render["BFRenderer + BFSpriteMgr + BFAnim* + BFSoundMgr"]
+  Host["host adapter<br/>live message transport, model loading,<br/>projection lifetime"]
   Backend["Gamebryo/NetImmerse + D3D + sound engine (REPLACEABLE)"]
-  Domain -->|preserved component inputs<br/>BFRActorComponent transforms, BFAnimController selections,<br/>BFSpriteMgr UI projection, BFSND_* cues| Render -->|adapter| Backend</pre>
+  Domain -->|preserved component inputs<br/>BFRActorComponent transforms, BFAnimController selections,<br/>BFSpriteMgr UI projection, BFSND_* cues| Render
+  ModeVfx --> Render --> Host --> Backend</pre>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li><code>.bfmat</code>/<code>.fx</code> parameter/animation syntax and material slot binding are not modeled.</li>
