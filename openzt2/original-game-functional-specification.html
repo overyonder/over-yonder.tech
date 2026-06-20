@@ -277,13 +277,15 @@ layer hydrate them.</p>
   BFComponent <|-- BFAICompletionData
   class BFAITaskTemplate {
     +register_type(BFComponent)
-    +UniqueID; +version; +useFromTokenQualifiers
+    +Name; +UniqueID; +version; +useFromTokenQualifiers
     +Priority; +TaskDelayMin; +TaskDelayMax
     +CursorTask; +UseForKeeperPanel; +DoNotDisturb
     +Subjects/_AND; +Targets/_AND
     +Objects/_AND; +Qualifiers/_AND
     +reserveTag; +attachTag; +sensorTag; +defaultSensorTag
     +objectContainer; +objectName
+    +create/eval/execution/completion/failure child data
+    +follow_up_behaviors[]; +sections[]
   }
   BFAITaskTemplate ..> BFAITaskThinker : scored by
   BFAITaskTemplate ..> BFAIEvalData : eval/runtime
@@ -1104,13 +1106,6 @@ and two thinkers (state-machine and task-selection); the game subclasses each.</
 <code>BFAITaskDocument</code>):</p>
 <pre class="mermaid">classDiagram
   class BFAITaskTemplate {
-    +name : Name
-    +unique_id : UniqueID
-    +task_delay_min_seconds : TaskDelayMin
-    +task_delay_max_seconds : TaskDelayMax
-    +create_data / eval_data / execution_data
-    +completion_data / failure_data
-    +follow_up_behaviors[] / sections[]
     +evaluate() fixed-score subject-token subset
     +instantiate() BFAITaskRoot
   }
