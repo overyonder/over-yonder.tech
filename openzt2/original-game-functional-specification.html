@@ -1785,9 +1785,8 @@ context:</p>
   Rule->>Act: trigger fires action
   Act->>Lua: ZT_RUN_SCRIPT
   Lua->>Mgr: BFS_SETRULESTATE / BFS_SETGLOBALVAR / BFS_GETLOCID
-  Mgr-->>Menu: goal/status updates (ZTGoalPanel)</pre>
-<p>Game-lifecycle tokens: <code>ZT_LOADGAME</code>, <code>ZT_SAVEGAME</code>, <code>ZT_SETMODE</code>,
-<code>ZT_SCENARIO_SELECTION_CHANGED</code>, <code>ZT_LOAD_AFTER_SAVE</code>, <code>ZT_SAVE_SCREENSHOT</code>.</p>
+  Mgr-->>Menu: goal/status updates (ZTGoalPanel)
+  Note over Menu,Mgr: lifecycle tokens: ZT_LOADGAME, ZT_SAVEGAME, ZT_SETMODE, ZT_SCENARIO_SELECTION_CHANGED, ZT_LOAD_AFTER_SAVE, ZT_SAVE_SCREENSHOT</pre>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li>Rule trigger/condition evaluation order and the campaign progression graph are not yet
