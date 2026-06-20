@@ -59,21 +59,15 @@ th{background:var(--soft)}
 <div class="doc-source">Rendered from <code>reconstruction/ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code></div>
 <main>
 <h1>OpenZT2 Original Game Functional Specification</h1>
-<p>The Rust reconstruction preserves Zoo Tycoon 2's product-domain contract:
-native types, source-hydrated data, runtime managers, hardcoded message/method
-surfaces, and adapter boundaries.</p>
-<ul>
-<li>source data from Z2F XML/MAXML, localization, scripts, materials, models,
-sounds, and scenario files remains data driven;</li>
-<li>native C++ managers, widget classes, message handlers, registries, mode
-classes, and algorithms remain native-domain contracts;</li>
-<li>renderer, audio, windowing, archive, parser, script, and OS mechanics may be
-replaced only behind adapters that preserve the original contracts.</li>
-</ul>
-<p>Named native types are registered with a known name, parent, and owner domain.
-The architecture is described at the product-domain level: inheritance, source
-data, runtime ownership, message surfaces, state transitions, and host-adapter
-boundaries.</p>
+<p>Zoo Tycoon 2's original product-domain contract consists of native types,
+source-hydrated data, runtime managers, hardcoded message/method surfaces,
+state transitions, and adapter boundaries. Z2F XML/MAXML, localization,
+scripts, materials, models, sounds, and scenario files remain data-driven
+inputs; native C++ managers, widget classes, message handlers, registries,
+mode classes, and algorithms remain native-domain contracts. Renderer, audio,
+windowing, archive, parser, script, and OS mechanics may be replaced only
+behind adapters that preserve the registered native type, data, runtime, and
+message contracts.</p>
 <h2>Orientation</h2>
 <p>Every concrete game object is a <code>BFTyped</code> object; almost everything is a <code>BFComponent</code>.
 Authored Z2F data hydrates these objects; singleton managers interpret them; the
@@ -90,9 +84,6 @@ in each layer are registered native types.</p>
   Mgrs -.project.-> Proj
   State -.project.-> Proj
   Mgrs -.residual evidence.-> Open</pre>
-<p>Modern adapters may replace renderer/audio/windowing/archive/parser/script/OS
-mechanics. Animal, UI, economy, placement, disease, scenario, save, and manager
-semantics stay on the original class boundary.</p>
 <h3>Foundational Type System</h3>
 <p>Every native object is a node in one single-inheritance hierarchy rooted at
 <code>BFTypedObj</code>. Each class registers lazily: a per-type cache global guarded by an init
@@ -116,17 +107,11 @@ hierarchy completely — 2,068 registered types over 128 distinct parents; the s
   class BFComponentContainer { components[]; name_map; stack }
   class BFAIEntityDataShared { b_* / s_* / f_* / p_* property maps }</pre>
 <h3>Native Code and Source Hydration</h3>
-<p>The original game's data-driven surfaces hydrate native source objects via
-<code>BFTypedBinder</code> and <code>BFGEntity</code>; source keys are read through the XML attribute
-reader, and messages are interned via <code>register_type</code>. Native registries and
-managers then interpret those objects through hardcoded C++ classes, vtables,
-message handlers, and update algorithms.</p>
-<pre class="mermaid">flowchart LR
-  XML["authored XML / assets"] --> Schema["BFXMLSchemaMgr validate"]
-  Schema --> Binder["BFTypedBinder create"]
-  Binder --> Comp["component tree (BFComponent*)"]
-  Comp --> Mgr["managers interpret + update"]
-  Mgr --> Msg["UI_/BFAI_/ZT_ message + value handlers"]</pre>
+<p>Data-driven surfaces hydrate native source objects via <code>BFTypedBinder</code> and
+<code>BFGEntity</code>; source keys are read through the XML attribute reader, messages
+are interned via <code>register_type</code>, and native registries/managers interpret the
+objects through hardcoded C++ classes, vtables, message handlers, and update
+algorithms.</p>
 <table>
 <thead>
 <tr>
@@ -169,11 +154,9 @@ message handlers, and update algorithms.</p>
 </tbody>
 </table>
 <h2>Source Data and Hydration</h2>
-<p>The <strong>generic document layer</strong> turns authored Z2F XML into native objects. It has
-four cooperating pieces under the <code>BFTyped</code> hierarchy: an <strong>XML DOM</strong>, a
-<strong>schema</strong> validator, a <strong>component-container</strong> spine, and the <strong>binder</strong> that
-loads typed entity/source documents. Game classes declare components and let this
-layer hydrate them.</p>
+<p>The <strong>generic document layer</strong> turns authored Z2F XML into native objects
+through four <code>BFTyped</code> surfaces: the <strong>XML DOM</strong>, <strong>schema</strong> validator,
+<strong>component-container</strong> spine, and <strong>binder</strong> for typed entity/source documents.</p>
 <h3>XML Document Model</h3>
 <pre class="mermaid">classDiagram
   BFXMLObj <|-- BFXMLNode
@@ -600,7 +583,7 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTFileMode <|-- ZTSaveMode
   ZTFileMode <|-- ZTLoadMode
   ZTMode <|-- ZTCameraCommandReader</pre>
-<h4>First-Person and Gameplay Modes</h4>
+<h4>Gameplay and Tool Mode Records</h4>
 <pre class="mermaid">classDiagram
   class ZTFPTrainingMode {
     +training_area; +animal_entity; +trick_token
@@ -613,10 +596,6 @@ reconstructed; only the message set and inheritance are established.</li>
   class ZTSelectionMode {
     +default_cursor; +pickup_cursor; +rotate_cursor; +selection_texture
     +info_panel_update_seconds; +mouse_over_check_seconds
-  }
-  class ZTGfxOptionsModeState {
-    +graphics : ZTGraphicsOptions; +audio : ZTAudioOptions; +vince : ZTVinceOptions
-    +settings_document; +pending_confirmation; +selected_detail_level
   }</pre>
 <h4>Gesture System</h4>
 <pre class="mermaid">classDiagram
@@ -636,7 +615,7 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTGestureTrace ..> ZTGestureMatch : scored against definition
   ZTGestureTrace "*" --> ZTGestureTraceSample : samples
   ZTGestureComponent ..> ZTGestureTrace : produces</pre>
-<h4>Reconstructed Mode-State Records</h4>
+<h4>Mode Source Records</h4>
 <pre class="mermaid">classDiagram
   class ZTShellModeTransition { +previous; +current; +previous_path; +current_path; +changed; +cursor; +layout_guis; +active_hotkeys; +off_events; +on_events }
   class ZTModeRecord { +class_name; +name; +attributes; +layout_guis; +hotkeys; +inline_hotkeys; +on_events; +off_events; +event_blocks; +config_children; +children }
@@ -650,7 +629,9 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTModeRecord "*" --> ZTModeUiBinding : bindings
   ZTModeDescriptor --> ZTModeTypeCache
   ZTModeClassRegistry "*" --> ZTModeDescriptor : registered modes</pre>
+<h4>Mode Native Contracts</h4>
 <pre class="mermaid">classDiagram
+  class ZTModeClassSurface { +runtime; +type_cache; +vtable; +input_state }
   class ZTDownloadModeNativeContract { +base_url_template; +index_file; +items_list_control; +downloads_root; +cannot_disable_token; +enabled_field; +ui_name_field; +site_name_field; +version_field; +viewable_field; +confirmed_token; +confirm_exit_token; +cancel_downloads_token; +downloads_title }
   class ZTFileModeNativeSchema { +record_type; +name_field; +display_name_field; +file_time_low_field; +file_time_high_field; +zip_kind; +dir_kind }
   class ZTLoadModeNativeContract { +save_glob; +row_layout; +list_control; +name_control; +preview_control; +delete_button; +saved_root }
@@ -659,6 +640,7 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTFileModeNativeSchema ..> ZTFileModeState
   ZTLoadModeNativeContract ..> ZTFileModeState
   ZTUILayoutModeNativeCommands ..> ZTModeRecord</pre>
+<h4>Mode Runtime State Records</h4>
 <pre class="mermaid">classDiagram
   class ZTOverheadMode { +surface; +camera; +cursor; +stars_display }
   class ZTStarsDisplay { +animation_delay_seconds; +appear_animation_token; +disappear_animation_token; +visuals }
@@ -727,11 +709,10 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTOptionsSelectedSetting "*" --> ZTOptionsTypedValue : values</pre>
 <p><strong>Open contracts.</strong></p>
 <ul>
-<li>Per-mode input state machines and the full <code>event_blocks</code>/<code>message_handlers</code> dispatch
-for each tool are structurally reconstructed. Original tick/transition logic
-is largely <code>todo!()</code>.</li>
-<li>The <code>ZTModeClassSurface</code> vtable/type-cache modeling mirrors the native shape.
-Individual mode method bodies are not yet reconstructed.</li>
+<li>Per-mode input state machines, full <code>event_blocks</code>/<code>message_handlers</code>
+dispatch, tick/transition logic, and individual mode method bodies are not yet
+reconstructed.</li>
+<li>Mode vtable/type-cache surfaces are established.</li>
 </ul>
 <h2>Entities, Animals, Catalog, and Selection</h2>
 <pre class="mermaid">classDiagram
@@ -820,8 +801,8 @@ Individual mode method bodies are not yet reconstructed.</li>
   ZTAnimal ..> ZTAdoptionMgr : adoption
   ZTAnimal ..> ZTFavoriteAnimalMgr : favorites
   ZTAnimalTypeDefinition ..> ZTAnimal : hydrate_runtime_animal_from_source_type</pre>
-<p>Open (from <code>todo!()</code>): breeding/offspring rules, training learning deltas, and the
-component→status read for several flags.</p>
+<p>Open: breeding/offspring rules, training learning deltas, and the
+component-to-status read for several flags.</p>
 <h3>Entity Consumers and Selection</h3>
 <p>World/AI managers read and mutate entities through their components: <code>BFGManager</code>,
 <code>BFGPlacementGrid</code>, <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, <code>BFGRampageMgr</code>,
@@ -971,16 +952,8 @@ undo stack can reverse.</p>
   ZTPlacementData *-- ZTFootprintPreview
   ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages
   ZTSkyTrackModeNativeContract ..> ZTGroundTrackModeState</pre>
-<h3>Editing Modes</h3>
+<h3>World Editing Modes</h3>
 <pre class="mermaid">classDiagram
-  class ZTModeRuntimeFields {
-    +cursor; +ui_layout; +active; +state_token
-    +config_fields; +layout_guis
-    +hotkeys; +inline_hotkeys
-    +event_blocks : Vec~ZTModeEventBlock~
-    +message_handlers : Vec~ZTModeMessageHandler~
-  }
-  class ZTModeClassSurface { +runtime; +type_cache; +vtable; +input_state }
   ZTEntityMovementMode <|-- ZTPlacementMode
   ZTEntityMovementMode <|-- ZTBiomeMode
   ZTMode <|-- ZTFenceMode
@@ -989,9 +962,7 @@ undo stack can reverse.</p>
   ZTMode <|-- ZTElevatedCurbMode
   ZTMode <|-- ZTGroundTrackMode
   ZTMode <|-- ZTTankCommandReader
-  ZTMode <|-- ZTTerrainCommandReader
-  ZTMode *-- ZTModeRuntimeFields
-  ZTModeClassSurface --> ZTModeRuntimeFields</pre>
+  ZTMode <|-- ZTTerrainCommandReader</pre>
 <h3>Placement Transaction Flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant Mode as ZTPlacementMode
@@ -1140,14 +1111,12 @@ and two thinkers (state-machine and task-selection); the game subclasses each.</
   BFAITaskThinker --> BFAITaskTemplateList : candidates
   BFAITaskThinker o-- BFAITaskRoot : active_task
   BFAITaskRoot ..> BFAIToken : reserves</pre>
-<p><code>BFAICreateData</code> selects subjects/targets/objects via selector lists + qualifiers
-(<code>BFAISubjectSelector</code> wraps a <code>BFAISelector</code> + <code>BFAISubjectData</code> <code>subject_type</code>/<code>token_name</code>;
-<code>BFAIQualifier</code> carries <code>required_tokens</code>/<code>rejected_tokens</code>/<code>required_properties</code>);
-<code>BFAIEvalData</code> is partially reconstructed. The current source-backed subset evaluates
-fixed-score templates when subject selectors match an entity's AI subject tokens,
-instantiates <code>BFAITaskRoot</code> records with subject/target/object identity, advances the
-active behavior sequence into behavior runtime events, and records <code>complete</code>/<code>fail</code>
-result state. <code>BFAIToken</code>/<code>BFAITokenList</code> reserve targets (<code>give_to</code>, <code>force</code>).</p>
+<p><code>BFAICreateData</code> selects subjects/targets/objects via selector lists and
+qualifiers (<code>BFAISubjectSelector</code> wraps a <code>BFAISelector</code> plus
+<code>BFAISubjectData</code> <code>subject_type</code>/<code>token_name</code>; <code>BFAIQualifier</code> carries
+<code>required_tokens</code>/<code>rejected_tokens</code>/<code>required_properties</code>). <code>BFAIEvalData</code>
+scores candidates, <code>BFAITaskRoot</code> carries the active behavior execution, and
+<code>BFAIToken</code>/<code>BFAITokenList</code> reserve targets (<code>give_to</code>, <code>force</code>).</p>
 <p>Open: full evaluator/controller scoring, qualifier handling, tie-break and scheduling
 policy, behavior sequence advancement beyond the first behavior, and the actual
 completion/failure side effects for mutations, feedback, follow-up behaviors, and
@@ -1394,7 +1363,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
   Eco->>Tx: find named transaction on current component
   alt transaction found
     Eco->>Tx: copy positive amount override + negation flag
-    Tx->>Tx: evaluate_cost() at native 0x006cd12d
+    Tx->>Tx: evaluate_cost()
     Tx->>Tx: dispatch removeUser/addUser/setCash/credit/debit
     Tx->>Tracker: commit transaction payload
     Tx->>Eco: dispatch nextTransaction if non-empty
@@ -1494,8 +1463,8 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +diseases : Vec~ZTDisease~
     +from_root(root)
     +read_config_xml_node(doc)
-    +update()  TODO
-    +force_disease(name, target)  TODO
+    +update()
+    +force_disease(name, target)
   }
   class ZTDisease {
     +name, name_loc_id, token, cure_token
@@ -1520,11 +1489,6 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +sample_distance; +ignored_sample_types; +active_target
     +ZT_DISEASE_CURE_QUERY
   }
-  class ZTDiseaseOpenContracts {
-    +ZTDiseaseMgr.update target-search loop
-    +force_disease application
-    +sample-to-cure scoring
-  }
   ZTDiseaseMgr "1" *-- "*" ZTDisease
   ZTDisease *-- ZTDiseaseQualifier
   ZTDisease *-- ZTDiseaseClue : cause / cure
@@ -1532,8 +1496,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
   ZTDiseaseQualifier *-- ZTDiseaseAnimalFilter
   ZTDiseaseCase ..> ZTCureDiseaseMode : sample/cure
   ZTBehCureDisease ..> ZTCureDiseaseMode
-  ZTBehAddSubjectAsDiseaseTarget ..> ZTCureDiseaseMode
-  ZTDiseaseMgr ..> ZTDiseaseOpenContracts : TODO</pre>
+  ZTBehAddSubjectAsDiseaseTarget ..> ZTCureDiseaseMode</pre>
 <pre class="mermaid">stateDiagram-v2
   [*] --> Unknown
   Unknown --> Unsampled
@@ -1811,7 +1774,7 @@ autosave cadence are open.</li>
   class BFResourceMgr { GPU/resource input owner }</pre>
 <h3>Materials and Textures</h3>
 <pre class="mermaid">classDiagram
-  class BFRMaterialManager { +load log string evidence; +no standalone registered type }
+  class BFRMaterialManager { +authored material load surface; +no standalone registered type }
   class BFRMaterialResource { +.bfmat; +.fx; +parameters; +textures }
   class TextureAnimationVariation {
     +BFGSetTextureData
@@ -2425,7 +2388,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ModesDomain "1" --> ZTDeleteModeState : delete_mode
   ModesDomain "1" --> ZTDownloadModeState : download_mode
   ModesDomain "1" --> ZTFileModeState : file_mode
-  ModesDomain "1" --> ZTGfxOptionsModeState : gfx_options_mode
+  ModesDomain "1" --> ZTGfxOptionsModeSnapshot : gfx_options_mode
   ModesDomain "1" --> ZTGuestViewModeState : guest_view_mode
   ModesDomain "1" --> ZTOverviewModeState : overview_mode
   ModesDomain "1" --> ZTFirstPersonModeState : first_person_state
@@ -3447,417 +3410,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   NetImmerseNifDocument "*" --> ModelBlockTypeCount : block_type_counts
   NetImmerseNifDocument "*" --> NetImmerseNifBlock : block_payloads
   NetImmerseShaderTextureSlot "0..1" --> NetImmerseTextureSlot : texture</pre>
-<h3>Reconstructed Type Reference</h3>
-<p>Field coverage for reconstructed flat config/state/helper records.</p>
-<p><strong>ai.rs</strong></p>
-<ul>
-<li><strong>BFSharedPhysVars</strong> — source_name, floats, strings, bools</li>
-<li><strong>BFAITokenTargetPosition</strong> — grid_x, grid_y, height</li>
-<li><strong>BFAITaskRuntimeState</strong> — active, completed, failed, elapsed_seconds, current_behavior_index</li>
-<li><strong>BFAITaskEvaluationResult</strong> — accepted, score, failed_evaluator, selected_subject, selected_target</li>
-<li><strong>BFAIFixedValueEval</strong> — value</li>
-<li><strong>BFAIEntityAttributeEval</strong> — attribute_name, subject_entity, target_entity, missing_value</li>
-<li><strong>BFAISpeciesViewEval</strong> — species, viewed_species_memory, donation_factor_key</li>
-<li><strong>BFAIThresholdEval</strong> — controller_name, threshold_name, minimum, maximum</li>
-<li><strong>BFAIFollowUpBehavior</strong> — behavior_type, delay_seconds, token_payload</li>
-<li><strong>BFAITaskMutation</strong> — mutation_name, target_entity, attribute_name, value, event_token</li>
-<li><strong>BFAIUnhideComponent</strong> — hidden_component, unhide_token</li>
-<li><strong>BFSteerVector</strong> — x, y, z</li>
-<li><strong>ZTAISharedInfluenceWatcher</strong> — watcher_type, watched_influence</li>
-<li><strong>ZTAIEducationData</strong> — education_value, topic</li>
-<li><strong>ZTAIFeedbackController</strong> — feedback_token, message_type</li>
-<li><strong>ZTAIViewpointSwapPolicy</strong> — swap_chance, min_swap_distance, max_swap_distance</li>
-<li><strong>ZTEdDonateValueRange</strong> — min_score, max_score, value</li>
-<li><strong>ZTAITourTakerData</strong> — weight, donate_min, donate_max, favorite_animal_bonus</li>
-<li><strong>ZTAIVehicleData</strong> — vehicle_type, capacity, route_token</li>
-<li><strong>ZTAIWaterFilterComponent</strong> — clean_tank_token, water_dirtiness</li>
-<li><strong>ZTPAPTEntityStub</strong> — entity_type, component_names</li>
-</ul>
-<p><strong>animal.rs</strong></p>
-<ul>
-<li><strong>ZTAnimalTypeLifeCycle</strong> — adult, pregnant</li>
-<li><strong>ZTAnimalTypeStatusFlags</strong> — predator, extinct, large_animal, marine, show_animal, can_be_ridden, can_swim_with</li>
-<li><strong>ZTAnimalTrickKnowledge</strong> — trick_token, min_score, max_score</li>
-<li><strong>ZTAnimalRuntime</strong> — rampaging, eyedropper_selected</li>
-<li><strong>ZTAnimalAdoptionState</strong> — show_adopt, adoptable, adoption_slot, adoption_message</li>
-<li><strong>ZTAnimalReleaseState</strong> — show_release, releasable, release_message, conservation_reward</li>
-<li><strong>ZTAnimalDiseaseState</strong> — disease_token, cure_token, target_for_disease</li>
-<li><strong>ZTAnimalCrateState</strong> — crated, show_crate, crate_entity, tranquilized</li>
-<li><strong>ZTAnimalConservationState</strong> — endangerment_token, release_bonus, donation_bonus</li>
-<li><strong>ZTAnimalTrainingState</strong> — training_area, learned_tricks, trick_scores, active_trick</li>
-<li><strong>ZTAnimalTrainingProgress</strong> — trick_token, previous_score, new_score, completed_before, completed_after</li>
-<li><strong>ZTAdoptionMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>ZTAdoptionSlotMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>ZTAdoptionFameSlot</strong> — fame, slots, loc_id</li>
-<li><strong>ZTAdoptionLoadEvent</strong> — msg, data, name, child_msg, child_data, child_name</li>
-<li><strong>ZTFavoriteAnimalMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-</ul>
-<p><strong>app.rs</strong></p>
-<ul>
-<li><strong>ZTStartupUiSurfaces</strong> — native_tool_roots, startup_splash_roots</li>
-</ul>
-<p><strong>audio.rs</strong></p>
-<ul>
-<li><strong>ZTWorldSoundGeneralData</strong> — env_transition_seconds, max_distance_to_hear_lapping_water, lapping_sound_interp_scalar, smallest_water_area_for_lapping</li>
-<li><strong>BF2DSndRequest</strong> — event_token, sound_asset, volume, pitch, pan, category, emitter_entity, world_position, looping, streamed</li>
-<li><strong>ZTMainMenuMusicState</strong> — track_token, playing, volume</li>
-</ul>
-<p><strong>camera.rs</strong></p>
-<ul>
-<li><strong>ZTCameraCommandStateEvent</strong> — token, active</li>
-</ul>
-<p><strong>catalog.rs</strong></p>
-<ul>
-<li><strong>BFBinderSubtree</strong> — name, binder_type, children</li>
-</ul>
-<p><strong>disease.rs</strong></p>
-<ul>
-<li><strong>ZTCureDiseasePanelState</strong> — cure_panel_visible, cause_panel_visible, sample_panel_visible, alert_status, hint_index</li>
-</ul>
-<p><strong>economy.rs</strong></p>
-<ul>
-<li><strong>ZTFameMessageType</strong> — token, value_type, loc_id</li>
-<li><strong>ZTStatusContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-</ul>
-<p><strong>entity_info.rs</strong></p>
-<ul>
-<li><strong>ZTEntityCrater</strong> — entity_type, crater_radius, decal</li>
-</ul>
-<p><strong>fence.rs</strong></p>
-<ul>
-<li><strong>ZTFenceModeCommandRequest</strong> — command_name, payload</li>
-<li><strong>ZTFenceModeCursorTypeQuery</strong> — command_name, requested_type, active_cursor_entity_type, matched</li>
-</ul>
-<p><strong>gesture.rs</strong></p>
-<ul>
-<li><strong>ZTGestureTraceInputToken</strong> — token</li>
-</ul>
-<p><strong>managers.rs</strong></p>
-<ul>
-<li><strong>ZTAppLifecycleCommand</strong> — message, target_context, payload</li>
-<li><strong>ZTViewableObjectRecord</strong> — entity_id, entity_type, view_value, max_tour_view_value</li>
-<li><strong>ZTViewableStationRecord</strong> — station_entity, viewed_entities, score</li>
-<li><strong>ZTAwardRecord</strong> — award_id, loc_id, persistent</li>
-<li><strong>ZTFeedbackMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>ZTPuzzleState</strong> — puzzle_id, layout_name, solved</li>
-<li><strong>ZTPuzzleAction</strong> — action_name, target</li>
-<li><strong>ZTPuzzleStep</strong> — step_id, required_action, target, complete</li>
-<li><strong>ZTWorldMgrContextConfig</strong> — source_path, config_data, default_world_size, attributes</li>
-<li><strong>ZTUndoMgrContextConfig</strong> — source_path, saveable, attributes</li>
-<li><strong>BFUndoAction</strong> — action_type, target_id, payload</li>
-<li><strong>ZTUndoStation</strong> — station_entity, return_station</li>
-<li><strong>BFAITokenDispatch</strong> — token_name, source_entity, target_entity, forced</li>
-<li><strong>BFAICognitiveCompletion</strong> — entity_id, task_name, succeeded</li>
-<li><strong>BFAIRelationshipEvent</strong> — subject, target, relation_type, message</li>
-<li><strong>BFAIRelationshipRecord</strong> — subject, target, relation_type, score</li>
-<li><strong>BFGEntityTriggerEvent</strong> — trigger_name, entity_id, payload</li>
-<li><strong>BFGInfluenceMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>BFGInfluenceTerrainRule</strong> — rule_name, key, value, radius, radius_dropoff</li>
-<li><strong>BFGInfluenceEffect</strong> — source_entity, target_entity, influence_type, scalar</li>
-<li><strong>BFGPathFinderMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>BFGConnectedPathRecalc</strong> — entity_id, elapsed_seconds, interval_seconds</li>
-<li><strong>BFGRampageSuppressionRecord</strong> — animal_entity, timeout_seconds, elapsed_seconds</li>
-<li><strong>BFGRampageEvent</strong> — animal_entity, message, triggered_drt, sound_distance</li>
-<li><strong>BFGRampageSoundPolicy</strong> — interp_scalar, max_distance, distance_for_max_volume</li>
-<li><strong>BFGDinoRecoveryDispatch</strong> — animal_entity, team_entity, crate_entity, task_token</li>
-<li><strong>BFGTraversabilityCommand</strong> — command_name, payload</li>
-<li><strong>BFGTraversabilityAreaWrite</strong> — area_id, changed_triangle_indices, immediate_triangle_indices</li>
-<li><strong>BFGTraversabilityEntityRule</strong> — entity_type, motion_class, required_open_area_size</li>
-<li><strong>BFGDistantViewType</strong> — view_type, display_motion_class</li>
-<li><strong>BFGTraversabilityMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>ZTLocationEntry</strong> — location_id, entity_id, position, biome</li>
-<li><strong>ZTViewableSubMgrStation</strong> — station_entity, viewed_animals, score</li>
-<li><strong>ZTAIGuestMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
-<li><strong>ZTSpawnPriceEffect</strong> — percent_range_min, percent_range_max, percent_delta, percent_adjust</li>
-<li><strong>ZTSpawnAnimalEffects</strong> — num_species_per_adjust, percent_adjust_per_num_species, max_percent_adjust</li>
-<li><strong>ZTSpawnNeedEffects</strong> — critical_check_interval, max_critical_need_hits_per_month, max_edu_points_per_view, max_ent_points_per_view, monitored_needs</li>
-</ul>
-<p><strong>menu_profile_campaign_scenario.rs</strong></p>
-<ul>
-<li><strong>ZTExpansionInfo</strong> — expansion_id, display_name, version, enabled</li>
-</ul>
-<p><strong>modes.rs</strong></p>
-<ul>
-<li><strong>ZTModeHotKeyFile</strong> — file, node</li>
-<li><strong>ZTSelectionEndangermentLocId</strong> — token, loc_id</li>
-<li><strong>ZTThoughtItemTemplate</strong> — priority, file</li>
-<li><strong>ZTDeleteGroup</strong> — name, type_tokens</li>
-<li><strong>ZTFirstPersonMouseLookTransition</strong> — active</li>
-<li><strong>ZTModeDelayConfig</strong> — name, delay_seconds</li>
-<li><strong>ZTTrainingEventPercentValue</strong> — event_count, percent_of_score</li>
-<li><strong>ZTTrainingNativeCursorContract</strong> — wait_cursor, training_cursor</li>
-<li><strong>ZTTrainingNativeGesturePointerContract</strong> — texture_sequence, terminal_frame</li>
-<li><strong>ZTUIParticleEffects</strong> — effects</li>
-<li><strong>ZTFPTrainingRewardEffect</strong> — animal_entity, effect</li>
-<li><strong>ZTOverviewModeAnimalIcon</strong> — entity_type, icon_name</li>
-<li><strong>ZTOverviewModeBuildingIcon</strong> — entity_type, icon_name</li>
-<li><strong>ZTOverviewFilter</strong> — category, type_name, enabled</li>
-<li><strong>ZTViewFilterState</strong> — token, visible</li>
-<li><strong>ZTOverviewMapProjection</strong> — world_bounds, screen_region, zoom</li>
-<li><strong>ZTOverviewClickTarget</strong> — entity_id, screen_x, screen_y</li>
-<li><strong>ZTDeleteConfirmationState</strong> — message_token, confirmed, cancel_token</li>
-<li><strong>ZTGroundTrackEndpoint</strong> — entity_id, endpoint_token, station_token</li>
-<li><strong>ZTGroundTrackCircuit</strong> — circuit_id, forward_segments, closed_circuit</li>
-<li><strong>ZTGuestViewTarget</strong> — guest_entity, tag_file</li>
-<li><strong>ZTGuestViewCameraBinding</strong> — yaw, pitch, zoom</li>
-<li><strong>ZTCurbAnchor</strong> — tile_x, tile_y, level</li>
-</ul>
-<p><strong>photo.rs</strong></p>
-<ul>
-<li><strong>ZTPhotoChallengeScoreThresholds</strong> — dist_from_camera, percent_seen, percent_seen_in_center</li>
-<li><strong>ZTPhotoChallengeMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
-</ul>
-<p><strong>placement.rs</strong></p>
-<ul>
-<li><strong>ZTPlacementValidation</strong> — accepted, message_token</li>
-<li><strong>ZTPlacementModeCommandRequest</strong> — command_name, entity_type</li>
-<li><strong>ZTPlacementModeCommandDecision</strong> — command_name, entity_type, active_entity_type, single_object_placement, accepted</li>
-<li><strong>ZTPlacementCommitRequest</strong> — command_name, entity_type, target_entity, platform_confirmation_branch</li>
-<li><strong>ZTPlacementCommitDecision</strong> — command_name, entity_type, target_entity, platform_confirmation_branch, fallback_mode_token, accepted</li>
-<li><strong>ZTEntityMovementModeState</strong> — selected_entity, original_location, candidate_location</li>
-<li><strong>ZTElevatedPathPlacementState</strong> — mode_token, height, anchor_entity, supports_required</li>
-<li><strong>ZTItemFilter</strong> — filter_name, selected_values</li>
-</ul>
-<p><strong>renderer.rs</strong></p>
-<ul>
-<li><strong>BFComponentNode</strong> — component_type, component_name, children</li>
-<li><strong>BFResourceEntryVirtualInterface</strong> — open_slot, enumerate_slot, predicate_slot, refresh_tree_slot, delete_slot</li>
-<li><strong>BFResourceEntryPredicate</strong> — normalized_key, helper_key, include_archives</li>
-<li><strong>BFRMaterialUvTransform</strong> — offset_u, offset_v, rotation_w, scale_u, scale_v</li>
-<li><strong>BFRMaterialTextureBinding</strong> — semantic, texture_path</li>
-<li><strong>BFRTransformBinding</strong> — semantic, matrix_source</li>
-<li><strong>BFRMaterialFlags</strong> — alpha_blend_enable, src_blend, dest_blend, no_render</li>
-<li><strong>BFREffectRenderer</strong> — renderer_type, emitter_name</li>
-<li><strong>BFREffectModifierBinding</strong> — emitter_name, modifier_name, usage, param</li>
-<li><strong>BFRModelMaterialSlot</strong> — slot_name, material_path, usage, param</li>
-<li><strong>BFRModelSourceBlockRecord</strong> — index, block_type</li>
-<li><strong>BFRModelSourceBlockTypeCount</strong> — block_type, count</li>
-<li><strong>BFRModelGeometryVisitor</strong> — visited_records, output_count, output_size_bytes</li>
-<li><strong>BFRModelGeometryIntersectionQuery</strong> — origin, direction, max_distance</li>
-<li><strong>BFRModelGeometryHit</strong> — distance, triangle_index, record_index</li>
-<li><strong>BFRModelTransform</strong> — position, direction, up</li>
-<li><strong>BFRModelCacheRecord</strong> — usage, param, looped, linked_resource</li>
-<li><strong>BFRModelParameterRecord</strong> — usage, param, value, looped</li>
-<li><strong>BFRTextureByteSizeRequest</strong> — format_code, width, height</li>
-<li><strong>BFRTextureByteSizeResult</strong> — bytes, block_width, block_height</li>
-<li><strong>BFDecorativeDetailObjectComponent</strong> — detail_level</li>
-<li><strong>BFSimpleLODComponent</strong> — standard_model, special_model</li>
-<li><strong>BFRVertexPT0</strong> — position, tex0</li>
-<li><strong>BFRVertexPNT0</strong> — position, normal, tex0</li>
-<li><strong>BFRVertexPNDT0T1</strong> — position, normal, diffuse, tex0, tex1</li>
-<li><strong>BFRVertexPNDT0T1T2</strong> — position, normal, diffuse, tex0, tex1, tex2</li>
-<li><strong>BFRVertexXPD</strong> — position, packed_data</li>
-<li><strong>BFWaterGroupMember</strong> — entity_id, tank_id, bounds</li>
-</ul>
-<p><strong>research.rs</strong></p>
-<ul>
-<li><strong>ZTResearchMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
-<li><strong>ZTResearchItemConfig</strong> — item_id, entity_type, fence_type, button_template, cost, time_until_unlock_seconds, duration_unlock_seconds, currently_researching, begun_researching, research_completed, research_completed_notified, source_ref</li>
-<li><strong>ZTResearchActiveRecord</strong> — progression_ref, source_button, elapsed_seconds, required_seconds, research_cost, progress</li>
-</ul>
-<p><strong>runtime_support.rs</strong></p>
-<ul>
-<li><strong>ZTAppComponentConfig</strong> — component_type, init_data, attributes</li>
-<li><strong>BFLogChannelConfig</strong> — channel, cutoff</li>
-<li><strong>BFRegistryAppConfig</strong> — app_key</li>
-<li><strong>ZTExtraPathsAppConfig</strong> — source_path, component_type, attributes</li>
-<li><strong>BFWindowComponentAppConfig</strong> — width, height, class_name, window_title, icon</li>
-<li><strong>BFContextCommand</strong> — message, target, payload</li>
-<li><strong>ZT2Strings</strong> — tables, locale, fallback_locale</li>
-<li><strong>ZTExtraPaths</strong> — bootstrapped, source_path, component_type, bootstrap_attributes, profile_root, save_root, download_root, screenshots_root</li>
-<li><strong>BFString</strong> — value</li>
-<li><strong>BFPoint</strong> — x, y</li>
-<li><strong>BFRect</strong> — left, top, right, bottom</li>
-<li><strong>BFTypedBinderChildRecord</strong> — name, binder_type, type_name, shared_node, instance_node</li>
-<li><strong>BFLoadListener</strong> — listener_name, phase</li>
-<li><strong>ZTLoadListener</strong> — listener_name, target_phase, layout, blit_rate_seconds</li>
-<li><strong>BFSafeHandleBase</strong> — handle_id, generation</li>
-<li><strong>BFUserProfileMgrOptionsInfo</strong> — app_name, extra_path, save_directory, temp_directory</li>
-<li><strong>BFUserProfileAddProfile</strong> — profile_name, source_path</li>
-<li><strong>BFUserProfileRemoveProfile</strong> — profile_name, delete_files</li>
-<li><strong>BFUserProfileSetProfile</strong> — profile_name</li>
-<li><strong>BFUserProfileOptionsChanged</strong> — profile_name, options_path</li>
-<li><strong>BFPerfIncreaseCommand</strong> — counter_name, amount</li>
-<li><strong>BFPerfDecreaseCommand</strong> — counter_name, amount</li>
-<li><strong>BFGraphicsPerfIncreaseCommand</strong> — counter_name, renderer_bucket</li>
-<li><strong>BFTimeHeartbeatEvent</strong> — elapsed_seconds, delta_seconds</li>
-<li><strong>BFTimeSimTickEvent</strong> — tick_index, sim_seconds</li>
-<li><strong>BFTimeSlowTickEvent</strong> — tick_index, elapsed_seconds</li>
-<li><strong>BFLogRecord</strong> — channel, message</li>
-<li><strong>BFStackTrace</strong> — frames</li>
-<li><strong>ZTCDCheck</strong> — last_result, failure_message</li>
-<li><strong>ZTWebIndexGetCommand</strong> — index_url, target_file</li>
-<li><strong>ZTWebMotdGetCommand</strong> — motd_url, target_file</li>
-<li><strong>ZTWebFileGetCommand</strong> — transfer_id, url, target_file</li>
-<li><strong>ZTWebFileEnableCommand</strong> — transfer_id, enabled</li>
-<li><strong>ZTWebFileGetCancelCommand</strong> — transfer_id, target_file</li>
-<li><strong>ZTWebGetFileDoneEvent</strong> — transfer_id, target_file, succeeded</li>
-<li><strong>ZTWebShowUpdateCommand</strong> — item_id, layout_path, force_visible</li>
-<li><strong>ZTLoggingConsent</strong> — accepted, registry_value, prompt_layout</li>
-<li><strong>ZTUsageObject</strong> — object_id, entity_id, active</li>
-<li><strong>ZTMemTrackingDumpCommand</strong> — destination, include_stack_traces</li>
-<li><strong>ZTMemTrackingClearCommand</strong> — reset_counters</li>
-<li><strong>ZTPerformanceStatsDumpCommand</strong> — destination, include_graphics_perf</li>
-<li><strong>ZTOptimizationToggle</strong> — optimization_name, enabled</li>
-<li><strong>ZTUiDrawToggle</strong> — draw_ui, source_message</li>
-<li><strong>ZTDebugToggleCommand</strong> — command_name, enabled, payload</li>
-<li><strong>ZTDebugActionCommand</strong> — command_name, payload</li>
-<li><strong>ZTRetailBuild</strong> — retail_flag, build_token</li>
-<li><strong>ZTVinceQuestionAnswer</strong> — question_id, answer, accepted</li>
-</ul>
-<p><strong>scenario.rs</strong></p>
-<ul>
-<li><strong>BFScenarioRuleTest</strong> — predicate, subject, value</li>
-<li><strong>ZTScenarioMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
-<li><strong>BFScenarioSetChallengeDelayCommand</strong> — challenge_id, delay_seconds</li>
-<li><strong>BFScenarioHideRuleCommand</strong> — rule_name</li>
-<li><strong>BFScenarioSetGlobalVarCommand</strong> — variable_name, value</li>
-<li><strong>BFScenarioSetUserValCommand</strong> — key, value</li>
-<li><strong>BFScenarioGetRuleNamesCommand</strong> — include_hidden</li>
-<li><strong>BFScenarioLoadScenarioCommand</strong> — scenario_path, load_count</li>
-<li><strong>BFScenarioSaveOptionsCommand</strong> — profile_name, options_path</li>
-<li><strong>BFScenarioGetAllChallengesCommand</strong> — campaign_id</li>
-<li><strong>BFScenarioOkCommand</strong> — request_id</li>
-<li><strong>BFScenarioErrorCommand</strong> — request_id, message</li>
-<li><strong>BFScenarioClearScenarioCommand</strong> — clear_world, clear_rules</li>
-<li><strong>BFScenarioLocalizeFloatCommand</strong> — value, format_token</li>
-<li><strong>BFScenarioResetRuleStatesCommand</strong> — include_completed</li>
-<li><strong>BFScenarioGetGlobalVarCommand</strong> — variable_name</li>
-<li><strong>BFScenarioShowRuleCommand</strong> — rule_name</li>
-<li><strong>BFScenarioAddScenarioCommand</strong> — scenario_id, group_name</li>
-<li><strong>BFScenarioGetRuleStateCommand</strong> — rule_name</li>
-<li><strong>BFScenarioValidateAllChallengesCommand</strong> — campaign_id</li>
-<li><strong>BFScenarioPickChallengeCommand</strong> — challenge_id</li>
-<li><strong>BFScenarioAddScenarioObjectCommand</strong> — object_type, object_id, target_rule</li>
-<li><strong>BFScenarioProcessVinceCommand</strong> — answer_id, accepted</li>
-<li><strong>BFScenarioGetUserValCommand</strong> — key</li>
-</ul>
-<p><strong>scripting.rs</strong></p>
-<ul>
-<li><strong>BFScriptActionRecord</strong> — action_name, script, function_name, payload</li>
-<li><strong>ZTScriptRunRequest</strong> — scope, script, function_name, arguments, raw_payload</li>
-<li><strong>ZTScriptUiReplacementText</strong> — target_name, locid, replacement</li>
-</ul>
-<p><strong>show.rs</strong></p>
-<ul>
-<li><strong>BFAITrickMgrData</strong> — trick_templates</li>
-<li><strong>BFAITrickTemplate</strong> — trick_token, default_trick, behavior_set, required_target</li>
-<li><strong>ZTAITrickMgrData</strong> — source_documents, tricks, tricks_by_animal_type, default_trick_by_variant, variants_by_default_trick</li>
-<li><strong>ZTAITrickComponentData</strong> — trick_token, display_loc_id, reward</li>
-<li><strong>ZTAITrickTargetComponent</strong> — trick_area, target_node</li>
-<li><strong>ZTTrickButtonPipConfig</strong> — dimension, scaled_width, scaled_height</li>
-</ul>
-<p><strong>staff.rs</strong></p>
-<ul>
-<li><strong>ZTAIStaffMgrContextConfig</strong> — source_path, config_data, saveable, cleanup_interval_seconds, attributes</li>
-<li><strong>ZTAIStaffTrainerComponent</strong> — trainee_animal, trick_token, training_area</li>
-<li><strong>ZTAIStaffJobStealPolicy</strong> — job_safe_distance, steal_job_threshold</li>
-<li><strong>ZTStaffWaterCleaningRequest</strong> — tank_entity, filter_entity, priority</li>
-</ul>
-<p><strong>tank.rs</strong></p>
-<ul>
-<li><strong>ZTTankChildEntry</strong> — entry_index, child_entity, child_type</li>
-<li><strong>ZTTankGateChildEntry</strong> — entry_index, child_entity, primary_tank_id, alternate_tank_id</li>
-<li><strong>ZTTankSegmentDetachState</strong> — primary_detached, alternate_detached, child_entries_released</li>
-<li><strong>ZTTankContainedEntity</strong> — entity_id, entity_type, water_compatibility</li>
-<li><strong>ZTTankWaterVolume</strong> — floor_height, water_height, depth</li>
-<li><strong>ZTTankCleanlinessState</strong> — cleanliness, active_filter_entities, dirty</li>
-<li><strong>ZTTankMaterialPolicy</strong> — high_detail_suffix, low_detail_suffix, texture_reflect, water_detail</li>
-<li><strong>ZTTankHeightCommand</strong> — tank_id, height, from_ui_message</li>
-<li><strong>ZTTankModeCommand</strong> — mode, source_message</li>
-<li><strong>ZTTankFillCommand</strong> — tank_id, source_message</li>
-<li><strong>ZTTankDrainCommand</strong> — tank_id, source_message</li>
-<li><strong>ZTTankDeleteCommand</strong> — tank_id, preserve_contents</li>
-<li><strong>ZTReplaceZooWallsCommand</strong> — old_wall_type, new_wall_type, selected_only</li>
-</ul>
-<p><strong>terrain.rs</strong></p>
-<ul>
-<li><strong>BFGBiomeData</strong> — display_name_token, water, overview_color, draw_order</li>
-<li><strong>BFGBiomeObjects</strong> — detail_objects, decorative_detail_objects, autoplacement_variations</li>
-</ul>
-<p><strong>transport.rs</strong></p>
-<ul>
-<li><strong>ZTToggleCircuitStatusCommand</strong> — circuit_id, active</li>
-<li><strong>ZTSelectStationComponentCommand</strong> — station_entity, component_name</li>
-<li><strong>ZTSelectVehicleTypeCommand</strong> — vehicle_type, circuit_id</li>
-<li><strong>ZTGenerateVehicleCommand</strong> — vehicle_type, station_entity, circuit_id</li>
-</ul>
-<p><strong>ui_binding.rs</strong></p>
-<ul>
-<li><strong>ZTGoalPanelEntry</strong> — goal_id, loc_id, completed, hidden</li>
-<li><strong>ZTZoopediaTOCEntry</strong> — entry_id, parent_id, loc_id, page_path</li>
-<li><strong>BFNullEvent</strong> — message</li>
-<li><strong>BFBooleanEvent</strong> — message, value</li>
-<li><strong>BFIntEvent</strong> — message, value</li>
-<li><strong>BFUIntEvent</strong> — message, value</li>
-<li><strong>BFFloatEvent</strong> — message, value</li>
-<li><strong>BFDoubleEvent</strong> — message, value</li>
-<li><strong>BFStringEvent</strong> — message, value</li>
-<li><strong>BFStringTokenEvent</strong> — message, token</li>
-<li><strong>BFTypeEvent</strong> — message, type_name</li>
-<li><strong>BFRefCountedXMLObjEvent</strong> — message, object_type, ref_count</li>
-<li><strong>UIKeyboardEvent</strong> — key_code, raw_key, command</li>
-<li><strong>UIMouseEvent</strong> — event_name, x, y, wheel_delta, dragging</li>
-<li><strong>BFStringObj</strong> — value</li>
-<li><strong>BFPoint</strong> — x, y, optional z</li>
-<li><strong>UIHandle</strong> — component_name, runtime_handle, object_type</li>
-<li><strong>UIAck</strong> — ok, error</li>
-<li><strong>UISettingsChangedData</strong> — graphics_changed, audio_changed, controls_changed, profile_changed</li>
-<li><strong>UICursorState</strong> — cursor_name, visible, owner_component</li>
-<li><strong>UIModalState</strong> — modal_component, previous_focus, blocked_components</li>
-<li><strong>UINameData</strong> — name, parent_name</li>
-<li><strong>UIParentData</strong> — parent_name, child_name</li>
-<li><strong>ZTFeedbackRecord</strong> — loc_id, sound, click_target, message, thought, action, emoticon, text, attributes</li>
-<li><strong>ZTActionInfo</strong> — action_token, loc_id, icon, enabled</li>
-<li><strong>ZTMoneyText</strong> — amount, formatted, positive_color, negative_color</li>
-<li><strong>ZTOverviewData</strong> — animal_icons, building_icons, filters</li>
-</ul>
-<p><strong>ui_contract.rs</strong></p>
-<ul>
-<li><strong>UIButtonEventBinding</strong> — event_name, command, data, target</li>
-<li><strong>UIHoverState</strong> — hovered, enter_event_count, leave_event_count</li>
-<li><strong>UIContainerLayout</strong> — auto_size, auto_size_parent, columns, rows, x_spacer, y_spacer, column_width, row_height, initial_x, initial_y</li>
-<li><strong>UIListBoxEntry</strong> — entry_id, layout, text, icon, selected</li>
-<li><strong>UIDragBounds</strong> — min_width, max_width, min_height, max_height, bounded, dragging</li>
-<li><strong>UIDropListItem</strong> — item_id, text, value</li>
-<li><strong>UISoundBinding</strong> — name, path, event</li>
-<li><strong>UIStaticState</strong> — rows</li>
-<li><strong>UITextBufferState</strong> — lines, scroll_offset</li>
-<li><strong>UIToolState</strong> — command, active</li>
-<li><strong>UITooltipState</strong> — target, tooltip_type, float, appear_seconds, display_seconds, help_ids, name_help, short_help, long_help, help_token</li>
-<li><strong>UITreeElementState</strong> — item_id, expanded, selected</li>
-<li><strong>UIWindowState</strong> — title, modal, draggable, horizontal, vertical, wheel_scroll, hscroll, vscroll</li>
-<li><strong>UIXMLEditState</strong> — document_path, dirty</li>
-<li><strong>BFUITextFontTag</strong> — name, size, image, shadow_x, shadow_y, shadow_alpha</li>
-<li><strong>BFUITextImageTag</strong> — source, source_x, source_y, source_width, source_height, width, height</li>
-<li><strong>BFUITextCellTag</strong> — width, pad_x, pad_y</li>
-</ul>
-<p><strong>world.rs</strong></p>
-<ul>
-<li><strong>BFGEventRoot</strong> — root_name, listeners, events</li>
-<li><strong>BFGEventRecord</strong> — message, subject_entity, target_entity, payload_type, payload</li>
-<li><strong>BFGAttachWorldCommand</strong> — world_id, map_path, source_message</li>
-<li><strong>BFGAttachGameCommand</strong> — game_id, profile_name, startup_context</li>
-<li><strong>BFGCameraYawQuery</strong> — camera_entity, yaw</li>
-<li><strong>BFGEntityRemovalResult</strong> — removed_entities, failed_entities, emitted_event</li>
-<li><strong>BFGDerivedTypesQuery</strong> — base_type, include_abstract, results</li>
-<li><strong>BFGPlacementGridContextConfig</strong> — source_path, saveable, attributes</li>
-<li><strong>BFGCollisionMgrContextConfig</strong> — source_path, saveable, attributes</li>
-<li><strong>BFGDetachInfo</strong> — detach_action, detach_beh_set, parent_obj, child_obj, parent_entity, child_entity</li>
-<li><strong>BFGPoint3Attribute</strong> — name, value</li>
-<li><strong>BFGFloatAttribute</strong> — name, value</li>
-<li><strong>BFGStringAttribute</strong> — name, value</li>
-<li><strong>BFGBooleanAttribute</strong> — name, value</li>
-<li><strong>BFFakePhysicsComponent</strong> — velocity, acceleration</li>
-<li><strong>BFComponentScriptHook</strong> — event_name, function_name</li>
-<li><strong>ZTExpandoHeight</strong> — height_absolute, min_height, default_height, current_height</li>
-<li><strong>ZTExpandoPiece</strong> — name, binder_name, attach_node</li>
-<li><strong>ZTAdmissionControls</strong> — adult_admission_token, selected_index, members_token</li>
-<li><strong>ZTBalanceSheetView</strong> — category_list, item_list, month_labels, monthly</li>
-<li><strong>ZTZooSurveyQuestion</strong> — question_id, loc_id, value_type</li>
-<li><strong>ZTZooSurveyAnswer</strong> — question_id, value</li>
-<li><strong>ZTZoopediaPage</strong> — entry_id, page_number, text_token, previous_entry, next_entry</li>
-</ul>
 <h3>Registered Class Roster</h3>
 <p>Thin registered subtypes/records (behaviour in base + message vocabulary), with parent:
 this roster is a functional appendix, not the complete 2,068-entry type registry
