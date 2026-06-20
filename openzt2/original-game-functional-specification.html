@@ -377,13 +377,13 @@ singleton lifetime, then stack in three layers under the application.</p>
 <pre class="mermaid">flowchart TB
   App["ZTApp < BFGApp < UIApp < BF3DApp (owns all managers)"]
   subgraph Source["Source runtime layer"]
-    R["BFResourceMgr<br/>Z2F archives and source entries/assets"]
-    L["BFLocaleMgr<br/>loc ids to strings, lang/&lt;id&gt;/"]
-    X["BFXMLSchemaMgr<br/>XML schema/type validation"]
+    R["BFResourceMgr<br/>Z2F archives and source entries/assets<br/>root_path, zip_paths, archive_paths<br/>binder_roots, entries : Vec~BFResourceEntry~, resource_tree"]
+    L["BFLocaleMgr<br/>loc ids to strings, lang/&lt;id&gt;/<br/>locale, string_tables"]
+    X["BFXMLSchemaMgr<br/>XML schema/type validation<br/>schemas : BTreeMap~String,BFXMLSchema~"]
     Reg["BFRegistry<br/>global keys, types, factories"]
     Sc["BFScriptContextMgr<br/>BFScriptContext/BFLuaContext instances"]
     P["BFUserProfileMgr<br/>profile paths, options.xml"]
-    T["BFTimeKeeper<br/>simulation clock and scheduled updates,<br/>BFTimeKeyInfo, BFTimeTriggersComponent"]
+    T["BFTimeKeeper<br/>simulation clock and scheduled updates<br/>elapsed_seconds, delta_seconds, paused<br/>BFTimeEventRoot, BFTimeKeyInfo, BFTimeTriggersComponent"]
   end
   subgraph Domain["Product domain manager layer"]
     Core["Core zoo state<br/>ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr,<br/>ZTDiseaseMgr, ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr"]
@@ -414,11 +414,6 @@ singleton lifetime, then stack in three layers under the application.</p>
   Domain --> Proj
   Tools --> Domain
   Other --> Domain</pre>
-<p>Known recovered manager state: <code>BFResourceMgr</code> holds <code>root_path</code>, <code>zip_paths</code>,
-<code>archive_paths</code>, <code>binder_roots</code>, <code>entries : Vec~BFResourceEntry~</code>, <code>resource_tree</code>;
-<code>BFLocaleMgr</code> holds <code>locale</code> + <code>string_tables</code>; <code>BFTimeKeeper</code> holds <code>elapsed_seconds</code>, <code>delta_seconds</code>, <code>paused</code>, and a
-<code>BFTimeEventRoot</code> — the sim clock that fans out scheduled updates; <code>BFXMLSchemaMgr</code> holds
-<code>schemas : BTreeMap~String, BFXMLSchema~</code>.</p>
 <h3>Registration and Lifetime Contract</h3>
 <p>Every manager is obtained through its lazy type getter (guarded cache global, parent via
 the parent getter, name interned by <code>register_type</code>). The application root
