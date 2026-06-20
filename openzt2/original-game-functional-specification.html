@@ -384,6 +384,8 @@ singleton lifetime, then stack in three layers under the application.</p>
     Sc["BFScriptContextMgr<br/>BFScriptContext/BFLuaContext instances"]
     P["BFUserProfileMgr<br/>profile paths, options.xml"]
     T["BFTimeKeeper<br/>simulation clock and scheduled updates<br/>elapsed_seconds, delta_seconds, paused<br/>BFTimeEventRoot, BFTimeKeyInfo, BFTimeTriggersComponent"]
+    Sim["ZTSimController<br/>paused, speed_index, feedback_control/gain<br/>min_interval_seconds, max_interval_seconds<br/>simulation_time : BFTimeKeeper<br/>adaptive clock for scheduled updates"]
+    Configs["Authored manager *Config schemas<br/>ZTAIGuestMgrConfig: max_guests_base, max_guests_per_star,<br/>spawn_at_entrance, displacement_*<br/>BFGRampageConfig: rampage formula<br/>BFGCollisionTesterConfig / BFGTraversabilityViewingConfig"]
   end
   subgraph Domain["Product domain manager layer"]
     Core["Core zoo state<br/>ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr,<br/>ZTDiseaseMgr, ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr"]
@@ -410,7 +412,8 @@ singleton lifetime, then stack in three layers under the application.</p>
   App --> Source
   App --> Domain
   App --> Tools
-  Source --> Domain
+  Source --> Configs --> Domain
+  T --> Sim
   Domain --> Proj
   Tools --> Domain
   Other --> Domain</pre>
@@ -418,15 +421,6 @@ singleton lifetime, then stack in three layers under the application.</p>
 <p>Every manager is obtained through its lazy type getter (guarded cache global, parent via
 the parent getter, name interned by <code>register_type</code>). The application root
 (<code>ZTApp</code>) constructs and owns them; their state is what Persistence serializes.</p>
-<h3>Runtime Config and Simulation Clock</h3>
-<p>The game-speed/tick controller is reconstructed: <code>ZTSimController</code>
-holds <code>paused</code>, <code>speed_index</code>, <code>feedback_control</code>/<code>gain</code>, <code>min_interval_seconds</code>/
-<code>max_interval_seconds</code>, and a <code>simulation_time : BFTimeKeeper</code>. It is the adaptive clock
-that paces all scheduled component updates.</p>
-<p>Manager behaviour is config-driven; each manager has an authored <code>*Config</code> schema, e.g.
-<code>ZTAIGuestMgrConfig</code> (<code>max_guests_base</code>, <code>max_guests_per_star</code>, <code>spawn_at_entrance</code>,
-<code>displacement_*</code>), <code>BFGRampageConfig</code> (the rampage formula — see World), and
-<code>BFGCollisionTesterConfig</code>/<code>BFGTraversabilityViewingConfig</code>.</p>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li>Manager construction order and inter-manager update sequencing per frame/tick are not yet
