@@ -119,21 +119,6 @@ one of those mechanics is part of an observable or persisted contract.</p>
 host substrate responsibilities. The functional specification owns the original
 class, manager, message, and source-data surfaces. This plan owns the Rust/Bevy
 runtime strategy that executes those surfaces.</p>
-<pre class="mermaid">flowchart TB
-  Spec["Original contract<br/>types, managers, messages, source schemas,<br/>state transitions, open native contracts"]
-  Source["Source hydration<br/>Z2F, paths, XML/BFXML/MAXML, localization,<br/>binders, registries, source format loaders"]
-  Domains["OpenZT2 semantic domains<br/>UI/app/modes, entity/animal/catalog,<br/>world/construction, AI/behavior,<br/>progression, scenario/script/save/photo"]
-  Presentation["Presentation contracts<br/>renderer, materials, models, animation,<br/>sprites, camera, audio"]
-  Host["Provided substrate and adapters<br/>Bevy ECS/app/assets/schedules/render/UI/window/input/time,<br/>bevy_asset_loader, bevy_kira_audio/Kira, mlua,<br/>image/dds/ktx2/nif decoders, OS/network/diagnostics"]
-  Workbook["Workbook checklist<br/>one row per domain/feature/subfeature"]
-
-  Spec --> Source --> Domains
-  Domains --> Presentation
-  Host --> Source
-  Host --> Domains
-  Host --> Presentation
-  Domains --> Workbook
-  Presentation --> Workbook</pre>
 <pre class="mermaid">classDiagram
   class ProvidedSubstrateAndAdapters {
     +Bevy runtime

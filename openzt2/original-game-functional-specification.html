@@ -1863,6 +1863,7 @@ below.</p>
   BFComponent <|-- BFParticleDictionary
   class BFRActorComponent { entity renderable }
   class BFNISceneGraphComponent { Gamebryo node base for camera/decals/bone LOD }
+  class BFCameraComponent { camera node }
   class BFRenderer { frame driver }
   class BFResourceMgr { GPU/resource input owner }</pre>
 <h3>Materials and Textures</h3>
@@ -1911,20 +1912,21 @@ below.</p>
   BFSpriteMgr <|-- BFNISpriteMgr
   class BFSpriteMgr { retained UI tree to screen bridge }
   class BFNISpriteMgr { Gamebryo-backed implementation }</pre>
-<h3>Camera</h3>
-<p><code>BFCameraComponent</code> (<code>&lt; BFNISceneGraphComponent</code>) is the camera node; <code>ZTCameraCommandReader</code>
-(<code>&lt; ZTMode</code>) is the input mode. Camera commands travel as messages:
-<code>ZT_CAMERA</code>, <code>ZT_CAMERA_ZOOM</code>, <code>ZT_CAMERA_ROTATE</code>, <code>ZT_CAMERA_PAN</code>, <code>ZT_CAMERA_POSITION</code>,
-<code>ZT_CAMERA_MOVED</code>. <code>ZT_BLIT</code> requests a frame blit.</p>
 <h3>Camera Commands</h3>
 <pre class="mermaid">classDiagram
-  class ZTCameraCommandReader { +command_state_bindings[]; +command_state_events[] }
+  ZTMode <|-- ZTCameraCommandReader
+  class ZTCameraCommandReader { +input mode; +command_state_bindings[]; +command_state_events[] }
   class ZTCameraCommandStateBinding { +trigger; +code; +char_value; +ctrl_state; +allow_repeat }
   class ZTCameraActiveCommands { +active_command_states[] }
+  class CameraMessages {
+    +ZT_CAMERA; +ZT_CAMERA_ZOOM; +ZT_CAMERA_ROTATE
+    +ZT_CAMERA_PAN; +ZT_CAMERA_POSITION; +ZT_CAMERA_MOVED
+    +ZT_BLIT frame blit
+  }
   ZTCameraCommandReader "*" --> ZTCameraCommandStateBinding : bindings
   ZTCameraCommandReader "*" --> ZTCameraCommandEvent : events
   ZTCameraActiveCommands "*" --> ZTCameraActiveCommandState : live states
-  ZTCameraCommandEvent ..> ZTMessage : ZT_CAMERA_*</pre>
+  ZTCameraCommandEvent ..> CameraMessages : messages</pre>
 <h3>Audio</h3>
 <pre class="mermaid">classDiagram
   BFSnd <|-- BF2DSnd
