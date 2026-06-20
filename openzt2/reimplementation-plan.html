@@ -607,9 +607,9 @@ owner; that count should stay at zero.</p>
 <tr>
   <td>Lua runtime execution</td>
   <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Lua 5.0.2 is middleware evidence. The Bevy adapter owns a main-thread <code>mlua</code> Lua 5.1 substrate, <code>.lua</code> source compilation diagnostics, and simple Lua 5.0 library aliases.</td>
-  <td>Shipped-script compile audit, Lua 5.0 compatibility gaps, original package/cache behavior, argument marshalling, return semantics, error handling, and every <code>BFS_*</code> side effect need implementation.</td>
-  <td>Load and compile every shipped <code>.lua</code>, classify failures, recover original bindings, then implement the BFS-compatible script host.</td>
+  <td>Lua 5.0.2 is middleware evidence. The Bevy adapter owns a working main-thread <code>mlua</code> Lua 5.1 compiler substrate, <code>.lua</code> source compilation diagnostics, and a validated Lua 5.0 compatibility prelude. The compile audit confirms that the prelude lets all shipped <code>.lua</code> sources and known Lua mods compile under Lua 5.1.</td>
+  <td>Original package/cache behavior, argument marshalling, return semantics, error handling, compatibility gaps that appear during execution, and every <code>BFS_*</code> side effect need implementation.</td>
+  <td>Recover original Lua globals/bindings, classify <code>BFS_*</code> argument and return shapes, then implement the BFS-compatible script host.</td>
 </tr>
 <tr>
   <td>Compiled scenario and VINCE payloads</td>
@@ -648,6 +648,19 @@ owner; that count should stay at zero.</p>
 </tr>
 </tbody>
 </table>
+<h4>Lua Recovery Note</h4>
+<p>The embedded Lua compiler path is proven enough to leave syntax triage behind:
+the Bevy adapter can compile scripts through its main-thread <code>mlua</code> Lua 5.1
+substrate, and the compatibility prelude has been written and validated against
+all shipped Lua 5.0.2 game scripts plus known Lua mod scripts. That proves the
+current prelude is sufficient for compilation under Lua 5.1; it does not prove
+runtime package/cache behavior or Blue Fang script API semantics.</p>
+<p>The open Lua work is now behavioral recovery: inventory the original Lua global
+surface and <code>BFS_*</code> bindings, classify each <code>BFS_*</code> command by owning manager
+or subsystem, recover argument and return shapes from script callsites and
+binary evidence, then implement argument marshalling, return semantics, error
+handling, package/cache behavior, and side effects through the owning runtime
+managers.</p>
 <h3>Renderer, Audio, Camera, And Host Adapters</h3>
 <table>
 <thead>
@@ -800,17 +813,18 @@ app lifecycle, fixed native-code message handlers, fixed native-code state
 machines, fixed native-code transitions, task pools, mounted archive state,
 Bevy asset sources, asset extraction, resources, ECS entities/components, Bevy
 messages, input, rendering, audio playback, and projection of source/domain
-values into the live Bevy world. Source-authored XML/Lua event blocks,
-transition declarations, command payloads, and visibility rules remain loaded
-source data that Bevy dispatches or interprets.</p>
+values into the live Bevy world. Source-authored XML event blocks, Lua script
+sources, transition declarations, command payloads, and visibility rules remain
+loaded source data; Bevy dispatches or interprets them through XML event routing
+and the script host.</p>
 <h2>Runtime Shape</h2>
 <p>The running game should use Bevy as the runtime world, scheduler, asset system,
 and presentation store. <code>domain</code> defines original semantic types, invariants,
 source-derived values, and pure rules; <code>bevy</code> stores live state as Bevy
 resources/components and implements recovered fixed native-code message
-handlers and transitions as systems. Authored XML/Lua event declarations feed
-those systems through source-compatible dispatch instead of being compiled into
-new Bevy-only behavior.</p>
+handlers and transitions as systems. Authored XML event declarations feed those
+systems through source-compatible dispatch, and Lua scripts reach them through
+recovered bindings instead of invented Bevy-only behavior.</p>
 <pre><code class="language-text">content
   Z2F/archive/path lookup
   source bytes
@@ -949,7 +963,7 @@ resources/components. Useful schedules/sets are:</p>
 <pre><code class="language-text">StartupSourceMount
 StartupDocumentHydration
 InputCollection
-LuaSourceCompilation
+ScriptHostDispatch
 RuntimeMessageDispatch
 Simulation
 PresentationSync
@@ -1474,7 +1488,8 @@ into the Bevy asset types the runtime normally consumes:</p>
 .bfmat -&gt; StandardMaterial or Zt2Material
 .nif/.bfb -&gt; Zt2Model / scene asset with Mesh, Material, Image, and AnimationClip handles
 .wav/.mp3/.ogg -&gt; AudioSource
-.xml/.lua/etc -&gt; structured game data only where runtime logic needs it
+.xml/etc -&gt; structured game data only where runtime logic needs it
+.lua -&gt; LuaScriptAsset loaded by the Lua substrate/script host
 </code></pre>
 <p>Parsers may use temporary internal structs, source documents, or domain value
 helpers while loading. Those structs should stay behind the loader boundary
@@ -1512,12 +1527,12 @@ Each UI entity carries:
   selection
   Bevy Node/Image/Text/etc. presentation components
 Input converts Bevy Interaction -&gt; original UI message/event.
-Source event dispatch interprets authored XML/Lua event blocks.
+Source event dispatch interprets authored XML event blocks.
 Bevy fixed-native-handler systems mutate UI/app/runtime state.
 Projection systems update only changed entities.
 </code></pre>
 <p>Clicking a button should not execute invented Bevy behaviour. It should dispatch
-the event block authored by the loaded layout/script data. When that event
+the event block authored by the loaded layout data. When that event
 reaches a recovered fixed native-code handler, Bevy routes the original message
 token and payload into the handler system, then reflects the result by changing
 visibility, text, images, layout state, cursor, audio, or other presentation

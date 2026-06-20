@@ -800,7 +800,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0042d0c2	31	checked_36byte_vector_at			confirmed			
 0x0042d0e1	33	destroy_ui_value_assignment_ref_slot_owner			confirmed			
 0x0042d118	153	register_ZTGameMode_ui_handler			confirmed			
-0x0042d1f8	79		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x0042d1f8	79	erase_all_4byte_vector_elements	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x0042d262	25	destroy_refcounted_ui_value_vector_range			confirmed			
 0x0042d27b	405	insert_repeated_refcounted_ui_value_vector_elements			confirmed			
 0x0042d410	160	insert_ZTGameMode_ui_handler_node			confirmed			
@@ -880,7 +880,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0043218e	61	rotate_left_ZTGfxOptionsMode_setting_value_tree			confirmed			
 0x004321cb	63	rotate_right_ZTGfxOptionsMode_setting_value_tree			confirmed			
 0x0043220a	57	destroy_ZTGfxOptionsMode_setting_value_tree_nodes_recursive			confirmed			
-0x00432243	19		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x00432243	19	release_refcounted_renderer_object_at_pointer_field44	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x00432256	117	register_ZTGfxOptionsMode_ui_handler_entries			confirmed			
 0x004322cb	55	try_get_UIComponent_value			confirmed			
 0x00432302	88	try_get_BFModeDesc_value			confirmed			
@@ -890,90 +890,90 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004323c7	23	init_wait_cursor_guard			confirmed			
 0x004323f9	56	get_construction_marker1_string_key			confirmed			
 0x00432431	56	get_construction_marker2_string_key			confirmed			
-0x00432469	23		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x00432469	23	is_path_endpoint_diagonal_mode	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x00432480	47	get_type_ZTGroundTrackMode			confirmed			
 0x004324b4	32	init_ZTGroundTrackMode_descriptor_ref			confirmed			
 0x004324d9	38	get_ZTGroundTrackMode_ui_handler_registry			confirmed			
 0x00432515	83	resolve_ZTGroundTrackMode_ui_handler_value			confirmed		0x008c3868#177	
-0x00432568	41		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x00432591	61		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x004325ce	272		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x004326de	268		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x00432568	41	is_float_within_0_001_epsilon	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x00432591	61	are_xy_points_within_track_epsilon	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x004325ce	272	classify_track_delta_axis_or_diagonal_octant	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x004326de	268	write_track_delta_unit_sign_vector	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x004327ea	655	construct_ZTGroundTrackMode			confirmed			
 0x00432a94	161	destroy_ZTGroundTrackMode			confirmed			
 0x00432b35	267	emit_ZTGroundTrackMode_setplacementobject_payload_to_buy_info_panel			confirmed		0x008c3868#138	
 0x00432cdc	873	read_placement_feedback_colors			confirmed		0x008c3868#20	
-0x004330f8	309		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043322d	297		tool modes, input bridges, UI primitives, and placement helpers		unidentified		0x008c3868#14	ui(medium)
-0x00433356	621		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004335c3	359		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043372a	38		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433750	46		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043377e	849		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433acf	582		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433d15	94		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433d73	72		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433dbb	53		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433df0	196		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x00433eb4	328		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00433ffc	171		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004340a7	441		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00434260	1067		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x004330f8	309	handle_ZTGroundTrackMode_set_mode_anchor_object_value	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043322d	297	update_ZTGroundTrackMode_frame	tool modes, input bridges, UI primitives, and placement helpers		confirmed		0x008c3868#14	ui(medium)
+0x00433356	621	refresh_ZTGroundTrackMode_candidate_preview	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004335c3	359	advance_ZTGroundTrackMode_candidate_search_state	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043372a	38	cancel_ZTGroundTrackMode_candidate_search_state	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433750	46	reset_ZTGroundTrackMode_candidate_state	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043377e	849	refresh_ZTGroundTrackMode_track_segment_preview	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433acf	582	refresh_ZTGroundTrackMode_endpoint_assignment_ref	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433d15	94	clear_ZTGroundTrackMode_endpoint_ref_pair	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433d73	72	clear_ZTGroundTrackMode_candidate_assignment_slot	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433dbb	53	assign_ZTGroundTrackMode_candidate_assignment_slot	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433df0	196	resolve_ZTGroundTrackMode_endpoint_record_from_delta	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x00433eb4	328	collect_ZTGroundTrackMode_station_endpoint_candidates	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00433ffc	171	select_nearest_ZTGroundTrackMode_candidate_record	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004340a7	441	find_nearest_ZTGroundTrackMode_station_endpoint_candidate	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00434260	1067	select_ZTGroundTrackMode_segment_candidate_record	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x0043468b	2443	resolve_zoo_boundary_segment			confirmed			
-0x00435016	887		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x0043538d	65		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004353ce	64		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043540e	579		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435651	279		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435768	211		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043583b	272		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043594b	113		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004359bc	229		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435aa1	456		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x00435016	887	materialize_ZTGroundTrackMode_preview_track_segment	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x0043538d	65	deactivate_unused_ZTGroundTrackMode_preview_track_segments	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004353ce	64	deactivate_first_ZTGroundTrackMode_preview_track_segment	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043540e	579	commit_ZTGroundTrackMode_preview_track_placement	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435651	279	project_ZTGroundTrackMode_point_to_record	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435768	211	clear_ZTGroundTrackMode_preview_assignment_refs	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043583b	272	update_ZTGroundTrackMode_preview_assignment_colors	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043594b	113	read_xml_rgb_color_child_as_vec3	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004359bc	229	clear_ZTGroundTrackMode_vehicle_gate_preview_refs	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435aa1	456	update_ZTGroundTrackMode_preview_cost_feedback	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x00435c69	33		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
 0x00435c8a	33		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
 0x00435cc6	82	register_ZTGroundTrackMode_ui_handlers			confirmed			
 0x00435d18	153	register_ZTGroundTrackMode_ui_handler			confirmed			
-0x00435df8	95		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x00435e57	48		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435e87	100		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435eeb	35		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435f0e	26		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435f63	48		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435f93	29		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435fb0	40		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435fd8	32		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00435ff8	46		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436026	32		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x00435df8	95	append_36byte_vector_value	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x00435e57	48	make_bit_vector_iterator_at_bit_index	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435e87	100	append_bit_vector_value	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435eeb	35	write_bit_vector_iterator_value	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435f0e	26	read_bit_vector_iterator_value	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435f63	48	init_bit_vector_begin_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435f93	29	init_bit_vector_end_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435fb0	40	checked_bit_vector_iterator_word_pointer	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435fd8	32	copy_checked_bit_vector_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00435ff8	46	copy_advanced_bit_vector_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436026	32	copy_checked_bit_vector_iterator_b	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x00436046	160	insert_ZTGroundTrackMode_ui_handler_node			confirmed			
-0x004360e6	151		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x004360e6	151	insert_fill_bit_vector_range	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x0043617d	43		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004361a8	177		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x004361a8	177	insert_bit_vector_gap_return_offset	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x00436259	119		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004362d0	138		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x004362d0	138	resize_4byte_vector_storage	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x0043635a	74		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
 0x004363a4	48		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004363d4	383		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436553	45		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436580	19		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436593	32		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004365b3	53		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x004363d4	383	insert_fill_4byte_vector_range	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436553	45	make_advanced_checked_dword_vector_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436580	19	get_4byte_vector_capacity	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436593	32	fill_dword_range_from_value_ptr	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004365b3	53	advance_checked_dword_vector_iterator_by_count	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x00436624	117	register_ZTGroundTrackMode_ui_handler_entries			confirmed			
 0x00436699	40	as_ZTTransportGroundTrack			confirmed			
 0x004366c1	55	try_get_BFPhysObj_value			confirmed			
 0x004366f8	40	as_ZTTransportStationGround			confirmed			
-0x00436720	41		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x00436749	78		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x00436720	41	copy_36byte_record_range_forward	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x00436749	78	copy_backward_bit_vector_range	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
 0x004367fb	40	as_ZTTransportTrack			confirmed			
-0x00436887	197		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043694c	62		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x0043698a	33		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004369ab	37		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x004369d0	79		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436a1f	40		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436a47	34		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00436a69	47		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
-0x00436a98	33		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
+0x00436887	197	copy_backward_bit_vector_range_core	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043694c	62	increment_bit_vector_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x0043698a	33	bit_vector_iterators_not_equal	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004369ab	37	fill_dword_count_from_value_ptr_wrapper	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x004369d0	79	decrement_bit_vector_iterator	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436a1f	40	move_4byte_range_forward	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436a47	34	fill_dword_count_from_value_ptr_inner	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(high)
+0x00436a69	47	move_4byte_range_forward_core	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
+0x00436a98	33	fill_dword_count_from_value_ptr_loop	tool modes, input bridges, UI primitives, and placement helpers		confirmed			ui(medium)
 0x00436ab9	53	cross_product_vector3			confirmed			
 0x00436aee	90	normalize_vector3_in_place_return_length			confirmed			
 0x00436b48	47	get_type_ZTGuestViewMode			confirmed			

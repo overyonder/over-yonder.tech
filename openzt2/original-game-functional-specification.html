@@ -67,9 +67,9 @@ renderer/audio/host layers project them behind a preservation boundary. The clas
 in each layer are registered native types.</p>
 <pre class="mermaid">flowchart TB
   Source["Shipped source data<br/>Z2F XML/MAXML, AI .tsk/.beh, scenarios, Lua,<br/>ui/layout, skins, lang, materials, models, sounds"]
-  Runtime["Generic source runtime<br/>BFResourceMgr, BFXMLObj/BFXMLDocument, BFXMLSchemaMgr,<br/>BFLocaleMgr, BFTypedBinder, register_type"]
-  Mgrs["Native game managers<br/>ZTApp, ZTWorldMgr, ZTAIMgr, ZTEconomyMgr,<br/>ZTDiseaseMgr, ZTScenarioMgr, ZTResearchMgr"]
-  State["Original native runtime state<br/>entities (component graphs), AI tokens, world grid,<br/>UI widget tree, profile/save/scenario state"]
+  Runtime["Generic source runtime<br/>BFResourceMgr, BFXMLObj/BFXMLDocument, BFXMLSchemaMgr,<br/>BFLocaleMgr, BFTypedBinder, BFRegistry, BFScriptContextMgr,<br/>BFUserProfileMgr, BFTimeKeeper, register_type"]
+  Mgrs["Native game/domain managers<br/>ZTApp, ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr, ZTDiseaseMgr,<br/>ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr, ZTTankMgr, ZTTransportationMgr,<br/>BFGTraversabilityMgr, BFGPathFinderMgr, BFGRampageMgr,<br/>BFGInfluenceMgr, BFGCollisionMgr, BFSteeringMgr, BFLocomotionMgr,<br/>ZTAI*Mgr, BFSoundMgr/BFSoundStageMgr, BFRenderer/BFSpriteMgr, ZTUndoMgr"]
+  State["Original native runtime state<br/>entities (component graphs), AI tokens/tasks, world grid,<br/>UI widget tree, profile/save/scenario/photo/status state"]
   Proj["Projection + host adapters (REPLACEABLE)<br/>Gamebryo/D3D, sound factories, Win32/winit,<br/>registry/profile/fs, Lua/CRT, network/MOTD"]
   Source --> Runtime --> Mgrs --> State
   Mgrs -.project.-> Proj
@@ -102,22 +102,12 @@ hierarchy completely — 2,068 registered types over 128 distinct parents; the s
   class BFTypedObj { type identity + cache global }
   class BFSafeHandledObj { safehandleID }
   class BFXMLObj { read_xml_node() write_xml_node() }
+  class BFComponent { type_name; component_name; owner_entity }
+  class BFComponentContainer { components[]; name_map; stack }
   class BFComponentNameMap { name-keyed component map }
   class BFTypedBinder { binderName/Type/Version; shared+instance XML }
-  class BFGEntity { entity = component graph }</pre>
-<p>Reconstructed members: <code>BFComponent</code> carries <code>type_name</code>,
-<code>component_name</code>, <code>owner_entity</code>; <code>BFComponentContainer</code> holds <code>components : Vec~BFComponent~</code>
-plus a <code>name_map : BFComponentNameMap</code> and a <code>stack : BFComponentStack</code>: the
-literal &quot;everything is a named component bag&quot; shape.</p>
-<p>Contract consequences (each traced to a ledger parent edge):</p>
-<ul>
-<li>A binder (<code>BFBinder</code>/<code>BFTypedBinder</code>) is a named, typed, versioned <strong>component
-map</strong>.</li>
-<li>An entity (<code>BFGEntity</code>, parent <code>BFComponentNameMap</code>) is itself a named component
-graph; &quot;animal&quot; is a <code>BFGEntity</code> binder type carrying AI/locomotion components.</li>
-<li><code>BFAIEntityDataShared</code> is a <code>BFComponentList</code> descendant (sibling of the binder
-chain), holding the <code>b_*</code>/<code>s_*</code>/<code>f_*</code>/<code>p_*</code> property maps.</li>
-</ul>
+  class BFGEntity { entity = component graph; animal = binder type + AI/locomotion components }
+  class BFAIEntityDataShared { b_* / s_* / f_* / p_* property maps }</pre>
 <h2>Hardcoded Native vs Data-Driven Hydration</h2>
 <p>The original game's data-driven surfaces hydrate native source objects via
 <code>BFTypedBinder</code> and <code>BFGEntity</code>; source keys are read through the XML attribute
@@ -191,26 +181,24 @@ layer hydrate them.</p>
   BFTypedObj <|-- BFXMLAttribute
   BFEvent <|-- BFXMLObjEvent
   BFEvent <|-- BFXMLNodeEvent
-  BFEvent <|-- BFXMLObjHandleEvent</pre>
-<p>Reconstructed: <code>BFXMLDocument</code> holds <code>path</code>, <code>declaration</code>,
-<code>root : BFXMLElement</code>, <code>schema</code>; <code>BFXMLElement</code> holds <code>name</code>, <code>attributes : Vec~BFXMLAttribute~</code>,
-<code>children : Vec~BFXMLNode~</code>; <code>BFXMLAttribute</code> is <code>name</code>/<code>value</code>. Every binder
-reads this parsed DOM.</p>
-<p><code>BFXMLObj</code> is the universal base (every game object can read/write itself as XML);
-<code>BFXMLNode</code> and its subtypes are the parsed DOM; change events propagate as
-<code>BFXMLObjEvent</code>/<code>BFXMLNodeEvent</code>.</p>
+  BFEvent <|-- BFXMLObjHandleEvent
+  class BFXMLObj { read_xml_node(); write_xml_node() }
+  class BFXMLDocument { +path; +declaration; +root; +schema }
+  class BFXMLElement { +name; +attributes[]; +children[] }
+  class BFXMLAttribute { +name; +value }</pre>
 <h3>Schema</h3>
 <pre class="mermaid">classDiagram
   BFTypedObj <|-- BFXMLSchemaType
   BFXMLSchemaType <|-- BFXMLSchemaElementType
   BFXMLSchemaType <|-- BFXMLSchemaAttributeType
   BFXMLSchemaType <|-- BFXMLSchemaRestriction
-  BFComponent <|-- BFXMLSchemaMgr</pre>
-<p><code>BFXMLSchemaMgr</code> validates documents against <code>.xdr</code>/schema types
-(e.g. <code>schema/bfgentitymorphdata.xdr</code>) before hydration; <code>BFRegistry</code>
-(<code>app_key</code>, <code>types : BTreeMap~String,BFType~</code>, <code>factories</code>) is the global type/factory
-registry, and <code>BFTypedBinderSchema</code> (<code>binder_type</code>, <code>type_rules</code>, <code>sub_binders</code>) is the
-binder's declared shape.</p>
+  BFComponent <|-- BFXMLSchemaMgr
+  class BFXMLSchemaMgr { +schemas : BTreeMap~String,BFXMLSchema~; validate .xdr schemas }
+  class BFRegistry { +app_key; +types; +factories }
+  class BFTypedBinderSchema { +binder_type; +type_rules; +sub_binders }
+  BFXMLSchemaMgr ..> BFXMLSchemaType : validates
+  BFRegistry ..> BFTypedObj : registers factories
+  BFTypedBinderSchema ..> BFTypedBinder : declares shape</pre>
 <h3>Component containers and binders</h3>
 <pre class="mermaid">classDiagram
   BFXMLObj <|-- BFComponent
@@ -222,18 +210,16 @@ binder's declared shape.</p>
   BFBinder <|-- BFTypedBinder
   BFComponent <|-- BFBinderRoot
   BFXMLObj <|-- BFComponentHandleVector
-  BFXMLObj <|-- BFComponentPointerVector</pre>
-<p>The container spine is what makes &quot;everything is a component map&quot; work: a
-<code>BFComponentNameMap</code> keys components by name; a <code>BFBinder</code>/<code>BFTypedBinder</code> is that map
-plus name/type/version identity. Entities, animals, and source documents are all binders. <code>BFTypedBinder</code> holds <code>binder : BFBinder</code>, <code>type_name</code>,
-<code>unique_name</code>, <code>version</code>, <code>version_replace</code>, <code>shared_xml : BFXMLDocument</code>; <code>BFBinder</code>
-holds <code>path</code>, <code>load_status</code>, <code>binder_type</code>, <code>children : Vec~BFBinder~</code> — the recursive
-binder tree.</p>
+  BFXMLObj <|-- BFComponentPointerVector
+  class BFComponentNameMap { name-keyed component map }
+  class BFBinder { +path; +load_status; +binder_type; +children[] }
+  class BFTypedBinder {
+    +type_name; +unique_name; +version; +version_replace
+    +shared_xml : BFXMLDocument
+  }</pre>
 <h3>Source-object inheritance</h3>
-<p>The generic source objects are nodes in the <code>BFTypedObj</code> single-inheritance
-hierarchy. Because <code>BFBinder</code>/<code>BFTypedBinder</code> descend from
-<code>BFComponentNameMap</code>, a binder is a named, typed, versioned component map.
-<code>BFAIEntityDataShared</code> is a sibling type registered on the same hierarchy.</p>
+<p>Generic source objects are native <code>BFTypedObj</code> hierarchy nodes; the diagrams above
+show the binder and shared-entity-data inheritance surfaces used by source hydration.</p>
 <h3>BFTypedBinder Document Schema</h3>
 <p>The binder document root element is <code>binder</code>. The create/open/save path and the binder property-name table define these
 source keys:</p>
@@ -390,59 +376,46 @@ singleton lifetime, then stack in three layers under the application.</p>
 <pre class="mermaid">flowchart TB
   App["ZTApp < BFGApp < UIApp < BF3DApp (owns all managers)"]
   subgraph Source["Source runtime layer"]
-    R[BFResourceMgr]
-    L[BFLocaleMgr]
-    X[BFXMLSchemaMgr]
-    Reg[BFRegistry]
-    Sc[BFScriptContextMgr]
-    P[BFUserProfileMgr]
-    T[BFTimeKeeper]
+    R["BFResourceMgr<br/>Z2F archives and source entries/assets"]
+    L["BFLocaleMgr<br/>loc ids to strings, lang/&lt;id&gt;/"]
+    X["BFXMLSchemaMgr<br/>XML schema/type validation"]
+    Reg["BFRegistry<br/>global keys, types, factories"]
+    Sc["BFScriptContextMgr<br/>BFScriptContext/BFLuaContext instances"]
+    P["BFUserProfileMgr<br/>profile paths, options.xml"]
+    T["BFTimeKeeper<br/>simulation clock and scheduled updates"]
   end
-  subgraph Domain["Domain layer"]
-    W[ZTWorldMgr]
-    AI[ZTAIMgr]
-    E[ZTEconomyMgr]
-    D[ZTDiseaseMgr]
-    Sn[BFSoundMgr]
+  subgraph Domain["Product domain manager layer"]
+    Core["Core zoo state<br/>ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr,<br/>ZTDiseaseMgr, ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr"]
+    World["World/grid/construction<br/>ZTTankMgr, ZTTransportationMgr, BFGTraversabilityMgr,<br/>BFGPathFinderMgr, BFGRampageMgr, BFGInfluenceMgr, BFGCollisionMgr"]
+    AiMove["AI and movement support<br/>ZTAI*Mgr, BFAIRelationshipMgr, ZTAIShowMgr, ZTAITrickMgr,<br/>BFSteeringMgr, BFLocomotionMgr"]
+    Sound["Sound domain<br/>BFSoundMgr, BFSoundStageMgr, ZTWorldSndMgr"]
+    Undo["Transactions and undo<br/>BFUndoMgr → BF3DUndoMgr → BFGUndoMgr → ZTUndoMgr"]
+  end
+  subgraph Tools["Cross-cutting/tooling manager layer"]
+    Tool["ZTToolMgr<br/>active tool"]
+    Gesture["ZTGestureMgr<br/>gesture input/minigames"]
+    Location["ZTLocationMgr<br/>named map locations"]
+    Viewable["ZTViewableObjectMgr / ZTViewableSubMgr<br/>tour/photo visible objects"]
+    Feedback["ZTFeedbackMgr<br/>player feedback"]
+    Puzzle["ZTPuzzleMgr<br/>puzzles"]
+    Favorite["ZTFavoriteAnimalMgr<br/>favorites"]
+    TrickButton["ZTTrickButtonMgr<br/>trick UI"]
   end
   subgraph Proj["Projection layer"]
     Rn[BFRenderer]
     Sp[BFSpriteMgr]
   end
-  App --> Source --> Domain --> Proj</pre>
-<h3>Source runtime managers</h3>
-<p>These cross-cutting managers underpin every domain:</p>
-<ul>
-<li><code>BFResourceMgr</code> — mounts Z2F archives and serves source entries/assets.</li>
-<li><code>BFLocaleMgr</code> — localization (loc ids → strings, <code>lang/&lt;id&gt;/</code>).</li>
-<li><code>BFXMLSchemaMgr</code> — XML schema/type validation (<code>BFXMLSchemaType</code>/<code>…ElementType</code>/
-<code>…AttributeType</code>/<code>…Restriction</code>).</li>
-<li><code>BFRegistry</code> — the global key/value registry.</li>
-<li><code>BFScriptContextMgr</code> — owns <code>BFScriptContext</code>/<code>BFLuaContext</code> instances.</li>
-<li><code>BFUserProfileMgr</code> — player profile, <code>saveDirectory</code>/<code>tempDirectory</code>/<code>options.xml</code>.</li>
-<li><code>BFTimeKeeper</code> (with <code>BFTimeKeyInfo</code>, <code>BFTimeTriggersComponent</code>) — the simulation
-clock that drives <code>ThinkerInterval</code>-style scheduled updates.</li>
-</ul>
+  App --> Source
+  App --> Domain
+  App --> Tools
+  Source --> Domain
+  Domain --> Proj
+  Tools --> Domain</pre>
 <p>Reconstructed fields: <code>BFResourceMgr</code> holds <code>root_path</code>, <code>zip_paths</code>,
 <code>archive_paths</code>, <code>binder_roots</code>, <code>entries : Vec~BFResourceEntry~</code>, <code>resource_tree</code>;
 <code>BFLocaleMgr</code> holds <code>locale</code> + <code>string_tables</code>; <code>BFTimeKeeper</code> holds <code>elapsed_seconds</code>, <code>delta_seconds</code>, <code>paused</code>, and a
 <code>BFTimeEventRoot</code> — the sim clock that fans out scheduled updates; <code>BFXMLSchemaMgr</code> holds
 <code>schemas : BTreeMap~String, BFXMLSchema~</code>.</p>
-<h3>Domain managers</h3>
-<p>Each domain manager is documented in its own section. The game-level subclass usually
-descends from a Blue Fang base: <code>ZTWorldMgr</code>, <code>ZTAIMgr</code> (<code>&lt; BFAIMgr</code>), <code>ZTEconomyMgr</code>,
-<code>ZTResearchMgr</code>, <code>ZTDiseaseMgr</code>, <code>ZTAdoptionMgr</code> (<code>→ ZTAdoptionSlotMgr</code>), <code>ZTAwardMgr</code>,
-<code>ZTScenarioMgr</code> (<code>&lt; BFScenarioMgr</code>), <code>ZTTankMgr</code>, <code>ZTTransportationMgr</code>
-(<code>&lt; BFGTransportationMgr</code>), <code>ZTWorldSndMgr</code>, <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>,
-<code>BFGRampageMgr</code>, <code>BFGInfluenceMgr</code>, <code>BFGCollisionMgr</code>, <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>,
-the <code>ZTAI*Mgr</code> per-entity-type managers, <code>BFSoundMgr</code>/<code>BFSoundStageMgr</code>, <code>BFRenderer</code>/
-<code>BFSpriteMgr</code>, and the undo chain (<code>BFUndoMgr → BF3DUndoMgr → BFGUndoMgr → ZTUndoMgr</code>).</p>
-<h3>Cross-cutting/tooling managers</h3>
-<p>Managers without a dedicated domain section: <code>ZTToolMgr</code> (active tool), <code>ZTGestureMgr</code>
-(gesture input, with cloning/training gesture modes), <code>ZTLocationMgr</code> (named map
-locations), <code>ZTViewableObjectMgr</code>/<code>ZTViewableSubMgr</code> (<code>&lt; BFGViewableObjectMgr</code> — visible
-object tracking for tours/photos), <code>ZTFeedbackMgr</code> (player feedback), <code>ZTPuzzleMgr</code>
-(<code>&lt; BFGPuzzleMgr</code>), <code>ZTFavoriteAnimalMgr</code>, <code>ZTTrickButtonMgr</code>.</p>
 <h3>Registration and lifetime contract</h3>
 <p>Every manager is obtained through its lazy type getter (guarded cache global, parent via
 the parent getter, name interned by <code>register_type</code>). The application root
@@ -569,10 +542,9 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   BF3DApp <|-- UIApp
   UIApp <|-- BFGApp
   BFGApp <|-- ZTApp
-  UIContainer <|-- UIRoot</pre>
-<p><code>ZTApp</code> is a <code>BFGApp</code> is a <code>UIApp</code> is a <code>BF3DApp</code>: the game application is layered on the
-UI/3D app stack. <code>UIApp</code> owns the active widget tree whose root is <code>UIRoot</code>
-(<code>&lt; UIContainer</code>), focus/hover, input routing, and the message/value registries.</p>
+  UIContainer <|-- UIRoot
+  class UIApp { +active widget tree; +focus/hover; +input routing; +message/value registries }
+  class UIRoot { root widget tree container }</pre>
 <h3>Widget class tree</h3>
 <pre class="mermaid">classDiagram
   BFComponent <|-- UIComponent
@@ -601,12 +573,12 @@ UI/3D app stack. <code>UIApp</code> owns the active widget tree whose root is <c
   UIButton <|-- UIHoverButton
   UIButton <|-- UIToggleButton
   UIButton <|-- UIMultiIcon
-  UIToggleButton <|-- UIToggleHoverButton</pre>
-<p>Reconstructed widget base (<code>UiComponentBase</code>): every widget carries
-<code>type_name</code>, <code>template</code>, <code>name</code>, <code>cursor</code>, <code>modal</code>, and
-<code>can_be_cached_when_called_from_lua</code> — confirming widgets are Lua-addressable, cached
-source objects.</p>
-<p>Note the real lineage: a button is a <em>text</em> widget (<code>UIButton &lt; UIText &lt; UILayout &lt; UIContainer &lt; UIComponent</code>), so every button carries text/layout/containment capability.</p>
+  UIToggleButton <|-- UIToggleHoverButton
+  class UIComponent {
+    +type_name; +template; +name; +cursor; +modal
+    +can_be_cached_when_called_from_lua
+  }
+  class UIButton { text/layout/containment-capable button }</pre>
 <h3>Reconstructed widget fields</h3>
 <p>Each widget nests a typed state struct:</p>
 <pre class="mermaid">classDiagram
@@ -622,14 +594,29 @@ source objects.</p>
   UIListBox *-- UIListBoxState
   UISlider *-- UISliderState
   UITextEdit *-- UITextEditState</pre>
-<p><code>UISlider</code> carries a typed range (<code>value_type</code>/<code>span</code>/<code>min</code>/<code>max</code>/<code>increment</code>);
-<code>UITextEdit</code> carries <code>max_length</code>, validation (<code>legal_filename_only</code>), and edit
-sounds; <code>UIListBox</code> is a grid (<code>columns</code>/<code>rows</code>/spacers).</p>
 <h3>Geometry, data, and presentation objects</h3>
-<p>Non-widget UI data are <code>BFXMLObj</code>/<code>BFTypedObj</code> value objects: geometry <code>UIRegion</code>,
-<code>UIRectObj</code>, <code>UIPointObj</code>, <code>UIColorObj</code>; data <code>UIChildData</code>, <code>UIEventList</code>, <code>UIFontData</code>,
-<code>UIKeyData</code>, <code>UIMouseData</code>, <code>UINotifyData</code>; presentation/state <code>UIState</code>, <code>UIAspect</code>,
-<code>UIAnimation</code>, <code>UIHelpInfo</code>, <code>UIHotKeys</code>. <code>UISoundMgr</code> (<code>&lt; BFComponent</code>) plays UI sound.</p>
+<pre class="mermaid">classDiagram
+  BFTypedObj <|-- UIRegion
+  BFTypedObj <|-- UIRectObj
+  BFTypedObj <|-- UIPointObj
+  BFTypedObj <|-- UIColorObj
+  BFXMLObj <|-- UIChildData
+  BFXMLObj <|-- UIEventList
+  BFXMLObj <|-- UIFontData
+  BFXMLObj <|-- UIKeyData
+  BFXMLObj <|-- UIMouseData
+  BFXMLObj <|-- UINotifyData
+  BFXMLObj <|-- UIState
+  BFXMLObj <|-- UIAspect
+  BFXMLObj <|-- UIAnimation
+  BFXMLObj <|-- UIHelpInfo
+  BFXMLObj <|-- UIHotKeys
+  BFComponent <|-- UISoundMgr
+  class UIRegion { geometry value }
+  class UIState { presentation state }
+  class UIAspect { visual aspect state }
+  class UIAnimation { show/hide animation }
+  class UISoundMgr { UI sound playback }</pre>
 <h3>Message bus</h3>
 <p>The 183 <code>UI_*</code> names are <strong>interned tokens</strong>, registered through the same <code>register_type</code>
 registrar as native types via the registration table. They form the dispatch
@@ -652,12 +639,21 @@ contract, grouped by role:</p>
 as <code>UIInlineTypedValue</code> (<code>value_type : UiValueTypeHandle</code>, <code>ref_count</code>, <code>payload</code>), with
 typed payloads <code>UIFloatPayloadValue</code>/<code>UIStringPayloadValue</code>/<code>UIPointerPayloadValue</code> — the
 ref-counted value objects behind <code>UI_CHANGED_VALUE</code>.</p>
-<h3>Reconstructed field detail (UI animation)</h3>
-<p>Modeled fields: <code>UIAnimation</code> carries <code>start_region</code>/<code>end_region</code> (<code>BfRect</code>),
-<code>colors</code> (<code>UiShowHideColors</code>), and a <code>UIAnimationRuntime</code> (<code>running</code>, <code>elapsed_seconds</code>,
-<code>exit_rate</code>, <code>initial_time</code>, <code>initial_dir</code>) with <code>UIAnimationKeyFrame</code>s
-(<code>time_seconds</code>/<code>region</code>/<code>color</code>/<code>alpha</code>), the concrete backing for the
-<code>UI_SET_ANIM_RECT_*</code>/<code>UI_SET_ANIM_COLOR_*</code> messages.</p>
+<h3>UI Animation State Model</h3>
+<pre class="mermaid">classDiagram
+  class UIAnimation {
+    +start_region : BfRect
+    +end_region : BfRect
+    +colors : UiShowHideColors
+  }
+  class UIAnimationRuntime {
+    +running; +elapsed_seconds; +exit_rate
+    +initial_time; +initial_dir
+  }
+  class UIAnimationKeyFrame { +time_seconds; +region; +color; +alpha }
+  UIAnimation "1" --> UIAnimationRuntime : runtime
+  UIAnimation "*" --> UIAnimationKeyFrame : keyframes
+  UIAnimation ..> UIMessage : UI_SET_ANIM_RECT_* / UI_SET_ANIM_COLOR_*</pre>
 <h3>Value-handler binding (UI &lt;-&gt; game state)</h3>
 <p>Managers <strong>register named value-handlers</strong> that widgets bind to. Examples are
 <code>register_globe_ui_value_handlers</code>,
@@ -854,16 +850,14 @@ reconstructed; only the message set and inheritance are established.</li>
 <h2>Entity and Animal Model</h2>
 <p><strong>An entity is a component aggregate.</strong> <code>BFGEntity</code> (parent
 <code>BFComponentNameMap</code>) is a named component map. Its single native C++ subtype in
-the binary is <code>ZTFenceEntity</code>. Every other kind of object the player sees —
-animal, guest, staff, scenery, building, food, path, tank, gate, ride, vehicle —
-uses the same <code>BFGEntity</code> class, distinguished by binder type and aggregated
-<code>BFComponent</code> subtypes. &quot;Animal&quot; is a composition over that shared entity class.</p>
+the binary is <code>ZTFenceEntity</code>.</p>
 <pre class="mermaid">classDiagram
   class BFGEntity {
     name-keyed component map
     mainObjName component (cached)
     read_instance_xml_node()
     resolve_main_object_name_value()
+    animal/guest/staff/scenery/building/food/path/tank/gate/ride/vehicle via binder + components
   }
   BFComponentNameMap <|-- BFGEntity
   BFGEntity <|-- ZTFenceEntity : ONLY native subtype
@@ -981,13 +975,13 @@ are the real animal state surfaces, sourced across the entity's binder + compone
   }
   ZTAnimal *-- ZTAnimalLifeCycleState
   ZTAnimal *-- ZTAnimalVariantState
+  ZTAnimal *-- ZTAnimalPregnancyRecord : breeding
+  ZTAnimal ..> BFGEntity : reads component state
+  ZTAnimal ..> ZTAdoptionMgr : adoption
+  ZTAnimal ..> ZTFavoriteAnimalMgr : favorites
   ZTAnimalTypeDefinition ..> ZTAnimal : hydrate_runtime_animal_from_source_type</pre>
-<p>Lifecycle (<code>ZTAnimalLifeCycleState</code>) and breeding (<code>ZTAnimalPregnancyRecord</code>:
-<code>mother_entity</code>/<code>father_entity</code>/<code>offspring_source_type</code>/<code>litter_size</code>/
-<code>inherited_variant</code>) are concrete; <code>select_runtime_variant</code> resolves adult/young/
-male/female variants. <code>update_status_from_components</code> shows the state is <em>read from the
-entity's components</em>, confirming the composition model. Adoption is owned by
-<code>ZTAdoptionMgr</code>/<code>ZTAdoptionSlotMgr</code>, favorites by <code>ZTFavoriteAnimalMgr</code>.</p>
+<p><code>select_runtime_variant</code> resolves adult/young/male/female variants;
+<code>update_status_from_components</code> reads state from the entity's components.</p>
 <p>Open (from <code>todo!()</code>): breeding/offspring rules, training learning deltas, and the
 component→status read for several flags.</p>
 <h3>Consumers</h3>
@@ -1069,18 +1063,20 @@ and two thinkers (state-machine and task-selection); the game subclasses each.</
   BFAIStateThinker <|-- ZTAIStateThinker
   BFAITaskThinker <|-- ZTAITaskThinker
   BFAITaskThinker <|-- ZTAIStaffTaskThinker
-  BFAITaskThinker <|-- ZTAITourTaskThinker</pre>
-<p>Reconstructed cognition fields: <code>BFAISensor</code> has <code>sensor_type</code>/<code>subject_type</code>/
-<code>target_types</code>; <code>BFAIStateThinker</code> has <code>current_state</code> + <code>state_vars : Vec~BFAIStateVar~</code>;
-<code>BFAIDataController</code> holds <code>thresholds : Vec~BFAIDataThresholdController~</code>
-(<code>property_name</code>/<code>minimum</code>/<code>maximum</code>); and <code>BFAIEntityDataShared</code> is literally the
-<code>b_*</code>/<code>s_*</code>/<code>f_*</code>/<code>p_*</code> maps — <code>bool_properties</code>, <code>string_properties</code>, <code>float_properties</code>,
-<code>float_maps</code>, <code>vector_properties</code> (keyed BTreeMaps).</p>
-<p>Sensors are a wide family (<code>ZTAISensorExplore</code>, <code>…Land</code>, <code>…Path</code>, <code>…Show</code>, <code>…Tour</code>,
-<code>…Transport</code>, <code>…VA</code> view-area, <code>…TA</code> traversable-area, <code>…FossilSites</code>, <code>…Rampage</code>,
-<code>…RampagingAnimals</code>). Cognition reads attribute data — <code>BFAIAttributeFloatMap</code>
-(<code>BFAIBiomeMap</code>, <code>BFAINeedAdjusts</code>), <code>BFAISubjectData</code>/<code>BFAITargetData</code> — and is
-driven on a <code>ThinkerInterval</code> schedule.</p>
+  BFAITaskThinker <|-- ZTAITourTaskThinker
+  class BFAISensor { +sensor_type; +subject_type; +target_types }
+  class BFAIStateThinker { +current_state; +state_vars[] }
+  class BFAIDataController { +thresholds[] }
+  class BFAIDataThresholdController { +property_name; +minimum; +maximum }
+  class BFAIEntityDataShared { bool/string/float/vector property maps }
+  class ZTAISensor {
+    Explore/Land/Path/Show/Tour/Transport
+    VA/TA/FossilSites/Rampage/RampagingAnimals
+  }
+  BFAIDataController "*" --> BFAIDataThresholdController : thresholds</pre>
+<p>Cognition reads attribute data (<code>BFAIAttributeFloatMap</code>, <code>BFAIBiomeMap</code>,
+<code>BFAINeedAdjusts</code>, <code>BFAISubjectData</code>, <code>BFAITargetData</code>) and is driven on a
+<code>ThinkerInterval</code> schedule.</p>
 <h3>Task pipeline (pick a concrete job)</h3>
 <p><code>BFAITaskThinker</code> selects from <code>BFAITaskTemplate</code>s (authored under <code>BFAITaskCatalog</code>/
 <code>BFAITaskDocument</code>):</p>
@@ -1164,16 +1160,24 @@ completion/failure side effects for mutations, feedback, follow-up behaviors, an
   ZTBehUseGate <|-- ZTBehExitTankGate
   BFBehavior <|-- ZTBehVehicleBase
   ZTBehVehicleBase <|-- ZTBehVehicleGround
-  ZTBehVehicleBase <|-- ZTBehVehicleSky</pre>
-<p>Reconstructed: <code>BFBehavior</code> base carries <code>behavior_type</code>, <code>subject</code>,
-<code>target</code>, <code>event_root</code>; each subtype adds its own params.</p>
-<p>Behavior families: routing (<code>BFBehRoute</code>/<code>ExecPath</code>/<code>PathRoute</code>/<code>TransportRoute</code>),
-docking (<code>BFBehDock*</code> Now/Queue/Radial/Spline/TAP), movement (<code>GotoPos</code>, <code>FollowEntity</code>,
-<code>FollowSpline</code>, <code>Wander</code>, <code>Fall</code>, <code>EscapeObstacle</code>, <code>Evasion</code>), animation
-(<code>BFBehAnimate*</code>, <code>AnimSwitchSet</code>), messaging (<code>SendEvent</code>, <code>SendToken</code>, <code>SendTrigger</code>,
-<code>SetAttribute</code>, <code>Spawn</code>, <code>Script</code>), and the ZT verbs (<code>CureDisease</code>, <code>DigArtifact</code>,
-<code>Tour</code>, <code>WatchShow</code>, <code>RideVehicle</code>, <code>ClimbLadder</code>, <code>Morph</code>, <code>SplashGuest</code>,
-<code>StaffTrainAnimal</code>, <code>ChangeWaterDirtiness</code>, <code>KickOffRider</code>, ...).</p>
+  ZTBehVehicleBase <|-- ZTBehVehicleSky
+  BFBehavior <|-- BFBehGotoPos
+  BFBehavior <|-- BFBehFollowEntity
+  BFBehavior <|-- BFBehAnimate
+  BFBehavior <|-- BFBehSendEvent
+  BFBehavior <|-- BFBehSendToken
+  BFBehavior <|-- BFBehSendTrigger
+  BFBehavior <|-- BFBehSetAttribute
+  BFBehavior <|-- BFBehSpawn
+  BFBehavior <|-- BFBehScript
+  BFBehavior <|-- ZTBehCureDisease
+  BFBehavior <|-- ZTBehDigArtifact
+  BFBehavior <|-- ZTBehTour
+  BFBehavior <|-- ZTBehWatchShow
+  BFBehavior <|-- ZTBehRideVehicle
+  BFBehavior <|-- ZTBehStaffTrainAnimal
+  BFBehavior <|-- ZTBehChangeWaterDirtiness
+  class BFBehavior { +behavior_type; +subject; +target; +event_root }</pre>
 <h3>Motor layer (move the body)</h3>
 <pre class="mermaid">classDiagram
   BFComponent <|-- BFSteer
@@ -1185,11 +1189,14 @@ docking (<code>BFBehDock*</code> Now/Queue/Radial/Spline/TAP), movement (<code>G
   BFSteer <|-- BFSteerWander
   BFComponent <|-- BFLocomotion
   BFLocomotion <|-- BFLocoAnimate
-  BFComponentContainer <|-- BFLocomotionMgr</pre>
-<p><code>BFSteeringMgr</code> blends active <code>BFSteer</code> behaviors (Seek/Pursuit/Avoid*/Align/Depth/
-Evasion/Wander/Vector) into a desired vector; <code>BFLocomotionMgr</code> realizes it as animated movement (<code>BFLocoAnimate</code>). <code>BFSteeringProfiles</code>
-aggregates the per-entity active steering set (align / avoid_entity / avoid_obstacle(_ahead) /
-avoid_vehicle / depth / evasion / pursuit / seek / wander vectors).</p>
+  BFComponentContainer <|-- BFLocomotionMgr
+  class BFSteeringMgr { blends active BFSteer behaviors into desired vector }
+  class BFLocomotionMgr { realizes steering as animated movement }
+  class BFSteeringProfiles {
+    align / avoid_entity / avoid_obstacle / avoid_vehicle
+    depth / evasion / pursuit / seek / wander vectors
+  }
+  BFSteeringMgr "*" --> BFSteeringProfiles : active profiles</pre>
 <h3>Runtime loop</h3>
 <pre class="mermaid">sequenceDiagram
   participant Mgr as BFAIMgr / ZTAIMgr
@@ -1208,11 +1215,20 @@ avoid_vehicle / depth / evasion / pursuit / seek / wander vectors).</p>
   Steer-->>Beh: arrived / blocked
   Beh-->>TT: BFAICompletionData / BFAIFailureData</pre>
 <h3>Managers</h3>
-<p><code>BFAIMgr &lt; BFAIComponentList</code> (game: <code>ZTAIMgr</code>) owns the AI world. Per-entity-type
-cognition managers derive from <code>BFAIEntityMgr</code>: <code>ZTAIGuestMgr</code>, <code>ZTAIStaffMgr</code>,
-<code>ZTAIAmbientsMgr</code>. Specialized managers: <code>BFAIRelationshipMgr</code>, <code>BFAIShowMgr</code>
-(<code>ZTAIShowMgr</code>), <code>BFAITrickMgr</code> (<code>ZTAITrickMgr</code>), <code>BFAICognitiveMgr</code>,
-<code>ZTAIStaffWaterCleaningMgr</code>, <code>ZTAITrickPopularityMgr</code>.</p>
+<pre class="mermaid">classDiagram
+  BFAIComponentList <|-- BFAIMgr
+  BFAIMgr <|-- ZTAIMgr
+  BFAIEntityMgr <|-- ZTAIGuestMgr
+  BFAIEntityMgr <|-- ZTAIStaffMgr
+  BFAIEntityMgr <|-- ZTAIAmbientsMgr
+  BFAIShowMgr <|-- ZTAIShowMgr
+  BFAITrickMgr <|-- ZTAITrickMgr
+  BFAIComponent <|-- BFAICognitiveMgr
+  BFAIComponent <|-- ZTAIStaffWaterCleaningMgr
+  BFAIComponent <|-- ZTAITrickPopularityMgr
+  BFAIComponent <|-- BFAIRelationshipMgr
+  class ZTAIMgr { owns AI world }
+  class BFAIEntityMgr { per-entity-type cognition managers }</pre>
 <h3>Shows, tricks, tours</h3>
 <p>Shows are a scheduled state machine (<code>ZTAIShowMgr</code>/<code>ZTAIShowScheduler</code>/<code>ZTAIShow</code>/
 <code>ZTAIShowComponent</code>/<code>ZTAIShowEvent</code>):</p>
@@ -1470,11 +1486,8 @@ undo stack can reverse.</p>
   BFDecalComponent <|-- BFTerrainShadowComponent
   BFWorldFittingSurface <|-- BFTerrainFittingSurface
   BFTypedObj <|-- BFWorldFittingSurface
-  class BFGBiome { autoplacement variation masks; weighted object lists }</pre>
-<p><code>BFGBiome</code> (<code>&lt; BFTerrainBiome</code>) carries autoplacement data; it updates the variation-type
-mask and reads a weighted object list to scatter foliage/rocks per biome.
-<code>BFWorldFittingSurface</code> (and <code>BFTerrain</code>/<code>BFGEntity</code> fitting-surface variants) is the
-query interface entities use to sit on the ground (see ground-fit below).</p>
+  class BFGBiome { autoplacement variation masks; weighted object lists }
+  class BFWorldFittingSurface { ground height/tilt/contact query }</pre>
 <h3>Placement grid</h3>
 <pre class="mermaid">classDiagram
   BFComponent <|-- BFGPlacementGrid
@@ -1485,11 +1498,8 @@ query interface entities use to sit on the ground (see ground-fit below).</p>
   BFComponent <|-- BFGElevatedSupportTracker
   BFXMLObj <|-- ZTPlacementInfo
   class BFGPlacementGrid { tile grid; occupancy }
+  class BFGPlacementData { per-object footprint authored data }
   class BFGElevatedSupportTracker { elevated path/track support }</pre>
-<p><code>BFGPlacementGrid</code> owns the tile grid; <code>BFGPlacementData</code>/<code>ZTPlacementData</code> is the
-per-object footprint authored data; elevated structures add
-<code>BFGElevatedPlacementTile</code> + <code>BFGElevatedSupportTracker</code> (support columns) with
-<code>BFGElevatedTileData</code>/<code>Serializer</code> persistence.</p>
 <h3>Collision, traversability, pathfinding</h3>
 <pre class="mermaid">classDiagram
   BFTraversabilityMgr <|-- BFGTraversabilityMgr
@@ -1500,17 +1510,16 @@ per-object footprint authored data; elevated structures add
   BFComponent <|-- BFGCollisionData
   BFPhysComponent <|-- BFGridCollisionComponent
   BFComponent <|-- BFGPathFinderMgr
-  BFComponent <|-- BFGRampageMgr</pre>
-<p><code>BFGTraversabilityMgr</code> answers the
-placement predicates and the <code>OUT_OF_ANIMAL_TRAVERS_AREA</code>
-check; <code>BFGPathFinderMgr</code> routes movers; <code>BFGRampageMgr</code> handles escaped-animal rampage over the
-same grid, driven by <code>BFGRampageConfig</code> (the formula): <code>update_interval_seconds</code>,
-<code>max_good_points</code>/<code>max_bad_points</code>, <code>base_rampage_chance</code>/<code>max_rampage_chance</code>,
-<code>rampaging_animal_factor</code>, <code>rampage_timeout_seconds</code>.</p>
+  BFComponent <|-- BFGRampageMgr
+  class BFGTraversabilityMgr { placement predicates; OUT_OF_ANIMAL_TRAVERS_AREA }
+  class BFGPathFinderMgr { mover routing }
+  class BFGRampageMgr { escaped-animal rampage over grid }
+  class BFGRampageConfig {
+    +update_interval_seconds; +max_good_points; +max_bad_points
+    +base_rampage_chance; +max_rampage_chance
+    +rampaging_animal_factor; +rampage_timeout_seconds
+  }</pre>
 <h3>Linear structures: fences, tanks, gates, paths, transport</h3>
-<p>The fence system is the base for aquatic tanks — <code>ZTTankSegment</code> <strong>is a</strong> <code>ZTFence</code>.
-Gates generalize across tanks and transport. Transport is circuits + tracks +
-stations + gates.</p>
 <pre class="mermaid">classDiagram
   BFComponent <|-- ZTFence
   ZTFence <|-- ZTTankSegment
@@ -1526,7 +1535,10 @@ stations + gates.</p>
   ZTPathBase <|-- ZTPathElevated
   BFComponent <|-- ZTTank
   BFComponent <|-- ZTTankMgr
-  ZTExpandoComponent <|-- ZTTankSupport</pre>
+  ZTExpandoComponent <|-- ZTTankSupport
+  class ZTFence { base linear-structure segment }
+  class ZTTankSegment { aquatic tank segment; is-a ZTFence }
+  class ZTGate { generalized tank/transport gate }</pre>
 <pre class="mermaid">classDiagram
   BFGTransportationMgr <|-- ZTTransportationMgr
   BFComponent <|-- ZTTransportCircuitPrivateBase
@@ -1538,16 +1550,24 @@ stations + gates.</p>
   ZTTransportTrack <|-- ZTTransportSkyTrack
   BFComponent <|-- ZTTransportStationBase
   ZTTransportStationBase <|-- ZTTransportStationGround
-  ZTTransportStationBase <|-- ZTTransportStationSky</pre>
-<h3>Reconstructed field detail (transport)</h3>
-<p>Modeled fields: <code>ZTTransportationMgr</code> holds <code>circuits : Vec~ZTTransportCircuit~</code>,
-<code>route_direction</code>, <code>paused_circuits</code>, <code>selected_vehicle_type</code>; <code>BFGTransportationMgr</code>
-holds <code>stations</code>/<code>vehicles</code>/<code>tracks</code>. A <code>ZTTransportCircuit</code> links
-<code>station_ids</code>/<code>track_ids</code>/<code>vehicle_ids</code> with a <code>closed</code> flag — the runtime ride loop. A <code>ZTTransportVehicle</code> has <code>entity_type</code>,
-<code>seat_count</code>/<code>occupied_seats</code>, <code>route_token</code>; <code>ZTTransportStation</code> has <code>station_kind</code>,
-<code>capacity</code>/<code>occupancy</code>; <code>ZTTransportTrack</code> has <code>track_kind</code> + <code>endpoints</code>.</p>
-<h3>Reconstructed field detail (terrain / placement / tank / fence)</h3>
-<p>Modeled fields:</p>
+  ZTTransportStationBase <|-- ZTTransportStationSky
+  class ZTTransportationMgr { circuits + tracks + stations + vehicles }</pre>
+<h3>Transport State Model</h3>
+<pre class="mermaid">classDiagram
+  class ZTTransportationMgr {
+    +circuits : Vec~ZTTransportCircuit~
+    +route_direction; +paused_circuits; +selected_vehicle_type
+  }
+  class BFGTransportationMgr { +stations; +vehicles; +tracks }
+  class ZTTransportCircuit { +station_ids[]; +track_ids[]; +vehicle_ids[]; +closed }
+  class ZTTransportVehicle { +entity_type; +seat_count; +occupied_seats; +route_token }
+  class ZTTransportStation { +station_kind; +capacity; +occupancy }
+  class ZTTransportTrack { +track_kind; +endpoints }
+  ZTTransportationMgr "*" --> ZTTransportCircuit : circuits
+  BFGTransportationMgr "*" --> ZTTransportStation : stations
+  BFGTransportationMgr "*" --> ZTTransportVehicle : vehicles
+  BFGTransportationMgr "*" --> ZTTransportTrack : tracks</pre>
+<h3>Terrain, Placement, Tank, And Fence State Model</h3>
 <pre class="mermaid">classDiagram
   class BFTerrain {
     +grid_width / grid_height
@@ -1569,14 +1589,11 @@ holds <code>stations</code>/<code>vehicles</code>/<code>tracks</code>. A <code>Z
   class ZTFence { +fence_id; +fence_type; +entities : Vec~ZTFenceEntity~ }
   class ZTFenceEntity { +entity_id; +segment_info; +health }
   class ZTFenceType { +entity_type; +segment_entity; +gate_entities[]; +cost }
+  class ZTPlacementFailureCatalog { token to UI message map }
   ZTFence "1" *-- "*" ZTFenceEntity
   ZTFenceType ..> ZTFence : authors
-  ZTPlacementData *-- ZTFootprintPreview</pre>
-<p><code>ZTFenceType</code> is the authored fence definition (segment/gate entities, cost);
-<code>ZTTankMgr</code> adds water/floor depth tuning and pending height commands over the fence
-base. <code>ZTPlacementData</code> carries the cursor/footprint assets and a
-<code>ZTPlacementFailureCatalog</code> (<code>messages : Vec~ZTPlacementFailureMessage~</code>) that maps each
-<code>place_*</code>/<code>too_steep</code>/<code>CANNOT_AFFORD</code>/<code>UNRESEARCHED</code> result token to its UI message.</p>
+  ZTPlacementData *-- ZTFootprintPreview
+  ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages</pre>
 <h3>Editing modes (tool layer)</h3>
 <p>The <code>ZTMode</code> base (<code>ZTModeRuntimeFields</code>) is an XML-configured interaction
 handler: <code>cursor</code>, <code>ui_layout</code>, <code>active</code>, <code>state_token</code>, <code>config_fields</code>, <code>layout_guis</code>,
@@ -1620,14 +1637,25 @@ covers camera/file/game/photo/gesture/training/overhead/main interaction modes.)
   BFXMLObj <|-- BFUndoTransactionData
   BFXMLObj <|-- BFGEconomyTransactionData</pre>
 <h3>Ground-fit (entities sitting on the world)</h3>
-<p><code>BFGroundFitComponent</code> and its specializations (<code>BF2LegsGroundFitComponent</code>,
-<code>BF4LegsGroundFitComponent</code>, <code>BFBirdGroundFitComponent</code>, <code>BFHoverGroundFitComponent</code>,
-<code>BFWaterGroundFitComponent</code>, <code>BFAboveGroundFitComponent</code>, <code>BFMultiGroundFitComponent</code>,
-<code>BFLegFitComponent</code>, <code>ZTFPSCameraGroundFitComponent</code>,
-<code>ZTUnderwaterFloatGroundFitComponent</code>) query a <code>BFWorldFittingSurface</code> to place an
-entity's height/tilt/contact. Hydrated keys:
-<code>heightOffset</code>, <code>maxTilt</code>, <code>fitRadius</code>, <code>fitLowest</code>, <code>tiltGain</code>, <code>groundFitSatisfied</code>,
-<code>autoHeightOffset</code>, <code>floatOnWater</code>, <code>waterOffset</code>. The fit algorithm is native.</p>
+<pre class="mermaid">classDiagram
+  BFComponent <|-- BFGroundFitComponent
+  BFGroundFitComponent <|-- BF2LegsGroundFitComponent
+  BFGroundFitComponent <|-- BF4LegsGroundFitComponent
+  BFGroundFitComponent <|-- BFBirdGroundFitComponent
+  BFGroundFitComponent <|-- BFHoverGroundFitComponent
+  BFGroundFitComponent <|-- BFWaterGroundFitComponent
+  BFGroundFitComponent <|-- BFAboveGroundFitComponent
+  BFGroundFitComponent <|-- BFMultiGroundFitComponent
+  BFGroundFitComponent <|-- BFLegFitComponent
+  BFGroundFitComponent <|-- ZTFPSCameraGroundFitComponent
+  BFGroundFitComponent <|-- ZTUnderwaterFloatGroundFitComponent
+  BFGroundFitComponent ..> BFWorldFittingSurface : height/tilt/contact query
+  class BFGroundFitComponent {
+    +heightOffset; +maxTilt; +fitRadius; +fitLowest
+    +tiltGain; +groundFitSatisfied; +autoHeightOffset
+    +floatOnWater; +waterOffset
+  }</pre>
+<p>The fit algorithm is native.</p>
 <h3>transport relationship model</h3>
 <pre class="mermaid">classDiagram
   TransportDomain "1" --> ZTTransportationMgr : manager
@@ -1958,14 +1986,6 @@ edge cases are open.</li>
     +graphics : ZTGraphicsOptions; +audio : ZTAudioOptions; +vince : ZTVinceOptions
     +settings_document; +pending_confirmation; +selected_detail_level
   }</pre>
-<p><code>ZTFPTrainingMode</code> runs trick training (reward/teleport timers); <code>ZTTranquilizeMode</code>
-darts an animal (<code>charge</code>/<code>range</code>); <code>ZTFossilFindingMode</code> is the dig-site sonar tool;
-<code>ZTCloningGestureMode</code> is the cloning-center minigame (<code>goo_level</code>/<code>countdown</code>/<code>score</code>);
-<code>ZTSelectionMode</code> is the default pick/move/rotate cursor handler; <code>ZTGfxOptionsMode</code>
-edits graphics/audio/VINCE options with confirmation. World-editing modes
-(<code>ZTPlacementMode</code>, <code>ZTFenceMode</code>, <code>ZTPathMode</code>, <code>ZTBiomeMode</code>, <code>ZTTankCommandReader</code>,
-<code>ZTTerrainCommandReader</code>) and camera (<code>ZTCameraCommandReader</code>) are detailed in the World
-and Renderer sections.</p>
 <h3>Gesture system (cloning / training minigames)</h3>
 <p><code>ZTGestureMgr</code> (cross-cutting manager) owns the gesture minigame used by
 <code>ZTCloningGestureMode</code> and training. Authored <code>ZTGestureDefinition</code>s describe the target
@@ -1980,14 +2000,13 @@ shape; the player's live <code>ZTGestureTrace</code> is matched against them to 
   class ZTGestureTrace { +gesture_type_hint; +strokes : Vec~ZTGestureStroke~; +source_mode; +subject_entity }
   class ZTGestureMatch { +gesture_type; +event_count; +trace_score; +score }
   class ZTGestureComponent { +gesture_type; +subject_entity; +target_entity; +dispatched_trace_events }
+  class ZTGestureTraceSample { +expected_point; +observed_point }
   ZTGestureMgr "1" *-- "*" ZTGestureDefinition
   ZTGestureMgr "1" *-- "*" ZTGestureTrace
   ZTGestureTrace ..> ZTGestureMatch : scored against definition
+  ZTGestureTrace "*" --> ZTGestureTraceSample : samples
   ZTGestureComponent ..> ZTGestureTrace : produces</pre>
-<p>A <code>ZTGestureDefinition</code> fixes the gesture plane (<code>camera_pos</code>/<code>plane_normal</code>) and a
-<code>bounding_box_scale</code>; the live <code>ZTGestureTrace</code> is a set of <code>ZTGestureStroke</code>s; matching
-samples observed-vs-expected points (<code>ZTGestureTraceSample</code>) into a <code>ZTGestureMatch</code>
-<code>score</code>. <code>ZTGestureComponent</code> attaches the minigame to an entity and dispatches
+<p><code>ZTGestureComponent</code> attaches the minigame to an entity and dispatches
 <code>ZTGestureTraceEvent</code>s at score thresholds.</p>
 <h3>Reconstructed mode-state records</h3>
 <p>Remaining mode structs (state/native-contract/config records), fields per type:</p>
@@ -2242,8 +2261,8 @@ transaction type table order recovered from source/type-table evidence:
 <code>removeUser</code>, <code>addUser</code>, <code>setCash</code>, <code>credit</code>, and <code>debit</code>. <code>setCash</code> applies
 the evaluated amount through the same active economy component cash setter slot
 <code>+0x68</code>; <code>credit</code> and <code>debit</code> use separate component money slots and correspond
-to the recovered receive/spend event polarity. <code>addUser</code> and <code>removeUser</code> are
-component user-count transactions, not money events. When <code>trackOnParent</code> is
+to the recovered receive/spend event polarity. <code>addUser</code> and <code>removeUser</code>
+affect component user counts and produce no money event. When <code>trackOnParent</code> is
 set and the transaction is applied to a child component, the apply body also
 updates the parent component.</p>
 <p>Recovered <code>BFGECONOMY_DO_TRANSACTION</code> handling: native registration installs
@@ -2260,14 +2279,14 @@ evaluate a transaction, they forward the transaction/status payload through a
 guarded ref-counted helper. The helper calls the caller receiver's vtable slot
 <code>+0x54</code>; for the recovered <code>vtable_008e0d30</code> receiver, that slot forwards the
 payload through the generic assignment/list helper and refreshes the <code>undo</code> UI
-target by sending <code>UI_ENABLE</code> or <code>UI_DISABLE</code> from receiver state. This path is
-UI/status and undo-control forwarding, not the recovered cash arithmetic or
-transaction aggregation/commit body.</p>
+target by sending <code>UI_ENABLE</code> or <code>UI_DISABLE</code> from receiver state. This path
+only forwards UI/status and undo-control state; recovered cash arithmetic and
+transaction aggregation/commit occur elsewhere.</p>
 <p>Open: countdown timing, aggregate and parent-cost accounting details, live
 simulation callers for economy component transactions, and the non-admission
 semantics of <code>ZT_SET_PRICE_INDEX</code>.</p>
 <h3>Economy cluster relationships</h3>
-<p>Relationship model (composition/aggregation with cardinality + field role, inheritance) for the full cluster, generated from the reconstruction field types:</p>
+<p>Composition/aggregation relationships with cardinality, field roles, and inheritance:</p>
 <pre class="mermaid">classDiagram
   BFGEconomyComponent <|-- ZTEconomyComponentBase
   BFGTransaction <|-- ZTTransaction
@@ -2438,9 +2457,12 @@ sample→cure scoring inside <code>ZTCureDiseaseMode</code>.</p>
   ZTAnimalFilter <|-- ZTAnimalAttributeFilter
   ZTAnimalFilter <|-- ZTAnimalProximityFilter
   ZTAnimalFilter <|-- ZTTAEntityFilter
-  ZTAnimalFilter <|-- ZTTAPerimeterFilter</pre>
-<p><code>ZTPredicate</code> objects are authored eligibility tests reused by disease targeting,
-scenario rules, adoption filters, and AI selection.</p>
+  ZTAnimalFilter <|-- ZTTAPerimeterFilter
+  class ZTPredicate { authored eligibility tests }
+  ZTPredicate ..> DiseaseDomain : targeting
+  ZTPredicate ..> ScenarioDomain : rules
+  ZTPredicate ..> AnimalDomain : adoption filters
+  ZTPredicate ..> AiDomain : selection</pre>
 <h3>Status, Zoopedia, awards, adoption</h3>
 <p><code>ZTStatus</code> (<code>&lt; BFScriptComponent</code>) is the zoo status aggregate. Its UI surface is a set
 of native widget subclasses under the UI framework:
@@ -2520,11 +2542,11 @@ scenario variants over the same machinery.</p>
   BFScenarioAction <|-- BFScenarioScriptAction
   BFXMLObj <|-- BFScenarioAltTextData
   BFScenarioRule "1" *-- "*" BFScenarioRule : nested rules
-  BFScenarioRule ..> BFScenarioAction : fires</pre>
-<p>Because <code>BFScenarioMgr</code> <strong>is a</strong> <code>BFScenarioGroup</code> <strong>is a</strong> <code>BFScenarioRule</code>, the whole
-scenario is one recursive rule structure. Rules carry state (visible/hidden, set/reset)
-queried and mutated by the <code>BFS_*</code> API; <code>BFScenarioScriptAction</code> runs a script when a
-rule triggers; <code>BFScenarioAltTextData</code> supplies alternate overview/help text.</p>
+  BFScenarioRule ..> BFScenarioAction : fires
+  class BFScenarioRule { visible/hidden; set/reset state }
+  class BFScenarioMgr { recursive rule root }
+  class BFScenarioScriptAction { runs script on trigger }
+  class BFScenarioAltTextData { alternate overview/help text }</pre>
 <h3>Script runtime</h3>
 <p><code>BFScriptComponent</code> (<code>&lt; BFComponent</code>) is the root of every scriptable component (AI,
 economy, status, research all descend from it). Lua sits behind a generic script
@@ -2537,10 +2559,12 @@ context:</p>
   BFTypedObj <|-- BFLuaStack
   BFXMLObj <|-- BFLuaArgs
   BFEvent <|-- BFLuaResponse
-  BFEvent <|-- BFScriptComponentArgs</pre>
-<p><code>BFScriptContextMgr</code> owns script contexts; <code>BFLuaContext</code> is the Lua binding, exchanging
-<code>BFLuaArgs</code>/<code>BFLuaStack</code> in and <code>BFLuaResponse</code> out. <code>ZT_RUN_SCRIPT</code>/<code>ZT_RUN_LOP</code>
-invoke scripts.</p>
+  BFEvent <|-- BFScriptComponentArgs
+  class BFScriptContextMgr { script contexts }
+  class BFLuaContext { Lua binding }
+  class BFLuaArgs { arguments in }
+  class BFLuaStack { stack exchange }
+  class BFLuaResponse { response out }</pre>
 <h3>Scenario scripting API (BFS_*)</h3>
 <p>The <code>BFS_*</code> tokens are the contract between rules/Lua and native state, grouped by role:</p>
 <ul>
@@ -2555,8 +2579,7 @@ invoke scripts.</p>
 <code>BFS_SETALTOVERVIEWTEXT</code></li>
 <li>misc: <code>BFS_SAVEOPTIONS</code>, <code>BFS_PROCESS_VINCE</code> (telemetry), <code>BFS_EVENT</code>/<code>BFS_OK</code>/<code>BFS_ERROR</code></li>
 </ul>
-<h3>Reconstructed field detail (scenario / scripts)</h3>
-<p>Modeled fields:</p>
+<h3>Scenario And Script State Model</h3>
 <pre class="mermaid">classDiagram
   class ZTScenarioMgr {
     +scenario_groups : Vec~BFScenarioGroup~
@@ -2580,10 +2603,10 @@ invoke scripts.</p>
   ZTScenarioMgr *-- BFScenarioMgr
   ZTScenarioMgr *-- Campaign
   BFScriptContextMgr "1" *-- "*" BFScriptContext
-  BFScriptContext *-- BFScriptFunctionBinding</pre>
-<p><code>BFScriptFunctionBinding</code> is the concrete <code>BFS_*</code> API surface: each exported Lua function
-maps to a <code>command_name</code> with typed <code>argument_signature</code>/<code>return_signature</code>. Campaigns
-(<code>BFCampaign</code>/<code>Campaign</code>) carry <code>unlock_rules</code> and a <code>current_scenario</code> over the rule tree.</p>
+  BFScriptContext *-- BFScriptFunctionBinding
+  BFScriptFunctionBinding ..> BFSMessage : exported BFS_* command binding</pre>
+<p>Campaigns (<code>BFCampaign</code>/<code>Campaign</code>) carry <code>unlock_rules</code> and a
+<code>current_scenario</code> over the rule tree.</p>
 <h3>Campaign, maps, photo challenges, profile</h3>
 <p><code>ZTMapData</code> (<code>&lt; BFComponent</code>) holds map/campaign list data; <code>ZTGameMode</code> (<code>&lt; ZTMode</code>)
 is the in-game interaction mode; <code>ZTGoalPanel</code> (<code>&lt; UIListBox</code>) shows goals. Photo
@@ -2715,11 +2738,11 @@ below.</p>
   BFPhysComponent <|-- BFRotYawMovingComponent
   BFComponent <|-- BFRenderer
   BFComponent <|-- BFResourceMgr
-  BFComponent <|-- BFParticleDictionary</pre>
-<p>An entity attaches into the scene through <code>BFSceneGraphComponent</code> →
-<code>BFRSceneGraphComponent</code> → <code>BFRActorComponent</code> (its renderable). <code>BFNISceneGraphComponent</code>
-is the Gamebryo node base used by camera, decals, and bone-LOD. <code>BFRenderer</code> drives the
-frame; <code>BFResourceMgr</code> owns GPU resources.</p>
+  BFComponent <|-- BFParticleDictionary
+  class BFRActorComponent { entity renderable }
+  class BFNISceneGraphComponent { Gamebryo node base for camera/decals/bone LOD }
+  class BFRenderer { frame driver }
+  class BFResourceMgr { GPU/resource input owner }</pre>
 <h3>Materials and textures</h3>
 <p>Materials are authored <code>.bfmat</code>/<code>.fx</code> source consumed by the renderer (the class
 <code>BFRMaterialManager</code> is evidenced only by its <code>::load</code> log string — no standalone type).
@@ -2745,25 +2768,26 @@ is a node/transition machine:</p>
   BFAnimGraph "1" *-- "*" BFAnimGraphNode
   BFAnimGraph "1" *-- "*" BFAnimGraphTransition
   BFAnimGraph ..> BFAnimationSequence : plays</pre>
-<p><code>BFAnimController</code> holds a <code>BFAnimTable</code> + <code>current_animation</code> and steps
-the graph; transitions fire on <code>condition</code>, blending over <code>blend_seconds</code>.</p>
 <h3>Sprites and UI rendering</h3>
 <pre class="mermaid">classDiagram
   BFUIRenderer <|-- BFSpriteMgr
-  BFSpriteMgr <|-- BFNISpriteMgr</pre>
-<p><code>BFSpriteMgr</code> is part of the UI renderer (<code>&lt; BFUIRenderer</code>); <code>BFNISpriteMgr</code> is the
-Gamebryo-backed implementation. It bridges the retained UI tree and the screen.</p>
+  BFSpriteMgr <|-- BFNISpriteMgr
+  class BFSpriteMgr { retained UI tree to screen bridge }
+  class BFNISpriteMgr { Gamebryo-backed implementation }</pre>
 <h3>Camera</h3>
 <p><code>BFCameraComponent</code> (<code>&lt; BFNISceneGraphComponent</code>) is the camera node; <code>ZTCameraCommandReader</code>
 (<code>&lt; ZTMode</code>) is the input mode. Camera commands travel as messages:
 <code>ZT_CAMERA</code>, <code>ZT_CAMERA_ZOOM</code>, <code>ZT_CAMERA_ROTATE</code>, <code>ZT_CAMERA_PAN</code>, <code>ZT_CAMERA_POSITION</code>,
 <code>ZT_CAMERA_MOVED</code>. <code>ZT_BLIT</code> requests a frame blit.</p>
 <h3>Camera detail</h3>
-<p>Modeled fields: <code>ZTCameraCommandReader</code> binds input to camera commands via
-<code>command_state_bindings</code> (<code>ZTCameraCommandStateBinding</code>: <code>trigger</code>/<code>code</code>/<code>char_value</code>/
-<code>ctrl_state</code>/<code>allow_repeat</code>) producing <code>command_state_events</code>; <code>active_command_states</code>
-holds the live set, providing the concrete backing for the <code>ZT_CAMERA_*</code>
-messages.</p>
+<pre class="mermaid">classDiagram
+  class ZTCameraCommandReader { +command_state_bindings[]; +command_state_events[] }
+  class ZTCameraCommandStateBinding { +trigger; +code; +char_value; +ctrl_state; +allow_repeat }
+  class ZTCameraActiveCommands { +active_command_states[] }
+  ZTCameraCommandReader "*" --> ZTCameraCommandStateBinding : bindings
+  ZTCameraCommandReader "*" --> ZTCameraCommandEvent : events
+  ZTCameraActiveCommands "*" --> ZTCameraActiveCommandState : live states
+  ZTCameraCommandEvent ..> ZTMessage : ZT_CAMERA_*</pre>
 <h3>Audio</h3>
 <pre class="mermaid">classDiagram
   BFSnd <|-- BF2DSnd
@@ -2774,23 +2798,26 @@ messages.</p>
   BFComponent <|-- BFSoundStage
   BFComponent <|-- BFSoundStageMgr
   BFComponent <|-- BFSoundtag
-  BFComponent <|-- BFWorld3DSndMgr</pre>
-<p><code>BFSoundMgr</code>/<code>BFSoundStageMgr</code> own playback; <code>BF2DSndFactory</code>/<code>BF3DSndFactory</code> mint
-2D/3D sound instances (<code>BF2DSnd</code>/<code>BF3DSnd &lt; BFSnd</code>); <code>BFWorld3DSndMgr</code> places world
-sound; <code>BFSoundtag</code> names a cue; <code>BFSndCrossFader</code> blends. Audio is fully
-message-driven (<code>BFSND_EVENT</code>/<code>BFSND_CMD</code>):</p>
+  BFComponent <|-- BFWorld3DSndMgr
+  class BFSoundMgr { playback owner; categories; options; sound tags; pending_events }
+  class BFSoundStageMgr { sound-stage owner }
+  class BF2DSndFactory { mints 2D sounds }
+  class BF3DSndFactory { mints 3D sounds }
+  class BFWorld3DSndMgr { world sound placement }
+  class BFSoundtag { cue name }</pre>
+<p>Audio is fully message-driven (<code>BFSND_EVENT</code>/<code>BFSND_CMD</code>):</p>
 <ul>
 <li>playback: <code>BFSND_PLAY</code>, <code>BFSND_PLAY_FROM_ENTITY</code></li>
 <li>transport: <code>BFSND_PAUSE</code>/<code>BFSND_RESUME</code>, <code>BFSND_FULLPAUSE</code>/<code>BFSND_FULLRESUME</code></li>
 <li>mix: <code>BFSND_MODIFY_PAN</code>, <code>BFSND_MODIFY_VOLUME</code></li>
 </ul>
-<h3>Reconstructed field detail (renderer / audio)</h3>
-<p>Modeled fields:</p>
+<h3>Renderer And Audio State Model</h3>
 <pre class="mermaid">classDiagram
   class BFDX9Renderer {
     +init_config : BFDX9RendererConfig
     +capability_report : BFRendererCapabilityReport
     +texture_memory_kib / vertex_buffer_kib / index_buffer_kib
+    +replaceable_backend : Direct3D9
   }
   class BFDX9RendererConfig {
     +minimal_graphics; +graphics_detail
@@ -2809,11 +2836,7 @@ message-driven (<code>BFSND_EVENT</code>/<code>BFSND_CMD</code>):</p>
   BFDX9Renderer *-- BFDX9RendererConfig
   BFDX9Renderer *-- BFRendererCapabilityReport
   BFSoundMgr *-- BFSoundOptions</pre>
-<p><code>BFDX9Renderer</code> is the concrete Direct3D 9 backend (the replaceable mechanism behind
-<code>BFRenderer</code>); its config/capability fields are the projection inputs a host adapter
-must satisfy. <code>BFSoundMgr</code> carries mixer <code>BFSoundOptions</code> and per-tag sound dirs.</p>
-<h3>Reconstructed model / effect / particle detail</h3>
-<p>Modeled fields:</p>
+<h3>Model, Effect, And Particle State Model</h3>
 <pre class="mermaid">classDiagram
   class BFRModelResource {
     +path; +source_document
@@ -2825,17 +2848,15 @@ must satisfy. <code>BFSoundMgr</code> carries mixer <code>BFSoundOptions</code> 
   class BFREffectEmitter { +particle emit params }
   class BFParticleDictionary { +dictionaries[]; +entries : Vec~BFParticleDictionaryEntry~ }
   class ZTSunLayer { +texture; +base_models[]; +sun_models[]; +sun_position_model }
+  class BFWaterGroup { water surfaces }
+  class BFRVertexFormatElement { GPU vertex layout element }
   BFRModelResource <|-- BFRNetImmerseNifModel : NIF backend
   BFRModelResource *-- BFRModelMesh
-  BFREffectResource "1" *-- "*" BFREffectEmitter</pre>
-<p><code>BFRModelResource</code> is the model loader (nodes/meshes); <code>BFRNetImmerseNifModel</code> is the
-concrete Gamebryo <code>.nif</code> backing. Materials (<code>BFRMaterialResource</code>) bind an effect +
-parameters + textures (authored <code>.bfmat</code>/<code>.fx</code>). Effects/particles
-(<code>BFREffectResource</code>/<code>BFREffectEmitter</code>/<code>BFRParticleEmitter</code>, indexed by
-<code>BFParticleDictionary</code>) drive VFX; <code>ZTSunLayer</code> renders the sky/sun; <code>BFWaterGroup</code>
-groups water surfaces. Vertex formats (<code>BFRVertexFormatElement</code>, <code>BFRVertexPND*</code>) are
-the GPU layouts the host adapter must reproduce.
-Mode visual-effect requests are transient renderer command values; the renderer
+  BFRMaterialResource --> BFREffectResource : effect
+  BFRMaterialResource "*" --> BFRTextureResource : textures
+  BFREffectResource "1" *-- "*" BFREffectEmitter
+  BFParticleDictionary "*" --> BFParticleDictionaryEntry : entries</pre>
+<p>Mode visual-effect requests are transient renderer command values; the renderer
 domain defines their semantic fields, while the host adapter owns their live
 message transport, model loading, and projection lifetime.</p>
 <h3>Adapter boundary</h3>
@@ -3242,8 +3263,8 @@ paths, transport, placement grid + elevated support via <code>BFGElevatedTileSer
 entity instances and their component state, AI tokens and task-relevant state,
 scenario/tutorial rule state, disease/cure state, adoption slots, and
 photos/challenges.</p>
-<p>Reconstructed: a <code>ZTSavedGame</code> row carries <code>name</code>, <code>path</code>, <code>preview</code>
-thumbnail, <code>file_time_low</code>/<code>high</code>, and <code>scenario_name</code>; <code>ZTSaveRequest</code>/<code>ZTLoadModeState</code>
+<p><code>ZTSavedGame</code> carries <code>name</code>, <code>path</code>, <code>preview</code> thumbnail,
+<code>file_time_low</code>/<code>high</code>, and <code>scenario_name</code>; <code>ZTSaveRequest</code>/<code>ZTLoadModeState</code>
 drive the file-mode flow.</p>
 <h3>Save/load flow</h3>
 <pre class="mermaid">sequenceDiagram
