@@ -3379,6 +3379,16 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   RenderEnvironmentDocuments "1" --> WaterRenderConfig : water
   RenderEnvironmentDocuments "1" --> RenderEnvironmentDocumentSet : authored_roots</pre>
 <pre class="mermaid">classDiagram
+  BFFPSUDVComponent <|-- ZTFPSUDVComponent
+  SkyLayersConfig "*" --> ZTSunLayer : layers
+  SkyLayersDocument "*" --> SkyLayerDocumentEntry : layers
+  SkyLayersDocument "0..1" --> TimeOfDayUpdateInterval : update_interval
+  SuspenseConfig "*" --> Graph : mix_graphs
+  SuspenseDocument "*" --> SuspenseCue : cues
+  SuspenseDocument "*" --> Graph : graphs
+  WaterDocument "*" --> WaterLayer : layers
+  WaterDocument "*" --> WaterScroll : scroll</pre>
+<pre class="mermaid">classDiagram
   RendererDomain "0..1" --> BFDX9Renderer : dx9_renderer
   RendererDomain "0..1" --> BFUIRenderer : ui_renderer
   RendererDomain "1" --> BFRResourceCache : resource_cache
@@ -3399,16 +3409,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   RendererDomain "*" --> BFWaterfall : waterfalls
   RendererDomain "1" --> GamebryoRuntime : gamebryo
   RendererDomain "1" --> BinkVideoRuntime : bink</pre>
-<pre class="mermaid">classDiagram
-  BFFPSUDVComponent <|-- ZTFPSUDVComponent
-  SkyLayersConfig "*" --> ZTSunLayer : layers
-  SkyLayersDocument "*" --> SkyLayerDocumentEntry : layers
-  SkyLayersDocument "0..1" --> TimeOfDayUpdateInterval : update_interval
-  SuspenseConfig "*" --> Graph : mix_graphs
-  SuspenseDocument "*" --> SuspenseCue : cues
-  SuspenseDocument "*" --> Graph : graphs
-  WaterDocument "*" --> WaterLayer : layers
-  WaterDocument "*" --> WaterScroll : scroll</pre>
 <p><strong>Model relationships.</strong></p>
 <pre class="mermaid">classDiagram
   NetImmerseColorKeyGroup "*" --> NetImmerseColorKey : keys
