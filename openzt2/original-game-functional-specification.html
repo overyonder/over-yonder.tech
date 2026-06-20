@@ -1903,7 +1903,6 @@ autosave cadence are open.</li>
   class BFNISpriteMgr { Gamebryo-backed implementation }</pre>
 <h3>Camera Commands</h3>
 <pre class="mermaid">classDiagram
-  ZTMode <|-- ZTCameraCommandReader
   class ZTCameraCommandReader { +input mode; +command_state_bindings[]; +command_state_events[] }
   class ZTCameraCommandStateBinding { +trigger; +code; +char_value; +ctrl_state; +allow_repeat }
   class ZTCameraActiveCommands { +active_command_states[] }
