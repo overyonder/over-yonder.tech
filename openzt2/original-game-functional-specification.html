@@ -1329,21 +1329,12 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
 <h3>Economy</h3>
 <pre class="mermaid">classDiagram
   class ZTEconomyMgr {
-    +context_configs : Vec~ZTEconomyContextConfig~
-    +configs : Vec~EconomyConfig~
-    +components : Vec~ZTEconomyComponent~
-    +zt_transactions : Vec~ZTTransaction~
-    +bfg_components : Vec~BFGEconomyComponent~
-    +transaction_tracker : BFGTransactionTracker
-    +money_events : Vec~MoneyEvent~
-    +ui_price_selections : Vec~ZTPriceIndexSelection~
     +from_root() / read_config_xml_node()
     +process_transaction(name)
     +set_price_index(...) / process_fame_update(fame)
   }
   class ZTEconomyComponent {
     +name; +category; +no_binder; +active
-    +transactions : Vec~TransactionConfig~
     +read_xml_node()/write_xml_node()
     +find_transaction_by_name(name)
   }
@@ -1356,9 +1347,6 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +activate()/deactivate()
   }
   class ZTEconomyComponentGuest { +guest_entity; +donation_multiplier; +score_donation(target) }
-  ZTEconomyMgr "1" *-- "*" ZTEconomyComponent
-  ZTEconomyMgr "1" *-- "*" ZTTransaction
-  ZTEconomyMgr *-- BFGTransactionTracker
   BFGEconomyComponent <|-- ZTEconomyComponentBase
   ZTEconomyComponentBase <|-- ZTEconomyComponentGuest
   ZTEconomyComponentBase <|-- ZTEconomyComponentStub
@@ -1440,10 +1428,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
 <h3>Research</h3>
 <pre class="mermaid">classDiagram
   class ZTResearchMgr {
-    +items : Vec~ZTResearchItem~
-    +buttons : Vec~ZTUIResearchButton~
     +unlocked_items[]; +unlocked_entities[]; +unlocked_fences[]
-    +active_research[]; +completed_research[]
     +read/write researchItems
     +read/write unlockedItems
   }
@@ -1471,9 +1456,6 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +researchCompleted; +researchCompletedNotified
   }
   BFScriptComponent <|-- ZTResearchMgr
-  ZTResearchMgr "1" *-- "*" ZTResearchItem
-  ZTResearchMgr "*" --> ZTResearchActiveRecord : active_research
-  ZTResearchMgr "*" --> ZTResearchUnlock : unlocks
   ZTResearchMgr ..> ResearchMessages
   ZTResearchItem ..> ResearchSourceFields : constructed from
   ZTResearchItem ..> ZTResearchPersistenceFields : persisted item fields</pre>
