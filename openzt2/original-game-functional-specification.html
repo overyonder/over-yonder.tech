@@ -822,6 +822,8 @@ Individual mode method bodies are not yet reconstructed.</li>
     +life_cycle : ZTAnimalLifeCycleState
     +needs / training / disease_state / conservation
     +adoption_state / release_state / crate_state / family_tree
+    +select_runtime_variant(adult/young/male/female)
+    +update_status_from_components()
   }
   class ZTAnimalLifeCycleState {
     +stage; +adult; +pregnant
@@ -840,8 +842,6 @@ Individual mode method bodies are not yet reconstructed.</li>
   ZTAnimal ..> ZTAdoptionMgr : adoption
   ZTAnimal ..> ZTFavoriteAnimalMgr : favorites
   ZTAnimalTypeDefinition ..> ZTAnimal : hydrate_runtime_animal_from_source_type</pre>
-<p><code>select_runtime_variant</code> resolves adult/young/male/female variants;
-<code>update_status_from_components</code> reads state from the entity's components.</p>
 <p>Open (from <code>todo!()</code>): breeding/offspring rules, training learning deltas, and the
 component→status read for several flags.</p>
 <h3>Entity Consumers and Selection</h3>
