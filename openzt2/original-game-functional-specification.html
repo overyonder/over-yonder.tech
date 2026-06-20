@@ -1849,11 +1849,6 @@ enumerated.</li>
 <code>icon</code>/<code>dialog_resource</code>) is the Win32 startup window. Autosave cadence is open.</li>
 </ul>
 <h2>Presentation: Renderer, Animation, Camera, and Audio</h2>
-<p>The <strong>projection/output layer</strong> consumes domain state (entities, world, UI) and
-renders/sounds it behind the preservation boundary. The original backend is
-Gamebryo/NetImmerse (the <code>BFNi*</code> classes) over Direct3D plus a sound engine; a
-modern host may replace those mechanics while preserving the component inputs
-below.</p>
 <h3>Scene Graph and Render Components</h3>
 <pre class="mermaid">classDiagram
   BFPhysComponent <|-- BFSceneGraphComponent
@@ -2010,7 +2005,7 @@ below.</p>
   ModeVfx["Mode visual-effect requests<br/>transient renderer command values<br/>semantic fields defined by renderer domain"]
   Render["BFRenderer + BFSpriteMgr + BFAnim* + BFSoundMgr"]
   Host["host adapter<br/>live message transport, model loading,<br/>projection lifetime"]
-  Backend["Gamebryo/NetImmerse + D3D + sound engine (REPLACEABLE)"]
+  Backend["Gamebryo/NetImmerse BFNi* + D3D + sound engine (REPLACEABLE)"]
   Domain -->|preserved component inputs<br/>BFRActorComponent transforms, BFAnimController selections,<br/>BFSpriteMgr UI projection, BFSND_* cues| Render
   ModeVfx --> Render --> Host --> Backend</pre>
 <p><strong>Open contracts.</strong></p>
