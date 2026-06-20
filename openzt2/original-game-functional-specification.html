@@ -599,14 +599,12 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   participant Bus as UI_* message bus
   participant H as value handler -> manager
   XML->>Root: hydrate widget tree (+skins, loc, fonts)
+  Note over XML,Root: source-owned: widget instances, child target names, image/skin paths, loc ids, font/format ids, authored event order
   W->>Bus: user input -> UI_ACTIVATE / UI_CHANGED_VALUE
   Bus->>H: routed event block (authored order)
+  Note over Bus,H: native-owned: legal UI_* semantics, value-handler registration, focus/input routing, widget vtable methods
+  Note over H: Lua remains scenario/script surface
   H->>W: UI_MODIFY / push value back (make_*_value)</pre>
-<h3>UI Boundary</h3>
-<p>Data-driven: widget instances, event message order, child target names, image/skin
-paths, loc ids, font/format ids. Hardcoded native: the set of legal <code>UI_*</code> messages and
-their meaning, value-handler registration, focus/input routing, and widget vtable
-methods. Lua remains a scenario/script surface.</p>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li>Widget vtable method bodies (<code>UI_HIT_TEST</code>/<code>UI_MODIFY</code>/<code>UI_QUERY</code> handlers) are not
