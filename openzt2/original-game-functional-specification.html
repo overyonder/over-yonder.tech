@@ -321,9 +321,6 @@ widget-tree construction and ordered message emission belong to the UI Runtime
 section (<code>class-checked</code>: messages are interned tokens).</li>
 <li>The full <code>BFAIEntityDataShared</code> shared schema (descriptor-table entry shape per
 field group) is not enumerated.</li>
-<li><code>BFUserProfile</code> keys adjacent in the binder property table (<code>saveDirectory</code>,
-<code>tempDirectory</code>, <code>options.xml</code>, <code>config/options.xml</code>, <code>lang/</code>) belong to the
-Profile/Persistence sections.</li>
 </ul>
 <p>Primary hydrated source families:</p>
 <table>
@@ -1809,7 +1806,11 @@ and components. Save and load are file-mode tools.</p>
   BFComponent <|-- BFUserProfileMgr
   BFComponent <|-- BFGElevatedTileSerializer
   BFXMLObj <|-- BFUndoTransactionData
-  class BFUserProfileMgr { profile id; saveDirectory; tempDirectory; options.xml }
+  class BFUserProfileMgr {
+    +profile id
+    +saveDirectory; +tempDirectory
+    +options.xml; +config/options.xml; +lang/
+  }
   class ZTSavedGame { +name; +path; +preview thumbnail; +file_time_low/high; +scenario_name }
   class SavePayload {
     +profile/options; +selected map/scenario/campaign
