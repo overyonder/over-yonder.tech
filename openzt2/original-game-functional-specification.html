@@ -2986,11 +2986,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <h4>Economy, Progression, Disease, and Status</h4>
 <p><strong>Economy relationships.</strong></p>
 <pre class="mermaid">classDiagram
-  BFGEconomyComponent <|-- ZTEconomyComponentBase
-  BFGTransaction <|-- ZTTransaction
-  ZTEconomyComponentBase <|-- ZTEconomyComponentGuest
-  ZTEconomyComponentBase <|-- ZTEconomyComponentHistoryBase
-  ZTEconomyComponentBase <|-- ZTEconomyComponentStub
   ZTEconomyComponentHistoryBase <|-- ZTEconomyComponent
   ZTEconomyMgr "*" --> ZTEconomyContextConfig : context_configs
   ZTEconomyMgr "0..1" --> EconomyConfig : config
