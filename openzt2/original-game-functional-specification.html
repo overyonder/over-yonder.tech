@@ -18,18 +18,6 @@ pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px}
 th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
 th{background:var(--soft)}
-.plan-callout{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:13px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
-.plan-callout>span{line-height:1.45}
-.plan-callout details{flex:1 1 100%;color:var(--fg)}
-.plan-callout summary{display:inline-flex;align-items:center;min-height:26px;padding:3px 8px;border:1px solid var(--control-border);border-radius:4px;background:var(--control);color:var(--fg);font-size:12px;cursor:pointer;list-style:none}
-.plan-callout summary::-webkit-details-marker{display:none}
-.plan-callout summary::before{content:"+";margin-right:6px;color:var(--muted)}
-.plan-callout details[open] summary::before{content:"-"}
-.plan-callout-body{margin-top:12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px;color:var(--fg)}
-.plan-callout-body h3{margin:14px 0 6px;font-size:15px}
-.plan-callout-body p{margin:0 0 8px}
-.plan-callout-body ul{margin:6px 0 10px;padding-left:20px}
-.plan-callout-body table{background:var(--panel)}
 .plan-progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 18px}
 .plan-progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}
 .plan-progress-card.primary{grid-column:1/-1}
@@ -1315,12 +1303,15 @@ completion/failure side effects for mutations, feedback, follow-up behaviors, an
   PRESHOW --> CONDUCTING
   CONDUCTING --> POSTSHOW
   POSTSHOW --> BETWEENSHOWS</pre>
-<p>Show runtime fields: <code>ZTAIShowMgr</code> holds <code>show_songs</code>, <code>score_table</code>
-(<code>ShowScoreBand</code>), <code>show_size_table</code>, <code>effect_sets</code>; a <code>ShowSong</code> is <code>song_name</code>/<code>sound</code>, a <code>ShowScoreBand</code> is
-<code>min_tricks</code>/<code>min_score</code>/<code>show_score</code>. <code>ZTAIShow</code> carries
-<code>show_token_name</code>, <code>state : ShowState</code>, <code>animal_data</code>, <code>guests_invited</code>,
-<code>ran_to_completion</code>; <code>ZTAIShowScheduler</code> holds <code>queued_shows</code>, <code>between_shows_time_block</code>,
-<code>pre_show_time_seconds</code>, <code>post_show_time_seconds</code>.</p>
+<pre class="mermaid">classDiagram
+  class ZTAIShowMgr { +show_songs; +score_table; +show_size_table; +effect_sets }
+  class ShowSong { +song_name; +sound }
+  class ShowScoreBand { +min_tricks; +min_score; +show_score }
+  class ZTAIShow { +show_token_name; +state : ShowState; +animal_data; +guests_invited; +ran_to_completion }
+  class ZTAIShowScheduler { +queued_shows; +between_shows_time_block; +pre_show_time_seconds; +post_show_time_seconds }
+  ZTAIShowMgr "*" --> ShowSong : show_songs
+  ZTAIShowMgr "*" --> ShowScoreBand : score_table
+  ZTAIShowScheduler "*" --> ZTAIShow : queued_shows</pre>
 <p>Tricks: <code>ZTAITrickComponent</code>/<code>Data</code>/<code>Level</code>/<code>Mgr</code>/<code>TargetComponent</code>/<code>PopularityMgr</code>.
 Tours: <code>ZTAITourTaker</code>/<code>Data</code>/<code>TourTaskThinker</code>/<code>ZTAISharedTourTaker</code>. Guest viewing
 and donations are behavior-driven (<code>ZTBehViewAnimals</code>, <code>ZTBehViewEvent</code>,

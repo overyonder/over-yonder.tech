@@ -18,18 +18,6 @@ pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px}
 th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
 th{background:var(--soft)}
-.plan-callout{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:13px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
-.plan-callout>span{line-height:1.45}
-.plan-callout details{flex:1 1 100%;color:var(--fg)}
-.plan-callout summary{display:inline-flex;align-items:center;min-height:26px;padding:3px 8px;border:1px solid var(--control-border);border-radius:4px;background:var(--control);color:var(--fg);font-size:12px;cursor:pointer;list-style:none}
-.plan-callout summary::-webkit-details-marker{display:none}
-.plan-callout summary::before{content:"+";margin-right:6px;color:var(--muted)}
-.plan-callout details[open] summary::before{content:"-"}
-.plan-callout-body{margin-top:12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px;color:var(--fg)}
-.plan-callout-body h3{margin:14px 0 6px;font-size:15px}
-.plan-callout-body p{margin:0 0 8px}
-.plan-callout-body ul{margin:6px 0 10px;padding-left:20px}
-.plan-callout-body table{background:var(--panel)}
 .plan-progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 18px}
 .plan-progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}
 .plan-progress-card.primary{grid-column:1/-1}
@@ -1104,40 +1092,6 @@ when a distinct manager, source file family, state transition, formula, message
 handler group, or adapter boundary appears. Attach unresolved methods, globals,
 payloads, and formulae to the nearest owning row. If ownership is unclear, leave
 the behavior blank until the source/spec evidence gives it a home.</p>
-<h2>Supporting Adapter Reference</h2>
-<aside class="plan-callout">
-<span>Bevy and library surfaces are support machinery for the plan above. They are not workbook domains and should not become top-level checklist buckets.</span>
-<details>
-<summary>Bevy feature mapping</summary>
-<div class="plan-callout-body">
-<p>This mapping records which host/engine features are expected to carry original-game contracts. It is an adapter checklist, not a second implementation taxonomy.</p>
-<table>
-<thead><tr><th>Adapter surface</th><th>Use in OpenZT2</th><th>Boundary rule</th></tr></thead>
-<tbody>
-<tr><td>Crate boundaries</td><td><code>content</code> owns source bytes and parsed source documents; <code>domain</code> owns host-independent semantic values and pure rules; <code>bevy</code> owns live runtime state, ECS entities/resources, fixed handlers, rendering, audio, input, and asset handles.</td><td>Original <code>ZT*</code>, <code>BF*</code>, and <code>BFG*</code> names describe preserved semantics, not a requirement to preserve C++ storage ownership.</td></tr>
-<tr><td>Runtime substrate</td><td>Bevy app, ECS, schedules, states, time, tasks, events/messages, queries, commands, observers, and change detection provide the canonical mutable runtime.</td><td>Recovered native handlers mutate Bevy resources/components and may call pure domain helpers; they should preserve original tokens, sender, target, payload, and ordering.</td></tr>
-<tr><td>Asset and source loading</td><td>Z2F-backed asset sources/readers and extension loaders map <code>zt2://</code> paths into Bevy assets such as <code>Image</code>, model/scene assets, materials, animation clips, audio sources, Lua scripts, and structured documents.</td><td>Do not extract every asset or mirror Bevy asset storage into domain caches. Store source ids, path ids, asset ids, or handles.</td></tr>
-<tr><td>Documents and localization</td><td>XML/BFXML/MAXML and locale sources should be parsed into compact ordered representations that preserve attributes, mixed content, ids, and lookup/fallback behavior.</td><td>Hydrators consume source documents; runtime state lives in the owning runtime domain.</td></tr>
-<tr><td>UI, input, and modes</td><td>Bevy UI/text/picking/input host original UI layouts, widgets, visual state, interaction, focus, cursor, and mode tools.</td><td>Clicking a widget dispatches authored original events and recovered handlers. It should not execute invented Bevy-only behavior.</td></tr>
-<tr><td>World, terrain, and selection</td><td>World instances become Bevy entities/components; terrain uses packed arrays, chunks, dirty regions, generated meshes, and picking for brush/placement hits.</td><td>Terrain should not be one entity per tile, and the runtime should not maintain a duplicate world graph beside ECS.</td></tr>
-<tr><td>Renderer, materials, animation, and camera</td><td>Bevy image, mesh, material, shader, PBR, animation, scene, camera, lighting, post-processing, gizmo, and diagnostic surfaces replace Gamebryo/D3D mechanics behind preserved component inputs.</td><td>Source-visible render contracts still come from the functional specification: <code>BFSceneGraphComponent</code>, <code>BFAnim*</code>, <code>BFSpriteMgr</code>, material, texture, and camera command semantics.</td></tr>
-<tr><td>Audio and scripting</td><td>Kira/Bevy audio execute recovered <code>BFSND_*</code> commands and sound-tag policy; <code>mlua</code> executes shipped Lua behind recovered <code>BFS_*</code> bindings.</td><td>Backend playback and Lua host mechanics are replaceable; command arguments, returns, errors, side effects, categories, and timing are product contracts.</td></tr>
-<tr><td>Host, platform, and tooling</td><td>Windowing, cursor, IME, filesystem, registry/profile paths, networking/download/MOTD, logging, diagnostics, CI, file watching, inspectors, and debug gizmos are host adapters.</td><td>Use these when they support fidelity, recovery, or development. They do not define semantic game domains.</td></tr>
-</tbody>
-</table>
-<h3>Storage Rules</h3>
-<ul>
-<li>Immutable authored data is stored once and shared by id or handle.</li>
-<li>Mutable runtime state is stored once in Bevy resources/components.</li>
-<li>Presentation is derived from runtime state and updated through dirty sets, generation counters, changed components, or explicit messages.</li>
-<li>Duplicate source trees, loaded-document stores, asset registries, entity graphs, and presentation caches are removed unless they are a proven original persisted/runtime contract.</li>
-</ul>
-<h3>Connection Pattern</h3>
-<p>Source asset -> Bevy loader/resource; input event -> original message handler; runtime state change -> presentation sync; asset handle ready -> attach image, mesh, material, audio, animation, or script; simulation tick -> mutate Bevy components/resources.</p>
-</div>
-</details>
-</aside>
-
 
 </main>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
