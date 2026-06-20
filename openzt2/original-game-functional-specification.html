@@ -2004,10 +2004,7 @@ message transport, model loading, and projection lifetime.</p>
   Domain["entities / world / UI / status (native runtime state)"]
   Render["BFRenderer + BFSpriteMgr + BFAnim* + BFSoundMgr"]
   Backend["Gamebryo/NetImmerse + D3D + sound engine (REPLACEABLE)"]
-  Domain -->|component inputs| Render -->|adapter| Backend</pre>
-<p>The reconstruction may swap <code>Backend</code> entirely; it must preserve the component inputs
-(<code>BFRActorComponent</code> transforms, <code>BFAnimController</code> selections, <code>BFSpriteMgr</code> UI
-projection, <code>BFSND_*</code> cues) that <code>Render</code> consumes.</p>
+  Domain -->|preserved component inputs<br/>BFRActorComponent transforms, BFAnimController selections,<br/>BFSpriteMgr UI projection, BFSND_* cues| Render -->|adapter| Backend</pre>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li><code>.bfmat</code>/<code>.fx</code> parameter/animation syntax and material slot binding are not modeled.</li>
