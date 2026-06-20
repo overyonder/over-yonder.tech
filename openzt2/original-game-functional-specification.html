@@ -2823,7 +2823,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <h4>AI, Behavior, Guests, Staff, and Shows</h4>
 <p><strong>Show relationships.</strong></p>
 <pre class="mermaid">classDiagram
-  BFAITrickMgr <|-- ZTAITrickMgr
   ShowDomain "1" --> ZTAIShowMgr : show_manager
   ShowDomain "1" --> BFAITrickMgr : bf_trick_manager
   ShowDomain "1" --> ZTAITrickMgr : trick_manager
