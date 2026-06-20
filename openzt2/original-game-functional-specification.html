@@ -2451,17 +2451,14 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ModesDomain "1" --> ZTDownloadModeState : download_mode
   ModesDomain "1" --> ZTFileModeState : file_mode
   ModesDomain "1" --> ZTGfxOptionsModeState : gfx_options_mode
-  ModesDomain "1" --> ZTGroundTrackModeState : ground_track_mode
   ModesDomain "1" --> ZTGuestViewModeState : guest_view_mode
   ModesDomain "1" --> ZTOverviewModeState : overview_mode
-  ModesDomain "1" --> ZTElevatedCurbModeState : elevated_curb_mode
   ModesDomain "1" --> ZTFirstPersonModeState : first_person_state
   ModesDomain "1" --> ZTFossilFindingModeState : fossil_finding_state
   ModesDomain "1" --> ZTFPTrainingModeState : fp_training_state
   ModesDomain "1" --> ZTTranquilizeModeState : tranquilize_state
   ModesDomain "1" --> ZTCloningGestureModeState : cloning_gesture_state
   ModesDomain "1" --> ZTSuperStaffModeState : super_staff_state
-  ModesDomain "1" --> ZTBiomeModeState : biome_mode_state
   ModesDomain "*" --> ZTModeCommand : commands
   ModesDomain "*" --> ZTKeyboardAction : keyboard_actions</pre>
 <pre class="mermaid">classDiagram
@@ -2544,6 +2541,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   TransportDomain "*" --> ZTTransportSkyCircuit : sky_circuits
   TransportDomain "*" --> ZTTransportVehicle : vehicles
   TransportDomain "*" --> ZTTransportStation : stations
+  TransportDomain "1" --> ZTGroundTrackModeState : ground_track_mode
   TransportDomain "1" --> ZTTransportQuerySet : queries
   ZTChangeCircuitDirectionCommand "0..1" --> RouteDirection : requested_direction
   ZTTourData "*" --> ZTTourDataAttr : tours
@@ -2804,6 +2802,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   PathDomain "*" --> ZTPathPlacementCommand : placement_commands
   PathDomain "*" --> ZTElevatedPathCommand : elevated_commands
   PathDomain "*" --> ZTConnectedPathQuery : connected_queries
+  PathDomain "1" --> ZTElevatedCurbModeState : elevated_curb_mode
   ZTElevatedPathSegment "1" --> ZTPathSegment : path
   ZTElevatedPathSegment "0..1" --> ZTElevatedCurbPlacement : curb_mode
   ZTPathPlacementCommand "0..1" --> ZTPathValidation : validation</pre>
