@@ -585,8 +585,6 @@ reconstructed; only the message set and inheritance are established.</li>
 <pre class="mermaid">classDiagram
   class ZTMode { cursor; ui_layout; event_blocks; message_handlers; hotkeys }
   ZTMode <|-- ZTEntityMovementMode
-  ZTEntityMovementMode <|-- ZTPlacementMode
-  ZTEntityMovementMode <|-- ZTBiomeMode
   ZTMode <|-- ZTSelectionMode
   ZTMode <|-- ZTFPActionModeBase
   ZTFPActionModeBase <|-- ZTCureDiseaseMode
@@ -599,9 +597,7 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTMode <|-- ZTFileMode
   ZTFileMode <|-- ZTSaveMode
   ZTFileMode <|-- ZTLoadMode
-  ZTMode <|-- ZTCameraCommandReader
-  ZTMode <|-- ZTTerrainCommandReader
-  ZTMode <|-- ZTTankCommandReader</pre>
+  ZTMode <|-- ZTCameraCommandReader</pre>
 <h4>First-Person and Gameplay Modes</h4>
 <pre class="mermaid">classDiagram
   class ZTFPTrainingMode {
