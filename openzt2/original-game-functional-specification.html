@@ -18,6 +18,18 @@ pre code{background:none;padding:0}
 table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px}
 th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
 th{background:var(--soft)}
+.plan-callout{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:13px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.plan-callout>span{line-height:1.45}
+.plan-callout details{flex:1 1 100%;color:var(--fg)}
+.plan-callout summary{display:inline-flex;align-items:center;min-height:26px;padding:3px 8px;border:1px solid var(--control-border);border-radius:4px;background:var(--control);color:var(--fg);font-size:12px;cursor:pointer;list-style:none}
+.plan-callout summary::-webkit-details-marker{display:none}
+.plan-callout summary::before{content:"+";margin-right:6px;color:var(--muted)}
+.plan-callout details[open] summary::before{content:"-"}
+.plan-callout-body{margin-top:12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px;color:var(--fg)}
+.plan-callout-body h3{margin:14px 0 6px;font-size:15px}
+.plan-callout-body p{margin:0 0 8px}
+.plan-callout-body ul{margin:6px 0 10px;padding-left:20px}
+.plan-callout-body table{background:var(--panel)}
 .spec-diagram{display:block;width:100%;height:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg)}
 .mermaid{margin:14px 0 22px;text-align:center;background:transparent}.mermaid svg{max-width:100%;height:auto}
 .spec-diagram text{font-family:system-ui,sans-serif}
@@ -660,6 +672,99 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTGestureTrace ..> ZTGestureMatch : scored against definition
   ZTGestureTrace "*" --> ZTGestureTraceSample : samples
   ZTGestureComponent ..> ZTGestureTrace : produces</pre>
+<h4>Reconstructed Mode-State Records</h4>
+<pre class="mermaid">classDiagram
+  class ZTShellModeTransition { +previous; +current; +previous_path; +current_path; +changed; +cursor; +layout_guis; +active_hotkeys; +off_events; +on_events }
+  class ZTModeRecord { +class_name; +name; +attributes; +layout_guis; +hotkeys; +inline_hotkeys; +on_events; +off_events; +event_blocks; +config_children; +children }
+  class ZTModeConfigNode { +name; +attributes; +text; +children }
+  class ZTModeDescriptor { +type_name; +parent_type; +command_token; +vtable_range; +descriptor_range }
+  class ZTModeClassRegistry { +zt_mode; +game; +main; +overhead; +overview; +first_person; +placement; +selection; +toolset; +delete; +download; +file; +load; +save }
+  class ZTModeTypeCache { +type_name; +cached_type_handle; +init_guard; +type_string_address }
+  class ZTModeUiBinding { +control_name; +layout_name; +value_message; +command_token }
+  class ZTModeInputState { +cursor_name; +shift_pressed; +control_pressed; +screen_point; +world_point }
+  ZTModeRecord "*" --> ZTModeConfigNode : config_children
+  ZTModeRecord "*" --> ZTModeUiBinding : bindings
+  ZTModeDescriptor --> ZTModeTypeCache
+  ZTModeClassRegistry "*" --> ZTModeDescriptor : registered modes</pre>
+<pre class="mermaid">classDiagram
+  class ZTDownloadModeNativeContract { +base_url_template; +index_file; +items_list_control; +downloads_root; +cannot_disable_token; +enabled_field; +ui_name_field; +site_name_field; +version_field; +viewable_field; +confirmed_token; +confirm_exit_token; +cancel_downloads_token; +downloads_title }
+  class ZTFileModeNativeSchema { +record_type; +name_field; +display_name_field; +file_time_low_field; +file_time_high_field; +zip_kind; +dir_kind }
+  class ZTLoadModeNativeContract { +save_glob; +row_layout; +list_control; +name_control; +preview_control; +delete_button; +saved_root }
+  class ZTUILayoutModeNativeCommands { +set_background; +load_ui; +clear_ui; +reload; +send; +quit }
+  class ZTSkyTrackModeNativeContract { +first_trip_token; +return_trip_token; +construction_marker_3; +construction_marker_4; +tower_type_token; +test_rope_object }
+  ZTDownloadModeNativeContract ..> ZTDownloadModeState
+  ZTFileModeNativeSchema ..> ZTFileModeState
+  ZTLoadModeNativeContract ..> ZTFileModeState
+  ZTUILayoutModeNativeCommands ..> ZTModeRecord
+  ZTSkyTrackModeNativeContract ..> ZTGroundTrackModeState</pre>
+<pre class="mermaid">classDiagram
+  class ZTOverheadMode { +surface; +camera; +cursor; +stars_display }
+  class ZTStarsDisplay { +animation_delay_seconds; +appear_animation_token; +disappear_animation_token; +visuals }
+  class ZTModePhysObjVisual { +token; +model_file; +scale; +controllers_only; +auto_start; +duration_seconds; +loop_animation }
+  class ZTGestureCreationBounds { +min_x; +max_x; +min_y; +max_y; +min_z; +max_z }
+  class ZTPuzzleMode { +common; +help_text_loc_id; +camera; +snap_distance; +piece_rotation_degrees; +completion_burst_system; +auto_exit_delay_seconds; +colors }
+  class ZTStaffAssignMode { +surface; +active_cursor; +keeper_cursor; +trainer_cursor; +waiting_cursor; +marker; +effect; +prevent_multiple_flags; +collision_tester }
+  class ZTDeleteMode { +surface; +cursor; +color_animation_cycle; +ground_cursor_rotation_cycle; +ground_cursor_grow_time; +ground_cursor_radius; +ground_cursor_effect_radius; +cursor_texture; +default_delete_sound; +multi_delete_sound; +colors; +delete_groups }
+  class ZTGuestViewMode { +surface; +tag_file; +ground_cursor; +cursor; +highlight_alpha }
+  class ZTPhotoMode { +surface; +zoom_speed; +move_speed; +turn_speed_out; +turn_speed_in; +last_pic_wait_time; +message_wait_time }
+  class ZTPlacementFootprintAssets { +place_yes; +place_yes_small; +place_no; +place_no_small }
+  class ZTModeColor { +r; +g; +b; +a }
+  class ZTModeGridPreview { +token; +cardinal_image; +diagonal_image; +radius }
+  class ZTFenceModeTankWallConfig { +default_height; +minimum_height; +maximum_height; +default_base_depth; +minimum_base_depth; +maximum_base_depth; +hill_threshold; +default_portal }
+  ZTOverheadMode --> ZTStarsDisplay
+  ZTDeleteMode "*" --> ZTModeColor : colors
+  ZTPuzzleMode "*" --> ZTModeColor : colors</pre>
+<pre class="mermaid">classDiagram
+  class ZTFirstPersonMode { +common; +carrying_avatar_token; +camera_set; +help_flags; +action_mode; +prompt_delay_seconds; +screen_dither; +keyboard_rotate_speed; +move_speed; +turn_speed; +center_mouse_on_hide; +native_state }
+  class ZTFirstPersonModeNativeState { +mouse_look_active; +mouse_prompt_visible; +yaw; +pitch; +strafe; +forward; +transitions; +resource_updates; +movement_events; +camera_moved_messages }
+  class ZTFPClimbLadderMode { +base; +ladder_entity; +direction; +time_per_meter; +target_platform; +native_state }
+  class ZTTrainingNativeUiBinding { +field; +lookup_name; +native_field_offset; +projection }
+  class ZTTrainingNativePresentation { +reset_message; +player_training_layout; +player_training_activate_message; +player_training_show_message; +player_training_master_listbox; +player_training_item_layout; +player_training_trick_button; +training_complete_trick_image_layout; +training_complete_trick_image; +training_locked_icon; +new_trick_border; +reward_message_control; +reward_message_show_message; +reward_message_hide_message }
+  class ZTSuperStaffMode { +common; +staff_entity; +active_usage_object; +max_usage_object_distance; +usage_object_labels; +user_prompt }
+  class ZTFPTrainingResultFeedbackAdvance { +crowd_cheer_token; +show_reward_message; +apply_reward; +cleanup_result_ui }
+  class ZTFPTrainingModeState { +active_task_token; +selected_gesture_token; +active_learning_delta; +active_keyboard_tokens; +last_keyboard_action; +event_count; +gesture_trace; +score_percent; +final_score; +result_bucket; +result_feedback_token; +result_feedback_phase; +result_feedback_elapsed_seconds; +crowd_feedback_sent }
+  ZTFirstPersonMode --> ZTFirstPersonModeNativeState
+  ZTFPClimbLadderMode --> ZTFirstPersonModeNativeState
+  ZTFPTrainingModeState --> ZTTrainingNativePresentation
+  ZTFPTrainingModeState "*" --> ZTTrainingNativeUiBinding
+  ZTFPTrainingModeState --> ZTFPTrainingResultFeedbackAdvance</pre>
+<pre class="mermaid">classDiagram
+  class ZTOverviewModeState { +selected_filter; +view_filters; +animal_icons; +building_icons; +visible_objects; +map_projection; +click_target }
+  class ZTOverviewVisibleObject { +entity_id; +entity_type; +world_position; +icon_name }
+  class ZTDeleteModeState { +mode_value; +delete_groups; +selected_entities; +pending_request; +confirmation }
+  class ZTDeleteRequest { +target_entity; +target_type; +return_station; +first_station; +destroy_command }
+  class ZTFileModeState { +root_path; +file_mode; +files; +selected_file; +file_info_list }
+  class ZTGroundTrackModeState { +construction_markers; +selected_endpoint; +circuit; +conservation_state }
+  class ZTGuestViewModeState { +tag_file; +ground_cursor; +highlight_alpha; +target; +camera_binding }
+  class ZTElevatedCurbModeState { +place_no; +replace; +anchor; +locked }
+  ZTOverviewModeState "*" --> ZTOverviewVisibleObject : visible_objects
+  ZTDeleteModeState "0..1" --> ZTDeleteRequest : pending_request</pre>
+<pre class="mermaid">classDiagram
+  class ZTDownloadModeState { +index; +items; +queue; +selected_item; +document; +items_list; +confirmation }
+  class ZTDownloadModeDocument { +base_url_template; +index_file; +downloads_root; +version }
+  class ZTDownloadItemsListRow { +item_id; +ui_name; +site_name; +enabled; +viewable; +status }
+  class ZTDownloadItem { +item_id; +ui_name; +site_name; +file_path; +enabled; +viewable; +version; +status }
+  class ZTDownloadQueue { +requests; +active_request; +completed_requests; +cancelled_requests }
+  class ZTDownloadRequest { +item_id; +url; +target_path; +cancel_message }
+  class ZTDownloadConfirmation { +item_id; +confirm_exit_token; +cancel_downloads_token; +confirmed }
+  ZTDownloadModeState "1" --> ZTDownloadModeDocument : document
+  ZTDownloadModeState "*" --> ZTDownloadItem : items
+  ZTDownloadModeState "*" --> ZTDownloadItemsListRow : items_list
+  ZTDownloadModeState "1" --> ZTDownloadQueue : queue
+  ZTDownloadModeState "0..1" --> ZTDownloadConfirmation : confirmation
+  ZTDownloadQueue "*" --> ZTDownloadRequest : requests</pre>
+<pre class="mermaid">classDiagram
+  class ZTGfxOptionsModeSnapshot { +graphics; +audio; +vince; +selected_detail_level; +selected_detail_token; +custom_detail_active; +display_mode_dirty; +detail_settings_dirty; +sound_settings_dirty; +free_mouse_look; +use_low_mem_defaults; +native_float_controls; +selected_settings; +pending_value_writes }
+  class ZTGfxOptionsNativeFloatControls { +sound_volume; +music_volume; +two_d_sound_fx_volume; +three_d_sound_fx_volume }
+  class ZTGfxOptionsFloatMessage { +control; +slider_widget; +value; +native_field_offset; +descriptor_global; +route }
+  class ZTGfxOptionsAcceptance { +profile_writes; +safe_graphics_writes; +motd_enabled; +confirmation_message; +save_profile_options }
+  class ZTGraphicsSafeMode { +fullscreen; +screen_width; +screen_height; +screen_depth }
+  class ZTOptionsSelectedSetting { +token; +label_locid; +setting_widget; +preset_attribute; +selected_index; +locid; +values }
+  class ZTOptionsTypedValue { +name; +value_type; +value; +attributes }
+  ZTGfxOptionsModeSnapshot --> ZTGfxOptionsNativeFloatControls
+  ZTGfxOptionsModeSnapshot "*" --> ZTGfxOptionsFloatMessage : pending_value_writes
+  ZTGfxOptionsAcceptance --> ZTGraphicsSafeMode : safe graphics restore
+  ZTOptionsSelectedSetting "*" --> ZTOptionsTypedValue : values</pre>
 <p><strong>Open contracts.</strong></p>
 <ul>
 <li>Per-mode input state machines and the full <code>event_blocks</code>/<code>message_handlers</code> dispatch
@@ -866,6 +971,48 @@ undo stack can reverse.</p>
   ZTTransportStationBase <|-- ZTTransportStationGround
   ZTTransportStationBase <|-- ZTTransportStationSky
   class ZTTransportationMgr { circuits + tracks + stations + vehicles }</pre>
+<h3>Transport State Model</h3>
+<pre class="mermaid">classDiagram
+  class ZTTransportationMgr {
+    +circuits : Vec~ZTTransportCircuit~
+    +route_direction; +paused_circuits; +selected_vehicle_type
+  }
+  class BFGTransportationMgr { +stations; +vehicles; +tracks }
+  class ZTTransportCircuit { +station_ids[]; +track_ids[]; +vehicle_ids[]; +closed }
+  class ZTTransportVehicle { +entity_type; +seat_count; +occupied_seats; +route_token }
+  class ZTTransportStation { +station_kind; +capacity; +occupancy }
+  class ZTTransportTrack { +track_kind; +endpoints }
+  ZTTransportationMgr "*" --> ZTTransportCircuit : circuits
+  BFGTransportationMgr "*" --> ZTTransportStation : stations
+  BFGTransportationMgr "*" --> ZTTransportVehicle : vehicles
+  BFGTransportationMgr "*" --> ZTTransportTrack : tracks</pre>
+<h3>Terrain, Placement, Tank, and Fence State Model</h3>
+<pre class="mermaid">classDiagram
+  class BFTerrain {
+    +grid_width / grid_height
+    +height_map : AssetPath
+    +terrain_biomes : Vec~BFTerrainBiome~
+    +vertices : Vec~BFTerrainVertex~
+    +triangles : Vec~BFTerrainTriangle~
+  }
+  class ZTPlacementData {
+    +mode_name; +cursor_xml; +footprint_xml
+    +validation_messages[]; +failure_catalog
+  }
+  class ZTFootprintPreview { +footprint_xml; +grid_cells[]; +blocked_cells[] }
+  class ZTTankMgr {
+    +water_height_offset; +floor_height_offset
+    +minimum_water_depth; +minimum_show_tank_depth
+    +selected_tank; +pending_height_commands[]
+  }
+  class ZTFence { +fence_id; +fence_type; +entities : Vec~ZTFenceEntity~ }
+  class ZTFenceEntity { +entity_id; +segment_info; +health }
+  class ZTFenceType { +entity_type; +segment_entity; +gate_entities[]; +cost }
+  class ZTPlacementFailureCatalog { token to UI message map }
+  ZTFence "1" *-- "*" ZTFenceEntity
+  ZTFenceType ..> ZTFence : authors
+  ZTPlacementData *-- ZTFootprintPreview
+  ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages</pre>
 <h3>Editing Modes</h3>
 <pre class="mermaid">classDiagram
   class ZTModeRuntimeFields {
@@ -1804,6 +1951,54 @@ below.</p>
   BFSoundMessages *-- BFSoundPlayback
   BFSoundMessages *-- BFSoundTransport
   BFSoundMessages *-- BFSoundMix</pre>
+<h3>Renderer and Audio State Model</h3>
+<pre class="mermaid">classDiagram
+  class BFDX9Renderer {
+    +init_config : BFDX9RendererConfig
+    +capability_report : BFRendererCapabilityReport
+    +texture_memory_kib / vertex_buffer_kib / index_buffer_kib
+    +replaceable_backend : Direct3D9
+  }
+  class BFDX9RendererConfig {
+    +minimal_graphics; +graphics_detail
+    +screen_width; +screen_height
+  }
+  class BFRendererCapabilityReport {
+    +video_ram_mib; +max_texture_width
+    +vertex_shader_version; +overall_graphic_detail
+  }
+  class BFSoundMgr {
+    +categories : Vec~SoundCategory~
+    +options : BFSoundOptions
+    +sound_tags; +pending_events
+  }
+  class BFSoundOptions { +want_sound; +sample_rate; +bits; +channels; +mixer_channels }
+  BFDX9Renderer *-- BFDX9RendererConfig
+  BFDX9Renderer *-- BFRendererCapabilityReport
+  BFSoundMgr *-- BFSoundOptions</pre>
+<h3>Model, Effect, and Particle State Model</h3>
+<pre class="mermaid">classDiagram
+  class BFRModelResource {
+    +path; +source_document
+    +subclass_kind; +nodes : Vec~BFRModelNode~; +meshes : Vec~BFRModelMesh~
+  }
+  class BFRNetImmerseNifModel { +nif geometry/skin/controllers }
+  class BFRMaterialResource { +effect; +parameters; +textures }
+  class BFREffectResource { +emitters }
+  class BFREffectEmitter { +particle emit params }
+  class BFParticleDictionary { +dictionaries[]; +entries : Vec~BFParticleDictionaryEntry~ }
+  class ZTSunLayer { +texture; +base_models[]; +sun_models[]; +sun_position_model }
+  class BFWaterGroup { water surfaces }
+  class BFRVertexFormatElement { GPU vertex layout element }
+  BFRModelResource <|-- BFRNetImmerseNifModel : NIF backend
+  BFRModelResource *-- BFRModelMesh
+  BFRMaterialResource --> BFREffectResource : effect
+  BFRMaterialResource "*" --> BFRTextureResource : textures
+  BFREffectResource "1" *-- "*" BFREffectEmitter
+  BFParticleDictionary "*" --> BFParticleDictionaryEntry : entries</pre>
+<p>Mode visual-effect requests are transient renderer command values; the renderer
+domain defines their semantic fields, while the host adapter owns their live
+message transport, model loading, and projection lifetime.</p>
 <h3>Adapter Boundary</h3>
 <pre class="mermaid">flowchart LR
   Domain["entities / world / UI / status (native runtime state)"]
@@ -1822,10 +2017,1940 @@ projection, <code>BFSND_*</code> cues) that <code>Render</code> consumes.</p>
 </ul>
 <h2>Evidence Appendices</h2>
 <h3>Reference Boundaries</h3>
-<p>Full relationship lists, Rust record field lists, registered-class rosters, and token
-dumps are reference material. They live in the byte-range map, Binary Perimeter, and
-reconstruction source. This specification keeps the functional contracts and open
-surfaces.</p>
+<p>Registered-class rosters and full message-token dumps are byte/range evidence and
+stay in the byte-range map and Binary Perimeter. Relationship maps and reconstructed
+type references below preserve recovered class, type, and state relationships that
+the byte map does not encode as relationship facts.</p>
+<h3>Message Family Coverage</h3>
+<p>The full token list is byte/range evidence. The recovered family counts are:</p>
+<table>
+<thead>
+<tr>
+  <th>Family</th>
+  <th style="text-align:right">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ZT_</code></td>
+  <td style="text-align:right">509</td>
+</tr>
+<tr>
+  <td><code>UI_</code></td>
+  <td style="text-align:right">151</td>
+</tr>
+<tr>
+  <td><code>BFG_</code></td>
+  <td style="text-align:right">116</td>
+</tr>
+<tr>
+  <td><code>ZTDEV_</code></td>
+  <td style="text-align:right">89</td>
+</tr>
+<tr>
+  <td><code>ZTAI_</code></td>
+  <td style="text-align:right">41</td>
+</tr>
+<tr>
+  <td><code>BFAI_</code></td>
+  <td style="text-align:right">26</td>
+</tr>
+<tr>
+  <td><code>BFSND_</code></td>
+  <td style="text-align:right">19</td>
+</tr>
+<tr>
+  <td><code>SGC_</code></td>
+  <td style="text-align:right">18</td>
+</tr>
+<tr>
+  <td><code>BF3DEVENT_</code></td>
+  <td style="text-align:right">15</td>
+</tr>
+<tr>
+  <td><code>ZTWEB_</code></td>
+  <td style="text-align:right">15</td>
+</tr>
+<tr>
+  <td><code>BF3D_</code></td>
+  <td style="text-align:right">13</td>
+</tr>
+<tr>
+  <td><code>BEH_</code></td>
+  <td style="text-align:right">10</td>
+</tr>
+<tr>
+  <td><code>TAP_</code></td>
+  <td style="text-align:right">8</td>
+</tr>
+<tr>
+  <td><code>ANIM_</code></td>
+  <td style="text-align:right">7</td>
+</tr>
+<tr>
+  <td><code>BFUSERPROFILE_</code></td>
+  <td style="text-align:right">7</td>
+</tr>
+<tr>
+  <td><code>STEER_</code></td>
+  <td style="text-align:right">7</td>
+</tr>
+<tr>
+  <td><code>BFTERRAIN_</code></td>
+  <td style="text-align:right">6</td>
+</tr>
+<tr>
+  <td><code>BF_</code></td>
+  <td style="text-align:right">5</td>
+</tr>
+<tr>
+  <td><code>BFTIME_</code></td>
+  <td style="text-align:right">4</td>
+</tr>
+<tr>
+  <td><code>COLL_</code></td>
+  <td style="text-align:right">3</td>
+</tr>
+<tr>
+  <td><code>BFUNDO_</code></td>
+  <td style="text-align:right">2</td>
+</tr>
+<tr>
+  <td><code>GET_</code></td>
+  <td style="text-align:right">2</td>
+</tr>
+<tr>
+  <td><code>LOCO_</code></td>
+  <td style="text-align:right">2</td>
+</tr>
+<tr>
+  <td><code>ZTSHOWTIMERMANAGER_</code></td>
+  <td style="text-align:right">2</td>
+</tr>
+<tr>
+  <td><code>ACTOR_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>BFGECONOMY_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>REQUEST_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>RESET_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>RESOLVE_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>RETURN_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td><code>ZTQUERY_</code></td>
+  <td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+<h3>Relationship Maps</h3>
+<p>These maps preserve recovered relationship inventories that support the
+contract sections above. They are grouped here so the body of the
+specification stays organized by domain responsibility and runtime behavior.</p>
+<h4>Source Data and Hydration</h4>
+<p><strong>Catalog relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  AdoptionConfig "*" --> AdoptionSlot : slots
+  CatalogItem "1" --> CatalogFilters : filters
+  CatalogItem "1" --> PlacementAffordance : placement
+  EntityAuthoredEvent "*" --> EntityDataNode : payload_nodes
+  EntityDefinition "*" --> EntityTypePath : type_paths
+  EntityDefinition "1" --> SharedEntityData : shared
+  EntityDefinition "0..1" --> EntityInstanceData : instance
+  EntityDefinition "*" --> EntitySubBinder : sub_binders
+  EntityFileBinder "*" --> EntityFileState : open_files
+  EntityFileBinder "1" --> BFTypedBinderSchema : schema
+  EntityFileBinderCommand "1" --> EntityFileCommandKind : command</pre>
+<pre class="mermaid">classDiagram
+  EntityFileCommandResult "1" --> EntityFileCommandStatus : status
+  EntityInstanceData "*" --> EntityDataNode : nodes
+  EntityInstanceData "*" --> EntityAuthoredEvent : authored_events
+  EntityInstanceData "*" --> EntityComponentRef : components
+  EntityInstanceData "0..1" --> BFComponentContainer : component_container
+  EntitySubBinder "*" --> EntityDataNode : instance_nodes
+  EntitySubBinder "*" --> EntityDataNode : shared_nodes
+  EntitySubBinder "*" --> EntityAuthoredEvent : authored_events
+  PlacementAffordance "1" --> CrateVisibility : crate_visibility
+  SelectedEntityState "1" --> EntityInfoPanel : panel
+  SharedEntityData "*" --> EntityDataNode : nodes
+  SharedEntityData "*" --> EntityAuthoredEvent : authored_events</pre>
+<p><strong>Data-document relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  DataDocument "1" --> DataRoot : root</pre>
+<h4>Runtime Managers</h4>
+<p><strong>App relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  UiListRowChildProjection "0..1" --> BFUITextDocument : rich_text
+  UiListRowChildProjection "*" --> UiEvent : activate_events
+  UiListRowProjection "*" --> UiListRowChildProjection : children
+  UiListRowProjection "*" --> UiEvent : on_events
+  UiRuntimeValues "*" --> UiNamedTextValue : named_text
+  UiTemplateDocument "1" --> UiDocument : document
+  UiNode "0..1" --> UiRegion : source_region
+  UiNode "1" --> UiState : authored_state
+  UISliderState "0..1" --> UiRegion : thumb_region
+  UISliderState "1" --> UIDragAxis : axis
+  ZTConfirmationRuntime "0..1" --> ZTExitConfirmation : exit_confirmation</pre>
+<p><strong>Manager relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFGPathRequest "0..1" --> BFGPathResult : result
+  BFGPathGraph "*" --> BFGPathNode : nodes
+  BFGPathGraph "*" --> BFGPathEdge : edges
+  BFGTraversabilityMgr "*" --> BFGTraversableArea : viewing_areas
+  BFGTraversabilityMgr "*" --> ChangedTriangleRecord : changed_triangles
+  BFGTraversabilityMgr "*" --> ChangedTriangleRecord : immediate_changed_triangles
+  BFGTraversabilityMgr "1" --> BFGTraversabilityInvalidationQueue : invalidation_queue
+  BFGTraversabilityInvalidationQueue "*" --> ChangedTriangleRecord : delayed
+  BFGTraversabilityInvalidationQueue "*" --> ChangedTriangleRecord : immediate
+  BFGTraversabilityCollisionTest "1" --> BFGCollisionTesterConfig : tester
+  BFGTraversabilityCollisionTest "0..1" --> BFGTraversabilityCollisionResult : result
+  ZTFeedbackGlobalThought "0..1" --> ZTMessageInfo : message
+  ZTFeedbackGlobalDisplay "*" --> ZTFeedbackDisplayTemplate : templates</pre>
+<pre class="mermaid">classDiagram
+  ZTPAPTBFAICognitiveMgr "*" --> ZTPAPTCognitiveTemplate : registered_templates
+  ZTPAPTBFAICognitiveMgr "*" --> ZTPAPTCognitiveInstance : active_instances
+  ZTPAPTBFBehaviorMgr "*" --> ZTPAPTBehaviorTemplate : behavior_templates
+  ZTPAPTBFBehaviorMgr "*" --> ZTPAPTBehaviorInstance : active_behaviors</pre>
+<p><strong>Runtime-support relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFBinder <|-- BFNamedBinder
+  BFXMLObj <|-- BFRefCountedXMLObj
+  BFGManagerContextComponent "*" --> BFContextComponent : children
+  BFLuaConfig "0..1" --> BFLuaLogConfig : log
+  BFLuaLogConfig "*" --> BFLuaLogChannelConfig : channels
+  BFNamedBinder "1" --> BFBinder : binder
+  BFPerformanceCommandQueue "*" --> BFPerformanceCommand : pending
+  BFPerformanceCommandQueue "*" --> BFPerformanceCommand : completed
+  BFPerformanceMonitor "1" --> BFPerformanceCommandQueue : commands
+  BFRefCountedXMLObj "1" --> BFXMLObj : object
+  BFTypedBinderDescriptor "*" --> BFTypedBinderDataRoot : data_roots
+  BFTypedBinderDescriptor "*" --> BFTypedBinderTypeRule : type_rules
+  BFTypedBinderCommandDispatcher "*" --> BFTypedBinderCommand : commands
+  BFTypedBinderCommandDispatcher "0..1" --> BFTypedBinderCommandResult : last_result</pre>
+<pre class="mermaid">classDiagram
+  BFUndoEventRoot "0..1" --> BFUndoActivateTransaction : active_transaction
+  BFUserOptions "1" --> BFGraphicsOptions : graphics
+  BFUserOptions "1" --> BFAudioOptions : audio
+  BFUserProfileEventRoot "*" --> BFUserProfileCommand : commands
+  BFUserProfileEventRoot "*" --> BFUserProfileActionResult : results
+  DxDiag "*" --> DxDiagSoundDevice : sound_devices
+  DxDiag "*" --> DxDiagDisplayDevice : display_devices
+  DxDiag "*" --> DxDiagResultCopy : copied_results
+  UIRootAppConfig "0..1" --> UIRootRegionConfig : region
+  UIRootAppConfig "*" --> UIRootHotKeyConfig : hotkeys
+  UIRootAppConfig "*" --> UiHotKeyBinding : hotkey_bindings
+  UIRootAppConfig "0..1" --> UiDocument : document
+  UserSettings "1" --> BFGraphicsOptions : safe_graphics</pre>
+<pre class="mermaid">classDiagram
+  VinceLog "0..1" --> VinceLogGuid : guid
+  ZT2Client "1" --> BF3DApp : app
+  ZTCommandStateSet "*" --> ZTCommandStateEvent : history
+  ZTDebugCommandQueue "*" --> ZTDebugCommand : pending
+  ZTDebugCommandQueue "*" --> ZTDebugCommand : completed
+  ZTDevConsole "*" --> ZTDevConsoleCommand : commands
+  ZTDevConsole "*" --> ZTDevConsoleAlias : aliases
+  ZTDevConsole "*" --> ZTDevConsoleResponse : bad_word_responses
+  ZTDevConsole "*" --> ZTDevConsoleMessageCommand : pending_messages
+  ZTDownloadsState "*" --> ZTWebFileTransfer : active_downloads
+  ZTEULACheckAppConfig "*" --> ZTEulaConfig : eulas</pre>
+<pre class="mermaid">classDiagram
+  ZTFilePathResolver "0..1" --> ZTAbsoluteFilePathRequest : last_request
+  ZTHardwareConfigRegistry "*" --> ZTHardwareRequirementSet : requirement_sets
+  ZTHardwareRequirementSet "1" --> ZTGraphicsRequirement : graphics
+  ZTWEB "*" --> ZTWebEvent : events
+  ZTWEB "*" --> ZTWebFileTransfer : transfers
+  ZTWEB "1" --> ZTWebRequestQueue : requests
+  ZTWEB "1" --> ZTWebCommandQueue : commands
+  ZTWEB "1" --> ZTWebMotdState : motd
+  ZTWebCommandQueue "*" --> ZTWebCommand : pending
+  ZTWebCommandQueue "*" --> ZTWebCommand : completed
+  ZTWebFileTransfer "1" --> ZTWebRequestKind : request_kind
+  ZTWebMotdState "0..1" --> ZTWebMotdDefaultIconResource : default_icon
+  ZTWebMotdState "*" --> ZTWebMotdMessage : messages
+  ZTWebMotdMessage "1" --> BFUITextDocument : content
+  ZTWebRequestQueue "*" --> ZTWebRequest : pending
+  ZTWebRequestQueue "*" --> ZTWebRequest : completed
+  ZTWebRequest "1" --> ZTWebRequestKind : kind</pre>
+<h4>App, UI, and Modes</h4>
+<p><strong>UI contract relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFLocaleMgrConfig "1" --> BFLocaleDateFormats : date_formats
+  BFLocaleMgrConfig "1" --> BFLocaleMonthAbbreviations : month_abbreviations
+  BFUITextDocument "*" --> BFUITextNode : nodes
+  BfFont "0..1" --> BfColor : color
+  LocalizationTextFormat "0..1" --> BfColor : color
+  UIButtonVisualState "0..1" --> BfRect : region
+  UIButtonVisualState "0..1" --> BfColor : text_color
+  UIDragCommand "1" --> UiComponentBase : base
+  UIDragCommand "1" --> UIDragAxis : axis
+  UIGraphState "*" --> UIGraphSeries : series
+  UIGraphState "1" --> UIGraphAxis : x_axis
+  UIGraphState "1" --> UIGraphAxis : y_axis
+  UIGraphState "*" --> UIGraphLabel : labels</pre>
+<pre class="mermaid">classDiagram
+  UIMultiIconState "*" --> UIMultiIconEntry : entries
+  UIMultiIconEntry "0..1" --> UiMetricRect : rect
+  UiAspect "1" --> UiAspectHitPolicy : always_hit
+  UiAspect "0..1" --> UiVisualState : default
+  UiAspect "*" --> UiNamedVisualState : standard
+  UiAspect "*" --> UiNamedVisualState : alternate
+  UiDocument "1" --> UiNode : root
+  UiDocument "*" --> UiSkin : skins
+  UiEvent "0..1" --> BfColor : color
+  UiEvent "0..1" --> BfColor : child_color
+  UiEvent "*" --> UiPayloadNode : payload_nodes
+  UiEventBlock "1" --> UiEventTrigger : trigger
+  UiEventBlock "*" --> UiEvent : events
+  UiHotKeyBinding "1" --> UiHotKeyTrigger : trigger
+  UiHotKeyBinding "1" --> UiEvent : event
+  UiMetricRect "1" --> UiMetric : x
+  UiMetricRect "1" --> UiMetric : y
+  UiMetricRect "1" --> UiMetric : width
+  UiMetricRect "1" --> UiMetric : height
+  UiNamedVisualState "1" --> UiVisualState : visual</pre>
+<pre class="mermaid">classDiagram
+  UiNode "1" --> UiWidget : widget
+  UiNode "0..1" --> UiRegion : region
+  UiNode "1" --> UiState : state
+  UiNode "0..1" --> UiShowHideAnim : show_hide_anim
+  UiNode "0..1" --> UiAspect : aspect
+  UiNode "0..1" --> UiAspectHitPolicy : always_hit
+  UiNode "0..1" --> UiHelpInfo : help
+  UiNode "*" --> UiFieldBinding : fields
+  UiNode "*" --> UiHotKeyBinding : hotkeys
+  UiNode "*" --> UiEventBlock : events
+  UiNode "*" --> UiAttribute : unknown_attributes
+  UiPayloadNode "*" --> UiAttribute : attributes
+  UiRegion "1" --> UiMetric : x
+  UiRegion "1" --> UiMetric : y
+  UiRegion "1" --> UiMetric : width
+  UiRegion "1" --> UiMetric : height
+  UiRegion "1" --> UiRegionAlign : x_align
+  UiRegion "1" --> UiRegionAlign : y_align
+  UiRegion "1" --> UiRegionAlign : width_align
+  UiRegion "1" --> UiRegionAlign : height_align
+  UiShowHideAnim "0..1" --> BfRect : start_region
+  UiShowHideAnim "0..1" --> BfRect : end_region
+  UiShowHideAnim "0..1" --> UiShowHideColors : colors</pre>
+<pre class="mermaid">classDiagram
+  UiSkin "*" --> UiSkinReplacement : replacements
+  UiSkin "*" --> UiSkinTheme : themes
+  UiSkinTheme "*" --> UiSkinReplacement : replacements
+  UiState "1" --> UiActiveState : active
+  UiVisualState "0..1" --> UiAspectHitPolicy : always_hit
+  UiVisualState "0..1" --> UiMetricRect : rect
+  UiVisualState "0..1" --> BfColor : color
+  UiVisualState "0..1" --> BfFont : font
+  ZTUITimedEvents "1" --> UiComponentBase : base
+  ZTUITimedEvents "*" --> ZTUITimedEvent : events
+  ZTUITimedEvent "1" --> UiEvent : event</pre>
+<p><strong>UI binding relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFFontData "1" --> UIFontData : font
+  UIActivationCommand "1" --> UICommandTarget : target
+  UIAlphaCommand "1" --> UICommandTarget : target
+  UIColorCommand "1" --> UICommandTarget : target
+  UIEnableCommand "1" --> UICommandTarget : target
+  UIEventNotification "1" --> UIEventRoute : route
+  UIHotKeyDocument "1" --> UIHotKeys : hotkeys
+  UIHotKeyDocument "*" --> UIHotKeyBinding : bindings
+  UIPositionCommand "1" --> UICommandTarget : target
+  UIRegionCommand "1" --> UICommandTarget : target
+  UIRegionCommand "0..1" --> UIRectObj : rect
+  UIScrollCommand "1" --> UICommandTarget : target
+  UISizeCommand "1" --> UICommandTarget : target
+  UITextCommand "1" --> UICommandTarget : target</pre>
+<pre class="mermaid">classDiagram
+  UIVisibilityCommand "1" --> UICommandTarget : target</pre>
+<pre class="mermaid">classDiagram
+  UiBindingDomain "1" --> UiValueHandlerRegistry : handler_registry
+  UiBindingDomain "1" --> BFMessageBus : message_bus
+  UiBindingDomain "1" --> UiNamedValueAssignmentList : named_assignments
+  UiBindingDomain "1" --> ZTUITimedEvents : timed_events
+  UiBindingDomain "1" --> UIHotKeyDocument : hotkeys
+  UiBindingDomain "1" --> ZTMessagesDocument : messages
+  UiBindingDomain "1" --> ZTEntriesDocument : entries
+  UiBindingDomain "1" --> ZTChallengesDocument : challenges
+  UiBindingDomain "*" --> UiMoneyEvent : money_events
+  UiBindingDomain "*" --> ZTUITypeList : type_lists
+  UiBindingDomain "*" --> ZTUIResearchButton : research_buttons
+  UiBindingDomain "*" --> ZTUIAdoptionButton : adoption_buttons
+  UiBindingDomain "0..1" --> ZTUIFullscreenButton : fullscreen_button
+  UiBindingDomain "1" --> ZTBuyInfoPanel : buy_info_panel
+  UiBindingDomain "1" --> ZTGoalPanel : goal_panel
+  UiBindingDomain "*" --> ZTMultiList : multi_lists
+  UiBindingDomain "1" --> ZTAwardPanel : award_panel
+  UiBindingDomain "1" --> ZTZoopediaTOC : zoopedia_toc
+  UiBindingDomain "*" --> ZTGenericConfirmation : confirmations
+  UiBindingDomain "*" --> ZTNamedEventRoute : named_event_routes
+  UiBindingDomain "*" --> ZTUIAutoPopulateList : auto_populate_lists
+  UiBindingDomain "*" --> ZTUITypeFilterCommand : type_filter_commands
+  UiBindingDomain "*" --> ZTUIActivateButtonCommand : activate_button_commands
+  UiBindingDomain "*" --> ZTMultiListCommand : multi_list_commands
+  UiBindingDomain "*" --> ZTZoopediaNavigation : zoopedia_navigation
+  UiBindingDomain "1" --> ZTLogEntitySelection : log_entity_selection</pre>
+<pre class="mermaid">classDiagram
+  UiMoneyEvent "1" --> UiMoneyEventKind : kind
+  UiMoneyEvent "1" --> UIFloatPayloadValue : amount_payload
+  UiNamedValueAssignment "1" --> UiValueTypeHandle : value_type
+  UiNamedValueAssignment "1" --> UiValueAssignmentBase : base
+  UiNamedValueAssignmentList "*" --> UiNamedValueAssignment : assignments
+  UiPayloadTypedValue "1" --> UiValueTypeHandle : value_type
+  UiPayloadTypedValue "1" --> UiPayloadValue : payload
+  UiValueAssignmentBase "0..1" --> UiTypedValue : current_value
+  UiValueAssignmentBase "*" --> UiValueAssignmentDependentRef : dependent_refs
+  UiValueAssignmentDependentRef "1" --> UiDependentRefKey : key
+  UiValueHandlerEntry "1" --> UiHandlerOwner : owner
+  UiValueHandlerRegistry "*" --> UiValueHandlerEntry : entries
+  ZTAwardPanel "*" --> ZTAwardPanelEntry : current_awards
+  ZTAwardPanel "*" --> ZTAwardPanelEntry : persistent_awards</pre>
+<pre class="mermaid">classDiagram
+  ZTBuyInfoPanel "0..1" --> ZTBuyInfoKind : info_kind
+  ZTBuyInfoPanel "*" --> ZTBuyInfoFilter : filters
+  ZTBuyInfoPanel "*" --> ZTBuyInfoRow : property_rows
+  ZTChallengesDocument "*" --> ZTMessageInfo : challenge_messages
+  ZTEntriesDocument "*" --> ZTZoopediaEntry : entries
+  ZTFeedbackData "*" --> ZTFeedbackRecord : records
+  ZTFeedbackDataSet "*" --> ZTFeedbackRecord : records
+  ZTFeedbackRecord "0..1" --> ZTFeedbackClickTarget : click_target
+  ZTMessagesDocument "*" --> ZTMessageInfo : messages
+  ZTMultiList "*" --> ZTMultiListTab : tabs
+  ZTMultiList "*" --> ZTMultiListRow : rows
+  ZTNamedEventRoute "*" --> UiValueMessage : events</pre>
+<pre class="mermaid">classDiagram
+  ZTSharedFeedbackData "*" --> ZTFeedbackDataSet : feedback_sets
+  ZTSharedFeedbackData "*" --> ZTFeedbackData : feedback_data
+  ZTUIAutoPopulateList "*" --> ZTUITypeListFilter : filters
+  ZTUIAutoPopulateList "*" --> ZTUITypeListEntry : rows
+  ZTZoopediaNavigation "1" --> ZTZoopediaNavigationDirection : direction</pre>
+<p><strong>Gesture relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  GestureDomain "1" --> ZTGestureMgr : manager
+  GestureDomain "*" --> GesturesDocument : documents
+  GestureDomain "1" --> ZTGestureRecognizer : recognizer
+  GestureDomain "1" --> ZTGestureSplineEditor : editor
+  GestureDomain "0..1" --> ZTGestureComponent : active_gesture
+  GestureDomain "0..1" --> ZTGestureTrace : active_trace
+  GestureDomain "*" --> ZTGestureEventFail : failed_events
+  GesturesDocument "*" --> ZTGestureDefinition : definitions
+  GesturesDocument "0..1" --> ZTGestureEditingConfig : editing
+  GesturesDocument "0..1" --> ZTGestureEventFail : failed_event
+  ZTGestureComponentNativeContract "1" --> ZTGestureProjectionFrame : projection_frame
+  ZTGestureComponentNativeContract "*" --> ZTGestureTraceEventTextureBinding : event_textures
+  ZTGestureRecognizer "*" --> ZTGestureDefinition : definitions
+  ZTGestureRecognizer "0..1" --> ZTGestureMatch : last_match
+  ZTGestureSplineEditor "0..1" --> ZTEditableGestureSpline : active_spline
+  ZTGestureSplineEditor "*" --> ZTGestureSplineCommand : commands</pre>
+<pre class="mermaid">classDiagram
+  ZTGestureTraceEventVisual "1" --> ZTGesturePoint : expected
+  ZTGestureTraceEventVisual "1" --> ZTGestureProjectionFrame : projection_frame
+  ZTGestureTraceEventVisual "1" --> ZTGestureTraceEventMarkerSurface : marker_surface
+  ZTGestureTraceEventAssetDispatch "1" --> ZTGestureTraceEvent : event
+  ZTGestureTraceAdvance "*" --> ZTGestureTraceEventPoint : due_events
+  ZTGestureTraceAdvance "*" --> ZTGestureTraceEventPoint : expired_events
+  ZTGestureTraceScore "1" --> ZTGestureTraceScoreBand : band
+  ZTGestureTraceEventPoint "1" --> ZTGestureTraceEvent : event
+  ZTGestureTraceEventPoint "1" --> ZTGesturePoint : expected
+  ZTGestureTracerNativeVisualContract "1" --> ZTGestureTraceEventTexture : event_textures
+  ZTGestureTracerEntitySurface "1" --> ZTGestureTracerEntityBinding : tracer
+  ZTGestureTracerEntitySurface "1" --> ZTGestureTracerEntityBinding : pointer_pointer
+  ZTGestureTracerEntityBinding "*" --> ZTGestureTracerBinderBinding : binders</pre>
+<p><strong>Mode relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  ModesDomain "0..1" --> ZTModeKind : current_mode
+  ModesDomain "0..1" --> ZTModeToken : current_shell_mode
+  ModesDomain "*" --> ZTModeToken : current_shell_mode_path
+  ModesDomain "*" --> ZTModeToken : shell_mode_history
+  ModesDomain "1" --> ZTShellModeCatalogue : shell_modes
+  ModesDomain "1" --> ZTModeHotKeyRegistry : shell_hotkeys
+  ModesDomain "*" --> ZTModeConfigDocument : mode_config_documents
+  ModesDomain "*" --> UiHotKeyBinding : active_hotkeys
+  ModesDomain "*" --> ZTModeKind : stack
+  ModesDomain "*" --> ZTModeRequest : requests
+  ModesDomain "*" --> ZTModeDescriptor : registered_modes
+  ModesDomain "1" --> ZTModeClassRegistry : mode_classes
+  ModesDomain "1" --> ZTDeleteModeState : delete_mode
+  ModesDomain "1" --> ZTDownloadModeState : download_mode
+  ModesDomain "1" --> ZTFileModeState : file_mode
+  ModesDomain "1" --> ZTGfxOptionsModeState : gfx_options_mode
+  ModesDomain "1" --> ZTGroundTrackModeState : ground_track_mode
+  ModesDomain "1" --> ZTGuestViewModeState : guest_view_mode
+  ModesDomain "1" --> ZTOverviewModeState : overview_mode
+  ModesDomain "1" --> ZTElevatedCurbModeState : elevated_curb_mode
+  ModesDomain "1" --> ZTFirstPersonModeState : first_person_state
+  ModesDomain "1" --> ZTFossilFindingModeState : fossil_finding_state
+  ModesDomain "1" --> ZTFPTrainingModeState : fp_training_state
+  ModesDomain "1" --> ZTTranquilizeModeState : tranquilize_state
+  ModesDomain "1" --> ZTCloningGestureModeState : cloning_gesture_state
+  ModesDomain "1" --> ZTSuperStaffModeState : super_staff_state
+  ModesDomain "1" --> ZTBiomeModeState : biome_mode_state
+  ModesDomain "*" --> ZTModeCommand : commands
+  ModesDomain "*" --> ZTKeyboardAction : keyboard_actions</pre>
+<pre class="mermaid">classDiagram
+  ZTDownloadIndex "*" --> ZTDownloadItem : items
+  ZTFPClimbLadderModeNativeState "*" --> ZTFPClimbLadderDurationRequest : duration_requests
+  ZTFileInfoList "*" --> FileInfo : rows
+  ZTFirstPersonResourceUpdate "1" --> ZTFirstPersonResourceValue : value
+  ZTFirstPersonMovementEvent "1" --> ZTFirstPersonMovementAxis : axis
+  ZTFirstPersonModeState "0..1" --> ZTModeKind : entered_from_mode
+  ZTGestureCreationMode "1" --> ZTModeClassSurface : surface
+  ZTGestureCreationMode "1" --> ZTGestureCreationBounds : trick_bounds
+  ZTGestureTraceModeBaseNativeState "0..1" --> ZTGestureTraceScore : last_trace_score</pre>
+<pre class="mermaid">classDiagram
+  ZTGfxOptionsBackRevert "1" --> ZTGfxOptionsModeSnapshot : restored
+  ZTGfxOptionsBackRevert "*" --> ZTGfxOptionsFloatMessage : dispatched_float_messages
+  ZTGfxOptionsSafeGraphicsRestore "1" --> ZTGraphicsSafeMode : restored
+  ZTGfxOptionsSettingsDocument "*" --> ZTOptionsSettingDefinition : settings
+  ZTMainMode "1" --> ZTModeClassSurface : surface
+  ZTModeColorBinding "1" --> ZTModeColor : color
+  ZTModeConfigDocument "1" --> ZTModeConfigNode : root
+  ZTModeHotKeyRegistry "*" --> ZTModeHotKeyDocument : documents
+  ZTModeHotKeyDocument "*" --> ZTModeHotKeyNode : nodes
+  ZTModeHotKeyNode "*" --> UiHotKeyBinding : hotkeys</pre>
+<pre class="mermaid">classDiagram
+  ZTModeVTable "0..1" --> ZTModeAddressRange : table_range
+  ZTModeVTable "0..1" --> ZTModeAddressRange : descriptor_subtable
+  ZTModeVTable "*" --> ZTModeVirtualSlot : virtual_slots
+  ZTOptionsSettingDefinition "*" --> ZTOptionsSettingChoice : choices
+  ZTOptionsSettingChoice "*" --> ZTOptionsTypedValue : values
+  ZTOptionsValueWrite "1" --> ZTOptionsValueType : value_type
+  ZTShellModeCatalogue "0..1" --> ZTModeRecord : root
+  ZTShellModeCatalogue "*" --> ZTModeRecord : standalone_modes
+  ZTToolsetMode "1" --> ZTModeClassSurface : surface
+  ZTToolsetMode "0..1" --> ZTToolsetModeDocument : config_document
+  ZTToolsetModeDocument "1" --> ZTModeRecord : mode_record</pre>
+<h4>Entities, Animals, Catalog, and Selection</h4>
+<p><strong>Animal relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  ZTAdoptionMgr <|-- ZTAdoptionSlotMgr
+  AnimalDomain "1" --> ZTAdoptionMgr : adoption_mgr
+  AnimalDomain "1" --> ZTAdoptionSlotMgr : adoption_slot_mgr
+  AnimalDomain "1" --> ZTFavoriteAnimalMgr : favorite_animal_mgr
+  BFGEntity ..> ZTAnimal : component-derived animal view
+  AnimalDomain "*" --> ZTAnimalSourceIdentity : source_resolutions
+  AnimalDomain "*" --> ZTAnimalBirthEvent : birth_events
+  AnimalDomain "*" --> ZTAnimalUiAction : user_actions
+  ZTAnimalFamilyTree "*" --> ZTAnimalLineageRecord : relation_rows
+  ZTAnimalNeeds "*" --> ZTAnimalNeed : rows
+  ZTAnimalNeeds "1" --> ZTHappyFactors : happy_factors</pre>
+<p><strong>Entity-info relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  EntityInfoDomain "0..1" --> ZTSelectedEntity : selected
+  EntityInfoDomain "1" --> ZTEntitySelector : selector
+  EntityInfoDomain "*" --> ZTEntitySelectionRequest : selection_requests
+  EntityInfoDomain "*" --> ZTEntityInfoActionCommand : action_commands
+  EntityInfoDomain "*" --> ZTEntityInfoPanel : panels
+  EntityInfoDomain "1" --> ZTBuyInfoPanel : buy_panel
+  ZTAnimalFamilyTreePanel "*" --> ZTAnimalFamilyRelationRow : rows
+  ZTDonationListPanel "*" --> ZTDonationListRow : rows
+  ZTEntityInfoPanel "1" --> ZTEntityActionControls : action_controls
+  ZTEntityInfoPanel "1" --> ZTEntityNeedsPanel : needs
+  ZTEntityInfoPanel "1" --> ZTAnimalFamilyTreePanel : family_tree
+  ZTEntityInfoPanel "1" --> ZTTrainingAreaListPanel : training
+  ZTEntityInfoPanel "1" --> ZTDonationListPanel : donations
+  ZTEntityInfoPanel "1" --> ZTInventoryPanel : inventory
+  ZTEntityInfoPanel "1" --> ZTGenderDisplay : gender
+  ZTEntityInfoPanel "1" --> ZTQuantityDisplay : quantity
+  ZTEntityNeedsPanel "*" --> ZTEntityNeedRow : rows</pre>
+<pre class="mermaid">classDiagram
+  ZTEntitySelectionRequest "0..1" --> ZTEntitySelectionQuery : query
+  ZTInventoryPanel "*" --> ZTInventoryRow : rows
+  ZTTrainingAreaListPanel "*" --> ZTTrainingAreaRow : rows</pre>
+<h4>World, Terrain, Construction, and Navigation</h4>
+<p><strong>Transport relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  TransportDomain "1" --> ZTTransportationMgr : manager
+  TransportDomain "1" --> ZTTourData : tour_data
+  TransportDomain "1" --> ZTTourRecorderData : recorder
+  TransportDomain "*" --> ZTTransportCircuit : circuits
+  TransportDomain "*" --> ZTTransportGroundCircuit : ground_circuits
+  TransportDomain "*" --> ZTTransportSkyCircuit : sky_circuits
+  TransportDomain "*" --> ZTTransportVehicle : vehicles
+  TransportDomain "*" --> ZTTransportStation : stations
+  TransportDomain "1" --> ZTTransportQuerySet : queries
+  ZTChangeCircuitDirectionCommand "0..1" --> RouteDirection : requested_direction
+  ZTTourData "*" --> ZTTourDataAttr : tours
+  ZTTourData "*" --> ZTTourDataFeedback : feedback
+  ZTTourRecorderData "*" --> ZTTourWaypoint : waypoints</pre>
+<pre class="mermaid">classDiagram
+  ZTTransportQuerySet "1" --> ZTGetCircuitQuery : circuit_query
+  ZTTransportQuerySet "1" --> ZTClosedCircuitQuery : closed_circuit_query
+  ZTTransportQuerySet "1" --> ZTConnectedSkyPieceQuery : connected_sky_piece_query
+  ZTTransportQuerySet "1" --> ZTTransportPassengerQuery : passenger_query
+  ZTTransportQuerySet "1" --> ZTTourStarRatingQuery : tour_star_rating_query
+  ZTVehicleGround "1" --> ZTTransportVehicle : vehicle
+  ZTVehicleSky "1" --> ZTTransportVehicle : vehicle</pre>
+<p><strong>Fence relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  FenceDomain "*" --> ZTFenceType : fence_types
+  FenceDomain "*" --> ZTFence : fences
+  FenceDomain "*" --> ZTFenceSegmentInfo : segments
+  FenceDomain "*" --> ZTGate : gates
+  FenceDomain "*" --> ZTTankPortalSegment : tank_portals
+  FenceDomain "1" --> FencePlacementShape : current_shape
+  FenceDomain "1" --> ZTFenceModeState : placement_mode
+  FenceDomain "*" --> ZTFenceTopologyEvent : topology_events
+  ZTFenceModeState "1" --> FencePlacementShape : shape
+  ZTFenceModeState "0..1" --> ZTFenceModeRotation : last_rotation
+  ZTFenceModeCommandDecision "0..1" --> FencePlacementShape : shape
+  ZTFenceModeCommandDecision "0..1" --> FencePlacementShape : previous_shape
+  ZTFenceModeCommandDecision "0..1" --> ZTFenceModeRotation : rotation
+  ZTFenceModeCommandDecision "0..1" --> ZTFenceModeUndoAction : undo_action
+  ZTFenceModeUndoAction "0..1" --> ZTFenceModeRubberBandUndo : rubber_band_restore
+  ZTFenceModeUndoAction "0..1" --> ZTFenceModeGateUndo : gate_restore
+  ZTFenceModeGateUndo "1" --> FencePlacementShape : restored_shape
+  ZTFenceModeRotation "1" --> FencePlacementShape : shape</pre>
+<p><strong>World relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFCameraComponent <|-- BFFPSCameraComponent
+  AutoPlacementVariation "1" --> ObjectTypeMask : object_mask
+  AutoPlacementVariation "*" --> WeightedObject : weighted_objects
+  BFBoundedObjectComponent "1" --> BFEntityComponentCommon : common
+  BFBoundedObjectComponent "0..1" --> GridRect : bounds
+  BFCollisionComponent "1" --> BFEntityComponentCommon : common
+  BFCollisionComponent "1" --> BFGCollisionData : collision_data
+  BFCollisionComponent "0..1" --> BFGCollisionTest : last_test
+  BFDebugComponent "1" --> BFEntityComponentCommon : common
+  BFDockingComponent "1" --> BFEntityComponentCommon : common
+  BFEntityComponentCommon "*" --> BFComponentProperty : properties
+  BFEnvMapSwapComponent "1" --> BFEntityComponentCommon : common
+  BFFPSCameraComponent "1" --> BFCameraComponent : base
+  BFFallComponent "1" --> BFMovingComponent : base
+  BFForceUpdateWhenVisibleComponent "1" --> BFEntityComponentCommon : common</pre>
+<pre class="mermaid">classDiagram
+  BFGEntityContainerSlot <|-- BFGEntityContainerSlotHeavy
+  BFGEntityContainerSlot <|-- BFGEntityContainerSlotLight
+  BFGPlacementTile <|-- BFGTerrainPlacementTile
+  BFForwardMovingComponent "1" --> BFMovingComponent : base
+  BFGEntityContainerSlot "1" --> EntityContainerSlotClass : slot_class
+  BFGEntityContainerSlotLight "1" --> BFGEntityContainerSlot : base
+  BFGEntityContainerSlotHeavy "1" --> BFGEntityContainerSlot : base
+  BFGEventRoot "*" --> BFGEventRecord : events
+  BFGFittingSurfaceComponent "0..1" --> BFWorldFittingSurface : fitting_surface
+  BFGGame "*" --> BFGWorld : worlds
+  BFGGame "1" --> BFGEventRoot : event_root
+  BFGRemoveEntityBatch "*" --> BFGRemoveEntityBatchEntry : entries
+  BFGTerrainPlacementTile "1" --> BFGPlacementTile : base</pre>
+<pre class="mermaid">classDiagram
+  BFGWorld "*" --> BFGEntity : entities
+  BFGWorld "1" --> BFGPlacementGrid : placement_grid
+  BFGWorld "1" --> BFGWorldMutationQueue : mutation_queue
+  BFGWorld "1" --> BFGGameAttachment : attached_game
+  BFGWorld "1" --> BFGWorldAttachment : attached_world
+  BFGWorld "1" --> BFGEntityTypeIndex : entity_type_index
+  BFGWorld "1" --> BFGEventRoot : event_root
+  BFGWorldMutationQueue "*" --> BFGSpawnEntityRequest : spawn_requests
+  BFGWorldMutationQueue "*" --> BFGRemoveEntityBatch : remove_batches
+  BFGWorldMutationQueue "*" --> BFGEntityColorCommand : color_commands
+  BFGWorldMutationQueue "*" --> BFGComponentLookup : component_lookups
+  BFGWorldMutationQueue "*" --> BFGEntityBatchActionEvent : batch_events
+  BFGestureSplineComponent "1" --> BFEntityComponentCommon : common
+  BFHasParticleComponent "1" --> BFEntityComponentCommon : common
+  BFHelpComponent "1" --> BFEntityComponentCommon : common
+  BFManipSensorComponent "1" --> BFEntityComponentCommon : common</pre>
+<pre class="mermaid">classDiagram
+  BFCameraComponent <|-- BFOverheadCameraComponent
+  BFMovingComponent "1" --> BFEntityComponentCommon : common
+  BFOverheadCameraComponent "1" --> BFCameraComponent : base
+  BFOverheadCameraComponent "0..1" --> BFOverheadCameraFrustum : frustum
+  BFOverheadCameraComponent "0..1" --> GridRect : pan_bounds
+  BFOverheadCameraUDVComponent "1" --> BFEntityComponentCommon : common
+  BFOverheadCameraUDVComponent "*" --> BFOverheadCameraZoomSpeedMod : zoom_speed_mod
+  BFPhysObj "1" --> BFPhysicsComponent : physics
+  BFPhysObj "0..1" --> BFOverheadCameraComponent : overhead_camera
+  BFPhysObj "0..1" --> BFOverheadCameraUDVComponent : overhead_camera_udv
+  BFPhysObj "0..1" --> BFBoundedObjectComponent : bounded_object
+  BFSpineBendComponent "1" --> BFEntityComponentCommon : common
+  BFStaticBlobShadowComponent "1" --> BFEntityComponentCommon : common
+  BFSuicideComponent "1" --> BFEntityComponentCommon : common
+  BFSwimComponent "1" --> BFMovingComponent : base
+  BFTextTagMacrosComponent "1" --> BFEntityComponentCommon : common
+  BFTextTagMacrosComponent "*" --> BFTextTagMacro : macros
+  BFTravAnimPathComponent "1" --> BFEntityComponentCommon : common</pre>
+<pre class="mermaid">classDiagram
+  BFTriggeredEventsComponent "1" --> BFEntityComponentCommon : common
+  BFTriggeredEventsComponent "*" --> BFTriggeredEvent : triggers
+  BFUserDrivenVehicleComponent "1" --> BFEntityComponentCommon : common
+  BFWindowComponent "1" --> BFEntityComponentCommon : common
+  BFWindowComponent "0..1" --> GridRect : region
+  BiomeDefinition "0..1" --> WaterDefinition : water
+  BiomeDefinition "*" --> WeightedObjectList : detail_objects
+  BiomeDefinition "*" --> WeightedObjectList : decorative_detail_objects
+  BiomeDefinition "*" --> AutoPlacementVariation : auto_placement
+  EntityContainerSchema "*" --> EntityContainerSlotSchema : slots
+  EntityContainerSlotSchema "1" --> EntityContainerSlotClass : slot_class
+  PlacementPredicateInput "1" --> PlacementMode : mode
+  PlacementPredicateInput "1" --> GridRect : bounds
+  PlacementPredicateInput "1" --> ObjectPlacementFlags : object_flags</pre>
+<pre class="mermaid">classDiagram
+  TraversabilityConfig "1" --> ViewingConfig : viewing
+  TraversabilityConfig "*" --> TraversalEntityConfig : entities
+  TraversabilityConfig "*" --> CollisionTesterConfig : collision_testers
+  WeightedObjectList "*" --> WeightedObject : objects
+  WorldDomain "1" --> BFGGame : game
+  WorldDomain "0..1" --> BFGWorld : active_world
+  WorldDomain "1" --> BFGPlacementGrid : placement_grid
+  WorldDomain "1" --> BFGCollisionMgr : collision_mgr
+  WorldDomain "*" --> ZTZooSurveyAdjustment : zoo_survey_adjustments
+  ZTDevComponent "1" --> BFEntityComponentCommon : common
+  ZTDevComponent "0..1" --> ZTComponentLock : profile_lock
+  ZTDevComponent "0..1" --> ZTComponentLock : game_lock
+  ZTDevComponent "0..1" --> ZTEyedropperState : eyedropper</pre>
+<pre class="mermaid">classDiagram
+  BFTriggeredEventsComponent <|-- ZTTriggeredEventsComponent
+  ZTFeedbackComponent "1" --> BFEntityComponentCommon : common
+  ZTFeedbackComponent "0..1" --> ZTMessageInfo : current_message
+  ZTFeedbackComponent "0..1" --> ZTThoughtInfo : current_thought
+  ZTFeedbackComponent "0..1" --> ZTEmoticonInfo : current_emoticon
+  ZTFeedbackComponent "0..1" --> ZTFeedbackClickTarget : click_target
+  ZTOverviewComponent "1" --> BFEntityComponentCommon : common
+  ZTOverviewComponent "*" --> ZTOverviewLayer : layers
+  ZTOverviewComponent "1" --> ZTOverviewExport : export
+  ZTTriggeredEventsComponent "1" --> BFTriggeredEventsComponent : base
+  ZTTriggeredEventsComponent "*" --> ZTTriggeredEventRecord : pending_events</pre>
+<p><strong>Terrain relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFTerrainEvent "*" --> ZTChangedTriangle : changed_triangles
+  BFTerrainEvent "0..1" --> BFTerrainChargeCommand : charge
+  BFTerrainMeshPatch "*" --> BFTerrainVertex : vertices
+  BFTerrainMeshPatch "*" --> BFTerrainTriangle : triangles
+  BFTerrainUndoData "*" --> BFTerrainUndoRecord : records
+  BFTerrainUndoData "0..1" --> BFTerrainChargeCommand : final_charge
+  BFTerrainUndoData "*" --> BFTerrainUndoBoundary : boundaries
+  BFTerrainUndoRecord "0..1" --> BFTerrainMeshPatch : before_patch
+  BFTerrainUndoRecord "0..1" --> BFTerrainMeshPatch : after_patch
+  BiomeOptions "*" --> BiomeBrushSet : brush_sets
+  MapsConfig "*" --> MapConfigEntry : entries
+  TerrDeformationUI "*" --> TerrDeformationCursorTexture : cursor_textures
+  TerrDeformationUI "*" --> TerrainBrush : brushes
+  TerrPaintUI "*" --> TerrainBrush : biome_brushes</pre>
+<pre class="mermaid">classDiagram
+  TerrainDomain "1" --> ZTTerrainGrid : grid
+  TerrainDomain "1" --> BFTerrain : bf_terrain
+  TerrainDomain "*" --> BFTerrainMeshPatch : mesh_patches
+  TerrainDomain "1" --> BFTerrainUndoData : undo_data
+  TerrainDomain "*" --> BFTerrainChargeCommand : charge_queue
+  TerrainDomain "1" --> BiomeOptions : biome_options
+  TerrainDomain "1" --> TerrDeformationUI : deformation_ui
+  TerrainDomain "1" --> TerrPaintUI : paint_ui
+  TerrainDomain "1" --> MapsConfig : maps
+  TerrainDomain "*" --> BFGBiome : biomes
+  TerrainDomain "1" --> ZTAutoPlacementController : autoplacement
+  TerrainDomain "1" --> ZTBiomeModeState : biome_mode
+  TerrainDomain "1" --> ZTTerrainModeState : terrain_mode
+  TerrainDomain "0..1" --> ZTTerrainCommandReader : active_command_reader
+  TerrainDomain "*" --> ZTChangedTriangle : changed_triangles
+  TerrainDomain "*" --> ZTBiomeObjectEvent : biome_events
+  TerrainDomain "*" --> BFTerrainEvent : events
+  TerrainDomain "1" --> ZTTerrainBrushPreview : brush_preview
+  TerrainDomain "*" --> BFTerrainWaterEdit : water_edits
+  TerrainDomain "*" --> ZTBiomeUndoDeleteFlattening : flattening_deletions
+  TerrainDomain "0..1" --> BFTerrainWorldSurface : loaded_world_surface</pre>
+<pre class="mermaid">classDiagram
+  ZTAutoPlacementController "*" --> ZTAutoPlacementVariation : variations
+  ZTAutoPlacementController "*" --> ZTAutoPlacementObjectSpawn : pending_spawns
+  ZTAutoPlacementController "*" --> ZTAutoPlacementObjectSpawn : pending_removals
+  ZTAutoPlacementVariation "1" --> ZTAutoPlacementObjectMask : object_mask
+  ZTAutoPlacementVariation "*" --> ZTAutoPlacementWeightedObject : weighted_objects
+  ZTBiomeModeState "0..1" --> BiomeBrushSet : brush_set
+  ZTBiomeModeState "*" --> ZTAutoPlacementObjectSpawn : added_objects
+  ZTBiomeModeState "*" --> ZTAutoPlacementObjectSpawn : removed_objects
+  ZTBiomeModeState "*" --> ZTBiomeCommand : commands
+  ZTTerrainCommandRecord "1" --> ZTTerrainCommand : command
+  ZTTerrainCommandRecord "0..1" --> BFTerrainUndoRecord : undo_record
+  ZTTerrainCommandRecord "0..1" --> BFTerrainChargeCommand : charge
+  ZTTerrainModeState "0..1" --> TerrainBrush : active_brush
+  ZTTerrainModeState "0..1" --> ZTTerrainCommandReader : command_reader
+  ZTTerrainModeState "0..1" --> ZTTerrainCommandRecord : last_command
+  ZTTerrainModeState "0..1" --> BFTerrainMeshPatch : preview_patch</pre>
+<p><strong>Tank relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  TankDomain "1" --> ZTTankMgr : manager
+  TankDomain "*" --> ZTTank : tanks
+  TankDomain "1" --> ZTTankTopology : topology
+  TankDomain "*" --> ZTTankWallSegment : wall_segments
+  TankDomain "*" --> ZTTankWallGlassMaterialSelector : glass_material_selectors
+  TankDomain "*" --> ZTTankGateSegment : gates
+  TankDomain "*" --> ZTTankPortal : portals
+  TankDomain "*" --> ZTTankSupport : supports
+  TankDomain "*" --> ZTTankLinkDetachRecord : link_detach_records
+  TankDomain "1" --> ZTTankCommandQueue : commands
+  TankDomain "1" --> ZTTankCommandReader : command_reader
+  TankDomain "1" --> ZTTankQuerySet : queries
+  ZTTankAlternateLink "0..1" --> ZTTankLink : link
+  ZTTankCommandQueue "*" --> ZTTankCommand : pending
+  ZTTankCommandQueue "*" --> ZTTankCommand : completed
+  ZTTankManipulationUi "*" --> ZTTankManipulationCursorTexture : cursor_textures</pre>
+<pre class="mermaid">classDiagram
+  ZTTankSegment <|-- ZTTankGateSegment
+  ZTTankPrimaryLink "0..1" --> ZTTankLink : link
+  ZTTankQuerySet "1" --> ZTIsTankInWorldQuery : world_query
+  ZTTankQuerySet "1" --> ZTTankFloorHeightQuery : floor_height_query
+  ZTTankQuerySet "1" --> ZTTankWaterHeightQuery : water_height_query
+  ZTTankTopology "*" --> ZTTankSegment : segments
+  ZTTankTopology "*" --> ZTTankGateSegment : gates
+  ZTTankTopology "*" --> ZTTankPortal : portals
+  ZTTankTopology "*" --> ZTTankLink : links
+  ZTTankTopology "*" --> ZTTankTopologyChange : pending_changes
+  ZTTankWallSegment "0..1" --> ZTTankWallGlassMaterialSelector : tankwallglass_selector
+  ZTTankWallGlassMaterialSelector "1" --> ZTTankWallGlassSelectorGeometry : geometry
+  ZTTankWallGlassSelectorGeometry "*" --> ZTTankWallGlassSelectorVertex : vertices
+  ZTTankWallGlassSelectorSweep "*" --> ZTTankWallGlassMaterialSelector : selectors</pre>
+<p><strong>Placement relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  PlacementDomain "1" --> ZTPlacementData : placement_data
+  PlacementDomain "0..1" --> ZTPlaceEntityComponent : active_entity
+  PlacementDomain "*" --> ZTSpawnEntityComponent : spawned_entities
+  PlacementDomain "0..1" --> ZTPlacementConfirmation : pending_confirmation
+  PlacementDomain "1" --> ZTPlacementPreview : preview
+  PlacementDomain "1" --> ZTPlacementCursor : cursor
+  PlacementDomain "*" --> ZTPlacementFailure : failure_history
+  PlacementDomain "1" --> ZTPlacementRuleSet : rules
+  PlacementDomain "1" --> ZTPlacementCommandQueue : commands
+  PlacementDomain "1" --> ZTToolCommandQueue : tool_commands
+  PlacementDomain "1" --> ZTUserDraggingState : user_dragging
+  PlacementDomain "1" --> ZTClickableObjectSelection : clickable_object
+  ZTPlaceEntityComponent "1" --> ZTPlacementFlags : placement_flags
+  ZTPlacementCommandQueue "*" --> ZTPlacementCommand : pending
+  ZTPlacementCommandQueue "*" --> ZTPlacementCommand : completed
+  ZTPlacementCommand "0..1" --> FencePlacementShape : fence_shape
+  ZTPlacementCommand "0..1" --> ZTFenceModeUndoAction : fence_undo_action
+  ZTPlacementPreview "0..1" --> ZTFootprintPreview : footprint</pre>
+<pre class="mermaid">classDiagram
+  ZTPlacementRuleSet "0..1" --> ZTPlacementAffordabilityRule : affordability
+  ZTPlacementRuleSet "0..1" --> ZTPlacementResearchRule : research
+  ZTPlacementRuleSet "0..1" --> ZTPlacementFootprintRule : footprint
+  ZTPlacementRuleSet "0..1" --> ZTPlacementTerrainRule : terrain
+  ZTPlacementRuleSet "0..1" --> ZTPlacementFenceRule : fence
+  ZTPlacementRuleSet "0..1" --> ZTPlacementPathRule : path
+  ZTPlacementRuleSet "0..1" --> ZTTankPlacementRule : tank
+  ZTPlacementRuleSet "0..1" --> ZTElevatedPathPlacementRule : elevated_path
+  ZTToolCommandQueue "*" --> ZTToolCommand : pending
+  ZTToolCommandQueue "*" --> ZTToolCommand : completed</pre>
+<p><strong>Path relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  PathDomain "*" --> ZTPath : paths
+  PathDomain "*" --> ZTPathElevated : elevated_paths
+  PathDomain "*" --> ZTPathPlacementCommand : placement_commands
+  PathDomain "*" --> ZTElevatedPathCommand : elevated_commands
+  PathDomain "*" --> ZTConnectedPathQuery : connected_queries
+  ZTElevatedPathSegment "1" --> ZTPathSegment : path
+  ZTElevatedPathSegment "0..1" --> ZTElevatedCurbPlacement : curb_mode
+  ZTPathPlacementCommand "0..1" --> ZTPathValidation : validation</pre>
+<h4>AI, Behavior, Guests, Staff, and Shows</h4>
+<p><strong>Show relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFAITrickMgr <|-- ZTAITrickMgr
+  ShowDomain "1" --> ZTAIShowMgr : show_manager
+  ShowDomain "1" --> BFAITrickMgr : bf_trick_manager
+  ShowDomain "1" --> ZTAITrickMgr : trick_manager
+  ShowDomain "1" --> ZTAITrickPopularityMgr : popularity_manager
+  ShowDomain "1" --> ZTShowMixerManager : mixer_manager
+  ShowDomain "1" --> ZTShowTimerManager : timer_manager
+  ShowDomain "*" --> ZTAIShow : active_shows
+  ShowDomain "*" --> ZTShowMixerEvent : mixer_events
+  ShowDomain "*" --> ZTShowSchedulerEvent : scheduler_events
+  ShowDomain "1" --> ZTShowSelectionState : show_selection
+  ShowEffectSet "*" --> ShowEffect : effects
+  ZTAITrickTrainingRequest "0..1" --> ZTAITrickLevel : selected_level</pre>
+<pre class="mermaid">classDiagram
+  ZTAITrickData "0..1" --> ZTAITrickPrerequisite : prerequisite
+  ZTAITrickData "0..1" --> ZTAITrickTargetData : target
+  ZTAITrickData "*" --> ZTAITrickLevel : levels
+  ZTAITrickData "1" --> ZTAITrickResultTokens : result_tokens
+  ZTShowMix "*" --> ShowEffect : effects
+  ZTShowMixerManager "*" --> ZTShowMixerIcon : icons
+  ZTShowMixerManager "0..1" --> ZTShowMixerHighlightColor : highlight_color
+  ZTShowMixerManager "*" --> ZTShowMix : mixes
+  ZTShowMixerManager "*" --> ZTShowMixerChannel : channels
+  ZTShowTimerManager "*" --> ZTShowTimer : timers
+  ZTShowTimerManager "*" --> ZTShowTimerState : active_timers</pre>
+<p><strong>AI relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFAIEntityData <|-- BFAIEntityDataShared
+  AiDomain "1" --> BFAITaskCatalog : task_catalog
+  AiDomain "1" --> BFBehaviorMgr : behavior_mgr
+  AiDomain "1" --> BFLocomotionMgr : locomotion_mgr
+  AiDomain "*" --> BFAIEntityDataShared : entity_shared_data
+  AiDomain "*" --> BFAIEntityData : entity_data
+  AiDomain "*" --> ZTBehaviorType : behavior_types
+  AiDomain "*" --> BFAIToken : tokens
+  AiDomain "*" --> ZTAISensor : sensors
+  AiDomain "*" --> BFAISensorSelf : self_sensors
+  AiDomain "*" --> ZTAISensorPath : path_sensors
+  AiDomain "*" --> ZTAISensorTA : ta_sensors
+  AiDomain "*" --> ZTAISensorVA : va_sensors
+  AiDomain "*" --> BFAINoPerceive : no_perceive_rules
+  AiDomain "*" --> BFAIScriptData : script_data
+  AiDomain "*" --> ZTAIInfluenceWatcher : influence_watchers
+  AiDomain "*" --> BFGInfluenceController : influence_controllers
+  AiDomain "*" --> BFGPhysAnimController : phys_anim_controllers
+  AiDomain "*" --> ZTBeh : active_behaviors
+  AiDomain "*" --> ZTAIStateThinker : zt_state_thinkers
+  AiDomain "*" --> ZTAITaskThinker : zt_task_thinkers
+  AiDomain "*" --> ZTAIViewData : view_data
+  AiDomain "*" --> ZTAITourTaker : tour_takers
+  AiDomain "*" --> ZTAIViewAnimals : view_animals</pre>
+<pre class="mermaid">classDiagram
+  BFAIMultiDataController "*" --> BFAIDataController : controllers
+  BFAIBehaviorSetDocument "*" --> BFAIBehaviorSetRecord : behavior_sets
+  BFAIBehaviorSetRecord "1" --> BFAIBehaviorSet : behavior_set
+  BFAIBehaviorSetRecord "*" --> BFAITaskSection : sections
+  BFAIExecutionData "1" --> BFAIBehaviorSet : behavior_set
+  BFAIExecutionData "*" --> BFAITaskSection : sections
+  BFAIEvaluator "0..1" --> BFAIEvaluatorKind : kind
+  BFAIBiomeMapEval "1" --> BFAIBiomeMap : map
+  BFAITargetSelector "1" --> BFAISelector : selector
+  BFAITargetSelector "0..1" --> BFAITargetData : target_data
+  BFAIObjectSelector "1" --> BFAISelector : selector
+  BFAIBehaviorSet "*" --> BFBehavior : behaviors
+  BFAIBehaviorSet "1" --> BFAIBehaviorSequence : sequence</pre>
+<pre class="mermaid">classDiagram
+  BFAISensor <|-- ZTAISensorPath
+  BFAISensor <|-- ZTAISensorTA
+  BFAISensor <|-- ZTAISensorVA
+  BFAICogShared "*" --> BFAIStateVar : shared_state_vars
+  BFAIFadeController "1" --> BFAIFadeHoldData : fade_hold
+  ZTAISensorPath "1" --> BFAISensor : sensor
+  ZTAISensorTA "1" --> BFAISensor : sensor
+  ZTAISensorVA "1" --> BFAISensor : sensor
+  ZTAISensorVA "*" --> ZTAIViewData : view_data
+  ZTAIInfluenceWatcher "*" --> ZTAIInfluenceEffectData : effects
+  ZTAIViewComponent "*" --> ViewedSpeciesScore : viewed_species
+  ZTAIVisibleAnimalTarget "0..1" --> ZTAIViewpointCandidate : traversable_viewpoint
+  ZTBehAnimateForViewFromTransport "1" --> ZTBehaviorInstance : instance
+  ZTBehChangeWaterDirtiness "1" --> ZTBehaviorInstance : instance</pre>
+<pre class="mermaid">classDiagram
+  ZTBehFollowBase <|-- ZTBehFollowCable
+  ZTBehFollowBase <|-- ZTBehFollowTrack
+  ZTBehClimbLadder "1" --> ZTBehaviorInstance : instance
+  ZTBehDigArtifact "1" --> ZTBehaviorInstance : instance
+  ZTBehDockFence "1" --> ZTBehaviorInstance : instance
+  ZTBehDockWater "1" --> ZTBehaviorInstance : instance
+  ZTBehEconomy "1" --> ZTBehaviorInstance : instance
+  ZTBehFeedback "1" --> ZTBehaviorInstance : instance
+  ZTBehFindArtifact "1" --> ZTBehaviorInstance : instance
+  ZTBehFollowBase "1" --> ZTBehaviorInstance : instance
+  ZTBehFollowCable "1" --> ZTBehaviorInstance : instance
+  ZTBehFollowTrack "1" --> ZTBehaviorInstance : instance
+  ZTBehKickOffRider "1" --> ZTBehaviorInstance : instance
+  ZTBehMorph "1" --> ZTBehaviorInstance : instance
+  ZTBehPlaceTarget "1" --> ZTBehaviorInstance : instance
+  ZTBehReplaceTrickObject "1" --> ZTBehaviorInstance : instance
+  ZTBehRideVehicle "1" --> ZTBehaviorInstance : instance
+  ZTBehShowEvent "1" --> ZTBehaviorInstance : instance
+  ZTBehSplashGuest "1" --> ZTBehaviorInstance : instance</pre>
+<pre class="mermaid">classDiagram
+  ZTBehStaffTrainAnimal "1" --> ZTBehaviorInstance : instance
+  ZTBehTargetFence "1" --> ZTBehaviorInstance : instance
+  ZTBehTeleportToLoc "1" --> ZTBehaviorInstance : instance
+  ZTBehTestTargetPos "1" --> ZTBehaviorInstance : instance
+  ZTBehTour "1" --> ZTBehaviorInstance : instance
+  ZTBehUseTransport "1" --> ZTBehaviorInstance : instance
+  ZTBehWatchShow "1" --> ZTBehaviorInstance : instance
+  ZTGuestDonationMemory "*" --> ZTGuestDonationCandidate : candidates
+  ZTGuestDonationMemory "0..1" --> ZTAIDonationTaskState : active_task
+  ZTGuestDonationMemory "1" --> ZTGuestViewedSpeciesMemory : viewed_species
+  ZTGuestDonationMemory "1" --> ZTGuestDonationPruning : pruning
+  ZTPAPTBFAIEntityDataInstance "*" --> ZTPredicate : predicates
+  ZTPAPTBFPhysObj "*" --> ZTQUERY : position_queries</pre>
+<p><strong>Staff relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  StaffDomain "1" --> ZTAIStaffMgr : manager
+  StaffDomain "1" --> ZTStaffAssignmentUi : assignment_ui
+  ZTAIStaffMgr "*" --> ZTStaffRequestData : request_templates
+  ZTAIStaffMgr "*" --> ZTStaffTimeCategory : time_categories
+  ZTAIStaffMgr "1" --> ZTStaffRoleTypeIntern : role_types
+  ZTAIStaffMgr "1" --> ZTAIStaffRequestController : request_controller
+  ZTAIStaffMgr "1" --> ZTAIStaffJobQueue : job_queue
+  ZTAIStaffMgr "1" --> ZTAIStaffJobStealPolicy : job_steal_policy
+  ZTAIStaffMgr "1" --> ZTAIStaffCandidateSet : candidate_cache
+  ZTAIStaffMgr "*" --> ZTAIStaffAssignmentComponent : assignment_components
+  ZTAIStaffMgr "1" --> ZTDinoRecoveryTargetSet : dino_recovery_targets
+  ZTAIStaffMgr "1" --> ZTAIBadEntityCleanupQueue : bad_entity_cleanup
+  ZTAIStaffMgr "1" --> ZTAIStaffWaterCleaningMgr : water_cleaning
+  ZTAIStaffMgr "*" --> ZTStaffTypeRef : source_type_refs
+  ZTAIStaffMgr "*" --> ZTUserStaffAction : user_actions
+  ZTAIStaffMgr "*" --> ZTStaffWorkOrderRecord : work_order_history
+  ZTAIStaffMgr "*" --> ZTStaffAssignmentRecord : assignment_history
+  ZTAIStaffMgr "*" --> ZTStaffActionRecord : action_history
+  ZTAIStaffMgr "*" --> ZTStaffStatusSnapshot : status_snapshots
+  ZTAIStaffRequestController "*" --> ZTStaffRequestData : pending
+  ZTAIStaffRequestController "*" --> ZTStaffRequestData : accepted
+  ZTAIStaffRequestController "*" --> ZTAIStaffRequestEvaluation : rejected
+  ZTAIStaffRequestController "*" --> ZTAIStaffBadEntityRecord : bad_entities
+  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : pending_jobs
+  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : active_jobs
+  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : completed_jobs
+  ZTAIStaffJobQueue "*" --> ZTAIStaffJob : failed_jobs
+  ZTAIStaffJobQueue "*" --> ZTStaffTimeCategory : time_categories
+  ZTAIStaffJob "0..1" --> ZTStaffTimeCategory : time_category
+  ZTAIStaffJob "1" --> ZTAIStaffJobStatus : status
+  ZTAIStaffAssignmentComponent "*" --> ZTAIStaffAssignment : assignments
+  ZTAIBadEntityCleanupQueue "*" --> ZTAIStaffBadEntityRecord : bad_entities
+  ZTAIStaffRequestEvaluation "0..1" --> ZTStaffRequestData : request
+  ZTAIStaffRequestEvaluation "*" --> ZTAIStaffCandidate : candidates
+  ZTAIStaffCandidateSet "*" --> ZTAIStaffCandidate : candidates
+  ZTAIStaffCandidate "0..1" --> StaffRole : role</pre>
+<pre class="mermaid">classDiagram
+  ZTDinoRecoveryTargetSet "*" --> ZTDinoRecoveryTarget : active_targets
+  ZTStaffAssignmentUi "1" --> ZTStaffAssignmentCursor : cursor
+  ZTStaffAssignmentUi "*" --> ZTStaffAssignmentPanel : panels
+  ZTStaffAssignmentUi "1" --> ZTStaffAssignmentTargetSelector : target_selector
+  ZTStaffAssignmentPanel "0..1" --> StaffRole : role
+  ZTStaffRoleTypeIntern "*" --> StaffRoleTypeHandle : registered_roles
+  ZTStaffTaskTokenBinding "0..1" --> StaffRole : staff_role
+  ZTStaffTokenConfig "1" --> BFAITokenList : tokens
+  ZTUserStaffAction "0..1" --> ZTStaffRequestData : request</pre>
+<h4>Economy, Progression, Disease, and Status</h4>
+<p><strong>Economy relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFGEconomyComponent <|-- ZTEconomyComponentBase
+  BFGTransaction <|-- ZTTransaction
+  ZTEconomyComponentBase <|-- ZTEconomyComponentGuest
+  ZTEconomyComponentBase <|-- ZTEconomyComponentHistoryBase
+  ZTEconomyComponentBase <|-- ZTEconomyComponentStub
+  ZTEconomyComponentHistoryBase <|-- ZTEconomyComponent
+  ZTEconomyMgr "*" --> ZTEconomyContextConfig : context_configs
+  ZTEconomyMgr "0..1" --> EconomyConfig : config
+  ZTEconomyMgr "*" --> EconomyConfig : configs
+  ZTEconomyMgr "*" --> ZTEconomyComponent : components
+  ZTEconomyMgr "*" --> ZTTransaction : zt_transactions
+  ZTEconomyMgr "*" --> BFGEconomyComponent : bfg_components
+  ZTEconomyMgr "1" --> BFGTransactionTracker : transaction_tracker
+  ZTEconomyMgr "*" --> MoneyEvent : money_events
+  ZTEconomyMgr "*" --> ZTPriceIndexSelection : ui_price_selections
+  ZTEconomyComponent "*" --> TransactionConfig : transactions
+  ZTTransaction "0..1" --> TransactionConfig : config
+  ZTEconomyComponentGuest "1" --> ZTEconomyComponentBase : base
+  ZTEconomyComponentStub "1" --> ZTEconomyComponentBase : base
+  ZTEconomyComponentHistoryBase "1" --> ZTEconomyComponentBase : base
+  ZTEconomyComponentHistoryBase "*" --> FameHistoryEntry : history
+  BFGEconomyComponent "1" --> BFGEconomyData : data
+  BFGEconomyComponent "*" --> BFGTransaction : transactions
+  BFGTransactionTracker "*" --> BFGTransaction : pending
+  BFGTransactionTracker "*" --> BFGTransaction : completed
+  EconomyConfig "0..1" --> EconomyComponentConfig : general_component
+  EconomyConfig "*" --> EconomyComponentConfig : components
+  EconomyConfig "*" --> CostFactor : cost_factors
+  TransactionConfig "0..1" --> TransactionFrequency : frequency
+  TransactionConfig "0..1" --> TransactionType : transaction_type
+  TransactionConfig "0..1" --> TransactionPeriod : period
+  TransactionConfig "0..1" --> CostType : cost_type
+  TransactionConfig "0..1" --> CostChoice : cost_choice
+  MoneyEvent "1" --> MoneyEventKind : kind</pre>
+<p><strong>Research relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  ResearchDomain "1" --> ZTResearchMgr : manager
+  ZTResearchMgr "*" --> ZTResearchItem : items
+  ZTResearchMgr "*" --> ZTResearchUnlock : config_unlocks
+  ZTResearchMgr "*" --> ZTUIResearchButton : buttons
+  ZTResearchMgr "*" --> ZTResearchActiveRecord : active_research
+  ZTResearchMgr "*" --> ZTResearchCompletedRecord : completed_research
+  ZTResearchActiveRecord "1" --> ZTResearchProgressionRef : progression
+  ZTResearchCompletedRecord "1" --> ZTResearchProgressionRef : progression</pre>
+<p><strong>Donation relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  ZTDonationStatus "*" --> ZTDonationBucket : by_animal_type
+  ZTDonationStatus "*" --> ZTDonationBucket : by_endangerment
+  ZTDonationStatus "*" --> ZTDonationBucket : by_box
+  ZTDonationStatus "*" --> ZTDonationBucket : by_transaction
+  ZTDonationBoxState "*" --> ZTDonationContribution : history
+  ZTGuestDonationState "*" --> ZTDonationTargetRecord : viewed_targets
+  ZTGuestDonationState "*" --> ZTDonationContribution : contribution_history
+  ZTDonationInfoPanelState "*" --> ZTDonationInfoPanelRow : rows</pre>
+<p><strong>Disease relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  DiseaseDomain "1" --> ZTDiseaseMgr : manager
+  DiseaseDomain "*" --> ZTDiseaseCase : cases
+  DiseaseDomain "*" --> ZTDiseaseUiCommand : ui_commands</pre>
+<p><strong>Fame and donation status relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  DonationTotals "*" --> DonationByAnimalType : by_animal_type
+  DonationTotals "*" --> DonationByEndangerment : by_endangerment
+  FameStatus "*" --> FameHistoryEntry : fame_history
+  ZTStatusConfig "1" --> ZTStatusHappyFactors : happy_factors</pre>
+<h4>Scenario, Scripting, Profile, Photos, and Persistence</h4>
+<p><strong>Scenario relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFScenarioChallengeState "*" --> BFScenarioChallenge : challenges
+  BFScenarioCommand "1" --> BFScenarioCommandKind : kind
+  BFScenarioCommand "0..1" --> BFScenarioTypedCommand : typed
+  BFScenarioCommandResult "1" --> BFScenarioCommandStatus : status
+  BFScenarioGlobalVars "*" --> BFScenarioVar : values
+  BFScenarioScriptActionPendingRecords "*" --> BFScenarioScriptActionPendingRecord : records
+  BFScenarioScriptActionPendingRecord "1" --> BFScenarioScriptAction : action
+  BFScenarioUserVars "*" --> BFScenarioVar : values</pre>
+<pre class="mermaid">classDiagram
+  ScenarioDomain "1" --> ZTScenarioMgr : manager
+  ZTScenarioMgr "1" --> BFScenarioMgr : bf_manager
+  ZTScenarioMgr "*" --> BFScenarioGroup : scenario_groups
+  ZTScenarioMgr "*" --> BFCampaign : campaign_documents
+  ZTScenarioMgr "1" --> ZTCampaignState : campaign_state
+  ZTScenarioMgr "1" --> ZTScenarioRuntimeState : runtime
+  ZTScenarioMgr "*" --> BFScenarioAction : pending_actions
+  ZTScenarioMgr "1" --> BFScenarioEventRoot : event_root
+  ZTScenarioMgr "1" --> BFScenarioChallengeState : challenge_state
+  ZTScenarioRuntimeState "0..1" --> BFScenarioRuntimeRef : active_scenario
+  ZTScenarioRuntimeState "*" --> BFScenarioObjectiveProgress : objective_progress</pre>
+<p><strong>Scripting relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  BFScriptContext <|-- BFLuaContext
+  BFResourceCacheFlush "*" --> BFResourceCacheRecord : copied_records
+  BFScriptCache "*" --> BFScriptCacheEntry : entries
+  BFScriptContextVector "*" --> BFScriptContextRecord : records
+  ScriptingDomain "1" --> BFScriptContextMgr : context_mgr
+  ScriptingDomain "*" --> BFScriptContext : contexts
+  ScriptingDomain "*" --> BFLuaContext : lua_contexts
+  ScriptingDomain "1" --> BFScriptCache : cache
+  ScriptingDomain "1" --> BFResourceCacheFlush : resource_cache_flush</pre>
+<p><strong>Photo relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  PhotoDomain "1" --> ZTPhotoManager : manager
+  PhotoDomain "1" --> ZTPhotoChallengeMgr : challenge_mgr
+  PhotoDomain "*" --> ZTPhotoAlbumComponent : albums
+  PhotoDomain "*" --> ZTPhotoAnalysisComponent : analysis_components
+  PhotoDomain "*" --> ZTPAParseTree : parse_trees
+  PhotoDomain "1" --> ZTPhotoModeState : mode
+  ZTPhotoManager "*" --> ZTPhotoCaptureRequest : capture_requests
+  ZTPhotoManager "*" --> ZTPhotoCaptureResult : capture_results
+  ZTPhotoChallengeMgr "*" --> ZTPhotoEventCommand : event_history
+  ZTPhotoChallengeMgr "*" --> ZTPhotoEventResult : event_results
+  ZTPAPTPhotoAnalysisComponent "*" --> ZTPAParseTree : queries
+  ZTPAParseTree "*" --> ZTPAParseNode : nodes
+  ZTPAParseTree "*" --> ZTPAGetterBinding : getters
+  ZTPAParseNode "0..1" --> ZTPAGetterBinding : getter
+  ZTPAGetterBinding "1" --> ZTPAGetterTarget : target
+  ZTPhotoAlbumComponent "*" --> ZTPhotoInfo : photos
+  ZTPhotoAnalysisComponent "0..1" --> ZTPAParseTree : parse_tree
+  ZTPhotoAnalysisComponent "*" --> ZTPhotoAbstraction : abstractions
+  ZTPhotoAnalysisComponent "*" --> ZTPhotoAnalysisResult : results
+  ZTPhotoAnalysisContext "*" --> ZTPhotoAnalysisEntity : entities
+  ZTPhotoAnalysisContext "*" --> ZTPhotoAbstraction : abstractions
+  ZTPhotoAnalysisEntity "*" --> ZTPhotoAnalysisProperty : properties</pre>
+<pre class="mermaid">classDiagram
+  ZTPhotoEventCommand "1" --> ZTPhotoEvent : event
+  ZTPhotoOptions "0..1" --> ZTPhotoCaptionScript : caption_script</pre>
+<p><strong>Menu/profile/campaign/scenario relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  MenuProfileCampaignScenarioDomain "*" --> ZTMapData : maps
+  MenuProfileCampaignScenarioDomain "1" --> ZTCampaignIndex : campaign_index
+  MenuProfileCampaignScenarioDomain "1" --> ZTCampaignSelectionState : campaign_state
+  MenuProfileCampaignScenarioDomain "1" --> ZTGlobe : globe
+  MenuProfileCampaignScenarioDomain "*" --> ZTUserProfile : profiles
+  MenuProfileCampaignScenarioDomain "1" --> ZTMovieList : movies
+  MenuProfileCampaignScenarioDomain "*" --> ZTMenuPopulationRequest : population_requests
+  MenuProfileCampaignScenarioDomain "1" --> ZTMenuPopulatedLists : populated_lists
+  ZTCampaignIndex "*" --> ZTCampaignIndexEntry : campaigns
+  ZTCampaignSelectionState "0..1" --> ZTMenuCachedMapData : cached_map_data
+  ZTGlobe "*" --> ZTGlobeDot : visible_dots
+  ZTMenuPopulatedLists "*" --> ZTMenuMapListEntry : map_entries
+  ZTMenuPopulatedLists "*" --> ZTMenuCampaignListEntry : campaign_entries
+  ZTMenuPopulatedLists "*" --> ZTMenuCampaignScenarioListEntry : campaign_scenario_entries
+  ZTMovieList "*" --> ZTMovieInfo : movies</pre>
+<p><strong>Save relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  SaveDomain "1" --> ZTLoadModeState : load_mode
+  SaveDomain "1" --> ZTSaveModeState : save_mode
+  SaveDomain "0..1" --> ZTSavedGame : current_game
+  SaveDomain "0..1" --> ZTLoadRequest : pending_load_request
+  SaveDomain "0..1" --> ZTSaveRequest : pending_save
+  SaveDomain "0..1" --> ZTDeleteGameRequest : pending_delete
+  SaveDomain "*" --> BFUserProfileEvent : profile_events
+  SaveDomain "0..1" --> ZTLoadAfterSave : load_after_save
+  ZTSaveModeState "*" --> ZTSaveLoadAlert : alerts</pre>
+<h4>Presentation: Renderer, Animation, Camera, and Audio</h4>
+<p><strong>Camera relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  CameraDomain "1" --> ZTCameraCommandReader : command_reader
+  CameraDomain "1" --> ZTUserCameraData : user_camera
+  CameraDomain "0..1" --> BFPhysObj : startup_phys_obj
+  CameraDomain "*" --> ZTRailCam : rail_cams
+  CameraDomain "1" --> ZTCameraActiveCommands : active_commands
+  CameraDomain "*" --> ZTCameraCommandEvent : command_events
+  CameraDomain "1" --> ZTFollowCameraState : follow_camera
+  ZTCameraActiveCommands "*" --> ZTCameraActiveCommandState : states
+  ZTCameraActiveCommandState "1" --> ZTCameraCommandKind : kind
+  ZTCameraCommandReaderNativeState "*" --> ZTCameraFreeMouseLookRequest : free_mouse_look_requests
+  ZTCameraCommandReaderNativeState "*" --> ZTCameraCrouchRequest : crouch_requests
+  ZTCameraCommandReaderNativeState "*" --> ZTCameraOutputCommandState : output_command_states
+  ZTCameraCommandEvent "1" --> ZTCameraCommandKind : kind
+  ZTCameraOutputCommandState "1" --> ZTCameraOutputCommand : command</pre>
+<p><strong>Audio relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  AmbientAllowedDocument "*" --> AmbientAllowedEntry : entries
+  AmbientBiomeDocument "*" --> AmbientBiomeBinding : bindings
+  AmbientSoundDocument "*" --> AmbientSoundSet : sets
+  AmbientSoundSet "*" --> AmbientSoundCue : cues
+  AudioAmbientDocuments "*" --> AmbientSoundDocument : ambient
+  AudioAmbientDocuments "*" --> AmbientBiomeDocument : ambient_biomes
+  AudioAmbientDocuments "*" --> AmbientAllowedDocument : ambients_allowed</pre>
+<pre class="mermaid">classDiagram
+  AudioDomain "1" --> BFSoundMgr : sound_mgr
+  AudioDomain "1" --> BFSoundStageMgr : sound_stage_mgr
+  AudioDomain "1" --> ZTWorldSndMgr : world_sound_mgr
+  AudioDomain "1" --> ZTAIAmbientsMgr : ambients_mgr
+  AudioDomain "1" --> SoundTags : sound_tags
+  AudioDomain "*" --> SoundTagsDocument : sound_tag_documents
+  AudioDomain "1" --> AudioAmbientDocuments : ambient_documents
+  AudioDomain "*" --> BFSoundtag : bf_soundtags
+  AudioDomain "1" --> BF2DSndFactory : two_d_factory
+  AudioDomain "1" --> BF3DSndFactory : three_d_factory
+  AudioDomain "1" --> BFAmbient2DSndFactory : ambient_two_d_factory
+  AudioDomain "1" --> BFAmbient3DSndFactory : ambient_three_d_factory
+  AudioDomain "*" --> BFSoundEvent : sound_events
+  BFAmbient3DSndFactory "*" --> BFAmbient3DSndGenerator : generators
+  BFAmbient3DSndGenerator "0..1" --> BF3DSnd : active_sound</pre>
+<pre class="mermaid">classDiagram
+  SoundTag "0..1" --> BF2DSndFactory : two_d_factory
+  SoundTag "*" --> SoundTagVariant : variants
+  SoundTag "1" --> SoundTagPlaybackPolicy : playback
+  SoundTag "1" --> SoundTagDistancePolicy : distance
+  SoundTag "1" --> SoundTagRandomPolicy : random
+  SoundTagGroup "*" --> SoundTag : tags
+  SoundTags "*" --> SoundTag : tags
+  SoundTags "*" --> SoundTagAlias : aliases
+  SoundTags "*" --> SoundTagGroup : groups
+  SoundTagsDocument "1" --> SoundTags : root
+  ZTWaterEnvSizes "1" --> ZTWaterSoundStages : natural
+  ZTWaterEnvSizes "1" --> ZTWaterSoundStages : tanks
+  ZTWorldSndMgrContextConfig "*" --> BFContextComponent : children</pre>
+<p><strong>Renderer relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  AmbientBiomesConfig "*" --> AmbientBiomeEntry : entries
+  AmbientConfig "*" --> AmbientWeight : day_weights
+  AmbientConfig "*" --> AmbientWeight : night_weights
+  BFBinderResourceEntry "1" --> BFResourceEntry : entry
+  BFDirectoryResourceEntry "1" --> BFResourceEntry : entry
+  BFLODComponent "0..1" --> BFLODPixelData : pixel_data
+  BFPosInterpolateComponent "1" --> BFPosInterpolate : interpolation
+  BFRD3DStateBlock "*" --> BFRRenderState : render_states
+  BFRD3DStateBlock "*" --> BFRRenderState : texture_stage_states
+  BFRD3DStateBlock "*" --> BFRShaderConstant : shader_constants
+  BFREffectManager "1" --> BFRResourceManager : base
+  BFREffectManager "*" --> BFREffectResource : effects</pre>
+<pre class="mermaid">classDiagram
+  BFREffectIncludeManager "1" --> BFRResourceManager : base
+  BFREffectIncludeManager "*" --> BFREffectIncludeRecord : include_records
+  BFRMaterialMode "*" --> BFRRenderState : render_states
+  BFRMaterialMode "*" --> BFRMaterialParam : params
+  BFRMaterialParam "1" --> BFRMaterialParamType : param_type
+  BFRMaterialParam "1" --> BFRMaterialParamValue : value
+  BFRMaterialParam "0..1" --> BFRMaterialAnimation : animated
+  BFRMaterialAnimation "*" --> BFRMaterialAnimationTrack : tracks
+  BFRMaterialAnimationTrack "0..1" --> BFRMaterialAnimationChannel : channel
+  BFRMaterialAnimationTrack "*" --> BFRMaterialKeyFrame : keys
+  BFRMaterialSelector "*" --> BFRMaterialResource : variants
+  BFRMaterialSelector "0..1" --> BFRSelectorBounds : bounds</pre>
+<pre class="mermaid">classDiagram
+  BFRModelManager "1" --> BFRResourceManager : base
+  BFRModelManager "*" --> BFRModelResource : models
+  BFRModelManager "*" --> BFRModelPathParts : path_parts
+  BFRModelManager "*" --> BFRModelFactoryDispatch : factory_dispatches
+  BFRModelFactoryDispatch "0..1" --> BFRModelSubclassKind : product_kind
+  BFRModelFactoryProduct "0..1" --> BFRModelSubclassKind : kind
+  BFRModelFactoryProduct "0..1" --> BFRModelResource : resource
+  BFRModelGeometryCollection "*" --> BFRModelGeometryRecord : records
+  BFRModelGeometryCollection "*" --> BFRModelGeometryChildRecord : child_records
+  BFRModelGeometryCollection "0..1" --> BFRBoundingSphere : bounds
+  BFRModelGeometryRecord "1" --> BFRModelGeometryRecordFlags : record_flags
+  BFRModelGeometryRecord "0..1" --> BFRModelGeometryStream : stream
+  BFRModelGeometryExtendedRecord "1" --> BFRModelGeometryRecord : base
+  BFRModelGeometryChildRecord "1" --> BFRModelGeometryRecord : record
+  BFRModelGeometryStream "0..1" --> BFRModelVertexFormatDescriptor : format
+  BFRModelGeometryStream "*" --> BFRVertexFormatElement : format_elements
+  BFRModelGeometryStream "*" --> BFRVertex : vertices
+  BFRModelGeometryStream "*" --> BFRModelGeometryStreamRecord : stream_records</pre>
+<pre class="mermaid">classDiagram
+  BFRNetImmerseNifBlock "1" --> BFRNetImmerseNifBlockPayload : payload
+  BFRParticleManager "1" --> BFRResourceManager : base
+  BFRParticleManager "*" --> BFRParticleSystem : systems
+  BFRParticleSystem "0..1" --> BFRParticleEmitter : emitter
+  BFRParticleSystem "*" --> BFRParticleModifier : modifiers
+  BFRParticleSystem "0..1" --> BFRParticleDefinition : default_particle
+  BFRParticleModifier "*" --> BFRParticleParam : params
+  BFRResourceManager "1" --> BFRResourceCache : cache
+  BFRResourceCache "*" --> BFRResourceHandle : handles
+  BFRShaderConstant "1" --> BFRMaterialParamValue : value
+  BFRTextureResourceCache "*" --> BFRResourceHandle : resident_textures
+  BFRTextureManager "1" --> BFRResourceManager : base
+  BFRTextureManager "*" --> BFRTextureResource : textures
+  BFRTextureManager "1" --> BFRTextureResourceCache : texture_cache
+  BFRTextureResource "0..1" --> BFRTextureFormat : format
+  BFResourceEntryLifecycle "*" --> BFRResourceHandle : retained_handles</pre>
+<pre class="mermaid">classDiagram
+  BFResourceImportRequest "*" --> BFResourceArchiveVariant : variants
+  BFResourceImportRequest "0..1" --> BFResourceZipPrefixImport : zip_prefix
+  BFResourceOpenRequest "1" --> BFResourceOpenMode : mode
+  BFResourceOpenRequest "0..1" --> BFResourcePathNormalization : normalized
+  BFResourceOpenResult "1" --> BFResourceEntryKind : entry_kind
+  BFResourceQueryResult "1" --> BFResourceEntryKind : entry_kind
+  BFResourceTree "*" --> BFResourceTreeNode : nodes
+  BFUITextRenderOptions "1" --> BFUITextRenderSetting : shadows
+  BFUITextRenderOptions "1" --> BFUITextRenderSetting : textures
+  BFZ2FResourceEntry "1" --> BFResourceEntry : entry
+  BFZ2SResourceEntry "1" --> BFResourceEntry : entry
+  BFZipResourceEntry "1" --> BFResourceEntry : entry</pre>
+<pre class="mermaid">classDiagram
+  Bink "0..1" --> BinkFrameCopy : last_copy
+  BinkVideoRuntime "*" --> Bink : videos
+  BinkVideoRuntime "*" --> BinkFrameCopy : pending_frames
+  CrowdConfig "*" --> Graph : density_curves
+  CrowdDocument "*" --> CrowdDensityBand : density_bands
+  CrowdDocument "*" --> Graph : graphs
+  CurveMap "*" --> CurvePoint : points
+  FogDocument "*" --> FogLayer : layers
+  FogDocument "*" --> FogTimeSlice : time_slices
+  FogLayer "*" --> FogKeyFrame : keyframes</pre>
+<pre class="mermaid">classDiagram
+  GamebryoRuntime "1" --> NiMain : main
+  GamebryoRuntime "1" --> NiSystem : system
+  GamebryoRuntime "1" --> NiD3D : d3d
+  GamebryoRuntime "1" --> NiDX9 : dx9
+  GamebryoRuntime "1" --> NiDX9Renderer : renderer
+  GamebryoRuntime "*" --> NiNode : root_nodes
+  GamebryoRuntime "*" --> NiParticles : particles
+  GamebryoRuntime "*" --> NiParticlesData : particle_data
+  GamebryoRuntime "*" --> NiParticleModifier : particle_modifiers
+  GamebryoRuntime "*" --> NiColorData : color_data
+  GamebryoRuntime "*" --> NiFloatData : float_data
+  GamebryoRuntime "*" --> NiCamera : cameras
+  GamebryoRuntime "*" --> NiTriShape : tri_shapes
+  GamebryoRuntime "*" --> NiSourceTexture : source_textures
+  GamebryoRuntime "*" --> NiRenderedTexture : rendered_textures
+  GamebryoRuntime "*" --> NiZBufferProperty : z_buffer_properties
+  GamebryoRuntime "*" --> NiVertexColorProperty : vertex_color_properties
+  GamebryoRuntime "*" --> NiStringExtraData : string_extra_data
+  GamebryoRuntime "*" --> NiMaterialProperty : material_properties
+  GamebryoRuntime "*" --> NiTexturingProperty : texturing_properties
+  GamebryoRuntime "*" --> NiAlphaProperty : alpha_properties
+  GamebryoRuntime "*" --> NiAlphaController : alpha_controllers
+  GamebryoRuntime "*" --> NiControllerManager : controller_managers
+  GamebryoRuntime "*" --> NiParticleSystemController : particle_controllers
+  GamebryoRuntime "*" --> NiCollisionObject : collision_objects
+  GamebryoRuntime "1" --> NiAccumulatorSet : accumulators</pre>
+<pre class="mermaid">classDiagram
+  LightRig "*" --> LightConfig : lights
+  LightRig "*" --> LightKeyFrame : keyframes
+  LightsConfig "*" --> LightConfig : lights
+  LightsDocument "*" --> LightRig : rigs
+  LodDistances "*" --> LodDistanceLevel : levels
+  LodDistancesDocument "*" --> LodDistanceLevel : levels
+  NiAVObject "1" --> NiObjectNET : object
+  NiAVObject "1" --> NiTransform : local_transform
+  NiAVObject "1" --> NiTransform : world_transform
+  NiAVObject "*" --> NiPropertyRef : properties
+  NiAVObject "0..1" --> NiCollisionObject : collision
+  NiAVObject "0..1" --> NiObjectRef : collision_ref
+  NiAccumulatorSet "1" --> NiAlphaAccumulator : alpha
+  NiAccumulatorSet "1" --> NiTextureAccumulator : texture
+  NiAlphaAccumulator "*" --> NiObjectRef : sorted_objects
+  NiAlphaAccumulator "*" --> NiAlphaProperty : alpha_properties</pre>
+<pre class="mermaid">classDiagram
+  NiAlphaController "1" --> NiObjectNET : object
+  NiAlphaController "0..1" --> NiControllerRef : next_controller
+  NiAlphaController "0..1" --> NiObjectRef : target
+  NiAlphaController "0..1" --> NiObjectRef : data
+  NiAlphaProperty "1" --> NiObjectNET : object
+  NiAnimation "*" --> NiControllerRef : controllers
+  NiAnimation "0..1" --> NiTextKeyExtraData : text_keys
+  NiCamera "1" --> NiAVObject : av_object
+  NiCamera "1" --> NiCameraFrustum : frustum
+  NiCamera "1" --> NiViewport : viewport
+  NiCollision "0..1" --> NiObjectRef : subject
+  NiCollision "0..1" --> NiObjectRef : target
+  NiCollisionObject "1" --> NiObjectNET : object
+  NiCollisionObject "0..1" --> NiObjectRef : target
+  NiCollisionObject "0..1" --> NiCollisionData : data
+  NiColorData "1" --> NiObjectRef : ref_id
+  NiColorData "1" --> NiColorKeyGroup : keys
+  NiColorKeyGroup "*" --> NiColorKey : keys
+  NiControllerManager "1" --> NiObjectNET : object
+  NiControllerManager "*" --> NiAnimation : sequences</pre>
+<pre class="mermaid">classDiagram
+  NiD3DShaderInterface "*" --> NiShaderConstant : constants
+  NiDX9 "1" --> NiD3D : d3d
+  NiDX9 "0..1" --> NiDX9Renderer : renderer
+  NiDX9 "0..1" --> NiD3DShaderInterface : shader_interface
+  NiDX9Renderer "*" --> NiRenderedTexture : render_targets
+  NiDX9Renderer "1" --> NiTextureAccumulator : texture_accumulator
+  NiDX9Renderer "1" --> NiAlphaAccumulator : alpha_accumulator
+  NiFloatData "1" --> NiObjectRef : ref_id
+  NiFloatData "1" --> NiFloatKeyGroup : keys
+  NiFloatKeyGroup "*" --> NiFloatKey : keys
+  NiGeometry "1" --> NiAVObject : av_object
+  NiGeometry "0..1" --> NiObjectRef : data
+  NiGeometry "0..1" --> NiObjectRef : skin_instance
+  NiGeometry "0..1" --> NiGeometryShader : shader
+  NiMain "*" --> NiObjectRef : object_roots
+  NiMaterialProperty "1" --> NiObjectNET : object</pre>
+<pre class="mermaid">classDiagram
+  NiNode "1" --> NiAVObject : av_object
+  NiNode "*" --> NiObjectRef : children
+  NiNode "*" --> NiObjectRef : effects
+  NiObjectNET "1" --> NiObjectRef : ref_id
+  NiObjectNET "*" --> NiExtraDataRef : extra_data
+  NiObjectNET "0..1" --> NiControllerRef : controller
+  NiParticleModifier "1" --> NiObjectNET : object
+  NiParticleModifier "1" --> NiParticleModifierKind : kind
+  NiParticleModifier "0..1" --> NiObjectRef : next_modifier
+  NiParticleModifier "0..1" --> NiObjectRef : controller
+  NiParticleModifier "0..1" --> NiObjectRef : color_data
+  NiParticleSystemController "1" --> NiObjectNET : object
+  NiParticleSystemController "0..1" --> NiControllerRef : next_controller
+  NiParticleSystemController "0..1" --> NiObjectRef : target
+  NiParticleSystemController "0..1" --> NiObjectRef : emitter
+  NiParticleSystemController "*" --> NiParticleInfo : particles
+  NiParticleSystemController "0..1" --> NiObjectRef : particle_extra
+  NiParticleSystemController "0..1" --> NiObjectRef : unknown_link
+  NiParticleSystemController "0..1" --> NiObjectRef : unknown_link_2
+  NiParticles "1" --> NiGeometry : geometry
+  NiParticlesData "1" --> NiObjectRef : ref_id
+  NiParticlesData "1" --> NiGeometryData : geometry
+  NiRenderedTexture "1" --> NiObjectNET : object
+  NiShaderTextureSlot "0..1" --> NiTextureSlot : texture</pre>
+<pre class="mermaid">classDiagram
+  NiSkinBone "1" --> NiTransform : transform
+  NiSkinBone "*" --> NiSkinWeight : weights
+  NiSkinData "*" --> NiSkinBone : bones
+  NiSkinData "1" --> NiTransform : bind_transform
+  NiSourceTexture "1" --> NiObjectNET : object
+  NiSourceTexture "0..1" --> NiObjectRef : pixel_data
+  NiStringExtraData "1" --> NiObjectRef : ref_id
+  NiTextKeyExtraData "*" --> NiTextKey : keys
+  NiTextureAccumulator "*" --> NiSourceTexture : queued_textures
+  NiTextureSlot "0..1" --> NiObjectRef : source
+  NiTexturingProperty "1" --> NiObjectNET : object
+  NiTexturingProperty "0..1" --> NiTextureSlot : base_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : dark_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : detail_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : gloss_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : glow_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : bump_map_texture
+  NiTexturingProperty "0..1" --> NiTextureSlot : decal_0_texture
+  NiTexturingProperty "*" --> NiShaderTextureSlot : shader_textures
+  NiTriShape "1" --> NiAVObject : av_object
+  NiTriShape "0..1" --> NiTriShapeData : data
+  NiTriShape "0..1" --> NiSkinData : skin
+  NiVertexColorProperty "1" --> NiObjectNET : object</pre>
+<pre class="mermaid">classDiagram
+  NiZBufferProperty "1" --> NiObjectNET : object
+  RenderEnvironmentDocumentSet "*" --> FogDocument : fog
+  RenderEnvironmentDocumentSet "*" --> LightsDocument : lights
+  RenderEnvironmentDocumentSet "*" --> SkyLayersDocument : sky_layers
+  RenderEnvironmentDocumentSet "*" --> WaterDocument : water
+  RenderEnvironmentDocumentSet "*" --> CrowdDocument : crowd
+  RenderEnvironmentDocumentSet "*" --> SuspenseDocument : suspense
+  RenderEnvironmentDocumentSet "*" --> LodDistancesDocument : lod_distances</pre>
+<pre class="mermaid">classDiagram
+  RenderEnvironmentDocuments "1" --> AmbientConfig : ambient
+  RenderEnvironmentDocuments "1" --> AmbientBiomesConfig : ambient_biomes
+  RenderEnvironmentDocuments "1" --> AmbientsAllowedConfig : ambients_allowed
+  RenderEnvironmentDocuments "1" --> CrowdConfig : crowd
+  RenderEnvironmentDocuments "1" --> FogConfig : fog
+  RenderEnvironmentDocuments "1" --> LightsConfig : lights
+  RenderEnvironmentDocuments "1" --> LodDistances : lod_distances
+  RenderEnvironmentDocuments "1" --> SkyLayersConfig : sky_layers
+  RenderEnvironmentDocuments "1" --> SuspenseConfig : suspense
+  RenderEnvironmentDocuments "1" --> WaterRenderConfig : water
+  RenderEnvironmentDocuments "1" --> RenderEnvironmentDocumentSet : authored_roots</pre>
+<pre class="mermaid">classDiagram
+  RendererDomain "0..1" --> BFDX9Renderer : dx9_renderer
+  RendererDomain "0..1" --> BFUIRenderer : ui_renderer
+  RendererDomain "1" --> BFRResourceCache : resource_cache
+  RendererDomain "1" --> BFRD3DStateBlock : d3d_state
+  RendererDomain "1" --> BFRTextureManager : texture_manager
+  RendererDomain "1" --> BFRMaterialManager : material_manager
+  RendererDomain "1" --> BFREffectManager : effect_manager
+  RendererDomain "1" --> BFREffectIncludeManager : effect_include_manager
+  RendererDomain "1" --> BFRModelManager : model_manager
+  RendererDomain "1" --> BFRParticleManager : particle_manager
+  RendererDomain "1" --> BFParticleDictionary : particle_dictionary
+  RendererDomain "*" --> BFParticleDefinition : particle_definitions
+  RendererDomain "1" --> BFRSceneGraph : scene_graph
+  RendererDomain "1" --> RenderEnvironmentDocuments : environment_documents
+  RendererDomain "*" --> ZTVista : vistas
+  RendererDomain "*" --> ZTSunLayer : sun_layers
+  RendererDomain "*" --> BFWaterGroup : water_groups
+  RendererDomain "*" --> BFWaterfall : waterfalls
+  RendererDomain "1" --> GamebryoRuntime : gamebryo
+  RendererDomain "1" --> BinkVideoRuntime : bink</pre>
+<pre class="mermaid">classDiagram
+  BFFPSUDVComponent <|-- ZTFPSUDVComponent
+  SkyLayersConfig "*" --> ZTSunLayer : layers
+  SkyLayersDocument "*" --> SkyLayerDocumentEntry : layers
+  SkyLayersDocument "0..1" --> TimeOfDayUpdateInterval : update_interval
+  SuspenseConfig "*" --> Graph : mix_graphs
+  SuspenseDocument "*" --> SuspenseCue : cues
+  SuspenseDocument "*" --> Graph : graphs
+  WaterDocument "*" --> WaterLayer : layers
+  WaterDocument "*" --> WaterScroll : scroll
+  ZTFPSUDVComponent "1" --> BFFPSUDVComponent : base</pre>
+<p><strong>Model relationships.</strong></p>
+<pre class="mermaid">classDiagram
+  NetImmerseColorKeyGroup "*" --> NetImmerseColorKey : keys
+  NetImmerseFloatKeyGroup "*" --> NetImmerseFloatKey : keys
+  NetImmerseNiAlphaController "1" --> NetImmerseNiTimeController : controller
+  NetImmerseNiAlphaProperty "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiAvObject "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiColorData "1" --> NetImmerseColorKeyGroup : data
+  NetImmerseNiFloatData "1" --> NetImmerseFloatKeyGroup : data
+  NetImmerseNiGeometry "1" --> NetImmerseNiAvObject : av_object
+  NetImmerseNiGeometry "0..1" --> NetImmerseNiGeometryShader : shader
+  NetImmerseNiMaterialProperty "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiNode "1" --> NetImmerseNiAvObject : av_object
+  NetImmerseNiParticleColorModifier "1" --> NetImmerseNiParticleModifier : modifier
+  NetImmerseNiParticleGrowFade "1" --> NetImmerseNiParticleModifier : modifier</pre>
+<pre class="mermaid">classDiagram
+  NetImmerseNiParticleRotation "1" --> NetImmerseNiParticleModifier : modifier
+  NetImmerseNiParticleSystemController "1" --> NetImmerseNiTimeController : controller
+  NetImmerseNiParticleSystemController "*" --> NetImmerseNiParticleInfo : particles
+  NetImmerseNiParticles "1" --> NetImmerseNiGeometry : geometry
+  NetImmerseNiParticlesData "1" --> NetImmerseNiGeometryData : geometry
+  NetImmerseNiSourceTexture "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiTexturingProperty "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : base_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : dark_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : detail_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : gloss_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : glow_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : bump_map_texture
+  NetImmerseNiTexturingProperty "0..1" --> NetImmerseTextureSlot : decal_0_texture
+  NetImmerseNiTexturingProperty "*" --> NetImmerseShaderTextureSlot : shader_textures
+  NetImmerseNiVertexColorProperty "1" --> NetImmerseNiObjectNet : object
+  NetImmerseNiZBufferProperty "1" --> NetImmerseNiObjectNet : object</pre>
+<pre class="mermaid">classDiagram
+  NetImmerseNifDocument "1" --> NetImmerseNifHeader : header
+  NetImmerseNifDocument "1" --> NetImmerseNifFooter : footer
+  NetImmerseNifDocument "*" --> ModelBlockRecord : block_records
+  NetImmerseNifDocument "*" --> ModelBlockTypeCount : block_type_counts
+  NetImmerseNifDocument "*" --> NetImmerseNifBlock : block_payloads
+  NetImmerseShaderTextureSlot "0..1" --> NetImmerseTextureSlot : texture</pre>
+<h3>Reconstructed Type Reference</h3>
+<p>Field coverage for reconstructed flat config/state/helper records.</p>
+<p><strong>ai.rs</strong></p>
+<ul>
+<li><strong>BFSharedPhysVars</strong> — source_name, floats, strings, bools</li>
+<li><strong>BFAITokenTargetPosition</strong> — grid_x, grid_y, height</li>
+<li><strong>BFAITaskRuntimeState</strong> — active, completed, failed, elapsed_seconds, current_behavior_index</li>
+<li><strong>BFAITaskEvaluationResult</strong> — accepted, score, failed_evaluator, selected_subject, selected_target</li>
+<li><strong>BFAIFixedValueEval</strong> — value</li>
+<li><strong>BFAIEntityAttributeEval</strong> — attribute_name, subject_entity, target_entity, missing_value</li>
+<li><strong>BFAISpeciesViewEval</strong> — species, viewed_species_memory, donation_factor_key</li>
+<li><strong>BFAIThresholdEval</strong> — controller_name, threshold_name, minimum, maximum</li>
+<li><strong>BFAIFollowUpBehavior</strong> — behavior_type, delay_seconds, token_payload</li>
+<li><strong>BFAITaskMutation</strong> — mutation_name, target_entity, attribute_name, value, event_token</li>
+<li><strong>BFAIUnhideComponent</strong> — hidden_component, unhide_token</li>
+<li><strong>BFSteerVector</strong> — x, y, z</li>
+<li><strong>ZTAISharedInfluenceWatcher</strong> — watcher_type, watched_influence</li>
+<li><strong>ZTAIEducationData</strong> — education_value, topic</li>
+<li><strong>ZTAIFeedbackController</strong> — feedback_token, message_type</li>
+<li><strong>ZTAIViewpointSwapPolicy</strong> — swap_chance, min_swap_distance, max_swap_distance</li>
+<li><strong>ZTEdDonateValueRange</strong> — min_score, max_score, value</li>
+<li><strong>ZTAITourTakerData</strong> — weight, donate_min, donate_max, favorite_animal_bonus</li>
+<li><strong>ZTAIVehicleData</strong> — vehicle_type, capacity, route_token</li>
+<li><strong>ZTAIWaterFilterComponent</strong> — clean_tank_token, water_dirtiness</li>
+<li><strong>ZTPAPTEntityStub</strong> — entity_type, component_names</li>
+</ul>
+<p><strong>animal.rs</strong></p>
+<ul>
+<li><strong>ZTAnimalTypeLifeCycle</strong> — adult, pregnant</li>
+<li><strong>ZTAnimalTypeStatusFlags</strong> — predator, extinct, large_animal, marine, show_animal, can_be_ridden, can_swim_with</li>
+<li><strong>ZTAnimalTrickKnowledge</strong> — trick_token, min_score, max_score</li>
+<li><strong>ZTAnimalRuntime</strong> — rampaging, eyedropper_selected</li>
+<li><strong>ZTAnimalAdoptionState</strong> — show_adopt, adoptable, adoption_slot, adoption_message</li>
+<li><strong>ZTAnimalReleaseState</strong> — show_release, releasable, release_message, conservation_reward</li>
+<li><strong>ZTAnimalDiseaseState</strong> — disease_token, cure_token, target_for_disease</li>
+<li><strong>ZTAnimalCrateState</strong> — crated, show_crate, crate_entity, tranquilized</li>
+<li><strong>ZTAnimalConservationState</strong> — endangerment_token, release_bonus, donation_bonus</li>
+<li><strong>ZTAnimalTrainingState</strong> — training_area, learned_tricks, trick_scores, active_trick</li>
+<li><strong>ZTAnimalTrainingProgress</strong> — trick_token, previous_score, new_score, completed_before, completed_after</li>
+<li><strong>ZTAdoptionMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>ZTAdoptionSlotMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>ZTAdoptionFameSlot</strong> — fame, slots, loc_id</li>
+<li><strong>ZTAdoptionLoadEvent</strong> — msg, data, name, child_msg, child_data, child_name</li>
+<li><strong>ZTFavoriteAnimalMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+</ul>
+<p><strong>app.rs</strong></p>
+<ul>
+<li><strong>ZTStartupUiSurfaces</strong> — native_tool_roots, startup_splash_roots</li>
+</ul>
+<p><strong>audio.rs</strong></p>
+<ul>
+<li><strong>ZTWorldSoundGeneralData</strong> — env_transition_seconds, max_distance_to_hear_lapping_water, lapping_sound_interp_scalar, smallest_water_area_for_lapping</li>
+<li><strong>BF2DSndRequest</strong> — event_token, sound_asset, volume, pitch, pan, category, emitter_entity, world_position, looping, streamed</li>
+<li><strong>ZTMainMenuMusicState</strong> — track_token, playing, volume</li>
+</ul>
+<p><strong>camera.rs</strong></p>
+<ul>
+<li><strong>ZTCameraCommandStateEvent</strong> — token, active</li>
+</ul>
+<p><strong>catalog.rs</strong></p>
+<ul>
+<li><strong>BFBinderSubtree</strong> — name, binder_type, children</li>
+</ul>
+<p><strong>disease.rs</strong></p>
+<ul>
+<li><strong>ZTCureDiseasePanelState</strong> — cure_panel_visible, cause_panel_visible, sample_panel_visible, alert_status, hint_index</li>
+</ul>
+<p><strong>economy.rs</strong></p>
+<ul>
+<li><strong>ZTFameMessageType</strong> — token, value_type, loc_id</li>
+<li><strong>ZTStatusContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+</ul>
+<p><strong>entity_info.rs</strong></p>
+<ul>
+<li><strong>ZTEntityCrater</strong> — entity_type, crater_radius, decal</li>
+</ul>
+<p><strong>fence.rs</strong></p>
+<ul>
+<li><strong>ZTFenceModeCommandRequest</strong> — command_name, payload</li>
+<li><strong>ZTFenceModeCursorTypeQuery</strong> — command_name, requested_type, active_cursor_entity_type, matched</li>
+</ul>
+<p><strong>gesture.rs</strong></p>
+<ul>
+<li><strong>ZTGestureTraceInputToken</strong> — token</li>
+</ul>
+<p><strong>managers.rs</strong></p>
+<ul>
+<li><strong>ZTAppLifecycleCommand</strong> — message, target_context, payload</li>
+<li><strong>ZTViewableObjectRecord</strong> — entity_id, entity_type, view_value, max_tour_view_value</li>
+<li><strong>ZTViewableStationRecord</strong> — station_entity, viewed_entities, score</li>
+<li><strong>ZTAwardRecord</strong> — award_id, loc_id, persistent</li>
+<li><strong>ZTFeedbackMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>ZTPuzzleState</strong> — puzzle_id, layout_name, solved</li>
+<li><strong>ZTPuzzleAction</strong> — action_name, target</li>
+<li><strong>ZTPuzzleStep</strong> — step_id, required_action, target, complete</li>
+<li><strong>ZTWorldMgrContextConfig</strong> — source_path, config_data, default_world_size, attributes</li>
+<li><strong>ZTUndoMgrContextConfig</strong> — source_path, saveable, attributes</li>
+<li><strong>BFUndoAction</strong> — action_type, target_id, payload</li>
+<li><strong>ZTUndoStation</strong> — station_entity, return_station</li>
+<li><strong>BFAITokenDispatch</strong> — token_name, source_entity, target_entity, forced</li>
+<li><strong>BFAICognitiveCompletion</strong> — entity_id, task_name, succeeded</li>
+<li><strong>BFAIRelationshipEvent</strong> — subject, target, relation_type, message</li>
+<li><strong>BFAIRelationshipRecord</strong> — subject, target, relation_type, score</li>
+<li><strong>BFGEntityTriggerEvent</strong> — trigger_name, entity_id, payload</li>
+<li><strong>BFGInfluenceMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>BFGInfluenceTerrainRule</strong> — rule_name, key, value, radius, radius_dropoff</li>
+<li><strong>BFGInfluenceEffect</strong> — source_entity, target_entity, influence_type, scalar</li>
+<li><strong>BFGPathFinderMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>BFGConnectedPathRecalc</strong> — entity_id, elapsed_seconds, interval_seconds</li>
+<li><strong>BFGRampageSuppressionRecord</strong> — animal_entity, timeout_seconds, elapsed_seconds</li>
+<li><strong>BFGRampageEvent</strong> — animal_entity, message, triggered_drt, sound_distance</li>
+<li><strong>BFGRampageSoundPolicy</strong> — interp_scalar, max_distance, distance_for_max_volume</li>
+<li><strong>BFGDinoRecoveryDispatch</strong> — animal_entity, team_entity, crate_entity, task_token</li>
+<li><strong>BFGTraversabilityCommand</strong> — command_name, payload</li>
+<li><strong>BFGTraversabilityAreaWrite</strong> — area_id, changed_triangle_indices, immediate_triangle_indices</li>
+<li><strong>BFGTraversabilityEntityRule</strong> — entity_type, motion_class, required_open_area_size</li>
+<li><strong>BFGDistantViewType</strong> — view_type, display_motion_class</li>
+<li><strong>BFGTraversabilityMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>ZTLocationEntry</strong> — location_id, entity_id, position, biome</li>
+<li><strong>ZTViewableSubMgrStation</strong> — station_entity, viewed_animals, score</li>
+<li><strong>ZTAIGuestMgrContextConfig</strong> — source_path, config_data, saveable, attributes</li>
+<li><strong>ZTSpawnPriceEffect</strong> — percent_range_min, percent_range_max, percent_delta, percent_adjust</li>
+<li><strong>ZTSpawnAnimalEffects</strong> — num_species_per_adjust, percent_adjust_per_num_species, max_percent_adjust</li>
+<li><strong>ZTSpawnNeedEffects</strong> — critical_check_interval, max_critical_need_hits_per_month, max_edu_points_per_view, max_ent_points_per_view, monitored_needs</li>
+</ul>
+<p><strong>menu_profile_campaign_scenario.rs</strong></p>
+<ul>
+<li><strong>ZTExpansionInfo</strong> — expansion_id, display_name, version, enabled</li>
+</ul>
+<p><strong>modes.rs</strong></p>
+<ul>
+<li><strong>ZTModeHotKeyFile</strong> — file, node</li>
+<li><strong>ZTSelectionEndangermentLocId</strong> — token, loc_id</li>
+<li><strong>ZTThoughtItemTemplate</strong> — priority, file</li>
+<li><strong>ZTDeleteGroup</strong> — name, type_tokens</li>
+<li><strong>ZTFirstPersonMouseLookTransition</strong> — active</li>
+<li><strong>ZTModeDelayConfig</strong> — name, delay_seconds</li>
+<li><strong>ZTTrainingEventPercentValue</strong> — event_count, percent_of_score</li>
+<li><strong>ZTTrainingNativeCursorContract</strong> — wait_cursor, training_cursor</li>
+<li><strong>ZTTrainingNativeGesturePointerContract</strong> — texture_sequence, terminal_frame</li>
+<li><strong>ZTUIParticleEffects</strong> — effects</li>
+<li><strong>ZTFPTrainingRewardEffect</strong> — animal_entity, effect</li>
+<li><strong>ZTOverviewModeAnimalIcon</strong> — entity_type, icon_name</li>
+<li><strong>ZTOverviewModeBuildingIcon</strong> — entity_type, icon_name</li>
+<li><strong>ZTOverviewFilter</strong> — category, type_name, enabled</li>
+<li><strong>ZTViewFilterState</strong> — token, visible</li>
+<li><strong>ZTOverviewMapProjection</strong> — world_bounds, screen_region, zoom</li>
+<li><strong>ZTOverviewClickTarget</strong> — entity_id, screen_x, screen_y</li>
+<li><strong>ZTDeleteConfirmationState</strong> — message_token, confirmed, cancel_token</li>
+<li><strong>ZTGroundTrackEndpoint</strong> — entity_id, endpoint_token, station_token</li>
+<li><strong>ZTGroundTrackCircuit</strong> — circuit_id, forward_segments, closed_circuit</li>
+<li><strong>ZTGuestViewTarget</strong> — guest_entity, tag_file</li>
+<li><strong>ZTGuestViewCameraBinding</strong> — yaw, pitch, zoom</li>
+<li><strong>ZTCurbAnchor</strong> — tile_x, tile_y, level</li>
+</ul>
+<p><strong>photo.rs</strong></p>
+<ul>
+<li><strong>ZTPhotoChallengeScoreThresholds</strong> — dist_from_camera, percent_seen, percent_seen_in_center</li>
+<li><strong>ZTPhotoChallengeMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
+</ul>
+<p><strong>placement.rs</strong></p>
+<ul>
+<li><strong>ZTPlacementValidation</strong> — accepted, message_token</li>
+<li><strong>ZTPlacementModeCommandRequest</strong> — command_name, entity_type</li>
+<li><strong>ZTPlacementModeCommandDecision</strong> — command_name, entity_type, active_entity_type, single_object_placement, accepted</li>
+<li><strong>ZTPlacementCommitRequest</strong> — command_name, entity_type, target_entity, platform_confirmation_branch</li>
+<li><strong>ZTPlacementCommitDecision</strong> — command_name, entity_type, target_entity, platform_confirmation_branch, fallback_mode_token, accepted</li>
+<li><strong>ZTEntityMovementModeState</strong> — selected_entity, original_location, candidate_location</li>
+<li><strong>ZTElevatedPathPlacementState</strong> — mode_token, height, anchor_entity, supports_required</li>
+<li><strong>ZTItemFilter</strong> — filter_name, selected_values</li>
+</ul>
+<p><strong>renderer.rs</strong></p>
+<ul>
+<li><strong>BFComponentNode</strong> — component_type, component_name, children</li>
+<li><strong>BFResourceEntryVirtualInterface</strong> — open_slot, enumerate_slot, predicate_slot, refresh_tree_slot, delete_slot</li>
+<li><strong>BFResourceEntryPredicate</strong> — normalized_key, helper_key, include_archives</li>
+<li><strong>BFRMaterialUvTransform</strong> — offset_u, offset_v, rotation_w, scale_u, scale_v</li>
+<li><strong>BFRMaterialTextureBinding</strong> — semantic, texture_path</li>
+<li><strong>BFRTransformBinding</strong> — semantic, matrix_source</li>
+<li><strong>BFRMaterialFlags</strong> — alpha_blend_enable, src_blend, dest_blend, no_render</li>
+<li><strong>BFREffectRenderer</strong> — renderer_type, emitter_name</li>
+<li><strong>BFREffectModifierBinding</strong> — emitter_name, modifier_name, usage, param</li>
+<li><strong>BFRModelMaterialSlot</strong> — slot_name, material_path, usage, param</li>
+<li><strong>BFRModelSourceBlockRecord</strong> — index, block_type</li>
+<li><strong>BFRModelSourceBlockTypeCount</strong> — block_type, count</li>
+<li><strong>BFRModelGeometryVisitor</strong> — visited_records, output_count, output_size_bytes</li>
+<li><strong>BFRModelGeometryIntersectionQuery</strong> — origin, direction, max_distance</li>
+<li><strong>BFRModelGeometryHit</strong> — distance, triangle_index, record_index</li>
+<li><strong>BFRModelTransform</strong> — position, direction, up</li>
+<li><strong>BFRModelCacheRecord</strong> — usage, param, looped, linked_resource</li>
+<li><strong>BFRModelParameterRecord</strong> — usage, param, value, looped</li>
+<li><strong>BFRTextureByteSizeRequest</strong> — format_code, width, height</li>
+<li><strong>BFRTextureByteSizeResult</strong> — bytes, block_width, block_height</li>
+<li><strong>BFDecorativeDetailObjectComponent</strong> — detail_level</li>
+<li><strong>BFSimpleLODComponent</strong> — standard_model, special_model</li>
+<li><strong>BFRVertexPT0</strong> — position, tex0</li>
+<li><strong>BFRVertexPNT0</strong> — position, normal, tex0</li>
+<li><strong>BFRVertexPNDT0T1</strong> — position, normal, diffuse, tex0, tex1</li>
+<li><strong>BFRVertexPNDT0T1T2</strong> — position, normal, diffuse, tex0, tex1, tex2</li>
+<li><strong>BFRVertexXPD</strong> — position, packed_data</li>
+<li><strong>BFWaterGroupMember</strong> — entity_id, tank_id, bounds</li>
+</ul>
+<p><strong>research.rs</strong></p>
+<ul>
+<li><strong>ZTResearchMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
+<li><strong>ZTResearchItemConfig</strong> — item_id, entity_type, fence_type, button_template, cost, time_until_unlock_seconds, duration_unlock_seconds, currently_researching, begun_researching, research_completed, research_completed_notified, source_ref</li>
+<li><strong>ZTResearchActiveRecord</strong> — progression_ref, source_button, elapsed_seconds, required_seconds, research_cost, progress</li>
+</ul>
+<p><strong>runtime_support.rs</strong></p>
+<ul>
+<li><strong>ZTAppComponentConfig</strong> — component_type, init_data, attributes</li>
+<li><strong>BFLogChannelConfig</strong> — channel, cutoff</li>
+<li><strong>BFRegistryAppConfig</strong> — app_key</li>
+<li><strong>ZTExtraPathsAppConfig</strong> — source_path, component_type, attributes</li>
+<li><strong>BFWindowComponentAppConfig</strong> — width, height, class_name, window_title, icon</li>
+<li><strong>BFContextCommand</strong> — message, target, payload</li>
+<li><strong>ZT2Strings</strong> — tables, locale, fallback_locale</li>
+<li><strong>ZTExtraPaths</strong> — bootstrapped, source_path, component_type, bootstrap_attributes, profile_root, save_root, download_root, screenshots_root</li>
+<li><strong>BFString</strong> — value</li>
+<li><strong>BFPoint</strong> — x, y</li>
+<li><strong>BFRect</strong> — left, top, right, bottom</li>
+<li><strong>BFTypedBinderChildRecord</strong> — name, binder_type, type_name, shared_node, instance_node</li>
+<li><strong>BFLoadListener</strong> — listener_name, phase</li>
+<li><strong>ZTLoadListener</strong> — listener_name, target_phase, layout, blit_rate_seconds</li>
+<li><strong>BFSafeHandleBase</strong> — handle_id, generation</li>
+<li><strong>BFUserProfileMgrOptionsInfo</strong> — app_name, extra_path, save_directory, temp_directory</li>
+<li><strong>BFUserProfileAddProfile</strong> — profile_name, source_path</li>
+<li><strong>BFUserProfileRemoveProfile</strong> — profile_name, delete_files</li>
+<li><strong>BFUserProfileSetProfile</strong> — profile_name</li>
+<li><strong>BFUserProfileOptionsChanged</strong> — profile_name, options_path</li>
+<li><strong>BFPerfIncreaseCommand</strong> — counter_name, amount</li>
+<li><strong>BFPerfDecreaseCommand</strong> — counter_name, amount</li>
+<li><strong>BFGraphicsPerfIncreaseCommand</strong> — counter_name, renderer_bucket</li>
+<li><strong>BFTimeHeartbeatEvent</strong> — elapsed_seconds, delta_seconds</li>
+<li><strong>BFTimeSimTickEvent</strong> — tick_index, sim_seconds</li>
+<li><strong>BFTimeSlowTickEvent</strong> — tick_index, elapsed_seconds</li>
+<li><strong>BFLogRecord</strong> — channel, message</li>
+<li><strong>BFStackTrace</strong> — frames</li>
+<li><strong>ZTCDCheck</strong> — last_result, failure_message</li>
+<li><strong>ZTWebIndexGetCommand</strong> — index_url, target_file</li>
+<li><strong>ZTWebMotdGetCommand</strong> — motd_url, target_file</li>
+<li><strong>ZTWebFileGetCommand</strong> — transfer_id, url, target_file</li>
+<li><strong>ZTWebFileEnableCommand</strong> — transfer_id, enabled</li>
+<li><strong>ZTWebFileGetCancelCommand</strong> — transfer_id, target_file</li>
+<li><strong>ZTWebGetFileDoneEvent</strong> — transfer_id, target_file, succeeded</li>
+<li><strong>ZTWebShowUpdateCommand</strong> — item_id, layout_path, force_visible</li>
+<li><strong>ZTLoggingConsent</strong> — accepted, registry_value, prompt_layout</li>
+<li><strong>ZTUsageObject</strong> — object_id, entity_id, active</li>
+<li><strong>ZTMemTrackingDumpCommand</strong> — destination, include_stack_traces</li>
+<li><strong>ZTMemTrackingClearCommand</strong> — reset_counters</li>
+<li><strong>ZTPerformanceStatsDumpCommand</strong> — destination, include_graphics_perf</li>
+<li><strong>ZTOptimizationToggle</strong> — optimization_name, enabled</li>
+<li><strong>ZTUiDrawToggle</strong> — draw_ui, source_message</li>
+<li><strong>ZTDebugToggleCommand</strong> — command_name, enabled, payload</li>
+<li><strong>ZTDebugActionCommand</strong> — command_name, payload</li>
+<li><strong>ZTRetailBuild</strong> — retail_flag, build_token</li>
+<li><strong>ZTVinceQuestionAnswer</strong> — question_id, answer, accepted</li>
+</ul>
+<p><strong>scenario.rs</strong></p>
+<ul>
+<li><strong>BFScenarioRuleTest</strong> — predicate, subject, value</li>
+<li><strong>ZTScenarioMgrContextConfig</strong> — source_path, init_data, config_data, saveable, attributes</li>
+<li><strong>BFScenarioSetChallengeDelayCommand</strong> — challenge_id, delay_seconds</li>
+<li><strong>BFScenarioHideRuleCommand</strong> — rule_name</li>
+<li><strong>BFScenarioSetGlobalVarCommand</strong> — variable_name, value</li>
+<li><strong>BFScenarioSetUserValCommand</strong> — key, value</li>
+<li><strong>BFScenarioGetRuleNamesCommand</strong> — include_hidden</li>
+<li><strong>BFScenarioLoadScenarioCommand</strong> — scenario_path, load_count</li>
+<li><strong>BFScenarioSaveOptionsCommand</strong> — profile_name, options_path</li>
+<li><strong>BFScenarioGetAllChallengesCommand</strong> — campaign_id</li>
+<li><strong>BFScenarioOkCommand</strong> — request_id</li>
+<li><strong>BFScenarioErrorCommand</strong> — request_id, message</li>
+<li><strong>BFScenarioClearScenarioCommand</strong> — clear_world, clear_rules</li>
+<li><strong>BFScenarioLocalizeFloatCommand</strong> — value, format_token</li>
+<li><strong>BFScenarioResetRuleStatesCommand</strong> — include_completed</li>
+<li><strong>BFScenarioGetGlobalVarCommand</strong> — variable_name</li>
+<li><strong>BFScenarioShowRuleCommand</strong> — rule_name</li>
+<li><strong>BFScenarioAddScenarioCommand</strong> — scenario_id, group_name</li>
+<li><strong>BFScenarioGetRuleStateCommand</strong> — rule_name</li>
+<li><strong>BFScenarioValidateAllChallengesCommand</strong> — campaign_id</li>
+<li><strong>BFScenarioPickChallengeCommand</strong> — challenge_id</li>
+<li><strong>BFScenarioAddScenarioObjectCommand</strong> — object_type, object_id, target_rule</li>
+<li><strong>BFScenarioProcessVinceCommand</strong> — answer_id, accepted</li>
+<li><strong>BFScenarioGetUserValCommand</strong> — key</li>
+</ul>
+<p><strong>scripting.rs</strong></p>
+<ul>
+<li><strong>BFScriptActionRecord</strong> — action_name, script, function_name, payload</li>
+<li><strong>ZTScriptRunRequest</strong> — scope, script, function_name, arguments, raw_payload</li>
+<li><strong>ZTScriptUiReplacementText</strong> — target_name, locid, replacement</li>
+</ul>
+<p><strong>show.rs</strong></p>
+<ul>
+<li><strong>BFAITrickMgrData</strong> — trick_templates</li>
+<li><strong>BFAITrickTemplate</strong> — trick_token, default_trick, behavior_set, required_target</li>
+<li><strong>ZTAITrickMgrData</strong> — source_documents, tricks, tricks_by_animal_type, default_trick_by_variant, variants_by_default_trick</li>
+<li><strong>ZTAITrickComponentData</strong> — trick_token, display_loc_id, reward</li>
+<li><strong>ZTAITrickTargetComponent</strong> — trick_area, target_node</li>
+<li><strong>ZTTrickButtonPipConfig</strong> — dimension, scaled_width, scaled_height</li>
+</ul>
+<p><strong>staff.rs</strong></p>
+<ul>
+<li><strong>ZTAIStaffMgrContextConfig</strong> — source_path, config_data, saveable, cleanup_interval_seconds, attributes</li>
+<li><strong>ZTAIStaffTrainerComponent</strong> — trainee_animal, trick_token, training_area</li>
+<li><strong>ZTAIStaffJobStealPolicy</strong> — job_safe_distance, steal_job_threshold</li>
+<li><strong>ZTStaffWaterCleaningRequest</strong> — tank_entity, filter_entity, priority</li>
+</ul>
+<p><strong>tank.rs</strong></p>
+<ul>
+<li><strong>ZTTankChildEntry</strong> — entry_index, child_entity, child_type</li>
+<li><strong>ZTTankGateChildEntry</strong> — entry_index, child_entity, primary_tank_id, alternate_tank_id</li>
+<li><strong>ZTTankSegmentDetachState</strong> — primary_detached, alternate_detached, child_entries_released</li>
+<li><strong>ZTTankContainedEntity</strong> — entity_id, entity_type, water_compatibility</li>
+<li><strong>ZTTankWaterVolume</strong> — floor_height, water_height, depth</li>
+<li><strong>ZTTankCleanlinessState</strong> — cleanliness, active_filter_entities, dirty</li>
+<li><strong>ZTTankMaterialPolicy</strong> — high_detail_suffix, low_detail_suffix, texture_reflect, water_detail</li>
+<li><strong>ZTTankHeightCommand</strong> — tank_id, height, from_ui_message</li>
+<li><strong>ZTTankModeCommand</strong> — mode, source_message</li>
+<li><strong>ZTTankFillCommand</strong> — tank_id, source_message</li>
+<li><strong>ZTTankDrainCommand</strong> — tank_id, source_message</li>
+<li><strong>ZTTankDeleteCommand</strong> — tank_id, preserve_contents</li>
+<li><strong>ZTReplaceZooWallsCommand</strong> — old_wall_type, new_wall_type, selected_only</li>
+</ul>
+<p><strong>terrain.rs</strong></p>
+<ul>
+<li><strong>BFGBiomeData</strong> — display_name_token, water, overview_color, draw_order</li>
+<li><strong>BFGBiomeObjects</strong> — detail_objects, decorative_detail_objects, autoplacement_variations</li>
+</ul>
+<p><strong>transport.rs</strong></p>
+<ul>
+<li><strong>ZTToggleCircuitStatusCommand</strong> — circuit_id, active</li>
+<li><strong>ZTSelectStationComponentCommand</strong> — station_entity, component_name</li>
+<li><strong>ZTSelectVehicleTypeCommand</strong> — vehicle_type, circuit_id</li>
+<li><strong>ZTGenerateVehicleCommand</strong> — vehicle_type, station_entity, circuit_id</li>
+</ul>
+<p><strong>ui_binding.rs</strong></p>
+<ul>
+<li><strong>ZTGoalPanelEntry</strong> — goal_id, loc_id, completed, hidden</li>
+<li><strong>ZTZoopediaTOCEntry</strong> — entry_id, parent_id, loc_id, page_path</li>
+<li><strong>BFNullEvent</strong> — message</li>
+<li><strong>BFBooleanEvent</strong> — message, value</li>
+<li><strong>BFIntEvent</strong> — message, value</li>
+<li><strong>BFUIntEvent</strong> — message, value</li>
+<li><strong>BFFloatEvent</strong> — message, value</li>
+<li><strong>BFDoubleEvent</strong> — message, value</li>
+<li><strong>BFStringEvent</strong> — message, value</li>
+<li><strong>BFStringTokenEvent</strong> — message, token</li>
+<li><strong>BFTypeEvent</strong> — message, type_name</li>
+<li><strong>BFRefCountedXMLObjEvent</strong> — message, object_type, ref_count</li>
+<li><strong>UIKeyboardEvent</strong> — key_code, raw_key, command</li>
+<li><strong>UIMouseEvent</strong> — event_name, x, y, wheel_delta, dragging</li>
+<li><strong>BFStringObj</strong> — value</li>
+<li><strong>BFPoint</strong> — x, y, z</li>
+<li><strong>UIHandle</strong> — component_name, runtime_handle, object_type</li>
+<li><strong>UIAck</strong> — ok, error</li>
+<li><strong>UISettingsChangedData</strong> — graphics_changed, audio_changed, controls_changed, profile_changed</li>
+<li><strong>UICursorState</strong> — cursor_name, visible, owner_component</li>
+<li><strong>UIModalState</strong> — modal_component, previous_focus, blocked_components</li>
+<li><strong>UINameData</strong> — name, parent_name</li>
+<li><strong>UIParentData</strong> — parent_name, child_name</li>
+<li><strong>ZTFeedbackRecord</strong> — loc_id, sound, click_target, message, thought, action, emoticon, text, attributes</li>
+<li><strong>ZTActionInfo</strong> — action_token, loc_id, icon, enabled</li>
+<li><strong>ZTMoneyText</strong> — amount, formatted, positive_color, negative_color</li>
+<li><strong>ZTOverviewData</strong> — animal_icons, building_icons, filters</li>
+</ul>
+<p><strong>ui_contract.rs</strong></p>
+<ul>
+<li><strong>UIButtonEventBinding</strong> — event_name, command, data, target</li>
+<li><strong>UIHoverState</strong> — hovered, enter_event_count, leave_event_count</li>
+<li><strong>UIContainerLayout</strong> — auto_size, auto_size_parent, columns, rows, x_spacer, y_spacer, column_width, row_height, initial_x, initial_y</li>
+<li><strong>UIListBoxEntry</strong> — entry_id, layout, text, icon, selected</li>
+<li><strong>UIDragBounds</strong> — min_width, max_width, min_height, max_height, bounded, dragging</li>
+<li><strong>UIDropListItem</strong> — item_id, text, value</li>
+<li><strong>UISoundBinding</strong> — name, path, event</li>
+<li><strong>UIStaticState</strong> — rows</li>
+<li><strong>UITextBufferState</strong> — lines, scroll_offset</li>
+<li><strong>UIToolState</strong> — command, active</li>
+<li><strong>UITooltipState</strong> — target, tooltip_type, float, appear_seconds, display_seconds, help_ids, name_help, short_help, long_help, help_token</li>
+<li><strong>UITreeElementState</strong> — item_id, expanded, selected</li>
+<li><strong>UIWindowState</strong> — title, modal, draggable, horizontal, vertical, wheel_scroll, hscroll, vscroll</li>
+<li><strong>UIXMLEditState</strong> — document_path, dirty</li>
+<li><strong>BFUITextFontTag</strong> — name, size, image, shadow_x, shadow_y, shadow_alpha</li>
+<li><strong>BFUITextImageTag</strong> — source, source_x, source_y, source_width, source_height, width, height</li>
+<li><strong>BFUITextCellTag</strong> — width, pad_x, pad_y</li>
+</ul>
+<p><strong>world.rs</strong></p>
+<ul>
+<li><strong>BFGEventRoot</strong> — root_name, listeners, events</li>
+<li><strong>BFGEventRecord</strong> — message, subject_entity, target_entity, payload_type, payload</li>
+<li><strong>BFGAttachWorldCommand</strong> — world_id, map_path, source_message</li>
+<li><strong>BFGAttachGameCommand</strong> — game_id, profile_name, startup_context</li>
+<li><strong>BFGCameraYawQuery</strong> — camera_entity, yaw</li>
+<li><strong>BFGEntityRemovalResult</strong> — removed_entities, failed_entities, emitted_event</li>
+<li><strong>BFGDerivedTypesQuery</strong> — base_type, include_abstract, results</li>
+<li><strong>BFGPlacementGridContextConfig</strong> — source_path, saveable, attributes</li>
+<li><strong>BFGCollisionMgrContextConfig</strong> — source_path, saveable, attributes</li>
+<li><strong>BFGDetachInfo</strong> — detach_action, detach_beh_set, parent_obj, child_obj, parent_entity, child_entity</li>
+<li><strong>BFGPoint3Attribute</strong> — name, value</li>
+<li><strong>BFGFloatAttribute</strong> — name, value</li>
+<li><strong>BFGStringAttribute</strong> — name, value</li>
+<li><strong>BFGBooleanAttribute</strong> — name, value</li>
+<li><strong>BFFakePhysicsComponent</strong> — velocity, acceleration</li>
+<li><strong>BFComponentScriptHook</strong> — event_name, function_name</li>
+<li><strong>ZTExpandoHeight</strong> — height_absolute, min_height, default_height, current_height</li>
+<li><strong>ZTExpandoPiece</strong> — name, binder_name, attach_node</li>
+<li><strong>ZTAdmissionControls</strong> — adult_admission_token, selected_index, members_token</li>
+<li><strong>ZTBalanceSheetView</strong> — category_list, item_list, month_labels, monthly</li>
+<li><strong>ZTZooSurveyQuestion</strong> — question_id, loc_id, value_type</li>
+<li><strong>ZTZooSurveyAnswer</strong> — question_id, value</li>
+<li><strong>ZTZoopediaPage</strong> — entry_id, page_number, text_token, previous_entry, next_entry</li>
+</ul>
 <h3>Open Contract Register</h3>
 <p>Open contracts mark native surfaces that remain explicit until established from
 source data and authored content. Cross-cutting unknowns:</p>
