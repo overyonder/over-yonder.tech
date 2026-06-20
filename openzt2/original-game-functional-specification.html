@@ -1736,7 +1736,11 @@ context:</p>
     +pending_script_actions
   }
   class BFScenarioMgr { +groups[]; +rules_by_name : Vec~BFScenarioRuleState~; +active_challenge }
-  class Campaign { +campaign_id; +xpack; +display_name; +scenarios : Vec~BFScenarioMapEntry~ }
+  class Campaign {
+    +campaign_id; +xpack; +display_name
+    +scenarios : Vec~BFScenarioMapEntry~
+    +unlock_rules; +current_scenario
+  }
   class BFScriptContextMgr {
     +config_path; +cache_scripts
     +loaded_contexts : Vec~BFScriptContext~
@@ -1752,8 +1756,6 @@ context:</p>
   BFScriptContextMgr "1" *-- "*" BFScriptContext
   BFScriptContext *-- BFScriptFunctionBinding
   BFScriptFunctionBinding ..> BFSMessage : exported BFS_* command binding</pre>
-<p>Campaigns (<code>BFCampaign</code>/<code>Campaign</code>) carry <code>unlock_rules</code> and a
-<code>current_scenario</code> over the rule tree.</p>
 <h3>Campaigns, Maps, Photo Challenges, and Profile</h3>
 <p><code>ZTMapData</code> (<code>&lt; BFComponent</code>) holds map/campaign list data; <code>ZTGameMode</code> (<code>&lt; ZTMode</code>)
 is the in-game interaction mode; <code>ZTGoalPanel</code> (<code>&lt; UIListBox</code>) shows goals. Photo
