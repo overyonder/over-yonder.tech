@@ -981,10 +981,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00436ba1	38	get_ZTGuestViewMode_ui_handler_registry			confirmed			
 0x00436bdd	83	resolve_ZTGuestViewMode_ui_handler_value			confirmed		0x008c3b70#178	
 0x00436cd1	193	destroy_ZTGuestViewMode			confirmed			
-0x00436e54	189		tool modes, input bridges, UI primitives, and placement helpers		unidentified		0x008c3b70#154	ui(high)
-0x00436f11	95		tool modes, input bridges, UI primitives, and placement helpers		unidentified		0x008c3b70#176	ui(medium)
-0x00436f70	591		tool modes, input bridges, UI primitives, and placement helpers		unidentified		0x008c3b70#14	ui(medium)
-0x004371bf	451		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x00436e54	189	handle_ZTGuestViewMode_mouse_move_value			confirmed		0x008c3b70#154	ui(high)
+0x00436f11	95	make_ZTGuestViewMode_guest_view_tile_count_value			confirmed		0x008c3b70#176	ui(medium)
+0x00436f70	591	update_ZTGuestViewMode_frame			confirmed		0x008c3b70#14	ui(medium)
+0x004371bf	451	collect_ZTGuestViewMode_guest_view_tiles			confirmed			ui(high)
 0x00437382	75	detach_ZTGuestViewMode_objects_from_index			confirmed			
 0x004373cd	189	read_ZTGuestViewMode_config			confirmed		0x008c3b70#20	
 0x004374a0	82	register_ZTGuestViewMode_ui_handlers			confirmed			
@@ -992,8 +992,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004375d2	160	insert_ZTGuestViewMode_ui_handler_node			confirmed			
 0x00437672	117	register_ZTGuestViewMode_ui_handler_entries			confirmed			
 0x004376e7	40	as_BFGTraversabilityMgr			confirmed			
-0x0043770f	105		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
-0x00437778	93		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(high)
+0x0043770f	105	copy_construct_red_black_tree_storage_with_header_links			confirmed			ui(high)
+0x00437778	93	clone_red_black_tree_nodes_recursive			confirmed			ui(high)
 0x004377d5	47	get_type_ZTLoadMode			confirmed			
 0x00437809	32	init_ZTLoadMode_descriptor_ref			confirmed			
 0x0043782e	73	get_ZTLoadMode_ui_handler_registry			confirmed			
@@ -1014,68 +1014,68 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004384f3	47	get_type_ZTMainMode			confirmed			
 0x00438527	32		tool modes, input bridges, UI primitives, and placement helpers		unidentified			ui(medium)
 0x0043854c	73	initialize_ui_value_handler_registry_state			confirmed			
-0x004385ab	83		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#214	ui(high)
+0x004385ab	83	resolve_ZTMainMode_ui_handler_value			confirmed		0x008c47d8#214	ui(high)
 0x004385fe	839	register_scenario_campaign_ui_value_handlers			confirmed			
-0x00438945	458		scenario, campaign, map-selection UI, and mode registry		unidentified			threading/sync(medium)
-0x00438b2a	314		scenario, campaign, map-selection UI, and mode registry		unidentified			threading/sync(medium)
-0x00438c64	59		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x00438c9f	326		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#140	ui(high)
+0x00438945	458	construct_ZTMainMode			confirmed			threading/sync(medium)
+0x00438b2a	314	destroy_ZTMainMode			confirmed			threading/sync(medium)
+0x00438c64	59	find_ZTMainMode_map_entry_payload_by_key			confirmed			ui(high)
+0x00438c9f	326	populate_ZTMainMode_credits_timed_events			confirmed		0x008c47d8#140	ui(high)
 0x00438de5	1368	populate_main_menu_shell			confirmed		0x008c47d8#138	
 0x0043933d	258		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#139	ui(high)
-0x0043943f	75		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#20	ui(medium)
-0x0043948a	820		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#176	ui(high)
-0x004397be	351		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#184	ui(high)
-0x0043991d	149		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#185	ui(high)
-0x004399b2	90		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#186	ui(high)
-0x00439a0c	90		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#187	ui(high)
-0x00439a66	352		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#191	ui(high)
-0x00439bef	583		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#188	ui(high)
-0x00439e7a	380		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#190	ui(high)
-0x00439ff6	360		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#14	ui(high)
-0x0043a15e	128		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#177	ui(high)
-0x0043a1de	49		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#178	ui(high)
-0x0043a20f	140		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#179	ui(medium)
-0x0043a2a9	115		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#206	ui(medium)
-0x0043a31c	53		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#208	ui(medium)
+0x0043943f	75	read_ZTMainMode_config	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#20	ui(medium)
+0x0043948a	820	handle_ZTMainMode_load_map_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#176	ui(high)
+0x004397be	351	handle_ZTMainMode_main_menu_music_start	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#184	ui(high)
+0x0043991d	149	handle_ZTMainMode_main_menu_music_volume	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#185	ui(high)
+0x004399b2	90	handle_ZTMainMode_main_menu_music_stop	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#186	ui(high)
+0x00439a0c	90	handle_ZTMainMode_main_menu_music_start_fading	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#187	ui(high)
+0x00439a66	352	sync_ZTMainMode_profile_delete_button_state	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#191	ui(high)
+0x00439bef	583	handle_ZTMainMode_create_profile_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#188	ui(high)
+0x00439e7a	380	handle_ZTMainMode_delete_profile_success_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#190	ui(high)
+0x00439ff6	360	update_ZTMainMode_frame	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#14	ui(high)
+0x0043a15e	128	handle_ZTMainMode_motd_items_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#177	ui(high)
+0x0043a1de	49	forward_ZTMainMode_value_to_motd_receiver	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#178	ui(high)
+0x0043a20f	140	show_ZTMainMode_wait_cursor	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#179	ui(medium)
+0x0043a2a9	115	handle_ZTMainMode_confirm_exit_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#206	ui(medium)
+0x0043a31c	53	handle_ZTMainMode_set_binderroot_reloadable_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#208	ui(medium)
 0x0043a351	740	emit_run_script_payload			candidate		0x008c47d8#209	
-0x0043a635	175		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#182	ui(high)
+0x0043a635	175	handle_ZTMainMode_setmode_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#182	ui(high)
 0x0043a70f	870	handle_tutorial_prompt			confirmed			
-0x0043aa75	109		scenario and campaign UI value handler registry tail		unidentified			ui(high)
-0x0043aae2	186		scenario and campaign UI value handler registry tail		unidentified			ui(high)
-0x0043ab9c	279		scenario and campaign UI value handler registry tail		unidentified			ui(high)
-0x0043acb3	115		scenario and campaign UI value handler registry tail		unidentified			ui(high)
+0x0043aa75	109	bind_ZTMainMode_main_menu_event_receiver	scenario and campaign UI value handler registry tail		confirmed			ui(high)
+0x0043aae2	186	populate_ZTMainMode_profile_list_entries	scenario and campaign UI value handler registry tail		confirmed			ui(high)
+0x0043ab9c	279	create_ZTMainMode_profile_entry_button	scenario and campaign UI value handler registry tail		confirmed			ui(high)
+0x0043acb3	115	remove_ZTMainMode_profile_entry_button	scenario and campaign UI value handler registry tail		confirmed			ui(high)
 0x0043ad26	5979	populate_selected_map_scenario_details			confirmed		0x008c47d8#193	
-0x0043c481	93		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#198	ui(high)
+0x0043c481	93	handle_ZTMainMode_set_game_mode_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#198	ui(high)
 0x0043c4de	211	find_current_ZTMapData_node			confirmed			
 0x0043c5b1	585	build_expansion_purchase_icon_image_node			confirmed			
 0x0043c7fa	1389	refresh_campaign_scenario_map_lists			confirmed		0x008c47d8#199	
-0x0043cd67	730		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#200	ui(high)
+0x0043cd67	730	handle_ZTMainMode_set_xpack_filter_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#200	ui(high)
 0x0043d041	2652	populate_campaign_list			confirmed		0x008c47d8#194	
-0x0043da9d	62		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#201	ui(medium)
+0x0043da9d	62	handle_ZTMainMode_scenario_selection_changed_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#201	ui(medium)
 0x0043dadb	643	load_next_scenario			confirmed		0x008c47d8#202	
-0x0043dd5e	84		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#203	ui(medium)
+0x0043dd5e	84	handle_ZTMainMode_save_screenshot_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#203	ui(medium)
 0x0043ddb2	4113	populate_campaign_scenario_list			confirmed		0x008c47d8#195	
 0x0043ee05	90	store_starting_scenario_cash_slider_value			confirmed		0x008c47d8#197	
 0x0043ee5f	212	clear_selected_map_list_ui_state			confirmed			
-0x0043ef33	346		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c47d8#175	ui(high)
+0x0043ef33	346	update_ZTMainMode_child_mode_sprites_and_camera	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#175	ui(high)
 0x0043f097	959	read_campaign_scenario_entry			confirmed		0x008c47d8#212	
 0x0043f456	519	read_expansion_install_info			confirmed			
-0x0043f65d	261		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
+0x0043f65d	261	run_customer_feedback_layout_modal_until_answered	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
 0x0043f762	122	handle_accept_logging			candidate			
 0x0043f7dc	121	handle_decline_logging			candidate			
 0x0043f855	77	handle_vince_question_answered			candidate			
 0x0043f8a2	101	append_refcounted_pointer_to_vector			confirmed			
 0x0043f907	59	clear_refcounted_pointer_vector			confirmed			
-0x0043f942	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x0043f962	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x0043fa02	132		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x0043fa86	105		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
+0x0043f942	32	advance_checked_16byte_vector_iterator	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
+0x0043f962	160	get_or_insert_inline_string_keyed_tree_value_payload	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
+0x0043fa02	132	erase_inline_string_keyed_tree_equal_range	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
+0x0043fa86	105	count_inline_string_keyed_tree_equal_range	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
 0x0043faef	91	init_named_ui_value_assignment_list			confirmed			
 0x0043fb60	153	register_ui_value_handler			confirmed			
 0x0043fc40	111	grow_refcounted_pointer_vector_for_append			confirmed			
 0x0043fcaf	75	erase_refcounted_pointer_vector_range			confirmed			
 0x0043fcfa	47	construct_refcounted_pointer_vector_element			confirmed			
-0x0043fd29	384		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
+0x0043fd29	384	insert_inline_string_keyed_tree_node_or_return_existing	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
 0x0043fea9	115		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0043ff1c	47		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0043ff4b	401		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)

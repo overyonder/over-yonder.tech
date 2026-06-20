@@ -60,733 +60,984 @@ materials, models, textures, audio, saves, and packages. It does not need to
 preserve the original C++ memory layout, allocator behaviour, STL container
 choices, pointer graph, vtable mechanics, or duplicate transient trees unless
 one of those mechanics is part of an observable or persisted contract.</p>
-<h2>Implementation Completion Tracker</h2>
-<p>This tracker is a work board for the Rust overhaul, with status assigned from
-the accepted functional specification, live Rust modules/loaders/systems, and
-the classified binary perimeter. It tracks current evidence state rather than
-percentage complete. A <code>recorded</code> row means Rust has records for a source/domain
-surface; source hydration and runtime execution are stated only when the
-capability cell names them. A row is ready for assignment when its <code>Unlock</code> cell
-names the first concrete source file family, handler group, binary contract, or
-runtime path to inspect or implement.</p>
-<p>Badge meanings:</p>
+<h2>Implementation Strategy Map</h2>
+<p>The implementation separates original contracts, OpenZT2 semantic domains, and
+host substrate responsibilities. The functional specification owns the original
+class, manager, message, and source-data surfaces. This plan owns the Rust/Bevy
+runtime strategy that executes those surfaces.</p>
+<pre class="mermaid">flowchart TB
+  Spec["Original contract<br/>types, managers, messages, source schemas,<br/>state transitions, open native contracts"]
+  Source["Source hydration<br/>Z2F, paths, XML/BFXML/MAXML, localization,<br/>binders, registries, source format loaders"]
+  Domains["OpenZT2 semantic domains<br/>UI/app/modes, entity/animal/catalog,<br/>world/construction, AI/behavior,<br/>progression, scenario/script/save/photo"]
+  Presentation["Presentation contracts<br/>renderer, materials, models, animation,<br/>sprites, camera, audio"]
+  Host["Provided substrate and adapters<br/>Bevy ECS/app/assets/schedules/render/UI/window/input/time,<br/>bevy_asset_loader, bevy_kira_audio/Kira, mlua,<br/>image/dds/ktx2/nif decoders, OS/network/diagnostics"]
+  Workbook["Workbook checklist<br/>one row per domain/feature/subfeature"]
+
+  Spec --> Source --> Domains
+  Domains --> Presentation
+  Host --> Source
+  Host --> Domains
+  Host --> Presentation
+  Domains --> Workbook
+  Presentation --> Workbook</pre>
+<pre class="mermaid">classDiagram
+  class ProvidedSubstrateAndAdapters {
+    +Bevy runtime
+    +Bevy assets and loaders
+    +Kira audio backend
+    +mlua script substrate
+    +decoder crates and host APIs
+  }
+  class SourceHydrationAndRegistries {
+    +Z2F archives and asset paths
+    +XML/BFXML/MAXML documents
+    +localization
+    +BFTypedBinder hydration
+    +type and message registries
+    +source format loaders
+  }
+  class AppUiAndModes {
+    +app shell and startup
+    +retained UI runtime
+    +message/value dispatch
+    +mode stack and tools
+    +menu/profile/options surfaces
+  }
+  class EntityAnimalCatalogSelection {
+    +entity component graph
+    +animal source/runtime state
+    +selection and info panels
+    +catalog and Zoopedia
+    +adoption and release
+  }
+  class WorldAndConstruction {
+    +terrain, biome, water
+    +placement and undo
+    +collision/traversability/pathfinding
+    +fences, paths, tanks
+    +transport rides
+  }
+  class AiBehaviorMovementGuestsStaffShows {
+    +tasks, thinkers, tokens
+    +behavior verbs
+    +steering and locomotion
+    +guest needs and donations
+    +staff, shows, tours, gestures
+  }
+  class EconomyProgressionStatus {
+    +cash and transactions
+    +fame and zoo rating
+    +research and unlocks
+    +disease and cure
+    +awards, feedback, predicates
+  }
+  class ScenarioScriptPersistencePhoto {
+    +scenario/campaign/tutorial
+    +BFS API and Lua execution
+    +profile/options
+    +save/load packages
+    +photo albums and challenges
+  }
+  class PresentationContracts {
+    +renderer bridge
+    +materials/effects/particles
+    +models/scenes/animation
+    +camera
+    +sprites/text/audio
+  }
+  SourceHydrationAndRegistries --> AppUiAndModes
+  SourceHydrationAndRegistries --> EntityAnimalCatalogSelection
+  SourceHydrationAndRegistries --> WorldAndConstruction
+  SourceHydrationAndRegistries --> AiBehaviorMovementGuestsStaffShows
+  SourceHydrationAndRegistries --> EconomyProgressionStatus
+  SourceHydrationAndRegistries --> ScenarioScriptPersistencePhoto
+  AppUiAndModes --> PresentationContracts
+  EntityAnimalCatalogSelection --> PresentationContracts
+  WorldAndConstruction --> PresentationContracts
+  AiBehaviorMovementGuestsStaffShows --> PresentationContracts
+  EconomyProgressionStatus --> AppUiAndModes
+  ScenarioScriptPersistencePhoto --> AppUiAndModes
+  ProvidedSubstrateAndAdapters ..> SourceHydrationAndRegistries
+  ProvidedSubstrateAndAdapters ..> PresentationContracts</pre>
+<h2>Implementation Work Board</h2>
+<p>Status values describe the current implementation evidence:</p>
 <table>
 <thead>
 <tr>
-  <th>Badge</th>
+  <th>Status</th>
   <th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>Finite evidence/register surface is exhausted enough to depend on it.</td>
+  <td><code>done</code></td>
+  <td>Closed finite evidence/register surface.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>The Rust/Bevy executable has a live path for this capability.</td>
+  <td><code>runs</code></td>
+  <td>Live Rust/Bevy execution path exists.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Source data or file format parses/hydrates into Rust values.</td>
+  <td><code>loaded</code></td>
+  <td>Source data or file format hydrates into Rust values.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Rust records fields, types, messages, or state shapes for the original surface.</td>
+  <td><code>recorded</code></td>
+  <td>Rust records fields, types, messages, or state shapes.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Source/binary/formula behavior must be recovered before implementation.</td>
+  <td><code>recover</code></td>
+  <td>Source/binary/formula behavior must be recovered.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#9d0006;color:#fbf1c7;font-weight:700">map</span></td>
-  <td>Known product area lacks a focused Rust owner or source inventory.</td>
+  <td><code>map</code></td>
+  <td>Known product area needs a focused owner or source inventory.</td>
 </tr>
 <tr>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Original middleware mechanics are replaced behind the original contracts.</td>
+  <td><code>adapter</code></td>
+  <td>Middleware/host mechanics are replaced behind original contracts.</td>
 </tr>
 </tbody>
 </table>
-<p>Binary-perimeter progress has four buckets. Closed identification/support rows
-have byte-map-confirmed exact names, generated <code>.text$rx</code> support-code
-classification, rebuilt <code>.idata</code> import-data classification, or mapped-data
-classification. Adapter-owned middleware rows are replaced behind original
-contracts. The active product recovery frontier is the set of ZT/BlueFang
-domain-only and vtable-method rows whose owner is known while exact behavior
-contracts remain open. Uncharacterized rows are the tail that still lacks an
-owner; that count should stay at zero.</p>
-<h3>Source And Evidence</h3>
+<p>The <code>Domain</code>, <code>Feature</code>, and <code>Subfeature</code> hierarchy is the active task axis.
+The table stays concise; detailed original type surfaces remain in the
+functional specification.</p>
 <table>
 <thead>
 <tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
+  <th>Domain</th>
+  <th>Feature</th>
+  <th>Subfeature</th>
+  <th>Status</th>
+  <th>Reimplementation description</th>
+  <th>Next recovery/implementation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>Native class/type roster</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>2,068 registered native types and parent edges are documented.</td>
-  <td>Runtime factories and type-specific handlers still need per-domain attachment.</td>
-  <td>Use the roster as the closed list for type handles and factory dispatch.</td>
-</tr>
-<tr>
-  <td>Message token registry</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>1,084 registered message/event tokens are grouped by family.</td>
-  <td>Most token handler bodies remain open.</td>
-  <td>Attach tokens to the feature row whose manager owns the side effect.</td>
-</tr>
-<tr>
-  <td>Binary perimeter classification</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>All 19,145 perimeter entries carry a byte-map-confirmed exact name, middleware provenance, vtable role, inferred domain, generated support-code classification, rebuilt import-data classification, or mapped-data classification.</td>
-  <td>7,218 ZT/BlueFang domain-inferred entries and 367 vtable-method entries still need exact behavior contracts.</td>
-  <td>Pick frontier functions only from a product row below.</td>
-</tr>
-<tr>
-  <td>Z2F archive mount and asset paths</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td><code>content::z2f</code>, <code>content::path</code>, and the Bevy Z2F asset-source plugin mount shipped archives and serve bytes.</td>
-  <td>Archive-backed loading is incomplete for every asset class.</td>
-  <td>Convert remaining extraction/temp reads into Bevy asset-source reads.</td>
-</tr>
-<tr>
-  <td>XML/BFXML/MAXML parsing</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td><code>content::data</code> parses documents; startup hydration reads UI, config, and runtime documents.</td>
-  <td>Schema validation, include resolution, and original DOM write order are open.</td>
-  <td>Implement <code>BFXMLSchemaMgr</code> validation and source-location preserving storage.</td>
-</tr>
-<tr>
-  <td>BFTypedBinder source objects</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Binder identity, type/version keys, component refs, shared/instance documents, and event nodes are represented.</td>
-  <td>Precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, and by-name/by-type/by-kind lookup are unrecovered.</td>
-  <td>Recover binder readers and lookup callsites before adding gameplay consumers.</td>
-</tr>
-<tr>
-  <td>Shared entity-data maps</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td><code>BFAIEntityDataShared</code> maps <code>b_*</code>, <code>s_*</code>, <code>f_*</code>, and <code>p_*</code> property families.</td>
-  <td>Descriptor-table fields per component family are incomplete.</td>
-  <td>Enumerate descriptors from native readers and representative entity XML.</td>
-</tr>
-<tr>
-  <td>Model source formats</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td><code>content::model</code> parses BFB and substantial NetImmerse/NIF block families.</td>
-  <td>The current Bevy path still has transitional parsed-document model assets and renderer-side mesh manufacture. Full animation, skin, texture, and render binding semantics are incomplete.</td>
-  <td>Make <code>.nif</code> and <code>.bfb</code> loaders emit Bevy <code>Mesh</code>, material/image dependencies, <code>AnimationClip</code> assets where present, and a root model/scene asset consumed by handles.</td>
-</tr>
-<tr>
-  <td>Material, texture, sound, and package formats</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Asset loader entry points and some texture helpers exist.</td>
-  <td><code>.bfmat</code> still needs Bevy-native material output; <code>.fx</code>, sound tags, package variants, and <code>.z2s</code> layout are open.</td>
-  <td>Recover one file family at a time from shipped assets plus native load callsites, with loaders returning <code>Image</code>, Bevy/Kira audio, material, model, scene, animation, or structured source assets the runtime actually consumes.</td>
-</tr>
-</tbody>
-</table>
-<h3>App, UI, Menus, And Modes</h3>
-<table>
-<thead>
-<tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Bevy shell boot</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td><code>openzt2_shell</code>, <code>launch</code>, task pools, archive registration, plugins, window setup, and startup loading run.</td>
-  <td>Original <code>ZT2Client</code>/<code>BFApp</code> manager order is represented with many startup <code>todo!()</code> points.</td>
+  <td>Provided substrate and adapters</td>
+  <td>Bevy runtime</td>
+  <td>App, ECS, schedules, states, time, tasks</td>
+  <td><code>runs</code></td>
+  <td>Use Bevy as the live runtime store, scheduler, change tracker, and frame loop.</td>
   <td>Replace startup placeholders with recovered app/bootstrap order.</td>
 </tr>
 <tr>
-  <td>Startup document hydration</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Startup reads UI, template, catalog, runtime-support, shell-mode, and presentation source documents.</td>
-  <td>Hydration still publishes several aggregate resources and lacks original listener order.</td>
-  <td>Shrink startup resources into Bevy-owned runtime resources and recover load listeners.</td>
+  <td>Provided substrate and adapters</td>
+  <td>Bevy asset system</td>
+  <td>Asset sources, handles, loaders, loading states</td>
+  <td><code>runs</code></td>
+  <td>Mount original archives through Bevy asset readers and load source formats into runtime assets.</td>
+  <td>Convert remaining extraction/temp reads into archive-backed asset loads.</td>
 </tr>
 <tr>
+  <td>Provided substrate and adapters</td>
+  <td>Audio backend</td>
+  <td>Kira-backed playback and instances</td>
+  <td><code>adapter</code></td>
+  <td>Execute original sound commands through Bevy/Kira audio state.</td>
+  <td>Bind <code>BFSND_*</code> commands to sound-tag playback.</td>
+</tr>
+<tr>
+  <td>Provided substrate and adapters</td>
+  <td>Lua substrate</td>
+  <td><code>mlua</code> Lua 5.1 host with compatibility prelude</td>
+  <td><code>adapter</code></td>
+  <td>Compile and run shipped Lua through a host adapter while preserving recovered BFS bindings.</td>
+  <td>Recover package/cache behavior and BFS argument/return shapes.</td>
+</tr>
+<tr>
+  <td>Provided substrate and adapters</td>
+  <td>Decoders and host APIs</td>
+  <td>Image, DDS/KTX2, NIF, filesystem, OS, network, diagnostics</td>
+  <td><code>adapter</code></td>
+  <td>Use current crates and host APIs behind original file/message contracts.</td>
+  <td>Add adapter code only when a source format or message contract needs it.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Evidence registers</td>
+  <td>Native type roster</td>
+  <td><code>done</code></td>
+  <td>Use the 2,068 registered native types and parent edges as type-handle/factory input.</td>
+  <td>Attach factories and handlers through owning feature rows.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Evidence registers</td>
+  <td>Message token registry</td>
+  <td><code>done</code></td>
+  <td>Preserve all 1,084 registered message/event tokens through dispatch.</td>
+  <td>Bind each side effect to the owning runtime domain.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Evidence registers</td>
+  <td>Binary perimeter classification</td>
+  <td><code>done</code></td>
+  <td>Use classified binary rows only to recover product contracts.</td>
+  <td>Select frontier functions from the owning feature row.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Evidence registers</td>
+  <td>Product contract frontier</td>
+  <td><code>recover</code></td>
+  <td>Classified ZT/BlueFang functions and vtable methods have owners, while selected exact behavior contracts remain unrecovered.</td>
+  <td>Recover contracts through the owning domain row before implementation.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Archive and paths</td>
+  <td>Z2F archive mount and asset paths</td>
+  <td><code>runs</code></td>
+  <td>Serve shipped archive bytes through source-compatible asset paths.</td>
+  <td>Finish archive-backed loading for each asset class.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Documents</td>
+  <td>XML/BFXML/MAXML parsing</td>
+  <td><code>runs</code></td>
+  <td>Parse ordered source documents for UI, config, runtime data, and authored events.</td>
+  <td>Add schema validation, include resolution, and write-order preservation.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Documents</td>
+  <td><code>BFXMLSchemaMgr</code> validation</td>
+  <td><code>recover</code></td>
+  <td>Validate original source documents against recovered schema contracts.</td>
+  <td>Recover schema readers and validation failure behavior.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Localization</td>
+  <td><code>BFLocaleMgr</code> tables and formatting</td>
+  <td><code>loaded</code></td>
+  <td>Load locale string tables and expose original loc-id/value formatting.</td>
+  <td>Recover remaining formatting and fallback rules.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Binder hydration</td>
+  <td><code>BFTypedBinder</code> source objects</td>
+  <td><code>loaded</code></td>
+  <td>Hydrate binder identity, type/version keys, shared/instance XML, components, and event nodes.</td>
+  <td>Recover precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, and lookup semantics.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Entity shared data</td>
+  <td><code>BFAIEntityDataShared</code> property maps</td>
+  <td><code>recorded</code></td>
+  <td>Preserve <code>b_*</code>, <code>s_*</code>, <code>f_*</code>, and <code>p_*</code> source property families.</td>
+  <td>Enumerate descriptor-table fields by component family.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Image textures: <code>.dds</code>, <code>.tga</code>, <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.bmp</code></td>
+  <td><code>loaded</code></td>
+  <td>Load valid image sources as Bevy <code>Image</code> assets through <code>zt2://</code>; the Z2F reader normalizes legacy DDS bytes before Bevy sees them.</td>
+  <td>Add cube-map/skybox presentation and source-manifest fallback handling.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>NetImmerse models: <code>.nif</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse NIF into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata.</td>
+  <td>Recover controllers, skinning, material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Blue Fang models: <code>.bfb</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse BFB into <code>Zt2Model</code>, Bevy scene output, per-source mesh subassets, and material or BFMat handles.</td>
+  <td>Recover axis/orientation, material completeness, skinning, animation linkage, and remaining source semantics.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Materials: <code>.bfmat</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse source material data and emit Bevy <code>StandardMaterial</code> output with texture dependencies and optional shader references.</td>
+  <td>Recover Direct3D material state, technique/pass mapping, render states, and exact shader specialization.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Effects/shaders: <code>.fx</code></td>
+  <td><code>loaded</code></td>
+  <td>Preserve original FX source and emit Bevy <code>Shader</code> output through the current adapter path.</td>
+  <td>Translate FX techniques, passes, uniforms, render states, and material binding into Bevy-native shader/material pipelines.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Terrain source: <code>.dat</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse terrain data into <code>BFTerrainDataSource</code>, terrain mesh output, and recovered bounds.</td>
+  <td>Recover terrain materials, splat/biome layers, water interaction, chunking, and runtime terrain systems.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Animation clips: <code>.bf</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse Blue Fang animation clips and emit Bevy <code>AnimationClip</code> handles with recovered duration.</td>
+  <td>Translate curves/channels and bind clips to model skeletons.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Animation graphs: <code>.bfm</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse animation graphs and emit Bevy animation graph output with referenced clip handles.</td>
+  <td>Recover original graph semantics, model/skeleton association, and playback integration.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Biped animation metadata: <code>.bip</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse BIP metadata and retain a placeholder Bevy animation output.</td>
+  <td>Recover channels, retargeting, and skeleton binding.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>GPK audio streams: <code>.gpk</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse recovered GPK stream metadata and retain a custom sound-clip asset.</td>
+  <td>Decode to playable Bevy/Kira audio or another native streaming source.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Playable audio: <code>.wav</code>, <code>.mp3</code>, <code>.ogg</code></td>
+  <td><code>runs</code></td>
+  <td>Request supported audio files as Kira <code>AudioSource</code> handles through the runtime sound path.</td>
+  <td>Confirm exact source references and playback events as sound systems are recovered.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Sound tags and ambient documents</td>
+  <td><code>recover</code></td>
+  <td>Load sound-tag and ambient source documents as policy records for playback selection.</td>
+  <td>Recover tag variants, aliases, random policy, distance policy, stages, categories, ducking, and cross-fades.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>XML-like authored data: <code>.xml</code>, <code>.maxml</code>, <code>.zt2</code>, <code>.xdr</code>, <code>.old</code>, <code>.trk</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse into source-preserving <code>DataDocument</code> assets for the owning runtime systems.</td>
+  <td>Assign each document family to its consuming domain and add schema-specific hydration where needed.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>AI task and behavior documents: <code>.tsk</code>, <code>.beh</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse task/behavior source documents and hydrate current task-catalog records where recovered.</td>
+  <td>Execute task and behavior data through Bevy AI/runtime systems.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Localization source: <code>.txtkeys</code></td>
+  <td><code>loaded</code></td>
+  <td>Parse localization source documents for locale lookup and text projection.</td>
+  <td>Complete runtime lookup integration and formatting coverage.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Lua script source: <code>.lua</code></td>
+  <td><code>loaded</code></td>
+  <td>Preserve Lua source as assets and compile through the Lua substrate where requested.</td>
+  <td>Add runtime package/cache loading, bindings, marshalling, and error semantics.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Compiled script/scenario payloads: <code>.bin</code>, <code>.lop</code></td>
+  <td><code>recorded</code></td>
+  <td>Preserve original binary payload bytes while behavior remains unrecovered.</td>
+  <td>Decode bytecode/object semantics and route recovered payloads through scenario/script runtime.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Text and metadata wrappers: <code>.bat</code>, <code>.corelog</code>, <code>.h</code>, <code>.kfinfo</code>, <code>.kfm</code>, <code>.txt</code></td>
+  <td><code>recorded</code></td>
+  <td>Preserve authored text or metadata for files without recovered runtime semantics.</td>
+  <td>Add structured loaders only when a runtime consumer requires structure.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Particle source: <code>.psys</code></td>
+  <td><code>map</code></td>
+  <td>No dedicated particle source loader exists yet.</td>
+  <td>Add a particle-system source loader and Bevy particle/simulation target.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Unclassified source blobs: extensionless entries and <code>.psd</code></td>
+  <td><code>map</code></td>
+  <td>Keep metadata or raw bytes until a runtime consumer proves a contract.</td>
+  <td>Classify or decode only when needed by a recovered source reference.</td>
+</tr>
+<tr>
+  <td>Source hydration and registries</td>
+  <td>Source formats</td>
+  <td>Package/save formats: <code>.zip</code>, <code>.z2s</code></td>
+  <td><code>recover</code></td>
+  <td>Parse packages and save containers that carry persisted game data.</td>
+  <td>Recover <code>.z2s</code> sections, ordering, versions, and member boundaries.</td>
+</tr>
+<tr>
+  <td>App, UI, and modes</td>
+  <td>App shell</td>
+  <td>Boot and plugin wiring</td>
+  <td><code>runs</code></td>
+  <td>Build the executable runtime from Bevy plugins, windows, task pools, archives, loaders, and startup systems.</td>
+  <td>Recover original manager/load-listener order.</td>
+</tr>
+<tr>
+  <td>App, UI, and modes</td>
+  <td>Startup hydration</td>
+  <td>Startup documents and runtime publication</td>
+  <td><code>runs</code></td>
+  <td>Hydrate startup UI, templates, catalog, runtime support, shell modes, and presentation source documents.</td>
+  <td>Publish directly into coherent Bevy resources/components.</td>
+</tr>
+<tr>
+  <td>App, UI, and modes</td>
+  <td>UI runtime</td>
   <td>Authored UI tree projection</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td><code>UiDocument</code>, skins, nodes, widgets, localization, and Bevy UI projection render source layouts.</td>
-  <td>Many widget subclasses lack native behavior parity.</td>
-  <td>Work widget family by family: list box, slider, drag/drop, text edit, tooltip, graph, window.</td>
+  <td><code>runs</code></td>
+  <td>Spawn Bevy UI entities from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
+  <td>Implement widget families one at a time.</td>
 </tr>
 <tr>
+  <td>App, UI, and modes</td>
+  <td>UI runtime</td>
   <td>UI messages and value handlers</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td><code>BFMessageBus</code>, typed UI payloads, value-handler registry, hotkeys, timed events, and named routes exist.</td>
-  <td>Most <code>UI_*</code> and <code>ZT_*</code> handlers lack recovered side effects.</td>
-  <td>Pick one panel, list its emitted tokens, then implement handlers owned by the target manager.</td>
+  <td><code>recorded</code></td>
+  <td>Route source-authored UI events through preserved message tokens, typed payloads, and manager-owned handlers.</td>
+  <td>Implement handlers panel by panel.</td>
 </tr>
 <tr>
-  <td>Widget hit-test, focus, edit, sound, animation</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Widget fields and runtime state exist.</td>
-  <td>Native hit-test, focus routing, edit validation, sound binding, font metrics, text wrap, and show/hide timing are open.</td>
+  <td>App, UI, and modes</td>
+  <td>UI runtime</td>
+  <td>Widget behavior</td>
+  <td><code>recover</code></td>
+  <td>Recreate native hit-test, focus, edit validation, sound binding, text metrics, and show/hide animation.</td>
   <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, and font/text callsites.</td>
 </tr>
 <tr>
-  <td>Main menu and title flow</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Source-driven menu layouts can reach Bevy projection and shell mode state.</td>
-  <td>Title/splash/profile/campaign transitions still need original message-order semantics.</td>
-  <td>Trace <code>ZT_SPLASH_CLOSED</code>, <code>ZT_SETMODE</code>, <code>ZT_LOADGAME</code>, and main-menu event blocks.</td>
+  <td>App, UI, and modes</td>
+  <td>Menu flow</td>
+  <td>Title, splash, main menu, profile/campaign selection</td>
+  <td><code>runs</code></td>
+  <td>Drive menu screens from source layouts and recovered shell/app messages.</td>
+  <td>Recover <code>ZT_SPLASH_CLOSED</code>, <code>ZT_SETMODE</code>, <code>ZT_LOADGAME</code>, and menu event ordering.</td>
 </tr>
 <tr>
-  <td>Profile selection and user options</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td><code>BFUserProfileMgr</code>, profile commands, options records, graphics/audio/Vince fields, and safe graphics state exist.</td>
-  <td>Read/write order, profile directories, registry mapping, and safe-mode restore are open.</td>
-  <td>Recover profile/options XML readers and write-back paths.</td>
+  <td>App, UI, and modes</td>
+  <td>Modes</td>
+  <td>General mode manager and shell mode stack</td>
+  <td><code>recorded</code></td>
+  <td>Store source mode records, hotkeys, event blocks, stack, requests, and active mode state.</td>
+  <td>Recover per-mode input, tick, and message handlers.</td>
 </tr>
 <tr>
-  <td>Campaign, scenario, map-selection panels</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Campaign index, globe dots, map data, movie list, populated menu lists, and cached map data exist.</td>
-  <td>UI population handlers and scenario launch effects are incomplete.</td>
-  <td>Read the authored menu layouts and implement <code>ZT_POPULATE_*</code>, <code>ZT_CACHE_MAPDATA</code>, and selection messages.</td>
-</tr>
-<tr>
-  <td>File/load/save modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>File mode state, file rows, load/save requests, screenshots, and alerts exist.</td>
-  <td>Directory enumeration, delete/preview, screenshot capture, and <code>.z2s</code> read/write are open.</td>
-  <td>Recover <code>ZTFileMode</code> handlers and the save package format.</td>
-</tr>
-<tr>
-  <td>Download, web, MOTD, EULA, diagnostics</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Commands and state exist for downloads, MOTD, EULA, CD check, DxDiag, logging consent, and Vince telemetry.</td>
-  <td>Host integration and event completion semantics are open.</td>
-  <td>Map user-visible effects onto modern OS/network APIs and keep original message contracts.</td>
-</tr>
-<tr>
-  <td>Options and graphics mode</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Graphics/audio/Vince snapshot, sliders, selected settings, float messages, and acceptance records exist.</td>
-  <td>Confirmation, safe restore, slider binding, and persistence are incomplete.</td>
-  <td>Recover <code>ZTGfxOptionsMode</code> value handlers and profile writes.</td>
-</tr>
-<tr>
-  <td>General mode manager</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td><code>ZTModeMgr</code>, mode records, hotkeys, event blocks, shell mode catalogue, stack, and requests exist.</td>
-  <td>Per-mode input/tick/message handlers are mostly pending.</td>
-  <td>Choose one mode row below and recover its vtable/message body.</td>
-</tr>
-<tr>
+  <td>App, UI, and modes</td>
+  <td>Modes</td>
   <td>Selection, delete, overview, guest-view modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>State records cover selection cursors, delete groups, overview filters/icons, and guest-view camera binding.</td>
-  <td>Entity queries, confirmations, map projection, highlighting, and commands are incomplete.</td>
-  <td>Implement one mode against live ECS entity state.</td>
+  <td><code>recorded</code></td>
+  <td>Execute entity selection, delete confirmation, overview filtering, and guest-view camera/tool state.</td>
+  <td>Bind modes against live ECS entity/world state.</td>
 </tr>
 <tr>
+  <td>App, UI, and modes</td>
+  <td>Modes</td>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Mode state covers camera, training result feedback, gesture traces, fossil sonar, cloning score, and tranquilize target/range.</td>
-  <td>Reward buckets, pointer math, target selection, and completion effects are open.</td>
-  <td>Recover the relevant <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
+  <td><code>recorded</code></td>
+  <td>Execute first-person action tools, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state.</td>
+  <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
 </tr>
-</tbody>
-</table>
-<h3>Entity, Animal, Guest, And World Systems</h3>
-<table>
-<thead>
 <tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
+  <td>App, UI, and modes</td>
+  <td>Modes</td>
+  <td>File, load, save, download, options, graphics modes</td>
+  <td><code>recorded</code></td>
+  <td>Use original mode records and UI messages for file rows, save/load alerts, downloads, options snapshots, and graphics/audio settings.</td>
+  <td>Recover file/mode handlers, profile writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
-</thead>
-<tbody>
 <tr>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Entity model</td>
   <td>Entity/component catalog</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Entity definitions, shared/instance data nodes, component refs, authored events, and binder subtree records exist.</td>
-  <td>Full component schema, inheritance, component factory creation, and validation are incomplete.</td>
-  <td>Recover component readers by binder family, starting with one animal and one scenery/building type.</td>
+  <td><code>loaded</code></td>
+  <td>Hydrate entity definitions, shared/instance nodes, component refs, authored events, and binder subtrees.</td>
+  <td>Recover component readers by binder family.</td>
 </tr>
 <tr>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Entity model</td>
   <td>Loaded-world ECS bootstrap</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Loaded-world records can queue Bevy projection/bootstrap resources and spawn source-derived entity components.</td>
-  <td>Original spawn/despawn, component mutation order, and full ECS ownership are incomplete.</td>
-  <td>Convert one <code>BFGEntity</code> instance path into Bevy components and systems.</td>
+  <td><code>runs</code></td>
+  <td>Spawn source-derived world/entity components into Bevy runtime storage.</td>
+  <td>Convert one <code>BFGEntity</code> instance path into complete Bevy components and systems.</td>
 </tr>
 <tr>
-  <td>Entity selection and info panels</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Selection requests, info panels, action controls, native guest-needs panel bindings/update helper, selected guest need values from source-derived ECS components, needs/training/inventory/family/donation rows, native donation-by-species panel summary aggregation, and native donation-box list row projection exist.</td>
-  <td>Panels still lack animal value bindings, dynamic guest need simulation, and action side effects.</td>
-  <td>Continue from guest need state into animal value bindings and recovered guest need model/<code>ZTAIGuestMgr</code> behavior.</td>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Entity model</td>
+  <td>Component factories and validation</td>
+  <td><code>recover</code></td>
+  <td>Instantiate recovered component sets through original type/factory contracts.</td>
+  <td>Recover factory callsites and representative binder families.</td>
 </tr>
 <tr>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Animal model</td>
   <td>Animal type definitions</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, adoption, release, crate, disease, conservation, and training records exist.</td>
-  <td>Source hydration per species and live need/status updates are incomplete.</td>
-  <td>Hydrate one species family from binder plus AI/entity data, then generalize.</td>
+  <td><code>recorded</code></td>
+  <td>Represent species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state.</td>
+  <td>Hydrate one species family from binder plus AI/entity data.</td>
 </tr>
 <tr>
-  <td>Animal lifecycle and breeding</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Lifecycle and pregnancy records exist.</td>
-  <td>Breeding, offspring selection, family tree effects, and status flag reads are open.</td>
-  <td>Recover animal lifecycle callsites and component-to-status readers.</td>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Animal model</td>
+  <td>Lifecycle and breeding</td>
+  <td><code>recover</code></td>
+  <td>Execute birth, pregnancy, offspring selection, family tree effects, and status flag reads.</td>
+  <td>Recover lifecycle callsites and component-to-status readers.</td>
 </tr>
 <tr>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Animal model</td>
+  <td>Adoption and release</td>
+  <td><code>recover</code></td>
+  <td>Execute adoption slots, rarity, decline/adopt/release side effects, crate state, conservation rewards, and panel refresh.</td>
+  <td>Recover <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and panel handlers.</td>
+</tr>
+<tr>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Animal model</td>
   <td>Species behavior slice</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>AI task, behavior, locomotion, animation, sound, and animal state surfaces exist separately.</td>
-  <td>No complete animal can think, choose tasks, move, animate, vocalize, and update needs end to end.</td>
-  <td>Pick one family such as elephant; read its binder, AI <code>.tsk</code>/<code>.beh</code>, model/anim/sound refs, then implement a vertical behavior pack.</td>
+  <td><code>recover</code></td>
+  <td>Connect one species through source definition, AI task/behavior, locomotion, animation, sound, and needs.</td>
+  <td>Implement a vertical behavior pack from one representative species family.</td>
 </tr>
 <tr>
-  <td>Guest needs, satisfaction, and movement</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#9d0006;color:#fbf1c7;font-weight:700">map</span></td>
-  <td>Guest surfaces are scattered through AI, donations, world queries, status, and entity-info UI; the native guest-needs panel field/row order is recorded, selected source-derived ECS guest need values feed the panel helper including <code>BFAIStateVar</code> midpoint initialization from <code>ValueMin</code>/<code>ValueMax</code>, <code>ZTAIGuestMgr</code> source/config hydration is separated from live per-guest memory, shipped <code>AI/guestMgr.xml</code> fields are represented, and guest <code>BFTypedBinder</code> source inventory shows need state vars/adjust tables, inventory containers, path/tour/show sensors, view/tour components, and the guest economy component as authored entity components rather than manager root collections. Domain has a source-derived <code>BFAINeedAdjusts</code> transition primitive for caller-owned need state.</td>
-  <td>A focused live guest owner, native need tick cadence/category selection, path goals, spending model, group behavior, and <code>ZTAIGuestMgr</code> lifecycle/spawn handlers are missing.</td>
-  <td>Recover <code>ZTAIGuestMgr</code> handlers plus the native <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling behavior, then model live guest need/path/spending state as Bevy components/resources with domain rules.</td>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Selection/UI</td>
+  <td>Entity selection and info panels</td>
+  <td><code>recorded</code></td>
+  <td>Project selected entity state, action controls, needs/training/inventory/family/donation rows, and source panel bindings.</td>
+  <td>Add animal value bindings and action side effects.</td>
 </tr>
 <tr>
-  <td>Guest viewing and donations</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>View memory, donation candidates, source-derived guest/animal score-factor extraction, native preferred-animal view/donate multiplier selection, native animal max-donation amount product, donation task state, contribution history, native donation behavior config keys and non-negative numeric clamps, source <code>AI/ZTAI.xml</code> <code>ZTAIShowMgr</code> default/cancelled/score-table feedback rows with donation config and nested feedback data, source <code>ZTBehEconomy transactionName</code> parsing for donation tasks, source <code>ZTBehFeedback</code> nested feedback-data parsing, source <code>ZTBehViewAnimals</code> view-meter/emote-band parsing and score-band behavior-set selection, source <code>ZTBehViewEvent</code> view-key/radius/target/education-donation property-key and feedback parsing, source <code>ZTAIEducationData</code> feedback chance, native feedback roll gate, native animal/education donation feedback event-name construction, and education-donation range parsing, native viewed-species score decay from <code>f_ViewSpeedBySpecies</code>, native <code>edDonate</code> task scalar field reading, native <code>edDonate</code> configured value-range selection with lower-inclusive/upper-exclusive bounds, non-positive candidate pruning, and strict <code>f_vpMinSwapDistance</code>/<code>f_vpMaxSwapDistance</code> viewpoint filtering exist.</td>
-  <td>Eligibility, scoring formula, feedback publication, update cadence, box routing, economy side-effect execution, behavior execution, and task dispatch are still incomplete.</td>
-  <td>Recover <code>ZTAIGuestMgr</code> donation callsites and <code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> execution against Bevy-owned guest/view state.</td>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Selection/UI</td>
+  <td>Donation panel rows</td>
+  <td><code>recorded</code></td>
+  <td>Build by-species summaries and donation-box rows from Bevy-owned donation runtime slices while domain keeps source-shaped panel templates.</td>
+  <td>Recover score-only/range donation production, exact amount formula, economy commit, and feedback timing.</td>
 </tr>
 <tr>
-  <td>Terrain heightfield, biome, water</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Terrain grid, biome definitions, mesh patches, water edits, brush state, and map config records exist.</td>
-  <td>Grid units, file layouts, water/biome edit algorithms, and charges are open.</td>
-  <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit command readers.</td>
+  <td>Entity, animal, catalog, and selection</td>
+  <td>Catalog/UI</td>
+  <td>Catalog and Zoopedia lists</td>
+  <td><code>recorded</code></td>
+  <td>Populate source-authored type lists, buy info, Zoopedia TOC/pages, filters, and purchase rows.</td>
+  <td>Recover paging/filter semantics, page loading, and navigation handlers.</td>
 </tr>
 <tr>
-  <td>Terrain/world Bevy projection</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Bevy world/terrain plugins have runtime resources, dirty queues, bootstrap projection, camera source, and mesh task scaffolding.</td>
-  <td>Projection is still a scaffold for authored world state.</td>
-  <td>Feed recovered terrain/world data into Bevy mesh/material/entity projection.</td>
+  <td>World and construction</td>
+  <td>Terrain</td>
+  <td>Heightfield, biome, water, autoplacement</td>
+  <td><code>recorded</code></td>
+  <td>Store terrain grid, biome definitions, water edits, brushes, maps, mesh patches, and autoplacement rules.</td>
+  <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit algorithms.</td>
 </tr>
 <tr>
-  <td>Placement validation and transactions</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Placement commands, rule sets, cursor/preview, affordance, failure catalog, and result tokens exist; object placement confirmation consults research unlock state and rejects locked research items with <code>UNRESEARCHED</code>.</td>
-  <td>Footprint schema, slope/headroom/traversability, money/order, fence/path/tank research gates, commit side effects, and undo are open.</td>
-  <td>Trace <code>ZT_SETPLACEMENT*</code>, <code>ZT_PLACEOBJECT</code>, <code>BFG_PLACE_ENTITY</code>, and validator result tokens.</td>
+  <td>World and construction</td>
+  <td>Terrain</td>
+  <td>Bevy terrain projection</td>
+  <td><code>runs</code></td>
+  <td>Update terrain chunks, dirty queues, camera source, mesh tasks, and material projection through Bevy assets.</td>
+  <td>Feed recovered terrain/world data into mesh/material/entity projection.</td>
 </tr>
 <tr>
+  <td>World and construction</td>
+  <td>Placement</td>
+  <td>Validation, preview, commit, transactions, undo</td>
+  <td><code>recover</code></td>
+  <td>Validate footprints, affordability, research, slope, headroom, traversability, cursor preview, commit effects, and undo.</td>
+  <td>Trace <code>ZT_SETPLACEMENT*</code>, <code>ZT_PLACEOBJECT</code>, <code>BFG_PLACE_ENTITY</code>, and result tokens.</td>
+</tr>
+<tr>
+  <td>World and construction</td>
+  <td>Paths</td>
   <td>Paths and elevated supports</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Path/elevated path records, placement commands, validation, support state, and curb mode exist.</td>
-  <td>Segment joins, height rules, support topology, traversability updates, and undo need recovery.</td>
-  <td>Recover path placement mode and <code>BFGElevatedSupportTracker</code> behavior.</td>
+  <td><code>recorded</code></td>
+  <td>Represent ground/elevated path records, placement commands, support state, curb mode, and connectivity.</td>
+  <td>Recover path placement modes and <code>BFGElevatedSupportTracker</code>.</td>
 </tr>
 <tr>
-  <td>Fences, gates, and portals</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Fence types, segments, gate undo, portal segments, topology events, and mode state exist.</td>
-  <td>Placement geometry, rotation, health, sale/delete, and traversal effects are pending.</td>
+  <td>World and construction</td>
+  <td>Fences</td>
+  <td>Fences, gates, portals</td>
+  <td><code>recorded</code></td>
+  <td>Represent fence types, segments, gates, tank portals, topology events, health, sale/delete, and mode state.</td>
   <td>Implement <code>ZTFenceMode</code> command decisions against placement grid.</td>
 </tr>
 <tr>
-  <td>Tanks and aquatic construction</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Tank manager, topology, walls, gates, portals, supports, links, water volume, cleanliness, and commands exist.</td>
-  <td>Height speeds, tank topology edits, animal containment, show-tank edges, and validation feedback are open.</td>
-  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, and tank-gate behavior.</td>
+  <td>World and construction</td>
+  <td>Tanks</td>
+  <td>Aquatic construction</td>
+  <td><code>recorded</code></td>
+  <td>Represent tank topology, walls, gates, portals, supports, links, water volume, cleanliness, and commands.</td>
+  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, and gate behavior.</td>
 </tr>
 <tr>
+  <td>World and construction</td>
+  <td>Transport</td>
   <td>Transport rides</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Circuits, tracks, stations, vehicles, crossings, query set, tour recorder, and command records exist.</td>
-  <td>Route generation, boarding, capacity, vehicle motion, circuit direction, and station limits are open.</td>
-  <td>Recover <code>ZTTransportationMgr</code> and <code>ZTBehVehicle*</code>/transport route behaviors.</td>
+  <td><code>recorded</code></td>
+  <td>Represent circuits, tracks, stations, vehicles, crossings, tour recorder, route queries, and commands.</td>
+  <td>Recover <code>ZTTransportationMgr</code> and <code>ZTBehVehicle*</code>/route behaviors.</td>
 </tr>
 <tr>
-  <td>Ground-fit, collision, traversability, pathfinding</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Fitting surfaces, collision/traversability/pathfinder managers, changed-triangle queues, and configs exist.</td>
-  <td>Contact math, open-area rules, path graph invalidation, and steering fan-out are open.</td>
-  <td>Recover <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, and ground-fit component callsites.</td>
+  <td>World and construction</td>
+  <td>Navigation</td>
+  <td>Collision, traversability, pathfinding, ground-fit</td>
+  <td><code>recover</code></td>
+  <td>Maintain collision data, traversable areas, path graphs, changed-triangle queues, and fitting surface/contact rules.</td>
+  <td>Recover <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, and ground-fit callsites.</td>
 </tr>
-</tbody>
-</table>
-<h3>AI, Staff, Shows, And Behavior</h3>
-<table>
-<thead>
 <tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>AI task template source</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Startup reads <code>.tsk</code>/<code>.beh</code> documents into <code>BFAITaskCatalog</code>; template parsing includes source sensor/reserve tags, completion/failure feedback as shared source records, eval attribute maps as one source-controller surface, and basic fixed-score selection exists.</td>
-  <td>Full authored behavior scheduling, sibling component attachment, scoring, sensor routing, and side effects are incomplete.</td>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>AI source</td>
+  <td>Task templates and behavior documents</td>
+  <td><code>loaded</code></td>
+  <td>Hydrate <code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, and behavior sets.</td>
   <td>Hydrate one task document end to end and instantiate <code>BFAITaskRoot</code>.</td>
 </tr>
 <tr>
-  <td>AI scoring and thinker scheduler</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>State/task thinker records, task runtime state, eval result, tokens, and manager records exist.</td>
-  <td>Scoring, tie-break, <code>ThinkerInterval</code>, token lifetime, reserve conflicts, and completion/failure effects are open.</td>
-  <td>Recover <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code> behavior.</td>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>AI runtime</td>
+  <td>Scoring, thinker scheduler, tokens</td>
+  <td><code>recover</code></td>
+  <td>Execute task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects.</td>
+  <td>Recover <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
 </tr>
 <tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Behaviors</td>
   <td>Behavior verbs</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td><code>BFBehavior</code> base and many <code>ZTBeh*</code> records exist; source <code>ZTBehEconomy</code> and <code>ZTBehFeedback</code> behavior facets parse into typed records; <code>ZTBehViewEvent</code> feedback uses shared source records; many methods name exact <code>todo!()</code> contracts.</td>
-  <td>Movement, docking, animation, events, scripts, feedback dispatch, use-gate, ride, tour, view, cure, dig, morph, and splash effects are pending.</td>
-  <td>Pick one verb family and implement XML read plus runtime side effect.</td>
+  <td><code>recorded</code></td>
+  <td>Execute movement, docking, animation, events, scripts, feedback, gates, rides, tours, views, cure, dig, morph, and splash verbs.</td>
+  <td>Implement one verb family from XML read through side effect.</td>
 </tr>
 <tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Movement</td>
   <td>Steering and locomotion</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Steering vectors, profiles, locomotion manager, traversal refs, and <code>STEER_*</code>/<code>LOCO_*</code> messages exist.</td>
-  <td>Blend weights, arbitration order, obstacle/entity avoidance, and animation realization are open.</td>
-  <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code> callsites.</td>
+  <td><code>recover</code></td>
+  <td>Blend steering components, arbitrate movement, avoid obstacles/entities, and realize movement through animation.</td>
+  <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
 </tr>
 <tr>
-  <td>Staff jobs and assignment UI</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Staff manager, request controller, job queue, role handles, candidates, assignments, time categories, trainer, cleaning records, <code>ZT_STAFF_REQUEST</code> dispatch into <code>ZTStaffRequestData</code>, clean-tank request queueing, worker assignment payload routing, trainer assignment row-index capture, and assignment selection/remove/fire command classification exist.</td>
-  <td>Request evaluation, job claiming/stealing, keeper assignment target resolution, trainer index-to-target execution, water-cleaning execution, trainer behavior, and staff lifecycle effects are pending.</td>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Guests</td>
+  <td>Needs, satisfaction, movement, lifecycle</td>
+  <td><code>map</code></td>
+  <td>Own live guest need/path/spending/group state as Bevy components/resources.</td>
+  <td>Recover <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
+</tr>
+<tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Guests</td>
+  <td>Viewing and donation candidates</td>
+  <td><code>recorded</code></td>
+  <td>Track per-guest viewed-species memory, donation candidates, pruning, viewpoint filters, education values, feedback gates, and view/donate score factors as Bevy runtime state.</td>
+  <td>Recover donation orchestration and <code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> execution.</td>
+</tr>
+<tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Guests</td>
+  <td>Education donation execution</td>
+  <td><code>recover</code></td>
+  <td>Source parse and range lookup exist for <code>edDonate</code> and education donation values.</td>
+  <td>Recover candidate generation, target selection, box routing, economy effects, feedback publication, and spend timing.</td>
+</tr>
+<tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Staff</td>
+  <td>Jobs and assignment UI</td>
+  <td><code>recorded</code></td>
+  <td>Execute staff requests, roles, candidates, job queues, assignments, trainers, clean-tank/water-filter actions, hire/fire, and lifecycle state through Bevy owners.</td>
   <td>Recover keeper assignment payloads and one staff role lifecycle.</td>
 </tr>
 <tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Shows</td>
   <td>Shows and trick training</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Show manager, scheduler, states, songs, score/size bands, effects, tricks, targets, mixer, timer, donation config key parsing, source <code>ZTBehWatchShow</code> event-scoring tables, source-order reaction band selection, native show-score feedback token bucketing, and UI commands exist.</td>
-  <td>Timeslot choice, trick difficulty/popularity, animal eligibility, guest feedback score calculation, behavior-set dispatch, feedback dispatch, show donation consumers, and show effects are open.</td>
+  <td><code>recorded</code></td>
+  <td>Execute show scheduler, states, songs, score bands, tricks, targets, mixer/timer UI, and reward/feedback flow.</td>
   <td>Recover show scheduler and one trick execution path.</td>
 </tr>
 <tr>
-  <td>Tours and guest viewing</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Tour taker data, recorder waypoints, viewable object managers, station view sets, and viewing behaviors exist.</td>
-  <td>Tour star rating, route feedback, and view scoring are open.</td>
-  <td>Recover <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, and tour star rating queries.</td>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Tours</td>
+  <td>Tours and viewable objects</td>
+  <td><code>recorded</code></td>
+  <td>Execute tour taker data, recorder waypoints, station view sets, viewable object managers, and tour star rating.</td>
+  <td>Recover <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, and star-rating queries.</td>
 </tr>
 <tr>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Gestures</td>
   <td>Gesture recognition and minigames</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Gesture definitions, traces, recognizer, spline editor, projection frame, event textures, and score bands exist.</td>
-  <td>Projection math, trace scoring, texture events, reward dispatch, and editor commands are open.</td>
+  <td><code>recorded</code></td>
+  <td>Execute gesture definitions, traces, recognizer, spline editor, projection frames, event textures, and score bands.</td>
   <td>Recover <code>ZTGestureMgr</code> and gesture trace component callsites.</td>
 </tr>
-</tbody>
-</table>
-<h3>Economy, Progression, Status, And Catalog UI</h3>
-<table>
-<thead>
 <tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
+  <td>AI, behavior, movement, guests, staff, and shows</td>
+  <td>Feedback</td>
+  <td>AI/show feedback routing</td>
+  <td><code>recorded</code></td>
+  <td>Load influence and feedback manager configs into Bevy runtime owners while domain keeps source feedback values and tokens.</td>
+  <td>Recover watch-show score calculation, selected behavior-set dispatch, feedback/thought/emoticon routing, sound dispatch, task scheduling, and reservations.</td>
 </tr>
-</thead>
-<tbody>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Economy</td>
   <td>Cash and admission price</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Startup hydrates economy/status configs; current economy helpers route <code>BFGECONOMY_DO_TRANSACTION</code>, apply cash deltas, commit immediate transaction records, follow <code>nextTransaction</code>, and handle transaction polarity plus admission price/index values when called.</td>
-  <td>Live simulation/entity transaction sources, countdown timing, aggregate/parent-cost accounting, and several status forwarding effects remain.</td>
-  <td>Recover live economy callers and countdown/aggregate cost paths.</td>
+  <td><code>loaded</code></td>
+  <td>Execute cash deltas, admission price/index values, transaction polarity, grant/remove grant, and immediate transaction commits.</td>
+  <td>Recover live transaction callers, countdown timing, aggregate/parent-cost paths.</td>
 </tr>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Economy</td>
   <td>Economy components and cost factors</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Economy components, context configs, transaction configs, cost factors, frequency/period/cost types, and user-count transactions exist.</td>
-  <td>Authored component execution on live entities is pending.</td>
-  <td>Hydrate economy config into ECS components carrying source/domain values and execute one transaction category.</td>
+  <td><code>recorded</code></td>
+  <td>Hydrate economy components, context configs, transaction configs, cost factors, frequencies, periods, and user-count transactions.</td>
+  <td>Execute one authored component transaction on live entities.</td>
 </tr>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Economy</td>
+  <td>Runtime status and price selections</td>
+  <td><code>recorded</code></td>
+  <td>Store loaded zoo status values, zoo-open transitions, admission selection, and non-admission price selection state in Bevy runtime owners.</td>
+  <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics and status forwarding effects.</td>
+</tr>
+<tr>
+  <td>Economy, progression, and status</td>
+  <td>Donations</td>
   <td>Donation boxes and guest spending</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Donation totals, buckets, box state values, source-derived donation-box acceptor/transaction definitions, contribution history, guest donation state, info-panel rows, native donation-by-species summary aggregation, native donation-box list row projection, the <code>edDonate</code> configured value lookup, and non-positive candidate pruning exist.</td>
-  <td>Weighting, target choice, box routing, and spend timing are open.</td>
-  <td>Recover donation candidate scoring orchestration and box contribution handlers.</td>
+  <td><code>recorded</code></td>
+  <td>Execute donation totals, buckets, box state, contribution history, donation-box rows, and economy side effects.</td>
+  <td>Recover candidate scoring, box routing, and contribution handlers.</td>
 </tr>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Donations</td>
+  <td>Donation scoring formula</td>
+  <td><code>recover</code></td>
+  <td>Keep recovered source factors separate from guessed arithmetic until the native formula is known.</td>
+  <td>Recover exact animal donation scoring before runtime execution.</td>
+</tr>
+<tr>
+  <td>Economy, progression, and status</td>
+  <td>Fame</td>
   <td>Fame and zoo rating</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Fame status, fame history, message types, half-star value handlers, release/all-species values, and admission coupling exist.</td>
-  <td>Half-star thresholds, fame sources, max fame, status update cadence, and award coupling are open.</td>
+  <td><code>recover</code></td>
+  <td>Execute half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling.</td>
   <td>Recover <code>ZTFameData</code> update and value-handler callsites.</td>
 </tr>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Research</td>
   <td>Research and unlocks</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Research manager, items and buttons, unlock refs, active/completed records, and <code>ZT_RESEARCH_*</code> tokens exist; startup hydrates source-derived items from entity shared <code>f_researchUnlockTime</code>/<code>f_researchCost</code> fields and records direct <code>researchicon</code>/<code>icon</code> plus authored <code>researchentity</code>/<code>adopt</code> default button images; start research compares item cost to zoo cash, returns the native unaffordable message token, routes affordable starts through the configured <code>research</code> debit transaction, advances active timers to unlock completed items, gates object placement for source research items while leaving non-researchable entity types placeable, projects the authored buy-info <code>start research button</code>/<code>research progress bar</code> from selected entity research state, publishes unaffordable/completed research feedback messages with source-localized <code>%s</code> item substitutions, projects the feedback last-message/list rows through the authored <code>globalDisplay</code> templates, prunes displayed feedback through source <code>timeout</code> values, suppresses duplicate source-authored feedback messages through <code>interval</code> timers, projects source-filtered unresearched catalog/list rows from <code>ZT_AUTOPOPULATE_LIST</code> requests with the authored <code>ui/layout/researchbutton.xml</code> template, projects source <code>ZTUITypeList</code> purchase rows from entity-authored catalog placement buttons including <code>adopt</code>, <code>fence</code>, and <code>path</code> source templates through <code>ui/layout/adoptbutton.xml</code> in authored <code>s_uisort</code> order, routes authored <code>ZT_SETPLACEMENTOBJECT</code>, <code>ZT_SETPLACEMENTFENCE</code>, and <code>ZT_SETPLACEMENTPATH</code> BFString payloads into placement selection, type-list selected type, and buy-info source image/name/cost/Zoopedia selection, and parses/applies native <code>researchItems</code>/<code>unlockedItems</code> manager containers with persisted <code>timeUntilUnlock</code>, <code>durationUnlock</code>, <code>currentlyResearching</code>, <code>begunResearching</code>, <code>researchCompleted</code>, and <code>researchCompletedNotified</code> item state.</td>
-  <td>Dependencies, full catalog filter/display and paging behavior, adoption-slot behavior, and fence/path/tank placement validation or commit gates are open.</td>
-  <td>Recover dependency consumers, remaining placement gates, and native catalog list behavior beyond source-driven purchase-row selection/order.</td>
+  <td><code>loaded</code></td>
+  <td>Execute research items/buttons, source-state flags, costs, timers, unlock state, feedback messages, catalog gating, and placement/research UI through Bevy <code>ResearchRuntime</code>.</td>
+  <td>Recover dependency consumers, remaining placement gates, and catalog behavior.</td>
 </tr>
 <tr>
+  <td>Economy, progression, and status</td>
+  <td>Disease</td>
   <td>Disease and cure mode</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Disease manager, disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, and clue records exist.</td>
-  <td>Spread cadence, force application, sampling, cure scoring, rewards, and vet/staff interactions are open.</td>
+  <td><code>recorded</code></td>
+  <td>Execute disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions.</td>
   <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code>, and <code>ZTCureDiseaseMode</code>.</td>
 </tr>
 <tr>
-  <td>Adoption and release</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Adoption manager records, slots, animal adoption/release/crate states, and UI actions exist.</td>
-  <td>Slot availability, rarity, decline/adopt/release side effects, and panel refresh are open.</td>
-  <td>Recover <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and adoption panel handlers.</td>
-</tr>
-<tr>
-  <td>Awards and status messages</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#9d0006;color:#fbf1c7;font-weight:700">map</span></td>
-  <td>Award records, status configs, feedback records, zoo messages, thoughts, emoticons, and survey records exist.</td>
-  <td>Criteria, trigger timing, display routing, and persistence are thin.</td>
+  <td>Economy, progression, and status</td>
+  <td>Status</td>
+  <td>Awards, feedback, survey, predicates</td>
+  <td><code>map</code></td>
+  <td>Execute award criteria, zoo status, feedback records, messages, thoughts, emoticons, surveys, and predicate-driven eligibility.</td>
   <td>Inventory <code>ZTAwardMgr</code>, <code>ZTStatus</code>, <code>ZTFeedbackMgr</code>, and status UI tokens.</td>
 </tr>
 <tr>
-  <td>Zoopedia and catalog lists</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Zoopedia TOC entries, pages, navigation, type lists, filters, buy info panel, and catalog entries exist; startup registers source <code>ZTUITypeList</code> declarations, including single <code>kind</code> roots, child <code>kinds</code> roots, and <code>nonRememberedKinds</code> hints; active/filter commands can populate purchase rows from catalog entity placement buttons with source-authored object, fence, and path placement events in authored <code>s_uisort</code> order, and selecting an authored row refreshes <code>ZTBuyInfoPanel</code> from source entity name/icon/Zoopedia plus <code>ZTEconomyComponent</code> or research cost formatted through the source <code>BFLocaleMgr</code> currency symbol.</td>
-  <td>Page loading, full type-list filter/display and paging behavior, fame/adoption-slot/upkeep/item-row rendering, localized value formatting outside buy-info, broader loc/text rendering, and navigation handlers are incomplete.</td>
-  <td>Recover native type-list row semantics and one source-driven catalog panel from layout through value handlers.</td>
-</tr>
-</tbody>
-</table>
-<h3>Scenario, Scripts, Save, And Photos</h3>
-<table>
-<thead>
-<tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Scenario rule tree</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Rules, groups, tests, actions, objectives, challenge state, globals/user vars, and typed BFS commands exist.</td>
-  <td>Evaluation order, trigger cadence, campaign graph, and objective progression are open.</td>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Scenario</td>
+  <td>Rule tree, campaign, tutorial, challenges</td>
+  <td><code>recorded</code></td>
+  <td>Execute scenario groups, rules, tests, actions, objectives, challenge state, campaign progression, and map selection launch effects.</td>
   <td>Recover <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
 </tr>
 <tr>
-  <td>Script context and BFS API</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Script context manager, Lua context records, function bindings, script action records, effects, cache, args, and responses exist.</td>
-  <td>Argument marshalling, return semantics, error handling, and every <code>BFS_*</code> side effect need implementation.</td>
-  <td>Map <code>BFS_*</code> commands by family, then bind them to owning managers.</td>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Scripting</td>
+  <td>BFS API</td>
+  <td><code>recorded</code></td>
+  <td>Bind <code>BFS_*</code> commands to owning managers with recovered arguments, returns, errors, and side effects.</td>
+  <td>Classify <code>BFS_*</code> commands by family and manager.</td>
 </tr>
 <tr>
-  <td>Lua runtime execution</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Lua 5.0.2 is middleware evidence. The Bevy adapter owns a working main-thread <code>mlua</code> Lua 5.1 compiler substrate, <code>.lua</code> source compilation diagnostics, and a validated Lua 5.0 compatibility prelude. The compile audit confirms that the prelude lets all shipped <code>.lua</code> sources and known Lua mods compile under Lua 5.1.</td>
-  <td>Original package/cache behavior, argument marshalling, return semantics, error handling, compatibility gaps that appear during execution, and every <code>BFS_*</code> side effect need implementation.</td>
-  <td>Recover original Lua globals/bindings, classify <code>BFS_*</code> argument and return shapes, then implement the BFS-compatible script host.</td>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Scripting</td>
+  <td>Lua execution</td>
+  <td><code>adapter</code></td>
+  <td>Run shipped Lua scripts through <code>mlua</code> and the compatibility prelude.</td>
+  <td>Implement runtime bindings, package/cache behavior, and error semantics.</td>
 </tr>
 <tr>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Scripting</td>
   <td>Compiled scenario and VINCE payloads</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td><code>.bin</code>, <code>.lop</code>, Vince, and telemetry command records exist.</td>
-  <td>Binary object semantics and telemetry payloads are open.</td>
+  <td><code>recover</code></td>
+  <td>Decode <code>.bin</code>, <code>.lop</code>, Vince, and telemetry command payloads.</td>
   <td>Decode compiled scenario assets and <code>BFS_PROCESS_VINCE</code>.</td>
 </tr>
 <tr>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Persistence</td>
+  <td>Profile/options persistence</td>
+  <td><code>loaded</code></td>
+  <td>Read/write graphics, audio, user settings, profile commands, safe graphics state, registry/path behavior, and options files.</td>
+  <td>Recover <code>BFUserProfileMgr</code> directory resolution and write order.</td>
+</tr>
+<tr>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Persistence</td>
   <td>Save/load package format</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Save/load requests, loaded game/world/economy/entity contexts, alerts, screenshots, and package refs exist.</td>
-  <td><code>.z2s</code> container bytes, section order, versioning, and persisted member boundary are open.</td>
+  <td><code>recover</code></td>
+  <td>Serialize and load the component/entity tree through original save/load modes and <code>.z2s</code> package structure.</td>
   <td>Recover <code>.z2s</code> container structure and per-component <code>write_xml_node</code> scope.</td>
 </tr>
 <tr>
-  <td>Profile/options persistence</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#b57614;color:#fbf1c7;font-weight:700">loaded</span></td>
-  <td>Graphics/audio/profile/user-settings records and commands exist.</td>
-  <td>Original profile directory resolution and write order are open.</td>
-  <td>Implement <code>BFUserProfileMgr</code> file/registry path behavior.</td>
-</tr>
-<tr>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Photos</td>
   <td>Photo albums and camera</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Photo manager, albums, capture requests/results, photo info, subject bounds, analysis context, and UI tokens exist.</td>
-  <td>Capture, album file behavior, move/delete/enlarge/shrink, and HTML export are pending.</td>
+  <td><code>recorded</code></td>
+  <td>Execute capture requests/results, albums, photo info, subject bounds, UI tokens, move/delete/enlarge/shrink, and HTML export.</td>
   <td>Implement <code>ZTPhotoManager</code> against Bevy camera/render output.</td>
 </tr>
 <tr>
+  <td>Scenario, scripting, persistence, and photos</td>
+  <td>Photos</td>
   <td>Photo challenges</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, and results exist.</td>
-  <td>Subject detection, scoring, challenge stars, and submission side effects are open.</td>
-  <td>Recover <code>ZTPA*</code> getter bindings and photo analysis scoring.</td>
-</tr>
-</tbody>
-</table>
-<h4>Lua Recovery Note</h4>
-<p>The embedded Lua compiler path is proven enough to leave syntax triage behind:
-the Bevy adapter can compile scripts through its main-thread <code>mlua</code> Lua 5.1
-substrate, and the compatibility prelude has been written and validated against
-all shipped Lua 5.0.2 game scripts plus known Lua mod scripts. That proves the
-current prelude is sufficient for compilation under Lua 5.1; it does not prove
-runtime package/cache behavior or Blue Fang script API semantics.</p>
-<p>The open Lua work is now behavioral recovery: inventory the original Lua global
-surface and <code>BFS_*</code> bindings, classify each <code>BFS_*</code> command by owning manager
-or subsystem, recover argument and return shapes from script callsites and
-binary evidence, then implement argument marshalling, return semantics, error
-handling, package/cache behavior, and side effects through the owning runtime
-managers.</p>
-<h3>Renderer, Audio, Camera, And Host Adapters</h3>
-<table>
-<thead>
-<tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Gamebryo/NetImmerse and D3D backend</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Middleware span and component inputs are known; Bevy owns modern render execution.</td>
-  <td>Source-visible render semantics still need preservation.</td>
-  <td>Replace backend internals while honoring <code>BFSceneGraphComponent</code>, <code>BFAnim*</code>, <code>BFSpriteMgr</code>, material, and texture contracts.</td>
+  <td><code>recorded</code></td>
+  <td>Execute challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, and results.</td>
+  <td>Recover <code>ZTPA*</code> getter bindings and scoring.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
+  <td>Renderer backend</td>
+  <td>Gamebryo/NetImmerse and D3D replacement</td>
+  <td><code>adapter</code></td>
+  <td>Preserve source-visible render semantics while Bevy owns modern render execution.</td>
+  <td>Honor <code>BFSceneGraphComponent</code>, <code>BFAnim*</code>, <code>BFSpriteMgr</code>, material, and texture contracts.</td>
+</tr>
+<tr>
+  <td>Presentation contracts</td>
+  <td>Renderer bridge</td>
   <td>Bevy render bridge</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Renderer plugin, terrain mesh tasks, dirty queue, and mode visual effect asset exist. Transitional model projection cache code still exists.</td>
-  <td>World/entity/material projection is thin, and model/material parsing still needs to move behind Bevy-native loaders.</td>
-  <td>Consume Bevy model/material/image handles produced by extension loaders, then feed ECS transforms into Bevy presentation components.</td>
+  <td><code>runs</code></td>
+  <td>Feed ECS transforms, terrain/world data, and asset handles into Bevy render/UI/audio presentation.</td>
+  <td>Consume Bevy model/material/image handles from extension loaders.</td>
 </tr>
 <tr>
-  <td>Scene graph and actor components</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Scene graph, actor, camera, decal, LOD, resource cache, model manager, texture manager, and particle manager records exist.</td>
-  <td>Live graph update, culling, bounds, attachment, and visibility rules are open.</td>
-  <td>Implement one visible entity projection from <code>BFSceneGraphComponent</code> to Bevy.</td>
+  <td>Presentation contracts</td>
+  <td>Scene graph</td>
+  <td>Actor, camera, decal, LOD, resource caches</td>
+  <td><code>recorded</code></td>
+  <td>Project original scene graph and actor component inputs into Bevy entities/assets.</td>
+  <td>Implement one visible entity projection from <code>BFSceneGraphComponent</code>.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
+  <td>Materials/effects</td>
   <td>Materials, effects, particles</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Material/effect/particle records, params, render states, selectors, emitters, and include managers exist.</td>
-  <td><code>.bfmat</code>/<code>.fx</code> syntax, animation tracks, shader constants, particle modifiers, and slot binding are open.</td>
-  <td>Recover source parsers and bind them to Bevy material/effect assets.</td>
+  <td><code>recover</code></td>
+  <td>Bind <code>.bfmat</code>, <code>.fx</code>, particle dictionaries, selectors, render states, emitters, and params to Bevy material/effect assets.</td>
+  <td>Recover parsers and slot binding.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
   <td>Animation</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>Animation graph, nodes, transitions, sequences, controllers, key data, and request records exist.</td>
-  <td>Blend/transition rules, event timing, locomotion coupling, and Bevy mapping are open.</td>
+  <td>Animation controllers, graphs, requests</td>
+  <td><code>recover</code></td>
+  <td>Map original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling to Bevy animation state.</td>
   <td>Recover <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key callsites.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
   <td>Camera</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Camera command reader, active commands, command events, rail/follow cameras, frustum, output states, and Bevy window camera source exist.</td>
-  <td>Curves, timing, first-person/overhead/guest-view coupling, and projection math are open.</td>
-  <td>Implement <code>ZT_CAMERA_*</code> commands against Bevy camera state.</td>
+  <td>Camera commands and projection</td>
+  <td><code>recorded</code></td>
+  <td>Execute overhead, first-person, follow, rail, guest-view, frustum, output states, and <code>ZT_CAMERA_*</code> commands in Bevy.</td>
+  <td>Recover curves, timing, coupling, and projection math.</td>
 </tr>
 <tr>
-  <td>UI sprite/text rendering</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Source UI documents reach Bevy UI projection.</td>
-  <td>Original sprite manager bitmap geometry, hitmasks, text buffer, font metrics, and rich text tags are incomplete.</td>
+  <td>Presentation contracts</td>
+  <td>UI rendering</td>
+  <td>Sprite/text rendering</td>
+  <td><code>runs</code></td>
+  <td>Render source UI through Bevy while preserving sprite manager, font, text buffer, rich text, hitmask, and visual-state contracts.</td>
   <td>Recover <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
+  <td>Audio</td>
   <td>Audio playback and ambients</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#d65d0e;color:#fbf1c7;font-weight:700">recorded</span></td>
-  <td>Sound manager, stages, categories, tags, ambient docs, water sound stages, requests, and commands exist.</td>
-  <td>Real playback, 3D attachment, category mix, ducking, random/stage selection, and cross-fade timing are open.</td>
-  <td>Implement <code>BFSND_*</code> through Bevy/audio backend and recover sound-tag selection.</td>
+  <td><code>recorded</code></td>
+  <td>Execute sound manager, stages, categories, tags, ambient docs, water sound stages, requests, 3D attachment, ducking, and cross-fades.</td>
+  <td>Implement <code>BFSND_*</code> and sound-tag selection through audio backend.</td>
 </tr>
 <tr>
+  <td>Presentation contracts</td>
+  <td>Host presentation</td>
   <td>Window, input, cursor, IME</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#076678;color:#fbf1c7;font-weight:700">runs</span></td>
-  <td>Bevy window/input plugins capture pointer, keyboard, focus, cursor projection, and window render config.</td>
-  <td>Original IME, dialog, startup-window, and some cursor file semantics are open.</td>
-  <td>Map <code>BFWindowComponent</code>, <code>UIKeyboardEvent</code>, <code>UIMouseEvent</code>, and IME records to host APIs.</td>
+  <td><code>runs</code></td>
+  <td>Translate host pointer, keyboard, focus, cursor, window, and IME events into original UI/game messages.</td>
+  <td>Map <code>BFWindowComponent</code>, <code>UIKeyboardEvent</code>, <code>UIMouseEvent</code>, and IME records.</td>
 </tr>
 </tbody>
 </table>
-<h3>Unknown Extent And Expansion Rule</h3>
-<table>
-<thead>
-<tr>
-  <th>Work package</th>
-  <th>State</th>
-  <th>Capability now</th>
-  <th>Missing product behavior</th>
-  <th>Unlock</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Proven middleware/library surface</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#7c6f64;color:#fbf1c7;font-weight:700">adapter</span></td>
-  <td>Binary perimeter marks 8,853 functions as proven middleware/library, including the large Gamebryo/NetImmerse renderer block and Lua 5.0.2.</td>
-  <td>Adapter layers still need source-visible behavior parity.</td>
-  <td>Implement replacement through Bevy, Lua host, archive readers, and audio/window/network adapters.</td>
-</tr>
-<tr>
-  <td>Classified ZT/BlueFang frontier</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#8f3f71;color:#fbf1c7;font-weight:700">recover</span></td>
-  <td>7,218 ZT/BlueFang functions have inferred functional area with no exact behavior name yet, and 367 vtable-method rows have object-method evidence without exact product contracts.</td>
-  <td>Exact contracts remain absent for selected handlers/formulae.</td>
-  <td>Pick a row above, inspect its functions/source assets, state the domain contract, then implement it.</td>
-</tr>
-<tr>
-  <td>Fully opaque tail</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>The 292 formerly ownerless entries are now characterized: real tank/map/fame code has exact byte-map rows; generated <code>.text$rx</code> support code, rebuilt <code>.idata</code> import data, dense data, and limited MSVC <code>TypeDescriptor</code> metadata for <code>BFSafeHandle</code> instantiations have specific perimeter classifications.</td>
-  <td>No fully opaque perimeter entries remain.</td>
-  <td>Continue through product rows and the classified ZT/BlueFang frontier.</td>
-</tr>
-<tr>
-  <td>Section-local other unknowns</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#9d0006;color:#fbf1c7;font-weight:700">map</span></td>
-  <td>Rows above cover the currently named work packages from the spec, Rust modules, and binary perimeter.</td>
-  <td>Any registered class, function band, source file family, or manager outside these rows lacks a project owner.</td>
-  <td>Add a row before implementing that evidence.</td>
-</tr>
-<tr>
-  <td>Tracker expansion rule</td>
-  <td><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:#79740e;color:#fbf1c7;font-weight:700">done</span></td>
-  <td>This board names current assignable rows.</td>
-  <td>New source or binary recovery can reveal finer owners.</td>
-  <td>Add a row when a distinct manager, source file family, state transition, formula, or adapter boundary appears.</td>
-</tr>
-</tbody>
-</table>
+<h2>Expansion Rule</h2>
+<p>Binary perimeter rows and source assets are recovery inputs. Add a work-board row
+when a distinct manager, source file family, state transition, formula, message
+handler group, or adapter boundary appears. Attach unresolved methods, globals,
+payloads, and formulae to the nearest owning row. If ownership is unclear, leave
+the behavior blank until the source/spec evidence gives it a home.</p>
 <h2>Workspace Crate Boundaries</h2>
 <p><code>content</code> owns source-file boundaries: shipped Z2F archive addressing, asset
 paths, XML/MAXML-like data documents, localization documents, parser support,
@@ -1612,5 +1863,5 @@ and recovered source/value meanings stay canonical; the original C++ heap
 mechanics do not.</p>
 
 </main>
-
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
 </html>

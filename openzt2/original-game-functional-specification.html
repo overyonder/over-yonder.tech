@@ -71,9 +71,11 @@ in each layer are registered native types.</p>
   Mgrs["Native game/domain managers<br/>ZTApp, ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr, ZTDiseaseMgr,<br/>ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr, ZTTankMgr, ZTTransportationMgr,<br/>BFGTraversabilityMgr, BFGPathFinderMgr, BFGRampageMgr,<br/>BFGInfluenceMgr, BFGCollisionMgr, BFSteeringMgr, BFLocomotionMgr,<br/>ZTAI*Mgr, BFSoundMgr/BFSoundStageMgr, BFRenderer/BFSpriteMgr, ZTUndoMgr"]
   State["Original native runtime state<br/>entities (component graphs), AI tokens/tasks, world grid,<br/>UI widget tree, profile/save/scenario/photo/status state"]
   Proj["Projection + host adapters (REPLACEABLE)<br/>Gamebryo/D3D, sound factories, Win32/winit,<br/>registry/profile/fs, Lua/CRT, network/MOTD"]
+  Open["Open / unidentified native surfaces<br/>anonymous vtables, candidate byte-map rows,<br/>unmodeled helper globals/functions"]
   Source --> Runtime --> Mgrs --> State
   Mgrs -.project.-> Proj
-  State -.project.-> Proj</pre>
+  State -.project.-> Proj
+  Mgrs -.residual evidence.-> Open</pre>
 <p>Modern adapters may replace renderer/audio/windowing/archive/parser/script/OS
 mechanics. Animal, UI, economy, placement, disease, scenario, save, and manager
 semantics stay on the original class boundary.</p>
@@ -221,56 +223,76 @@ layer hydrate them.</p>
 <p>Generic source objects are native <code>BFTypedObj</code> hierarchy nodes; the diagrams above
 show the binder and shared-entity-data inheritance surfaces used by source hydration.</p>
 <h3>BFTypedBinder Document Schema</h3>
-<p>The binder document root element is <code>binder</code>. The create/open/save path and the binder property-name table define these
-source keys:</p>
-<ul>
-<li>identity/versioning: <code>binderName</code>, <code>binderType</code>, <code>binderUniqueName</code>,
-<code>binderVersion</code>, <code>version</code>, <code>versionReplace</code></li>
-<li>declaration flags: <code>abstract</code>, <code>required</code>, <code>suppressed</code>, <code>repopulateMethod</code></li>
-<li>declared child sets: <code>types</code>, <code>entity</code>, <code>instance</code>, <code>shared</code>, <code>fence</code></li>
-<li>lookup kinds: <code>byName</code>, <code>byType</code>, <code>byKind</code></li>
-<li>safe-handle identity: <code>safehandleID</code></li>
-</ul>
-<p><code>shared</code> versus <code>instance</code> separate per-type shared XML from per-entity instance
-XML. Concrete typed entity classes named at the binder create path include
-<code>BFGEntity</code> and <code>ZTFenceEntity</code>; binder files persist with the <code>.xml</code> extension.</p>
+<pre class="mermaid">classDiagram
+  class BFTypedBinderDocument {
+    +root : binder
+    +extension : .xml
+    +creates : BFGEntity / ZTFenceEntity
+  }
+  class BinderIdentityKeys {
+    +binderName; +binderType; +binderUniqueName
+    +binderVersion; +version; +versionReplace
+  }
+  class BinderDeclarationKeys {
+    +abstract; +required; +suppressed
+    +repopulateMethod; +safehandleID
+  }
+  class BinderChildSetKeys { +types; +entity; +instance; +shared; +fence }
+  class BinderLookupKeys { +byName; +byType; +byKind }
+  class BinderXmlPartitions { +shared : per-type XML; +instance : per-entity XML }
+  BFTypedBinderDocument *-- BinderIdentityKeys
+  BFTypedBinderDocument *-- BinderDeclarationKeys
+  BFTypedBinderDocument *-- BinderChildSetKeys
+  BFTypedBinderDocument *-- BinderLookupKeys
+  BFTypedBinderDocument *-- BinderXmlPartitions</pre>
 <h3>BFAIEntityDataShared Property Maps</h3>
-<p>Shared entity/animal attribute data is hydrated by a property-child reader that
-dispatches on the key prefix into typed containers:</p>
-<ul>
-<li><code>b_*</code> -&gt; bool / bool-expression map</li>
-<li><code>s_*</code> -&gt; string-token map</li>
-<li><code>f_*</code> -&gt; float / float-expression map</li>
-<li><code>p_*</code> -&gt; point/vector map</li>
-</ul>
-<p><code>read_property_children</code> clears and repopulates these maps from XML children; the
-A binder read-node additionally resolves randomized float-expression
-entries (<code>rand(...)</code>) into concrete float values at read time. Observed concrete
-keys at consumer callsites: <code>s_Species</code>, <code>s_Zoopedia</code>, <code>b_NoPerceiveOverride</code>,
-<code>f_adoptRarity</code>, <code>f_needPointsGood</code>, <code>f_needPointsGoodCum</code>, <code>f_needPointsBad</code>,
-<code>f_needPointsBadCum</code>. Descriptor-table field strings include <code>fadeHold</code>,
-<code>wrapValue</code>, <code>minRange</code>, <code>maxRange</code>, <code>maxAlpha</code>, <code>stateList</code>.</p>
+<pre class="mermaid">classDiagram
+  class BFAIEntityDataShared {
+    +read_property_children()
+    +resolves rand(...) float expressions
+  }
+  class BoolPropertyMap { +b_*; +b_NoPerceiveOverride }
+  class StringPropertyMap { +s_*; +s_Species; +s_Zoopedia }
+  class FloatPropertyMap {
+    +f_*; +f_adoptRarity
+    +f_needPointsGood; +f_needPointsGoodCum
+    +f_needPointsBad; +f_needPointsBadCum
+  }
+  class PointPropertyMap { +p_* }
+  class DescriptorFieldStrings {
+    +fadeHold; +wrapValue; +minRange
+    +maxRange; +maxAlpha; +stateList
+  }
+  BFAIEntityDataShared *-- BoolPropertyMap
+  BFAIEntityDataShared *-- StringPropertyMap
+  BFAIEntityDataShared *-- FloatPropertyMap
+  BFAIEntityDataShared *-- PointPropertyMap
+  BFAIEntityDataShared ..> DescriptorFieldStrings</pre>
 <h3>BFAITaskTemplate Source Schema</h3>
-<p><code>BFAITaskTemplate</code> is a native <code>BFComponent</code> subtype. Its type getter registers
-the class name with <code>register_type</code> under the <code>BFComponent</code> parent getter, with
-its own type-cache global. Sibling registered native types in the same task
-family are <code>BFAITaskRoot</code>, <code>BFAITaskTemplateList</code>, <code>BFAITaskThinker</code>,
-<code>BFAICreateData</code>, <code>BFAIEvalData</code>, <code>BFAICompletionData</code>, <code>BFBehExecTask</code>, and
-<code>BFBehExecPath</code>; these are separate component classes.</p>
-<p>The template's XML read method hydrates these source keys via the binder
-attribute readers:</p>
-<ul>
-<li>identity/version: <code>UniqueID</code>, <code>version</code>, <code>useFromTokenQualifiers</code></li>
-<li>scheduling: <code>Priority</code>, <code>TaskDelayMin</code>, <code>TaskDelayMax</code></li>
-<li>flags: <code>CursorTask</code>, <code>UseForKeeperPanel</code>, <code>DoNotDisturb</code></li>
-<li>selection sets (each with an <code>_AND</code> companion): <code>Subjects</code>, <code>Targets</code>,
-<code>Objects</code>, <code>Qualifiers</code></li>
-<li>tagging/containers: <code>reserveTag</code>, <code>attachTag</code>, <code>sensorTag</code>,
-<code>defaultSensorTag</code>, <code>objectContainer</code>, <code>objectName</code></li>
-</ul>
-<p>The template is a hydrated configuration component. Scoring, execution,
-completion, and failure are runtime behaviors owned by the AI thinker/behavior
-classes (<code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, <code>BFBehExecTask</code>).</p>
+<pre class="mermaid">classDiagram
+  BFComponent <|-- BFAITaskTemplate
+  BFComponent <|-- BFAITaskRoot
+  BFComponent <|-- BFAITaskTemplateList
+  BFComponent <|-- BFAITaskThinker
+  BFComponent <|-- BFAICreateData
+  BFComponent <|-- BFAIEvalData
+  BFComponent <|-- BFAICompletionData
+  BFBehavior <|-- BFBehExecTask
+  BFBehRoute <|-- BFBehExecPath
+  class BFAITaskTemplate {
+    +register_type(BFComponent)
+    +UniqueID; +version; +useFromTokenQualifiers
+    +Priority; +TaskDelayMin; +TaskDelayMax
+    +CursorTask; +UseForKeeperPanel; +DoNotDisturb
+    +Subjects/_AND; +Targets/_AND
+    +Objects/_AND; +Qualifiers/_AND
+    +reserveTag; +attachTag; +sensorTag; +defaultSensorTag
+    +objectContainer; +objectName
+  }
+  BFAITaskTemplate ..> BFAITaskThinker : scored by
+  BFAITaskTemplate ..> BFAIEvalData : eval/runtime
+  BFAITaskTemplate ..> BFBehExecTask : execution
+  BFAITaskTemplate ..> BFAICompletionData : complete/fail</pre>
 <h3>catalog relationship model</h3>
 <pre class="mermaid">classDiagram
   AdoptionConfig "*" --> AdoptionSlot : slots
@@ -382,7 +404,7 @@ singleton lifetime, then stack in three layers under the application.</p>
     Reg["BFRegistry<br/>global keys, types, factories"]
     Sc["BFScriptContextMgr<br/>BFScriptContext/BFLuaContext instances"]
     P["BFUserProfileMgr<br/>profile paths, options.xml"]
-    T["BFTimeKeeper<br/>simulation clock and scheduled updates"]
+    T["BFTimeKeeper<br/>simulation clock and scheduled updates,<br/>BFTimeKeyInfo, BFTimeTriggersComponent"]
   end
   subgraph Domain["Product domain manager layer"]
     Core["Core zoo state<br/>ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr,<br/>ZTDiseaseMgr, ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr"]
@@ -395,11 +417,12 @@ singleton lifetime, then stack in three layers under the application.</p>
     Tool["ZTToolMgr<br/>active tool"]
     Gesture["ZTGestureMgr<br/>gesture input/minigames"]
     Location["ZTLocationMgr<br/>named map locations"]
-    Viewable["ZTViewableObjectMgr / ZTViewableSubMgr<br/>tour/photo visible objects"]
+    Viewable["ZTViewableObjectMgr / ZTViewableSubMgr / BFGViewableObjectMgr<br/>tour/photo visible objects"]
     Feedback["ZTFeedbackMgr<br/>player feedback"]
-    Puzzle["ZTPuzzleMgr<br/>puzzles"]
+    Puzzle["ZTPuzzleMgr / BFGPuzzleMgr<br/>puzzles"]
     Favorite["ZTFavoriteAnimalMgr<br/>favorites"]
     TrickButton["ZTTrickButtonMgr<br/>trick UI"]
+    Other["Other / unidentified manager-like surfaces<br/>address-only vtables and helper functions remain in the byte map"]
   end
   subgraph Proj["Projection layer"]
     Rn[BFRenderer]
@@ -410,7 +433,8 @@ singleton lifetime, then stack in three layers under the application.</p>
   App --> Tools
   Source --> Domain
   Domain --> Proj
-  Tools --> Domain</pre>
+  Tools --> Domain
+  Other --> Domain</pre>
 <p>Reconstructed fields: <code>BFResourceMgr</code> holds <code>root_path</code>, <code>zip_paths</code>,
 <code>archive_paths</code>, <code>binder_roots</code>, <code>entries : Vec~BFResourceEntry~</code>, <code>resource_tree</code>;
 <code>BFLocaleMgr</code> holds <code>locale</code> + <code>string_tables</code>; <code>BFTimeKeeper</code> holds <code>elapsed_seconds</code>, <code>delta_seconds</code>, <code>paused</code>, and a
@@ -580,7 +604,6 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   }
   class UIButton { text/layout/containment-capable button }</pre>
 <h3>Reconstructed widget fields</h3>
-<p>Each widget nests a typed state struct:</p>
 <pre class="mermaid">classDiagram
   class UIButtonState { +auto_size; +min_height; +toggle; +sticky; +repress }
   class UITextState { +auto_size; +text_type; +text_format; +loc_id }
@@ -618,27 +641,36 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   class UIAnimation { show/hide animation }
   class UISoundMgr { UI sound playback }</pre>
 <h3>Message bus</h3>
-<p>The 183 <code>UI_*</code> names are <strong>interned tokens</strong>, registered through the same <code>register_type</code>
-registrar as native types via the registration table. They form the dispatch
-contract, grouped by role:</p>
-<ul>
-<li>tree/lifecycle: <code>UI_CHILD</code>, <code>UI_GET_CHILD</code>, <code>UI_DESTROY_CHILD(_DELAYED)</code>,
-<code>UI_DESTROY_CHILDREN</code>, <code>UI_SHOW</code>/<code>UI_HIDE</code>, <code>UI_SHOW_CHILD_EX</code>, <code>UI_ENABLE</code>/<code>UI_DISABLE</code></li>
-<li>identity/nav: <code>UI_GET_NAME</code>/<code>UI_SET_NAME</code>, <code>UI_GET_PARENT</code>, <code>UI_SET_NEXT</code>/<code>UI_SET_PREVIOUS</code></li>
-<li>activation: <code>UI_ACTIVATE</code>, <code>UI_ACTIVATE_ON</code>/<code>UI_ACTIVATE_OFF</code>, <code>UI_ACTIVATE_DATA</code>,
-<code>UI_ADD_ACTIVATE_EVENT</code>(<code>_ON</code>/<code>_OFF</code>)</li>
-<li>value/state: <code>UI_CHANGED_VALUE</code>, <code>UI_CHANGED_STATE</code>, <code>UI_CHANGED_TEXT</code>, <code>UI_MODIFY</code>,
-<code>UI_QUERY</code>, <code>UI_SET_EDIT_LOCK</code></li>
-<li>animation: <code>UI_SET_ANIM_RECT_START</code>/<code>_END</code>, <code>UI_SET_ANIM_COLOR_START</code>/<code>_END</code></li>
-<li>input: <code>UI_GET_MOUSE_DATA</code>, <code>UI_SETCURSOR</code>, <code>UI_SETTINGS_CHANGED</code></li>
-<li>region/aspect: the <code>UI_*_REGION</code>/<code>UI_*_ASPECT</code> families</li>
-</ul>
-<p>Reconstructed dispatch infrastructure: a <code>BFMessageBus</code> holds
-<code>listeners : Vec~BFMessageListener~</code> + <code>queued_events : BFEventList</code>; each
-<code>BFMessageListener</code> binds <code>owner</code>/<code>message</code>/<code>callback_name</code>. Widget values cross the bus
-as <code>UIInlineTypedValue</code> (<code>value_type : UiValueTypeHandle</code>, <code>ref_count</code>, <code>payload</code>), with
-typed payloads <code>UIFloatPayloadValue</code>/<code>UIStringPayloadValue</code>/<code>UIPointerPayloadValue</code> — the
-ref-counted value objects behind <code>UI_CHANGED_VALUE</code>.</p>
+<pre class="mermaid">classDiagram
+  class UIMessageRegistry {
+    +183 UI_* interned tokens
+    +registered through register_type
+  }
+  class BFMessageBus { +listeners : Vec~BFMessageListener~; +queued_events : BFEventList }
+  class BFMessageListener { +owner; +message; +callback_name }
+  class UITreeLifecycleMessages {
+    +UI_CHILD; +UI_GET_CHILD; +UI_DESTROY_CHILD_DELAYED
+    +UI_DESTROY_CHILDREN; +UI_SHOW; +UI_HIDE
+    +UI_SHOW_CHILD_EX; +UI_ENABLE; +UI_DISABLE
+  }
+  class UIIdentityNavMessages { +UI_GET_NAME; +UI_SET_NAME; +UI_GET_PARENT; +UI_SET_NEXT; +UI_SET_PREVIOUS }
+  class UIActivationMessages { +UI_ACTIVATE; +UI_ACTIVATE_ON; +UI_ACTIVATE_OFF; +UI_ACTIVATE_DATA; +UI_ADD_ACTIVATE_EVENT }
+  class UIValueStateMessages { +UI_CHANGED_VALUE; +UI_CHANGED_STATE; +UI_CHANGED_TEXT; +UI_MODIFY; +UI_QUERY; +UI_SET_EDIT_LOCK }
+  class UIAnimationMessages { +UI_SET_ANIM_RECT_START; +UI_SET_ANIM_RECT_END; +UI_SET_ANIM_COLOR_START; +UI_SET_ANIM_COLOR_END }
+  class UIInputMessages { +UI_GET_MOUSE_DATA; +UI_SETCURSOR; +UI_SETTINGS_CHANGED }
+  class UIRegionAspectMessages { +UI_*_REGION; +UI_*_ASPECT }
+  class UIInlineTypedValue { +value_type : UiValueTypeHandle; +ref_count; +payload }
+  class UIPayloadValues { +UIFloatPayloadValue; +UIStringPayloadValue; +UIPointerPayloadValue }
+  UIMessageRegistry *-- UITreeLifecycleMessages
+  UIMessageRegistry *-- UIIdentityNavMessages
+  UIMessageRegistry *-- UIActivationMessages
+  UIMessageRegistry *-- UIValueStateMessages
+  UIMessageRegistry *-- UIAnimationMessages
+  UIMessageRegistry *-- UIInputMessages
+  UIMessageRegistry *-- UIRegionAspectMessages
+  BFMessageBus "*" --> BFMessageListener : listeners
+  BFMessageBus "*" --> UIInlineTypedValue : value payloads
+  UIInlineTypedValue --> UIPayloadValues</pre>
 <h3>UI Animation State Model</h3>
 <pre class="mermaid">classDiagram
   class UIAnimation {
@@ -655,24 +687,26 @@ ref-counted value objects behind <code>UI_CHANGED_VALUE</code>.</p>
   UIAnimation "*" --> UIAnimationKeyFrame : keyframes
   UIAnimation ..> UIMessage : UI_SET_ANIM_RECT_* / UI_SET_ANIM_COLOR_*</pre>
 <h3>Value-handler binding (UI &lt;-&gt; game state)</h3>
-<p>Managers <strong>register named value-handlers</strong> that widgets bind to. Examples are
-<code>register_globe_ui_value_handlers</code>,
-<code>register_scenario_campaign_ui_value_handlers</code>, and <code>handle_&lt;x&gt;_ui_value</code> bodies; the
-producer/consumer side is the economy/fame <code>make_&lt;x&gt;_value</code>/<code>accept_&lt;x&gt;_value</code> pattern.
-<code>ZT_GET_ZOO_CASH</code> etc. reach labels through this value-handler path.</p>
+<pre class="mermaid">classDiagram
+  class UiValueHandlerRegistry {
+    +register_globe_ui_value_handlers()
+    +register_scenario_campaign_ui_value_handlers()
+    +handle_named_ui_value()
+  }
+  class UiValueProducer { +make_named_value(); +ZT_GET_ZOO_CASH; +fame/status labels }
+  class UiValueConsumer { +accept_named_value(); +setters/sliders/toggles }
+  class UIWidgetBinding { +control; +value_message; +target_manager }
+  UiValueHandlerRegistry "*" --> UIWidgetBinding : named handlers
+  UIWidgetBinding --> UiValueProducer : queries
+  UIWidgetBinding --> UiValueConsumer : accepts</pre>
 <h3>Startup lifecycle</h3>
 <pre class="mermaid">stateDiagram-v2
   [*] --> Boot
-  Boot --> LoadSources : mount Z2F, UI, loc, assets
+  Boot --> LoadSources : options/app.xml ZTAppConfig + mount Z2F/UI/loc/assets
   LoadSources --> Splash : source UI visible
   Splash --> Title : ZT_SPLASH_CLOSED
   Title --> MainMenu : ui/layout/mainmenu
   MainMenu --> InGame : profile/campaign/scenario -> ZT_SETMODE</pre>
-<p><code>ZT_SPLASH_CLOSED</code> is a lifecycle transition interpreted by <code>ZTApp</code>;
-<code>ui/layout/mainmenu.xml</code> drives the menu widget tree. App bootstrap is authored
-(<code>ZTAppConfig</code>): <code>components</code>, <code>log : BFLogAppConfig</code>,
-<code>resource_mgr : BFResourceMgrAppConfig</code>, <code>registry</code>, <code>extra_paths</code>, <code>eula_check</code>,
-<code>xp_info_folder</code> — the startup component/config graph (options/app.xml).</p>
 <h3>Data flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant XML as ui/layout XML
@@ -859,6 +893,23 @@ the binary is <code>ZTFenceEntity</code>.</p>
     resolve_main_object_name_value()
     animal/guest/staff/scenery/building/food/path/tank/gate/ride/vehicle via binder + components
   }
+  class BFGEntityContainer { +slots; +SlotHeavy/SlotLight; holds other entities }
+  class BFGEntitySndComponent { +per-entity sound emission }
+  class BFGEnvironmentComponent { +local environment contribution/effect }
+  class BFGInfluenceComponent { +influence-field source read by AI }
+  class BFGridCollisionComponent { +grid collision footprint }
+  class BFSceneGraphComponent { +render scene-graph attachment }
+  class BFGEntityTriggerMgr {
+    +config/entitytriggers.xml
+    +primary/secondary/count/proximity/attribute
+    +on_message/off_message
+  }
+  class BFGPlacementData { +placement footprint/flags }
+  class BFGEntityDataHolders {
+    +BFGContainerData; +BFGEntityMoveData
+    +BFGEntityMorphData schema/bfgentitymorphdata.xdr
+    +BFGEntitySharedEventData; +BFGEntityFittingSurface
+  }
   BFComponentNameMap <|-- BFGEntity
   BFGEntity <|-- ZTFenceEntity : ONLY native subtype
   BFGEntity *-- BFGEntityContainer : containment
@@ -869,91 +920,29 @@ the binary is <code>ZTFenceEntity</code>.</p>
   BFGEntity *-- BFSceneGraphComponent : render/scene attach
   BFGEntity *-- BFGEntityTriggerMgr : triggers
   BFGEntity *-- BFGPlacementData : placement footprint
+  BFGEntity *-- BFGEntityDataHolders : per-entity XML/fitting data
   BFGEntity ..> BFAIEntityDataShared : AI/animal entities only
   BFGEntity ..> BFAICognitiveComponent : AI/animal entities only
   BFGEntity ..> BFLocomotion : moving entities only</pre>
-<h3>Component roles</h3>
-<p>Each aggregated component is itself a registered native type (a <code>BFComponent</code> unless
-noted). The entity's behaviour is the union of whichever components its binder
-attaches:</p>
-<table>
-<thead>
-<tr>
-  <th>Component</th>
-  <th>Parent</th>
-  <th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><code>BFGEntityContainer</code> (+ <code>…Slot</code>, <code>…SlotHeavy/Light</code>)</td>
-  <td><code>BFComponent</code> / <code>BFXMLObj</code></td>
-  <td>holds other entities (guests on rides, animals in tanks)</td>
-</tr>
-<tr>
-  <td><code>BFGEntitySndComponent</code></td>
-  <td><code>BFComponent</code></td>
-  <td>per-entity sound emission</td>
-</tr>
-<tr>
-  <td><code>BFGEnvironmentComponent</code></td>
-  <td><code>BFComponent</code></td>
-  <td>local environment contribution/effect</td>
-</tr>
-<tr>
-  <td><code>BFGInfluenceComponent</code> (+ <code>BFGInfluenceMgr</code>, <code>BFGInfluenceController</code>)</td>
-  <td><code>BFComponent</code> / <code>BFAIDataController</code></td>
-  <td>influence-field source read by AI</td>
-</tr>
-<tr>
-  <td><code>BFGridCollisionComponent</code></td>
-  <td><code>BFPhysComponent</code></td>
-  <td>grid collision footprint</td>
-</tr>
-<tr>
-  <td><code>BFSceneGraphComponent</code></td>
-  <td><code>BFPhysComponent</code></td>
-  <td>attaches the entity into the render scene graph</td>
-</tr>
-<tr>
-  <td><code>BFGEntityTriggerMgr</code></td>
-  <td><code>BFComponent</code></td>
-  <td>event triggers (<code>config/entitytriggers.xml</code>); rules are <code>BFGEntityTriggerRule</code> (<code>primary</code>/<code>secondary</code>/<code>count</code>/<code>proximity</code>/<code>attribute</code> -&gt; <code>on_message</code>/<code>off_message</code>)</td>
-</tr>
-<tr>
-  <td><code>BFGPlacementData</code></td>
-  <td><code>BFComponent</code></td>
-  <td>placement footprint/flags</td>
-</tr>
-<tr>
-  <td><code>BFGContainerData</code>, <code>BFGEntityMoveData</code>, <code>BFGEntityMorphData</code>, <code>BFGEntitySharedEventData</code>, <code>BFGEntityFittingSurface</code></td>
-  <td><code>BFXMLObj</code> / <code>BFWorldFittingSurface</code></td>
-  <td>per-entity data holders (<code>BFGEntityMorphData</code> has schema <code>bfgentitymorphdata.xdr</code>)</td>
-</tr>
-</tbody>
-</table>
 <h3>Hydration</h3>
-<p>An entity is created through a <code>BFTypedBinder</code>,
-which separates per-type <strong>shared</strong> XML from per-instance <strong>instance</strong> XML.
-The instance document is read to populate the entity's component set. The main-object-name
-component is built lazily from the <code>s_mainObjName</code> key by querying the entity's own
-component provider, then cached on the entity.</p>
+<pre class="mermaid">sequenceDiagram
+  participant Binder as BFTypedBinder
+  participant Shared as shared XML
+  participant Instance as instance XML
+  participant Entity as BFGEntity
+  Binder->>Shared: resolve per-type data
+  Binder->>Instance: read_instance_xml_node()
+  Instance->>Entity: populate component set
+  Entity->>Entity: resolve s_mainObjName and cache component</pre>
 <h3>Animal = entity + AI/animal components</h3>
-<p>An animal is a <code>BFGEntity</code> binder type that additionally aggregates the AI/animal
-component set:</p>
-<ul>
-<li><code>BFAIEntityDataShared</code> (parent <code>BFAIEntityData</code> &lt; <code>BFComponentList</code>) — the
-<code>b_*</code>/<code>s_*</code>/<code>f_*</code>/<code>p_*</code> property maps, with concrete keys <code>s_Species</code>, <code>s_Zoopedia</code>,
-<code>f_adoptRarity</code>, <code>f_needPointsGood/Bad(Cum)</code>, <code>b_NoPerceiveOverride</code>.</li>
-<li><code>BFAICognitiveComponent</code> / <code>BFAICognitiveMgr</code> (parent <code>BFAIEntityComponent</code>) — the
-thinking/needs cognition.</li>
-<li><code>BFLocomotion</code> / <code>BFLocomotionMgr</code>, <code>BFAnimController</code>, <code>BFSecondaryAnimComponent</code> —
-movement and animation.</li>
-</ul>
-<p>The reconstruction aggregates the component-derived animal state into a
-<code>ZTAnimal</code> runtime view, and the authored type into <code>ZTAnimalTypeDefinition</code>. These
-are the real animal state surfaces, sourced across the entity's binder + components:</p>
 <pre class="mermaid">classDiagram
+  BFGEntity ..> BFAIEntityDataShared : property maps b/s/f/p + species/zoopedia/adoption/needs keys
+  BFGEntity ..> BFAICognitiveComponent : thinking/needs cognition
+  BFGEntity ..> BFAICognitiveMgr : cognition manager
+  BFGEntity ..> BFLocomotion : movement
+  BFGEntity ..> BFLocomotionMgr : movement manager
+  BFGEntity ..> BFAnimController : animation selection
+  BFGEntity ..> BFSecondaryAnimComponent : secondary animation
   class ZTAnimal {
     +entity_id; +source_identity
     +species; +family; +biome; +endangerment; +sex
@@ -1251,8 +1240,6 @@ Tours: <code>ZTAITourTaker</code>/<code>Data</code>/<code>TourTaskThinker</code>
 and donations are behavior-driven (<code>ZTBehViewAnimals</code>, <code>ZTBehViewEvent</code>,
 <code>process_guest_animal_donation_candidates</code>, the <code>edDonate</code> functions).</p>
 <h3>Guest viewing and donation</h3>
-<p>The guest donation/education loop is reconstructed — and recovers some of the
-donation formula the open contracts flagged:</p>
 <pre class="mermaid">classDiagram
   class ZTGuestDonationCandidate {
     +target_entity; +target_species; +view_key
@@ -1266,33 +1253,36 @@ donation formula the open contracts flagged:</p>
   }
   class ZTGuestViewedSpeciesMemory { +guest_entity; +scores; +preferred_animal; +view_species_discount }
   class ZTEdDonateTask { +view_key; +ed_value; +ed_donate; +view_radius; +target_type }
+  class ZTGuestDonationHelpers {
+    +prune_expired_guest_donation_candidates()
+    +select_ed_donate_viewpoint_swap_target()
+    +vpintersect target scan
+    +f_vpMinSwapDistance / f_vpMaxSwapDistance
+  }
+  class DonationSourceOwnership {
+    +guest shared data : preferred-animal + repeat-view discount factors
+    +animal shared data : base donation + max-species donation factors
+  }
+  ZTBehViewAnimals ..> ZTGuestDonationCandidate : drives
+  ZTBehViewEvent ..> ZTGuestDonationCandidate : drives
   ZTGuestViewedSpeciesMemory ..> ZTGuestDonationCandidate : scores
-  ZTGuestDonationScoreFactors ..> ZTGuestDonationCandidate : weights</pre>
-<p>A guest accumulates <code>ZTGuestViewedSpeciesMemory</code> (per-species view scores + a
-<code>preferred_animal</code>); a <code>ZTGuestDonationCandidate</code> weighs <code>education_value</code>/
-<code>donation_value</code>/<code>max_tour_view_value</code>; <code>ZTGuestDonationScoreFactors</code> carries the
-weighting constants (<code>base_donation_amount</code>, <code>max_species_donation_factor</code>,
-<code>preferred_animal_*_factor</code>, repeat-view <code>view_species_discount</code>/<code>cap</code>). <code>ZTEdDonateTask</code>
-is the education-donate behavior (<code>ed_value</code>/<code>ed_donate</code>/<code>view_radius</code>). Behaviours
-<code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> drive it.
-Recovered helper contracts include <code>prune_expired_guest_donation_candidates</code>,
-which erases candidate entries whose score/value is non-positive, and
-<code>select_ed_donate_viewpoint_swap_target</code>, which scans <code>vpintersect</code> targets and
-selects the nearest valid target strictly inside the configured
-<code>f_vpMinSwapDistance</code>/<code>f_vpMaxSwapDistance</code> band.
-The recovered fields are not all manager-owned: guest entity shared data carries
-preferred-animal and repeat-view discount factors, while animal entity shared
-data carries base donation amount and max-species donation factor.</p>
+  ZTGuestDonationScoreFactors ..> ZTGuestDonationCandidate : weights
+  ZTEdDonateTask ..> ZTGuestDonationCandidate : education-donate behavior
+  ZTGuestDonationHelpers ..> ZTGuestDonationCandidate : prune/select
+  DonationSourceOwnership ..> ZTGuestDonationScoreFactors</pre>
 <h3>Message surface</h3>
-<p>102 registered <code>BFAI_*</code>/<code>ZTAI_*</code> tokens form the AI query/command/event vocabulary:
-the <code>BFAI_EVENT</code> root; queries (<code>BFAI_GET_CRITICAL</code>, <code>…GET_ARRIVAL</code>,
-<code>…GET_RELATED_ENTITIES</code>, <code>ZTAI_GET_SHOW_STAR_RATING</code>, <code>ZTAI_GET_TRICK_SCORE</code>,
-<code>ZTAI_GET_DONATION_POINTS</code>, ...); tests (<code>BFAI_IS_ENTITY_CONTAINED</code>, <code>…IN_HABITAT</code>,
-<code>…ON_BIOME</code>, <code>BFAI_HAS_TOKEN</code>); commands (<code>BFAI_CREATE_ENTITY</code>,
-<code>BFAI_REGISTER_ENTITY</code>, <code>BFAI_ADD_RELATIONSHIP</code>, <code>BFAI_SET_TOKEN_TARGET</code>,
-<code>BFAI_REMOVE_TOKEN</code>); attribute-changed notifications
-(<code>BFAI_ATTRIBUTE_CHANGED_BOOL/FLOAT/POINT3/STRING</code>); and the <code>BEH_EVENT_ROOT</code>/
-<code>LOCO_EVENT_ROOT</code>/<code>STEER_EVENT_ROOT</code> per-layer roots.</p>
+<pre class="mermaid">classDiagram
+  class AiMessageRegistry { +102 BFAI_* / ZTAI_* registered tokens; +BFAI_EVENT root }
+  class AiQueryMessages { +BFAI_GET_CRITICAL; +BFAI_GET_ARRIVAL; +BFAI_GET_RELATED_ENTITIES; +ZTAI_GET_SHOW_STAR_RATING; +ZTAI_GET_TRICK_SCORE; +ZTAI_GET_DONATION_POINTS }
+  class AiTestMessages { +BFAI_IS_ENTITY_CONTAINED; +BFAI_IS_ENTITY_IN_HABITAT; +BFAI_IS_ENTITY_ON_BIOME; +BFAI_HAS_TOKEN }
+  class AiCommandMessages { +BFAI_CREATE_ENTITY; +BFAI_REGISTER_ENTITY; +BFAI_ADD_RELATIONSHIP; +BFAI_SET_TOKEN_TARGET; +BFAI_REMOVE_TOKEN }
+  class AiAttributeMessages { +BFAI_ATTRIBUTE_CHANGED_BOOL; +BFAI_ATTRIBUTE_CHANGED_FLOAT; +BFAI_ATTRIBUTE_CHANGED_POINT3; +BFAI_ATTRIBUTE_CHANGED_STRING }
+  class AiLayerEventRoots { +BEH_EVENT_ROOT; +LOCO_EVENT_ROOT; +STEER_EVENT_ROOT }
+  AiMessageRegistry *-- AiQueryMessages
+  AiMessageRegistry *-- AiTestMessages
+  AiMessageRegistry *-- AiCommandMessages
+  AiMessageRegistry *-- AiAttributeMessages
+  AiMessageRegistry *-- AiLayerEventRoots</pre>
 <h3>show relationship model</h3>
 <pre class="mermaid">classDiagram
   BFAITrickMgr <|-- ZTAITrickMgr
@@ -1496,10 +1486,12 @@ undo stack can reverse.</p>
   BFTypedObj <|-- BFGPlacementTile
   BFGPlacementTile <|-- BFGElevatedPlacementTile
   BFComponent <|-- BFGElevatedSupportTracker
+  BFXMLObj <|-- BFGElevatedTileData
   BFXMLObj <|-- ZTPlacementInfo
   class BFGPlacementGrid { tile grid; occupancy }
   class BFGPlacementData { per-object footprint authored data }
-  class BFGElevatedSupportTracker { elevated path/track support }</pre>
+  class BFGElevatedSupportTracker { elevated path/track support }
+  class BFGElevatedTileData { elevated tile persistence/source data }</pre>
 <h3>Collision, traversability, pathfinding</h3>
 <pre class="mermaid">classDiagram
   BFTraversabilityMgr <|-- BFGTraversabilityMgr
@@ -1595,17 +1587,27 @@ undo stack can reverse.</p>
   ZTPlacementData *-- ZTFootprintPreview
   ZTPlacementData "1" --> ZTPlacementFailureCatalog : validation messages</pre>
 <h3>Editing modes (tool layer)</h3>
-<p>The <code>ZTMode</code> base (<code>ZTModeRuntimeFields</code>) is an XML-configured interaction
-handler: <code>cursor</code>, <code>ui_layout</code>, <code>active</code>, <code>state_token</code>, <code>config_fields</code>, <code>layout_guis</code>,
-<code>hotkeys</code>/<code>inline_hotkeys</code>, <code>event_blocks : Vec~ZTModeEventBlock~</code>, and
-<code>message_handlers : Vec~ZTModeMessageHandler~</code>. The reconstruction also models the native
-surface explicitly — <code>ZTModeClassSurface { runtime, type_cache, vtable, input_state }</code>.</p>
-<p>World editing is driven by <code>ZTMode</code> subtypes (a shared interaction-mode base used
-across the game). The placement/world tools are <code>ZTPlacementMode</code>
-(<code>&lt; ZTEntityMovementMode</code>), <code>ZTFenceMode</code>, <code>ZTPathMode</code>, <code>ZTElevatedPathMode</code>,
-<code>ZTElevatedCurbMode</code>, <code>ZTBiomeMode</code> (<code>&lt; ZTEntityMovementMode</code>), <code>ZTGroundTrackMode</code>,
-<code>ZTTankCommandReader</code>, <code>ZTTerrainCommandReader</code>. (The full <code>ZTMode</code> catalog also
-covers camera/file/game/photo/gesture/training/overhead/main interaction modes.)</p>
+<pre class="mermaid">classDiagram
+  class ZTModeRuntimeFields {
+    +cursor; +ui_layout; +active; +state_token
+    +config_fields; +layout_guis
+    +hotkeys; +inline_hotkeys
+    +event_blocks : Vec~ZTModeEventBlock~
+    +message_handlers : Vec~ZTModeMessageHandler~
+  }
+  class ZTModeClassSurface { +runtime; +type_cache; +vtable; +input_state }
+  ZTMode <|-- ZTEntityMovementMode
+  ZTEntityMovementMode <|-- ZTPlacementMode
+  ZTEntityMovementMode <|-- ZTBiomeMode
+  ZTMode <|-- ZTFenceMode
+  ZTMode <|-- ZTPathMode
+  ZTMode <|-- ZTElevatedPathMode
+  ZTMode <|-- ZTElevatedCurbMode
+  ZTMode <|-- ZTGroundTrackMode
+  ZTMode <|-- ZTTankCommandReader
+  ZTMode <|-- ZTTerrainCommandReader
+  ZTMode *-- ZTModeRuntimeFields
+  ZTModeClassSurface --> ZTModeRuntimeFields</pre>
 <h3>Placement transaction flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant Mode as ZTPlacementMode
@@ -1620,11 +1622,21 @@ covers camera/file/game/photo/gesture/training/overhead/main interaction modes.)
   Mode->>Tx: commit (charge, mutate grid, attach entity)
   Tx->>Undo: push BFUndoTransactionData
   Tx->>Grid: refresh collision/traversability/pathfinding queries</pre>
-<p>Result tokens are native string constants emitted by the validators/modes:
-<code>place_yes</code>/<code>place_no</code>, <code>place_fence</code>/<code>place_fence_overlap</code>, <code>place_path</code>/
-<code>no_headroom_path</code>, <code>place_track</code>, <code>place_tree</code>/<code>place_plant</code>/<code>place_rock</code>,
-<code>place_vehicle_ground</code>/<code>place_vehicle_sky</code>, <code>place_animal_entity</code>, plus
-<code>too_steep</code>, <code>CANNOT_AFFORD</code>, <code>UNRESEARCHED</code>, <code>OUT_OF_ANIMAL_TRAVERS_AREA</code>.</p>
+<pre class="mermaid">classDiagram
+  class PlacementResultTokens {
+    +place_yes; +place_no
+    +place_fence; +place_fence_overlap
+    +place_path; +no_headroom_path; +place_track
+    +place_tree; +place_plant; +place_rock
+    +place_vehicle_ground; +place_vehicle_sky
+    +place_animal_entity
+  }
+  class PlacementFailureTokens {
+    +too_steep; +CANNOT_AFFORD; +UNRESEARCHED
+    +OUT_OF_ANIMAL_TRAVERS_AREA
+  }
+  ZTPlacementData --> PlacementResultTokens
+  ZTPlacementData --> PlacementFailureTokens</pre>
 <h3>Transactions and undo</h3>
 <pre class="mermaid">classDiagram
   BFComponent <|-- BFGTransaction
@@ -1654,8 +1666,8 @@ covers camera/file/game/photo/gesture/training/overhead/main interaction modes.)
     +heightOffset; +maxTilt; +fitRadius; +fitLowest
     +tiltGain; +groundFitSatisfied; +autoHeightOffset
     +floatOnWater; +waterOffset
+    +native fit algorithm
   }</pre>
-<p>The fit algorithm is native.</p>
 <h3>transport relationship model</h3>
 <pre class="mermaid">classDiagram
   TransportDomain "1" --> ZTTransportationMgr : manager
@@ -1987,87 +1999,116 @@ edge cases are open.</li>
     +settings_document; +pending_confirmation; +selected_detail_level
   }</pre>
 <h3>Gesture system (cloning / training minigames)</h3>
-<p><code>ZTGestureMgr</code> (cross-cutting manager) owns the gesture minigame used by
-<code>ZTCloningGestureMode</code> and training. Authored <code>ZTGestureDefinition</code>s describe the target
-shape; the player's live <code>ZTGestureTrace</code> is matched against them to produce a score
-:</p>
 <pre class="mermaid">classDiagram
-  class ZTGestureMgr { +gestures; +committed_traces; +definitions; +tracer_visuals; +editing_directory }
+  class ZTGestureMgr { +cloning/training minigame; +gestures; +committed_traces; +definitions; +tracer_visuals; +editing_directory }
   class ZTGestureDefinition {
     +gesture_type; +parent_obj; +parent_node
     +camera_pos; +plane_normal; +bounding_box_scale
   }
   class ZTGestureTrace { +gesture_type_hint; +strokes : Vec~ZTGestureStroke~; +source_mode; +subject_entity }
   class ZTGestureMatch { +gesture_type; +event_count; +trace_score; +score }
-  class ZTGestureComponent { +gesture_type; +subject_entity; +target_entity; +dispatched_trace_events }
+  class ZTGestureComponent { +gesture_type; +subject_entity; +target_entity; +dispatched_trace_events; +score threshold dispatch }
   class ZTGestureTraceSample { +expected_point; +observed_point }
+  ZTCloningGestureMode ..> ZTGestureMgr
+  ZTFPTrainingMode ..> ZTGestureMgr
   ZTGestureMgr "1" *-- "*" ZTGestureDefinition
   ZTGestureMgr "1" *-- "*" ZTGestureTrace
   ZTGestureTrace ..> ZTGestureMatch : scored against definition
   ZTGestureTrace "*" --> ZTGestureTraceSample : samples
   ZTGestureComponent ..> ZTGestureTrace : produces</pre>
-<p><code>ZTGestureComponent</code> attaches the minigame to an entity and dispatches
-<code>ZTGestureTraceEvent</code>s at score thresholds.</p>
 <h3>Reconstructed mode-state records</h3>
-<p>Remaining mode structs (state/native-contract/config records), fields per type:</p>
-<ul>
-<li><strong>ZTShellModeTransition</strong> — previous, current, previous_path, current_path, changed, cursor, layout_guis, active_hotkeys, off_events, on_events</li>
-<li><strong>ZTModeRecord</strong> — class_name, name, attributes, layout_guis, hotkeys, inline_hotkeys, on_events, off_events, event_blocks, config_children, children</li>
-<li><strong>ZTModeConfigNode</strong> — name, attributes, text, children</li>
-<li><strong>ZTModeDescriptor</strong> — type_name, parent_type, command_token, vtable_range, descriptor_range</li>
-<li><strong>ZTModeClassRegistry</strong> — zt_mode, game, main, overhead, overview, first_person, placement, selection, toolset, delete, download, file, load, save …</li>
-<li><strong>ZTModeTypeCache</strong> — type_name, cached_type_handle, init_guard, type_string_address</li>
-<li><strong>ZTModeUiBinding</strong> — control_name, layout_name, value_message, command_token</li>
-<li><strong>ZTModeInputState</strong> — cursor_name, shift_pressed, control_pressed, screen_point, world_point</li>
-<li><strong>ZTDownloadModeNativeContract</strong> — base_url_template, index_file, items_list_control, downloads_root, cannot_disable_token, enabled_field, ui_name_field, site_name_field, version_field, viewable_field, confirmed_token, confirm_exit_token, cancel_downloads_token, downloads_title …</li>
-<li><strong>ZTFileModeNativeSchema</strong> — record_type, name_field, display_name_field, file_time_low_field, file_time_high_field, zip_kind, dir_kind</li>
-<li><strong>ZTLoadModeNativeContract</strong> — save_glob, row_layout, list_control, name_control, preview_control, delete_button, saved_root</li>
-<li><strong>ZTUILayoutModeNativeCommands</strong> — set_background, load_ui, clear_ui, reload, send, quit</li>
-<li><strong>ZTSkyTrackModeNativeContract</strong> — first_trip_token, return_trip_token, construction_marker_3, construction_marker_4, tower_type_token, test_rope_object</li>
-<li><strong>ZTOverheadMode</strong> — surface, camera, cursor, stars_display</li>
-<li><strong>ZTStarsDisplay</strong> — animation_delay_seconds, appear_animation_token, disappear_animation_token, visuals</li>
-<li><strong>ZTModePhysObjVisual</strong> — token, model_file, scale, controllers_only, auto_start, duration_seconds, loop_animation</li>
-<li><strong>ZTGestureCreationBounds</strong> — min_x, max_x, min_y, max_y, min_z, max_z</li>
-<li><strong>ZTPuzzleMode</strong> — common, help_text_loc_id, camera, snap_distance, piece_rotation_degrees, completion_burst_system, auto_exit_delay_seconds, colors</li>
-<li><strong>ZTStaffAssignMode</strong> — surface, active_cursor, keeper_cursor, trainer_cursor, waiting_cursor, marker, effect, prevent_multiple_flags, collision_tester</li>
-<li><strong>ZTDeleteMode</strong> — surface, cursor, color_animation_cycle, ground_cursor_rotation_cycle, ground_cursor_grow_time, ground_cursor_radius, ground_cursor_effect_radius, cursor_texture, default_delete_sound, multi_delete_sound, colors, delete_groups</li>
-<li><strong>ZTGuestViewMode</strong> — surface, tag_file, ground_cursor, cursor, highlight_alpha</li>
-<li><strong>ZTPhotoMode</strong> — surface, zoom_speed, move_speed, turn_speed_out, turn_speed_in, last_pic_wait_time, message_wait_time</li>
-<li><strong>ZTPlacementFootprintAssets</strong> — place_yes, place_yes_small, place_no, place_no_small</li>
-<li><strong>ZTModeColor</strong> — r, g, b, a</li>
-<li><strong>ZTModeGridPreview</strong> — token, cardinal_image, diagonal_image, radius</li>
-<li><strong>ZTFenceModeTankWallConfig</strong> — default_height, minimum_height, maximum_height, default_base_depth, minimum_base_depth, maximum_base_depth, hill_threshold, default_portal</li>
-<li><strong>ZTFirstPersonMode</strong> — common, carrying_avatar_token, camera_set, help_flags, action_mode, prompt_delay_seconds, screen_dither, keyboard_rotate_speed, move_speed, turn_speed, center_mouse_on_hide, native_state</li>
-<li><strong>ZTFirstPersonModeNativeState</strong> — mouse_look_active, mouse_prompt_visible, yaw, pitch, strafe, forward, transitions, resource_updates, movement_events, camera_moved_messages</li>
-<li><strong>ZTFPClimbLadderMode</strong> — base, ladder_entity, direction, time_per_meter, target_platform, native_state</li>
-<li><strong>ZTTrainingNativeUiBinding</strong> — field, lookup_name, native_field_offset, projection</li>
-<li><strong>ZTTrainingNativePresentation</strong> — reset_message, player_training_layout, player_training_activate_message, player_training_show_message, player_training_master_listbox, player_training_item_layout, player_training_trick_button, training_complete_trick_image_layout, training_complete_trick_image, training_locked_icon, new_trick_border, reward_message_control, reward_message_show_message, reward_message_hide_message …</li>
-<li><strong>ZTSuperStaffMode</strong> — common, staff_entity, active_usage_object, max_usage_object_distance, usage_object_labels, user_prompt</li>
-<li><strong>ZTFPTrainingResultFeedbackAdvance</strong> — crowd_cheer_token, show_reward_message, apply_reward, cleanup_result_ui</li>
-<li><strong>ZTFPTrainingModeState</strong> — active_task_token, selected_gesture_token, active_learning_delta, active_keyboard_tokens, last_keyboard_action, event_count, gesture_trace, score_percent, final_score, result_bucket, result_feedback_token, result_feedback_phase, result_feedback_elapsed_seconds, crowd_feedback_sent …</li>
-<li><strong>ZTOverviewModeState</strong> — selected_filter, view_filters, animal_icons, building_icons, visible_objects, map_projection, click_target</li>
-<li><strong>ZTOverviewVisibleObject</strong> — entity_id, entity_type, world_position, icon_name</li>
-<li><strong>ZTDeleteModeState</strong> — mode_value, delete_groups, selected_entities, pending_request, confirmation</li>
-<li><strong>ZTDeleteRequest</strong> — target_entity, target_type, return_station, first_station, destroy_command</li>
-<li><strong>ZTDownloadModeState</strong> — index, items, queue, selected_item, document, items_list, confirmation</li>
-<li><strong>ZTDownloadModeDocument</strong> — base_url_template, index_file, downloads_root, version</li>
-<li><strong>ZTDownloadItemsListRow</strong> — item_id, ui_name, site_name, enabled, viewable, status</li>
-<li><strong>ZTDownloadItem</strong> — item_id, ui_name, site_name, file_path, enabled, viewable, version, status</li>
-<li><strong>ZTDownloadQueue</strong> — requests, active_request, completed_requests, cancelled_requests</li>
-<li><strong>ZTDownloadRequest</strong> — item_id, url, target_path, cancel_message</li>
-<li><strong>ZTDownloadConfirmation</strong> — item_id, confirm_exit_token, cancel_downloads_token, confirmed</li>
-<li><strong>ZTFileModeState</strong> — root_path, file_mode, files, selected_file, file_info_list</li>
-<li><strong>ZTGfxOptionsModeSnapshot</strong> — graphics, audio, vince, selected_detail_level, selected_detail_token, custom_detail_active, display_mode_dirty, detail_settings_dirty, sound_settings_dirty, free_mouse_look, use_low_mem_defaults, native_float_controls, selected_settings, pending_value_writes</li>
-<li><strong>ZTGfxOptionsNativeFloatControls</strong> — sound_volume, music_volume, two_d_sound_fx_volume, three_d_sound_fx_volume</li>
-<li><strong>ZTGfxOptionsFloatMessage</strong> — control, slider_widget, value, native_field_offset, descriptor_global, route</li>
-<li><strong>ZTGfxOptionsAcceptance</strong> — profile_writes, safe_graphics_writes, motd_enabled, confirmation_message, save_profile_options</li>
-<li><strong>ZTGraphicsSafeMode</strong> — fullscreen, screen_width, screen_height, screen_depth</li>
-<li><strong>ZTOptionsSelectedSetting</strong> — token, label_locid, setting_widget, preset_attribute, selected_index, locid, values</li>
-<li><strong>ZTOptionsTypedValue</strong> — name, value_type, value, attributes</li>
-<li><strong>ZTGroundTrackModeState</strong> — construction_markers, selected_endpoint, circuit, conservation_state</li>
-<li><strong>ZTGuestViewModeState</strong> — tag_file, ground_cursor, highlight_alpha, target, camera_binding</li>
-<li><strong>ZTElevatedCurbModeState</strong> — place_no, replace, anchor, locked</li>
-</ul>
+<pre class="mermaid">classDiagram
+  class ZTShellModeTransition { +previous; +current; +previous_path; +current_path; +changed; +cursor; +layout_guis; +active_hotkeys; +off_events; +on_events }
+  class ZTModeRecord { +class_name; +name; +attributes; +layout_guis; +hotkeys; +inline_hotkeys; +on_events; +off_events; +event_blocks; +config_children; +children }
+  class ZTModeConfigNode { +name; +attributes; +text; +children }
+  class ZTModeDescriptor { +type_name; +parent_type; +command_token; +vtable_range; +descriptor_range }
+  class ZTModeClassRegistry { +zt_mode; +game; +main; +overhead; +overview; +first_person; +placement; +selection; +toolset; +delete; +download; +file; +load; +save }
+  class ZTModeTypeCache { +type_name; +cached_type_handle; +init_guard; +type_string_address }
+  class ZTModeUiBinding { +control_name; +layout_name; +value_message; +command_token }
+  class ZTModeInputState { +cursor_name; +shift_pressed; +control_pressed; +screen_point; +world_point }
+  ZTModeRecord "*" --> ZTModeConfigNode : config_children
+  ZTModeRecord "*" --> ZTModeUiBinding : bindings
+  ZTModeDescriptor --> ZTModeTypeCache
+  ZTModeClassRegistry "*" --> ZTModeDescriptor : registered modes</pre>
+<pre class="mermaid">classDiagram
+  class ZTDownloadModeNativeContract { +base_url_template; +index_file; +items_list_control; +downloads_root; +cannot_disable_token; +enabled_field; +ui_name_field; +site_name_field; +version_field; +viewable_field; +confirmed_token; +confirm_exit_token; +cancel_downloads_token; +downloads_title }
+  class ZTFileModeNativeSchema { +record_type; +name_field; +display_name_field; +file_time_low_field; +file_time_high_field; +zip_kind; +dir_kind }
+  class ZTLoadModeNativeContract { +save_glob; +row_layout; +list_control; +name_control; +preview_control; +delete_button; +saved_root }
+  class ZTUILayoutModeNativeCommands { +set_background; +load_ui; +clear_ui; +reload; +send; +quit }
+  class ZTSkyTrackModeNativeContract { +first_trip_token; +return_trip_token; +construction_marker_3; +construction_marker_4; +tower_type_token; +test_rope_object }
+  ZTDownloadModeNativeContract ..> ZTDownloadModeState
+  ZTFileModeNativeSchema ..> ZTFileModeState
+  ZTLoadModeNativeContract ..> ZTFileModeState
+  ZTUILayoutModeNativeCommands ..> ZTModeRecord
+  ZTSkyTrackModeNativeContract ..> ZTGroundTrackModeState</pre>
+<pre class="mermaid">classDiagram
+  class ZTOverheadMode { +surface; +camera; +cursor; +stars_display }
+  class ZTStarsDisplay { +animation_delay_seconds; +appear_animation_token; +disappear_animation_token; +visuals }
+  class ZTModePhysObjVisual { +token; +model_file; +scale; +controllers_only; +auto_start; +duration_seconds; +loop_animation }
+  class ZTGestureCreationBounds { +min_x; +max_x; +min_y; +max_y; +min_z; +max_z }
+  class ZTPuzzleMode { +common; +help_text_loc_id; +camera; +snap_distance; +piece_rotation_degrees; +completion_burst_system; +auto_exit_delay_seconds; +colors }
+  class ZTStaffAssignMode { +surface; +active_cursor; +keeper_cursor; +trainer_cursor; +waiting_cursor; +marker; +effect; +prevent_multiple_flags; +collision_tester }
+  class ZTDeleteMode { +surface; +cursor; +color_animation_cycle; +ground_cursor_rotation_cycle; +ground_cursor_grow_time; +ground_cursor_radius; +ground_cursor_effect_radius; +cursor_texture; +default_delete_sound; +multi_delete_sound; +colors; +delete_groups }
+  class ZTGuestViewMode { +surface; +tag_file; +ground_cursor; +cursor; +highlight_alpha }
+  class ZTPhotoMode { +surface; +zoom_speed; +move_speed; +turn_speed_out; +turn_speed_in; +last_pic_wait_time; +message_wait_time }
+  class ZTPlacementFootprintAssets { +place_yes; +place_yes_small; +place_no; +place_no_small }
+  class ZTModeColor { +r; +g; +b; +a }
+  class ZTModeGridPreview { +token; +cardinal_image; +diagonal_image; +radius }
+  class ZTFenceModeTankWallConfig { +default_height; +minimum_height; +maximum_height; +default_base_depth; +minimum_base_depth; +maximum_base_depth; +hill_threshold; +default_portal }
+  ZTOverheadMode --> ZTStarsDisplay
+  ZTDeleteMode "*" --> ZTModeColor : colors
+  ZTPuzzleMode "*" --> ZTModeColor : colors</pre>
+<pre class="mermaid">classDiagram
+  class ZTFirstPersonMode { +common; +carrying_avatar_token; +camera_set; +help_flags; +action_mode; +prompt_delay_seconds; +screen_dither; +keyboard_rotate_speed; +move_speed; +turn_speed; +center_mouse_on_hide; +native_state }
+  class ZTFirstPersonModeNativeState { +mouse_look_active; +mouse_prompt_visible; +yaw; +pitch; +strafe; +forward; +transitions; +resource_updates; +movement_events; +camera_moved_messages }
+  class ZTFPClimbLadderMode { +base; +ladder_entity; +direction; +time_per_meter; +target_platform; +native_state }
+  class ZTTrainingNativeUiBinding { +field; +lookup_name; +native_field_offset; +projection }
+  class ZTTrainingNativePresentation { +reset_message; +player_training_layout; +player_training_activate_message; +player_training_show_message; +player_training_master_listbox; +player_training_item_layout; +player_training_trick_button; +training_complete_trick_image_layout; +training_complete_trick_image; +training_locked_icon; +new_trick_border; +reward_message_control; +reward_message_show_message; +reward_message_hide_message }
+  class ZTSuperStaffMode { +common; +staff_entity; +active_usage_object; +max_usage_object_distance; +usage_object_labels; +user_prompt }
+  class ZTFPTrainingResultFeedbackAdvance { +crowd_cheer_token; +show_reward_message; +apply_reward; +cleanup_result_ui }
+  class ZTFPTrainingModeState { +active_task_token; +selected_gesture_token; +active_learning_delta; +active_keyboard_tokens; +last_keyboard_action; +event_count; +gesture_trace; +score_percent; +final_score; +result_bucket; +result_feedback_token; +result_feedback_phase; +result_feedback_elapsed_seconds; +crowd_feedback_sent }
+  ZTFirstPersonMode --> ZTFirstPersonModeNativeState
+  ZTFPClimbLadderMode --> ZTFirstPersonModeNativeState
+  ZTFPTrainingModeState --> ZTTrainingNativePresentation
+  ZTFPTrainingModeState "*" --> ZTTrainingNativeUiBinding
+  ZTFPTrainingModeState --> ZTFPTrainingResultFeedbackAdvance</pre>
+<pre class="mermaid">classDiagram
+  class ZTOverviewModeState { +selected_filter; +view_filters; +animal_icons; +building_icons; +visible_objects; +map_projection; +click_target }
+  class ZTOverviewVisibleObject { +entity_id; +entity_type; +world_position; +icon_name }
+  class ZTDeleteModeState { +mode_value; +delete_groups; +selected_entities; +pending_request; +confirmation }
+  class ZTDeleteRequest { +target_entity; +target_type; +return_station; +first_station; +destroy_command }
+  class ZTFileModeState { +root_path; +file_mode; +files; +selected_file; +file_info_list }
+  class ZTGroundTrackModeState { +construction_markers; +selected_endpoint; +circuit; +conservation_state }
+  class ZTGuestViewModeState { +tag_file; +ground_cursor; +highlight_alpha; +target; +camera_binding }
+  class ZTElevatedCurbModeState { +place_no; +replace; +anchor; +locked }
+  ZTOverviewModeState "*" --> ZTOverviewVisibleObject : visible_objects
+  ZTDeleteModeState "0..1" --> ZTDeleteRequest : pending_request</pre>
+<pre class="mermaid">classDiagram
+  class ZTDownloadModeState { +index; +items; +queue; +selected_item; +document; +items_list; +confirmation }
+  class ZTDownloadModeDocument { +base_url_template; +index_file; +downloads_root; +version }
+  class ZTDownloadItemsListRow { +item_id; +ui_name; +site_name; +enabled; +viewable; +status }
+  class ZTDownloadItem { +item_id; +ui_name; +site_name; +file_path; +enabled; +viewable; +version; +status }
+  class ZTDownloadQueue { +requests; +active_request; +completed_requests; +cancelled_requests }
+  class ZTDownloadRequest { +item_id; +url; +target_path; +cancel_message }
+  class ZTDownloadConfirmation { +item_id; +confirm_exit_token; +cancel_downloads_token; +confirmed }
+  ZTDownloadModeState "1" --> ZTDownloadModeDocument : document
+  ZTDownloadModeState "*" --> ZTDownloadItem : items
+  ZTDownloadModeState "*" --> ZTDownloadItemsListRow : items_list
+  ZTDownloadModeState "1" --> ZTDownloadQueue : queue
+  ZTDownloadModeState "0..1" --> ZTDownloadConfirmation : confirmation
+  ZTDownloadQueue "*" --> ZTDownloadRequest : requests</pre>
+<pre class="mermaid">classDiagram
+  class ZTGfxOptionsModeSnapshot { +graphics; +audio; +vince; +selected_detail_level; +selected_detail_token; +custom_detail_active; +display_mode_dirty; +detail_settings_dirty; +sound_settings_dirty; +free_mouse_look; +use_low_mem_defaults; +native_float_controls; +selected_settings; +pending_value_writes }
+  class ZTGfxOptionsNativeFloatControls { +sound_volume; +music_volume; +two_d_sound_fx_volume; +three_d_sound_fx_volume }
+  class ZTGfxOptionsFloatMessage { +control; +slider_widget; +value; +native_field_offset; +descriptor_global; +route }
+  class ZTGfxOptionsAcceptance { +profile_writes; +safe_graphics_writes; +motd_enabled; +confirmation_message; +save_profile_options }
+  class ZTGraphicsSafeMode { +fullscreen; +screen_width; +screen_height; +screen_depth }
+  class ZTOptionsSelectedSetting { +token; +label_locid; +setting_widget; +preset_attribute; +selected_index; +locid; +values }
+  class ZTOptionsTypedValue { +name; +value_type; +value; +attributes }
+  ZTGfxOptionsModeSnapshot --> ZTGfxOptionsNativeFloatControls
+  ZTGfxOptionsModeSnapshot "*" --> ZTGfxOptionsFloatMessage : pending_value_writes
+  ZTGfxOptionsAcceptance --> ZTGraphicsSafeMode : safe graphics restore
+  ZTOptionsSelectedSetting "*" --> ZTOptionsTypedValue : values</pre>
 <h3>gesture relationship model</h3>
 <pre class="mermaid">classDiagram
   GestureDomain "1" --> ZTGestureMgr : manager
@@ -2214,79 +2255,67 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
   ZTEconomyComponentBase <|-- ZTEconomyComponentGuest
   ZTEconomyComponentBase <|-- ZTEconomyComponentStub
   ZTEconomyComponentBase <|-- ZTEconomyComponentHistoryBase</pre>
-<p><code>ZTEconomyMgr</code> owns cash via per-context <code>ZTEconomyContextConfig</code> (<code>initial_cash</code>,
-<code>saveable</code>, <code>config_data</code>), aggregates <code>ZTEconomyComponent</code>s (each a named set of
-<code>TransactionConfig</code>s), and runs <code>ZTTransaction</code>s — <code>evaluate_cost</code>/<code>set_cost_clamped</code>
-compute the charge, <code>apply</code> commits it, and <code>BFGTransactionTracker</code> holds
-<code>pending</code>/<code>completed</code>. <code>ZTEconomyComponentGuest.score_donation</code> scores guest donations;
-<code>ZTEconomyComponentHistoryBase</code> keeps <code>FameHistoryEntry</code> history feeding fame.</p>
-<p>Recovered admission-price handling: <code>ZT_SET_ADMISSION_PRICE</code> routes to
-<code>ZTFameData_update_admission_price_index_for_price</code>, which starts at index <code>0</code>
-and advances to <code>1</code>, <code>2</code>, or <code>3</code> as the submitted price crosses the
-<code>admissionCheap</code>, <code>admissionModerate</code>, and <code>admissionExpensive</code> thresholds.
-<code>ZT_SET_ADMISSION_PRICE_INDEX</code> accepts only indices <code>0..3</code> and updates the
-<code>admission_price_index</code> value-handler state.</p>
-<p>Recovered transaction event polarity: shipped <code>ZTTransaction</code> source uses
-<code>type=&quot;credit&quot;</code> for receive-style transactions and <code>type=&quot;debit&quot;</code> for
-spend-style transactions, while <code>addUser</code>/<code>removeUser</code> are non-money user-count
-transactions. Native dispatch rows for <code>dispatch_money_spend_status_event</code> and
-<code>dispatch_transaction_money_receive_status_event</code> emit <code>UI_MONEY_SPEND</code> or
-<code>UI_MONEY_RECEIVE</code> float payloads only when the evaluated transaction amount is
-nonzero.</p>
-<p>Recovered cash-grant command routing: native economy UI registration separates
-direct cash commands from transaction commands. <code>ZT_SET_ZOO_CASH</code> uses the
-direct cash setter, and <code>ZT_ADD_INCOME</code>/<code>ZT_ADD_EXPENSE</code> use income and expense
-callbacks. <code>ZT_GIVE_CASHGRANT</code> parses the payload amount and runs the named
-<code>cash_grants</code> transaction; <code>ZT_REMOVE_CASHGRANT</code> parses the payload amount and
-runs <code>remove_cash_grants</code>. Shipped economy XML defines those transactions with
-configured <code>cost=&quot;0&quot;</code> and category <code>cash_grants</code>, with credit/debit polarity
-supplied by their source <code>type</code>. Freeform map selection uses
-<code>ZT_SET_STARTING_SCENARIO_CASH</code> for slider selection, then sends
-<code>ZT_GIVE_CASHGRANT</code> from the slider value at launch. Disease and fossil reward
-callers also emit <code>ZT_GIVE_CASHGRANT</code> typed values with reward amounts.</p>
-<p>Recovered freeform startup cash sequence: shipped game-mode contexts place
-<code>initialCash=&quot;10000&quot;</code> on <code>ZTEconomyMgr</code>. Native finalization reads the parsed
-manager field at <code>+0x5c</code>, applies a positive value through the active economy
-component slot <code>+0x68</code>, and clears the field. The
-<code>ZT_SET_STARTING_SCENARIO_CASH</code> handler accepts the map-selection slider value
-and stores it on the campaign/map-selection object; it does not mutate economy
-cash. The freeform Play Map button then sends <code>ZT_LOADGAME</code>,
-<code>ZT_CACHE_MAPDATA</code>, and finally <code>ZT_GIVE_CASHGRANT</code> from the slider's <code>number</code>
-value. The recovered sequence is therefore context initial cash first and
-slider grant transaction second; <code>ZT_LOADGAME</code> does not carry starting cash as
-a load-request payload.</p>
-<p>Recovered transaction apply dispatch: native <code>0x006cd12d</code> evaluates the
-transaction cost through <code>ZTTransaction_evaluate_cost</code>, then dispatches by the
-transaction type table order recovered from source/type-table evidence:
-<code>removeUser</code>, <code>addUser</code>, <code>setCash</code>, <code>credit</code>, and <code>debit</code>. <code>setCash</code> applies
-the evaluated amount through the same active economy component cash setter slot
-<code>+0x68</code>; <code>credit</code> and <code>debit</code> use separate component money slots and correspond
-to the recovered receive/spend event polarity. <code>addUser</code> and <code>removeUser</code>
-affect component user counts and produce no money event. When <code>trackOnParent</code> is
-set and the transaction is applied to a child component, the apply body also
-updates the parent component.</p>
-<p>Recovered <code>BFGECONOMY_DO_TRANSACTION</code> handling: native registration installs
-the token on the economy transaction dispatcher. The handler unwraps a
-<code>BFGEconomyTransactionData</code> payload, finds the named <code>ZTTransaction</code> on the
-current economy component, copies the positive payload amount override and
-negation flag into the transaction's temporary evaluation fields, calls the
-transaction apply method, commits the resulting tracker payload, and then
-immediately dispatches the transaction's <code>nextTransaction</code> when that field is
-not empty. If the transaction name is not found, no apply or tracker commit is
-performed.</p>
-<p>Recovered transaction/status forwarding: after spend/receive dispatchers
-evaluate a transaction, they forward the transaction/status payload through a
-guarded ref-counted helper. The helper calls the caller receiver's vtable slot
-<code>+0x54</code>; for the recovered <code>vtable_008e0d30</code> receiver, that slot forwards the
-payload through the generic assignment/list helper and refreshes the <code>undo</code> UI
-target by sending <code>UI_ENABLE</code> or <code>UI_DISABLE</code> from receiver state. This path
-only forwards UI/status and undo-control state; recovered cash arithmetic and
-transaction aggregation/commit occur elsewhere.</p>
-<p>Open: countdown timing, aggregate and parent-cost accounting details, live
-simulation callers for economy component transactions, and the non-admission
-semantics of <code>ZT_SET_PRICE_INDEX</code>.</p>
+<pre class="mermaid">sequenceDiagram
+  participant UI as admission UI
+  participant Fame as ZTFameData
+  participant Handler as admission_price_index handler
+  UI->>Fame: ZT_SET_ADMISSION_PRICE(price)
+  Fame->>Handler: compare admissionCheap / admissionModerate / admissionExpensive
+  Handler-->>Fame: index 0..3
+  UI->>Fame: ZT_SET_ADMISSION_PRICE_INDEX(index)
+  Fame->>Fame: accept only 0..3; update admission_price_index value-handler state</pre>
+<pre class="mermaid">sequenceDiagram
+  participant UI as economy UI registration
+  participant Eco as ZTEconomyMgr
+  participant Tx as ZTTransaction
+  participant Event as UI money/status event
+  UI->>Eco: ZT_SET_ZOO_CASH direct setter
+  UI->>Eco: ZT_ADD_INCOME / ZT_ADD_EXPENSE callbacks
+  UI->>Eco: ZT_GIVE_CASHGRANT(amount) / ZT_REMOVE_CASHGRANT(amount)
+  Eco->>Tx: cash_grants / remove_cash_grants cost=0 category=cash_grants
+  Tx->>Event: credit -> UI_MONEY_RECEIVE when amount != 0
+  Tx->>Event: debit -> UI_MONEY_SPEND when amount != 0
+  Tx->>Eco: addUser/removeUser update user counts only</pre>
+<pre class="mermaid">sequenceDiagram
+  participant Context as game-mode context
+  participant Eco as ZTEconomyMgr
+  participant Select as map selection
+  participant Play as Play Map button
+  Context->>Eco: initialCash=10000
+  Eco->>Eco: finalize field +0x5c via active component slot +0x68, then clear field
+  Select->>Select: ZT_SET_STARTING_SCENARIO_CASH stores slider value only
+  Play->>Eco: ZT_LOADGAME
+  Play->>Eco: ZT_CACHE_MAPDATA
+  Play->>Eco: ZT_GIVE_CASHGRANT(slider number)
+  Play-->>Eco: ZT_LOADGAME carries no starting-cash payload</pre>
+<pre class="mermaid">sequenceDiagram
+  participant Msg as BFGECONOMY_DO_TRANSACTION
+  participant Eco as economy transaction dispatcher
+  participant Data as BFGEconomyTransactionData
+  participant Tx as ZTTransaction
+  participant Tracker as BFGTransactionTracker
+  Msg->>Eco: unwrap payload
+  Eco->>Tx: find named transaction on current component
+  alt transaction found
+    Eco->>Tx: copy positive amount override + negation flag
+    Tx->>Tx: evaluate_cost() at native 0x006cd12d
+    Tx->>Tx: dispatch removeUser/addUser/setCash/credit/debit
+    Tx->>Tracker: commit transaction payload
+    Tx->>Eco: dispatch nextTransaction if non-empty
+  else not found
+    Eco-->>Tracker: no apply, no commit
+  end</pre>
+<pre class="mermaid">sequenceDiagram
+  participant Tx as spend/receive dispatcher
+  participant Helper as guarded ref-counted helper
+  participant Receiver as vtable_008e0d30 receiver
+  participant UI as undo UI target
+  Tx->>Helper: forward transaction/status payload after evaluation
+  Helper->>Receiver: vtable slot +0x54
+  Receiver->>Receiver: generic assignment/list forwarding
+  Receiver->>UI: UI_ENABLE / UI_DISABLE from receiver state
+  Note over Tx,UI: cash arithmetic and aggregation/commit occur elsewhere</pre>
 <h3>Economy cluster relationships</h3>
-<p>Composition/aggregation relationships with cardinality, field roles, and inheritance:</p>
 <pre class="mermaid">classDiagram
   BFGEconomyComponent <|-- ZTEconomyComponentBase
   BFGTransaction <|-- ZTTransaction
@@ -2322,21 +2351,20 @@ semantics of <code>ZT_SET_PRICE_INDEX</code>.</p>
   TransactionConfig "0..1" --> CostType : cost_type
   TransactionConfig "0..1" --> CostChoice : cost_choice
   MoneyEvent "1" --> MoneyEventKind : kind</pre>
-<p>coupling, and <code>process_fame_update</code> hand-off to <code>ZTFameData</code>.</p>
 <h3>Fame: a value-handler registry</h3>
-<p><code>ZTFameData</code> (<code>&lt; BFXMLObj</code>) is the clearest instance of the value-handler pattern — it
-exposes dozens of computed status values and persists them:</p>
-<ul>
-<li>producers (<code>make_*_value</code>): <code>zoo_fame</code>, <code>num_halfstars</code>, <code>zoo_is_open</code>,
-<code>all_species_released</code>, <code>all_animals_released</code>, <code>last_animal_released</code>,
-<code>num_extinct_species_released</code>, <code>admission_price_index</code>, <code>donation_by_animal_type</code>,
-<code>donation_all_animals</code>, <code>donation_by_endangerment</code>, <code>has_expansion_pack</code>,
-<code>is_freeform</code>.</li>
-<li>consumers (<code>accept_*_value</code>): <code>zoo_is_open</code>, <code>fame_halfstars</code>,
-<code>admission_price_index</code>, <code>tutorial_rule_active</code>.</li>
-<li>lifecycle: <code>process_fame_update</code>, <code>read/write_status_xml_node</code>,
-<code>read/write_fame_msgtype_node</code>.</li>
-</ul>
+<pre class="mermaid">classDiagram
+  BFXMLObj <|-- ZTFameData
+  class ZTFameData {
+    +make zoo_fame / num_halfstars / zoo_is_open
+    +make all_species_released / all_animals_released / last_animal_released
+    +make num_extinct_species_released / admission_price_index
+    +make donation_by_animal_type / donation_all_animals / donation_by_endangerment
+    +make has_expansion_pack / is_freeform
+    +accept zoo_is_open / fame_halfstars / admission_price_index / tutorial_rule_active
+    +process_fame_update()
+    +read/write_status_xml_node()
+    +read/write_fame_msgtype_node()
+  }</pre>
 <h3>Research</h3>
 <pre class="mermaid">classDiagram
   class ZTResearchMgr {
@@ -2344,6 +2372,8 @@ exposes dozens of computed status values and persists them:</p>
     +buttons : Vec~ZTUIResearchButton~
     +unlocked_items[]; +unlocked_entities[]; +unlocked_fences[]
     +active_research[]; +completed_research[]
+    +read/write researchItems
+    +read/write unlockedItems
   }
   class ZTResearchItem {
     +item_id; +entity_type; +fence_type
@@ -2355,48 +2385,54 @@ exposes dozens of computed status values and persists them:</p>
   }
   class ZTResearchUnlock { +entity_type; +fence_type; +fame_requirement }
   class ZTResearchActiveRecord { +elapsed_seconds; +required_seconds; +research_cost }
+  class ResearchSourceFields {
+    +BFAIEntityDataShared
+    +f_researchUnlockTime; +f_researchCost
+    +researchicon; +icon
+    +researchentity/adopt UIAspect default image fallback
+    +buildings; +enrichment; +fences; +food; +scenery; +viewing areas
+  }
+  class ResearchMessages { +ZT_RESEARCH_IS_UNLOCKED; +ZT_RESEARCH_UNLOCK_ENTITY_KIND; +UNRESEARCHED }
+  class ZTResearchPersistenceFields {
+    +timeUntilUnlock; +durationUnlock; +entityType
+    +currentlyResearching; +begunResearching
+    +researchCompleted; +researchCompletedNotified
+  }
   BFScriptComponent <|-- ZTResearchMgr
-  ZTResearchMgr "1" *-- "*" ZTResearchItem</pre>
-<p><code>ZTResearchMgr</code> tracks unlock state; <code>ZTResearchItem</code> is a research entry. Gating
-messages: <code>ZT_RESEARCH_IS_UNLOCKED</code>, <code>ZT_RESEARCH_UNLOCK_ENTITY_KIND</code>. Placement
-validation consults research (the <code>UNRESEARCHED</code> token in the World section).</p>
-<p>Recovered item source hydration: <code>ZTResearchItem</code> is constructed from an entity
-type's <code>BFAIEntityDataShared</code> component. Native construction skips abstract entity
-definitions, reads <code>f_researchUnlockTime</code>, stores the same value as time remaining,
-then builds the research UI button and refreshes its progress state. Shipped
-researchable entity shared data carries <code>f_researchUnlockTime</code> and
-<code>f_researchCost</code> on buildings, enrichment, fences, food, scenery, and viewing
-areas.</p>
-<p>Recovered button source hydration: native button construction reads
-<code>researchicon</code> and <code>icon</code> from the entity shared data and uses
-<code>ui/layout/researchbutton.xml</code> as the button layout. Source entity XML also
-authors research/product images through <code>UIToggleButton template=&quot;researchentity&quot;</code>
-and <code>UIToggleButton template=&quot;adopt&quot;</code> <code>UIAspect/default image</code> values; these
-default images are the source fallback when direct scalar icon attributes are
-absent. The research button then owns the associated <code>ZTResearchItem</code> reference
-and progress display.</p>
-<p>Recovered start-research behavior: starting research reads <code>f_researchCost</code> from
-the entity shared data and compares it with available zoo cash. If the zoo cannot
-afford the cost, the handler displays <code>zoomessages:ResearchUnaffordable</code>. If the
-cost is affordable, it emits a <code>research</code> economy transaction and marks the item
-as begun/currently researching.</p>
-<p>Recovered completion behavior: active research advances against the source
-<code>f_researchUnlockTime</code> duration and refreshes the button/progress state. When an
-item completes, the native path emits <code>zoomessages:ResearchCompleted</code>, marks the
-item/entity completed and unlocked, and clears the active tracking for that
-progression.</p>
-<p>Recovered persistence/config schema: <code>ZTResearchMgr</code> reads and writes a
-<code>researchItems</code> child containing <code>ZTResearchItem</code> objects, plus an <code>unlockedItems</code>
-child containing unlocked item/type strings. Each persisted item writes
-<code>timeUntilUnlock</code>, <code>durationUnlock</code>, optional <code>entityType</code>,
-<code>currentlyResearching</code>, <code>begunResearching</code>, <code>researchCompleted</code>, and
-<code>researchCompletedNotified</code>. These containers are manager-owned research state,
-not a Bevy projection cache.</p>
+  ZTResearchMgr "1" *-- "*" ZTResearchItem
+  ZTResearchMgr "*" --> ZTResearchActiveRecord : active_research
+  ZTResearchMgr "*" --> ZTResearchUnlock : unlocks
+  ZTResearchMgr ..> ResearchMessages
+  ZTResearchItem ..> ResearchSourceFields : constructed from
+  ZTResearchItem ..> ZTResearchPersistenceFields : persisted item fields</pre>
+<pre class="mermaid">sequenceDiagram
+  participant Source as BFAIEntityDataShared
+  participant Item as ZTResearchItem
+  participant Button as ZTUIResearchButton
+  Source->>Item: skip abstract definitions; read f_researchUnlockTime/f_researchCost
+  Item->>Item: set duration and time remaining
+  Source->>Button: researchicon/icon or UIAspect default image fallback
+  Button->>Button: ui/layout/researchbutton.xml + item ref + progress display</pre>
+<pre class="mermaid">sequenceDiagram
+  participant UI as research button
+  participant Item as ZTResearchItem
+  participant Eco as ZTEconomyMgr
+  UI->>Item: start research
+  Item->>Eco: compare f_researchCost with zoo cash
+  alt cannot afford
+    Item-->>UI: zoomessages:ResearchUnaffordable
+  else affordable
+    Item->>Eco: research economy transaction
+    Item->>Item: begunResearching + currentlyResearching
+  end
+  Item->>Item: advance against f_researchUnlockTime
+  Item-->>UI: refresh progress
+  Item->>Item: zoomessages:ResearchCompleted; mark completed/unlocked; clear active tracking</pre>
 <h3>Disease</h3>
-<p>Fields carry their XML-attribute provenance; <code>todo!()</code> in the code marks
-behaviour still open.</p>
 <pre class="mermaid">classDiagram
+  BFComponent <|-- ZTDiseaseMgr
   class ZTDiseaseMgr {
+    +config/diseasemgr.xml
     +half_star_minimum  : halfStarMinimum
     +disease_check_interval_seconds : diseaseCheckInterval
     +update_interval_seconds : updateInterval
@@ -2420,19 +2456,30 @@ behaviour still open.</p>
     +disease_name; +target_entity
     +cause_entity; +cure_entity; +research_state
   }
+  class ZTDiseaseQualifier {
+    +ZTEntityTypePredicate; +ZTZooFamePredicate
+    +ZTAnimalAttributeFilter attribute/boolValue/stringValue
+    +ZTAnimalProximityFilter type/distance/closer
+  }
+  class ZTCureDiseaseMode {
+    +analysis_duration_seconds; +indicator_duration_seconds
+    +sample_distance; +ignored_sample_types; +active_target
+    +ZT_DISEASE_CURE_QUERY
+  }
+  class ZTDiseaseOpenContracts {
+    +ZTDiseaseMgr.update target-search loop
+    +force_disease application
+    +sample-to-cure scoring
+  }
   ZTDiseaseMgr "1" *-- "*" ZTDisease
   ZTDisease *-- ZTDiseaseQualifier
   ZTDisease *-- ZTDiseaseClue : cause / cure
   ZTDiseaseQualifier *-- ZTDiseaseZooTest
-  ZTDiseaseQualifier *-- ZTDiseaseAnimalFilter</pre>
-<p><code>ZTDiseaseMgr</code> (<code>&lt; BFComponent</code>) hydrates from <code>config/diseasemgr.xml</code> and holds the
-<code>ZTDisease</code> records; each <code>ZTDisease</code> carries cause/cure <code>ZTDiseaseClue</code>s
-(<code>types</code>/<code>hint</code>/<code>product</code>) and a <code>ZTDiseaseQualifier</code>. Qualifiers combine zoo tests
-(<code>ZTEntityTypePredicate</code>, <code>ZTZooFamePredicate</code>) and animal filters
-(<code>ZTAnimalAttributeFilter</code> <code>attribute</code>/<code>boolValue</code>/<code>stringValue</code>,
-<code>ZTAnimalProximityFilter</code> <code>type</code>/<code>distance</code>/<code>closer</code>) — these are the predicate family
-shared with scenario/AI. A live infection is a <code>ZTDiseaseCase</code> whose research progresses
-through a state machine:</p>
+  ZTDiseaseQualifier *-- ZTDiseaseAnimalFilter
+  ZTDiseaseCase ..> ZTCureDiseaseMode : sample/cure
+  ZTBehCureDisease ..> ZTCureDiseaseMode
+  ZTBehAddSubjectAsDiseaseTarget ..> ZTCureDiseaseMode
+  ZTDiseaseMgr ..> ZTDiseaseOpenContracts : TODO</pre>
 <pre class="mermaid">stateDiagram-v2
   [*] --> Unknown
   Unknown --> Unsampled
@@ -2441,13 +2488,6 @@ through a state machine:</p>
   CauseKnown --> CureKnown
   CureKnown --> Cured
   Cured --> [*]</pre>
-<p><code>ZTCureDiseaseMode</code> (<code>&lt; ZTFPActionModeBase</code>) drives sampling/curing with fields
-<code>analysis_duration_seconds</code>, <code>indicator_duration_seconds</code>, <code>sample_distance</code>,
-<code>ignored_sample_types</code>, <code>active_target</code>; behaviours <code>ZTBehCureDisease</code>/
-<code>ZTBehAddSubjectAsDiseaseTarget</code> carry it out; query <code>ZT_DISEASE_CURE_QUERY</code>.</p>
-<p>Open (from <code>todo!()</code>): the disease check/update interval target-search loop
-(<code>ZTDiseaseMgr::update</code>), forced-disease application (<code>force_disease</code>), and the
-sample→cure scoring inside <code>ZTCureDiseaseMode</code>.</p>
 <h3>Predicate system (cross-cutting eligibility)</h3>
 <pre class="mermaid">classDiagram
   BFXMLObj <|-- ZTPredicate
@@ -2464,12 +2504,20 @@ sample→cure scoring inside <code>ZTCureDiseaseMode</code>.</p>
   ZTPredicate ..> AnimalDomain : adoption filters
   ZTPredicate ..> AiDomain : selection</pre>
 <h3>Status, Zoopedia, awards, adoption</h3>
-<p><code>ZTStatus</code> (<code>&lt; BFScriptComponent</code>) is the zoo status aggregate. Its UI surface is a set
-of native widget subclasses under the UI framework:
-<code>ZTZooStatusComponent</code>/<code>ZTZoopediaComponent</code> (<code>&lt; UILayout</code>), <code>ZTZoopediaTOC</code>/
-<code>ZTZooSurveyComponent</code> (<code>&lt; UIListBox</code>); <code>ZTZooMessageData</code> carries zoo messages.
-<code>ZTAdoptionMgr</code> (<code>&lt; BFComponent</code>) → <code>ZTAdoptionSlotMgr</code>, with <code>ZTAdoptionSlot</code>
-entries, owns the buy/adopt panel; <code>ZTAwardMgr</code> grants awards.</p>
+<pre class="mermaid">classDiagram
+  BFScriptComponent <|-- ZTStatus
+  UILayout <|-- ZTZooStatusComponent
+  UILayout <|-- ZTZoopediaComponent
+  UIListBox <|-- ZTZoopediaTOC
+  UIListBox <|-- ZTZooSurveyComponent
+  BFComponent <|-- ZTAdoptionMgr
+  ZTAdoptionMgr <|-- ZTAdoptionSlotMgr
+  class ZTStatus { +zoo status aggregate }
+  class ZTZooMessageData { +zoo messages }
+  class ZTAdoptionSlot { +buy/adopt panel entry }
+  class ZTAwardMgr { +grants awards }
+  ZTStatus ..> ZTZooMessageData
+  ZTAdoptionSlotMgr "*" --> ZTAdoptionSlot : entries</pre>
 <h3>Message surface and data flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant Src as gameplay (sale, birth, view)
@@ -2480,9 +2528,15 @@ entries, owns the buy/adopt panel; <code>ZTAwardMgr</code> grants awards.</p>
   Eco->>Eco: update state, run make_*_value
   Eco->>Bus: emit ZT_ECONOMY_EVENT / refresh handler
   Bus-->>UI: ZT_GET_ZOO_CASH / FAME / PROFIT / ...</pre>
-<p>Tokens: <code>ZT_GET_ZOO_CASH</code>/<code>FAME</code>/<code>OPEN</code>/<code>NAME</code>/<code>INCOME</code>/<code>PROFIT</code>, <code>ZT_SET_ZOO_CASH</code>,
-<code>ZT_ADD_INCOME</code>/<code>ZT_ADD_EXPENSE</code>, <code>ZT_ECONOMY_EVENT</code>, <code>ZT_RESEARCH_IS_UNLOCKED</code>/
-<code>UNLOCK_ENTITY_KIND</code>, <code>ZT_DISEASE_CURE_QUERY</code>.</p>
+<pre class="mermaid">classDiagram
+  class ProgressionMessageSurface {
+    +ZT_GET_ZOO_CASH; +ZT_GET_ZOO_FAME; +ZT_GET_ZOO_OPEN
+    +ZT_GET_ZOO_NAME; +ZT_GET_ZOO_INCOME; +ZT_GET_ZOO_PROFIT
+    +ZT_SET_ZOO_CASH; +ZT_ADD_INCOME; +ZT_ADD_EXPENSE
+    +ZT_ECONOMY_EVENT
+    +ZT_RESEARCH_IS_UNLOCKED; +ZT_RESEARCH_UNLOCK_ENTITY_KIND
+    +ZT_DISEASE_CURE_QUERY
+  }</pre>
 <h3>research relationship model</h3>
 <pre class="mermaid">classDiagram
   ResearchDomain "1" --> ZTResearchMgr : manager
@@ -2519,7 +2573,9 @@ entries, owns the buy/adopt panel; <code>ZTAwardMgr</code> grants awards.</p>
 <li>Fame half-star thresholds and donation weighting are not yet reconstructed.
 Admission price/index handling is partially recovered: price thresholds select
 indices <code>0..3</code>, and the direct index acceptor validates that range; remaining
-non-admission price-selection semantics are open.</li>
+non-admission price-selection semantics are open. Economy countdown timing,
+aggregate and parent-cost accounting, and live simulation callers for component
+transactions are open.</li>
 <li>Disease progression/spread cadence and cure scoring are native and unrecovered.</li>
 <li>Entity-shared research item fields and <code>ZTResearchMgr</code>
 <code>researchItems</code>/<code>unlockedItems</code> persistence/config fields are recovered.
@@ -2566,19 +2622,20 @@ context:</p>
   class BFLuaStack { stack exchange }
   class BFLuaResponse { response out }</pre>
 <h3>Scenario scripting API (BFS_*)</h3>
-<p>The <code>BFS_*</code> tokens are the contract between rules/Lua and native state, grouped by role:</p>
-<ul>
-<li>rule control: <code>BFS_GETRULESTATE</code>, <code>BFS_SETRULESTATE</code>, <code>BFS_RESET_RULE_STATES</code>,
-<code>BFS_SHOWRULE</code>, <code>BFS_HIDERULE</code>, <code>BFS_GET_RULE_NAMES</code></li>
-<li>scenario lifecycle: <code>BFS_ADDSCENARIO</code>, <code>BFS_CLEARSCENARIO</code>, <code>BFS_LOADSCENARIO</code>,
-<code>BFS_ADD_SCENARIO_OBJECT</code></li>
-<li>variables: <code>BFS_GETGLOBALVAR</code>, <code>BFS_SETGLOBALVAR</code>, <code>BFS_GETUSERVAL</code>, <code>BFS_SETUSERVAL</code></li>
-<li>challenges: <code>BFS_GETALLCHALLENGES</code>, <code>BFS_PICKCHALLENGE</code>, <code>BFS_GET_CHALLENGE_DELAY</code>,
-<code>BFS_SET_CHALLENGE_DELAY</code>, <code>BFS_VALIDATEALLCHALLENGES</code></li>
-<li>text/loc: <code>BFS_GETLOCID</code>, <code>BFS_LOCALIZEFLOAT</code>, <code>BFS_SETALTTEXT</code>,
-<code>BFS_SETALTOVERVIEWTEXT</code></li>
-<li>misc: <code>BFS_SAVEOPTIONS</code>, <code>BFS_PROCESS_VINCE</code> (telemetry), <code>BFS_EVENT</code>/<code>BFS_OK</code>/<code>BFS_ERROR</code></li>
-</ul>
+<pre class="mermaid">classDiagram
+  class BFSMessageRegistry { +rules/Lua/native scripting API }
+  class BFSRuleControl { +BFS_GETRULESTATE; +BFS_SETRULESTATE; +BFS_RESET_RULE_STATES; +BFS_SHOWRULE; +BFS_HIDERULE; +BFS_GET_RULE_NAMES }
+  class BFSScenarioLifecycle { +BFS_ADDSCENARIO; +BFS_CLEARSCENARIO; +BFS_LOADSCENARIO; +BFS_ADD_SCENARIO_OBJECT }
+  class BFSVariables { +BFS_GETGLOBALVAR; +BFS_SETGLOBALVAR; +BFS_GETUSERVAL; +BFS_SETUSERVAL }
+  class BFSChallenges { +BFS_GETALLCHALLENGES; +BFS_PICKCHALLENGE; +BFS_GET_CHALLENGE_DELAY; +BFS_SET_CHALLENGE_DELAY; +BFS_VALIDATEALLCHALLENGES }
+  class BFSTextLoc { +BFS_GETLOCID; +BFS_LOCALIZEFLOAT; +BFS_SETALTTEXT; +BFS_SETALTOVERVIEWTEXT }
+  class BFSMisc { +BFS_SAVEOPTIONS; +BFS_PROCESS_VINCE; +BFS_EVENT; +BFS_OK; +BFS_ERROR }
+  BFSMessageRegistry *-- BFSRuleControl
+  BFSMessageRegistry *-- BFSScenarioLifecycle
+  BFSMessageRegistry *-- BFSVariables
+  BFSMessageRegistry *-- BFSChallenges
+  BFSMessageRegistry *-- BFSTextLoc
+  BFSMessageRegistry *-- BFSMisc</pre>
 <h3>Scenario And Script State Model</h3>
 <pre class="mermaid">classDiagram
   class ZTScenarioMgr {
@@ -2744,11 +2801,18 @@ below.</p>
   class BFRenderer { frame driver }
   class BFResourceMgr { GPU/resource input owner }</pre>
 <h3>Materials and textures</h3>
-<p>Materials are authored <code>.bfmat</code>/<code>.fx</code> source consumed by the renderer (the class
-<code>BFRMaterialManager</code> is evidenced only by its <code>::load</code> log string — no standalone type).
-Texture animation/variation is native data: <code>BFGSetTextureData</code>, <code>BFTextureSwapInfo</code>,
-<code>BFSharedRandomTextureInfo</code>, <code>BFDecalTextureCycleComponent</code>,
-<code>ZTTransportGroundTrackTextureData</code>.</p>
+<pre class="mermaid">classDiagram
+  class BFRMaterialManager { +load log string evidence; +no standalone registered type }
+  class BFRMaterialResource { +.bfmat; +.fx; +parameters; +textures }
+  class TextureAnimationVariation {
+    +BFGSetTextureData
+    +BFTextureSwapInfo
+    +BFSharedRandomTextureInfo
+    +BFDecalTextureCycleComponent
+    +ZTTransportGroundTrackTextureData
+  }
+  BFRMaterialManager "*" --> BFRMaterialResource : consumes authored source
+  BFRMaterialResource --> TextureAnimationVariation : native data</pre>
 <h3>Animation</h3>
 <pre class="mermaid">classDiagram
   BFTypedObj <|-- BFAnimController
@@ -2756,10 +2820,18 @@ Texture animation/variation is native data: <code>BFGSetTextureData</code>, <cod
   BFComponent <|-- BFAnimManager
   BFComponent <|-- BFAnimTable
   BFXMLObj <|-- BFAnimRequestData
-  BFPhysComponent <|-- BFAnimatedObjectControllerComponent</pre>
-<p><code>BFAnimController</code> selects animations from a <code>BFAnimTable</code>/<code>BFAnimGraph</code> driven by
-<code>BFAnimRequestData</code>; <code>BFAnimManager</code> coordinates. AI's <code>BFLocoAnimate</code> and <code>BFAITextureController</code> feed this layer. The animation graph
-is a node/transition machine:</p>
+  BFPhysComponent <|-- BFAnimatedObjectControllerComponent
+  class BFAnimController { +selects animation }
+  class BFAnimTable { +animation lookup }
+  class BFAnimGraph { +node/transition machine }
+  class BFAnimRequestData { +animation request }
+  class BFAnimManager { +coordinates animation }
+  BFAnimController ..> BFAnimTable
+  BFAnimController ..> BFAnimGraph
+  BFAnimController ..> BFAnimRequestData
+  BFAnimManager ..> BFAnimController
+  BFLocoAnimate ..> BFAnimController
+  BFAITextureController ..> BFAnimController</pre>
 <pre class="mermaid">classDiagram
   class BFAnimGraph { +graph_name; +nodes : Vec~BFAnimGraphNode~; +transitions : Vec~BFAnimGraphTransition~ }
   class BFAnimGraphNode { +node_name; +animation_name; +looped; +blend_seconds }
@@ -2805,12 +2877,14 @@ is a node/transition machine:</p>
   class BF3DSndFactory { mints 3D sounds }
   class BFWorld3DSndMgr { world sound placement }
   class BFSoundtag { cue name }</pre>
-<p>Audio is fully message-driven (<code>BFSND_EVENT</code>/<code>BFSND_CMD</code>):</p>
-<ul>
-<li>playback: <code>BFSND_PLAY</code>, <code>BFSND_PLAY_FROM_ENTITY</code></li>
-<li>transport: <code>BFSND_PAUSE</code>/<code>BFSND_RESUME</code>, <code>BFSND_FULLPAUSE</code>/<code>BFSND_FULLRESUME</code></li>
-<li>mix: <code>BFSND_MODIFY_PAN</code>, <code>BFSND_MODIFY_VOLUME</code></li>
-</ul>
+<pre class="mermaid">classDiagram
+  class BFSoundMessages { +BFSND_EVENT; +BFSND_CMD }
+  class BFSoundPlayback { +BFSND_PLAY; +BFSND_PLAY_FROM_ENTITY }
+  class BFSoundTransport { +BFSND_PAUSE; +BFSND_RESUME; +BFSND_FULLPAUSE; +BFSND_FULLRESUME }
+  class BFSoundMix { +BFSND_MODIFY_PAN; +BFSND_MODIFY_VOLUME }
+  BFSoundMessages *-- BFSoundPlayback
+  BFSoundMessages *-- BFSoundTransport
+  BFSoundMessages *-- BFSoundMix</pre>
 <h3>Renderer And Audio State Model</h3>
 <pre class="mermaid">classDiagram
   class BFDX9Renderer {
@@ -3254,18 +3328,21 @@ and components. Save and load are file-mode tools.</p>
   BFComponent <|-- BFUserProfileMgr
   BFComponent <|-- BFGElevatedTileSerializer
   BFXMLObj <|-- BFUndoTransactionData
-  class BFUserProfileMgr { profile id; saveDirectory; tempDirectory; options.xml }</pre>
-<h3>What is persisted</h3>
-<p>The save captures the source-defined zoo: profile/options (<code>BFUserProfileMgr</code>,
-<code>options.xml</code>), selected map/scenario/campaign, zoo session (cash/economy
-history, fame, research unlocks, status), the world (terrain/biome, fences/tanks,
-paths, transport, placement grid + elevated support via <code>BFGElevatedTileSerializer</code>),
-entity instances and their component state, AI tokens and task-relevant state,
-scenario/tutorial rule state, disease/cure state, adoption slots, and
-photos/challenges.</p>
-<p><code>ZTSavedGame</code> carries <code>name</code>, <code>path</code>, <code>preview</code> thumbnail,
-<code>file_time_low</code>/<code>high</code>, and <code>scenario_name</code>; <code>ZTSaveRequest</code>/<code>ZTLoadModeState</code>
-drive the file-mode flow.</p>
+  class BFUserProfileMgr { profile id; saveDirectory; tempDirectory; options.xml }
+  class ZTSavedGame { +name; +path; +preview thumbnail; +file_time_low/high; +scenario_name }
+  class SavePayload {
+    +profile/options; +selected map/scenario/campaign
+    +cash/economy history/fame/research/status
+    +terrain/biome/fences/tanks/paths/transport
+    +placement grid/elevated support
+    +entity instances/component state
+    +AI tokens/task state
+    +scenario/tutorial rules; +disease/cure; +adoption slots
+    +photos/challenges
+  }
+  ZTSavedGame *-- SavePayload
+  SavePayload ..> BFUserProfileMgr
+  SavePayload ..> BFGElevatedTileSerializer</pre>
 <h3>Save/load flow</h3>
 <pre class="mermaid">sequenceDiagram
   participant UI as menu
@@ -3276,9 +3353,8 @@ drive the file-mode flow.</p>
   Mode->>Tree: walk roots
   Tree->>File: write_xml_node() per component (save)
   File->>Tree: read_xml_node() per component (load)
-  Mode-->>UI: ZT_SAVE_SCREENSHOT / ZT_LOAD_AFTER_SAVE</pre>
-<p><code>handle_saveEntityFile_command</code> shows the same path for single entity-file export;
-<code>ZT_SAVE_SCREENSHOT</code> attaches the save thumbnail.</p>
+  Mode->>File: handle_saveEntityFile_command uses same path for single entity export
+  Mode-->>UI: ZT_SAVE_SCREENSHOT attaches thumbnail / ZT_LOAD_AFTER_SAVE</pre>
 <h3>save relationship model</h3>
 <pre class="mermaid">classDiagram
   SaveDomain "1" --> ZTLoadModeState : load_mode
@@ -3714,7 +3790,10 @@ enumerated.</li>
 <li><strong>ZTZoopediaPage</strong> — entry_id, page_number, text_token, previous_entry, next_entry</li>
 </ul>
 <h2>Registered Class Roster (node-level)</h2>
-<p>Thin registered subtypes/records (behaviour in base + message vocabulary), with parent:</p>
+<p>Thin registered subtypes/records (behaviour in base + message vocabulary), with parent:
+this roster is a functional appendix, not the complete 2,068-entry type registry
+or the full anonymous-vtable atlas. Complete byte/function/vtable evidence remains
+in the byte-range map and reconstruction TSVs.</p>
 <ul>
 <li><strong>&lt; (root)</strong>: <code>BFAIStateVarBaseType</code>, <code>BFColor</code>, <code>BFRect</code>, <code>getActiveSequenceName</code>, <code>getActiveSequenceTime</code>, <code>getBM</code>, <code>getCM</code>, <code>getCurrTask</code>, <code>getCurrentPlaySet</code>, <code>getDistFromCamera</code>, <code>getEDI</code>, <code>getFirstContainedEntity</code>, <code>getFirstInterestingEntity</code>, <code>getFirstInterestingEntity2</code>, <code>getFirstPhysObj</code>, <code>getID</code>, <code>getIsCrated</code>, <code>getIsDiseased</code>, <code>getIsElevatedShot</code>, <code>getIsInWater</code>, <code>getIsOnElevatedTile</code>, <code>getIsSuper</code>, <code>getIsUnderwaterShot</code>, <code>getNextContainedEntity</code>, <code>getNextInterestingEntity</code>, <code>getNextInterestingEntity2</code>, <code>getPAC</code>, <code>getPercentOfScreen</code>, <code>getPercentSeen</code>, <code>getPercentSeenInCenter</code>, <code>getPosition</code>, <code>getRotation</code>, <code>getSharedVar</code>, <code>getStateVar</code>, <code>getTaskTarget</code>, <code>getType</code>, <code>getVar</code>, <code>getVehicleShot</code>, <code>hasRelationship</code>, <code>isKindOf</code>, <code>isPlaySetInContext</code>, <code>localize</code>, <code>testRelationship</code></li>
 <li><strong>&lt; BFComponent</strong>: <code>BFAITrickMgrData</code>, <code>BFAIUnhideComponent</code>, <code>BFBehSetMap</code>, <code>BFGBiomeData</code>, <code>BFGDetachInfo</code>, <code>BFLoadListener</code>, <code>BFSharedPhysVars</code>, <code>BFSkyLayer</code>, <code>BFSndComponent</code>, <code>BFXMLNodeComp</code>, <code>ZTAIEducationData</code>, <code>ZTAISharedInfluenceWatcher</code>, <code>ZTAIStaffTrainerComponent</code>, <code>ZTAITourTakerData</code>, <code>ZTAITrickComponentData</code>, <code>ZTAITrickTargetComponent</code>, <code>ZTAIVehicleData</code>, <code>ZTAIWaterFilterComponent</code>, <code>ZTCDCheck</code>, <code>ZTCloningCenterComponent</code>, <code>ZTCloningCenterInstanceComponent</code>, <code>ZTElevatedTriangleGraphic</code>, <code>ZTEntityCrater</code>, <code>ZTEntityDestructionComponent</code>, <code>ZTEntityDestructionData</code>, <code>ZTExtraPaths</code>, <code>ZTFossilSkeletonComponent</code>, <code>ZTItemFilter</code>, <code>ZTLocationEntry</code>, <code>ZTOverviewData</code>, <code>ZTOverviewModeAnimalIcon</code>, <code>ZTOverviewModeBuildingIcon</code>, <code>ZTPhysObjSwapComponent</code>, <code>ZTPuzzlePiece</code>, <code>ZTTransportGroundTrackShared</code>, <code>ZTVehicleBase</code>, <code>ZTWebComponent</code>, <code>ZTWetsuitComponent</code>, <code>ZTWitheredPlantComponent</code></li>
@@ -3837,6 +3916,11 @@ source data and authored content. Cross-cutting unknowns:</p>
   <td>Host adapters</td>
   <td>Win32 pump/dialog/IME edges, registry/profile mapping, network/download/MOTD</td>
   <td>Renderer, Persistence (adapter boundary)</td>
+</tr>
+<tr>
+  <td>Discovery coverage</td>
+  <td>anonymous <code>vtable_*</code> surfaces, candidate byte-map rows, and address-only helper functions are not all semantically named in this spec</td>
+  <td>Registered Class Roster, Binary Perimeter</td>
 </tr>
 </tbody>
 </table>

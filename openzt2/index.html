@@ -22,7 +22,9 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 .phase h3{margin:0 0 6px;font-size:15px;display:flex;align-items:baseline;gap:8px}.phase h3 .tag{font-size:11px;color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.04em}
 .phase h4{margin:12px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
 .phase p{margin:0;font-size:13px;line-height:1.6}.phase p+p{margin-top:8px}
-.perimeter-link{display:inline-flex;align-items:center;gap:6px;margin:2px 0 4px;font-size:13px}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:10px 0 18px}
+.doc-card{border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px}
+.doc-card h3{margin:0 0 6px;font-size:15px}.doc-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.doc-card a{font-weight:700;text-decoration:none}
 .legalrow{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .legalrow button{font-size:12px}
 .modal[hidden]{display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:60}
@@ -35,9 +37,28 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 <nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
- <p class="sub">The outer perimeter of the original Zoo Tycoon 2 binary and the reconstruction's coverage of it — the denominator. Counts from the stripped executable; full tables on the <a href="perimeter.html">Binary Perimeter</a>.</p>
+ <p class="sub">A map of the reconstruction evidence, original-game contract, and implementation strategy. Counts below summarize the stripped executable's current function/global coverage.</p>
  <div class="cards" id="cards"></div>
- <p class="perimeter-link">→ <a href="perimeter.html">Browse the full binary perimeter tables</a></p>
+
+ <h2>Pages</h2>
+ <div class="doc-grid" aria-label="Project page guide">
+  <div class="doc-card">
+   <h3><a href="zt-disk-map.html">Byte Range Map</a></h3>
+   <p>Contains the byte-level evidence ledger for the original executable: disk/runtime ranges, SafeDisc materialization records, accepted function identities, residual gaps, and status notes for exact address spans.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="perimeter.html">Binary Perimeter</a></h3>
+   <p>Shows generated function, global/static, and vtable-method inventories over the stripped binary, joining exact byte-map anchors with library provenance, vtable membership, inferred domains, and remaining frontier classifications.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="original-game-functional-specification.html">Functional Specification</a></h3>
+   <p>Outlines the original game contract: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and open native-behavior contracts.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="reimplementation-plan.html">Reimplementation Plan</a></h3>
+   <p>Presents the Rust/Bevy implementation strategy: which original contracts are rebuilt as OpenZT2 domains, which responsibilities move to libraries or adapters, and how remaining product-domain work is tracked.</p>
+  </div>
+ </div>
 
  <h2>How the project is structured</h2>
  <div class="phases">
