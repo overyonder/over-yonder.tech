@@ -2605,7 +2605,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFDockingComponent "1" --> BFEntityComponentCommon : common
   BFEntityComponentCommon "*" --> BFComponentProperty : properties
   BFEnvMapSwapComponent "1" --> BFEntityComponentCommon : common
-  BFFPSCameraComponent "1" --> BFCameraComponent : base
   BFFallComponent "1" --> BFMovingComponent : base
   BFForceUpdateWhenVisibleComponent "1" --> BFEntityComponentCommon : common</pre>
 <pre class="mermaid">classDiagram
@@ -2614,14 +2613,11 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   BFGPlacementTile <|-- BFGTerrainPlacementTile
   BFForwardMovingComponent "1" --> BFMovingComponent : base
   BFGEntityContainerSlot "1" --> EntityContainerSlotClass : slot_class
-  BFGEntityContainerSlotLight "1" --> BFGEntityContainerSlot : base
-  BFGEntityContainerSlotHeavy "1" --> BFGEntityContainerSlot : base
   BFGEventRoot "*" --> BFGEventRecord : events
   BFGFittingSurfaceComponent "0..1" --> BFWorldFittingSurface : fitting_surface
   BFGGame "*" --> BFGWorld : worlds
   BFGGame "1" --> BFGEventRoot : event_root
-  BFGRemoveEntityBatch "*" --> BFGRemoveEntityBatchEntry : entries
-  BFGTerrainPlacementTile "1" --> BFGPlacementTile : base</pre>
+  BFGRemoveEntityBatch "*" --> BFGRemoveEntityBatchEntry : entries</pre>
 <pre class="mermaid">classDiagram
   BFGWorld "*" --> BFGEntity : entities
   BFGWorld "1" --> BFGPlacementGrid : placement_grid
@@ -2642,7 +2638,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <pre class="mermaid">classDiagram
   BFCameraComponent <|-- BFOverheadCameraComponent
   BFMovingComponent "1" --> BFEntityComponentCommon : common
-  BFOverheadCameraComponent "1" --> BFCameraComponent : base
   BFOverheadCameraComponent "0..1" --> BFOverheadCameraFrustum : frustum
   BFOverheadCameraComponent "0..1" --> GridRect : pan_bounds
   BFOverheadCameraUDVComponent "1" --> BFEntityComponentCommon : common
@@ -2697,7 +2692,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTOverviewComponent "1" --> BFEntityComponentCommon : common
   ZTOverviewComponent "*" --> ZTOverviewLayer : layers
   ZTOverviewComponent "1" --> ZTOverviewExport : export
-  ZTTriggeredEventsComponent "1" --> BFTriggeredEventsComponent : base
   ZTTriggeredEventsComponent "*" --> ZTTriggeredEventRecord : pending_events</pre>
 <p><strong>Terrain relationships.</strong></p>
 <pre class="mermaid">classDiagram
@@ -3013,9 +3007,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTEconomyMgr "*" --> ZTPriceIndexSelection : ui_price_selections
   ZTEconomyComponent "*" --> TransactionConfig : transactions
   ZTTransaction "0..1" --> TransactionConfig : config
-  ZTEconomyComponentGuest "1" --> ZTEconomyComponentBase : base
-  ZTEconomyComponentStub "1" --> ZTEconomyComponentBase : base
-  ZTEconomyComponentHistoryBase "1" --> ZTEconomyComponentBase : base
   ZTEconomyComponentHistoryBase "*" --> FameHistoryEntry : history
   BFGEconomyComponent "1" --> BFGEconomyData : data
   BFGEconomyComponent "*" --> BFGTransaction : transactions
@@ -3475,8 +3466,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   SuspenseDocument "*" --> SuspenseCue : cues
   SuspenseDocument "*" --> Graph : graphs
   WaterDocument "*" --> WaterLayer : layers
-  WaterDocument "*" --> WaterScroll : scroll
-  ZTFPSUDVComponent "1" --> BFFPSUDVComponent : base</pre>
+  WaterDocument "*" --> WaterScroll : scroll</pre>
 <p><strong>Model relationships.</strong></p>
 <pre class="mermaid">classDiagram
   NetImmerseColorKeyGroup "*" --> NetImmerseColorKey : keys
