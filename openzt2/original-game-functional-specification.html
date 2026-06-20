@@ -3073,7 +3073,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTScenarioRuntimeState "*" --> BFScenarioObjectiveProgress : objective_progress</pre>
 <p><strong>Scripting relationships.</strong></p>
 <pre class="mermaid">classDiagram
-  BFScriptContext <|-- BFLuaContext
   BFResourceCacheFlush "*" --> BFResourceCacheRecord : copied_records
   BFScriptCache "*" --> BFScriptCacheEntry : entries
   BFScriptContextVector "*" --> BFScriptContextRecord : records
