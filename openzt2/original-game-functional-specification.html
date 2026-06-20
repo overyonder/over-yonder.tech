@@ -2846,7 +2846,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTShowTimerManager "*" --> ZTShowTimerState : active_timers</pre>
 <p><strong>AI relationships.</strong></p>
 <pre class="mermaid">classDiagram
-  BFAIEntityData <|-- BFAIEntityDataShared
   AiDomain "1" --> BFAITaskCatalog : task_catalog
   AiDomain "1" --> BFBehaviorMgr : behavior_mgr
   AiDomain "1" --> BFLocomotionMgr : locomotion_mgr

@@ -101,9 +101,9 @@ authority.</p>
 </tr>
 </tbody>
 </table>
-<p>The <code>Domain</code> column below contains product/runtime domains. Tooling, evidence
-registers, generic adapters, source loaders, crate names, and progress buckets
-belong in the boundary table or in a row's evidence/next-action text.</p>
+<p>The work board below uses actual owners. Product/runtime domains, source-format
+families, host boundaries, and evidence frontiers may all own rows when they
+carry real work. Aggregate progress buckets are invalid owners.</p>
 <h2>Status Values</h2>
 <table>
 <thead>
@@ -143,13 +143,17 @@ belong in the boundary table or in a row's evidence/next-action text.</p>
 </tr>
 </tbody>
 </table>
-<h2>Domain Work Board</h2>
+<h2>Implementation Work Board</h2>
+<p>The <code>Owner</code>, <code>Subdomain</code>, and <code>Feature</code> hierarchy is the active task axis.
+<code>Owner</code> names the real product domain, runtime boundary, source-format family,
+or evidence source that owns the work. Detailed original type surfaces remain
+in the functional specification.</p>
 <table>
 <thead>
 <tr>
-  <th>Domain</th>
+  <th>Owner</th>
+  <th>Subdomain</th>
   <th>Feature</th>
-  <th>Subfeature</th>
   <th>Status</th>
   <th>Reimplementation description</th>
   <th>Next recovery/implementation</th>
@@ -157,285 +161,1034 @@ belong in the boundary table or in a row's evidence/next-action text.</p>
 </thead>
 <tbody>
 <tr>
-  <td>App</td>
-  <td>Application shell</td>
-  <td><code>ZTApp</code>, <code>BFGApp</code>, <code>UIApp</code>, startup contexts, load listeners</td>
+  <td>Bevy runtime</td>
+  <td>Runtime substrate</td>
+  <td>App, ECS, schedules, states, time, tasks</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Bevy startup mounts archives, loads app/root/game/freeform/challenge/campaign contexts, publishes startup resources, and enters menu runtime.</td>
-  <td>Recover original manager construction order, load-listener phases, and per-frame update ordering.</td>
+  <td>Bevy is the live runtime store, scheduler, change tracker, and frame loop.</td>
+  <td>Replace startup placeholders with recovered app/bootstrap order.</td>
 </tr>
 <tr>
-  <td>UI</td>
-  <td>Widget tree</td>
-  <td><code>UIApp</code>, <code>UIRoot</code>, <code>UIComponent</code>, <code>UIContainer</code>, <code>UILayout</code>, <code>UIText</code>, <code>UIButton</code>, list/slider/edit/drop widgets</td>
+  <td>Asset graph</td>
+  <td>Bevy asset system</td>
+  <td>Asset sources, handles, loaders, loading states</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source UI documents parse and project to Bevy UI; code already marks the direct tag-to-Rust mapping as a bootstrap shortcut.</td>
-  <td>Replace shortcut hydration with original-style <code>BFXMLObj</code>/<code>BFComponent</code> registry/factory hydration and recover widget vtable behavior.</td>
+  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets.</td>
+  <td>Convert remaining extraction/temp reads into archive-backed asset loads.</td>
 </tr>
 <tr>
-  <td>UI</td>
-  <td>Messages and values</td>
-  <td><code>UI_*</code> bus, typed payloads, value handlers, event blocks</td>
+  <td>Asset graph</td>
+  <td>Loader ownership</td>
+  <td>Shipped extension owner matrix</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>UI message/value records, authored event payloads, named assignments, hotkeys, feedback data, and panel bindings are modeled.</td>
-  <td>Bind recovered handlers panel by panel while preserving message order, sender, target, and payload semantics.</td>
+  <td>Bevy registers explicit owners for mounted archive documents, models, materials, animations, audio metadata, raw/text wrappers, Z2F archives, and Bevy/Kira image or audio playback families.</td>
+  <td>Close the remaining unowned inputs: loose <code>.psys</code>, loose <code>.bmp</code> splash input, <code>.zip</code>/<code>.z2s</code> persistence containers, extensionless marker semantics, and source entries only classified by the Z2F kind table.</td>
 </tr>
 <tr>
-  <td>UI</td>
-  <td>Text, sound, and visual state</td>
-  <td><code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, <code>UISoundMgr</code>, font/text/rich-text state</td>
+  <td>Asset graph</td>
+  <td>Consumer migration</td>
+  <td>Startup and document discovery</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Bevy presents current UI output from parsed source data.</td>
-  <td>Recover font metrics, text wrapping, hit masks, skin replacement order, UI sound routing, and show/hide animation timing.</td>
+  <td>Startup still has transitional asset-loading/document-store surfaces while the Bevy manifest and handles become the owning discovery path.</td>
+  <td>Replace startup document reads, direct path checks, and document waits with manifest-driven <code>AssetServer</code> handles; decide the <code>ztapp4.xml</code> host-file versus asset-source boundary.</td>
 </tr>
 <tr>
-  <td>Modes</td>
-  <td>Shell and tools</td>
-  <td><code>ZTMode</code>, mode records, hotkeys, event blocks, command readers</td>
+  <td>Asset graph</td>
+  <td>Consumer migration</td>
+  <td>Renderer, UI, and audio handles</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Renderer, UI projection, and audio still have transitional helper paths around loader-emitted assets.</td>
+  <td>Consume loader-emitted model/scene/mesh/material/image/audio handles; route UI images and authored sounds through the source manifest; remove direct consumer parsing once equivalent handles exist.</td>
+</tr>
+<tr>
+  <td>Audio adapter</td>
+  <td>Playback backend</td>
+  <td>Kira-backed playback and instances</td>
+  <td><span class="plan-status plan-status-adapter">adapter</span></td>
+  <td>Original sound command surfaces route through Bevy/Kira audio state where playback bindings exist.</td>
+  <td>Bind <code>BFSND_*</code> commands to sound-tag playback.</td>
+</tr>
+<tr>
+  <td>Scripting adapter</td>
+  <td>Lua substrate</td>
+  <td><code>mlua</code> Lua 5.1 host with compatibility prelude</td>
+  <td><span class="plan-status plan-status-adapter">adapter</span></td>
+  <td>Lua 5.1 host support exists with compatibility-prelude and recorded BFS binding surfaces.</td>
+  <td>Recover package/cache behavior and BFS argument/return shapes.</td>
+</tr>
+<tr>
+  <td>Host adapters</td>
+  <td>Platform APIs</td>
+  <td>Window, input, filesystem, OS, network, diagnostics, decoder backends</td>
+  <td><span class="plan-status plan-status-adapter">adapter</span></td>
+  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts.</td>
+  <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support.</td>
+</tr>
+<tr>
+  <td>Evidence inputs</td>
+  <td>Native type roster</td>
+  <td>2,068 native types and parent edges</td>
+  <td><span class="plan-status plan-status-done">done</span></td>
+  <td>The registered native type roster supplies type-handle/factory input.</td>
+  <td>Attach factories and handlers through owning feature rows.</td>
+</tr>
+<tr>
+  <td>Evidence inputs</td>
+  <td>Message token registry</td>
+  <td>1,084 registered message/event tokens</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Mode catalogue, mode configs, hotkeys, lifecycle events, and several mode states are represented.</td>
-  <td>Recover per-mode input/tick/message handlers and route <code>ZTCameraCommandReader</code>, <code>ZTTerrainCommandReader</code>, and <code>ZTTankCommandReader</code> through their owning domains.</td>
+  <td>Token facts remain evidence inputs for dispatch, source-authored events, and native handler recovery.</td>
+  <td>Restore the exact token registry surface in the specification and bind each side effect to the owning runtime domain.</td>
+</tr>
+<tr>
+  <td>Evidence inputs</td>
+  <td>Binary perimeter classification</td>
+  <td>Classified functions, globals, and vtable methods</td>
+  <td><span class="plan-status plan-status-done">done</span></td>
+  <td>Binary perimeter rows are inputs for recovering product contracts.</td>
+  <td>Select frontier functions from the owning feature row.</td>
+</tr>
+<tr>
+  <td>Native contract recovery</td>
+  <td>Product contract frontier</td>
+  <td>ZT/BlueFang domain-only and vtable-method rows</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Classified rows have owners while selected exact behavior contracts remain unrecovered.</td>
+  <td>Recover each contract as owner, entry message/call, data read, mutation, callee surface, visible effect, and unknowns before implementation.</td>
+</tr>
+<tr>
+  <td>Archive assets</td>
+  <td>Archive and paths</td>
+  <td>Z2F archive mount and asset paths</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td><code>Z2fAssetReaderState</code> and <code>Z2fAssetManifest</code> serve mounted archives through <code>zt2://</code>, preserve path lookup data, list directories, count extensionless entries, and normalize legacy DDS bytes before asset decoding.</td>
+  <td>Finish manifest-owned precedence, host-file fallback decisions, and removal of direct document reads.</td>
+</tr>
+<tr>
+  <td>Source documents</td>
+  <td>Documents</td>
+  <td>XML/BFXML/MAXML parsing</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Ordered source documents parse for UI, config, runtime data, and authored events.</td>
+  <td>Add schema validation, include resolution, and write-order preservation.</td>
+</tr>
+<tr>
+  <td>Source schema</td>
+  <td>Documents</td>
+  <td><code>BFXMLSchemaMgr</code> validation</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Original source document validation is represented as an unrecovered schema contract.</td>
+  <td>Recover schema readers and validation failure behavior.</td>
+</tr>
+<tr>
+  <td>Locale</td>
+  <td>Localization</td>
+  <td><code>BFLocaleMgr</code> tables and formatting</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Locale string tables load and expose original loc-id/value formatting.</td>
+  <td>Recover remaining formatting and fallback rules.</td>
+</tr>
+<tr>
+  <td>Binder</td>
+  <td>Binder hydration</td>
+  <td><code>BFTypedBinder</code> source objects</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Binder identity, type/version keys, shared/instance XML, components, and event nodes hydrate from source.</td>
+  <td>Recover precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, and lookup semantics.</td>
 </tr>
 <tr>
   <td>Entity</td>
-  <td>Component aggregate</td>
-  <td><code>BFGEntity</code>, component maps, binder-derived instance/shared data</td>
-  <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source-derived entities can bootstrap into Bevy world/runtime records.</td>
-  <td>Convert representative binder families into complete component factory paths and validation rules.</td>
-</tr>
-<tr>
-  <td>Animal</td>
-  <td>Animal state</td>
-  <td>species, family, biome, lifecycle, variant, needs, training, disease, crate, conservation</td>
+  <td>Shared source data</td>
+  <td><code>BFAIEntityDataShared</code> property maps</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Animal type definitions and runtime animal records preserve source-derived animal state.</td>
-  <td>Recover breeding, offspring selection, component-to-status reads, training deltas, adoption rarity, release rewards, and family tree effects.</td>
+  <td><code>b_*</code>, <code>s_*</code>, <code>f_*</code>, and <code>p_*</code> source property families are preserved.</td>
+  <td>Enumerate descriptor-table fields by component family.</td>
 </tr>
 <tr>
-  <td>Catalog</td>
-  <td>Type lists and Zoopedia</td>
-  <td><code>ZTUITypeList</code>, catalog entries, filters, buy info, Zoopedia pages</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Catalog and Zoopedia structures are modeled from source type lists and UI records.</td>
-  <td>Recover paging/filter semantics, page navigation, purchase row behavior, and source/type lookup precedence.</td>
-</tr>
-<tr>
-  <td>World</td>
-  <td>World/session state</td>
-  <td><code>BFGGame</code>, <code>BFGWorld</code>, <code>ZTWorldMgr</code>, entity indexes, mutation queues</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>World records hold entities, placement grid, event roots, attachment commands, and mutation queues.</td>
-  <td>Recover attach/detach ordering, world save/load boundaries, entity removal side effects, and manager update cadence.</td>
-</tr>
-<tr>
-  <td>Terrain</td>
-  <td>Heightfield and biome</td>
-  <td><code>BFTerrain</code>, <code>BFGBiome</code>, terrain grid, brushes, changed triangles, autoplacement</td>
+  <td>Image assets</td>
+  <td>Source formats</td>
+  <td>Archive textures: <code>.dds</code>, <code>.tga</code>, <code>.jpg</code> plus supported <code>.jpeg</code>/<code>.png</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Terrain source documents, biome data, mesh patches, brush UI, water edits, and autoplacement records are modeled.</td>
-  <td>Recover terrain units, brush algorithms, water interactions, charge/undo behavior, and material projection rules.</td>
+  <td>Mounted archives contain <code>.dds</code>, <code>.tga</code>, and <code>.jpg</code> textures; Bevy image features also cover <code>.jpeg</code> and <code>.png</code>; the Z2F reader normalizes legacy DDS bytes before Bevy sees them.</td>
+  <td>Add cube-map/skybox presentation and source-manifest fallback handling.</td>
 </tr>
 <tr>
-  <td>Placement</td>
-  <td>Validation and commit</td>
-  <td><code>ZTPlacementMode</code>, <code>ZTPlacementData</code>, footprint preview, placement result tokens</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Placement commands, failure tokens, preview state, affordability/research hooks, and commit requests are modeled.</td>
-  <td>Recover exact footprint schema, slope/headroom/traversability tests, placement transactions, and confirmation branches.</td>
-</tr>
-<tr>
-  <td>Fence</td>
-  <td>Fence topology</td>
-  <td><code>ZTFence</code>, <code>ZTFenceEntity</code>, <code>ZTGate</code>, <code>ZTFenceMode</code></td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Fence types, segments, gates, shape commands, rotations, undo records, and mode decisions are represented.</td>
-  <td>Recover rubber-band placement, gate insertion, health/sale/delete effects, and topology event ordering.</td>
-</tr>
-<tr>
-  <td>Tank</td>
-  <td>Aquatic construction</td>
-  <td><code>ZTTankMgr</code>, <code>ZTTank</code>, tank walls, gates, portals, links, supports, water volume</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Tank manager/config, manipulation UI, topology, wall/glass selectors, commands, links, and cleanliness state are modeled.</td>
-  <td>Recover command reader behavior, height/fill/drain/delete semantics, tank entity containment, and gate/portal edge cases.</td>
-</tr>
-<tr>
-  <td>Path</td>
-  <td>Paths and elevated supports</td>
-  <td><code>ZTPath</code>, <code>ZTPathElevated</code>, elevated curb/support state</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Path and elevated path placement records, commands, validation, and connectivity queries are represented.</td>
-  <td>Recover path placement modes, support tracker behavior, headroom tests, and connected-path recalculation.</td>
-</tr>
-<tr>
-  <td>Transport</td>
-  <td>Rides and tours</td>
-  <td><code>ZTTransportationMgr</code>, circuits, tracks, stations, vehicles, tour data</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Transport circuits, station/vehicle/track records, route queries, tour data, and command records are modeled.</td>
-  <td>Recover circuit closure, route direction, station selection, passenger behavior, vehicle generation, and tour star rating.</td>
-</tr>
-<tr>
-  <td>AI</td>
-  <td>Cognition and tasks</td>
-  <td><code>BFAIMgr</code>, <code>ZTAIMgr</code>, sensors, thinkers, task templates, tokens</td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Task and behavior documents hydrate into catalog, selector, evaluator, behavior-set, task-root, and token records.</td>
-  <td>Recover scoring, tie-breaks, <code>ThinkerInterval</code>, token lifetime, conflict policy, qualifiers, and completion/failure side effects.</td>
-</tr>
-<tr>
-  <td>Behavior</td>
-  <td>Simulation verbs</td>
-  <td><code>BFBehavior</code>, <code>BFBehaviorMgr</code>, <code>BFBeh*</code>, <code>ZTBeh*</code></td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Behavior type records and active behavior events preserve movement, docking, animation, scripts, feedback, gates, rides, tours, and show/view verbs.</td>
-  <td>Implement one verb family from source read through runtime side effects before broadening.</td>
-</tr>
-<tr>
-  <td>Movement</td>
-  <td>Steering and locomotion</td>
-  <td><code>BFSteeringMgr</code>, <code>BFSteer*</code>, <code>BFLocomotionMgr</code>, <code>BFLocoAnimate</code></td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Source requests and steering vectors are represented.</td>
-  <td>Recover steering blend weights, arbitration, obstacle/entity avoidance, pathfinder coupling, and animation realization.</td>
-</tr>
-<tr>
-  <td>Guest</td>
-  <td>Guest AI and donations</td>
-  <td><code>ZTAIGuestMgr</code>, viewing memory, donation candidates, education donation</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Guest manager config, viewed-species memory, donation candidates, scoring factors, and education donation source ranges are represented.</td>
-  <td>Recover guest need cadence, target selection, box routing, donation amount formula, economy effects, and feedback timing.</td>
-</tr>
-<tr>
-  <td>Staff</td>
-  <td>Jobs and assignment</td>
-  <td><code>ZTAIStaffMgr</code>, staff roles, job queue, assignment UI, water cleaning</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Staff manager config, roles, request controller, job queues, candidates, assignments, user actions, and water-cleaning records are modeled.</td>
-  <td>Recover keeper/trainer assignment payloads, job stealing, cleanup scheduling, and one complete staff role lifecycle.</td>
-</tr>
-<tr>
-  <td>Show</td>
-  <td>Shows and tricks</td>
-  <td><code>ZTAIShowMgr</code>, <code>ZTAITrickMgr</code>, show scheduler, mixer, timer, trick buttons</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Show songs, score bands, effect sets, trick templates, mixer channels, timers, active shows, and selection state are modeled.</td>
-  <td>Recover show scheduler timeslot selection, trick difficulty/popularity formulae, reward flow, and mixer/timer handlers.</td>
-</tr>
-<tr>
-  <td>Economy</td>
-  <td>Cash and transactions</td>
-  <td><code>ZTEconomyMgr</code>, <code>ZTTransaction</code>, <code>BFGTransactionTracker</code>, money events</td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Economy config, components, transaction configs, cash grants, admission price/index, and immediate transaction dispatch are modeled.</td>
-  <td>Recover countdown timing, aggregate/parent-cost accounting, live transaction callers, and user-count effects.</td>
-</tr>
-<tr>
-  <td>Fame</td>
-  <td>Zoo rating and admission coupling</td>
-  <td><code>ZTFameData</code>, fame/status XML, half-star values</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Fame/status value handlers, admission price index handling, release values, and history records are represented.</td>
-  <td>Recover half-star thresholds, fame update cadence, award coupling, and remaining non-admission price selection semantics.</td>
-</tr>
-<tr>
-  <td>Research</td>
-  <td>Research and unlocks</td>
-  <td><code>ZTResearchMgr</code>, research items, buttons, unlocks, active/completed records</td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Research config, UI buttons, item costs/timers, active/completed records, and unaffordable outcomes are modeled.</td>
-  <td>Recover dependency consumers, completion cadence, catalog/placement gates, and remaining persistence fields.</td>
-</tr>
-<tr>
-  <td>Disease</td>
-  <td>Disease and cure</td>
-  <td><code>ZTDiseaseMgr</code>, disease cases, qualifiers, clues, <code>ZTCureDiseaseMode</code></td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Disease manager config, diseases, target filters, clues, cure mode state, and cure UI state are modeled.</td>
-  <td>Recover disease update target search, force-disease application, spread cadence, sample-to-cure scoring, and rewards.</td>
-</tr>
-<tr>
-  <td>Status</td>
-  <td>Zoo status, awards, feedback</td>
-  <td><code>ZTStatus</code>, <code>ZTAwardMgr</code>, <code>ZTFeedbackMgr</code>, survey/status UI</td>
+  <td>Image assets</td>
+  <td>Host/loose images</td>
+  <td><code>.bmp</code> splash and host image inputs</td>
   <td><span class="plan-status plan-status-map">map</span></td>
-  <td>Status, award, feedback, message/thought/emoticon, and zoo survey records exist across economy, managers, and UI binding modules.</td>
-  <td>Assign each status surface to its native manager and recover award criteria, survey updates, and feedback dispatch.</td>
+  <td>The shipped loose product files include <code>SplashImage.bmp</code>; current Bevy image features do not include BMP, and no OpenZT2 loader owns that file.</td>
+  <td>Decide whether loose splash/helper images are reconstruction source inputs; add a BMP normalization/loader path or document the excluded host boundary.</td>
 </tr>
 <tr>
-  <td>Scenario</td>
-  <td>Rule tree and campaign</td>
-  <td><code>BFScenarioMgr</code>, <code>ZTScenarioMgr</code>, groups, rules, actions, campaign state</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Scenario groups, campaign documents, rule/action records, global/user vars, challenges, objectives, and pending actions are modeled.</td>
-  <td>Recover trigger/condition evaluation order, campaign progression graph, challenge scheduling, and map-selection launch effects.</td>
-</tr>
-<tr>
-  <td>Scripting</td>
-  <td>Script API</td>
-  <td><code>BFScriptContextMgr</code>, <code>BFLuaContext</code>, <code>BFS_*</code>, script actions</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Script contexts, cache config, function calls, Lua run requests/effects, and BFS command records are represented.</td>
-  <td>Recover Lua argument/stack marshalling, package/cache behavior, command return/error semantics, and <code>BFS_PROCESS_VINCE</code>.</td>
-</tr>
-<tr>
-  <td>Profile</td>
-  <td>User options and profile paths</td>
-  <td><code>BFUserProfileMgr</code>, <code>BFUserOptions</code>, graphics/audio options</td>
+  <td>Model assets</td>
+  <td>Source formats</td>
+  <td>NetImmerse models: <code>.nif</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Profile commands, options documents, graphics/audio options, safe graphics, and profile path records are modeled.</td>
-  <td>Recover directory resolution, registry/profile mapping, write order, autosave cadence, and profile-change message effects.</td>
+  <td>NIF parses into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata.</td>
+  <td>Recover controllers, skinning, material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
 </tr>
 <tr>
-  <td>Save</td>
-  <td>Save/load package</td>
-  <td><code>ZTSaveMode</code>, <code>ZTLoadMode</code>, <code>ZTSavedGame</code>, <code>.z2s</code> payload</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Save/load requests, alerts, selected map/scenario/profile fields, current game rows, and component-tree save payload boundaries are represented.</td>
-  <td>Recover <code>.z2s</code> container sections, versioning, member ordering, thumbnail handling, and per-component serialization scope.</td>
+  <td>Model assets</td>
+  <td>Source formats</td>
+  <td>Blue Fang models: <code>.bfb</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>BFB parses into <code>Zt2Model</code>, Bevy scene output, per-source mesh subassets, and material or BFMat handles.</td>
+  <td>Recover axis/orientation, material completeness, skinning, animation linkage, and remaining source semantics.</td>
 </tr>
 <tr>
-  <td>Photo</td>
-  <td>Albums and challenges</td>
-  <td><code>ZTPhotoManager</code>, <code>ZTPhotoChallengeMgr</code>, photo mode, parse trees, getters</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Photo albums, capture requests/results, subject bounds, challenge parse trees, analysis context, scoring thresholds, and events are modeled.</td>
-  <td>Recover camera capture integration, abstraction matching, challenge scoring, getter bindings, HTML export, and album UI effects.</td>
+  <td>Material assets</td>
+  <td>Source formats</td>
+  <td>Materials: <code>.bfmat</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Source material data parses and emits Bevy <code>StandardMaterial</code> output with texture dependencies and optional shader references.</td>
+  <td>Recover Direct3D material state, technique/pass mapping, render states, and exact shader specialization.</td>
 </tr>
 <tr>
-  <td>Renderer</td>
-  <td>Scene, models, materials, effects</td>
-  <td><code>BFRenderer</code>, <code>BFResourceMgr</code>, <code>BFSceneGraphComponent</code>, <code>BFR*</code>, Gamebryo/NIF/D3D surfaces</td>
-  <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Source render contracts, materials, NIF/BFB model records, environment documents, resource caches, and Bevy render projection exist.</td>
-  <td>Recover <code>.bfmat</code>/<code>.fx</code> parameter syntax, material slot binding, resource manager lifetimes, scene graph attachment, particles, and render-state semantics.</td>
+  <td>Shader assets</td>
+  <td>Source formats</td>
+  <td>Effects/shaders: <code>.fx</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Original FX source is preserved and emits Bevy <code>Shader</code> output through the current adapter path.</td>
+  <td>Translate FX techniques, passes, uniforms, render states, and material binding into Bevy-native shader/material pipelines.</td>
 </tr>
 <tr>
-  <td>Camera</td>
-  <td>Camera commands and views</td>
-  <td><code>ZTCameraCommandReader</code>, overhead/follow/rail/guest/first-person camera state</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Camera command states, camera events, active commands, rail/follow/user camera data, and startup/mode camera sources are represented.</td>
-  <td>Recover camera curves, constraints, frustum math, first-person coupling, output command states, and <code>ZT_CAMERA_*</code> effects.</td>
+  <td>Terrain assets</td>
+  <td>Source formats</td>
+  <td>Terrain source: <code>.dat</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Terrain data parses into <code>BFTerrainDataSource</code>, terrain mesh output, and recovered bounds.</td>
+  <td>Recover terrain materials, splat/biome layers, water interaction, chunking, and runtime terrain systems.</td>
+</tr>
+<tr>
+  <td>Animation assets</td>
+  <td>Source formats</td>
+  <td>Animation clips: <code>.bf</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Blue Fang animation clips parse and emit Bevy <code>AnimationClip</code> handles with recovered duration.</td>
+  <td>Translate curves/channels and bind clips to model skeletons.</td>
+</tr>
+<tr>
+  <td>Animation assets</td>
+  <td>Source formats</td>
+  <td>Animation graphs: <code>.bfm</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Animation graphs parse and emit Bevy animation graph output with referenced clip handles.</td>
+  <td>Recover original graph semantics, model/skeleton association, and playback integration.</td>
+</tr>
+<tr>
+  <td>Animation assets</td>
+  <td>Source formats</td>
+  <td>Biped animation metadata: <code>.bip</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>BIP metadata parses and retains a placeholder Bevy animation output.</td>
+  <td>Recover channels, retargeting, and skeleton binding.</td>
+</tr>
+<tr>
+  <td>Audio assets</td>
+  <td>Source formats</td>
+  <td>GPK audio streams: <code>.gpk</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Recovered GPK stream metadata parses and retains a custom sound-clip asset.</td>
+  <td>Decode to playable Bevy/Kira audio or another native streaming source.</td>
+</tr>
+<tr>
+  <td>Audio assets</td>
+  <td>Source formats</td>
+  <td>Archive audio: <code>.wav</code>, <code>.mp3</code> plus supported <code>.ogg</code></td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Mounted archives contain <code>.wav</code> and <code>.mp3</code>; Kira also supports <code>.ogg</code>; supported audio files are requested as <code>AudioSource</code> handles through the runtime sound path.</td>
+  <td>Confirm exact source references and playback events as sound systems are recovered.</td>
 </tr>
 <tr>
   <td>Audio</td>
-  <td>Sound, music, ambients</td>
-  <td><code>BFSoundMgr</code>, <code>BFSoundStageMgr</code>, <code>ZTWorldSndMgr</code>, sound tags, ambient docs</td>
+  <td>Source formats</td>
+  <td>Sound tags and ambient documents</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Sound-tag and ambient source documents load as policy records for playback selection.</td>
+  <td>Recover tag variants, aliases, random policy, distance policy, stages, categories, ducking, and cross-fades.</td>
+</tr>
+<tr>
+  <td>Source documents</td>
+  <td>Source formats</td>
+  <td>XML-like authored data: <code>.xml</code>, <code>.maxml</code>, <code>.zt2</code>, <code>.xdr</code>, <code>.old</code>, <code>.trk</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Source-preserving <code>DataDocument</code> assets feed the owning runtime systems.</td>
+  <td>Assign each document family to its consuming domain and add schema-specific hydration where needed.</td>
+</tr>
+<tr>
+  <td>AI</td>
+  <td>Source formats</td>
+  <td>AI task and behavior documents: <code>.tsk</code>, <code>.beh</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Task/behavior source documents parse and hydrate current task-catalog records where recovered.</td>
+  <td>Execute task and behavior data through Bevy AI/runtime systems.</td>
+</tr>
+<tr>
+  <td>Locale</td>
+  <td>Source formats</td>
+  <td>Localization source: <code>.txtkeys</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Localization source documents parse for locale lookup and text projection.</td>
+  <td>Complete runtime lookup integration and formatting coverage.</td>
+</tr>
+<tr>
+  <td>Scripting</td>
+  <td>Source formats</td>
+  <td>Lua script source: <code>.lua</code></td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Lua source is preserved as assets and compiles through the Lua substrate where requested.</td>
+  <td>Add runtime package/cache loading, bindings, marshalling, and error semantics.</td>
+</tr>
+<tr>
+  <td>Scripting</td>
+  <td>Source formats</td>
+  <td>Compiled script/scenario payloads: <code>.bin</code> and LOP/VINCE payloads</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Sound manager/stage config, sound tags, ambient allowed/biome/sound docs, factories, main-menu music, and sound events are modeled.</td>
-  <td>Bind <code>BFSND_*</code> commands to playback, recover tag variants/aliases, random/distance policy, categories, ducking, cross-fades, and world sound timing.</td>
+  <td><code>.bin</code> payload bytes are preserved; LOP and VINCE remain recovered command/payload surfaces rather than mounted archive extensions.</td>
+  <td>Decode bytecode/object semantics and route recovered payloads through scenario/script runtime.</td>
+</tr>
+<tr>
+  <td>Source support</td>
+  <td>Source formats</td>
+  <td>Text and metadata wrappers: <code>.bat</code>, <code>.corelog</code>, <code>.h</code>, <code>.kfinfo</code>, <code>.kfm</code>, <code>.txt</code></td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Authored text or metadata is preserved for files without recovered runtime semantics.</td>
+  <td>Add structured loaders only when a runtime consumer requires structure.</td>
+</tr>
+<tr>
+  <td>Particle assets</td>
+  <td>Source formats</td>
+  <td>Loose particle source: <code>.psys</code></td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>The shipped loose <code>particle/</code> tree contains <code>.psys</code> files; no current asset loader or runtime particle owner hydrates them.</td>
+  <td>Add a particle-system source loader, classify the loose-file boundary, and target Bevy particle/simulation output.</td>
+</tr>
+<tr>
+  <td>Source support</td>
+  <td>Source formats</td>
+  <td>Raw and marker inputs: extensionless entries and <code>.psd</code></td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>PSD bytes have a raw asset owner, and extensionless archive marker entries are counted in the Z2F manifest while their runtime meaning remains open.</td>
+  <td>Classify marker semantics and decode PSD only when a recovered source reference needs it.</td>
+</tr>
+<tr>
+  <td>Save</td>
+  <td>Source formats</td>
+  <td>Save/package containers: <code>.z2s</code> and <code>.zip</code></td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>The Z2F classifier recognizes save/package containers, and save/load modes own persisted game data recovery.</td>
+  <td>Recover <code>.z2s</code> sections, ordering, versions, member boundaries, and any <code>.zip</code> package behavior from save/profile evidence.</td>
+</tr>
+<tr>
+  <td>App</td>
+  <td>App shell</td>
+  <td>Boot and plugin wiring</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>The executable runtime builds from Bevy plugins, windows, task pools, archives, loaders, and startup systems.</td>
+  <td>Recover original manager/load-listener order.</td>
+</tr>
+<tr>
+  <td>App</td>
+  <td>Startup hydration</td>
+  <td>Startup documents and runtime publication</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td><code>StartupRuntimeResources</code> publishes the current app, UI, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy.</td>
+  <td>Recover original manager/load-listener order and replace seeded defaults with source-backed initialization where evidence exists.</td>
+</tr>
+<tr>
+  <td>UI</td>
+  <td>UI runtime</td>
+  <td>Authored UI tree projection</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Bevy UI entities spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
+  <td>Implement widget families one at a time.</td>
+</tr>
+<tr>
+  <td>UI</td>
+  <td>UI runtime</td>
+  <td>UI messages and value handlers</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Source-authored UI events, typed payloads, value commands, and selected panel handlers are preserved in the runtime message/value surfaces.</td>
+  <td>Bind side effects to owning managers panel by panel.</td>
+</tr>
+<tr>
+  <td>UI</td>
+  <td>UI runtime</td>
+  <td>Widget behavior</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Native hit-test, focus, edit validation, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
+  <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, and font/text callsites.</td>
+</tr>
+<tr>
+  <td>Menu</td>
+  <td>Menu flow</td>
+  <td>Title, splash, main menu, profile/campaign selection</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Source layouts and the current app/menu runtime drive splash and main-menu surfaces, profile/campaign records, and selected shell transitions.</td>
+  <td>Recover <code>ZT_SPLASH_CLOSED</code>, <code>ZT_SETMODE</code>, <code>ZT_LOADGAME</code>, and menu event ordering.</td>
+</tr>
+<tr>
+  <td>Location</td>
+  <td>Location registry</td>
+  <td>World locations, biomes, coordinates, and globe dots</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td><code>ZTLocationMgr</code>, location-entry documents, biome/location hierarchy, coordinates, icons, and menu globe-dot projection hydrate from source records.</td>
+  <td>Recover location resolution against saved/world entity state and map/campaign launch effects.</td>
+</tr>
+<tr>
+  <td>Modes</td>
+  <td>Shell modes</td>
+  <td>General mode manager and shell mode stack</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Source mode records, hotkeys, event blocks, stack, requests, and active mode state are stored.</td>
+  <td>Recover per-mode input, tick, and message handlers.</td>
+</tr>
+<tr>
+  <td>Modes</td>
+  <td>Tool modes</td>
+  <td>Selection, delete, overview, guest-view modes</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Entity selection, delete confirmation, overview filtering, and guest-view camera/tool state are represented in mode records and Bevy runtime state.</td>
+  <td>Bind modes against live ECS entity/world state.</td>
+</tr>
+<tr>
+  <td>Modes</td>
+  <td>Tool modes</td>
+  <td>First-person, training, fossil, cloning, tranquilize modes</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>First-person action tools, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in mode records and Bevy runtime state.</td>
+  <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
+</tr>
+<tr>
+  <td>Puzzle</td>
+  <td>Puzzle mode</td>
+  <td>Puzzle manager, steps, mode requests, and actions</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTPuzzleMgr</code>, <code>ZTPuzzle</code>, <code>ZTPuzzleStep</code>, puzzle-mode requests, and solved/action runtime state are represented.</td>
+  <td>Recover puzzle XML layout/step parsing, completion conditions, camera coupling, and reward/exit side effects.</td>
+</tr>
+<tr>
+  <td>Modes</td>
+  <td>File/options modes</td>
+  <td>File, load, save, download, options, graphics modes</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Original mode records and UI messages represent file rows, save/load alerts, downloads, options snapshots, and graphics/audio settings.</td>
+  <td>Recover file/mode handlers, profile writes, network completions, and <code>.z2s</code> integration.</td>
+</tr>
+<tr>
+  <td>Web</td>
+  <td>Web/downloads/MOTD</td>
+  <td>Online index, downloads, update prompts, and MOTD</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTWeb*</code> command records, request/completion events, MOTD source records, download-mode state, and Bevy web command/request queues are represented.</td>
+  <td>Bind original web/download messages to host fetch policy, local file writes, UI list updates, cancellation, and completion events.</td>
+</tr>
+<tr>
+  <td>Entity</td>
+  <td>Entity model</td>
+  <td>Entity/component catalog</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Entity definitions, shared/instance nodes, component refs, authored events, and binder subtrees hydrate from source.</td>
+  <td>Recover component readers by binder family.</td>
+</tr>
+<tr>
+  <td>Entity</td>
+  <td>Entity model</td>
+  <td>Loaded-world ECS bootstrap</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the recovered surfaces.</td>
+  <td>Complete one <code>BFGEntity</code> instance path through source load, ECS components, runtime mutation, AI, selection, and render projection.</td>
+</tr>
+<tr>
+  <td>Entity</td>
+  <td>Entity model</td>
+  <td>Component factories and validation</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Recovered component sets instantiate through original type/factory contracts.</td>
+  <td>Recover factory callsites and representative binder families.</td>
+</tr>
+<tr>
+  <td>Entity</td>
+  <td>Triggered events</td>
+  <td>Entity and time-trigger components</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFGEntityTriggerMgr</code>, <code>BFGEntityTriggerRule</code>, <code>BFTriggeredEventsComponent</code>, <code>BFTimeTriggersComponent</code>, and <code>ZTTriggeredEventsComponent</code> records are represented, and selected trigger records dispatch through the world event queue.</td>
+  <td>Recover trigger condition evaluation, time scheduling, on/off message ordering, and entity payload semantics.</td>
+</tr>
+<tr>
+  <td>Entity</td>
+  <td>Interaction affordances</td>
+  <td>Usage objects</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTUsageObject</code> source/runtime state and super-staff usage-object selection are represented as interaction targets.</td>
+  <td>Recover usage-object discovery, activation/deactivation rules, user prompts, and owning behavior side effects.</td>
+</tr>
+<tr>
+  <td>Animal</td>
+  <td>Animal model</td>
+  <td>Animal type definitions</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state are represented.</td>
+  <td>Hydrate one species family from binder plus AI/entity data.</td>
+</tr>
+<tr>
+  <td>Animal</td>
+  <td>Animal model</td>
+  <td>Lifecycle and breeding</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Birth, pregnancy, offspring selection, family tree effects, and status flag reads remain recovery surfaces.</td>
+  <td>Recover lifecycle callsites and component-to-status readers.</td>
+</tr>
+<tr>
+  <td>Animal</td>
+  <td>Animal model</td>
+  <td>Adoption and release</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Adoption slots, rarity, decline/adopt/release side effects, crate state, conservation rewards, and panel refresh remain recovery surfaces.</td>
+  <td>Recover <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and panel handlers.</td>
+</tr>
+<tr>
+  <td>Animal</td>
+  <td>Rampage and recovery</td>
+  <td>Escaped-animal rampage and dino recovery</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFGRampageMgr</code>, rampage config/events/suppression records, sound policy, and <code>ZTDinoRecoveryTarget</code> runtime state are represented.</td>
+  <td>Recover rampage scoring/cadence, DRT timing, suppression lifetime, recovery-team dispatch, crate routing, and sound/message effects.</td>
+</tr>
+<tr>
+  <td>Animal</td>
+  <td>Behavior slice</td>
+  <td>Species behavior slice</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>One species must connect through source definition, AI task/behavior, locomotion, animation, sound, and needs.</td>
+  <td>Implement a vertical behavior pack from one representative species family.</td>
+</tr>
+<tr>
+  <td>Entity info</td>
+  <td>Selection/UI</td>
+  <td>Entity selection and info panels</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Selected entity state, action controls, needs/training/inventory/family/donation rows, and source panel bindings project through UI.</td>
+  <td>Add animal value bindings and action side effects.</td>
+</tr>
+<tr>
+  <td>Donation</td>
+  <td>Selection/UI</td>
+  <td>Donation panel rows</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>By-species summaries and donation-box rows build from Bevy-owned donation runtime slices while domain keeps source-shaped panel templates.</td>
+  <td>Recover score-only/range donation production, exact amount formula, economy commit, and feedback timing.</td>
+</tr>
+<tr>
+  <td>Catalog</td>
+  <td>Catalog/UI</td>
+  <td>Type lists, buy info, filters, and purchase rows</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Source-authored type lists, buy info, filters, and purchase rows populate from recovered records.</td>
+  <td>Recover catalog paging, filtering, purchase row selection, and placement handoff semantics.</td>
+</tr>
+<tr>
+  <td>Zoopedia</td>
+  <td>Zoopedia</td>
+  <td>TOC, entries, pages, and navigation</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTZoopediaComponent</code>, <code>ZTZoopediaTOC</code>, TOC entries, article entries, pages, navigation directions, and page-open state are represented.</td>
+  <td>Recover TOC population, page loading, back/forward history, entity/catalog entry links, and UI navigation handlers.</td>
+</tr>
+<tr>
+  <td>Terrain</td>
+  <td>Terrain</td>
+  <td>Heightfield, biome, water, autoplacement</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Terrain grid, biome definitions, water edits, brushes, maps, mesh patches, and autoplacement rules are stored.</td>
+  <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit algorithms.</td>
+</tr>
+<tr>
+  <td>Terrain</td>
+  <td>Terrain projection</td>
+  <td>Bevy terrain projection</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
+  <td>Feed recovered terrain/world data into mesh/material/entity projection.</td>
+</tr>
+<tr>
+  <td>Placement</td>
+  <td>Placement</td>
+  <td>Validation, preview, commit, transactions, undo</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Footprints, affordability, research, slope, headroom, traversability, cursor preview, commit effects, and undo remain recovery surfaces.</td>
+  <td>Trace <code>ZT_SETPLACEMENT*</code>, <code>ZT_PLACEOBJECT</code>, <code>BFG_PLACE_ENTITY</code>, and result tokens.</td>
+</tr>
+<tr>
+  <td>Path</td>
+  <td>Paths</td>
+  <td>Paths and elevated supports</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Ground/elevated path records, placement commands, support state, curb mode, and connectivity are represented.</td>
+  <td>Recover path placement modes and <code>BFGElevatedSupportTracker</code>.</td>
+</tr>
+<tr>
+  <td>Fence</td>
+  <td>Fences</td>
+  <td>Fences, gates, portals</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Fence types, segments, gates, tank portals, topology events, health, sale/delete, and mode state are represented.</td>
+  <td>Implement <code>ZTFenceMode</code> command decisions against placement grid.</td>
+</tr>
+<tr>
+  <td>Tank</td>
+  <td>Tanks</td>
+  <td>Aquatic construction</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Tank topology, walls, gates, portals, supports, links, water volume, cleanliness, and commands are represented.</td>
+  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, and gate behavior.</td>
+</tr>
+<tr>
+  <td>Transport</td>
+  <td>Transport</td>
+  <td>Transport rides</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Circuits, tracks, stations, vehicles, crossings, tour recorder, route queries, and commands are represented.</td>
+  <td>Recover <code>ZTTransportationMgr</code> and <code>ZTBehVehicle*</code>/route behaviors.</td>
+</tr>
+<tr>
+  <td>World</td>
+  <td>Traversability/pathfinding</td>
+  <td>Collision, traversability, pathfinding, ground-fit</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><code>BFGWorldRuntime</code> records collision data, traversable areas, changed-triangle queues, invalidation, path/collision tests, and fitting surface/contact inputs while exact algorithms remain open.</td>
+  <td>Recover <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, and ground-fit callsites.</td>
+</tr>
+<tr>
+  <td>AI</td>
+  <td>AI source</td>
+  <td>Task templates and behavior documents</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, and behavior sets hydrate from source.</td>
+  <td>Hydrate one task document end to end, instantiate <code>BFAITaskRoot</code>, and advance it through <code>BFAIMgr</code>.</td>
+</tr>
+<tr>
+  <td>AI</td>
+  <td>AI runtime</td>
+  <td>Scoring, thinker scheduler, tokens</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects remain recovery surfaces.</td>
+  <td>Recover <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
+</tr>
+<tr>
+  <td>AI</td>
+  <td>Relationships</td>
+  <td>AI relationship manager and records</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFAIRelationshipMgr</code>, relationship records, and relationship events are represented in the AI runtime.</td>
+  <td>Recover relationship type taxonomy, score mutation rules, event callers, and downstream behavior/feedback effects.</td>
+</tr>
+<tr>
+  <td>Behavior</td>
+  <td>Behaviors</td>
+  <td>Behavior verbs</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Movement, docking, animation, events, scripts, feedback, gates, rides, tours, views, cure, dig, morph, and splash verbs are represented.</td>
+  <td>Implement one verb family from XML read through side effect.</td>
+</tr>
+<tr>
+  <td>Movement</td>
+  <td>Movement</td>
+  <td>Steering and locomotion</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Steering components, movement arbitration, obstacle/entity avoidance, and animation realization remain recovery surfaces.</td>
+  <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
+</tr>
+<tr>
+  <td>Influence</td>
+  <td>Influence fields</td>
+  <td>Influence manager, components, terrain rules, and AI watchers</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFGInfluenceMgr</code>, influence context config, terrain rules/effects, <code>BFGInfluenceComponent</code>, and <code>ZTAI*InfluenceWatcher</code> records are represented.</td>
+  <td>Recover influence-field propagation, falloff math, watcher dispatch, AI consumption, and terrain/entity coupling.</td>
+</tr>
+<tr>
+  <td>Guest</td>
+  <td>Guests</td>
+  <td>Needs, satisfaction, movement, lifecycle</td>
+  <td><span class="plan-status plan-status-map">map</span></td>
+  <td>Live guest need/path/spending/group state belongs in Bevy components/resources.</td>
+  <td>Recover <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
+</tr>
+<tr>
+  <td>Guest</td>
+  <td>Guests</td>
+  <td>Viewing and donation candidates</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Per-guest viewed-species memory, donation candidates, pruning, viewpoint filters, education values, feedback gates, and view/donate score factors are Bevy runtime state.</td>
+  <td>Recover donation orchestration and <code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> execution.</td>
+</tr>
+<tr>
+  <td>Guest</td>
+  <td>Guests</td>
+  <td>Education donation execution</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Source parse and range lookup exist for <code>edDonate</code> and education donation values.</td>
+  <td>Recover candidate generation, target selection, box routing, economy effects, feedback publication, and spend timing.</td>
+</tr>
+<tr>
+  <td>Staff</td>
+  <td>Staff</td>
+  <td>Jobs and assignment UI</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Staff requests, roles, candidates, job queues, assignments, trainers, clean-tank/water-filter actions, hire/fire, and lifecycle state are represented in Bevy staff runtime owners.</td>
+  <td>Recover keeper assignment payloads and one staff role lifecycle.</td>
+</tr>
+<tr>
+  <td>Staff</td>
+  <td>Keeper care</td>
+  <td>Keeper role, keeper-panel tasks, and animal care links</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>StaffRole::Keeper</code>, <code>UseForKeeperPanel</code> task flags, animal <code>s_KeeperEatType</code>/<code>s_KeeperDrinkType</code> fields, keeper recommendations, and staff request/assignment records are represented.</td>
+  <td>Recover keeper task selection, feeding/drinking object resolution, panel recommendations, job completion, and animal status effects.</td>
+</tr>
+<tr>
+  <td>Show</td>
+  <td>Shows</td>
+  <td>Shows and trick training</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Show scheduler, states, songs, score bands, tricks, targets, mixer/timer UI, and reward/feedback flow are represented.</td>
+  <td>Recover show scheduler and one trick execution path.</td>
+</tr>
+<tr>
+  <td>Tour</td>
+  <td>Tours</td>
+  <td>Tours and viewable objects</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Tour taker data, recorder waypoints, station view sets, viewable object managers, and tour star rating are represented.</td>
+  <td>Recover <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, and star-rating queries.</td>
+</tr>
+<tr>
+  <td>Gesture</td>
+  <td>Gestures</td>
+  <td>Gesture recognition and minigames</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Gesture definitions, traces, recognizer, spline editor, projection frames, event textures, and score bands are represented.</td>
+  <td>Recover <code>ZTGestureMgr</code> and gesture trace component callsites.</td>
+</tr>
+<tr>
+  <td>Feedback</td>
+  <td>Feedback</td>
+  <td>AI/show feedback routing</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Feedback manager configs load into Bevy runtime owners while domain keeps source feedback values and tokens.</td>
+  <td>Recover watch-show score calculation, selected behavior-set dispatch, feedback/thought/emoticon routing, sound dispatch, task scheduling, and reservations.</td>
+</tr>
+<tr>
+  <td>Economy</td>
+  <td>Economy</td>
+  <td>Cash and admission price</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, and selected immediate transaction commits run from recovered records.</td>
+  <td>Recover live transaction callers, countdown timing, aggregate/parent-cost paths.</td>
+</tr>
+<tr>
+  <td>Economy</td>
+  <td>Economy</td>
+  <td>Economy components and cost factors</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Economy components, context configs, transaction configs, cost factors, frequencies, periods, and user-count transactions hydrate from source.</td>
+  <td>Execute one authored component transaction on live entities.</td>
+</tr>
+<tr>
+  <td>Economy</td>
+  <td>Economy</td>
+  <td>Runtime status and price selections</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Loaded zoo status values, zoo-open transitions, admission selection, and non-admission price selection state live in Bevy runtime owners.</td>
+  <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics and status forwarding effects.</td>
+</tr>
+<tr>
+  <td>Donation</td>
+  <td>Donations</td>
+  <td>Donation boxes and guest spending</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Donation totals, buckets, box state, contribution history, donation-box rows, and selected economy handoff surfaces are recorded.</td>
+  <td>Recover candidate scoring, box routing, and contribution handlers.</td>
+</tr>
+<tr>
+  <td>Donation</td>
+  <td>Donations</td>
+  <td>Donation scoring formula</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Recovered source factors stay separate from guessed arithmetic until the native formula is known.</td>
+  <td>Recover exact animal donation scoring before runtime execution.</td>
+</tr>
+<tr>
+  <td>Fame</td>
+  <td>Fame</td>
+  <td>Fame and zoo rating</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain recovery surfaces.</td>
+  <td>Recover <code>ZTFameData</code> update and value-handler callsites.</td>
+</tr>
+<tr>
+  <td>Research</td>
+  <td>Research</td>
+  <td>Research and unlocks</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Research items/buttons, source-state flags, costs, timers, unlock state, feedback messages, and selected placement/research UI paths run through Bevy <code>ResearchRuntime</code>.</td>
+  <td>Recover dependency consumers, remaining placement gates, and catalog behavior.</td>
+</tr>
+<tr>
+  <td>Disease</td>
+  <td>Disease</td>
+  <td>Disease and cure mode</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions are represented.</td>
+  <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code>, and <code>ZTCureDiseaseMode</code>.</td>
+</tr>
+<tr>
+  <td>Status</td>
+  <td>Zoo status and predicates</td>
+  <td>Status aggregate, zoo messages, and predicates</td>
+  <td><span class="plan-status plan-status-map">map</span></td>
+  <td><code>ZTStatus</code>, zoo message data, predicate-driven eligibility, status UI values, and status forwarding are represented across managers.</td>
+  <td>Inventory <code>ZTStatus</code>, <code>ZTPredicate</code>, status UI tokens, and status update callers.</td>
+</tr>
+<tr>
+  <td>Status</td>
+  <td>Awards</td>
+  <td>Award manager and award panel</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTAwardMgr</code>, award context config, award records, persistent awards, and award-panel rows are represented.</td>
+  <td>Recover award criteria, grant timing, persistence, feedback coupling, and panel refresh effects.</td>
+</tr>
+<tr>
+  <td>Status</td>
+  <td>Zoo survey</td>
+  <td>Zoo survey component, questions, answers, and adjustments</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTZooSurveyComponent</code>, survey questions/answers, and world survey-adjustment records are represented.</td>
+  <td>Recover survey population, adjustment formulas, answer persistence, and UI value/message handlers.</td>
+</tr>
+<tr>
+  <td>Scenario</td>
+  <td>Scenario</td>
+  <td>Rule tree, campaign, tutorial, challenges</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Scenario groups, rules, tests, actions, objectives, challenge state, campaign progression, and map selection launch effects are represented.</td>
+  <td>Recover <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
+</tr>
+<tr>
+  <td>Scripting</td>
+  <td>Scripting</td>
+  <td>BFS API</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFS_*</code> command records, argument surfaces, response tokens, and selected script request effects are preserved.</td>
+  <td>Classify <code>BFS_*</code> commands by family and manager, then bind side effects to owning runtimes.</td>
+</tr>
+<tr>
+  <td>Scripting</td>
+  <td>Scripting</td>
+  <td>Lua execution</td>
+  <td><span class="plan-status plan-status-adapter">adapter</span></td>
+  <td>Lua 5.1 adapter state, compatibility prelude, cache records, and function-call response surfaces exist.</td>
+  <td>Implement runtime bindings, package/cache behavior, and error semantics.</td>
+</tr>
+<tr>
+  <td>Scripting</td>
+  <td>Scripting</td>
+  <td>Compiled scenario and VINCE payloads</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><code>.bin</code> payload bytes plus LOP, Vince, and telemetry command payloads remain decode targets.</td>
+  <td>Decode compiled scenario assets and <code>BFS_PROCESS_VINCE</code>.</td>
+</tr>
+<tr>
+  <td>Profile</td>
+  <td>Persistence</td>
+  <td>Profile/options persistence</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Graphics, audio, user settings, profile commands, safe graphics state, registry/path behavior, and options-file values load or record through recovered records.</td>
+  <td>Recover <code>BFUserProfileMgr</code> directory resolution and write order.</td>
+</tr>
+<tr>
+  <td>Save</td>
+  <td>Persistence</td>
+  <td>Save/load package format</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure.</td>
+  <td>Recover <code>.z2s</code> container structure and per-component <code>write_xml_node</code> scope.</td>
+</tr>
+<tr>
+  <td>Photo</td>
+  <td>Photos</td>
+  <td>Photo albums and camera</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Capture requests/results, albums, photo info, subject bounds, UI tokens, move/delete/enlarge/shrink, and HTML export are represented.</td>
+  <td>Recover Bevy camera/render capture and HTML export side effects for <code>ZTPhotoManager</code>.</td>
+</tr>
+<tr>
+  <td>Photo</td>
+  <td>Photos</td>
+  <td>Photo challenges</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, and results are represented.</td>
+  <td>Recover <code>ZTPA*</code> getter bindings and scoring.</td>
+</tr>
+<tr>
+  <td>Undo</td>
+  <td>Undo system</td>
+  <td>Undo managers, transactions, actions, and stations</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, event roots, transactions, actions, and station-return records are represented in Bevy <code>UndoRuntime</code>.</td>
+  <td>Recover transaction capture, action payload schemas, reversal ordering, station returns, and integration with placement/terrain/show/delete commands.</td>
+</tr>
+<tr>
+  <td>Renderer</td>
+  <td>Renderer backend</td>
+  <td>Gamebryo/NetImmerse and D3D replacement</td>
+  <td><span class="plan-status plan-status-adapter">adapter</span></td>
+  <td>Source-visible render records are preserved while Bevy owns modern render execution.</td>
+  <td>Honor <code>BFSceneGraphComponent</code>, <code>BFAnim*</code>, <code>BFSpriteMgr</code>, material, and texture contracts.</td>
+</tr>
+<tr>
+  <td>Renderer</td>
+  <td>Renderer bridge</td>
+  <td>Bevy render bridge</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>ECS transforms, terrain/world data, and asset handles feed Bevy render/UI/audio presentation.</td>
+  <td>Consume Bevy model/material/image handles from extension loaders.</td>
+</tr>
+<tr>
+  <td>Scene graph</td>
+  <td>Scene graph</td>
+  <td>Actor, camera, decal, LOD, resource caches</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Original scene graph and actor component inputs are recorded, and selected model/document paths project into Bevy resources.</td>
+  <td>Implement one visible entity projection from <code>BFSceneGraphComponent</code>.</td>
+</tr>
+<tr>
+  <td>Materials</td>
+  <td>Materials/effects</td>
+  <td>Materials, effects, particles</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><code>.bfmat</code>/<code>.fx</code> records, particle dictionaries, selectors, render states, emitters, and params are represented while exact slot binding remains recovery work.</td>
+  <td>Recover parsers and slot binding.</td>
+</tr>
+<tr>
+  <td>Animation</td>
+  <td>Animation</td>
+  <td>Animation controllers, graphs, requests</td>
+  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records.</td>
+  <td>Recover <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key callsites.</td>
+</tr>
+<tr>
+  <td>Camera</td>
+  <td>Camera</td>
+  <td>Camera commands and projection</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Overhead, first-person, follow, rail, guest-view, frustum, output states, and selected <code>ZT_CAMERA_*</code> command surfaces are recorded in Bevy.</td>
+  <td>Recover curves, timing, coupling, and projection math.</td>
+</tr>
+<tr>
+  <td>Camera</td>
+  <td>Vistas</td>
+  <td>Vista camera targets and activation requests</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td><code>ZTVista</code> records and activation requests preserve authored camera position, look-at, and preview-image data.</td>
+  <td>Recover vista source loading, activation messages, interpolation, and UI/renderer projection effects.</td>
+</tr>
+<tr>
+  <td>UI rendering</td>
+  <td>UI rendering</td>
+  <td>Sprite/text rendering</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Source UI renders through Bevy with recorded sprite manager, font, text buffer, rich text, hitmask, and visual-state contracts.</td>
+  <td>Recover <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior.</td>
+</tr>
+<tr>
+  <td>Audio</td>
+  <td>Audio</td>
+  <td>Audio playback and ambients</td>
+  <td><span class="plan-status plan-status-recorded">recorded</span></td>
+  <td>Sound manager, stages, categories, tags, ambient docs, water sound stages, requests, 3D attachment, ducking, and cross-fades are represented.</td>
+  <td>Implement <code>BFSND_*</code> and sound-tag selection through audio backend.</td>
+</tr>
+<tr>
+  <td>Host adapters</td>
+  <td>Host presentation</td>
+  <td>Window, input, cursor, IME</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Host pointer, keyboard, focus, cursor, window, and IME events translate into original UI/game messages.</td>
+  <td>Map <code>BFWindowComponent</code>, <code>UIKeyboardEvent</code>, <code>UIMouseEvent</code>, and IME records.</td>
+</tr>
+</tbody>
+</table>
+<h2>Host-Provided Runtime Mechanics</h2>
+<p>These mechanics are not reimplemented as original engine subsystems. OpenZT2
+keeps the original native records, messages, source contracts, and state
+transitions at the boundary, then projects them into idiomatic Bevy/runtime
+backends.</p>
+<table>
+<thead>
+<tr>
+  <th>Host-provided mechanic</th>
+  <th>Provider</th>
+  <th>OpenZT2 responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Audio mixing, voice allocation, streaming, and backend device output</td>
+  <td>Kira and Bevy audio integration</td>
+  <td>Emit <code>BFSND_*</code>, sound-tag, ambient, stage, category, ducking, and attachment records into playback requests.</td>
+</tr>
+<tr>
+  <td>GPU device management, D3D driver behavior, swapchain, and render scheduling</td>
+  <td>Bevy/wgpu</td>
+  <td>Emit recovered Gamebryo/NetImmerse scene graph, material, texture, shader, UI sprite/text, camera, and render-state records into Bevy render resources.</td>
+</tr>
+<tr>
+  <td>Window creation, OS input, cursor plumbing, IME, and focus events</td>
+  <td>Bevy window/input plus host OS APIs</td>
+  <td>Translate host events into original <code>BFWindowComponent</code>, <code>UIKeyboardEvent</code>, <code>UIMouseEvent</code>, cursor, focus, and IME message surfaces.</td>
+</tr>
+<tr>
+  <td>Lua VM internals and bytecode execution substrate</td>
+  <td><code>mlua</code> Lua 5.1 adapter</td>
+  <td>Preserve package/cache behavior, compatibility prelude, <code>BFS_*</code> bindings, marshalling, errors, and original script dispatch semantics.</td>
+</tr>
+<tr>
+  <td>Image/audio/container codec internals</td>
+  <td>Bevy asset loaders, Kira, and decoder crates</td>
+  <td>Preserve source paths and source-visible metadata, normalize legacy inputs where needed, and emit Bevy/Kira asset handles.</td>
+</tr>
+<tr>
+  <td>Network transport for web/download requests</td>
+  <td>Host networking adapter</td>
+  <td>Preserve <code>ZTWeb*</code>, download, MOTD, cancellation, and completion messages while delegating HTTP/file transfer mechanics.</td>
+</tr>
+<tr>
+  <td>Frame scheduling, task pools, and clock delivery</td>
+  <td>Bevy schedules/tasks/time</td>
+  <td>Preserve <code>BFTimeKeeper</code>, time event records, simulation tick/slow-tick surfaces, and manager update ordering once recovered.</td>
+</tr>
+<tr>
+  <td>Filesystem dialogs, directory enumeration, and platform profile roots</td>
+  <td>Host filesystem APIs</td>
+  <td>Preserve <code>BFUserProfileMgr</code>, save/load/download/screenshot roots, file rows, options writes, and profile command semantics.</td>
+</tr>
+<tr>
+  <td>Logging, diagnostics, performance collection, and OS device survey</td>
+  <td>Host logging, tracing, performance counters, and OS diagnostics</td>
+  <td>Preserve <code>BFLog</code>, <code>DxDiag</code>, <code>ZTPerformanceStatsDumpCommand</code>, debug feature gates, sprite-debug toggles, and perf/debug command records.</td>
 </tr>
 </tbody>
 </table>
 <h2>Expansion Rule</h2>
-<p>Add a row only when an original product concept needs an implementation owner:
-a manager, native class family, source file family with a consumer, state
-transition, message handler group, formula, persisted surface, or adapter
-boundary. Attach unresolved methods, globals, payloads, functions, and formulae
-to that owning row. If the owner is unclear, leave the fact in the byte map or
+<p>Add or split a row when evidence gives a distinct owner: a manager, native class
+family, source file family with a consumer, state transition, message handler
+group, formula, persisted surface, evidence frontier, or adapter boundary.
+Attach unresolved methods, globals, payloads, functions, and formulae to that
+owning row. If the owner is unclear, leave the fact in the byte map or
 functional specification until source, code, or binary evidence gives it a home.</p>
 
 </main>
