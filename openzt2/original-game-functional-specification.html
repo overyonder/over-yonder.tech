@@ -285,10 +285,6 @@ resolve remain native-behavior unknowns.</li>
 <code>Subjects</code>/<code>Targets</code>/<code>Objects</code> and sibling attachment for
 <code>BFAIEvalData</code>/<code>BFBehExecTask</code>/<code>BFAICompletionData</code> are runtime behaviors
 owned by the AI section.</li>
-<li>The <code>UI XML Source Object</code> is authored data with defined keys (<code>UIRegion</code>,
-<code>UIAspect</code>, <code>UIState</code>, <code>ui/template*</code> paths, loc ids, event blocks); the native
-widget-tree construction and ordered message emission belong to the UI Runtime
-section (<code>class-checked</code>: messages are interned tokens).</li>
 <li>The full <code>BFAIEntityDataShared</code> shared schema (descriptor-table entry shape per
 field group) is not enumerated.</li>
 </ul>
@@ -620,9 +616,9 @@ reconstructed; only the message set and inheritance are established.</li>
   class ZTShellModeTransition { +previous; +current; +previous_path; +current_path; +changed; +cursor; +layout_guis; +active_hotkeys; +off_events; +on_events }
   class ZTModeRecord { +class_name; +name; +attributes; +layout_guis; +hotkeys; +inline_hotkeys; +on_events; +off_events; +event_blocks; +config_children; +children }
   class ZTModeConfigNode { +name; +attributes; +text; +children }
-  class ZTModeDescriptor { +type_name; +parent_type; +command_token; +vtable_range; +descriptor_range }
+  class ZTModeDescriptor { +type_name; +parent_type; +command_token; +vtable; +descriptor }
   class ZTModeClassRegistry { +zt_mode; +game; +main; +overhead; +overview; +first_person; +placement; +selection; +toolset; +delete; +download; +file; +load; +save }
-  class ZTModeTypeCache { +type_name; +cached_type_handle; +init_guard; +type_string_address }
+  class ZTModeTypeCache { +type_name; +cached_type_handle; +init_guard }
   class ZTModeUiBinding { +control_name; +layout_name; +value_message; +command_token }
   class ZTModeInputState { +cursor_name; +shift_pressed; +control_pressed; +screen_point; +world_point }
   ZTModeRecord "*" --> ZTModeConfigNode : config_children
@@ -662,7 +658,7 @@ reconstructed; only the message set and inheritance are established.</li>
   class ZTFirstPersonMode { +common; +carrying_avatar_token; +camera_set; +help_flags; +action_mode; +prompt_delay_seconds; +screen_dither; +keyboard_rotate_speed; +move_speed; +turn_speed; +center_mouse_on_hide; +native_state }
   class ZTFirstPersonModeNativeState { +mouse_look_active; +mouse_prompt_visible; +yaw; +pitch; +strafe; +forward; +transitions; +resource_updates; +movement_events; +camera_moved_messages }
   class ZTFPClimbLadderMode { +base; +ladder_entity; +direction; +time_per_meter; +target_platform; +native_state }
-  class ZTTrainingNativeUiBinding { +field; +lookup_name; +native_field_offset; +projection }
+  class ZTTrainingNativeUiBinding { +field; +lookup_name; +native_field; +projection }
   class ZTTrainingNativePresentation { +reset_message; +player_training_layout; +player_training_activate_message; +player_training_show_message; +player_training_master_listbox; +player_training_item_layout; +player_training_trick_button; +training_complete_trick_image_layout; +training_complete_trick_image; +training_locked_icon; +new_trick_border; +reward_message_control; +reward_message_show_message; +reward_message_hide_message }
   class ZTSuperStaffMode { +common; +staff_entity; +active_usage_object; +max_usage_object_distance; +usage_object_labels; +user_prompt }
   class ZTFPTrainingResultFeedbackAdvance { +crowd_cheer_token; +show_reward_message; +apply_reward; +cleanup_result_ui }
@@ -698,7 +694,7 @@ reconstructed; only the message set and inheritance are established.</li>
 <pre class="mermaid">classDiagram
   class ZTGfxOptionsModeSnapshot { +graphics; +audio; +vince; +selected_detail_level; +selected_detail_token; +custom_detail_active; +display_mode_dirty; +detail_settings_dirty; +sound_settings_dirty; +free_mouse_look; +use_low_mem_defaults; +native_float_controls; +selected_settings; +pending_value_writes }
   class ZTGfxOptionsNativeFloatControls { +sound_volume; +music_volume; +two_d_sound_fx_volume; +three_d_sound_fx_volume }
-  class ZTGfxOptionsFloatMessage { +control; +slider_widget; +value; +native_field_offset; +descriptor_global; +route }
+  class ZTGfxOptionsFloatMessage { +control; +slider_widget; +value; +native_field; +descriptor; +route }
   class ZTGfxOptionsAcceptance { +profile_writes; +safe_graphics_writes; +motd_enabled; +confirmation_message; +save_profile_options }
   class ZTGraphicsSafeMode { +fullscreen; +screen_width; +screen_height; +screen_depth }
   class ZTOptionsSelectedSetting { +token; +label_locid; +setting_widget; +preset_attribute; +selected_index; +locid; +values }
@@ -800,7 +796,7 @@ reconstructed.</li>
   ZTAnimal ..> BFGEntity : reads component state
   ZTAnimal ..> ZTAdoptionMgr : adoption
   ZTAnimal ..> ZTFavoriteAnimalMgr : favorites
-  ZTAnimalTypeDefinition ..> ZTAnimal : hydrate_runtime_animal_from_source_type</pre>
+  ZTAnimalTypeDefinition ..> ZTAnimal : hydrates animal runtime</pre>
 <p>Open: breeding/offspring rules, training learning deltas, and the
 component-to-status read for several flags.</p>
 <h3>Entity Consumers and Selection</h3>
@@ -1077,7 +1073,7 @@ and two thinkers (state-machine and task-selection); the game subclasses each.</
 <code>BFAITaskDocument</code>):</p>
 <pre class="mermaid">classDiagram
   class BFAITaskTemplate {
-    +evaluate() fixed-score subject-token subset
+    +evaluate() score candidates
     +instantiate() BFAITaskRoot
   }
   class BFAICreateData {
@@ -1118,7 +1114,7 @@ qualifiers (<code>BFAISubjectSelector</code> wraps a <code>BFAISelector</code> p
 scores candidates, <code>BFAITaskRoot</code> carries the active behavior execution, and
 <code>BFAIToken</code>/<code>BFAITokenList</code> reserve targets (<code>give_to</code>, <code>force</code>).</p>
 <p>Open: full evaluator/controller scoring, qualifier handling, tie-break and scheduling
-policy, behavior sequence advancement beyond the first behavior, and the actual
+policy, behavior sequence advancement, and the actual
 completion/failure side effects for mutations, feedback, follow-up behaviors, and
 <code>suppressFailureMessage</code>.</p>
 <h3>Behavior Layer</h3>
@@ -1347,7 +1343,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
   participant Select as map selection
   participant Play as Play Map button
   Context->>Eco: initialCash=10000
-  Eco->>Eco: finalize field +0x5c via active component slot +0x68, then clear field
+  Eco->>Eco: apply pending initial cash through the active economy component, then clear it
   Select->>Select: ZT_SET_STARTING_SCENARIO_CASH stores slider value only
   Play->>Eco: ZT_LOADGAME
   Play->>Eco: ZT_CACHE_MAPDATA
@@ -1373,10 +1369,10 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
 <pre class="mermaid">sequenceDiagram
   participant Tx as spend/receive dispatcher
   participant Helper as guarded ref-counted helper
-  participant Receiver as vtable_008e0d30 receiver
+  participant Receiver as status/list receiver
   participant UI as undo UI target
   Tx->>Helper: forward transaction/status payload after evaluation
-  Helper->>Receiver: vtable slot +0x54
+  Helper->>Receiver: deliver forwarded payload
   Receiver->>Receiver: generic assignment/list forwarding
   Receiver->>UI: UI_ENABLE / UI_DISABLE from receiver state
   Note over Tx,UI: cash arithmetic and aggregation/commit occur elsewhere</pre>
@@ -1919,10 +1915,10 @@ autosave cadence are open.</li>
 </ul>
 <h2>Evidence Appendices</h2>
 <h3>Reference Boundaries</h3>
-<p>Registered-class rosters are byte/range evidence and stay in the byte-range map
-and Binary Perimeter. Relationship maps and reconstructed type references below
-preserve recovered class, type, and state relationships that the byte map does
-not encode as relationship facts.</p>
+<p>Complete registered-class rosters are byte/range evidence and stay in the
+byte-range map and Binary Perimeter. The appendices below preserve relationship
+maps, message-family counts, and a thin functional class roster that support the
+contract sections above.</p>
 <h3>Message Family Coverage</h3>
 <p>The full token list is byte/range evidence and stays in the byte-range map and
 Binary Perimeter. <code>UI_EVENT</code> is the UI event root; the <code>UI_</code> count below is the
@@ -2421,8 +2417,6 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   ZTModeHotKeyDocument "*" --> ZTModeHotKeyNode : nodes
   ZTModeHotKeyNode "*" --> UiHotKeyBinding : hotkeys</pre>
 <pre class="mermaid">classDiagram
-  ZTModeVTable "0..1" --> ZTModeAddressRange : table_range
-  ZTModeVTable "0..1" --> ZTModeAddressRange : descriptor_subtable
   ZTModeVTable "*" --> ZTModeVirtualSlot : virtual_slots
   ZTOptionsSettingDefinition "*" --> ZTOptionsSettingChoice : choices
   ZTOptionsSettingChoice "*" --> ZTOptionsTypedValue : values
@@ -3414,7 +3408,7 @@ specification stays organized by domain responsibility and runtime behavior.</p>
 <p>Thin registered subtypes/records (behaviour in base + message vocabulary), with parent:
 this roster is a functional appendix, not the complete 2,068-entry type registry
 or the full anonymous-vtable atlas. Complete byte/function/vtable evidence remains
-in the byte-range map and reconstruction TSVs.</p>
+in the byte-range map and perimeter TSVs.</p>
 <ul>
 <li><strong>&lt; (root)</strong>: <code>BFAIStateVarBaseType</code>, <code>BFColor</code>, <code>BFRect</code>, <code>getActiveSequenceName</code>, <code>getActiveSequenceTime</code>, <code>getBM</code>, <code>getCM</code>, <code>getCurrTask</code>, <code>getCurrentPlaySet</code>, <code>getDistFromCamera</code>, <code>getEDI</code>, <code>getFirstContainedEntity</code>, <code>getFirstInterestingEntity</code>, <code>getFirstInterestingEntity2</code>, <code>getFirstPhysObj</code>, <code>getID</code>, <code>getIsCrated</code>, <code>getIsDiseased</code>, <code>getIsElevatedShot</code>, <code>getIsInWater</code>, <code>getIsOnElevatedTile</code>, <code>getIsSuper</code>, <code>getIsUnderwaterShot</code>, <code>getNextContainedEntity</code>, <code>getNextInterestingEntity</code>, <code>getNextInterestingEntity2</code>, <code>getPAC</code>, <code>getPercentOfScreen</code>, <code>getPercentSeen</code>, <code>getPercentSeenInCenter</code>, <code>getPosition</code>, <code>getRotation</code>, <code>getSharedVar</code>, <code>getStateVar</code>, <code>getTaskTarget</code>, <code>getType</code>, <code>getVar</code>, <code>getVehicleShot</code>, <code>hasRelationship</code>, <code>isKindOf</code>, <code>isPlaySetInContext</code>, <code>localize</code>, <code>testRelationship</code></li>
 <li><strong>&lt; BFComponent</strong>: <code>BFAITrickMgrData</code>, <code>BFAIUnhideComponent</code>, <code>BFBehSetMap</code>, <code>BFGBiomeData</code>, <code>BFGDetachInfo</code>, <code>BFLoadListener</code>, <code>BFSharedPhysVars</code>, <code>BFSkyLayer</code>, <code>BFSndComponent</code>, <code>BFXMLNodeComp</code>, <code>ZTAIEducationData</code>, <code>ZTAISharedInfluenceWatcher</code>, <code>ZTAIStaffTrainerComponent</code>, <code>ZTAITourTakerData</code>, <code>ZTAITrickComponentData</code>, <code>ZTAITrickTargetComponent</code>, <code>ZTAIVehicleData</code>, <code>ZTAIWaterFilterComponent</code>, <code>ZTCDCheck</code>, <code>ZTCloningCenterComponent</code>, <code>ZTCloningCenterInstanceComponent</code>, <code>ZTElevatedTriangleGraphic</code>, <code>ZTEntityCrater</code>, <code>ZTEntityDestructionComponent</code>, <code>ZTEntityDestructionData</code>, <code>ZTExtraPaths</code>, <code>ZTFossilSkeletonComponent</code>, <code>ZTItemFilter</code>, <code>ZTLocationEntry</code>, <code>ZTOverviewData</code>, <code>ZTOverviewModeAnimalIcon</code>, <code>ZTOverviewModeBuildingIcon</code>, <code>ZTPhysObjSwapComponent</code>, <code>ZTPuzzlePiece</code>, <code>ZTTransportGroundTrackShared</code>, <code>ZTVehicleBase</code>, <code>ZTWebComponent</code>, <code>ZTWetsuitComponent</code>, <code>ZTWitheredPlantComponent</code></li>
