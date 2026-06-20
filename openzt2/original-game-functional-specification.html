@@ -107,9 +107,6 @@ hierarchy completely — 2,068 registered types over 128 distinct parents; the s
   BFXMLObj <|-- BFComponent
   BFComponent <|-- BFComponentContainer
   BFComponentContainer <|-- BFComponentList
-  BFComponentNameMap <|-- BFBinder
-  BFBinder <|-- BFTypedBinder
-  BFComponentNameMap <|-- BFGEntity
   BFComponentList <|-- BFAIEntityData
   BFAIEntityData <|-- BFAIEntityDataShared
   class BFTypedObj { type identity + cache global }
@@ -117,9 +114,6 @@ hierarchy completely — 2,068 registered types over 128 distinct parents; the s
   class BFXMLObj { read_xml_node() write_xml_node() }
   class BFComponent { type_name; component_name; owner_entity }
   class BFComponentContainer { components[]; name_map; stack }
-  class BFComponentNameMap { name-keyed component map }
-  class BFTypedBinder { binderName/Type/Version; shared+instance XML }
-  class BFGEntity { entity = component graph; animal = binder type + AI/locomotion components }
   class BFAIEntityDataShared { b_* / s_* / f_* / p_* property maps }</pre>
 <h3>Native Code and Source Hydration</h3>
 <p>The original game's data-driven surfaces hydrate native source objects via
