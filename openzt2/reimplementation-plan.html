@@ -207,8 +207,8 @@ remain in the functional specification.</p>
   <td>Runtime substrate</td>
   <td>App, ECS, schedules, states, time, tasks</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Bevy is the live runtime store, scheduler, change tracker, frame loop, app/menu/in-game state owner, and runtime message bus for manager effects.</td>
-  <td>Recover remaining startup/bootstrap order and transition evidence; keep manager effects on Bevy messages.</td>
+  <td>Bevy is the live runtime store, scheduler, change tracker, frame loop, top-level app state owner, menu/in-game child substate owner, scoped in-game overlay state owner, retained runtime collection owner, and cross-owner request/effect transport; <code>RuntimeSupport</code> owns timekeeper state while emitted <code>BFTimeEvent</code> facts publish as Bevy messages from the loaded-world tick system.</td>
+  <td>Recover remaining startup/bootstrap order and transition evidence; keep manager effects on the Bevy resource or message stream that has the live consumer.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -231,8 +231,8 @@ remain in the functional specification.</p>
   <td>Consumer migration</td>
   <td>Startup and document discovery</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Startup mounts archives, loads <code>ztapp4.xml</code>, and hydrates source documents through Bevy <code>AssetServer</code> handles; the remaining transitional surface is the startup-owned document handle map and the host-file app-config boundary.</td>
-  <td>Collapse startup document-handle tracking into manifest/load-state ownership and decide the <code>ztapp4.xml</code> host-file versus asset-source boundary.</td>
+  <td>Startup validates required loose host inputs, mounts archives, loads loose host-file <code>ztapp4.xml</code>, reports Bevy asset-load failures, and hydrates source documents through Bevy <code>AssetServer</code> handles; <code>ztapp4.xml</code> is a pre-archive host bootstrap input while <code>ztappstrings.xml</code> remains archive-local localization data.</td>
+  <td>Collapse startup document-handle tracking into manifest/load-state ownership and recover original manager/load-listener ordering.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -263,7 +263,7 @@ remain in the functional specification.</p>
   <td>Platform APIs</td>
   <td>Window, input, filesystem, OS, network, diagnostics, decoder backends</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input now consumes source-mode input sample requests and publishes captured modifier state.</td>
+  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on <code>ZTModeMgr</code>.</td>
   <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support.</td>
 </tr>
 <tr>
@@ -327,8 +327,8 @@ remain in the functional specification.</p>
   <td>Host/loose images</td>
   <td><code>.bmp</code> splash and host image inputs</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Bevy image loading enables BMP decode support, and the host-file asset source can load the shipped loose <code>SplashImage.bmp</code> where a recovered startup or helper surface references it.</td>
-  <td>Recover whether the original launcher consumes the loose splash bitmap directly or only source-authored UI splash surfaces.</td>
+  <td>The original helper splash is a host-level pre-source surface: <code>Splash.EXE</code> imports Win32 image/window APIs and carries a loose <code>splash.bmp</code> path literal, while the shipped loose <code>SplashImage.bmp</code> is now projected by the Bevy <code>Loading</code> state through the host-file asset source; the later in-game splash remains source-authored UI driven by <code>ZT_SPLASH_CLOSED</code>.</td>
+  <td>Recover the exact filename handoff between <code>Splash.EXE</code>'s <code>splash.bmp</code> literal and the shipped <code>SplashImage.bmp</code>, then decide whether the Bevy launcher should rename/map that host input or preserve the shipped filename as the source boundary.</td>
 </tr>
 <tr>
   <td>Model assets</td>
@@ -503,28 +503,28 @@ remain in the functional specification.</p>
   <td>Startup hydration</td>
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>StartupRuntimeResources</code> publishes the current app, UI, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy.</td>
+  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, active UI layout selection, UI source documents, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy; app/menu/in-game flow lives in Bevy <code>State</code>, <code>SubStates</code>, <code>NextState</code>, and message effects.</td>
   <td>Recover original manager/load-listener order and replace seeded defaults with source-backed initialization where evidence exists.</td>
 </tr>
 <tr>
   <td>UI</td>
-  <td>UI runtime</td>
+  <td>UI projection</td>
   <td>Authored UI tree projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Bevy UI entities spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
+  <td>Source UI documents remain source/hydration inputs, active layout selection is a Bevy resource, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
   <td>Implement widget families one at a time.</td>
 </tr>
 <tr>
   <td>UI</td>
-  <td>UI runtime</td>
+  <td>UI dispatch</td>
   <td>UI messages and value handlers</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source-authored UI events, typed payloads, value commands, and selected panel handlers are preserved in the runtime message/value surfaces.</td>
+  <td>Source-authored UI events, typed payloads, value commands, selected panel handlers, and fixed native app-message effects dispatch through Bevy message/state owners.</td>
   <td>Bind side effects to owning managers panel by panel.</td>
 </tr>
 <tr>
   <td>UI</td>
-  <td>UI runtime</td>
+  <td>UI behavior</td>
   <td>Widget behavior</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
   <td>Native hit-test, focus, edit validation, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
@@ -535,7 +535,7 @@ remain in the functional specification.</p>
   <td>Menu flow</td>
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source layouts and Bevy app/menu/in-game states drive splash and main-menu surfaces, profile/campaign records, resolved shell-mode transitions, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, source-path-derived <code>ZT_SETMODE</code> app/menu classification, in-game options pause/resume, exit confirmation, profile/campaign/load/save panel commands, and exit-to-main-menu through Bevy <code>NextState</code>/presentation effects.</td>
+  <td>Source layouts and Bevy app/menu/in-game states drive splash and main-menu surfaces, profile/campaign records, resolved shell-mode transitions, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, source-path-derived <code>ZT_SETMODE</code> app/menu classification, scoped in-game settings overlay state, pause/resume, exit confirmation, profile/campaign/load/save panel commands, and exit-to-main-menu through Bevy <code>NextState</code>/presentation effects; decoded menu transitions drive top-level <code>Loading</code>/<code>Menus</code>/<code>InGame</code> state plus Bevy <code>SubStates</code>, source-authored splash show/hide events perform splash visibility changes, and native app messages set concrete child targets for splash/main menu, playing/paused gameplay, and the in-game settings overlay.</td>
   <td>Recover original menu event ordering, remaining panel row refresh details, and exact file/profile host side effects.</td>
 </tr>
 <tr>
@@ -551,7 +551,7 @@ remain in the functional specification.</p>
   <td>Shell modes</td>
   <td>General mode manager and shell mode stack</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source mode records, hotkeys, event blocks, shell navigation stack, requests, lifecycle events, and active mode state are represented through Bevy-owned runtime state and messages; startup mode-config documents hydrate the catalogue/classes without a duplicate Bevy-side document cache, active-runtime source-mode adapter systems consume source-mode requests into config/UI/input/deferred-handler statuses, and host input answers mode input sample requests with captured modifier state.</td>
+  <td>Source mode records, hotkeys, event blocks, shell navigation stack, requests, lifecycle events, and active mode state are represented through Bevy-owned runtime state and messages; startup mode-config documents hydrate the catalogue/classes without a duplicate Bevy-side document cache, active-runtime source-mode adapter systems record config/UI/input/unrecovered-handler statuses on <code>ZTModeMgr</code>, and host input samples travel as Bevy messages before captured modifier state is recorded.</td>
   <td>Recover per-mode input, tick, and message handlers.</td>
 </tr>
 <tr>
@@ -559,7 +559,7 @@ remain in the functional specification.</p>
   <td>Tool modes</td>
   <td>Selection, delete, overview, guest-view modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Entity selection, delete confirmation, overview filtering, and guest-view camera/tool state are represented in mode records and Bevy runtime state.</td>
+  <td>Selection records, recovered delete-mode value, overview filtering, and guest-view camera/tool state are represented in mode records and Bevy runtime state; delete request, confirmation, and entity removal execution remain unrecovered implementation surfaces.</td>
   <td>Bind modes against live ECS entity/world state.</td>
 </tr>
 <tr>
@@ -567,7 +567,7 @@ remain in the functional specification.</p>
   <td>Tool modes</td>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in mode records and Bevy runtime state; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests are consumed into Bevy-owned climb mode state with applied-duration messages.</td>
+  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in mode records and Bevy runtime state; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests are consumed into Bevy-owned climb mode state with applied-duration records on <code>ZTModeMgr</code>.</td>
   <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
 </tr>
 <tr>
@@ -583,7 +583,7 @@ remain in the functional specification.</p>
   <td>File/options modes</td>
   <td>File, load, save, download, options, graphics modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages rather than polling save-runtime request state, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host-command status, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
+  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host command handling and publish explicit result messages, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
   <td>Recover exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
 <tr>
@@ -591,7 +591,7 @@ remain in the functional specification.</p>
   <td>Web/downloads/MOTD</td>
   <td>Online index, downloads, update prompts, and MOTD</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the recovered source URL template and downloads-root target, active-runtime systems convert web commands into queued host web requests, and the host-policy adapter consumes queued requests into fetch-ready, missing-URL, or template-expansion status messages.</td>
+  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the recovered source URL template and downloads-root target, and the active-runtime host-policy system records fetch-ready, missing-URL, or template-expansion request status directly on <code>RuntimeSupport</code>.</td>
   <td>Recover URL template expansion, then bind ready web requests to host fetch, local file writes, UI list updates, cancellation, and completion events.</td>
 </tr>
 <tr>
@@ -703,7 +703,7 @@ remain in the functional specification.</p>
   <td>Zoopedia</td>
   <td>TOC, entries, pages, and navigation</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTZoopediaComponent</code>, <code>ZTZoopediaTOC</code>, TOC entries, article entries, pages, navigation directions, and page-open state are represented.</td>
+  <td><code>ZTZoopediaComponent</code>, <code>ZTZoopediaTOC</code>, TOC entries, article entries, pages, navigation directions, page-open state, and <code>ZT_ZOOPEDIA_BACK</code>/<code>ZT_ZOOPEDIA_FORWARD</code> navigation records published as Bevy messages are represented.</td>
   <td>Recover TOC population, page loading, back/forward history, entity/catalog entry links, and UI navigation handlers.</td>
 </tr>
 <tr>
@@ -711,7 +711,7 @@ remain in the functional specification.</p>
   <td>Terrain</td>
   <td>Heightfield, biome, water, autoplacement</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Terrain grid, biome definitions, brushes, maps, mesh patches, selected biome state, and authored autoplacement rules are stored in Bevy terrain runtime; terrain command records refresh the loaded-world terrain bootstrap for ECS chunk projection, final charges dispatch into <code>EconomyRuntime</code>, terrain undo transactions are retained by <code>UndoRuntime</code>, and autoplacement spawn requests feed <code>BFGWorldRuntime</code> entity creation and world-spawn projection.</td>
+  <td>Terrain grid, biome definitions, brushes, maps, mesh patches, selected biome state, changed-triangle state, and authored autoplacement rules are stored in Bevy terrain runtime; terrain event, water-edit, and flattening-deletion records return as dispatch effects, terrain command records refresh the loaded-world terrain bootstrap for ECS chunk projection, final charges dispatch into <code>EconomyRuntime</code>, terrain undo transactions are retained by <code>UndoRuntime</code>, and autoplacement spawn requests feed <code>BFGWorldRuntime</code> entity creation and world-spawn projection.</td>
   <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit algorithms.</td>
 </tr>
 <tr>
@@ -735,7 +735,7 @@ remain in the functional specification.</p>
   <td>Paths</td>
   <td>Paths and elevated supports</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Startup validates the source path-finder config; <code>PathRuntime</code> owns active placement/type/height state and staff candidate path request/result records; obsolete placement-side elevated-height request state and duplicate path command records have been removed.</td>
+  <td>Startup validates the source path-finder config; <code>PathRuntime</code> owns active placement/type/height state while staff candidate path request/result records publish as Bevy messages; obsolete placement-side elevated-height request state and duplicate path command records have been removed.</td>
   <td>Recover path placement modes, live graph/ECS connectivity, and <code>BFGElevatedSupportTracker</code>.</td>
 </tr>
 <tr>
@@ -775,7 +775,7 @@ remain in the functional specification.</p>
   <td>AI source</td>
   <td>Task templates and behavior documents</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; Bevy consumes those source requests into handled status messages while recovered execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; <code>BFAIMgr</code> records those source-request statuses while recovered execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
   <td>Hydrate one task document end to end, instantiate <code>BFAITaskRoot</code>, and advance it through <code>BFAIMgr</code>.</td>
 </tr>
 <tr>
@@ -807,7 +807,7 @@ remain in the functional specification.</p>
   <td>Movement</td>
   <td>Steering and locomotion</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain recovery surfaces; Bevy consumes locomotion and steering source requests into handled status messages until the recovered runtimes can execute them.</td>
+  <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain recovery surfaces; <code>BFAIMgr</code> records locomotion and steering source-request statuses until the recovered runtimes can execute them.</td>
   <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
 </tr>
 <tr>
@@ -847,7 +847,7 @@ remain in the functional specification.</p>
   <td>Staff</td>
   <td>Jobs and assignment UI</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Staff requests, roles, candidates, job queues, assignments, trainers, clean-tank/water-filter actions, hire/fire, and lifecycle state are represented in Bevy staff runtime owners; candidate selection is a returned/published effect rather than a resource-level cache.</td>
+  <td>Staff requests, roles, candidates, real job queues, assignments, trainers, clean-tank/water-filter actions, hire/fire, lifecycle state, candidate selections, native command results with explicit accepted/rejected/missing-scope/missing-owner/missing-target/missing-source/candidate-empty statuses, work-order effects, assignment effects, action effects, and trainer-training effects are represented through Bevy staff runtime owners and returned command records.</td>
   <td>Recover keeper assignment payloads and one staff role lifecycle.</td>
 </tr>
 <tr>
@@ -911,7 +911,7 @@ remain in the functional specification.</p>
   <td>Economy</td>
   <td>Runtime status and price selections</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Loaded zoo fame, half-star, and open-state values publish through Bevy fame-value messages; admission selection, non-admission price selection state, and Bevy economy command/result messages live in Bevy runtime owners.</td>
+  <td>Loaded zoo fame, half-star, open-state, and admission values are retained by <code>EconomyRuntime</code>; admission selection, non-admission price selection state, and Bevy economy command/result messages live in Bevy runtime owners.</td>
   <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics and status forwarding effects.</td>
 </tr>
 <tr>
@@ -975,7 +975,7 @@ remain in the functional specification.</p>
   <td>Zoo survey</td>
   <td>Zoo survey component, questions, answers, and adjustments</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTZooSurveyComponent</code>, survey questions/answers, and world survey-adjustment records are represented; native survey adjustment events publish <code>ZTZooSurveyAdjustmentRecorded</code> Bevy messages instead of accumulating hidden world-runtime history.</td>
+  <td><code>ZTZooSurveyComponent</code>, survey questions/answers, and native survey adjustment records are retained by <code>BFGWorldRuntime</code>.</td>
   <td>Recover survey population, adjustment formulas, answer persistence, and UI value/message handlers.</td>
 </tr>
 <tr>
@@ -1023,7 +1023,7 @@ remain in the functional specification.</p>
   <td>Persistence</td>
   <td>Save/load package format</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter classifies save/delete/load-after-save commands until the file format writer is recovered.</td>
+  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter consumes save/delete/load-after-save commands into explicit unrecovered-contract result messages when writer, confirmation, path, or save-root semantics are missing.</td>
   <td>Recover <code>.z2s</code> container structure, host write/delete execution, and per-component <code>write_xml_node</code> scope.</td>
 </tr>
 <tr>
@@ -1031,8 +1031,8 @@ remain in the functional specification.</p>
   <td>Photos</td>
   <td>Photo albums and camera</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Capture requests, albums, photo info, subject bounds, host-capture status records, UI tokens, move/delete/enlarge/shrink, challenge completion, and last capture result are represented in <code>PhotoRuntime</code> and Bevy capture-request messages.</td>
-  <td>Recover Bevy camera/render capture completion and HTML export side effects for <code>ZTPhotoManager</code>.</td>
+  <td>Capture requests, albums, photo info, subject bounds, host-capture status records, UI tokens, move/delete/enlarge/shrink, challenge completion, and last capture result are represented in <code>PhotoRuntime</code> and Bevy capture-request messages; capture host requests with concrete output files spawn Bevy primary-window screenshot captures through the render screenshot API.</td>
+  <td>Recover original photo output path generation, screenshot completion/result events, and HTML export side effects for <code>ZTPhotoManager</code>.</td>
 </tr>
 <tr>
   <td>Photo</td>
@@ -1055,7 +1055,7 @@ remain in the functional specification.</p>
   <td>Renderer backend</td>
   <td>Gamebryo/NetImmerse and D3D replacement</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Source-visible render records are preserved through parsed model resources and Bevy-owned presentation/runtime state; startup still validates the required <code>BFDX9Renderer</code> config, but the runtime no longer retains duplicate Gamebryo/NIF, D3D, <code>BFResourceMgr</code>, or <code>BFNISpriteMgr</code> mirrors without ECS/asset consumers.</td>
+  <td>Source-visible render records are preserved through parsed model resources and Bevy-owned presentation/runtime state; startup still validates the required <code>BFDX9Renderer</code> config, and duplicate Gamebryo/NIF, D3D, <code>BFResourceMgr</code>, or <code>BFNISpriteMgr</code> mirrors have been removed where no ECS/asset consumers exist.</td>
   <td>Honor <code>BFSceneGraphComponent</code>, <code>BFAnim*</code>, <code>BFSpriteMgr</code>, material, texture, and animation-controller contracts through Bevy ECS/assets.</td>
 </tr>
 <tr>
@@ -1087,7 +1087,7 @@ remain in the functional specification.</p>
   <td>Animation</td>
   <td>Animation controllers, graphs, requests</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; Bevy consumes animation graph evaluation requests into handled status messages pending the recovered graph runtime.</td>
+  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; <code>BFAIMgr</code> records animation graph evaluation statuses pending the recovered graph runtime.</td>
   <td>Recover <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key callsites.</td>
 </tr>
 <tr>
@@ -1095,7 +1095,7 @@ remain in the functional specification.</p>
   <td>Camera</td>
   <td>Camera commands and projection</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Overhead, first-person, follow, rail, guest-view, frustum, output states, command-reader lifecycle events, command-reader effects, first-person mouse-look transition handling, selected <code>ZT_CAMERA_*</code> command surfaces, and <code>ZT_CAMERA_MOVED</code> BF message publication are recorded in Bevy.</td>
+  <td>Overhead, first-person, follow, rail, guest-view, frustum, output states, command-reader state/effects, first-person mouse-look transition handling, selected <code>ZT_CAMERA_*</code> command surfaces, and <code>ZT_CAMERA_MOVED</code> BF message publication are recorded in Bevy.</td>
   <td>Recover curves, timing, coupling, and projection math.</td>
 </tr>
 <tr>
@@ -1179,7 +1179,7 @@ backends.</p>
 <tr>
   <td>Frame scheduling, task pools, and clock delivery</td>
   <td>Bevy schedules/tasks/time</td>
-  <td>Preserve <code>BFTimeKeeper</code>, time event records, simulation tick/slow-tick surfaces, and manager update ordering once recovered.</td>
+  <td>Preserve <code>BFTimeKeeper</code>, publish time event records through Bevy messages, and keep simulation tick/slow-tick surfaces plus manager update ordering once recovered.</td>
 </tr>
 <tr>
   <td>Filesystem dialogs, directory enumeration, and platform profile roots</td>
@@ -1189,7 +1189,7 @@ backends.</p>
 <tr>
   <td>Logging, diagnostics, performance collection, and OS device survey</td>
   <td>Host logging, tracing, performance counters, and OS diagnostics</td>
-  <td>Preserve <code>BFLog</code>, <code>DxDiag</code>, <code>ZTPerformanceStatsDumpCommand</code>, source-resolved dev-console commands in <code>RuntimeSupport</code>, logging-consent records, Vince answer submissions, debug feature gates, sprite-debug toggles, and perf/debug command state.</td>
+  <td>Preserve <code>BFLog</code>, <code>DxDiag</code>, <code>ZTPerformanceStatsDumpCommand</code>, logging-consent records, Vince answer submissions, source-resolved dev-console command records, diagnostic command records, debug feature gates, sprite-debug toggles, and perf/debug command state in Bevy runtime state.</td>
 </tr>
 </tbody>
 </table>
