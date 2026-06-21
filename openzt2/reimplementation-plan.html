@@ -503,7 +503,7 @@ remain in the functional specification.</p>
   <td>Startup hydration</td>
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, active UI layout selection, UI source documents, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy; app/menu/in-game flow lives in Bevy <code>State</code>, <code>SubStates</code>, <code>NextState</code>, and message effects.</td>
+  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy; hydrated UI documents load into Bevy assets, startup selects the first projected layout from shell-mode state, and app/menu/in-game flow lives in Bevy <code>State</code>, <code>SubStates</code>, <code>NextState</code>, and message effects.</td>
   <td>Recover original manager/load-listener order and replace seeded defaults with source-backed initialization where evidence exists.</td>
 </tr>
 <tr>
@@ -511,7 +511,7 @@ remain in the functional specification.</p>
   <td>UI projection</td>
   <td>Authored UI tree projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source UI documents remain source/hydration inputs, active layout selection is a Bevy resource, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
+  <td>Source UI documents remain source/hydration inputs, Bevy UI layout requests project hydrated documents into entity trees, generated row templates live with the UI binding runtime that consumes them, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
   <td>Implement widget families one at a time.</td>
 </tr>
 <tr>
