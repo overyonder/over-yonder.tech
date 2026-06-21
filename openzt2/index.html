@@ -107,8 +107,8 @@ function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:$
 function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
 (()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
 Promise.all([
- tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
- text(["reimplementation-plan.html","../reconstruction/REIMPLEMENTATION-PLAN.md"])
+ tsv(["zt-function-perimeter.tsv","../docs/analysis/function-perimeter.tsv"]),
+ text(["reimplementation-plan.html","../docs/REIMPLEMENTATION-PLAN.md"])
 ]).then(([fp,planText])=>{
  const fs=counts(fp,"status");
  const closedStatuses=["confirmed","generated-support-code","generated-import-data","mapped-data"];

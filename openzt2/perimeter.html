@@ -30,7 +30,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 
  <section class="narrative">
   <h2>Authority Model</h2>
-  <p>The byte map is the address-fact archive. A function has an exact identity record when a <code>runtime-parent</code> row in <code>web/zt-byte-range-map.tsv</code> starts at that function entry. Native type getters are ordinary confirmed byte-map identities named <code>get_type_*</code>.</p>
+  <p>The byte map is the address-fact archive. A function has an exact identity record when a <code>runtime-parent</code> row in <code>docs/analysis/zt-byte-range-map.tsv</code> starts at that function entry. Native type getters are ordinary confirmed byte-map identities named <code>get_type_*</code>.</p>
   <p>The function perimeter is a generated view over the stripped executable's function entries. It joins byte-map exact anchors with structural overlays: library provenance, vtable membership, and inferred domain. Detector proposals are produced live by <code>tools/detect-address-id-candidates.py</code>; durable review candidates and accepted identities live in the byte map.</p>
 
   <h3>Current Work State</h3>
@@ -134,8 +134,8 @@ function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
  document.getElementById(countId).textContent=`(${rows.length})`;render();
 }
 Promise.all([
- tsv(["zt-function-perimeter.tsv","../reconstruction/function-perimeter.tsv"]),
- tsv(["zt-global-perimeter.tsv","../reconstruction/global-perimeter.tsv"])
+ tsv(["zt-function-perimeter.tsv","../docs/analysis/function-perimeter.tsv"]),
+ tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"])
 ]).then(([fp,gp])=>{
  coverageSummary(fp,gp);
  table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");

@@ -56,7 +56,7 @@ th{background:var(--soft)}
 })();
 </script>
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart " href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart active" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
-<div class="doc-source">Rendered from <code>reconstruction/REIMPLEMENTATION-PLAN.md</code></div>
+<div class="doc-source">Rendered from <code>docs/REIMPLEMENTATION-PLAN.md</code></div>
 <main>
 <h1>OpenZT2 Reimplementation Plan</h1>
 <p><code>ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code> owns the original Zoo Tycoon 2
@@ -583,7 +583,7 @@ remain in the functional specification.</p>
   <td>File/options modes</td>
   <td>File, load, save, download, options, graphics modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages rather than polling save-runtime request state, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into host-status records, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
+  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages rather than polling save-runtime request state, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host-command status, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
   <td>Recover exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
 <tr>
@@ -775,7 +775,7 @@ remain in the functional specification.</p>
   <td>AI source</td>
   <td>Task templates and behavior documents</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; Bevy consumes those source requests into handled status messages while recovered execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores only task, behavior, and source managers currently consumed by runtime execution.</td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; Bevy consumes those source requests into handled status messages while recovered execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
   <td>Hydrate one task document end to end, instantiate <code>BFAITaskRoot</code>, and advance it through <code>BFAIMgr</code>.</td>
 </tr>
 <tr>
@@ -1189,7 +1189,7 @@ backends.</p>
 <tr>
   <td>Logging, diagnostics, performance collection, and OS device survey</td>
   <td>Host logging, tracing, performance counters, and OS diagnostics</td>
-  <td>Preserve <code>BFLog</code>, <code>DxDiag</code>, <code>ZTPerformanceStatsDumpCommand</code>, source-resolved dev-console command records, logging-consent records, Vince answer submissions, debug feature gates, sprite-debug toggles, and perf/debug command records.</td>
+  <td>Preserve <code>BFLog</code>, <code>DxDiag</code>, <code>ZTPerformanceStatsDumpCommand</code>, source-resolved dev-console commands in <code>RuntimeSupport</code>, logging-consent records, Vince answer submissions, debug feature gates, sprite-debug toggles, and perf/debug command state.</td>
 </tr>
 </tbody>
 </table>
