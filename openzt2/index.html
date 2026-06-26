@@ -186,7 +186,8 @@ Promise.all([
   else someMembers++;
  }
  const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
- const namedVtables=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const namedClassTypes=rtti.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const zeroSlotClassTypes=rtti.filter(r=>Number(r.slot_count||0)===0).length;
  const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
  const typeCacheDetails=typeCacheRows(mapRows,typeCacheGlobals);
  const ranges=functionRanges(fp);
@@ -214,17 +215,19 @@ Promise.all([
    </div>`,
    `<div class="progress-card">
     <h3><a href="perimeter.html">Native Class Members</a></h3>
-    <div class="stacked-bar" role="img" aria-label="No virtual slots identified ${noMembers}, some virtual slots identified ${someMembers}, all virtual slots identified ${allMembers}">
-     ${seg("seg-none",noMembers,vtableRows.length,`No virtual slots identified: ${noMembers}`)}
-     ${seg("seg-some",someMembers,vtableRows.length,`Some virtual slots identified: ${someMembers}`)}
-     ${seg("seg-all",allMembers,vtableRows.length,`All virtual slots identified: ${allMembers}`)}
+    <div class="stacked-bar" role="img" aria-label="Complete zero-slot types ${zeroSlotClassTypes}, no virtual slots identified ${noMembers}, some virtual slots identified ${someMembers}, all virtual slots identified ${allMembers}">
+     ${seg("seg-all",zeroSlotClassTypes,rtti.length,`Complete zero-slot types: ${zeroSlotClassTypes}`)}
+     ${seg("seg-none",noMembers,rtti.length,`No virtual slots identified: ${noMembers}`)}
+     ${seg("seg-some",someMembers,rtti.length,`Some virtual slots identified: ${someMembers}`)}
+     ${seg("seg-all",allMembers,rtti.length,`All virtual slots identified: ${allMembers}`)}
     </div>
     <div class="legend">
+     ${legend("seg-all",`Complete zero-slot types: ${zeroSlotClassTypes.toLocaleString()}`)}
      ${legend("seg-none",`No slots identified: ${noMembers.toLocaleString()}`)}
      ${legend("seg-some",`Some slots identified: ${someMembers.toLocaleString()}`)}
      ${legend("seg-all",`All slots identified: ${allMembers.toLocaleString()}`)}
     </div>
-    <p class="progress-note">${vtableRows.length.toLocaleString()} vtable-backed classes; ${namedVtables.toLocaleString()} have recovered class names.</p>
+    <p class="progress-note">${rtti.length.toLocaleString()} recovered class/type rows; ${namedClassTypes.toLocaleString()} have names, and ${vtableRows.length.toLocaleString()} contain vtable slots.</p>
    </div>`,
    `<div class="progress-card">
     <h3><a href="perimeter.html">Type Registry Links</a></h3>
