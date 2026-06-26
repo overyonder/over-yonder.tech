@@ -80,7 +80,28 @@ function num(s){return /^0x/i.test(s||"")?parseInt(s,16):Number(s||0)}
 function hex(s){const n=parseInt(s||"",16);return Number.isFinite(n)?n:null}
 const supportFunctionStatuses=new Set(["generated-support-code","generated-import-data","mapped-data"]);
 const knownByteStatuses=new Set(["known","assessed","copied","consumed","generated-known","indirected","omitted","matches-runtime","external"]);
-function promotedCacheRows(mapRows){return mapRows.filter(r=>(r.details||"").startsWith("Promoted from retired register_type detector evidence. Evidence: cached native type handle"))}
+function typeCacheRows(mapRows,typeCacheGlobals){
+ const wanted=new Set(typeCacheGlobals.map(r=>hex(r.address)).filter(Number.isFinite));
+ const rows=new Map([...wanted].map(a=>[a,{address:a,name:"",details:""}]));
+ for(const r of mapRows){
+  const start=hex(r.start),name=r.name||"",details=r.details||"";
+  if(!wanted.has(start))continue;
+  const lower=name.toLowerCase();
+  const handleName=name.startsWith("g_type_")&&!name.endsWith("_init_flag");
+  const handleEvidence=lower.includes("type-cache")&&!name.includes("_init_flag")&&(
+   details.includes("writes cache")||
+   details.includes("writes and returns cache dword")||
+   details.includes("stores the cached type")||
+   details.includes("stores and returns cache dword")||
+   details.includes("cached native type handle")
+  );
+  if(!handleName&&!handleEvidence)continue;
+  const row=rows.get(start);
+  row.name=row.name||name;
+  row.details+=(row.details?" | ":"")+details;
+ }
+ return [...rows.values()];
+}
 function functionRanges(fp){
  return fp.map(r=>{const start=hex(r.address),size=Number(r.size||0);return Number.isFinite(start)&&size>0?{start,end:start+size,row:r}:null}).filter(Boolean).sort((a,b)=>a.start-b.start);
 }
@@ -89,6 +110,26 @@ function containingFunction(ranges,addr){
  while(lo<hi){const mid=(lo+hi)>>1;if(ranges[mid].start<=addr)lo=mid+1;else hi=mid}
  const hit=ranges[lo-1];
  return hit&&hit.start<=addr&&addr<hit.end?hit.row:null;
+}
+function typeGetterAddrs(details){
+ const addrs=[];
+ for(const re of [
+  /getter call site `0x([0-9a-fA-F]+)`/g,
+  /`0x([0-9a-fA-F]+)` tests (?:guard|init flags)/g,
+  /Function `0x([0-9a-fA-F]+)` tests/g
+ ]){
+  let m;
+  while((m=re.exec(details)))addrs.push(parseInt(m[1],16));
+ }
+ return [...new Set(addrs)];
+}
+function isConfirmedTypeGetter(row){
+ if(!row||row.status!=="confirmed")return false;
+ const name=row.name||"";
+ return name.startsWith("get_type_")||/^get_or_register_.*_type$/.test(name);
+}
+function hasResolvedParent(details){
+ return /parent type `/.test(details)||/get_or_register_type\([^)]*, 0\)/.test(details);
 }
 function tinyHeap(){
  const h=[];
@@ -142,18 +183,13 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
  const globalDone=gp.filter(r=>r.status==="identified"||r.status==="type-cache").length;
  const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
  const typeCacheDone=typeCacheGlobals.filter(r=>(r.name||"").trim()).length;
- const cacheRows=promotedCacheRows(mapRows);
+ const cacheRows=typeCacheRows(mapRows,typeCacheGlobals);
  const ranges=functionRanges(fp);
- let getterDone=0,getterTotal=0,parentDone=0;
+ let getterDone=0,parentDone=0;
  for(const r of cacheRows){
   const details=r.details||"";
-  const getter=/getter call site `0x([0-9a-fA-F]+)`/.exec(details);
-  if(getter){
-   getterTotal++;
-   const hit=containingFunction(ranges,parseInt(getter[1],16));
-   if(hit&&hit.status==="confirmed"&&(hit.name||"").startsWith("get_type_"))getterDone++;
-  }
-  if(/parent type `/.test(details))parentDone++;
+  if(typeGetterAddrs(details).some(a=>isConfirmedTypeGetter(containingFunction(ranges,a))))getterDone++;
+  if(hasResolvedParent(details))parentDone++;
  }
  const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
  const vtableClassDone=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
@@ -164,8 +200,8 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Function recovery substrate",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionContextDone,notDone:nativeFunctions.length-functionContextDone,doneMeans:"Function row has an exact/candidate identity or structural context: region, library provenance, vtable membership, or inferred domain.",notDoneMeans:"Function row has no exact identity and no structural context to guide recovery."},
   {name:"Global/static names",den:`${fmt(gp.length)} referenced global/static cells`,done:globalDone,notDone:gp.length-globalDone,doneMeans:"Global row is identified or classified as a type-cache cell.",notDoneMeans:"Global row remains an unidentified referenced address."},
   {name:"Type-cache handles",den:`${fmt(typeCacheGlobals.length)} referenced cached type-handle cells`,done:typeCacheDone,notDone:typeCacheGlobals.length-typeCacheDone,doneMeans:"Cached type-handle cell is named in the global/static perimeter.",notDoneMeans:"Referenced cached type-handle cell lacks a retained name."},
-  {name:"Type getter linkage",den:`${fmt(getterTotal)} promoted cache rows with getter callsites`,done:getterDone,notDone:getterTotal-getterDone,doneMeans:"Cache getter callsite falls inside a confirmed `get_type_*` function range.",notDoneMeans:"Callsite is outside the current function perimeter or falls inside a non-`get_type_*`/unconfirmed function."},
-  {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} promoted cached type registrations`,done:parentDone,notDone:cacheRows.length-parentDone,doneMeans:"Registration evidence includes a resolved parent type name.",notDoneMeans:"Parent evidence is absent or only a parent-getter address."},
+  {name:"Type getter linkage",den:`${fmt(cacheRows.length)} current cached type-handle cells`,done:getterDone,notDone:cacheRows.length-getterDone,doneMeans:"Cache initializer evidence lands inside a confirmed type getter or type-registration helper range.",notDoneMeans:"No current getter address evidence is recorded, or the address lands in an unconfirmed/non-type function."},
+  {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} current cached type-handle cells`,done:parentDone,notDone:cacheRows.length-parentDone,doneMeans:"Registration evidence includes a resolved parent type name or an explicit root/no-parent registration.",notDoneMeans:"Parent evidence is absent or only an unresolved helper/call address."},
   {name:"Vtable class names",den:`${fmt(vtableRows.length)} enumerated vtable rows`,done:vtableClassDone,notDone:vtableRows.length-vtableClassDone,doneMeans:"Vtable row is associated with a recovered class name.",notDoneMeans:"Vtable row still has an address-only `vtable_*` placeholder."},
   {name:"Vtable slot identities",den:`${fmt(vt.length)} virtual method slot rows`,done:vslotDone,notDone:vt.length-vslotDone,doneMeans:"Virtual slot has a confirmed method identity.",notDoneMeans:"Virtual slot remains unidentified."},
   {name:"Byte-map partition coverage",den:`${fmt(bmap.done+bmap.notDone)} non-overlapping leaf partitions`,done:bmap.done,notDone:bmap.notDone,doneMeans:"Most-specific covering row has a known-like status: known, assessed, copied, consumed, generated-known, indirected, omitted, matches-runtime, or external.",notDoneMeans:"Most-specific covering row is blank, unknown, candidate, not-done, unmaterialized, or another open status."}

@@ -232,17 +232,17 @@ runtime path rather than by a fabricated tool path;</li>
 static checks: missing durable smoke paths or runtime acceptance harnesses are
 implemented or recorded on the owner row that needs them;</li>
 <li>documented commands and aliases used as acceptance evidence resolve in the
-current workspace; stale references such as an absent <code>cargo game-check</code> alias
-are corrected before they count as a checkpoint gate;</li>
+current workspace before they count as a checkpoint gate;</li>
 <li>fixed-step/update ordering is either recovered into runtime schedules and run
 conditions, or left as named unrecovered contract work on the row that owns
 the manager/update family.</li>
 </ul>
 <p>The checkpoint inventory is:</p>
 <ul>
-<li>partly completed: real module boundaries are better than before, while
-<code>features/mod.rs</code> still needs to stop acting as a large migration/prelude
-surface with broad imports and re-exports;</li>
+<li>partly completed: real module boundaries are better than before, and
+<code>features/mod.rs</code> now exposes only the feature plugin entry point, while a
+small set of feature modules still use broad wildcard imports across owner
+boundaries;</li>
 <li>partly completed: message ownership is much improved, while source UI
 messages still pass through a central router layer before reaching owners;</li>
 <li>partly completed: UI projection files are separated into projection, tree,
@@ -268,9 +268,7 @@ slices;</li>
 <li>not completed: placement/transactions/undo, pathfinding, AI loop, save/load,
 disease, scenarios, animation, and audio semantics;</li>
 <li>not completed: test and acceptance suite expansion beyond compile, format,
-and static checks;</li>
-<li>not completed: stale command cleanup, especially references to commands or
-aliases that no longer resolve, such as <code>cargo game-check</code>.</li>
+and static checks.</li>
 </ul>
 <p>Broad product domains remain open until their own rows close a representative
 source-to-runtime path. BFXML/MAXML/XDR/BFTypedBinder semantics, replacement and
@@ -390,8 +388,8 @@ remain in the functional specification.</p>
   <td>Refactor checkpoint</td>
   <td>Feature boundary cleanup</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources instead of UI dispatch, UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>, active UI assets rebuild when their loaded asset changes, rich-text resize scaling is scoped to changed owners, and the hover/cursor/help path has a single active-hover owner. The startup builder entrypoint is now <code>build_loaded_startup_from_assets</code>, with locale and audio source composition split into source-specific helpers.</td>
-  <td>Finish splitting the remaining UI event router into feature-owned typed message handlers, continue breaking startup dependency discovery and hydration into source-specific builders, reduce remaining recovered-unused warnings by deleting stale scaffolding or documenting unrecovered original surfaces, and keep checkpoint acceptance commands current when aliases such as <code>cargo game-check</code> disappear.</td>
+  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources instead of UI dispatch, UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>, active UI assets rebuild when their loaded asset changes, rich-text resize scaling is scoped to changed owners, and the hover/cursor/help path has a single active-hover owner. The startup builder entrypoint is now <code>build_loaded_startup_from_assets</code>, with locale and audio source composition split into source-specific helpers. Stale checkpoint command aliases have been removed from the canonical plan; acceptance commands must resolve in the current workspace.</td>
+  <td>Finish splitting the remaining UI event router into feature-owned typed message handlers, continue breaking startup dependency discovery and hydration into source-specific builders, reduce remaining recovered-unused warnings by deleting stale scaffolding or documenting unrecovered original surfaces, and keep checkpoint acceptance commands current as repo-local commands change.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
