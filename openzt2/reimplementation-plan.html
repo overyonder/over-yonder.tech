@@ -97,14 +97,111 @@ authority.</p>
 </tbody>
 </table>
 <p>The default implementation rule is to represent a recovered concept directly in
-Bevy ECS/runtime types whenever Bevy can express the original concept without
-losing the recovered contract. Domain ownership is exceptional: keep a concept
-in <code>domain</code> only when it is source-authored data, host-independent source or
-message contract, pure rule, manager/native type identity, or another original
-surface that cannot live directly as Bevy components, resources, states,
-messages, or assets. Bevy runtime resources may store domain values as loaded
-contracts or semantic payloads; the owning live collection remains the Bevy
-resource, component, state, message stream, or asset.</p>
+Bevy ECS/runtime types whenever Bevy can express the original contract. Bevy
+<code>States</code> are available for finite, code-owned protocols only after the original
+contract proves such a closed protocol exists. The current app flow does not use
+closed Bevy app/menu/game states: startup loading is the absence of
+<code>RuntimeResourcesReady</code>, and the original game shell owns the live flow through
+ECS-visible resources such as <code>ModeRegistry</code>, <code>ActiveMode</code>,
+<code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, and <code>CurrentCursor</code>. Source-authored state
+such as shell-mode tokens, layout paths, hotkeys, cursors, and authored UI
+events stays data-driven: load it into registries/assets, then expose the live
+choice as ECS resources, components, entities, and messages. Domain ownership is
+exceptional: keep a concept in <code>domain</code> only when it is source-authored data,
+host-independent source or message contract, pure rule, manager/native type
+identity, or another original surface that cannot live directly as Bevy
+components, resources, messages, or assets. Bevy runtime resources may store
+domain values as loaded contracts or semantic payloads; the owning live
+collection remains the Bevy resource, component, message stream, or asset.</p>
+<h2>Bevy State, Registries, and Source Modes</h2>
+<p>Data-driven state still needs a runtime fact somewhere. The target shape is one
+owner: source registries answer what the original data defines, ECS facts answer
+what is active right now, and systems perform the behavior.</p>
+<p>ECS ownership does not mean every active effect becomes an entity/component.
+Bevy resources are ECS state too, and singleton-shaped resources are the right
+fit for genuinely global facts. The useful distinction is fact versus private
+runtime:</p>
+<pre><code class="language-rust">Res&lt;ModeRegistry&gt;   // source-authored definitions
+Res&lt;ActiveMode&gt;     // current global fact: token plus resolved path
+Res&lt;ActiveLayoutPaths&gt; // current global fact consumed by UI projection
+Res&lt;ActiveKeymap&gt;   // current global fact derived from the active mode
+Res&lt;CurrentCursor&gt;  // current global fact consumed by cursor presentation
+</code></pre>
+<p>Those resources are healthy when they store narrow facts with one owner and
+ordinary Bevy systems consume them. The unhealthy version is:</p>
+<pre><code class="language-text">Res&lt;ZTModeMgr&gt;: ask me what mode we are in, what UI should show, what hotkeys
+are active, what commands are queued, what effects should happen, and which
+private transition rule wins.
+</code></pre>
+<p>That &quot;ask me&quot; shape is the shadow runtime. The problem is not that it is a
+resource. The problem is that it becomes a second scheduler/state machine beside
+Bevy.</p>
+<p>For modes, the registry/catalogue holds source-authored definitions: mode
+tokens, parent paths, on/off events, layouts, cursors, hotkeys, and source
+payloads. The active mode is an ECS resource or component such as <code>ActiveMode</code>
+with the current token and resolved path. A transition system handles a
+<code>ZT_SETMODE</code>-style request by resolving the token against the registry, updating
+the ECS-owned active fact, and publishing concrete effects such as
+<code>ModeEntered</code>, <code>ModeExited</code>, <code>LayoutRequested</code>, <code>CursorChanged</code>, and
+<code>KeymapActivated</code>. UI, input, cursor, audio, and gameplay systems react to those
+facts and messages through ordinary Bevy schedules and run conditions.</p>
+<p>A registry is healthy when it stores source definitions. An ECS resource or
+component is healthy when it stores the current live fact. A shadow runtime
+appears when one retained manager owns the current mode, active layouts, active
+hotkeys, command queues, transition side effects, and private dispatch rules,
+then other systems ask that manager what app they are in. That pattern recreates
+a second runtime beside ECS. It should be collapsed into registries, ECS facts,
+messages, and systems.</p>
+<p>The design history matters because the code has already moved through these
+shapes:</p>
+<ul>
+<li><code>f6966524</code> (<code>Start game reconstruction workspace</code>, 2026-06-14) created the
+pre-Bevy domain-first scaffold. It had source/domain/host boundaries,
+host-independent UI contract records, and only a tiny placeholder
+<code>GameMode::{MainMenu, LoadingWorld, InWorld}</code>. It was an architectural
+starting point before recovered data-driven runtime behavior existed.</li>
+<li><code>a3c0142f</code> (<code>Set up Bevy reconstruction shell</code>, 2026-06-14) introduced the
+Bevy host shell.</li>
+<li><code>b6317954</code> (<code>Replace fake app phase with domain UI dispatch</code>, 2026-06-14)
+moved behavior into <code>ZTAppRuntime</code> and <code>UiRuntimeContext</code>, where UI messages
+such as <code>ZT_SPLASH_CLOSED</code> changed an active layout. That was source-aware,
+and it also put live app/UI state in a domain-side shadow runtime.</li>
+<li><code>f0d35051</code> (<code>Sync shell mode transitions to native owners</code>, 2026-06-16)
+recovered the more useful semantic shape: source-token mode transitions
+resolved through a shell-mode catalogue, computed mode paths, on/off events,
+layouts, cursors, and hotkeys. The semantic direction was right; the live
+owner still needs to be ECS rather than a domain manager.</li>
+<li>By <code>6c95b926</code> (<code>Split Cargo and flake roots by project</code>, 2026-06-19), the
+Bevy runtime had closed menu/in-game mode variants into <code>States</code>/<code>SubStates</code>
+and mapped source messages into those Rust enums. That improved native Bevy
+ownership for finite lifecycle phases, and it overreached when it turned
+source-authored modes into fixed Rust state variants.</li>
+</ul>
+<p>The intended final arrangement is therefore: use closed Bevy <code>States</code> only when
+the recovered original contract is genuinely finite and code-owned; load
+source-authored modes and UI layouts as data; keep the current source-selected
+mode/layout as ECS-visible facts; express behavior as systems reacting to
+messages, events, components, resources, and assets.</p>
+<p>The current Bevy runtime follows that shape. The top-level scheduler keeps only
+phase-oriented ordering sets such as <code>InputCollection</code>,
+<code>RuntimeMessageDispatch</code>, <code>Simulation</code>, <code>PresentationSync</code>, and
+<code>RenderPreparation</code>. Runtime systems carry explicit run conditions:
+startup/loading work runs before <code>RuntimeResourcesReady</code>, normal runtime work
+uses <code>runtime_resources_ready</code>, and loaded-world systems add concrete ECS gates
+such as <code>in_loaded_world</code>. The former closed <code>OpenZt2AppSet</code>
+menu/game/overlay buckets have been removed.</p>
+<p>The current refactor boundary is: no private <code>game_runtime</code> module, no live
+<code>RuntimeSupport</code> resource, and no compatibility owner that other systems ask for
+unrelated facts. <code>FeatureRuntimePlugin</code> only composes feature-owned
+registrations. Startup may still use <code>RuntimeSupport</code> as a seed/composition
+value while source documents are being hydrated; once runtime resources are
+published, live facts sit in narrower resources such as runtime configuration,
+session/profile/time, diagnostics, external/web state, random state, mode
+registry, active mode, active layouts, active keymap, and current cursor. UI
+source events are recorded in order as <code>UiSourceEventRecorded</code>, then decoded by
+runtime systems into the typed effects owned by their feature boundary. This is
+not the final completion of every UI message family; it is the ownership rule
+for finishing those families.</p>
 <p>The work board below uses actual owners. Product concepts, runtime boundaries,
 source-format families, and host boundaries may all own rows when they carry real
 implementation work. Aggregate progress buckets are invalid owners.</p>
@@ -151,28 +248,28 @@ implementation work. Aggregate progress buckets are invalid owners.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 16, loaded 21, recorded 50, recover 22, map 2, adapter 5">
-    <div class="plan-seg plan-seg-runs" style="width:13.793103%" title="Runs: 16">13.8%</div>
-    <div class="plan-seg plan-seg-loaded" style="width:18.103448%" title="Loaded: 21">18.1%</div>
-    <div class="plan-seg plan-seg-recorded" style="width:43.103448%" title="Recorded: 50">43.1%</div>
-    <div class="plan-seg plan-seg-recover" style="width:18.965517%" title="Recover: 22">19.0%</div>
-    <div class="plan-seg plan-seg-map" style="width:1.724138%" title="Map: 2">1.7%</div>
-    <div class="plan-seg plan-seg-adapter" style="width:4.310345%" title="Adapter: 5">4.3%</div>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 18, loaded 21, recorded 49, recover 22, map 2, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:15.384615%" title="Runs: 18">15.4%</div>
+    <div class="plan-seg plan-seg-loaded" style="width:17.948718%" title="Loaded: 21">17.9%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:41.880342%" title="Recorded: 49">41.9%</div>
+    <div class="plan-seg plan-seg-recover" style="width:18.803419%" title="Recover: 22">18.8%</div>
+    <div class="plan-seg plan-seg-map" style="width:1.709402%" title="Map: 2">1.7%</div>
+    <div class="plan-seg plan-seg-adapter" style="width:4.273504%" title="Adapter: 5">4.3%</div>
   </div>
   <div class="plan-legend">
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 16</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 18</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 21</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 50</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 49</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-recover"></span>Recover: 22</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-map"></span>Map: 2</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
-  <p class="plan-progress-note">116 work-board rows across 67 top-level domains.</p>
+  <p class="plan-progress-note">117 work-board rows across 67 top-level domains.</p>
  </div>
  <div class="plan-progress-card">
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
-   <dt>Live / loaded / recorded</dt><dd>87</dd>
+   <dt>Live / loaded / recorded</dt><dd>88</dd>
    <dt>Open recovery / mapping</dt><dd>24</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
@@ -180,7 +277,7 @@ implementation work. Aggregate progress buckets are invalid owners.</p>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>16</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>50</dd><dt>Recover</dt><dd>22</dd><dt>Map</dt><dd>2</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>18</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>49</dd><dt>Recover</dt><dd>22</dd><dt>Map</dt><dd>2</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -205,10 +302,18 @@ remain in the functional specification.</p>
 <tr>
   <td>Bevy runtime</td>
   <td>Runtime substrate</td>
-  <td>App, ECS, schedules, states, time, tasks</td>
+  <td>App, ECS, schedules, resources, time, tasks</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Bevy is the live runtime store, scheduler, change tracker, frame loop, top-level app state owner, menu/in-game child substate owner, scoped in-game overlay state owner, retained runtime collection owner, and cross-owner request/effect transport; <code>RuntimeSupport</code> owns timekeeper state while emitted <code>BFTimeEvent</code> facts publish as Bevy messages from the loaded-world tick system.</td>
-  <td>Recover remaining startup/bootstrap order and transition evidence; keep manager effects on the Bevy resource or message stream that has the live consumer.</td>
+  <td>Bevy is the live runtime store, scheduler, change tracker, frame loop, retained runtime collection owner, and cross-owner request/effect transport. Startup systems run while <code>RuntimeResourcesReady</code> is absent; active runtime systems use explicit run conditions against the readiness marker and other ECS facts. Source-authored mode and layout choices are ECS-visible resources resolved from source registries rather than closed Rust state variants. Runtime configuration, session/profile/time, diagnostics, external/web state, and RNG now publish as separate Bevy resources; emitted <code>BFTimeEvent</code> facts publish as Bevy messages from the loaded-world tick system.</td>
+  <td>Recover remaining startup/bootstrap order and transition evidence; add narrower run conditions for specific source-mode classes and loaded-world facts as recovered contracts require them.</td>
+</tr>
+<tr>
+  <td>Bevy runtime</td>
+  <td>Refactor checkpoint</td>
+  <td>Feature boundary cleanup</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>The private <code>game_runtime</code> aggregate is removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, <code>RuntimeSupport</code> is startup seed data rather than a live ECS resource, startup hydration params live under startup resources instead of UI dispatch, UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>, active UI assets rebuild when their loaded asset changes, rich-text resize scaling is scoped to changed owners, and the hover/cursor/help path has a single active-hover owner.</td>
+  <td>Finish splitting the remaining UI event router into feature-owned typed message handlers, break the large startup builder into source-specific builders, and remove the remaining feature-root prelude imports as each module gets explicit owner imports.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -263,7 +368,7 @@ remain in the functional specification.</p>
   <td>Platform APIs</td>
   <td>Window, input, filesystem, OS, network, diagnostics, decoder backends</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on <code>ZTModeMgr</code>.</td>
+  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on the <code>ModeSamples</code> resource.</td>
   <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support.</td>
 </tr>
 <tr>
@@ -327,7 +432,7 @@ remain in the functional specification.</p>
   <td>Host/loose images</td>
   <td><code>.bmp</code> splash and host image inputs</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>The original helper splash is a host-level pre-source surface: <code>Splash.EXE</code> imports Win32 image/window APIs and carries a loose <code>splash.bmp</code> path literal, while the shipped loose <code>SplashImage.bmp</code> is now projected by the Bevy <code>Loading</code> state through the host-file asset source; the later in-game splash remains source-authored UI driven by <code>ZT_SPLASH_CLOSED</code>.</td>
+  <td>The original helper splash is a host-level pre-source surface: <code>Splash.EXE</code> imports Win32 image/window APIs and carries a loose <code>splash.bmp</code> path literal, while the shipped loose <code>SplashImage.bmp</code> is projected by the Bevy startup loading surface through the host-file asset source; the later in-game splash remains source-authored UI driven by <code>ZT_SPLASH_CLOSED</code>.</td>
   <td>Recover the exact filename handoff between <code>Splash.EXE</code>'s <code>splash.bmp</code> literal and the shipped <code>SplashImage.bmp</code>, then decide whether the Bevy launcher should rename/map that host input or preserve the shipped filename as the source boundary.</td>
 </tr>
 <tr>
@@ -503,7 +608,7 @@ remain in the functional specification.</p>
   <td>Startup hydration</td>
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalog, manager, world, terrain, mode, save, audio, renderer, scenario, and support resources into Bevy; hydrated UI documents load into Bevy assets, startup selects the first projected layout from shell-mode state, and app/menu/in-game flow lives in Bevy <code>State</code>, <code>SubStates</code>, <code>NextState</code>, and message effects.</td>
+  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages.</td>
   <td>Recover original manager/load-listener order and replace seeded defaults with source-backed initialization where evidence exists.</td>
 </tr>
 <tr>
@@ -511,15 +616,15 @@ remain in the functional specification.</p>
   <td>UI projection</td>
   <td>Authored UI tree projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source UI documents remain source/hydration inputs, Bevy UI layout requests project hydrated documents into entity trees, generated row templates live with the UI binding runtime that consumes them, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
-  <td>Implement widget families one at a time.</td>
+  <td>Source UI documents remain source/hydration inputs, <code>PresentationSync</code> projects requested or active <code>UiAsset</code> paths into path-bearing <code>UiRoot</code> entity trees, generated row templates live with the UI binding runtime that consumes them, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, and image refs.</td>
+  <td>Implement widget families one at a time and drive visibility from source-authored UI events plus ECS-visible active layout facts.</td>
 </tr>
 <tr>
   <td>UI</td>
   <td>UI dispatch</td>
   <td>UI messages and value handlers</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source-authored UI events, typed payloads, value commands, selected panel handlers, and fixed native app-message effects dispatch through Bevy message/state owners.</td>
+  <td>Source-authored UI events, typed payloads, value commands, selected panel handlers, and fixed native app-message effects dispatch through Bevy messages and the ECS owners of the state they mutate.</td>
   <td>Bind side effects to owning managers panel by panel.</td>
 </tr>
 <tr>
@@ -535,8 +640,8 @@ remain in the functional specification.</p>
   <td>Menu flow</td>
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source layouts and Bevy app/menu/in-game states drive splash and main-menu surfaces, profile/campaign records, resolved shell-mode transitions, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, source-path-derived <code>ZT_SETMODE</code> app/menu classification, scoped in-game settings overlay state, pause/resume, exit confirmation, profile/campaign/load/save panel commands, and exit-to-main-menu through Bevy <code>NextState</code>/presentation effects; decoded menu transitions drive top-level <code>Loading</code>/<code>Menus</code>/<code>InGame</code> state plus Bevy <code>SubStates</code>, source-authored splash show/hide events perform splash visibility changes, and native app messages set concrete child targets for splash/main menu, playing/paused gameplay, and the in-game settings overlay.</td>
-  <td>Recover original menu event ordering, remaining panel row refresh details, and exact file/profile host side effects.</td>
+  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems.</td>
+  <td>Recover original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
 </tr>
 <tr>
   <td>Location</td>
@@ -549,17 +654,17 @@ remain in the functional specification.</p>
 <tr>
   <td>Modes</td>
   <td>Shell modes</td>
-  <td>General mode manager and shell mode stack</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source mode records, hotkeys, event blocks, shell navigation stack, requests, lifecycle events, and active mode state are represented through Bevy-owned runtime state and messages; startup mode-config documents hydrate the catalogue/classes without a duplicate Bevy-side document cache, active-runtime source-mode adapter systems record config/UI/input/unrecovered-handler statuses on <code>ZTModeMgr</code>, and host input samples travel as Bevy messages before captured modifier state is recorded.</td>
-  <td>Recover per-mode input, tick, and message handlers.</td>
+  <td>Source mode registry and active ECS mode</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Source mode records, hotkeys, event blocks, path transitions, requests, and lifecycle events hydrate from <code>modes.xml</code> into <code>ModeRegistry</code>. The live owner is ECS-visible state: <code>ActiveMode</code> stores the current resolved source path, <code>ActiveLayoutPaths</code> stores requested UI layouts, <code>ActiveKeymap</code> stores the current hotkey bindings, and <code>CurrentCursor</code> stores the current cursor token. Transition systems resolve requests against the registry, update those facts, and publish layout, cursor, hotkey, audio, and handler-request effects.</td>
+  <td>Recover per-mode input, tick, and message handlers; add finer run conditions for systems that should only run for particular active mode classes.</td>
 </tr>
 <tr>
   <td>Modes</td>
   <td>Tool modes</td>
   <td>Selection, delete, overview, guest-view modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Selection records, recovered delete-mode value, overview filtering, and guest-view camera/tool state are represented in mode records and Bevy runtime state; delete request, confirmation, and entity removal execution remain unrecovered implementation surfaces.</td>
+  <td>Selection records, recovered delete-mode value, overview filtering, and guest-view camera/tool state are represented in source mode records and Bevy ECS resources/components; delete request, confirmation, and entity removal execution remain unrecovered implementation surfaces.</td>
   <td>Bind modes against live ECS entity/world state.</td>
 </tr>
 <tr>
@@ -567,8 +672,8 @@ remain in the functional specification.</p>
   <td>Tool modes</td>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in mode records and Bevy runtime state; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests are consumed into Bevy-owned climb mode state with applied-duration records on <code>ZTModeMgr</code>.</td>
-  <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers.</td>
+  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in source mode records and Bevy ECS resources/components; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests land on <code>ModeRuntime</code> with source definitions read from <code>ModeRegistry</code>.</td>
+  <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers, then move mode fields that are really entity/world facts onto their owning ECS resources/components.</td>
 </tr>
 <tr>
   <td>Puzzle</td>
@@ -583,7 +688,7 @@ remain in the functional specification.</p>
   <td>File/options modes</td>
   <td>File, load, save, download, options, graphics modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host command handling and publish explicit result messages, menu-side download/options/load shell modes resolve to Bevy menu states from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
+  <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host command handling and publish explicit result messages, menu-side download/options/load shell modes resolve to active source mode/layout ECS facts from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
   <td>Recover exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
 <tr>
@@ -591,7 +696,7 @@ remain in the functional specification.</p>
   <td>Web/downloads/MOTD</td>
   <td>Online index, downloads, update prompts, and MOTD</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the recovered source URL template and downloads-root target, and the active-runtime host-policy system records fetch-ready, missing-URL, or template-expansion request status directly on <code>RuntimeSupport</code>.</td>
+  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the recovered source URL template and downloads-root target, and the active-runtime host-policy system records fetch-ready, missing-URL, or template-expansion request status on the external/web runtime resource.</td>
   <td>Recover URL template expansion, then bind ready web requests to host fetch, local file writes, UI list updates, cancellation, and completion events.</td>
 </tr>
 <tr>
@@ -1015,7 +1120,7 @@ remain in the functional specification.</p>
   <td>Persistence</td>
   <td>Profile/options persistence</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Graphics, audio, user settings, profile events, safe graphics state, registry/path behavior, and options-file values load into <code>RuntimeSupport</code> and record through <code>SaveRuntime</code> effects.</td>
+  <td>Graphics, audio, user settings, profile events, safe graphics state, registry/path behavior, and options-file values load through startup seed data into runtime configuration and session/profile resources, then record through <code>SaveRuntime</code> effects.</td>
   <td>Recover <code>BFUserProfileMgr</code> directory resolution and write order.</td>
 </tr>
 <tr>
