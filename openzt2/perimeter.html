@@ -49,7 +49,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Native function exact IDs</strong> track accepted byte-map names over the current analyzer function list. <strong>Type-cache</strong> bars distinguish named global cache cells from the separate question of whether cache rows, global rows, and getter callsites reconcile. <strong>Vtable</strong> bars track class/vtable naming and virtual slot identity separately. <strong>Byte-map partition coverage</strong> classifies non-overlapping map partitions as known-like or open/unknown-like, avoiding the misleading row-count denominator created by overlapping parent and child ranges.</p>
+  <p><strong>Native function exact IDs</strong> track accepted byte-map names over the current analyzer function list. <strong>Type-cache handles</strong> count recovered cached type-handle cells once; byte-map promotion, global references, and getter bodies are validation sources for that same fact. <strong>Type getter linkage</strong> tracks whether a cache entry is tied to a confirmed native getter function. <strong>Registered parent relationships</strong> track whether that registered type has a resolved parent edge. <strong>Vtable</strong> bars track class/vtable naming and virtual slot identity separately. <strong>Byte-map partition coverage</strong> classifies non-overlapping map partitions as known-like or open/unknown-like, avoiding the misleading row-count denominator created by overlapping parent and child ranges.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
@@ -81,8 +81,6 @@ function hex(s){const n=parseInt(s||"",16);return Number.isFinite(n)?n:null}
 const supportFunctionStatuses=new Set(["generated-support-code","generated-import-data","mapped-data"]);
 const knownByteStatuses=new Set(["known","assessed","copied","consumed","generated-known","indirected","omitted","matches-runtime","external"]);
 function promotedCacheRows(mapRows){return mapRows.filter(r=>(r.details||"").startsWith("Promoted from retired register_type detector evidence. Evidence: cached native type handle"))}
-function rowAddr(r,key="start"){return hex(r[key]||r.address)}
-function rowSet(rows,key="start"){return new Set(rows.map(r=>rowAddr(r,key)).filter(Number.isFinite))}
 function functionRanges(fp){
  return fp.map(r=>{const start=hex(r.address),size=Number(r.size||0);return Number.isFinite(start)&&size>0?{start,end:start+size,row:r}:null}).filter(Boolean).sort((a,b)=>a.start-b.start);
 }
@@ -145,9 +143,6 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
  const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
  const typeCacheDone=typeCacheGlobals.filter(r=>(r.name||"").trim()).length;
  const cacheRows=promotedCacheRows(mapRows);
- const cacheSet=rowSet(cacheRows),globalCacheSet=rowSet(typeCacheGlobals,"address");
- const overlap=[...cacheSet].filter(a=>globalCacheSet.has(a)).length;
- const cacheAlignmentTotal=new Set([...cacheSet,...globalCacheSet]).size;
  const ranges=functionRanges(fp);
  let getterDone=0,getterTotal=0,parentDone=0;
  for(const r of cacheRows){
@@ -168,8 +163,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Native function exact IDs",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionExactDone,notDone:nativeFunctions.length-functionExactDone,doneMeans:"Function row has an accepted exact byte-map identity at the function entry.",notDoneMeans:"Function row is still unidentified or only a candidate exact identity."},
   {name:"Function recovery substrate",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionContextDone,notDone:nativeFunctions.length-functionContextDone,doneMeans:"Function row has an exact/candidate identity or structural context: region, library provenance, vtable membership, or inferred domain.",notDoneMeans:"Function row has no exact identity and no structural context to guide recovery."},
   {name:"Global/static names",den:`${fmt(gp.length)} referenced global/static cells`,done:globalDone,notDone:gp.length-globalDone,doneMeans:"Global row is identified or classified as a type-cache cell.",notDoneMeans:"Global row remains an unidentified referenced address."},
-  {name:"Type-cache global labels",den:`${fmt(typeCacheGlobals.length)} current type-cache global rows`,done:typeCacheDone,notDone:typeCacheGlobals.length-typeCacheDone,doneMeans:"Type-cache global row has a retained name.",notDoneMeans:"Type-cache global row lacks a retained name."},
-  {name:"Type-cache ledger alignment",den:`${fmt(cacheAlignmentTotal)} unique promoted-cache or global-cache addresses`,done:overlap,notDone:cacheAlignmentTotal-overlap,doneMeans:"Address appears in both the promoted registration cache rows and the global type-cache perimeter.",notDoneMeans:"Address appears in only one of those two ledgers and needs reconciliation."},
+  {name:"Type-cache handles",den:`${fmt(typeCacheGlobals.length)} referenced cached type-handle cells`,done:typeCacheDone,notDone:typeCacheGlobals.length-typeCacheDone,doneMeans:"Cached type-handle cell is named in the global/static perimeter.",notDoneMeans:"Referenced cached type-handle cell lacks a retained name."},
   {name:"Type getter linkage",den:`${fmt(getterTotal)} promoted cache rows with getter callsites`,done:getterDone,notDone:getterTotal-getterDone,doneMeans:"Cache getter callsite falls inside a confirmed `get_type_*` function range.",notDoneMeans:"Callsite is outside the current function perimeter or falls inside a non-`get_type_*`/unconfirmed function."},
   {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} promoted cached type registrations`,done:parentDone,notDone:cacheRows.length-parentDone,doneMeans:"Registration evidence includes a resolved parent type name.",notDoneMeans:"Parent evidence is absent or only a parent-getter address."},
   {name:"Vtable class names",den:`${fmt(vtableRows.length)} enumerated vtable rows`,done:vtableClassDone,notDone:vtableRows.length-vtableClassDone,doneMeans:"Vtable row is associated with a recovered class name.",notDoneMeans:"Vtable row still has an address-only `vtable_*` placeholder."},

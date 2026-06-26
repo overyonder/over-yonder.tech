@@ -878,7 +878,7 @@ address	section	name	status
 0x00937044	.data	g_type_ZT_LOADGAME	type-cache
 0x00937048	.data	g_type_ZT_SAVEGAME	type-cache
 0x0093704c	.data	g_type_ZT_DELETEGAME	type-cache
-0x00937050	.data	UI value type globals	type-cache
+0x00937050	.data	g_type_ZT_SETMODE	type-cache
 0x00937054	.data	g_type_ZT_GET_CURRENT_MODE_NAME	type-cache
 0x00937058	.data	g_type_ZT_EXITMODE	type-cache
 0x0093705c	.data	g_type_ZT_CLEARMODE	type-cache
@@ -954,7 +954,7 @@ address	section	name	status
 0x00937174	.data	g_type_ZT_GET_ZOO_NAME	type-cache
 0x00937178	.data	g_type_ZT_SET_MAX_FAME_REACHED	type-cache
 0x0093717c	.data	g_type_ZT_GET_IS_FREEFORM	type-cache
-0x00937180	.data	campaign/freeform, time, admission, fame, and animal-status UI token g	type-cache
+0x00937180	.data	g_type_ZT_GET_IS_CAMPAIGN	type-cache
 0x00937184	.data	g_type_ZT_GET_IS_CHALLENGE	type-cache
 0x00937188	.data	g_type_ZT_ENABLE_TUTORIAL_EYEDROPPER	type-cache
 0x0093718c	.data	g_type_ZT_GET_CURRENT_MONTH	type-cache
@@ -976,7 +976,7 @@ address	section	name	status
 0x009371cc	.data	g_type_ZT_GET_LAST_ANIMAL_RELEASED	type-cache
 0x009371d0	.data	g_type_ZT_GET_ALL_ANIMALS_RELEASED	type-cache
 0x009371d4	.data	g_type_ZT_HAS_ANIMAL_BEEN_RELEASED	type-cache
-0x009371d8	.data	zoopedia, camera, biome, entity, and list UI command-token globals	type-cache
+0x009371d8	.data	g_type_ZT_GET_NUM_EXTINCT_SPECIES_RELEASED	type-cache
 0x009371dc	.data	g_type_ZT_IS_ANIMAL_CRATED	type-cache
 0x009371e0	.data	g_type_ZT_ZOOPEDIA_PREV_ENTRY	type-cache
 0x009371e4	.data	g_type_ZT_ZOOPEDIA_NEXT_ENTRY	type-cache
@@ -1005,8 +1005,8 @@ address	section	name	status
 0x00937240	.data	g_type_ZT_NEW_ENTITY_PLACED	type-cache
 0x00937244	.data	g_type_ZT_EVENTCAPTURED	type-cache
 0x00937248	.data	g_type_ZT_AUTOPOPULATE_LIST	type-cache
-0x0093724c	.data	ZT UI event/value type globals	type-cache
-0x00937250	.data	zoo cash and economy UI command-token globals	type-cache
+0x0093724c	.data	g_type_ZT_ECONOMY_EVENT	type-cache
+0x00937250	.data	g_type_ZT_GET_ZOO_CASH	type-cache
 0x00937254	.data	g_type_ZT_SET_ZOO_CASH	type-cache
 0x00937258	.data	g_type_ZT_ADD_INCOME	type-cache
 0x0093725c	.data	g_type_ZT_ADD_EXPENSE	type-cache
@@ -1014,7 +1014,7 @@ address	section	name	status
 0x00937264	.data	g_type_ZT_GET_ZOO_INCOME	type-cache
 0x00937268	.data	g_type_ZT_GET_ZOO_PROFIT	type-cache
 0x0093726c	.data	g_type_ZT_SET_STARTING_SCENARIO_CASH	type-cache
-0x00937270	.data	transaction, entity-selection, and object-use UI command-token globals	type-cache
+0x00937270	.data	g_type_ZT_GIVE_CASHGRANT	type-cache
 0x00937274	.data	g_type_ZT_REMOVE_CASHGRANT	type-cache
 0x00937278	.data	g_type_ZT_GENERIC_TRANSACTION	type-cache
 0x0093727c	.data	g_type_ZT_GET_COST_BY_BINDER	type-cache
@@ -1041,7 +1041,7 @@ address	section	name	status
 0x009372d0	.data	g_type_ZT_PLAY_NEXT_SCENARIO	type-cache
 0x009372d4	.data	g_type_ZT_FEEDBACK_EVENT	type-cache
 0x009372d8	.data	g_type_ZT_PLAY_TUTORIAL	type-cache
-0x009372dc	.data	staff and keeper assignment UI command-token globals	type-cache
+0x009372dc	.data	g_type_ZT_STAFF_REQUEST	type-cache
 0x009372e0	.data	g_type_ZT_STAFF_CANCEL_REQUEST	type-cache
 0x009372e4	.data	g_type_ZT_HIRE_STAFF	type-cache
 0x009372e8	.data	g_type_ZT_FIRE_STAFF	type-cache
@@ -1058,7 +1058,7 @@ address	section	name	status
 0x00937314	.data	g_type_ZT_DECLINE_ADOPTION	type-cache
 0x00937318	.data	g_type_ZT_DECLINE_ALL_ADOPTIONS	type-cache
 0x0093731c	.data	g_type_ZT_SET_GAME_MODE	type-cache
-0x00937320	.data	animal release UI command-token globals	type-cache
+0x00937320	.data	g_type_ZT_ANIMAL_RELEASE	type-cache
 0x00937324	.data	g_type_ZT_ANIMAL_RELEASE_ZOO	type-cache
 0x00937328	.data	g_type_ZT_ANIMAL_RELEASE_WILD	type-cache
 0x0093732c	.data	g_type_ZT_SET_WORLD_LOCATION	type-cache
@@ -1130,7 +1130,7 @@ address	section	name	status
 0x00937434	.data	g_type_ZT_EXIT_AFTER_SAVE	type-cache
 0x00937438	.data	g_type_ZT_LOAD_AFTER_SAVE	type-cache
 0x0093743c	.data	g_type_ZT_SAVE_SCREENSHOT	type-cache
-0x00937440	.data	biome undo/paint and UI button activation command-token globals	type-cache
+0x00937440	.data	g_type_ZT_BIOME_UNDO_DELETE_FLATTENING	type-cache
 0x00937444	.data	g_type_ZT_BIOME_UNDO_RECREATE_FLATTENING	type-cache
 0x00937448	.data	g_type_ZT_BIOME_PAINT_TREES	type-cache
 0x0093744c	.data	g_type_ZT_BIOME_PAINT_FOLIAGE	type-cache
@@ -1138,7 +1138,7 @@ address	section	name	status
 0x00937454	.data	g_type_ZT_ACTIVATE_UI_BUTTON	type-cache
 0x00937458	.data	g_type_ZT_ACTIVATE_ON_UI_BUTTON	type-cache
 0x0093745c	.data	g_type_ZT_SET_BINDERROOT_RELOADABLE	type-cache
-0x00937460	.data	binder reload, tool, file-path, and log UI command-token globals	type-cache
+0x00937460	.data	g_type_ZT_RELOAD_BINDER	type-cache
 0x00937464	.data	g_type_ZT_CLEANUP_TRASHED_BINDERS	type-cache
 0x00937468	.data	g_type_ZT_TOOL_COMMAND	type-cache
 0x0093746c	.data	g_type_ZT_GET_ABSOLUTE_FILE_PATH	type-cache
@@ -1147,7 +1147,7 @@ address	section	name	status
 0x00937478	.data	g_type_ZT_RUN_SCRIPT	type-cache
 0x0093747c	.data	g_type_ZT_RUN_LOP	type-cache
 0x00937480	.data	g_type_ZT_SET_LOP_DURATION	type-cache
-0x00937484	.data	recording/download and vehicle-circuit UI command token globals	type-cache
+0x00937484	.data	g_type_ZT_START_RECORDING	type-cache
 0x00937488	.data	g_type_ZT_STOP_RECORDING	type-cache
 0x0093748c	.data	g_type_ZT_TOGGLE_OPTIMIZATION	type-cache
 0x00937490	.data	g_type_ZT_EXIT_DOWNLOADS	type-cache
@@ -1155,7 +1155,7 @@ address	section	name	status
 0x00937498	.data	g_type_ZT_TOGGLE_CIRCUIT_STATUS	type-cache
 0x0093749c	.data	g_type_ZT_CHANGE_CIRCUIT_DIRECTION	type-cache
 0x009374a0	.data	g_type_ZT_SELECT_VEHICLE_TYPE	type-cache
-0x009374a4	.data	circuit, elevated-placement, skytrack, and interaction UI command toke	type-cache
+0x009374a4	.data	g_type_ZT_GET_CIRCUIT	type-cache
 0x009374a8	.data	g_type_ZT_GET_CLOSED_CIRCUIT	type-cache
 0x009374ac	.data	g_type_ZT_GET_NUM_FORWARD_SEGMENTS	type-cache
 0x009374b0	.data	g_type_ZT_GET_ECONOMY_COMPONENT	type-cache
@@ -1178,7 +1178,7 @@ address	section	name	status
 0x009374f4	.data	g_type_ZT_GET_RIDING_SEAT_INDEX	type-cache
 0x009374f8	.data	g_type_ZT_GET_CONNECTED_SKY_PIECE	type-cache
 0x009374fc	.data	g_type_ZT_GET_ENTITY_TYPE_INDEX	type-cache
-0x00937500	.data	tour, birth, spline, gesture, and show-setup UI command token globals	type-cache
+0x00937500	.data	g_type_ZT_GET_LIFETIME_USERS	type-cache
 0x00937504	.data	g_type_ZT_GET_LIFETIME_INCOME	type-cache
 0x00937508	.data	g_type_ZT_GET_TOUR_STARRATING	type-cache
 0x0093750c	.data	g_type_ZT_REPLACE_ZOO_WALLS	type-cache
@@ -1242,11 +1242,11 @@ address	section	name	status
 0x009375f4	.data	g_type_ZT_POST_ENTER_VEHICLE	type-cache
 0x009375f8	.data	g_type_ZT_SET_VEHICLE_UNDO_IN_PROGRESS	type-cache
 0x009375fc	.data	g_type_ZT_SET_UNDO_STATION	type-cache
-0x00937600	.data	station undo and show-action UI command token globals	type-cache
+0x00937600	.data	g_type_ZT_SET_UNDO_STATION_IS_RETURN_STATION	type-cache
 0x00937604	.data	g_type_ZT_ACTION_CONFIRMED	type-cache
 0x00937608	.data	g_type_ZT_UPDATE_SELL_MESSAGE	type-cache
 0x0093760c	.data	g_type_ZT_GET_NUM_PASSENGERS_ON_CIRCUIT	type-cache
-0x00937610	.data	show-mixer event and child UI command token globals	type-cache
+0x00937610	.data	g_type_ZT_SHOWMIXER_EVENT	type-cache
 0x00937614	.data	g_type_ZT_SHOWMIXER_SETSHOWPLATFORM	type-cache
 0x00937618	.data	g_type_ZT_SHOWMIXER_SETSHOWBYINDEX	type-cache
 0x0093761c	.data	g_type_ZT_SHOWMIXER_SHOWMIXERPANEL	type-cache
@@ -1278,7 +1278,7 @@ address	section	name	status
 0x00937684	.data	g_type_ZT_SHOWMIXER_ENABLE_ANIMAL	type-cache
 0x00937688	.data	g_type_ZT_SHOWMIXER_ENABLE_TRICK	type-cache
 0x0093768c	.data	g_type_ZT_SHOWMIXER_IS_WAIT_TRICK	type-cache
-0x00937690	.data	show-mixer shutdown and show-scheduler UI command token globals	type-cache
+0x00937690	.data	g_type_ZT_SHOWMIXER_SHUTDOWN_UI	type-cache
 0x00937694	.data	g_type_ZT_SHOWSCHEDULER_EVENT	type-cache
 0x00937698	.data	g_type_ZT_SHOWSCHEDULER_ADDSHOW	type-cache
 0x0093769c	.data	g_type_ZT_SHOWSCHEDULER_REQUEST_ADDSHOW	type-cache
@@ -1293,7 +1293,7 @@ address	section	name	status
 0x009376c0	.data	g_type_ZT_SHOWSCHEDULER_TOGGLEENABLE	type-cache
 0x009376c4	.data	g_type_ZT_SHOWSCHEDULER_ENTRYDOUBLECLICK	type-cache
 0x009376c8	.data	g_type_ZT_SHOWSCHEDULER_SCHEDULERTABCLICKED	type-cache
-0x009376cc	.data	tank command/status UI value token globals	type-cache
+0x009376cc	.data	g_type_ZT_SET_TANK_WALL_HEIGHT	type-cache
 0x009376d0	.data	g_type_ZT_SET_TANK_FLOOR_HEIGHT	type-cache
 0x009376d4	.data	g_type_ZT_FILL_TANK	type-cache
 0x009376d8	.data	g_type_ZT_DRAIN_TANK	type-cache
@@ -1301,7 +1301,7 @@ address	section	name	status
 0x009376e0	.data	g_type_ZT_GET_TANK_FLOOR_HEIGHT	type-cache
 0x009376e4	.data	g_type_ZT_GET_TANK_WATER_HEIGHT	type-cache
 0x009376e8	.data	g_type_ZT_IS_TANK_IN_WORLD	type-cache
-0x009376ec	.data	confirmation, options, show timer, filter, trainer, placement, upgrade	type-cache
+0x009376ec	.data	g_type_ZT_CANCEL_GENERIC_CONFIRMATION	type-cache
 0x009376f0	.data	g_type_ZT_GENERIC_CONFIRMATION_PROCEED	type-cache
 0x009376f4	.data	g_type_ZT_REQUEST_IN_GAME_OPTIONS	type-cache
 0x009376f8	.data	g_type_ZTSHOWTIMERMANAGER_SHUTDOWN_UI	type-cache
@@ -1317,10 +1317,10 @@ address	section	name	status
 0x00937720	.data	g_type_ZT_SET_CURRENT_SHOW_FOR_DONATIONS	type-cache
 0x00937724	.data	g_type_ZT_SET_SHOW_TO_SELECT	type-cache
 0x00937728	.data	g_type_ZT_CLEAR_USAGE_OBJECT	type-cache
-0x0093772c	.data	logging answer UI value globals	type-cache
+0x0093772c	.data	g_type_ZT_ACCEPT_LOGGING	type-cache
 0x00937730	.data	g_type_ZT_DECLINE_LOGGING	type-cache
 0x00937734	.data	g_type_ZT_VINCE_QUESTION_ANSWERED	type-cache
-0x00937738	.data	cloning, puzzle, disease, tranq, fossil, mouse-prompt, placement, and 	type-cache
+0x00937738	.data	g_type_ZT_SET_CLONING_SPECIES	type-cache
 0x0093773c	.data	g_type_ZT_ENTER_CLONING_MODE	type-cache
 0x00937740	.data	g_type_ZT_SET_CLONING_CENTER	type-cache
 0x00937744	.data	g_type_ZT_SET_NEXT_CLONED_SPECIES	type-cache
@@ -1367,7 +1367,7 @@ address	section	name	status
 0x009377e8	.data	g_type_ZT_HIDE_MOUSE_PROMPT	type-cache
 0x009377ec	.data	g_type_ZT_NO_PLACEMENT_IN_TANK_WITH_ANIMALS	type-cache
 0x009377f0	.data	g_type_ZT_ENABLE_ADOPTION	type-cache
-0x009377f4	.data	g_type_ZT_ENABLE_ADOPTION_init_flag	type-cache
+0x009377f4	.data	g_type_ZT_ENABLE_ADOPTION_init_flag	identified
 0x00937800	.data		unidentified
 0x00937808	.data		unidentified
 0x0093780c	.data		unidentified
@@ -1383,7 +1383,7 @@ address	section	name	status
 0x0093784c	.data		unidentified
 0x00937850	.data		unidentified
 0x00937854	.data		unidentified
-0x00937864	.data	BFSND audio command-token globals	type-cache
+0x00937864	.data	g_type_BFSND_MASTER_VOLUME	type-cache
 0x00937868	.data	g_type_BFSND_GET_VOLUME	type-cache
 0x0093786c	.data	g_type_BFSND_MODIFY_VOLUME	type-cache
 0x00937870	.data	g_type_BFG_ACTIVATE_GLOBALSOUNDDUCKING	type-cache
@@ -1462,7 +1462,7 @@ address	section	name	status
 0x00937da0	.data		unidentified
 0x00937da8	.data	0x00937da8 g_ui_value_assignment_dependent_update_registry_sentinel_no	identified
 0x00937dac	.data		unidentified
-0x00937db0	.data	BFUNDO event command-token globals	type-cache
+0x00937db0	.data	g_type_BFUNDO_EVENT	type-cache
 0x00937db4	.data	g_type_BFUNDO_ACTIVATETRANSACTION	type-cache
 0x00937dd8	.data		unidentified
 0x00937de0	.data		unidentified
@@ -1470,16 +1470,16 @@ address	section	name	status
 0x00937df8	.data	g_type_BF_GET_HEARTBEAT	type-cache
 0x00937e00	.data		unidentified
 0x00937e04	.data		unidentified
-0x00937e08	.data	BFTIME command-token globals	type-cache
+0x00937e08	.data	g_type_BFTIME_EVENT	type-cache
 0x00937e0c	.data	g_type_BFTIME_HEARTBEAT	type-cache
 0x00937e10	.data	g_type_BFTIME_SIMTICK	type-cache
 0x00937e14	.data	g_type_BFTIME_SLOWTICK	type-cache
 0x00937e1c	.data		unidentified
 0x00937e24	.data	g_type_BFUSERPROFILE_EVENT	type-cache
-0x00937e28	.data	profile UI value globals	type-cache
+0x00937e28	.data	g_type_BFUSERPROFILE_ADD_PROFILE	type-cache
 0x00937e2c	.data	g_type_BFUSERPROFILE_REMOVE_PROFILE	type-cache
 0x00937e30	.data	g_type_BFUSERPROFILE_SET_PROFILE	type-cache
-0x00937e34	.data	BFUserProfile option/result UI token globals	type-cache
+0x00937e34	.data	g_type_BFUSERPROFILE_OPTIONS_CHANGED	type-cache
 0x00937e38	.data	g_type_BFUSERPROFILE_ACTION_SUCCEEDED	type-cache
 0x00937e3c	.data	g_type_BFUSERPROFILE_ACTION_FAILED	type-cache
 0x00937e48	.data		unidentified
@@ -1495,7 +1495,7 @@ address	section	name	status
 0x00937e88	.data		unidentified
 0x00937e8c	.data		unidentified
 0x00937eac	.data		unidentified
-0x00937ec8	.data	performance command token globals	type-cache
+0x00937ec8	.data	g_type_BF_PERF_INCREASE	type-cache
 0x00937ecc	.data	g_type_BF_PERF_DECREASE	type-cache
 0x00937ed0	.data	g_type_BF_GRAPHICS_PERF_INCREASE	type-cache
 0x00937ed4	.data	g_type_BF_GRAPHICS_PERF_DECREASE	type-cache
@@ -1514,7 +1514,7 @@ address	section	name	status
 0x009380e8	.data		unidentified
 0x009380ec	.data		unidentified
 0x009380f0	.data		unidentified
-0x009380f8	.data	BEH event command-token globals and scalar	type-cache
+0x009380f8	.data	g_type_BEH_EVENT_ROOT	type-cache
 0x009380fc	.data	g_type_BEH_APPEND	type-cache
 0x00938100	.data	g_type_BEH_END	type-cache
 0x00938104	.data	g_type_BEH_INTERRUPT	type-cache
@@ -1526,7 +1526,7 @@ address	section	name	status
 0x0093811c	.data	g_type_BEH_COMPLETE	type-cache
 0x00938120	.data	g_type_BEH_FAILURE	type-cache
 0x0093812c	.data		unidentified
-0x00938130	.data	BFAI event and action command-token globals	type-cache
+0x00938130	.data	g_type_BFAI_EVENT	type-cache
 0x00938134	.data	g_type_BFAI_CREATE_ENTITY	type-cache
 0x00938138	.data	g_type_BFAI_DESTROY_ENTITY	type-cache
 0x0093813c	.data	g_type_BFAI_REGISTER_ENTITY	type-cache
@@ -1599,7 +1599,7 @@ address	section	name	status
 0x00938444	.data		unidentified
 0x00938460	.data		unidentified
 0x00938464	.data		unidentified
-0x00938468	.data	BFAI locomotion event-token globals	type-cache
+0x00938468	.data	g_type_LOCO_EVENT_ROOT	type-cache
 0x0093846c	.data	g_type_REQUEST_VELOCITY	type-cache
 0x00938470	.data	g_type_RETURN_VELOCITY	type-cache
 0x00938474	.data	g_type_RESOLVE_COLLISIONS	type-cache
@@ -1647,7 +1647,7 @@ address	section	name	status
 0x0093857c	.data		unidentified
 0x00938580	.data		unidentified
 0x00938584	.data		unidentified
-0x00938590	.data	BFAI steering event-token globals	type-cache
+0x00938590	.data	g_type_STEER_EVENT_ROOT	type-cache
 0x00938594	.data	g_type_STEER_ADD	type-cache
 0x00938598	.data	g_type_STEER_ADDED	type-cache
 0x0093859c	.data	g_type_STEER_REMOVE	type-cache
@@ -1655,7 +1655,7 @@ address	section	name	status
 0x009385a4	.data	g_type_STEER_DESTROY	type-cache
 0x009385a8	.data	g_type_STEER_DESTROYED	type-cache
 0x009385ac	.data	g_type_STEER_DESTROY_ALL	type-cache
-0x009385b0	.data	g_type_STEER_DESTROY_ALL_init_flag	type-cache
+0x009385b0	.data	g_type_STEER_DESTROY_ALL_init_flag	identified
 0x009385b4	.data	steering/runtime cleanup-list globals after steering tokens	identified
 0x009385b8	.data		unidentified
 0x009385bc	.data		unidentified
@@ -1666,7 +1666,7 @@ address	section	name	status
 0x009385d0	.data		unidentified
 0x009385d4	.data		unidentified
 0x009385d8	.data	BFBehFollowEntity object freelist head	identified
-0x00938648	.data	UI framework root event/list/input command-token globals	type-cache
+0x00938648	.data	g_type_UI_EVENT	type-cache
 0x0093864c	.data	g_type_UI_EVENTLIST	type-cache
 0x00938650	.data	g_type_UI_HANDLE	type-cache
 0x00938654	.data	g_type_UI_ACK	type-cache
@@ -1740,7 +1740,7 @@ address	section	name	status
 0x00938764	.data	g_type_UI_REPRESS	type-cache
 0x00938768	.data	g_type_UI_CAN_BE_TOGGLED	type-cache
 0x0093876c	.data	g_type_UI_ACTIVATE_DATA	type-cache
-0x00938770	.data	UI alert/notify/changed event command-token globals	type-cache
+0x00938770	.data	g_type_UI_ALERT_RETURN	type-cache
 0x00938774	.data	g_type_UI_NOTIFY_PARENT	type-cache
 0x00938778	.data	g_type_UI_NOTIFY_CHILD	type-cache
 0x0093877c	.data	g_type_UI_NOTIFY_TARGET	type-cache
@@ -1751,7 +1751,7 @@ address	section	name	status
 0x00938790	.data	g_type_UI_CHANGED_TARGET	type-cache
 0x00938794	.data	g_type_UI_MONEY_SPEND	type-cache
 0x00938798	.data	g_type_UI_MONEY_RECEIVE	type-cache
-0x0093879c	.data	UI changed/modify/layout presentation command-token globals	type-cache
+0x0093879c	.data	g_type_UI_CHANGED_TEXT	type-cache
 0x009387a0	.data	g_type_UI_CHANGED_HTML	type-cache
 0x009387a4	.data	g_type_UI_CHANGED_VALUE	type-cache
 0x009387a8	.data	g_type_UI_CHANGED_TEXT_ENTER	type-cache
@@ -1782,18 +1782,18 @@ address	section	name	status
 0x0093880c	.data	g_type_UI_SET_ALPHA	type-cache
 0x00938810	.data	g_type_UI_SET_TEXT_ALPHA	type-cache
 0x00938814	.data	g_type_UI_SET_IMAGE	type-cache
-0x00938818	.data	UI image/text formatting command-token globals	type-cache
+0x00938818	.data	g_type_UI_SET_SRC_RECT	type-cache
 0x0093881c	.data	g_type_UI_SET_TEXT_FORMAT	type-cache
 0x00938820	.data	g_type_UI_SET_XML	type-cache
 0x00938824	.data	g_type_UI_SET_LOCID	type-cache
 0x00938828	.data	g_type_UI_SET_TEXT	type-cache
 0x0093882c	.data	g_type_UI_SET_HTML	type-cache
 0x00938830	.data	g_type_UI_SET_VALUE	type-cache
-0x00938834	.data	UI edit/range/scroll command-token globals	type-cache
+0x00938834	.data	g_type_UI_SET_EDIT	type-cache
 0x00938838	.data	g_type_UI_SET_RANGE	type-cache
 0x0093883c	.data	g_type_UI_SCROLL	type-cache
 0x00938840	.data	g_type_UI_SET_SCROLL	type-cache
-0x00938844	.data	UI paging/modal/query/get/target/mouse command-token globals	type-cache
+0x00938844	.data	g_type_UI_PAGE_UP	type-cache
 0x00938848	.data	g_type_UI_PAGE_DOWN	type-cache
 0x0093884c	.data	g_type_UI_SET_MODAL	type-cache
 0x00938850	.data	g_type_UI_SET_STT	type-cache
@@ -1923,7 +1923,7 @@ address	section	name	status
 0x00944960	.data		unidentified
 0x00944964	.data		unidentified
 0x00944970	.data	g_type_BFG_EVENT	type-cache
-0x00944974	.data	broad event/type key globals	type-cache
+0x00944974	.data	g_type_BFG_ATTACH_ENTITY	type-cache
 0x00944978	.data	g_type_BFG_SET_ENTITY_COLOR	type-cache
 0x0094497c	.data	g_type_BFG_ATTACH_WORLD	type-cache
 0x00944980	.data	g_type_BFG_DETACH_WORLD	type-cache
@@ -1954,7 +1954,7 @@ address	section	name	status
 0x009449e4	.data	g_type_BFG_GET_CAMERA_Z	type-cache
 0x009449e8	.data	g_type_BFG_GET_CAMERA_ZOOM	type-cache
 0x009449ec	.data	g_type_BFG_GET_CAMERA_YAW	type-cache
-0x009449f0	.data	BFG extended command/query token globals	type-cache
+0x009449f0	.data	g_type_BFG_GET_DERIVED_TYPES	type-cache
 0x009449f4	.data	g_type_BFG_GET_DERIVED_LEAF_TYPES	type-cache
 0x009449f8	.data	g_type_BFG_MOVE_ENTITY	type-cache
 0x009449fc	.data	g_type_BFG_MORPH_ENTITY	type-cache
@@ -2037,7 +2037,7 @@ address	section	name	status
 0x00944b30	.data	g_type_BFG_SET_DRT_TIMEIN_OVERRIDE	type-cache
 0x00944b34	.data	g_type_BFG_SET_ALLOW_FP_TRANQ	type-cache
 0x00944b38	.data	g_type_BFG_SUPPRESS_RAMPAGE_TIMEOUT	type-cache
-0x00944b3c	.data	BFG component, rampage, and physics metadata initializer globals	type-cache
+0x00944b3c	.data	BFG component, rampage, and physics metadata initializer globals	identified
 0x00944b40	.data		unidentified
 0x00944b44	.data		unidentified
 0x00944b58	.data		unidentified
@@ -2066,9 +2066,9 @@ address	section	name	status
 0x00944c48	.data		unidentified
 0x00944c4c	.data		unidentified
 0x00944c50	.data		unidentified
-0x00944c80	.data	BFGECONOMY event and transaction token globals	type-cache
+0x00944c80	.data	g_type_BFGECONOMY_EVENT	type-cache
 0x00944c84	.data	g_type_BFGECONOMY_DO_TRANSACTION	type-cache
-0x00944c88	.data	post-BFGECONOMY helper-return cache globals	type-cache
+0x00944c88	.data	post-BFGECONOMY helper-return cache globals	identified
 0x00944c8c	.data		unidentified
 0x00944c90	.data		unidentified
 0x00944c98	.data		unidentified
@@ -2127,13 +2127,13 @@ address	section	name	status
 0x00944e98	.data		unidentified
 0x00944ec8	.data		unidentified
 0x00944ecc	.data		unidentified
-0x00944ed0	.data	BFTERRAIN undo/charge event token globals	type-cache
+0x00944ed0	.data	g_type_BFTERRAIN_EVENT	type-cache
 0x00944ed4	.data	g_type_BFTERRAIN_START_UNDO_DATA	type-cache
 0x00944ed8	.data	g_type_BFTERRAIN_END_UNDO_DATA	type-cache
 0x00944edc	.data	g_type_BFTERRAIN_EXECUTE_UNDO	type-cache
 0x00944ee0	.data	g_type_BFTERRAIN_CHARGE	type-cache
 0x00944ee4	.data	g_type_BFTERRAIN_FINAL_CHARGE	type-cache
-0x00944ee8	.data	BF3D render/camera/animation event token globals	type-cache
+0x00944ee8	.data	g_type_BF3D_EVENT_ROOT	type-cache
 0x00944eec	.data	g_type_BF3DEVENT_INTERPOLATE_COMPLETE	type-cache
 0x00944ef0	.data	g_type_BF3DEVENT_FADE_COMPLETE	type-cache
 0x00944ef4	.data	g_type_BF3DEVENT_FADE_INTERRUPTED	type-cache
@@ -2166,7 +2166,7 @@ address	section	name	status
 0x009450ac	.data		unidentified
 0x009450b0	.data		unidentified
 0x009450b4	.data		unidentified
-0x009450d4	.data	ACTOR_EVENT animation token globals	type-cache
+0x009450d4	.data	g_type_ACTOR_EVENT_ROOT	type-cache
 0x009450d8	.data	g_type_ANIM_END	type-cache
 0x009450dc	.data	g_type_ANIM_ADJUST	type-cache
 0x009450e0	.data	g_type_ANIM_REQUEST	type-cache
@@ -2278,7 +2278,7 @@ address	section	name	status
 0x00945a90	.data		unidentified
 0x00945a94	.data		unidentified
 0x00945a98	.data		unidentified
-0x00945ab0	.data	BFS child command token globals before BFS_EVENT key	type-cache
+0x00945ab0	.data	g_type_BFS_SET_CHALLENGE_DELAY	type-cache
 0x00945ab4	.data	g_type_BFS_HIDERULE	type-cache
 0x00945ab8	.data	g_type_BFS_SETGLOBALVAR	type-cache
 0x00945abc	.data	g_type_BFS_SETALTTEXT	type-cache
@@ -2303,10 +2303,10 @@ address	section	name	status
 0x00945b08	.data	g_type_BFS_VALIDATEALLCHALLENGES	type-cache
 0x00945b0c	.data	g_type_BFS_PICKCHALLENGE	type-cache
 0x00945b10	.data	g_type_BFS_EVENT	type-cache
-0x00945b14	.data	BFS child command token globals after BFS_EVENT key	type-cache
+0x00945b14	.data	g_type_BFS_ADD_SCENARIO_OBJECT	type-cache
 0x00945b18	.data	g_type_BFS_PROCESS_VINCE	type-cache
 0x00945b1c	.data	g_type_BFS_GETUSERVAL	type-cache
-0x00945b20	.data	g_type_BFS_GETUSERVAL_init_flag	type-cache
+0x00945b20	.data	g_type_BFS_GETUSERVAL_init_flag	identified
 0x00945b24	.data	COM apartment/object helper globals	identified
 0x00945b2c	.data	cached SendMessageA callable cell	identified
 0x00945b38	.data		unidentified
@@ -2416,7 +2416,7 @@ address	section	name	status
 0x00946234	.data	g_type_ZTAI_SHOW_UNDO_PROP_DELETION	type-cache
 0x00946238	.data	g_type_ZTAI_SHOW_ADD_DONATION	type-cache
 0x0094623c	.data	g_type_ZTAI_SHOW_NUM_DONORS	type-cache
-0x00946240	.data	g_type_ZTAI_SHOW_NUM_DONORS_init_flag	type-cache
+0x00946240	.data	g_type_ZTAI_SHOW_NUM_DONORS_init_flag	identified
 0x00946264	.data		unidentified
 0x00946268	.data		unidentified
 0x0094626c	.data		unidentified
@@ -2488,9 +2488,9 @@ address	section	name	status
 0x00946628	.data		unidentified
 0x00946630	.data		unidentified
 0x00946634	.data		unidentified
-0x00946638	.data	ZT_PHOTOEVENT parent/type token globals	type-cache
+0x00946638	.data	g_type_ZT_PHOTOEVENT	type-cache
 0x0094663c	.data	g_type_ZT_PHOTOEVENT_TYPE	type-cache
-0x00946640	.data	ZT_PHOTOEVENT camera/album child token cache globals	type-cache
+0x00946640	.data	g_type_ZT_PHOTOEVENT_TAKE_PHOTO	type-cache
 0x00946644	.data	g_type_ZT_PHOTOEVENT_PICTURE_TAKEN	type-cache
 0x00946648	.data	g_type_ZT_PHOTOEVENT_NUM_PICTURES	type-cache
 0x0094664c	.data	g_type_ZT_PHOTOEVENT_ENLARGE	type-cache
@@ -2514,7 +2514,7 @@ address	section	name	status
 0x00946694	.data	g_type_ZT_PHOTOEVENT_MOVE_EXIT	type-cache
 0x00946698	.data	g_type_ZT_PHOTOEVENT_MOVE_SELECTED_TARGET	type-cache
 0x0094669c	.data	g_type_ZT_PHOTOEVENT_MOVE_SELECTED_PICTURE_CANCELED	type-cache
-0x009466a0	.data	ZT_PHOTOEVENT challenge child token cache globals	type-cache
+0x009466a0	.data	g_type_ZT_PHOTOEVENT_DELETE_SELECTED_PICTURE	type-cache
 0x009466a4	.data	g_type_ZT_PHOTOEVENT_DELETE_ALBUM_PICTURE	type-cache
 0x009466a8	.data	g_type_ZT_PHOTOEVENT_DELETE_CAMERA_PICTURE	type-cache
 0x009466ac	.data	g_type_ZT_PHOTOEVENT_SUBMIT_CHALLENGE_PHOTOS	type-cache
@@ -3590,7 +3590,7 @@ address	section	name	status
 0x0094d5f4	.data		unidentified
 0x0094d5f8	.data		unidentified
 0x0094d5fc	.data		unidentified
-0x0094d604	.data	unresolved mixed static/list/default cells before XML attribute type c	type-cache
+0x0094d604	.data	unresolved mixed static/list/default cells before XML attribute type c	identified
 0x0094d608	.data		unidentified
 0x0094d60c	.data		unidentified
 0x0094d614	.data		unidentified
@@ -3599,9 +3599,9 @@ address	section	name	status
 0x0094d63c	.data		unidentified
 0x0094d648	.data		unidentified
 0x0094d64c	.data		unidentified
-0x0094d668	.data	BFXMLAttribute type-cache globals	type-cache
+0x0094d668	.data	g_type_BFXMLAttribute	type-cache
 0x0094d670	.data	g_type_BFSafeHandledObj	type-cache
-0x0094d678	.data	BFSafeHandleBase type-cache globals	type-cache
+0x0094d678	.data	g_type_BFSafeHandleBase	type-cache
 0x0094d680	.data	g_type_BFXMLObj	type-cache
 0x0094d688	.data	g_type_BFSafeHandle<ZTTank>	type-cache
 0x0094d690	.data	g_type_BFSafeHandle<ZTTrickButtonMgr>	type-cache
@@ -3622,7 +3622,7 @@ address	section	name	status
 0x0094d780	.data	g_type_BFSafeHandle<ZTWorldSndMgr>	type-cache
 0x0094d790	.data	g_type_BFSafeHandle<ZTAIStaffMgr>	type-cache
 0x0094d7a0	.data	g_type_(computed)	type-cache
-0x0094d7a8	.data	ZTPredicate type-cache globals	type-cache
+0x0094d7a8	.data	g_type_ZTPredicate	type-cache
 0x0094d7b0	.data	g_type_ZTEntityTypePredicate	type-cache
 0x0094d7b8	.data	g_type_ZTAnimalFilter	type-cache
 0x0094d7c0	.data	g_type_ZTAnimalAttributeFilter	type-cache
@@ -3693,7 +3693,7 @@ address	section	name	status
 0x0094db1c	.data	g_type_ZTAIShowEvent	type-cache
 0x0094db24	.data	g_type_ZTAITrickData	type-cache
 0x0094db2c	.data	g_type_ZTStaffRequestData	type-cache
-0x0094db34	.data	BFSafeHandle<ZTAIShowComponent> type-cache/static cells	type-cache
+0x0094db34	.data	g_type_BFSafeHandle<BFWaterGroup>	type-cache
 0x0094db44	.data	g_type_ZTAIShowScheduler	type-cache
 0x0094db4c	.data	g_type_ZTAIStaffAssignment	type-cache
 0x0094db54	.data	g_type_BFSafeHandle<ZTAIShow>	type-cache
@@ -3797,8 +3797,8 @@ address	section	name	status
 0x0094df6c	.data	g_type_BFComponentHandleVector	type-cache
 0x0094df74	.data	g_type_BFHeartbeatData	type-cache
 0x0094df80	.data	g_type_BFXMLNode	type-cache
-0x0094df88	.data	BFComponent type cache globals	type-cache
-0x0094df90	.data	BFUndoMgr type-cache globals	type-cache
+0x0094df88	.data	g_type_BFComponent	type-cache
+0x0094df90	.data	g_type_BFUndoMgr	type-cache
 0x0094df98	.data	g_type_BFRefCountedXMLObj	type-cache
 0x0094dfa0	.data	g_type_BFSafeHandle<BFScriptContextMgr>	type-cache
 0x0094dfb0	.data	g_type_BFSafeHandle<BFLoadListener>	type-cache
@@ -3814,7 +3814,7 @@ address	section	name	status
 0x0094e050	.data	g_type_BFSafeHandle<BFPerformanceMonitor>	type-cache
 0x0094e060	.data	g_type_BFUndoTransactionData	type-cache
 0x0094e068	.data	g_type_BFSafeHandle<BFSafeHandledObj>	type-cache
-0x0094e078	.data	BFLocaleMgr type-cache globals	type-cache
+0x0094e078	.data	g_type_BFLocaleMgr	type-cache
 0x0094e080	.data	g_type_BFSoundStageMgr	type-cache
 0x0094e088	.data	g_type_BFSoundtag	type-cache
 0x0094e090	.data	g_type_BFSoundStage	type-cache
@@ -3823,7 +3823,7 @@ address	section	name	status
 0x0094e0a8	.data	g_type_BFSnd	type-cache
 0x0094e0b0	.data	g_type_BF2DSnd	type-cache
 0x0094e0b8	.data	g_type_BFSoundMgr	type-cache
-0x0094e0c0	.data	ZTDevConsole type-cache globals	type-cache
+0x0094e0c0	.data	g_type_ZTDevConsole	type-cache
 0x0094e0c8	.data	g_type_ZTAwardMgr	type-cache
 0x0094e0d0	.data	g_type_ZTShowTimerManager	type-cache
 0x0094e0d8	.data	g_type_ZTShowMixerManager	type-cache
@@ -3880,34 +3880,34 @@ address	section	name	status
 0x0094e264	.data	g_type_ZTPath	type-cache
 0x0094e26c	.data	g_type_ZTMovieList	type-cache
 0x0094e274	.data	g_type_ZTMapData	type-cache
-0x0094e27c	.data	ZTLocationMgr type-cache globals	type-cache
-0x0094e284	.data	ZTLocationEntry type-cache globals	type-cache
-0x0094e28c	.data	ZTItemFilter type-cache globals	type-cache
-0x0094e294	.data	ZTGestureMgr type-cache globals	type-cache
-0x0094e29c	.data	ZTGestureComponent type-cache globals	type-cache
-0x0094e2a4	.data	ZTGate type-cache globals	type-cache
+0x0094e27c	.data	g_type_ZTLocationMgr	type-cache
+0x0094e284	.data	g_type_ZTLocationEntry	type-cache
+0x0094e28c	.data	g_type_ZTItemFilter	type-cache
+0x0094e294	.data	g_type_ZTGestureMgr	type-cache
+0x0094e29c	.data	g_type_ZTGestureComponent	type-cache
+0x0094e2a4	.data	g_type_ZTGate	type-cache
 0x0094e2b0	.data	g_type_ZTFenceSegmentInfo	type-cache
 0x0094e2b8	.data	g_type_ZTFence	type-cache
 0x0094e2c0	.data	g_type_ZTFeedbackMgr	type-cache
 0x0094e2c8	.data	g_type_ZTFeedbackComponent	type-cache
-0x0094e2d0	.data	ZTFavoriteAnimalMgr type-cache globals	type-cache
+0x0094e2d0	.data	g_type_ZTSharedFeedbackData	type-cache
 0x0094e2d8	.data	g_type_ZTMessageInfo	type-cache
 0x0094e2e0	.data	g_type_ZTActionInfo	type-cache
 0x0094e2e8	.data	g_type_ZTThoughtInfo	type-cache
-0x0094e2f0	.data	ZTEntitySelector type-cache globals	type-cache
-0x0094e2f8	.data	ZTExtraPaths type-cache globals	type-cache
-0x0094e300	.data	ZTExpandoComponent type-cache globals	type-cache
-0x0094e308	.data	ZTEULACheck type-cache globals	type-cache
-0x0094e310	.data	ZTEntityCrater type-cache globals	type-cache
-0x0094e318	.data	ZTEconomyMgr type-cache globals	type-cache
-0x0094e320	.data	ZTEconomyMgr secondary type-cache globals	type-cache
-0x0094e334	.data	ZTDevComponent type cache globals	type-cache
-0x0094e33c	.data	ZTCDCheck type-cache globals	type-cache
-0x0094e34c	.data	ZTOverviewModeBuildingIcon type-cache globals	type-cache
-0x0094e354	.data	ZTOverviewModeAnimalIcon type-cache globals	type-cache
-0x0094e35c	.data	ZTOverviewData type-cache globals	type-cache
+0x0094e2f0	.data	g_type_ZTFavoriteAnimalMgr	type-cache
+0x0094e2f8	.data	g_type_ZTExtraPaths	type-cache
+0x0094e300	.data	g_type_ZTExpandoComponent	type-cache
+0x0094e308	.data	g_type_ZTEULACheck	type-cache
+0x0094e310	.data	g_type_ZTEntitySelector	type-cache
+0x0094e318	.data	g_type_ZTEntityCrater	type-cache
+0x0094e320	.data	g_type_ZTEconomyMgr	type-cache
+0x0094e334	.data	g_type_ZTDevComponent	type-cache
+0x0094e33c	.data	g_type_ZTCDCheck	type-cache
+0x0094e34c	.data	g_type_ZTOverviewModeBuildingIcon	type-cache
+0x0094e354	.data	g_type_ZTOverviewModeAnimalIcon	type-cache
+0x0094e35c	.data	g_type_ZTOverviewData	type-cache
 0x0094e368	.data	g_type_ZTAdoptionMgr	type-cache
-0x0094e370	.data	ZTAdoptionSlot type-cache globals	type-cache
+0x0094e370	.data	g_type_ZTAdoptionSlot	type-cache
 0x0094e37c	.data	tranqgun readoutbar static asset cells	identified
 0x0094e380	.data		unidentified
 0x0094e40c	.data	gesturetrace music/difficulty static key cells	identified
@@ -3916,14 +3916,14 @@ address	section	name	status
 0x0094e418	.data		unidentified
 0x0094e41c	.data		unidentified
 0x0094e420	.data		unidentified
-0x0094e438	.data	BFAmbient3DSndFactory type-cache globals	type-cache
-0x0094e440	.data	BFAmbient2DSndFactory type-cache globals	type-cache
-0x0094e448	.data	BF3DSndFactory type-cache globals	type-cache
-0x0094e450	.data	BF2DSndFactory type-cache globals	type-cache
-0x0094e458	.data	entity/photo query getter tail cache cells	type-cache
+0x0094e438	.data	g_type_BFAmbient3DSndFactory	type-cache
+0x0094e440	.data	g_type_BFAmbient2DSndFactory	type-cache
+0x0094e448	.data	g_type_BF3DSndFactory	type-cache
+0x0094e450	.data	g_type_BF2DSndFactory	type-cache
+0x0094e458	.data	g_type_getIsCrated	type-cache
 0x0094e45c	.data	g_type_getIsSuper	type-cache
 0x0094e460	.data	g_type_getIsDiseased	type-cache
-0x0094e464	.data	entity/photo query getter type-cache block	type-cache
+0x0094e464	.data	g_type_getPercentOfScreen	type-cache
 0x0094e468	.data	g_type_getPercentSeenInCenter	type-cache
 0x0094e46c	.data	g_type_getPercentSeen	type-cache
 0x0094e470	.data	g_type_getVehicleShot	type-cache
@@ -3941,15 +3941,15 @@ address	section	name	status
 0x0094e4a0	.data	g_type_getActiveSequenceName	type-cache
 0x0094e4a4	.data	g_type_getNextContainedEntity	type-cache
 0x0094e4a8	.data	g_type_getFirstContainedEntity	type-cache
-0x0094e4b0	.data	ZTPhotoAnalysisComponent type-cache globals	type-cache
-0x0094e4c4	.data	ZTPhotoChallengeSet type-cache globals	type-cache
-0x0094e4cc	.data	ZTPhotoChallenge type-cache globals	type-cache
-0x0094e4d8	.data	ZTPhotoChallengeMgr type-cache globals	type-cache
-0x0094e4e0	.data	ZTPhotoManager type-cache globals	type-cache
-0x0094e4e8	.data	ZTAISharedTourTaker type-cache globals	type-cache
-0x0094e4f0	.data	ZTAITourTakerData type-cache globals	type-cache
-0x0094e4f8	.data	ZTAIViewComponent type-cache globals	type-cache
-0x0094e508	.data	AI/component type-cache run	type-cache
+0x0094e4b0	.data	g_type_ZTPhotoAnalysisComponent	type-cache
+0x0094e4c4	.data	g_type_ZTPhotoChallengeSet	type-cache
+0x0094e4cc	.data	g_type_ZTPhotoChallenge	type-cache
+0x0094e4d8	.data	g_type_ZTPhotoChallengeMgr	type-cache
+0x0094e4e0	.data	g_type_ZTPhotoManager	type-cache
+0x0094e4e8	.data	g_type_ZTAISharedTourTaker	type-cache
+0x0094e4f0	.data	g_type_ZTAITourTakerData	type-cache
+0x0094e4f8	.data	g_type_ZTAIViewComponent	type-cache
+0x0094e508	.data	g_type_ZTAISharedInfluenceWatcher	type-cache
 0x0094e510	.data	g_type_ZTAIInfluenceEffectData	type-cache
 0x0094e518	.data	g_type_ZTAIEducationData	type-cache
 0x0094e520	.data	g_type_ZTAIVehicleData	type-cache
@@ -3961,7 +3961,7 @@ address	section	name	status
 0x0094e550	.data	g_type_ZTAIWaterFilterComponent	type-cache
 0x0094e558	.data	g_type_ZTAIShow	type-cache
 0x0094e560	.data	g_type_ZTAIStaffAssignmentComponent	type-cache
-0x0094e568	.data	ZTAIShowComponent type-cache globals	type-cache
+0x0094e568	.data	g_type_ZTAIShowComponent	type-cache
 0x0094e5b0	.data		unidentified
 0x0094e5b4	.data		unidentified
 0x0094e5b8	.data		unidentified
@@ -3993,7 +3993,7 @@ address	section	name	status
 0x0094e620	.data		unidentified
 0x0094e624	.data		unidentified
 0x0094e628	.data		unidentified
-0x0094e630	.data	BFLuaContext type-cache globals	type-cache
+0x0094e630	.data	g_type_BFLuaContext	type-cache
 0x0094e638	.data	g_type_BFScenarioRule	type-cache
 0x0094e640	.data	g_type_ZTDownloadItem	type-cache
 0x0094e648	.data	g_type_ZTWebComponent	type-cache
@@ -4032,10 +4032,10 @@ address	section	name	status
 0x0094e750	.data	g_type_BFCollisionComponent	type-cache
 0x0094e758	.data	g_type_BFBoundedObjectComponent	type-cache
 0x0094e760	.data	g_type_BFGroundFitComponent	type-cache
-0x0094e768	.data	BFTerrainBiome type-cache globals	type-cache
-0x0094e770	.data	BF3DUndoMgr type-cache globals	type-cache
-0x0094e778	.data	BFTerrain type-cache globals	type-cache
-0x0094e78c	.data	BF terrain/physics/pathfinding component type-cache run	type-cache
+0x0094e768	.data	g_type_BFTerrainBiome	type-cache
+0x0094e770	.data	g_type_BF3DUndoMgr	type-cache
+0x0094e778	.data	g_type_BFTerrain	type-cache
+0x0094e78c	.data	g_type_BFPhysObj	type-cache
 0x0094e794	.data	g_type_BFBirdGroundFitComponent	type-cache
 0x0094e79c	.data	g_type_BFSecondaryAnimComponent	type-cache
 0x0094e7a4	.data	g_type_BFGElevatedTileSerializer	type-cache
@@ -4050,7 +4050,7 @@ address	section	name	status
 0x0094e7ec	.data	g_type_BFGPathFinderMgr	type-cache
 0x0094e7f4	.data	g_type_BFGCollisionHandler	type-cache
 0x0094e7fc	.data	g_type_BFGDetachInfo	type-cache
-0x0094e804	.data	referenced lazy type-cache/static cells before fitting-surface compone	type-cache
+0x0094e804	.data	g_type_BFGPuzzleMgr	type-cache
 0x0094e80c	.data	g_type_BFGViewableObjectMgr	type-cache
 0x0094e814	.data	g_type_BFGPhysAnimController	type-cache
 0x0094e81c	.data	g_type_BFGTransportationMgr	type-cache
@@ -4058,8 +4058,8 @@ address	section	name	status
 0x0094e82c	.data	g_type_BFGCollisionMgr	type-cache
 0x0094e834	.data	g_type_BFGTransactionTracker	type-cache
 0x0094e83c	.data	g_type_BFRealPhysicsComponent	type-cache
-0x0094e844	.data	BFGFittingSurfaceComponent type-cache globals	type-cache
-0x0094e84c	.data	BFG collision/container/traversability type-cache run	type-cache
+0x0094e844	.data	g_type_BFGFittingSurfaceComponent	type-cache
+0x0094e84c	.data	g_type_BFGCollisionTester	type-cache
 0x0094e854	.data	g_type_BFGEntityContainerSlotHeavy	type-cache
 0x0094e85c	.data	g_type_BFGEntityContainerSlotLight	type-cache
 0x0094e864	.data	g_type_BFGEntityContainer	type-cache
@@ -4069,12 +4069,12 @@ address	section	name	status
 0x0094e884	.data	g_type_BFGPlacementData	type-cache
 0x0094e88c	.data	g_type_BFGridCollisionComponent	type-cache
 0x0094e894	.data	g_type_BFGElevatedSupportTracker	type-cache
-0x0094e89c	.data	BFGTransaction type-cache globals	type-cache
-0x0094e8a8	.data	BFGUndoMgr and BFGBiomeData type-cache globals	type-cache
+0x0094e89c	.data	g_type_BFGTransaction	type-cache
+0x0094e8a8	.data	g_type_BFGUndoMgr	type-cache
 0x0094e8b0	.data	g_type_BFGBiomeData	type-cache
 0x0094e8b8	.data	path/fence static lookup cells	identified
 0x0094e8bc	.data		unidentified
-0x0094e8c4	.data	BFG placement tile/biome type-cache run	type-cache
+0x0094e8c4	.data	g_type_BFGPlacementGrid	type-cache
 0x0094e8cc	.data	g_type_BFGTerrainPlacementTile	type-cache
 0x0094e8d4	.data	g_type_BFGElevatedPlacementTile	type-cache
 0x0094e8dc	.data	g_type_BFGBiome	type-cache
@@ -4082,9 +4082,9 @@ address	section	name	status
 0x0094e8ec	.data		unidentified
 0x0094e8f0	.data		unidentified
 0x0094e8f4	.data		unidentified
-0x0094e900	.data	UISoundMgr type-cache globals	type-cache
-0x0094e91c	.data	UIComponent type-cache globals	type-cache
-0x0094e928	.data	BF steering/locomotion/AI type-cache run	type-cache
+0x0094e900	.data	g_type_UISoundMgr	type-cache
+0x0094e91c	.data	g_type_UIComponent	type-cache
+0x0094e928	.data	g_type_BFSteer	type-cache
 0x0094e930	.data	g_type_BFSteerAlign	type-cache
 0x0094e938	.data	g_type_BFSteerAvoidObstacleAhead	type-cache
 0x0094e940	.data	g_type_BFSteerDepth	type-cache
@@ -4112,7 +4112,7 @@ address	section	name	status
 0x0094e9f0	.data	g_type_BFAICompletionData	type-cache
 0x0094e9f8	.data	g_type_BFAITaskTemplate	type-cache
 0x0094ea00	.data	g_type_BFAICreateData	type-cache
-0x0094ea0c	.data	BF AI/XML/resource/component manager type-cache run	type-cache
+0x0094ea0c	.data	g_type_BFAIToken	type-cache
 0x0094ea14	.data	g_type_BFAITrickMgr	type-cache
 0x0094ea1c	.data	g_type_BFAITrickMgrData	type-cache
 0x0094ea24	.data	g_type_BFAIDataThresholdController	type-cache
@@ -4145,17 +4145,17 @@ address	section	name	status
 0x0094eafc	.data	g_type_BFXMLDeclaration	type-cache
 0x0094eb04	.data	g_type_BFXMLDocument	type-cache
 0x0094eb0c	.data	g_type_BFEvent	type-cache
-0x0094eb14	.data	BF ambient/3D sound type-cache globals	type-cache
+0x0094eb14	.data	g_type_BFAmbient3DSndGenerator	type-cache
 0x0094eb1c	.data	g_type_BF3DSnd	type-cache
 0x0094eb2c	.data	fence/zooboundary static placement filter lookup cells	identified
 0x0094eb30	.data		unidentified
-0x0094eb38	.data	ZTUndoMgr and ZTPuzzleMgr type-cache globals	type-cache
+0x0094eb38	.data	g_type_ZTUndoMgr	type-cache
 0x0094eb40	.data	g_type_ZTPuzzleMgr	type-cache
 0x0094eb48	.data	g_type_ZTTankSupport	type-cache
 0x0094eb50	.data	g_type_ZTTankSegment	type-cache
 0x0094eb58	.data	g_type_ZTTankPortal	type-cache
-0x0094eb60	.data	ZTTankGateSegment type-cache globals	type-cache
-0x0094eb68	.data	ZT viewable/vehicle/transport type-cache run	type-cache
+0x0094eb60	.data	g_type_ZTTankGateSegment	type-cache
+0x0094eb68	.data	g_type_ZTViewableSubMgrStation	type-cache
 0x0094eb70	.data	g_type_ZTViewableObjectMgr	type-cache
 0x0094eb78	.data	g_type_ZTVehicleSky	type-cache
 0x0094eb80	.data	g_type_ZTVehicleGround	type-cache
@@ -4168,27 +4168,27 @@ address	section	name	status
 0x0094ebb8	.data	g_type_ZTTransportationMgr	type-cache
 0x0094ebc0	.data	guarded transport-adjacent runtime value	identified
 0x0094ebc8	.data	transport/tour config static lookup cells	identified
-0x0094ebe4	.data	ZTPathElevated type-cache globals	type-cache
-0x0094ec00	.data	ZT component type-cache globals	type-cache
+0x0094ebe4	.data	g_type_ZTPathElevated	type-cache
+0x0094ec00	.data	g_type_ZTUnderwaterFloatGroundFitComponent	type-cache
 0x0094ec08	.data	g_type_ZTTriggeredEventsComponent	type-cache
-0x0094ec10	.data	ZTSunLayer type-cache globals	type-cache
-0x0094ec18	.data	ZTStatus and ZTResearchMgr type-cache globals	type-cache
+0x0094ec10	.data	g_type_ZTSunLayer	type-cache
+0x0094ec18	.data	g_type_ZTStatus	type-cache
 0x0094ec20	.data	g_type_ZTResearchMgr	type-cache
-0x0094ec28	.data	ZTRailCam and ZTPlacementData type-cache globals	type-cache
+0x0094ec28	.data	g_type_ZTRailCam	type-cache
 0x0094ec30	.data	g_type_ZTPlacementData	type-cache
-0x0094ec38	.data	ZTLoadListener type-cache globals	type-cache
-0x0094ec40	.data	ZTGlobe type-cache globals	type-cache
-0x0094ec48	.data	ZTTransaction type-cache globals	type-cache
+0x0094ec38	.data	g_type_ZTLoadListener	type-cache
+0x0094ec40	.data	g_type_ZTGlobe	type-cache
+0x0094ec48	.data	g_type_ZTTransaction	type-cache
 0x0094ec50	.data	g_type_ZTAdoptionSlotMgr	type-cache
-0x0094ec58	.data	ZTPAPTBFAIEntityDataInstance type-cache globals	type-cache
-0x0094ec64	.data	ZTPAPTPhotoAnalysisComponent type-cache globals	type-cache
-0x0094ec6c	.data	ZTPAPT behavior/entity/parse-tree type-cache globals	type-cache
+0x0094ec58	.data	g_type_ZTPAPTBFAIEntityDataInstance	type-cache
+0x0094ec64	.data	g_type_ZTPAPTPhotoAnalysisComponent	type-cache
+0x0094ec6c	.data	g_type_ZTPAPTBFBehaviorMgr	type-cache
 0x0094ec74	.data	g_type_ZTPAPTBFAICognitiveMgr	type-cache
 0x0094ec7c	.data	g_type_ZTPAPTBFPhysObj	type-cache
 0x0094ec84	.data	g_type_ZTPAPTEntityStub	type-cache
 0x0094ec8c	.data	g_type_ZTPAParseTree	type-cache
 0x0094ec94	.data	g_type_ZTPhotoChallengesComponent	type-cache
-0x0094ec9c	.data	ZTBeh behavior type-cache globals	type-cache
+0x0094ec9c	.data	g_type_ZTBehFollowBase	type-cache
 0x0094eca4	.data	g_type_ZTBehVehicleBase	type-cache
 0x0094ecac	.data	g_type_ZTBehTargetFence	type-cache
 0x0094ecb4	.data	g_type_ZTBehWatchShow	type-cache
@@ -4220,9 +4220,9 @@ address	section	name	status
 0x0094ed88	.data		unidentified
 0x0094ed8c	.data		unidentified
 0x0094ed90	.data		unidentified
-0x0094ed98	.data	ZTBehFollowTrack type-cache globals	type-cache
-0x0094eda4	.data	ZTBehChangeWaterDirtiness type-cache globals	type-cache
-0x0094edd0	.data	ZTBeh staff/vehicle/show type-cache globals	type-cache
+0x0094ed98	.data	g_type_ZTBehFollowTrack	type-cache
+0x0094eda4	.data	g_type_ZTBehChangeWaterDirtiness	type-cache
+0x0094edd0	.data	g_type_ZTBehSplashGuest	type-cache
 0x0094edd8	.data	g_type_ZTBehStaffTrainAnimal	type-cache
 0x0094ede0	.data	g_type_ZTBehUsePortal	type-cache
 0x0094ede8	.data	g_type_ZTBehShowEvent	type-cache
@@ -4233,17 +4233,17 @@ address	section	name	status
 0x0094ee14	.data		unidentified
 0x0094ee18	.data		unidentified
 0x0094ee1c	.data		unidentified
-0x0094ee24	.data	ZTAI trick/staff-request type-cache globals	type-cache
+0x0094ee24	.data	g_type_ZTAITrickMgr	type-cache
 0x0094ee2c	.data	g_type_ZTAITrickMgrData	type-cache
 0x0094ee34	.data	g_type_ZTAIStaffRequestController	type-cache
-0x0094ee48	.data	ZTAIShowMgr type-cache globals	type-cache
-0x0094ee50	.data	BFLuaResponse type-cache globals	type-cache
-0x0094ee58	.data	BF sprite-manager type-cache globals	type-cache
+0x0094ee48	.data	g_type_ZTAIShowMgr	type-cache
+0x0094ee50	.data	g_type_BFLuaResponse	type-cache
+0x0094ee58	.data	g_type_BFSpriteMgr	type-cache
 0x0094ee60	.data	g_type_BFNISpriteMgr	type-cache
 0x0094ee6c	.data	g_type_BFScenarioAction	type-cache
 0x0094ee74	.data	g_type_BFScenarioGroup	type-cache
 0x0094ee7c	.data	g_type_BFScenarioMgr	type-cache
-0x0094ee88	.data	BF component type-cache globals	type-cache
+0x0094ee88	.data	g_type_BFTimeTriggersComponent	type-cache
 0x0094ee90	.data	g_type_BFPhysicsComponent	type-cache
 0x0094ee98	.data	g_type_BFWaterGroundFitComponent	type-cache
 0x0094eea0	.data	g_type_BFSpineBendComponent	type-cache
@@ -4257,7 +4257,7 @@ address	section	name	status
 0x0094eee0	.data	g_type_BFForwardMovingComponent	type-cache
 0x0094eee8	.data	g_type_BFMovingComponent	type-cache
 0x0094eef0	.data	g_type_BFMultiGroundFitComponent	type-cache
-0x0094ef18	.data	BF component/rendering type-cache globals	type-cache
+0x0094ef18	.data	g_type_BFFallComponent	type-cache
 0x0094ef20	.data	g_type_BFTextTagMacrosComponent	type-cache
 0x0094ef28	.data	g_type_BFDecalTextureCycleComponent	type-cache
 0x0094ef30	.data	g_type_BFDX9Renderer	type-cache
@@ -4357,26 +4357,26 @@ address	section	name	status
 0x0094f418	.data	g_type_BFComponentList	type-cache
 0x0094f420	.data	g_type_BFContext	type-cache
 0x0094f428	.data	g_type_BFTypedBinder	type-cache
-0x0094f430	.data	BFNamedBinder type-cache globals	type-cache
-0x0094f438	.data	BF XML event type-cache globals	type-cache
+0x0094f430	.data	g_type_BFNamedBinder	type-cache
+0x0094f438	.data	g_type_BFXMLNodeEvent	type-cache
 0x0094f440	.data	g_type_BFRefCountedXMLObjEvent	type-cache
 0x0094f448	.data	g_type_BFXMLObjHandleEvent	type-cache
-0x0094f450	.data	BF event value type-cache globals	type-cache
+0x0094f450	.data	g_type_BFXMLObjEvent	type-cache
 0x0094f458	.data	g_type_BFTypeEvent	type-cache
 0x0094f460	.data	g_type_BFStringTokenEvent	type-cache
 0x0094f468	.data	g_type_BFStringEvent	type-cache
 0x0094f470	.data	g_type_BFDoubleEvent	type-cache
-0x0094f478	.data	BF scalar event type-cache globals	type-cache
+0x0094f478	.data	g_type_BFFloatEvent	type-cache
 0x0094f480	.data	g_type_BFUIntEvent	type-cache
 0x0094f488	.data	g_type_BFIntEvent	type-cache
 0x0094f490	.data	g_type_BFBooleanEvent	type-cache
 0x0094f498	.data	g_type_BFNullEvent	type-cache
-0x0094f4a0	.data	BFApp type-cache globals	type-cache
+0x0094f4a0	.data	g_type_BFApp	type-cache
 0x0094f4a8	.data	icon/name static lookup cells	identified
 0x0094f4ac	.data		unidentified
 0x0094f4b8	.data	g_type_ZTScenarioMgr	type-cache
-0x0094f4c0	.data	BFTerrainShadowComponent type-cache globals	type-cache
-0x0094f4c8	.data	BFStaticBlobShadowComponent type-cache globals	type-cache
+0x0094f4c0	.data	g_type_BFTerrainShadowComponent	type-cache
+0x0094f4c8	.data	g_type_BFStaticBlobShadowComponent	type-cache
 0x0094f4d0	.data	g_type_BFMovingBlobShadowComponent	type-cache
 0x0094f4ec	.data		unidentified
 0x0094f4f0	.data		unidentified
@@ -4403,7 +4403,7 @@ address	section	name	status
 0x0094f5e0	.data	g_type_ZTGroundTrackMode	type-cache
 0x0094f5e8	.data	g_type_ZTGfxOptionsMode	type-cache
 0x0094f5f0	.data	g_type_ZTGestureCreationMode	type-cache
-0x0094f5f8	.data	ZTGameMode type cache globals	type-cache
+0x0094f5f8	.data	g_type_ZTGameMode	type-cache
 0x0094f600	.data	g_type_ZTFileMode	type-cache
 0x0094f610	.data	g_type_ZTFenceMode	type-cache
 0x0094f618	.data	g_type_ZTEntityMovementMode	type-cache
@@ -4412,16 +4412,16 @@ address	section	name	status
 0x0094f630	.data	g_type_ZTDownloadMode	type-cache
 0x0094f638	.data	g_type_ZTCameraCommandReader	type-cache
 0x0094f640	.data	g_type_ZTBiomeMode	type-cache
-0x0094f64c	.data	ZTBehUseTankGate type-cache globals	type-cache
+0x0094f64c	.data	g_type_ZTBehUseTankGate	type-cache
 0x0094f654	.data	tankgate token typed-value cache globals	identified
-0x0094f660	.data	ZTBehPathRoute type-cache globals	type-cache
-0x0094f66c	.data	ZTAITourTaker type-cache globals	type-cache
+0x0094f660	.data	g_type_ZTBehPathRoute	type-cache
+0x0094f66c	.data	g_type_ZTAITourTaker	type-cache
 0x0094f674	.data	view target animation token cache globals	identified
 0x0094f678	.data		unidentified
 0x0094f67c	.data		unidentified
-0x0094f684	.data	ZTBehTransportRoute type-cache globals	type-cache
+0x0094f684	.data	g_type_ZTBehTransportRoute	type-cache
 0x0094f68c	.data	unresolved runtime cache before ZTAIStaffWaterCleaningMgr	identified
-0x0094f698	.data	AI/staff type-cache globals	type-cache
+0x0094f698	.data	g_type_ZTAIStaffWaterCleaningMgr	type-cache
 0x0094f6a4	.data	g_type_ZTAIInfluenceWatcher	type-cache
 0x0094f6ac	.data	g_type_ZTBehDockPortal	type-cache
 0x0094f6b4	.data	g_type_ZTBehDockTankWall	type-cache
@@ -4457,16 +4457,16 @@ address	section	name	status
 0x0094f738	.data		unidentified
 0x0094f73c	.data		unidentified
 0x0094f740	.data		unidentified
-0x0094f74c	.data	ZTAIViewAnimals type-cache globals	type-cache
+0x0094f74c	.data	g_type_ZTAIViewAnimals	type-cache
 0x0094f754	.data	g_type_ZTAIStaffMgr	type-cache
 0x0094f760	.data		unidentified
 0x0094f764	.data		unidentified
 0x0094f768	.data		unidentified
-0x0094f774	.data	BFScenarioScriptAction type-cache globals	type-cache
+0x0094f774	.data	g_type_BFScenarioScriptAction	type-cache
 0x0094f780	.data		unidentified
 0x0094f784	.data		unidentified
 0x0094f788	.data		unidentified
-0x0094f790	.data	component type-cache globals	type-cache
+0x0094f790	.data	g_type_BFSimpleLODComponent	type-cache
 0x0094f798	.data	g_type_BFOverheadCameraUDVComponent	type-cache
 0x0094f7a4	.data	g_type_BFShadowCamera	type-cache
 0x0094f7ac	.data	g_type_BFNiBoneLODComponent	type-cache
@@ -4474,22 +4474,22 @@ address	section	name	status
 0x0094f7bc	.data	g_type_BFRSceneGraphComponent	type-cache
 0x0094f7c4	.data	g_type_BFDecorativeDetailObjectComponent	type-cache
 0x0094f7cc	.data	unresolved component/property cache before BFFPSUDVComponent	identified
-0x0094f7d4	.data	BFFPSUDVComponent type-cache globals	type-cache
-0x0094f7e0	.data	3D/camera type-cache globals	type-cache
+0x0094f7d4	.data	g_type_BFFPSUDVComponent	type-cache
+0x0094f7e0	.data	g_type_BF3DApp	type-cache
 0x0094f7e8	.data	g_type_BFFPSCameraComponent	type-cache
 0x0094f7f0	.data	g_type_BFOverheadCameraComponent	type-cache
 0x0094f7fc	.data		unidentified
-0x0094f810	.data	BFGestureSplineComponent type-cache globals	type-cache
+0x0094f810	.data	g_type_BFGestureSplineComponent	type-cache
 0x0094f828	.data	Guest/animal child-collection typed-value projection caches	identified
 0x0094f830	.data		unidentified
 0x0094f838	.data		unidentified
 0x0094f840	.data		unidentified
-0x0094f848	.data	BFGManager type-cache globals	type-cache
+0x0094f848	.data	g_type_BFGManager	type-cache
 0x0094f850	.data	base/decal material token cache globals	identified
 0x0094f854	.data		unidentified
 0x0094f858	.data		unidentified
 0x0094f878	.data	path token typed-value cache globals	identified
-0x0094f884	.data	UI type-cache globals	type-cache
+0x0094f884	.data	g_type_UIDropList	type-cache
 0x0094f890	.data	g_type_UIWindow	type-cache
 0x0094f898	.data	g_type_UILayout	type-cache
 0x0094f8a0	.data	g_type_UISlider	type-cache
@@ -4497,12 +4497,12 @@ address	section	name	status
 0x0094f8b0	.data	g_type_UIRoot	type-cache
 0x0094f8b8	.data	g_type_UIApp	type-cache
 0x0094f8c0	.data	g_type_UIToggleSet	type-cache
-0x0094f8d8	.data	BFBehExecPath type-cache globals	type-cache
+0x0094f8d8	.data	g_type_BFBehExecPath	type-cache
 0x0094f8e0	.data	fall/impact animation token cache globals	identified
 0x0094f8e4	.data		unidentified
 0x0094f8e8	.data		unidentified
 0x0094f900	.data	fence token typed-value cache globals	identified
-0x0094f914	.data	AI type-cache globals	type-cache
+0x0094f914	.data	g_type_BFAICognitiveComponent	type-cache
 0x0094f91c	.data	g_type_BFAIComponentList	type-cache
 0x0094f924	.data	g_type_BFAIStateThinker	type-cache
 0x0094f930	.data	g_type_BFAISensor	type-cache
@@ -4511,14 +4511,14 @@ address	section	name	status
 0x0094f948	.data	g_type_BFAITaskTemplateList	type-cache
 0x0094f950	.data	AI task configuration token cache	identified
 0x0094f954	.data		unidentified
-0x0094f95c	.data	AI data/model type-cache globals	type-cache
+0x0094f95c	.data	g_type_BFAIMgr	type-cache
 0x0094f964	.data	g_type_BFAITokenList	type-cache
 0x0094f96c	.data	g_type_BFAITargetData	type-cache
 0x0094f974	.data	g_type_BFAISubjectData	type-cache
 0x0094f97c	.data	g_type_BFAIBiomeMap	type-cache
 0x0094f984	.data	g_type_BFAINeedAdjusts	type-cache
 0x0094f98c	.data	g_type_BFAIEntityData	type-cache
-0x0094f994	.data	BFComponentStack type-cache globals	type-cache
+0x0094f994	.data	g_type_BFComponentStack	type-cache
 0x0094f99c	.data	0x0094f99c g_shared_inline_ui_typed_value	identified
 0x0094f9b0	.data		unidentified
 0x0094f9c4	.data		unidentified
@@ -4580,23 +4580,23 @@ address	section	name	status
 0x0094fb5c	.data		unidentified
 0x0094fb64	.data		unidentified
 0x0094fb6c	.data		unidentified
-0x0094fb98	.data	ZTFPSUDVComponent type-cache globals	type-cache
+0x0094fb98	.data	g_type_ZTFPSUDVComponent	type-cache
 0x0094fba4	.data		unidentified
-0x0094fbac	.data	economy component type-cache globals	type-cache
+0x0094fbac	.data	g_type_ZTEconomyComponentStub	type-cache
 0x0094fbb4	.data	g_type_ZTEconomyComponentGuest	type-cache
 0x0094fbbc	.data	g_type_ZTEconomyComponentHistoryBase	type-cache
-0x0094fbc4	.data	zoo UI/status component type-cache globals	type-cache
+0x0094fbc4	.data	g_type_ZTZooSurveyComponent	type-cache
 0x0094fbcc	.data	g_type_ZTZooStatusComponent	type-cache
 0x0094fbd4	.data	g_type_ZTZoopediaTOC	type-cache
 0x0094fbdc	.data	g_type_ZTZoopediaComponent	type-cache
-0x0094fbe4	.data	UI list/research button type-cache globals	type-cache
+0x0094fbe4	.data	g_type_ZTUITypeList	type-cache
 0x0094fbec	.data	g_type_ZTUIResearchButton	type-cache
-0x0094fc1c	.data	ZTPhotoAlbumComponent type-cache globals	type-cache
+0x0094fc1c	.data	g_type_ZTPhotoAlbumComponent	type-cache
 0x0094fc24	.data	path/ground-track static lookup keys	identified
 0x0094fc2c	.data		unidentified
 0x0094fc30	.data		unidentified
 0x0094fc38	.data		unidentified
-0x0094fc40	.data	ZTOverviewComponent type-cache globals	type-cache
+0x0094fc40	.data	g_type_ZTOverviewComponent	type-cache
 0x0094fc48	.data	entity category static lookup keys	identified
 0x0094fc4c	.data		unidentified
 0x0094fc50	.data		unidentified
@@ -4605,12 +4605,12 @@ address	section	name	status
 0x0094fc5c	.data		unidentified
 0x0094fc60	.data		unidentified
 0x0094fc64	.data		unidentified
-0x0094fc6c	.data	UI list/goal/buy panel type-cache globals	type-cache
+0x0094fc6c	.data	g_type_ZTMultiList	type-cache
 0x0094fc74	.data	g_type_ZTGoalPanel	type-cache
 0x0094fc7c	.data	g_type_ZTBuyInfoPanel	type-cache
-0x0094fc84	.data	UI adoption/layout type-cache globals	type-cache
+0x0094fc84	.data	g_type_ZTUIAdoptionButton	type-cache
 0x0094fc8c	.data	g_type_ZTUILayoutMode	type-cache
-0x0094fc94	.data	mode/tool type-cache globals	type-cache
+0x0094fc94	.data	mode/tool type-cache globals	identified
 0x0094fc98	.data		unidentified
 0x0094fc9c	.data	g_type_ZTPuzzleMode	type-cache
 0x0094fca4	.data	g_type_ZTPhotoMode	type-cache
@@ -4648,7 +4648,7 @@ address	section	name	status
 0x0094fd70	.data		unidentified
 0x0094fd7c	.data		unidentified
 0x0094fd80	.data		unidentified
-0x0094fd98	.data	first-person action mode type-cache globals	type-cache
+0x0094fd98	.data	g_type_ZTFPTrainingMode	type-cache
 0x0094fda0	.data	g_type_ZTFPClimbLadderMode	type-cache
 0x0094fda8	.data	g_type_ZTFPActionModeBase	type-cache
 0x0094fdb0	.data	g_type_ZTFossilFindingMode	type-cache
@@ -4656,7 +4656,7 @@ address	section	name	status
 0x0094fdc0	.data	ZTCureDiseaseMode cured/reward message scratch object	identified
 0x0094fdc4	.data		unidentified
 0x0094fdc8	.data		unidentified
-0x0094fdd4	.data	ZTCureDiseaseMode type-cache globals	type-cache
+0x0094fdd4	.data	g_type_ZTCureDiseaseMode	type-cache
 0x0094fddc	.data	cloning mode rotating render/material descriptor groups	identified
 0x0094fde4	.data		unidentified
 0x0094fde8	.data		unidentified
@@ -4675,14 +4675,14 @@ address	section	name	status
 0x0094fe34	.data		unidentified
 0x0094fe38	.data		unidentified
 0x0094fe3c	.data		unidentified
-0x0094fe44	.data	late mode/tool type-cache globals	type-cache
+0x0094fe44	.data	g_type_ZTCloningGestureMode	type-cache
 0x0094fe4c	.data	g_type_ZTTerrainCommandReader	type-cache
 0x0094fe54	.data	g_type_ZTStaffAssignMode	type-cache
 0x0094fe5c	.data	b_Disease static lookup key cache	identified
 0x0094fe64	.data	item and BFGEntityContainer static lookup key caches	identified
 0x0094fe68	.data		unidentified
 0x0094fe70	.data	TankPlatform static lookup key cache	identified
-0x0094fe78	.data	ZTSelectionMode type cache globals	type-cache
+0x0094fe78	.data	g_type_ZTSelectionMode	type-cache
 0x0094fe80	.data	g_type_ZTSaveMode	type-cache
 0x0094fe90	.data	g_type_ZTPlacementMode	type-cache
 0x0094fe98	.data	g_type_ZTPathMode	type-cache
@@ -4709,14 +4709,14 @@ address	section	name	status
 0x0094ff14	.data		unidentified
 0x0094ff24	.data		unidentified
 0x0094ff38	.data		unidentified
-0x0094ff40	.data	ZTAISensorFossilSites type-cache globals	type-cache
+0x0094ff40	.data	g_type_ZTAISensorFossilSites	type-cache
 0x0094ff48	.data	visible-animal tour-view static lookup keys	identified
 0x0094ff58	.data	visible-animal tour-view cached source pointer	identified
 0x0094ff60	.data	dino-recovery staff target static lookup keys	identified
 0x0094ff64	.data		unidentified
 0x0094ff68	.data		unidentified
 0x0094ff6c	.data		unidentified
-0x0094ff74	.data	ZTAISensorRampagingAnimals type-cache globals	type-cache
+0x0094ff74	.data	g_type_ZTAISensorRampagingAnimals	type-cache
 0x0094ff7c	.data	g_type_ZTAITaskThinker	type-cache
 0x0094ff88	.data		unidentified
 0x0094ff8c	.data		unidentified
@@ -4735,7 +4735,7 @@ address	section	name	status
 0x0094ffe8	.data	g_type_ZTAISensorVA	type-cache
 0x0094fff0	.data	g_type_ZTAITourTaskThinker	type-cache
 0x0094fff8	.data	g_type_ZTAISensorShow	type-cache
-0x00950000	.data	unresolved late mixed data before spatial vector state	type-cache
+0x00950000	.data	unresolved late mixed data before spatial vector state	identified
 0x00950010	.data		unidentified
 0x00950014	.data		unidentified
 0x0095001c	.data	g_type_ZTAISensor	type-cache
@@ -4745,7 +4745,7 @@ address	section	name	status
 0x00950038	.data		unidentified
 0x0095004c	.data		unidentified
 0x00950054	.data	g_type_ZTAIMgr	type-cache
-0x0095005c	.data	unresolved late mixed data before spatial vector state	type-cache
+0x0095005c	.data	unresolved late mixed data before spatial vector state	identified
 0x00950060	.data		unidentified
 0x00950064	.data		unidentified
 0x00950068	.data		unidentified
@@ -4797,11 +4797,11 @@ address	section	name	status
 0x009501cc	.data		unidentified
 0x009501d0	.data		unidentified
 0x009501ec	.data	g_type_BFAISensorSelf	type-cache
-0x009501fc	.data	BFAIEntityDataInstance type-cache globals	type-cache
+0x009501fc	.data	g_type_BFAIEntityDataInstance	type-cache
 0x00950204	.data	g_type_BFAIEntityDataShared	type-cache
 0x0095020c	.data	tank segment/gate static lookup keys	identified
 0x00950210	.data		unidentified
-0x00950218	.data	ZTApp type-cache globals	type-cache
+0x00950218	.data	g_type_ZTApp	type-cache
 0x00950220	.data	unresolved mixed late .data span after ZTApp cache	identified
 0x00950228	.data		unidentified
 0x0095022c	.data		unidentified
@@ -4847,7 +4847,7 @@ address	section	name	status
 0x00950368	.data	g_type_ZTSuperStaffMode	type-cache
 0x00950380	.data	mode_climb_ladder static lookup key	identified
 0x00950388	.data	CloningCenter static lookup key	identified
-0x00950390	.data	ZTSkyTrackMode type-cache globals	type-cache
+0x00950390	.data	g_type_ZTSkyTrackMode	type-cache
 0x00950398	.data	entity multi-list static lookup keys	identified
 0x0095039c	.data		unidentified
 0x009503a0	.data		unidentified
@@ -4862,14 +4862,14 @@ address	section	name	status
 0x009503e0	.data		unidentified
 0x009503e8	.data	groundstation static lookup key	identified
 0x009503f0	.data	animal placement-validation lookup cache	identified
-0x00950400	.data	AI/script binding name cache globals	type-cache
+0x00950400	.data	g_type_getEDI	type-cache
 0x00950404	.data	g_type_getPAC	type-cache
 0x00950408	.data	g_type_getBM	type-cache
 0x0095040c	.data	g_type_getCM	type-cache
 0x00950410	.data	g_type_getSharedVar	type-cache
 0x00950414	.data	g_type_isKindOf	type-cache
 0x00950418	.data	g_type_getFirstPhysObj	type-cache
-0x00950420	.data	AI staff sensor type-cache globals	type-cache
+0x00950420	.data	g_type_ZTAIStaffSensorSelf	type-cache
 0x00950428	.data	g_type_ZTAIStaffSensor	type-cache
 0x00950430	.data	animal/platform animation static token cache group	identified
 0x00950434	.data		unidentified
@@ -4882,14 +4882,14 @@ address	section	name	status
 0x00950454	.data		unidentified
 0x0095045c	.data	gate/tankgate typed lookup keys	identified
 0x00950460	.data		unidentified
-0x00950478	.data	ZTAISensorTransport type-cache globals	type-cache
+0x00950478	.data	g_type_ZTAISensorTransport	type-cache
 0x00950490	.data	animal/speciesHab static lookup support	identified
-0x00950498	.data	ZTAISensorTour type-cache globals	type-cache
+0x00950498	.data	g_type_ZTAISensorTour	type-cache
 0x009504a0	.data	Grandstand and Guest typed lookup keys	identified
 0x009504a4	.data		unidentified
 0x009504ac	.data	NoTrainingPlatform zoomessage static key	identified
-0x009504b4	.data	ZTAISensorExplore type-cache globals	type-cache
-0x009504cc	.data	ZTAISensorLand type-cache globals	type-cache
+0x009504b4	.data	g_type_ZTAISensorExplore	type-cache
+0x009504cc	.data	g_type_ZTAISensorLand	type-cache
 0x009504f0	.data		unidentified
 0x009504f4	.data		unidentified
 0x009504f8	.data		unidentified
@@ -4969,7 +4969,7 @@ address	section	name	status
 0x00950758	.data		unidentified
 0x00950760	.data		unidentified
 0x00950764	.data		unidentified
-0x0095076c	.data	ZTUIFullscreenButton type-cache globals	type-cache
+0x0095076c	.data	g_type_ZTUIFullscreenButton	type-cache
 0x00950774	.data	unresolved late .data runtime island after fullscreen-button cache	identified
 0x0095077c	.data		unidentified
 0x00950784	.data		unidentified
@@ -5057,6 +5057,25 @@ address	section	name	status
 0x009509e8	.data		unidentified
 0x009509f0	.data		unidentified
 0x009509f4	.data		unidentified
+0x00950a04	.data		unidentified
+0x00950a08	.data		unidentified
+0x00950a0c	.data		unidentified
+0x00950a14	.data		unidentified
+0x00950a18	.data		unidentified
+0x00950a28	.data		unidentified
+0x00950a34	.data		unidentified
+0x00950a38	.data		unidentified
+0x00950a3c	.data		unidentified
+0x00950a48	.data		unidentified
+0x00950a4c	.data		unidentified
+0x00950a50	.data		unidentified
+0x00950a58	.data		unidentified
+0x00950a5c	.data		unidentified
+0x00950ab4	.data		unidentified
+0x00950ac4	.data	g_type_UITextBuffer	type-cache
+0x00950adc	.data	animal/food static lookup keys	identified
+0x00950ae0	.data		unidentified
+0x00950af8	.data	CloningCenter typed lookup key	identified
 0x00950bf4	.data		unidentified
 0x00950bfc	.data		unidentified
 0x00950c00	.data		unidentified
