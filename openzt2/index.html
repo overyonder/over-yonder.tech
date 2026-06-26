@@ -15,7 +15,7 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 .progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 18px}
 .progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:10px 12px}.progress-card h3{margin:0 0 7px;font-size:15px}.progress-card h3 a{text-decoration:none}
 .stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
-.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.seg-opaque{background:#9d0006}
+.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-accepted,.seg-known,.seg-named,.seg-all{background:#79740e}.seg-candidate,.seg-some{background:#b57614}.seg-open,.seg-unnamed,.seg-none{background:#9d0006}.seg-mid,.seg-type{background:#076678}.seg-support{background:#7c6f64}.mini-label{margin:8px 0 3px;font-size:12px;color:var(--muted)}
 .seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-recover{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
@@ -106,36 +106,144 @@ function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
 function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${pct(n,total)}</div>`:""}
 function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
 (()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
+function hex(s){const n=parseInt(s||"",16);return Number.isFinite(n)?n:null}
+function functionRanges(fp){
+ return fp.map(r=>{const start=hex(r.address),size=Number(r.size||0);return Number.isFinite(start)&&size>0?{start,end:start+size,row:r}:null}).filter(Boolean).sort((a,b)=>a.start-b.start);
+}
+function containingFunction(ranges,addr){
+ let lo=0,hi=ranges.length;
+ while(lo<hi){const mid=(lo+hi)>>1;if(ranges[mid].start<=addr)lo=mid+1;else hi=mid}
+ const hit=ranges[lo-1];
+ return hit&&hit.start<=addr&&addr<hit.end?hit.row:null;
+}
+function typeCacheRows(mapRows,typeCacheGlobals){
+ const wanted=new Set(typeCacheGlobals.map(r=>hex(r.address)).filter(Number.isFinite));
+ const rows=new Map([...wanted].map(a=>[a,{address:a,name:"",details:""}]));
+ for(const r of mapRows){
+  const start=hex(r.start),name=r.name||"",details=r.details||"";
+  if(!wanted.has(start))continue;
+  const lower=name.toLowerCase();
+  const handleName=name.startsWith("g_type_")&&!name.endsWith("_init_flag");
+  const handleEvidence=lower.includes("type-cache")&&!name.includes("_init_flag")&&(
+   details.includes("writes cache")||
+   details.includes("writes and returns cache dword")||
+   details.includes("stores the cached type")||
+   details.includes("stores and returns cache dword")||
+   details.includes("cached native type handle")
+  );
+  if(!handleName&&!handleEvidence)continue;
+  const row=rows.get(start);
+  row.name=row.name||name;
+  row.details+=(row.details?" | ":"")+details;
+ }
+ return [...rows.values()];
+}
+function typeGetterAddrs(details){
+ const addrs=[];
+ for(const re of [
+  /getter call site `0x([0-9a-fA-F]+)`/g,
+  /`0x([0-9a-fA-F]+)` tests (?:guard|init flags)/g,
+  /Function `0x([0-9a-fA-F]+)` tests/g
+ ]){
+  let m;
+  while((m=re.exec(details)))addrs.push(parseInt(m[1],16));
+ }
+ return [...new Set(addrs)];
+}
+function isConfirmedTypeGetter(row){
+ if(!row||row.status!=="confirmed")return false;
+ const name=row.name||"";
+ return name.startsWith("get_type_")||/^get_or_register_.*_type$/.test(name);
+}
+function hasResolvedParent(details){
+ return /parent type `/.test(details)||/get_or_register_type\([^)]*, 0\)/.test(details);
+}
 Promise.all([
  tsv(["zt-function-perimeter.tsv","../docs/analysis/function-perimeter.tsv"]),
+ tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"]),
+ tsv(["zt-vtable-methods-full.tsv","../docs/analysis/vtable-methods-full.tsv"]),
+ tsv(["zt-rtti-classes.tsv","../docs/analysis/rtti-classes.tsv"]),
+ tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"]),
  text(["reimplementation-plan.html","../docs/REIMPLEMENTATION-PLAN.md"])
-]).then(([fp,planText])=>{
- const fs=counts(fp,"status");
- const closedStatuses=["confirmed","generated-support-code","generated-import-data","mapped-data"];
- const closed=(fs.confirmed||0)+(fs["generated-support-code"]||0)+(fs["generated-import-data"]||0)+(fs["mapped-data"]||0);
- const candidates=fs.candidate||0;
- const library=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&r.provenance).length;
- const frontier=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&!r.provenance&&(r.vtable||r.domain)).length;
- const opaque=fp.length-closed-candidates-library-frontier;
+]).then(([fp,gp,vt,rtti,mapRows,planText])=>{
+ const supportFunctionStatuses=new Set(["generated-support-code","generated-import-data","mapped-data"]);
+ const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
+ const accepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
+ const candidates=nativeFunctions.filter(r=>r.status==="candidate").length;
+ const open=nativeFunctions.filter(r=>r.status==="unidentified").length;
+ const classSlots=new Map();
+ for(const r of vt){
+  const key=r.vtable||r.class;
+  const row=classSlots.get(key)||{total:0,confirmed:0};
+  row.total++;
+  if(r.status==="confirmed")row.confirmed++;
+  classSlots.set(key,row);
+ }
+ let noMembers=0,someMembers=0,allMembers=0;
+ for(const row of classSlots.values()){
+  if(row.confirmed===0)noMembers++;
+  else if(row.confirmed===row.total)allMembers++;
+  else someMembers++;
+ }
+ const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
+ const namedVtables=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
+ const typeCacheDetails=typeCacheRows(mapRows,typeCacheGlobals);
+ const ranges=functionRanges(fp);
+ let getterDone=0,parentDone=0;
+ for(const r of typeCacheDetails){
+  const details=r.details||"";
+  if(typeGetterAddrs(details).some(a=>isConfirmedTypeGetter(containingFunction(ranges,a))))getterDone++;
+  if(hasResolvedParent(details))parentDone++;
+ }
  const plan=planProgress(planText);
  document.getElementById("progress-bars").innerHTML=[
    `<div class="progress-card">
-    <h3><a href="perimeter.html">Binary Perimeter</a></h3>
-    <div class="stacked-bar" role="img" aria-label="Closed or support ${closed}, candidates ${candidates}, adapter-owned middleware ${library}, product frontier ${frontier}, opaque ${opaque}">
-     ${seg("seg-exact",closed,fp.length,`Closed/support: ${closed}`)}
-     ${seg("seg-candidate",candidates,fp.length,`Exact-ID candidates: ${candidates}`)}
-     ${seg("seg-mid",library,fp.length,`Adapter-owned middleware: ${library}`)}
-     ${seg("seg-zt",frontier,fp.length,`Product recovery frontier: ${frontier}`)}
-     ${seg("seg-opaque",opaque,fp.length,`Opaque: ${opaque}`)}
+    <h3><a href="perimeter.html">Native Function Behavior</a></h3>
+    <div class="stacked-bar" role="img" aria-label="Accepted behavior ${accepted}, candidate behavior ${candidates}, no exact behavior ${open}">
+     ${seg("seg-accepted",accepted,nativeFunctions.length,`Accepted behavior/name: ${accepted}`)}
+     ${seg("seg-candidate",candidates,nativeFunctions.length,`Candidate behavior/name: ${candidates}`)}
+     ${seg("seg-open",open,nativeFunctions.length,`No exact behavior/name: ${open}`)}
     </div>
     <div class="legend">
-     ${legend("seg-exact",`Closed/support: ${closed.toLocaleString()}`)}
-     ${legend("seg-candidate",`Exact-ID candidates: ${candidates.toLocaleString()}`)}
-     ${legend("seg-mid",`Adapter-owned middleware: ${library.toLocaleString()}`)}
-     ${legend("seg-zt",`Product frontier: ${frontier.toLocaleString()}`)}
-     ${legend("seg-opaque",`Opaque: ${opaque.toLocaleString()}`)}
+     ${legend("seg-accepted",`Accepted: ${accepted.toLocaleString()}`)}
+     ${legend("seg-candidate",`Candidate: ${candidates.toLocaleString()}`)}
+     ${legend("seg-open",`No exact behavior: ${open.toLocaleString()}`)}
     </div>
-    <p class="progress-note">${frontier.toLocaleString()} product functions remain in the recovery queue.</p>
+    <p class="progress-note">${nativeFunctions.length.toLocaleString()} confirmed native function entries. Suspected-only entries are not tracked separately.</p>
+   </div>`,
+   `<div class="progress-card">
+    <h3><a href="perimeter.html">Native Class Members</a></h3>
+    <div class="stacked-bar" role="img" aria-label="No virtual slots identified ${noMembers}, some virtual slots identified ${someMembers}, all virtual slots identified ${allMembers}">
+     ${seg("seg-none",noMembers,vtableRows.length,`No virtual slots identified: ${noMembers}`)}
+     ${seg("seg-some",someMembers,vtableRows.length,`Some virtual slots identified: ${someMembers}`)}
+     ${seg("seg-all",allMembers,vtableRows.length,`All virtual slots identified: ${allMembers}`)}
+    </div>
+    <div class="legend">
+     ${legend("seg-none",`No slots identified: ${noMembers.toLocaleString()}`)}
+     ${legend("seg-some",`Some slots identified: ${someMembers.toLocaleString()}`)}
+     ${legend("seg-all",`All slots identified: ${allMembers.toLocaleString()}`)}
+    </div>
+    <p class="progress-note">${vtableRows.length.toLocaleString()} vtable-backed classes; ${namedVtables.toLocaleString()} have recovered class names.</p>
+   </div>`,
+   `<div class="progress-card">
+    <h3><a href="perimeter.html">Type Registry Links</a></h3>
+    <p class="mini-label">Getter linkage</p>
+    <div class="stacked-bar" role="img" aria-label="Getter linked ${getterDone}, getter unresolved ${typeCacheDetails.length-getterDone}">
+     ${seg("seg-accepted",getterDone,typeCacheDetails.length,`Linked getter/helper: ${getterDone}`)}
+     ${seg("seg-open",typeCacheDetails.length-getterDone,typeCacheDetails.length,`Unlinked or unconfirmed: ${typeCacheDetails.length-getterDone}`)}
+    </div>
+    <p class="mini-label">Parent relationships</p>
+    <div class="stacked-bar" role="img" aria-label="Parent resolved ${parentDone}, parent unresolved ${typeCacheDetails.length-parentDone}">
+     ${seg("seg-accepted",parentDone,typeCacheDetails.length,`Resolved parent/root: ${parentDone}`)}
+     ${seg("seg-open",typeCacheDetails.length-parentDone,typeCacheDetails.length,`Parent unresolved: ${typeCacheDetails.length-parentDone}`)}
+    </div>
+    <div class="legend">
+     ${legend("seg-named",`Cached handles named: ${typeCacheGlobals.length.toLocaleString()}`)}
+     ${legend("seg-accepted",`Getter linked: ${getterDone.toLocaleString()}`)}
+     ${legend("seg-open",`Parent unresolved: ${(typeCacheDetails.length-parentDone).toLocaleString()}`)}
+    </div>
+    <p class="progress-note">${typeCacheGlobals.length.toLocaleString()} current cached type-handle cells.</p>
    </div>`,
    `<div class="progress-card">
     <h3><a href="reimplementation-plan.html">Reconstruction Work Board</a></h3>

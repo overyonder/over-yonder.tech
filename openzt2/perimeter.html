@@ -15,7 +15,7 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
 h3{font-size:14px;margin:16px 0 4px}
 .narrative{max-width:1000px}.narrative p,.narrative li{font-size:13px;line-height:1.6}.narrative p{margin:6px 0}.narrative table{margin:8px 0;font-size:12.5px}.narrative code{background:var(--soft);padding:.05em .35em;border-radius:3px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
-.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-done{background:#79740e}.seg-notdone{background:#9d0006}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-identified{background:#076678}.seg-opaque{background:#9d0006}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}.coverage-table td:nth-child(3),.coverage-table td:nth-child(4){text-align:right;font-variant-numeric:tabular-nums}.metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.metric-list dt{color:var(--muted)}.metric-list dd{margin:0;font-weight:700}
+.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-accepted,.seg-known,.seg-named,.seg-all{background:#79740e}.seg-candidate,.seg-some{background:#b57614}.seg-context,.seg-type,.seg-other,.seg-mid{background:#076678}.seg-open,.seg-unnamed,.seg-none,.seg-unknown{background:#9d0006}.seg-support,.seg-nameonly{background:#7c6f64}.seg-frontier{background:var(--frontier)}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}.coverage-table td:nth-child(3){font-variant-numeric:tabular-nums}.metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.metric-list dt{color:var(--muted)}.metric-list dd{margin:0;font-weight:700}
 .controls{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}.controls input.search{width:260px;font:400 12px/1.2 ui-monospace,Menlo,Consolas,monospace}
 table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}th{background:var(--soft);position:sticky;top:0;cursor:pointer;user-select:none}td code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}tr:hover{background:var(--soft)}
 .pill{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;border:1px solid var(--control-border)}.s-confirmed,.s-identified,.s-type-cache,.s-generated-support-code,.s-generated-import-data,.s-mapped-data{background:color-mix(in srgb,var(--ok) 22%,transparent)}.s-candidate,.s-region-tagged{background:color-mix(in srgb,var(--warn) 22%,transparent)}.s-unidentified,.s-thunk,.s-small-unidentified{background:color-mix(in srgb,var(--bad) 16%,transparent)}
@@ -30,26 +30,26 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 
  <section class="narrative">
   <h2>Authority Model</h2>
-  <p>The byte map is the address-fact archive. A function has an exact identity record when a <code>runtime-parent</code> row in <code>docs/analysis/zt-byte-range-map.tsv</code> starts at that function entry. Native type getters are ordinary confirmed byte-map identities named <code>get_type_*</code>.</p>
-  <p>The function perimeter is a generated view over the stripped executable's function entries. It joins byte-map exact anchors with structural overlays: library provenance, vtable membership, and inferred domain. Detector proposals are produced live by <code>tools/detect-address-id-candidates.py</code>; durable review candidates and accepted identities live in the byte map.</p>
+  <p>The byte map is the address-fact archive. A function has an accepted exact identity only when a <code>runtime-parent</code> row in <code>docs/analysis/zt-byte-range-map.tsv</code> starts at that function entry. Candidate rows are proposed exact identities awaiting review. Region, provenance, vtable, and domain labels are triage context; they do not mean the function's concrete behavior has been recovered.</p>
+  <p>The class surface is the vtable surface unless stated otherwise. Vtable rows prove polymorphic native objects and their virtual slot counts. Additional name-only RTTI rows prove surviving type names, but they do not establish a vtable or virtual member perimeter. Type-cache rows track the runtime type-registration cache cells; parent relationships and getter linkage are separate facts over that same cache surface.</p>
 
   <h3>Recovery Domains</h3>
-  <p>Each bar below has its own denominator. The byte-map bar uses non-overlapping leaf partitions classified by the most specific covering map row; it is not a count of map rows.</p>
+  <p>Each bar below answers one completion question with one denominator. The byte-map bar uses non-overlapping leaf partitions classified by the most specific covering map row; it is not a count of map rows.</p>
   <div id="coverage-summary" class="coverage-grid" aria-label="Binary recovery domain coverage charts"></div>
-  <table class="coverage-table"><thead><tr><th>Recovery domain</th><th>Denominator</th><th>Done</th><th>Not done</th><th>Done means</th><th>Not done means</th></tr></thead><tbody id="coverage-rows"></tbody></table>
+  <table class="coverage-table"><thead><tr><th>Recovery domain</th><th>Denominator</th><th>Current split</th><th>What this answers</th><th>Remaining uncertainty</th></tr></thead><tbody id="coverage-rows"></tbody></table>
 
   <h3>Status Vocabulary</h3>
   <table><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody>
-   <tr><td>confirmed</td><td>accepted exact function identity from a byte-map row whose start equals the function entry</td></tr>
-   <tr><td>candidate</td><td>exact function identity proposal recorded in the byte map and awaiting manual review</td></tr>
+   <tr><td>confirmed</td><td>accepted exact function behavior/name from a byte-map row whose start equals the function entry</td></tr>
+   <tr><td>candidate</td><td>proposed exact function behavior/name recorded in the byte map and awaiting manual review</td></tr>
    <tr><td>generated-support-code</td><td>generated runtime support code outside the stripped game <code>.text</code> surface</td></tr>
    <tr><td>generated-import-data</td><td>generated import-support entries outside the stripped game <code>.text</code> surface</td></tr>
    <tr><td>mapped-data</td><td>non-<code>.text</code> mapped support entries with a byte-map owner</td></tr>
-   <tr><td>unidentified</td><td>no accepted exact function identity yet; structural overlays may still assign middleware, vtable, or domain context</td></tr>
+   <tr><td>unidentified</td><td>known function entry with no accepted or candidate exact behavior/name; structural overlays may still assign middleware, vtable, or domain context</td></tr>
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Native function exact IDs</strong> track accepted byte-map names over the current analyzer function list. <strong>Type-cache handles</strong> count recovered cached type-handle cells once; byte-map promotion, global references, and getter bodies are validation sources for that same fact. <strong>Type getter linkage</strong> tracks whether a cache entry is tied to a confirmed native getter function. <strong>Registered parent relationships</strong> track whether that registered type has a resolved parent edge. <strong>Vtable</strong> bars track class/vtable naming and virtual slot identity separately. <strong>Byte-map partition coverage</strong> classifies non-overlapping map partitions as known-like or open/unknown-like, avoiding the misleading row-count denominator created by overlapping parent and child ranges.</p>
+  <p><strong>Native function behavior</strong> tracks accepted and candidate exact recovery over known native function entries. The current tables do not keep a suspected-only function-entry bucket. <strong>Class evidence</strong> separates vtable-backed classes from name-only RTTI rows, class names from vtable addresses, and total virtual slots from identified virtual slots. <strong>Type-cache handles</strong> count recovered cached type-handle cells once; global references, byte-map rows, and getter bodies are validation sources for that same fact. <strong>Type getter linkage</strong> and <strong>registered parent relationships</strong> are separate completion questions over those cache handles.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
@@ -176,11 +176,22 @@ function byteMapPartitionStats(mapRows){
  }
  return {done,notDone,bytesDone,bytesNotDone};
 }
+function summarySegments(segments,total){
+ return segments.map(s=>seg(s.cls,s.value,total,`${s.label}: ${fmt(s.value)}`)).join("");
+}
+function summaryLegend(segments,total){
+ return segments.map(s=>legend(s.cls,`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`)).join("");
+}
+function summarySplit(segments,total){
+ return segments.map(s=>`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`).join("; ");
+}
 function coverageSummary(fp,gp,vt,rtti,mapRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
- const functionExactDone=nativeFunctions.filter(r=>r.status==="confirmed").length;
- const functionContextDone=nativeFunctions.filter(r=>r.status!=="unidentified"||r.provenance||r.vtable||r.domain||r.region).length;
- const globalDone=gp.filter(r=>r.status==="identified"||r.status==="type-cache").length;
+ const supportFunctions=fp.length-nativeFunctions.length;
+ const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
+ const functionCandidate=nativeFunctions.filter(r=>r.status==="candidate").length;
+ const functionOpen=nativeFunctions.filter(r=>r.status==="unidentified").length;
+ const globalIdentified=gp.filter(r=>r.status==="identified").length;
  const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
  const typeCacheDone=typeCacheGlobals.filter(r=>(r.name||"").trim()).length;
  const cacheRows=typeCacheRows(mapRows,typeCacheGlobals);
@@ -192,36 +203,53 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   if(hasResolvedParent(details))parentDone++;
  }
  const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
- const vtableClassDone=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const nameOnlyRtti=rtti.filter(r=>!(r.vtable||"").trim());
+ const vtableClassNamed=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const vtableClassUnnamed=vtableRows.length-vtableClassNamed;
+ const classSlots=new Map();
+ for(const r of vt){
+  const key=r.vtable||r.class;
+  const row=classSlots.get(key)||{total:0,confirmed:0};
+  row.total++;
+  if(r.status==="confirmed")row.confirmed++;
+  classSlots.set(key,row);
+ }
+ let classesNoMembers=0,classesSomeMembers=0,classesAllMembers=0;
+ for(const row of classSlots.values()){
+  if(row.confirmed===0)classesNoMembers++;
+  else if(row.confirmed===row.total)classesAllMembers++;
+  else classesSomeMembers++;
+ }
  const vslotDone=vt.filter(r=>r.status==="confirmed").length;
  const bmap=byteMapPartitionStats(mapRows);
  const domains=[
-  {name:"Native function exact IDs",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionExactDone,notDone:nativeFunctions.length-functionExactDone,doneMeans:"Function row has an accepted exact byte-map identity at the function entry.",notDoneMeans:"Function row is still unidentified or only a candidate exact identity."},
-  {name:"Function recovery substrate",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionContextDone,notDone:nativeFunctions.length-functionContextDone,doneMeans:"Function row has an exact/candidate identity or structural context: region, library provenance, vtable membership, or inferred domain.",notDoneMeans:"Function row has no exact identity and no structural context to guide recovery."},
-  {name:"Global/static names",den:`${fmt(gp.length)} referenced global/static cells`,done:globalDone,notDone:gp.length-globalDone,doneMeans:"Global row is identified or classified as a type-cache cell.",notDoneMeans:"Global row remains an unidentified referenced address."},
-  {name:"Type-cache handles",den:`${fmt(typeCacheGlobals.length)} referenced cached type-handle cells`,done:typeCacheDone,notDone:typeCacheGlobals.length-typeCacheDone,doneMeans:"Cached type-handle cell is named in the global/static perimeter.",notDoneMeans:"Referenced cached type-handle cell lacks a retained name."},
-  {name:"Type getter linkage",den:`${fmt(cacheRows.length)} current cached type-handle cells`,done:getterDone,notDone:cacheRows.length-getterDone,doneMeans:"Cache initializer evidence lands inside a confirmed type getter or type-registration helper range.",notDoneMeans:"No current getter address evidence is recorded, or the address lands in an unconfirmed/non-type function."},
-  {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} current cached type-handle cells`,done:parentDone,notDone:cacheRows.length-parentDone,doneMeans:"Registration evidence includes a resolved parent type name or an explicit root/no-parent registration.",notDoneMeans:"Parent evidence is absent or only an unresolved helper/call address."},
-  {name:"Vtable class names",den:`${fmt(vtableRows.length)} enumerated vtable rows`,done:vtableClassDone,notDone:vtableRows.length-vtableClassDone,doneMeans:"Vtable row is associated with a recovered class name.",notDoneMeans:"Vtable row still has an address-only `vtable_*` placeholder."},
-  {name:"Vtable slot identities",den:`${fmt(vt.length)} virtual method slot rows`,done:vslotDone,notDone:vt.length-vslotDone,doneMeans:"Virtual slot has a confirmed method identity.",notDoneMeans:"Virtual slot remains unidentified."},
-  {name:"Byte-map partition coverage",den:`${fmt(bmap.done+bmap.notDone)} non-overlapping leaf partitions`,done:bmap.done,notDone:bmap.notDone,doneMeans:"Most-specific covering row has a known-like status: known, assessed, copied, consumed, generated-known, indirected, omitted, matches-runtime, or external.",notDoneMeans:"Most-specific covering row is blank, unknown, candidate, not-done, unmaterialized, or another open status."}
+  {name:"Function entry perimeter",den:`${fmt(fp.length)} generated function-perimeter rows`,segments:[{label:"Native entries",value:nativeFunctions.length,cls:"seg-known"},{label:"Generated support/data",value:supportFunctions,cls:"seg-support"}],answer:"How many function-like rows are in the current stripped-binary perimeter.",uncertainty:"No separate suspected-only function-entry ledger exists; candidate rows below are candidate identities for confirmed entries."},
+  {name:"Native function behavior",den:`${fmt(nativeFunctions.length)} confirmed native function entries`,segments:[{label:"Accepted behavior/name",value:functionAccepted,cls:"seg-accepted"},{label:"Candidate behavior/name",value:functionCandidate,cls:"seg-candidate"},{label:"No exact behavior/name",value:functionOpen,cls:"seg-open"}],answer:"How much concrete behavior/name recovery is accepted or awaiting review over known native function entries.",uncertainty:"Structural context on an unidentified row helps triage, but it is not concrete behavior recovery."},
+  {name:"Global/static references",den:`${fmt(gp.length)} referenced global/static cells`,segments:[{label:"Type-cache handles",value:typeCacheGlobals.length,cls:"seg-type"},{label:"Other identified",value:globalIdentified,cls:"seg-other"},{label:"Unidentified",value:gp.length-typeCacheGlobals.length-globalIdentified,cls:"seg-open"}],answer:"How many referenced static cells have a concrete current classification.",uncertainty:"Unidentified cells need byte-map facts from initializer writes, consumers, or exact data shape."},
+  {name:"Type-cache handle names",den:`${fmt(typeCacheGlobals.length)} referenced cached type-handle cells`,segments:[{label:"Named handles",value:typeCacheDone,cls:"seg-named"},{label:"Unnamed handles",value:typeCacheGlobals.length-typeCacheDone,cls:"seg-unnamed"}],answer:"Whether each recovered cached type-handle cell has a retained name.",uncertainty:"This does not imply the getter function, parent edge, vtable, fields, or methods are known."},
+  {name:"Type getter linkage",den:`${fmt(cacheRows.length)} current cached type-handle cells`,segments:[{label:"Linked to confirmed getter/helper",value:getterDone,cls:"seg-accepted"},{label:"Unlinked or unconfirmed",value:cacheRows.length-getterDone,cls:"seg-open"}],answer:"Whether cache evidence lands inside a confirmed type getter or type-registration helper range.",uncertainty:"Unlinked rows may still have cache-write evidence, but the surrounding function identity is not accepted."},
+  {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} current cached type-handle cells`,segments:[{label:"Resolved parent/root",value:parentDone,cls:"seg-accepted"},{label:"Parent unresolved",value:cacheRows.length-parentDone,cls:"seg-open"}],answer:"Whether registered type-cache evidence includes a resolved parent edge or explicit root/no-parent registration.",uncertainty:"A resolved registered parent is not the same as a recovered native C++ inheritance graph."},
+  {name:"Native class evidence",den:`${fmt(rtti.length)} current class-evidence rows`,segments:[{label:"Vtable-backed",value:vtableRows.length,cls:"seg-known"},{label:"Name-only RTTI",value:nameOnlyRtti.length,cls:"seg-nameonly"}],answer:"How many class-like records are backed by an enumerated vtable versus only a surviving name.",uncertainty:"Additional non-polymorphic classes or stripped classes may exist outside this evidence surface."},
+  {name:"Vtable class names",den:`${fmt(vtableRows.length)} vtable-backed native classes`,segments:[{label:"Recovered class name",value:vtableClassNamed,cls:"seg-named"},{label:"Address-only vtable",value:vtableClassUnnamed,cls:"seg-unnamed"}],answer:"How many enumerated vtables have a recovered class name.",uncertainty:"A class name does not imply fields, constructors, inheritance, or virtual method meanings are complete."},
+  {name:"Virtual member totals",den:`${fmt(rtti.length)} current class-evidence rows`,segments:[{label:"Slot total known",value:vtableRows.length,cls:"seg-known"},{label:"No vtable/member total",value:nameOnlyRtti.length,cls:"seg-unknown"}],answer:"Which known class-evidence rows have a concrete virtual member count.",uncertainty:"The count is the vtable slot count only; non-virtual methods and fields are outside this denominator."},
+  {name:"Per-class virtual member identity",den:`${fmt(vtableRows.length)} vtable-backed native classes`,segments:[{label:"No slots identified",value:classesNoMembers,cls:"seg-none"},{label:"Some slots identified",value:classesSomeMembers,cls:"seg-some"},{label:"All slots identified",value:classesAllMembers,cls:"seg-all"}],answer:"Whether each vtable-backed class has zero, partial, or complete confirmed virtual slot identities.",uncertainty:"A confirmed slot identity names behavior; unidentified slot addresses still require function recovery."},
+  {name:"Virtual slot identities",den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
+  {name:"Byte-map partition coverage",den:`${fmt(bmap.done+bmap.notDone)} non-overlapping leaf partitions`,segments:[{label:"Known-like partition",value:bmap.done,cls:"seg-known"},{label:"Open/unknown partition",value:bmap.notDone,cls:"seg-open"}],answer:"How much of the partitioned byte-map surface is covered by known-like statuses.",uncertainty:"The denominator is partitioned spans, not row count; overlapping parent rows do not inflate progress."}
  ];
- document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.done+d.notDone;return `
+ document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
   <div class="coverage-card">
    <h3>${esc(d.name)}</h3>
-   <div class="stacked-bar" role="img" aria-label="${esc(d.name)} done ${d.done}, not done ${d.notDone}">
-    ${seg("seg-done",d.done,total,`Done: ${fmt(d.done)}`)}
-    ${seg("seg-notdone",d.notDone,total,`Not done: ${fmt(d.notDone)}`)}
+   <div class="stacked-bar" role="img" aria-label="${esc(d.name)} ${esc(summarySplit(d.segments,total))}">
+    ${summarySegments(d.segments,total)}
    </div>
    <div class="legend">
-    ${legend("seg-done",`Done: ${fmt(d.done)} (${pct(d.done,total)})`)}
-    ${legend("seg-notdone",`Not done: ${fmt(d.notDone)} (${pct(d.notDone,total)})`)}
+    ${summaryLegend(d.segments,total)}
    </div>
    <p class="coverage-note">${esc(d.den)}</p>
   </div>`}).join("");
  document.getElementById("coverage-rows").innerHTML=domains.map(d=>{
-  const total=d.done+d.notDone;
-  return `<tr><td>${esc(d.name)}</td><td>${esc(d.den)}</td><td>${fmt(d.done)} (${pct(d.done,total)})</td><td>${fmt(d.notDone)} (${pct(d.notDone,total)})</td><td>${esc(d.doneMeans)}</td><td>${esc(d.notDoneMeans)}</td></tr>`;
+  const total=d.segments.reduce((n,s)=>n+s.value,0);
+  return `<tr><td>${esc(d.name)}</td><td>${esc(d.den)}</td><td>${esc(summarySplit(d.segments,total))}</td><td>${esc(d.answer)}</td><td>${esc(d.uncertainty)}</td></tr>`;
  }).join("");
 }
 function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
