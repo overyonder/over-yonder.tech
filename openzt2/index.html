@@ -211,7 +211,7 @@ Promise.all([
      ${legend("seg-candidate",`Candidate: ${candidates.toLocaleString()}`)}
      ${legend("seg-open",`No exact behavior: ${open.toLocaleString()}`)}
     </div>
-    <p class="progress-note">${nativeFunctions.length.toLocaleString()} confirmed native function entries. Suspected-only entries are not tracked separately.</p>
+    <p class="progress-note">${nativeFunctions.length.toLocaleString()} known native .text function entries, including entries that also appear in vtable slots. Suspected-only entries are not tracked separately.</p>
    </div>`,
    `<div class="progress-card">
     <h3><a href="perimeter.html">Native Class Members</a></h3>
