@@ -15,7 +15,7 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
 h3{font-size:14px;margin:16px 0 4px}
 .narrative{max-width:1000px}.narrative p,.narrative li{font-size:13px;line-height:1.6}.narrative p{margin:6px 0}.narrative table{margin:8px 0;font-size:12.5px}.narrative code{background:var(--soft);padding:.05em .35em;border-radius:3px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
-.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card.primary{grid-column:1/-1}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-identified{background:#076678}.seg-opaque{background:#9d0006}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}.metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.metric-list dt{color:var(--muted)}.metric-list dd{margin:0;font-weight:700}
+.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 10px}.coverage-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:9px 10px}.coverage-card h3{margin:0 0 7px}.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-done{background:#79740e}.seg-notdone{background:#9d0006}.seg-exact{background:#79740e}.seg-candidate{background:#b57614}.seg-identified{background:#076678}.seg-opaque{background:#9d0006}.seg-mid{background:#7c6f64}.seg-zt{background:var(--frontier)}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.coverage-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}.coverage-table td:nth-child(3),.coverage-table td:nth-child(4){text-align:right;font-variant-numeric:tabular-nums}.metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.metric-list dt{color:var(--muted)}.metric-list dd{margin:0;font-weight:700}
 .controls{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}.controls input.search{width:260px;font:400 12px/1.2 ui-monospace,Menlo,Consolas,monospace}
 table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}th{background:var(--soft);position:sticky;top:0;cursor:pointer;user-select:none}td code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}tr:hover{background:var(--soft)}
 .pill{display:inline-block;padding:0 6px;border-radius:9px;font-size:11px;border:1px solid var(--control-border)}.s-confirmed,.s-identified,.s-type-cache,.s-generated-support-code,.s-generated-import-data,.s-mapped-data{background:color-mix(in srgb,var(--ok) 22%,transparent)}.s-candidate,.s-region-tagged{background:color-mix(in srgb,var(--warn) 22%,transparent)}.s-unidentified,.s-thunk,.s-small-unidentified{background:color-mix(in srgb,var(--bad) 16%,transparent)}
@@ -26,15 +26,17 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
- <p class="sub">The stripped Zoo Tycoon 2 binary's function and global/static inventory, with per-function name, status, library provenance, vtable membership, and inferred domain. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>.</p>
+ <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type-cache, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, <code>zt-rtti-classes.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
 
  <section class="narrative">
   <h2>Authority Model</h2>
   <p>The byte map is the address-fact archive. A function has an exact identity record when a <code>runtime-parent</code> row in <code>docs/analysis/zt-byte-range-map.tsv</code> starts at that function entry. Native type getters are ordinary confirmed byte-map identities named <code>get_type_*</code>.</p>
   <p>The function perimeter is a generated view over the stripped executable's function entries. It joins byte-map exact anchors with structural overlays: library provenance, vtable membership, and inferred domain. Detector proposals are produced live by <code>tools/detect-address-id-candidates.py</code>; durable review candidates and accepted identities live in the byte map.</p>
 
-  <h3>Current Work State</h3>
-  <div id="coverage-summary" class="coverage-grid" aria-label="Function perimeter coverage charts"></div>
+  <h3>Recovery Domains</h3>
+  <p>Each bar below has its own denominator. The byte-map bar uses non-overlapping leaf partitions classified by the most specific covering map row; it is not a count of map rows.</p>
+  <div id="coverage-summary" class="coverage-grid" aria-label="Binary recovery domain coverage charts"></div>
+  <table class="coverage-table"><thead><tr><th>Recovery domain</th><th>Denominator</th><th>Done</th><th>Not done</th><th>Done means</th><th>Not done means</th></tr></thead><tbody id="coverage-rows"></tbody></table>
 
   <h3>Status Vocabulary</h3>
   <table><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody>
@@ -47,7 +49,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Closed/support</strong> rows are confirmed exact identities or generated/mapped support. <strong>Exact-ID candidates</strong> are recorded byte-map proposals awaiting review. <strong>Adapter-owned middleware</strong> rows carry third-party provenance such as Gamebryo, Lua, D3D9, zlib, libjpeg, or CRT. <strong>Product recovery frontier</strong> rows are remaining ZT/BlueFang functions that have vtable or domain context but still lack exact behavior names. <strong>Opaque</strong> rows have none of those facts.</p>
+  <p><strong>Native function exact IDs</strong> track accepted byte-map names over the current analyzer function list. <strong>Type-cache</strong> bars distinguish named global cache cells from the separate question of whether cache rows, global rows, and getter callsites reconcile. <strong>Vtable</strong> bars track class/vtable naming and virtual slot identity separately. <strong>Byte-map partition coverage</strong> classifies non-overlapping map partitions as known-like or open/unknown-like, avoiding the misleading row-count denominator created by overlapping parent and child ranges.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
@@ -70,54 +72,127 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"
 async function tsv(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok){const t=await r.text();const L=t.trim().split(/\r?\n/);const h=L.shift().split("\t");return L.filter(Boolean).map(l=>{const c=l.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]||"");return o})}last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
 function pill(s){return `<span class="pill s-${esc(s)}">${esc(s)}</span>`}
 function counts(rows,key){const c={};for(const r of rows)c[r[key]]=(c[r[key]]||0)+1;return c}
+function fmt(n){return Number(n||0).toLocaleString()}
 function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
-function seg(cls,n,total,label){return `<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${n?pct(n,total):""}</div>`}
+function seg(cls,n,total,label){const p=100*n/(total||1);return `<div class="seg ${cls}" style="width:${p}%" title="${esc(label)}">${n&&p>=7?pct(n,total):""}</div>`}
 function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
-function coverageSummary(fp,gp){
- const fs=counts(fp,"status"), gs=counts(gp,"status");
- const confirmed=fs.confirmed||0, candidates=fs.candidate||0, without=fp.length-confirmed-candidates;
- const typeGetters=fp.filter(r=>r.status==="confirmed"&&(r.name||"").startsWith("get_type_")).length;
- const closedStatuses=["confirmed","generated-support-code","generated-import-data","mapped-data"];
- const closed=(fs.confirmed||0)+(fs["generated-support-code"]||0)+(fs["generated-import-data"]||0)+(fs["mapped-data"]||0);
- const library=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&r.provenance).length;
- const frontier=fp.filter(r=>!closedStatuses.includes(r.status)&&r.status!=="candidate"&&!r.provenance&&(r.vtable||r.domain)).length;
- const opaque=fp.length-closed-candidates-library-frontier;
- document.getElementById("coverage-summary").innerHTML=`
-  <div class="coverage-card primary">
-   <h3>Function Work Queue</h3>
-   <div class="stacked-bar" role="img" aria-label="Closed or support ${closed}, candidates ${candidates}, adapter-owned middleware ${library}, product frontier ${frontier}, opaque ${opaque}">
-    ${seg("seg-exact",closed,fp.length,`Closed/support: ${closed}`)}
-    ${seg("seg-candidate",candidates,fp.length,`Exact-ID candidates: ${candidates}`)}
-    ${seg("seg-mid",library,fp.length,`Adapter-owned middleware: ${library}`)}
-    ${seg("seg-zt",frontier,fp.length,`Product recovery frontier: ${frontier}`)}
-    ${seg("seg-opaque",opaque,fp.length,`Opaque: ${opaque}`)}
+function num(s){return /^0x/i.test(s||"")?parseInt(s,16):Number(s||0)}
+function hex(s){const n=parseInt(s||"",16);return Number.isFinite(n)?n:null}
+const supportFunctionStatuses=new Set(["generated-support-code","generated-import-data","mapped-data"]);
+const knownByteStatuses=new Set(["known","assessed","copied","consumed","generated-known","indirected","omitted","matches-runtime","external"]);
+function promotedCacheRows(mapRows){return mapRows.filter(r=>(r.details||"").startsWith("Promoted from retired register_type detector evidence. Evidence: cached native type handle"))}
+function rowAddr(r,key="start"){return hex(r[key]||r.address)}
+function rowSet(rows,key="start"){return new Set(rows.map(r=>rowAddr(r,key)).filter(Number.isFinite))}
+function functionRanges(fp){
+ return fp.map(r=>{const start=hex(r.address),size=Number(r.size||0);return Number.isFinite(start)&&size>0?{start,end:start+size,row:r}:null}).filter(Boolean).sort((a,b)=>a.start-b.start);
+}
+function containingFunction(ranges,addr){
+ let lo=0,hi=ranges.length;
+ while(lo<hi){const mid=(lo+hi)>>1;if(ranges[mid].start<=addr)lo=mid+1;else hi=mid}
+ const hit=ranges[lo-1];
+ return hit&&hit.start<=addr&&addr<hit.end?hit.row:null;
+}
+function tinyHeap(){
+ const h=[];
+ const less=(a,b)=>a.len!==b.len?a.len<b.len:a.id>b.id;
+ const swap=(i,j)=>{const t=h[i];h[i]=h[j];h[j]=t};
+ return {
+  push(x){h.push(x);let i=h.length-1;while(i){const p=(i-1)>>1;if(!less(h[i],h[p]))break;swap(i,p);i=p}},
+  pop(){if(!h.length)return null;const top=h[0],last=h.pop();if(h.length){h[0]=last;let i=0;for(;;){let l=i*2+1,r=l+1,m=i;if(l<h.length&&less(h[l],h[m]))m=l;if(r<h.length&&less(h[r],h[m]))m=r;if(m===i)break;swap(i,m);i=m}}return top},
+  peek(){return h[0]},
+  get length(){return h.length}
+ };
+}
+function byteMapPartitionStats(mapRows){
+ const bySpace=new Map();
+ for(const r of mapRows){
+  const start=hex(r.start),end=hex(r.end);
+  if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)continue;
+  const space=r.space||"";
+  if(!bySpace.has(space))bySpace.set(space,[]);
+  bySpace.get(space).push({start,end,len:end-start,status:r.status||"",name:r.name||""});
+ }
+ let done=0,notDone=0,bytesDone=0,bytesNotDone=0;
+ for(const rows of bySpace.values()){
+  const events=[];
+  rows.forEach((r,id)=>{events.push({pos:r.start,id,start:true});events.push({pos:r.end,id,start:false})});
+  events.sort((a,b)=>a.pos-b.pos||Number(a.start)-Number(b.start));
+  const active=new Uint8Array(rows.length),heap=tinyHeap();
+  let last=events.length?events[0].pos:null,idx=0;
+  while(idx<events.length){
+   const pos=events[idx].pos;
+   if(last!==null&&pos>last){
+    while(heap.length&&!active[heap.peek().id])heap.pop();
+    if(heap.length){
+     const top=heap.peek(),span=pos-last;
+     if(knownByteStatuses.has(top.status)){done++;bytesDone+=span}else{notDone++;bytesNotDone+=span}
+    }
+   }
+   while(idx<events.length&&events[idx].pos===pos){
+    const ev=events[idx++],r=rows[ev.id];
+    if(ev.start){active[ev.id]=1;heap.push({id:ev.id,len:r.len,status:r.status})}else active[ev.id]=0;
+   }
+   last=pos;
+  }
+ }
+ return {done,notDone,bytesDone,bytesNotDone};
+}
+function coverageSummary(fp,gp,vt,rtti,mapRows){
+ const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
+ const functionExactDone=nativeFunctions.filter(r=>r.status==="confirmed").length;
+ const functionContextDone=nativeFunctions.filter(r=>r.status!=="unidentified"||r.provenance||r.vtable||r.domain||r.region).length;
+ const globalDone=gp.filter(r=>r.status==="identified"||r.status==="type-cache").length;
+ const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
+ const typeCacheDone=typeCacheGlobals.filter(r=>(r.name||"").trim()).length;
+ const cacheRows=promotedCacheRows(mapRows);
+ const cacheSet=rowSet(cacheRows),globalCacheSet=rowSet(typeCacheGlobals,"address");
+ const overlap=[...cacheSet].filter(a=>globalCacheSet.has(a)).length;
+ const cacheAlignmentTotal=new Set([...cacheSet,...globalCacheSet]).size;
+ const ranges=functionRanges(fp);
+ let getterDone=0,getterTotal=0,parentDone=0;
+ for(const r of cacheRows){
+  const details=r.details||"";
+  const getter=/getter call site `0x([0-9a-fA-F]+)`/.exec(details);
+  if(getter){
+   getterTotal++;
+   const hit=containingFunction(ranges,parseInt(getter[1],16));
+   if(hit&&hit.status==="confirmed"&&(hit.name||"").startsWith("get_type_"))getterDone++;
+  }
+  if(/parent type `/.test(details))parentDone++;
+ }
+ const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
+ const vtableClassDone=vtableRows.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
+ const vslotDone=vt.filter(r=>r.status==="confirmed").length;
+ const bmap=byteMapPartitionStats(mapRows);
+ const domains=[
+  {name:"Native function exact IDs",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionExactDone,notDone:nativeFunctions.length-functionExactDone,doneMeans:"Function row has an accepted exact byte-map identity at the function entry.",notDoneMeans:"Function row is still unidentified or only a candidate exact identity."},
+  {name:"Function recovery substrate",den:`${fmt(nativeFunctions.length)} current native function entries`,done:functionContextDone,notDone:nativeFunctions.length-functionContextDone,doneMeans:"Function row has an exact/candidate identity or structural context: region, library provenance, vtable membership, or inferred domain.",notDoneMeans:"Function row has no exact identity and no structural context to guide recovery."},
+  {name:"Global/static names",den:`${fmt(gp.length)} referenced global/static cells`,done:globalDone,notDone:gp.length-globalDone,doneMeans:"Global row is identified or classified as a type-cache cell.",notDoneMeans:"Global row remains an unidentified referenced address."},
+  {name:"Type-cache global labels",den:`${fmt(typeCacheGlobals.length)} current type-cache global rows`,done:typeCacheDone,notDone:typeCacheGlobals.length-typeCacheDone,doneMeans:"Type-cache global row has a retained name.",notDoneMeans:"Type-cache global row lacks a retained name."},
+  {name:"Type-cache ledger alignment",den:`${fmt(cacheAlignmentTotal)} unique promoted-cache or global-cache addresses`,done:overlap,notDone:cacheAlignmentTotal-overlap,doneMeans:"Address appears in both the promoted registration cache rows and the global type-cache perimeter.",notDoneMeans:"Address appears in only one of those two ledgers and needs reconciliation."},
+  {name:"Type getter linkage",den:`${fmt(getterTotal)} promoted cache rows with getter callsites`,done:getterDone,notDone:getterTotal-getterDone,doneMeans:"Cache getter callsite falls inside a confirmed `get_type_*` function range.",notDoneMeans:"Callsite is outside the current function perimeter or falls inside a non-`get_type_*`/unconfirmed function."},
+  {name:"Registered parent relationships",den:`${fmt(cacheRows.length)} promoted cached type registrations`,done:parentDone,notDone:cacheRows.length-parentDone,doneMeans:"Registration evidence includes a resolved parent type name.",notDoneMeans:"Parent evidence is absent or only a parent-getter address."},
+  {name:"Vtable class names",den:`${fmt(vtableRows.length)} enumerated vtable rows`,done:vtableClassDone,notDone:vtableRows.length-vtableClassDone,doneMeans:"Vtable row is associated with a recovered class name.",notDoneMeans:"Vtable row still has an address-only `vtable_*` placeholder."},
+  {name:"Vtable slot identities",den:`${fmt(vt.length)} virtual method slot rows`,done:vslotDone,notDone:vt.length-vslotDone,doneMeans:"Virtual slot has a confirmed method identity.",notDoneMeans:"Virtual slot remains unidentified."},
+  {name:"Byte-map partition coverage",den:`${fmt(bmap.done+bmap.notDone)} non-overlapping leaf partitions`,done:bmap.done,notDone:bmap.notDone,doneMeans:"Most-specific covering row has a known-like status: known, assessed, copied, consumed, generated-known, indirected, omitted, matches-runtime, or external.",notDoneMeans:"Most-specific covering row is blank, unknown, candidate, not-done, unmaterialized, or another open status."}
+ ];
+ document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.done+d.notDone;return `
+  <div class="coverage-card">
+   <h3>${esc(d.name)}</h3>
+   <div class="stacked-bar" role="img" aria-label="${esc(d.name)} done ${d.done}, not done ${d.notDone}">
+    ${seg("seg-done",d.done,total,`Done: ${fmt(d.done)}`)}
+    ${seg("seg-notdone",d.notDone,total,`Not done: ${fmt(d.notDone)}`)}
    </div>
    <div class="legend">
-    ${legend("seg-exact",`Closed/support: ${closed.toLocaleString()}`)}
-    ${legend("seg-candidate",`Exact-ID candidates: ${candidates.toLocaleString()}`)}
-    ${legend("seg-mid",`Adapter-owned middleware: ${library.toLocaleString()}`)}
-    ${legend("seg-zt",`Product recovery frontier: ${frontier.toLocaleString()}`)}
-    ${legend("seg-opaque",`Opaque: ${opaque.toLocaleString()}`)}
+    ${legend("seg-done",`Done: ${fmt(d.done)} (${pct(d.done,total)})`)}
+    ${legend("seg-notdone",`Not done: ${fmt(d.notDone)} (${pct(d.notDone,total)})`)}
    </div>
-   <p class="coverage-note">${frontier.toLocaleString()} product functions remain in the recovery queue. ${candidates.toLocaleString()} exact-ID candidates need review before promotion.</p>
-  </div>
-  <div class="coverage-card">
-   <h3>Exact Address Names</h3>
-   <dl class="metric-list">
-    <dt>Confirmed exact IDs</dt><dd>${confirmed.toLocaleString()}</dd>
-    <dt>Exact-ID candidates</dt><dd>${candidates.toLocaleString()}</dd>
-    <dt>Without exact ID</dt><dd>${without.toLocaleString()}</dd>
-    <dt>Confirmed type-getter accessors</dt><dd>${typeGetters.toLocaleString()}</dd>
-   </dl>
-  </div>
-  <div class="coverage-card">
-   <h3>Globals / Statics</h3>
-   <dl class="metric-list">
-    <dt>Type-cache globals</dt><dd>${(gs["type-cache"]||0).toLocaleString()}</dd>
-    <dt>Identified globals</dt><dd>${(gs.identified||0).toLocaleString()}</dd>
-    <dt>Unidentified globals</dt><dd>${(gs.unidentified||0).toLocaleString()}</dd>
-   </dl>
-  </div>`;
+   <p class="coverage-note">${esc(d.den)}</p>
+  </div>`}).join("");
+ document.getElementById("coverage-rows").innerHTML=domains.map(d=>{
+  const total=d.done+d.notDone;
+  return `<tr><td>${esc(d.name)}</td><td>${esc(d.den)}</td><td>${fmt(d.done)} (${pct(d.done,total)})</td><td>${fmt(d.notDone)} (${pct(d.notDone,total)})</td><td>${esc(d.doneMeans)}</td><td>${esc(d.notDoneMeans)}</td></tr>`;
+ }).join("");
 }
 function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
  let sortK=cols[0],desc=false;
@@ -135,9 +210,12 @@ function table(rows,bodyId,cols,searchId,statusId,shownId,countId){
 }
 Promise.all([
  tsv(["zt-function-perimeter.tsv","../docs/analysis/function-perimeter.tsv"]),
- tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"])
-]).then(([fp,gp])=>{
- coverageSummary(fp,gp);
+ tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"]),
+ tsv(["zt-vtable-methods-full.tsv","../docs/analysis/vtable-methods-full.tsv"]),
+ tsv(["zt-rtti-classes.tsv","../docs/analysis/rtti-classes.tsv"]),
+ tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"])
+]).then(([fp,gp,vt,rtti,mapRows])=>{
+ coverageSummary(fp,gp,vt,rtti,mapRows);
  table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});

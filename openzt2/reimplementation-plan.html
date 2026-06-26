@@ -190,21 +190,59 @@ startup/loading work runs before <code>RuntimeResourcesReady</code>, normal runt
 uses <code>runtime_resources_ready</code>, and loaded-world systems add concrete ECS gates
 such as <code>in_loaded_world</code>. The former closed <code>OpenZt2AppSet</code>
 menu/game/overlay buckets have been removed.</p>
-<p>The current refactor boundary is: no private <code>game_runtime</code> module, no live
-<code>RuntimeSupport</code> resource, and no compatibility owner that other systems ask for
-unrelated facts. <code>FeatureRuntimePlugin</code> only composes feature-owned
-registrations. Startup may still use <code>RuntimeSupport</code> as a seed/composition
-value while source documents are being hydrated; once runtime resources are
-published, live facts sit in narrower resources such as runtime configuration,
-session/profile/time, diagnostics, external/web state, random state, mode
-registry, active mode, active layouts, active keymap, and current cursor. UI
-source events are recorded in order as <code>UiSourceEventRecorded</code>, then decoded by
-runtime systems into the typed effects owned by their feature boundary. This is
-not the final completion of every UI message family; it is the ownership rule
-for finishing those families.</p>
+<p>The current refactor boundary is: no private <code>game_runtime</code> module, no
+<code>RuntimeSupport</code> resource or seed type, no root feature compatibility prelude,
+and no compatibility owner that other systems ask for unrelated facts.
+<code>FeatureRuntimePlugin</code> only composes feature-owned registrations. Startup uses
+explicit seed/composition values such as <code>StartupResourceSeeds</code> and
+<code>StartupHostSources</code> while source documents are being hydrated; once runtime
+resources are published, live facts sit in narrower resources such as runtime
+configuration, session/profile/time, diagnostics, external/web state, random
+state, mode registry, active mode, active layouts, active keymap, and current
+cursor. UI source events are recorded in order as <code>UiSourceEventRecorded</code>, then
+decoded by runtime systems into the typed effects owned by their feature
+boundary. This is not the final completion of every UI message family; it is
+the ownership rule for finishing those families.</p>
 <p>The work board below uses actual owners. Product concepts, runtime boundaries,
 source-format families, and host boundaries may all own rows when they carry real
 implementation work. Aggregate progress buckets are invalid owners.</p>
+<h2>Active Cleanup Goal</h2>
+<p>The active cleanup goal is the native Bevy runtime cleanup checkpoint. Its
+durable work-board owner is <code>Bevy runtime / Refactor checkpoint / Feature boundary cleanup</code>; adjacent rows inherit work only when the change crosses their
+real owner boundary.</p>
+<p>Completion means closing the remaining refactor-cleanup class in code, or moving
+the residue to the owning row as explicit unrecovered contract work. The
+checkpoint is complete when:</p>
+<ul>
+<li>the feature tree has no compatibility aggregate, broad prelude, private
+runtime owner, or root re-export that hides the feature that owns a fact;</li>
+<li>source UI events keep one ordered recording path, while typed app, shell,
+economy, world, population, presentation, save, script, mode, input, and
+panel effects are decoded and handled by their owning feature systems;</li>
+<li>the remaining large UI command surfaces and startup builder surfaces are split
+only at real owners: command families, source-specific startup builders,
+renderer asset loading, UI projection, and world projection;</li>
+<li>remaining item-level <code>#[allow(dead_code)]</code> sites have been audited: stale
+scaffolding is deleted, and unrecovered original surfaces are documented at
+the owner that will recover them;</li>
+<li>active UI root order, hover ownership, click dispatch, screenshot capture,
+resize projection, and startup-root despawn are verified through the Bevy
+runtime path rather than by a fabricated tool path;</li>
+<li>fixed-step/update ordering is either recovered into runtime schedules and run
+conditions, or left as named unrecovered contract work on the row that owns
+the manager/update family.</li>
+</ul>
+<p>Broad product domains remain open until their own rows close a representative
+source-to-runtime path. BFXML/MAXML/XDR/BFTypedBinder semantics, replacement and
+repopulation, complete UI focus/capture/bubbling semantics, terrain/material
+fidelity, placement/undo/pathfinding/AI/save/load/disease/scenario behavior, and
+animation/audio semantics must stay on their owning rows until each contract is
+recovered and running.</p>
+<p>This cleanup may delete compatibility surfaces, split modules, and rename
+messages when the owner becomes clearer. It must not add hardcoded menu/layout
+fixes, duplicate source state beside ECS facts, restore closed Rust state
+variants for source-authored modes, create a second status ledger, or close a
+row through documentation-only churn.</p>
 <h2>Status Values</h2>
 <table>
 <thead>
@@ -312,8 +350,8 @@ remain in the functional specification.</p>
   <td>Refactor checkpoint</td>
   <td>Feature boundary cleanup</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>The private <code>game_runtime</code> aggregate is removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, <code>RuntimeSupport</code> is startup seed data rather than a live ECS resource, startup hydration params live under startup resources instead of UI dispatch, UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>, active UI assets rebuild when their loaded asset changes, rich-text resize scaling is scoped to changed owners, and the hover/cursor/help path has a single active-hover owner.</td>
-  <td>Finish splitting the remaining UI event router into feature-owned typed message handlers, break the large startup builder into source-specific builders, and remove the remaining feature-root prelude imports as each module gets explicit owner imports.</td>
+  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources instead of UI dispatch, UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>, active UI assets rebuild when their loaded asset changes, rich-text resize scaling is scoped to changed owners, and the hover/cursor/help path has a single active-hover owner. The startup builder entrypoint is now <code>build_loaded_startup_from_assets</code>, with locale and audio source composition split into source-specific helpers.</td>
+  <td>Finish splitting the remaining UI event router into feature-owned typed message handlers, continue breaking startup dependency discovery and hydration into source-specific builders, and reduce remaining recovered-unused warnings by deleting stale scaffolding or documenting unrecovered original surfaces.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -608,8 +646,8 @@ remain in the functional specification.</p>
   <td>Startup hydration</td>
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages.</td>
-  <td>Recover original manager/load-listener order and replace seeded defaults with source-backed initialization where evidence exists.</td>
+  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages. The builder entrypoint has a neutral name and source-specific helper seams for locale/audio composition.</td>
+  <td>Recover original manager/load-listener order, continue splitting source-specific startup builders, and replace seeded defaults with source-backed initialization where evidence exists.</td>
 </tr>
 <tr>
   <td>UI</td>
