@@ -19,7 +19,7 @@ address	section	name	status
 0x00919aa0	.data	guest view/donation numToSee scalar cache global	identified
 0x00919ba0	.data	runtime record serial counter before NiSystem metadata	identified
 0x00919bfc	.data	app-shell/profile mode state cell	identified
-0x00919c00	.data	mutable UI/platform string/context pointer cell	identified
+0x00919c00	.data		unidentified
 0x00919c04	.data	game-mode/profile path cache pointer cell	identified
 0x00919c08	.data	IMEUILIB marker string	identified
 0x00919c28	.data	IME/UI color and render-state defaults	identified
@@ -238,7 +238,7 @@ address	section	name	status
 0x0091fb48	.data		unidentified
 0x0091fb4c	.data		unidentified
 0x0091fe68	.data	renderer transparent pixel/color-key cache global	identified
-0x0091feb8	.data	keyboard/IME modifier-state globals	identified
+0x0091feb8	.data		unidentified
 0x0091febc	.data		unidentified
 0x0091fec0	.data		unidentified
 0x0091fec4	.data	IME mode-change state globals	identified
@@ -267,7 +267,7 @@ address	section	name	status
 0x0092055c	.data		unidentified
 0x00920760	.data	NetImmerse serialization cursor cache pointer and offset words	identified
 0x00920764	.data		unidentified
-0x0092076c	.data	0x0092076c g_small_pool_bucket_table	identified
+0x0092076c	.data	small-pool allocator bucket-table pointer	identified
 0x00920788	.data		unidentified
 0x0092078c	.data		unidentified
 0x00920790	.data		unidentified
@@ -480,7 +480,7 @@ address	section	name	status
 0x009352c4	.data		unidentified
 0x009352c8	.data		unidentified
 0x009352cc	.data		unidentified
-0x009352d0	.data	award/entity/name/type receiver-owner family	identified
+0x009352d0	.data		unidentified
 0x009352d4	.data		unidentified
 0x009352d8	.data		unidentified
 0x009352dc	.data		unidentified
@@ -501,7 +501,7 @@ address	section	name	status
 0x00935328	.data		unidentified
 0x0093532c	.data		unidentified
 0x00935430	.data	current renderer manager object pointer	identified
-0x00935434	.data	frame/update copied global	identified
+0x00935434	.data		unidentified
 0x0093543c	.data	Ni runtime object linked-list head and tail globals	identified
 0x00935440	.data		unidentified
 0x00935444	.data	CPU SIMD/vector routine tier global	identified
@@ -511,7 +511,7 @@ address	section	name	status
 0x00935454	.data	process startup argument globals	identified
 0x00935458	.data		unidentified
 0x0093545c	.data		unidentified
-0x00935460	.data	status/UI value object global	identified
+0x00935460	.data		unidentified
 0x00935464	.data		unidentified
 0x00935470	.data		unidentified
 0x00935474	.data		unidentified
@@ -586,19 +586,19 @@ address	section	name	status
 0x009355b0	.data		unidentified
 0x009355b4	.data		unidentified
 0x009355b8	.data		unidentified
-0x009355bc	.data	secondary receiver-owner family	identified
+0x009355bc	.data		unidentified
 0x009355c0	.data		unidentified
 0x009355c4	.data		unidentified
-0x009355e4	.data	active object/window globals	identified
+0x009355e4	.data		unidentified
 0x009355e8	.data		unidentified
 0x009355ec	.data	GDI monitor drawing state global	identified
 0x009355f0	.data	object-detail presentation controller singleton pointer	identified
-0x00935620	.data	UI/runtime pointer cell near presentation traversal	identified
+0x00935620	.data		unidentified
 0x00935624	.data	MOTD default icon layout resource pointer	identified
 0x00935628	.data	MOTD messages/list resource pointer	identified
-0x00935630	.data	startup/platform counter global	identified
+0x00935630	.data		unidentified
 0x00935634	.data	HWConfig strings module global	identified
-0x00935638	.data	HWConfig secondary startup handle global	identified
+0x00935638	.data		unidentified
 0x0093563c	.data	startup/HWConfig setup flags	identified
 0x00935640	.data		unidentified
 0x00935644	.data	DxDiag DirectSound device count global	identified
@@ -617,8 +617,8 @@ address	section	name	status
 0x00935680	.data	logging GameID/session counter global	identified
 0x00935684	.data	logging append scratch allocation pointer	identified
 0x00935688	.data	lazy runtime allocation pointer before callback dispatch globals	identified
-0x0093568c	.data	cached runtime presentation object pointer	identified
-0x00935694	.data	runtime presentation object construction counter	identified
+0x0093568c	.data		unidentified
+0x00935694	.data		unidentified
 0x00935698	.data	startup/shutdown callback dispatch count global	identified
 0x0093569c	.data		unidentified
 0x009356a0	.data		unidentified
@@ -1367,7 +1367,7 @@ address	section	name	status
 0x009377e8	.data	g_type_ZT_HIDE_MOUSE_PROMPT	type-cache
 0x009377ec	.data	g_type_ZT_NO_PLACEMENT_IN_TANK_WITH_ANIMALS	type-cache
 0x009377f0	.data	g_type_ZT_ENABLE_ADOPTION	type-cache
-0x009377f4	.data	g_type_ZT_ENABLE_ADOPTION_init_flag	identified
+0x009377f4	.data	startup logging/config object global	identified
 0x00937800	.data		unidentified
 0x00937808	.data		unidentified
 0x0093780c	.data		unidentified
@@ -1460,7 +1460,7 @@ address	section	name	status
 0x00937d94	.data		unidentified
 0x00937d9c	.data		unidentified
 0x00937da0	.data		unidentified
-0x00937da8	.data	0x00937da8 g_ui_value_assignment_dependent_update_registry_sentinel_no	identified
+0x00937da8	.data	UI value-assignment dependency registry sentinel node	identified
 0x00937dac	.data		unidentified
 0x00937db0	.data	g_type_BFUNDO_EVENT	type-cache
 0x00937db4	.data	g_type_BFUNDO_ACTIVATETRANSACTION	type-cache
@@ -1609,13 +1609,13 @@ address	section	name	status
 0x00938488	.data	BFBehSyncSet object freelist head	identified
 0x00938490	.data	BFBehHide object freelist head	identified
 0x00938494	.data	BFBehFade object freelist head	identified
-0x00938498	.data	unresolved BFAI action metadata cells before object/target keys	identified
+0x00938498	.data		unidentified
 0x0093849c	.data		unidentified
 0x009384a0	.data		unidentified
 0x009384a4	.data		unidentified
 0x009384a8	.data		unidentified
 0x009384b4	.data	BFAI attachment/action field-key globals	identified
-0x009384cc	.data	unresolved BFAI action/steering metadata and cleanup cells	identified
+0x009384cc	.data		unidentified
 0x009384d0	.data		unidentified
 0x009384d4	.data		unidentified
 0x009384dc	.data		unidentified
@@ -1640,7 +1640,7 @@ address	section	name	status
 0x0093853c	.data		unidentified
 0x00938540	.data	BFAI target/node action field key globals	identified
 0x00938560	.data	BFBehSendEvent object freelist head	identified
-0x00938568	.data	unresolved BFAI action/steering cleanup cells before steering events	identified
+0x00938568	.data		unidentified
 0x0093856c	.data		unidentified
 0x00938570	.data		unidentified
 0x00938574	.data		unidentified
@@ -1655,8 +1655,8 @@ address	section	name	status
 0x009385a4	.data	g_type_STEER_DESTROY	type-cache
 0x009385a8	.data	g_type_STEER_DESTROYED	type-cache
 0x009385ac	.data	g_type_STEER_DESTROY_ALL	type-cache
-0x009385b0	.data	g_type_STEER_DESTROY_ALL_init_flag	identified
-0x009385b4	.data	steering/runtime cleanup-list globals after steering tokens	identified
+0x009385b0	.data	BFBehGotoPos object freelist head	identified
+0x009385b4	.data		unidentified
 0x009385b8	.data		unidentified
 0x009385bc	.data		unidentified
 0x009385c0	.data		unidentified
@@ -2306,7 +2306,7 @@ address	section	name	status
 0x00945b14	.data	g_type_BFS_ADD_SCENARIO_OBJECT	type-cache
 0x00945b18	.data	g_type_BFS_PROCESS_VINCE	type-cache
 0x00945b1c	.data	g_type_BFS_GETUSERVAL	type-cache
-0x00945b20	.data	g_type_BFS_GETUSERVAL_init_flag	identified
+0x00945b20	.data	MSVCRT locale/codepage cache pointer	identified
 0x00945b24	.data	COM apartment/object helper globals	identified
 0x00945b2c	.data	cached SendMessageA callable cell	identified
 0x00945b38	.data		unidentified
@@ -3196,7 +3196,7 @@ address	section	name	status
 0x00948ec8	.data		unidentified
 0x00948ed4	.data		unidentified
 0x00948ee0	.data		unidentified
-0x00948eec	.data	0x00948eec g_ui_value_handler_registry_sentinel_node	identified
+0x00948eec	.data	UI value handler registry sentinel node	identified
 0x00948ef8	.data		unidentified
 0x00948f04	.data		unidentified
 0x00948f10	.data		unidentified
@@ -3451,7 +3451,7 @@ address	section	name	status
 0x0094c848	.data		unidentified
 0x0094c84c	.data		unidentified
 0x0094c850	.data		unidentified
-0x0094c8b4	.data	0x0094c8b4 g_shared_globe_ui_refresh_value	identified
+0x0094c8b4	.data	shared globe UI refresh typed-value singleton pointer	identified
 0x0094c928	.data		unidentified
 0x0094c92c	.data		unidentified
 0x0094c930	.data		unidentified
@@ -3573,7 +3573,7 @@ address	section	name	status
 0x0094d52c	.data		unidentified
 0x0094d55c	.data		unidentified
 0x0094d56c	.data	g_type_BFType	type-cache
-0x0094d574	.data	unresolved mixed runtime/type/token cache band	identified
+0x0094d574	.data		unidentified
 0x0094d578	.data		unidentified
 0x0094d57c	.data		unidentified
 0x0094d580	.data		unidentified
@@ -3590,7 +3590,7 @@ address	section	name	status
 0x0094d5f4	.data		unidentified
 0x0094d5f8	.data		unidentified
 0x0094d5fc	.data		unidentified
-0x0094d604	.data	unresolved mixed static/list/default cells before XML attribute type c	identified
+0x0094d604	.data		unidentified
 0x0094d608	.data		unidentified
 0x0094d60c	.data		unidentified
 0x0094d614	.data		unidentified
@@ -4166,7 +4166,7 @@ address	section	name	status
 0x0094eba8	.data	g_type_ZTTransportGroundCircuit	type-cache
 0x0094ebb0	.data	g_type_ZTTransportCrossingGate	type-cache
 0x0094ebb8	.data	g_type_ZTTransportationMgr	type-cache
-0x0094ebc0	.data	guarded transport-adjacent runtime value	identified
+0x0094ebc0	.data		unidentified
 0x0094ebc8	.data	transport/tour config static lookup cells	identified
 0x0094ebe4	.data	g_type_ZTPathElevated	type-cache
 0x0094ec00	.data	g_type_ZTUnderwaterFloatGroundFitComponent	type-cache
@@ -4420,7 +4420,7 @@ address	section	name	status
 0x0094f678	.data		unidentified
 0x0094f67c	.data		unidentified
 0x0094f684	.data	g_type_ZTBehTransportRoute	type-cache
-0x0094f68c	.data	unresolved runtime cache before ZTAIStaffWaterCleaningMgr	identified
+0x0094f68c	.data		unidentified
 0x0094f698	.data	g_type_ZTAIStaffWaterCleaningMgr	type-cache
 0x0094f6a4	.data	g_type_ZTAIInfluenceWatcher	type-cache
 0x0094f6ac	.data	g_type_ZTBehDockPortal	type-cache
@@ -4473,7 +4473,7 @@ address	section	name	status
 0x0094f7b4	.data	g_type_BFDeflectedCamera	type-cache
 0x0094f7bc	.data	g_type_BFRSceneGraphComponent	type-cache
 0x0094f7c4	.data	g_type_BFDecorativeDetailObjectComponent	type-cache
-0x0094f7cc	.data	unresolved component/property cache before BFFPSUDVComponent	identified
+0x0094f7cc	.data		unidentified
 0x0094f7d4	.data	g_type_BFFPSUDVComponent	type-cache
 0x0094f7e0	.data	g_type_BF3DApp	type-cache
 0x0094f7e8	.data	g_type_BFFPSCameraComponent	type-cache
@@ -4519,7 +4519,7 @@ address	section	name	status
 0x0094f984	.data	g_type_BFAINeedAdjusts	type-cache
 0x0094f98c	.data	g_type_BFAIEntityData	type-cache
 0x0094f994	.data	g_type_BFComponentStack	type-cache
-0x0094f99c	.data	0x0094f99c g_shared_inline_ui_typed_value	identified
+0x0094f99c	.data	shared inline UI typed-value singleton pointer	identified
 0x0094f9b0	.data		unidentified
 0x0094f9c4	.data		unidentified
 0x0094f9cc	.data		unidentified
@@ -4735,7 +4735,7 @@ address	section	name	status
 0x0094ffe8	.data	g_type_ZTAISensorVA	type-cache
 0x0094fff0	.data	g_type_ZTAITourTaskThinker	type-cache
 0x0094fff8	.data	g_type_ZTAISensorShow	type-cache
-0x00950000	.data	unresolved late mixed data before spatial vector state	identified
+0x00950000	.data		unidentified
 0x00950010	.data		unidentified
 0x00950014	.data		unidentified
 0x0095001c	.data	g_type_ZTAISensor	type-cache
@@ -4745,7 +4745,7 @@ address	section	name	status
 0x00950038	.data		unidentified
 0x0095004c	.data		unidentified
 0x00950054	.data	g_type_ZTAIMgr	type-cache
-0x0095005c	.data	unresolved late mixed data before spatial vector state	identified
+0x0095005c	.data		unidentified
 0x00950060	.data		unidentified
 0x00950064	.data		unidentified
 0x00950068	.data		unidentified
@@ -4777,7 +4777,7 @@ address	section	name	status
 0x0095012c	.data		unidentified
 0x00950130	.data		unidentified
 0x00950138	.data	g_type_BFGApp	type-cache
-0x00950140	.data	unresolved late mixed data before entity-data instance cache	identified
+0x00950140	.data		unidentified
 0x00950144	.data		unidentified
 0x00950148	.data		unidentified
 0x0095014c	.data		unidentified
@@ -4802,7 +4802,7 @@ address	section	name	status
 0x0095020c	.data	tank segment/gate static lookup keys	identified
 0x00950210	.data		unidentified
 0x00950218	.data	g_type_ZTApp	type-cache
-0x00950220	.data	unresolved mixed late .data span after ZTApp cache	identified
+0x00950220	.data		unidentified
 0x00950228	.data		unidentified
 0x0095022c	.data		unidentified
 0x00950240	.data		unidentified
@@ -4842,7 +4842,7 @@ address	section	name	status
 0x00950338	.data	g_type_ZTEconomyComponent	type-cache
 0x00950344	.data	g_type_ZTUIContextList	type-cache
 0x00950350	.data	g_type_ZTMoneyText	type-cache
-0x00950358	.data	unresolved mixed late .data span after ZTApp cache	identified
+0x00950358	.data		unidentified
 0x00950360	.data	g_type_ZTTranquilizeMode	type-cache
 0x00950368	.data	g_type_ZTSuperStaffMode	type-cache
 0x00950380	.data	mode_climb_ladder static lookup key	identified
@@ -4856,7 +4856,7 @@ address	section	name	status
 0x009503ac	.data		unidentified
 0x009503b4	.data	BFGEntityContainer static lookup key	identified
 0x009503c4	.data	training no-training-area zoomessage static key	identified
-0x009503c8	.data	unresolved training typed lookup sibling cells	identified
+0x009503c8	.data		unidentified
 0x009503d8	.data		unidentified
 0x009503dc	.data		unidentified
 0x009503e0	.data		unidentified
@@ -4970,7 +4970,7 @@ address	section	name	status
 0x00950760	.data		unidentified
 0x00950764	.data		unidentified
 0x0095076c	.data	g_type_ZTUIFullscreenButton	type-cache
-0x00950774	.data	unresolved late .data runtime island after fullscreen-button cache	identified
+0x00950774	.data		unidentified
 0x0095077c	.data		unidentified
 0x00950784	.data		unidentified
 0x00950788	.data		unidentified
