@@ -54,7 +54,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
 
   <h3>Per-Class Method Perimeter</h3>
-  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, constructor/vptr-store evidence, and the function perimeter. They are a method-shape view, not a second accepted function-name archive.</p>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a method-shape view, not a second accepted function-name archive.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
@@ -236,11 +236,11 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
  const classTypeSegments=[
   {label:"Named zero-slot complete",value:classTypeStats.namedZeroSlot,cls:"seg-all"},
   {label:"Named all slot identities",value:classTypeStats.namedAllMembers,cls:"seg-all"},
+  {label:"Address-only all slot identities",value:classTypeStats.unnamedAllMembers,cls:"seg-all"},
   {label:"Named some slot identities",value:classTypeStats.namedSomeMembers,cls:"seg-some"},
+  {label:"Address-only some slot identities",value:classTypeStats.unnamedSomeMembers,cls:"seg-some"},
   {label:"Named no slot identities",value:classTypeStats.namedNoMembers,cls:"seg-nameonly"},
   {label:"Address-only zero-slot complete",value:classTypeStats.unnamedZeroSlot,cls:"seg-all"},
-  {label:"Address-only all slot identities",value:classTypeStats.unnamedAllMembers,cls:"seg-all"},
-  {label:"Address-only some slot identities",value:classTypeStats.unnamedSomeMembers,cls:"seg-some"},
   {label:"Address-only no slot identities",value:classTypeStats.unnamedNoMembers,cls:"seg-none"}
  ].filter(s=>s.value>0);
  const vslotDone=vt.filter(r=>r.status==="confirmed").length;
@@ -254,7 +254,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Wrapper indirection neutralization",openEnded:false,den:`${fmt(indirectedRows.length)} runtime-parent indirected byte-map rows`,segments:[{label:"Neutralized",value:indirectedRows.length,cls:"seg-accepted"},{label:"Open",value:0,cls:"seg-open"}],answer:"Whether current wrapper-mediated callsite/import rows have been neutralized in the depepper/strip pipeline.",uncertainty:`Both wrapper-indirection types are complete: ${fmt(indirectedEditRows)} rows are covered by depepper edits and ${fmt(indirectedImportRows)} rows are covered by the rebuilt import table. ${fmt(wrapperIndirectedFunctionRows)} function-list rows are wrapper-indirected depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function recovery.`},
   {name:"Global/static references",openEnded:true,den:`${fmt(gp.length)} referenced global/static cells`,segments:[{label:"Named type-cache handles",value:typeCacheGlobals.length,cls:"seg-type"},{label:"Other identified",value:globalIdentified,cls:"seg-other"},{label:"Unidentified",value:gp.length-typeCacheGlobals.length-globalIdentified,cls:"seg-open"}],answer:"How many referenced static cells are named type-cache handles, other identified statics, or still unidentified.",uncertainty:"Unidentified cells need byte-map facts from initializer writes, consumers, or exact data shape."},
   {name:"Type-cache handles",openEnded:true,den:`${fmt(cacheRows.length)} known cached type-handle cells`,segments:[{label:"Named + getter + parent/root",value:linkedTypeCache,cls:"seg-accepted"},{label:"Named but unlinked",value:namedUnlinkedTypeCache,cls:"seg-open"},{label:"Unnamed known handles",value:unnamedTypeCache,cls:"seg-unnamed"}],answer:"How many known type-cache handles are named and linked to both a getter/helper and a registered parent or root relationship.",uncertainty:"This refines the named type-cache-handle segment of global/static references. The current known handle population can grow if new cache cells are found; registered parent/root coverage is not native C++ inheritance recovery."},
-  {name:"Class/type recovery",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:classTypeSegments,answer:"How known class/type rows split by recovered name and confirmed virtual-member identity.",uncertainty:"Named rows still need fields, constructors, inheritance, and non-virtual methods. No vtable-bearing class currently has all slot identities confirmed."},
+  {name:"Class/type recovery",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:classTypeSegments,answer:"How known class/type rows split by recovered name and confirmed virtual-member identity.",uncertainty:"Named rows still need fields, constructors, inheritance, and non-virtual methods. Address-only rows with confirmed slots still lack a unique owner type signal. No vtable-bearing class currently has all slot identities confirmed."},
   {name:"Virtual slot identities",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
   {name:"Byte-map partition coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} leaf bytes across non-overlapping partitions`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much byte length of the partitioned byte-map surface is covered by known-like statuses.",uncertainty:`The denominator is byte-weighted over ${fmt(bmap.done+bmap.notDone)} resolved leaf partitions; overlapping parent rows do not inflate progress.`}
  ];
