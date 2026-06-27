@@ -168,17 +168,17 @@ function staticTypeSegments(gp,typeRows){
  const otherIdentified=gp.filter(r=>r.status==="identified").length;
  const unidentified=gp.filter(r=>r.status==="unidentified").length;
  const order=[
-  ["Template-only zero-slot identities","seg-all"],
-  ["Type-cache named linked: all slot identities","seg-all"],
-  ["Type-cache named linked: zero-slot complete","seg-all"],
-  ["Type-cache named linked: some slot identities","seg-context"],
-  ["Type-cache unnamed linked: some slot identities","seg-context"],
-  ["Type-cache named linked: no slot identities","seg-partial"],
-  ["Type-cache unnamed linked: no slot identities","seg-support"],
-  ["Type-cache named partially linked: some slot identities","seg-partial"],
-  ["Type-cache unnamed partially linked: some slot identities","seg-support"],
-  ["Type-cache named partially linked: no slot identities","seg-partial"],
-  ["Type-cache unnamed partially linked: no slot identities","seg-support"]
+  ["Template-only: zero virtual slots","seg-all"],
+  ["Type-cache: named; getter and parent/root linked; all virtual slots identified","seg-all"],
+  ["Type-cache: named; getter and parent/root linked; zero virtual slots","seg-all"],
+  ["Type-cache: named; getter and parent/root linked; some virtual slots identified","seg-context"],
+  ["Type-cache: unnamed; getter and parent/root linked; some virtual slots identified","seg-context"],
+  ["Type-cache: named; getter and parent/root linked; no virtual slots identified","seg-partial"],
+  ["Type-cache: unnamed; getter and parent/root linked; no virtual slots identified","seg-support"],
+  ["Type-cache: named; missing getter or parent/root link; some virtual slots identified","seg-partial"],
+  ["Type-cache: unnamed; missing getter or parent/root link; some virtual slots identified","seg-support"],
+  ["Type-cache: named; missing getter or parent/root link; no virtual slots identified","seg-partial"],
+  ["Type-cache: unnamed; missing getter or parent/root link; no virtual slots identified","seg-support"]
  ];
  const known=new Set(order.map(([label])=>label));
  const segments=order.map(([label,cls])=>({label,value:p[label]||0,cls}));
@@ -208,8 +208,8 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
   {name:"Native function behavior",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries`,segments:[{label:"Accepted behavior/name",value:functionAccepted,cls:"seg-accepted"},{label:"No exact behavior/name",value:functionOpen,cls:"seg-open"}],answer:"How much concrete behavior/name recovery is accepted over known original .text function entries.",uncertainty:"Structural context on an unidentified row helps triage, but it is not concrete behavior recovery. Wrapper-indirected and mapped-data rows are excluded from this denominator."},
   {name:"Function vtable-method overlap",openEnded:true,den:`${fmt(nativeFunctions.length)} native function entries`,segments:[{label:"Appears in vtable slot",value:virtualMemberFunctions,cls:"seg-some"},{label:"No vtable-slot membership recorded",value:noVirtualMemberEvidence,cls:"seg-support"}],answer:"How many native function entries are also known virtual methods.",uncertainty:"No vtable-slot membership recorded is not proof of a free function; constructors, static members, non-virtual members, and type helpers can still live there."},
   {name:"Wrapper indirection neutralization",openEnded:false,den:`${fmt(indirectedRows.length)} runtime-parent indirected byte-map rows`,segments:[{label:"Neutralized",value:indirectedRows.length,cls:"seg-accepted"},{label:"Open",value:0,cls:"seg-open"}],answer:"Whether current wrapper-mediated callsite/import rows have been neutralized in the depepper/strip pipeline.",uncertainty:`Both wrapper-indirection types are complete: ${fmt(indirectedEditRows)} rows are covered by depepper edits and ${fmt(indirectedImportRows)} rows are covered by the rebuilt import table. ${fmt(wrapperIndirectedFunctionRows)} function-list rows are wrapper-indirected depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function recovery.`},
-  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only zero-slot identities"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, other identified statics, template-only types, and type-cache identities by name, linkage, and slot evidence.",uncertainty:"Driven by zt-type-coverage-reconciliation.tsv. The six address-only vtable owner rows and ten foreign getter-use rows are included in the named linked segment with some slot identity. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape."},
-  {name:"Virtual slot identities",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
+  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, other identified statics, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:"Driven by zt-type-coverage-reconciliation.tsv. The six address-only vtable owner rows and ten foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape."},
+  {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Method identified",value:vslotDone,cls:"seg-accepted"},{label:"Method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is virtual-slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
  document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
