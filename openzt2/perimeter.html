@@ -26,12 +26,12 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
- <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type-cache, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, <code>zt-rtti-classes.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
+ <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type identity, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, <code>zt-rtti-classes.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
 
  <section class="narrative">
   <h2>Authority Model</h2>
   <p>The byte map is the address-fact archive. A function has an accepted exact identity only when a <code>runtime-parent</code> row in <code>docs/analysis/zt-byte-range-map.tsv</code> starts at that function entry. Candidate rows are proposed exact identities awaiting review. Region, provenance, vtable, and domain labels are triage context; they do not mean the function's concrete behavior has been recovered.</p>
-  <p>The class/type identity surface combines recovered names and vtable rows. A class/type can be identified without contributing vtable slots; <code>BFSafeHandle&lt;T&gt;</code> specializations are identified C++ template specializations with zero virtual slots. Slot-level bars count only rows that actually contain vtable slots.</p>
+  <p>The type identity surface is built from the reconciliation table. It joins registered type-token cache handles, getter and parent/root evidence, named vtable rows, address-only vtable owner candidates, foreign vtable getter uses, and zero-slot <code>BFSafeHandle&lt;T&gt;</code> rows into one denominator.</p>
 
   <h3>Recovery Domains</h3>
   <p>Each bar below answers one completion question with one denominator. Solid bars use a closed denominator for that question. Striped bars use the currently known perimeter; future discoveries can expand the total. The byte-map bar is limited to the mapped runtime executable image at <code>runtime-parent 0x00400000..0x00a92000</code>. It reports bytes rather than row counts or partition counts.</p>
@@ -48,7 +48,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Native function behavior</strong> tracks accepted and candidate exact recovery over known original <code>.text</code> function entries in the deobfuscated executable. The current tables do not keep a suspected-only function-entry bucket. Function entries and class methods overlap: the <code>vtable</code> column records virtual-method membership when a function body appears in an enumerated vtable slot. Absence from that column does not prove the function is not a constructor, static member, non-virtual member, or helper associated with a type. Rows marked <code>wrapper-indirected</code> are depepper support records connected to the wrapper indirection bar. <strong>Global/static references</strong> is a separate address surface from native function entries; its named type-cache-handle segment is refined by the type-cache handles bar below. Type-cache handles are cache cells for registered identifiers; class/type recovery rows are vtable-bearing or zero-slot class/type records, so the two denominators overlap without matching one-for-one. <strong>Class/type recovery</strong> partitions the known class/type rows by recovered name and virtual-member identity in one denominator.</p>
+  <p><strong>Native function behavior</strong> tracks accepted and candidate exact recovery over known original <code>.text</code> function entries in the deobfuscated executable. The current tables do not keep a suspected-only function-entry bucket. Function entries and class methods overlap: the <code>vtable</code> column records virtual-method membership when a function body appears in an enumerated vtable slot. Absence from that column does not prove the function is not a constructor, static member, non-virtual member, or helper associated with a type. Rows marked <code>wrapper-indirected</code> are depepper support records connected to the wrapper indirection bar. <strong>Global/static references</strong> is a separate address surface from native function entries. <strong>Type identity coverage</strong> reconciles the named type-cache handles from that global/static surface with vtable rows and zero-slot type rows.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
@@ -88,60 +88,6 @@ const runtimeExecutableSections=[
  {name:".rsrc",start:0x00952000,end:0x00a8b000},
  {name:"post-resource",start:0x00a8b000,end:0x00a92000}
 ];
-function typeCacheRows(mapRows,typeCacheGlobals){
- const wanted=new Set(typeCacheGlobals.map(r=>hex(r.address)).filter(Number.isFinite));
- const rows=new Map(typeCacheGlobals.map(r=>[hex(r.address),{address:hex(r.address),name:r.name||"",details:""}]).filter(([a])=>Number.isFinite(a)));
- for(const r of mapRows){
-  const start=hex(r.start),name=r.name||"",details=r.details||"";
-  if(!wanted.has(start))continue;
-  const lower=name.toLowerCase();
-  const handleName=name.startsWith("g_type_")&&!name.endsWith("_init_flag");
-  const handleEvidence=lower.includes("type-cache")&&!name.includes("_init_flag")&&(
-   details.includes("writes cache")||
-   details.includes("writes and returns cache dword")||
-   details.includes("stores the cached type")||
-   details.includes("stores and returns cache dword")||
-   details.includes("cached native type handle")
-  );
-  if(!handleName&&!handleEvidence)continue;
-  const row=rows.get(start);
-  if(!row.name&&handleName)row.name=name;
-  row.details+=(row.details?" | ":"")+details;
- }
- return [...rows.values()];
-}
-function functionRanges(fp){
- return fp.map(r=>{const start=hex(r.address),size=Number(r.size||0);return Number.isFinite(start)&&size>0?{start,end:start+size,row:r}:null}).filter(Boolean).sort((a,b)=>a.start-b.start);
-}
-function containingFunction(ranges,addr){
- let lo=0,hi=ranges.length;
- while(lo<hi){const mid=(lo+hi)>>1;if(ranges[mid].start<=addr)lo=mid+1;else hi=mid}
- const hit=ranges[lo-1];
- return hit&&hit.start<=addr&&addr<hit.end?hit.row:null;
-}
-function typeGetterAddrs(details){
- const addrs=[];
- for(const re of [
-  /getter call site `0x([0-9a-fA-F]+)`/g,
-  /`0x([0-9a-fA-F]+)` tests (?:guard|init flags)/g,
-  /Function `0x([0-9a-fA-F]+)` tests/g
- ]){
-  let m;
-  while((m=re.exec(details)))addrs.push(parseInt(m[1],16));
- }
- return [...new Set(addrs)];
-}
-function isConfirmedTypeGetter(row){
- if(!row||row.status!=="confirmed")return false;
- const name=row.name||"";
- return name.startsWith("get_type_")||/^get_or_register_.*_type$/.test(name);
-}
-function hasGetterLink(details,ranges){
- return /getter entry `0x[0-9a-fA-F]+`/.test(details)||typeGetterAddrs(details).some(a=>isConfirmedTypeGetter(containingFunction(ranges,a)));
-}
-function hasResolvedParent(details){
- return /parent type `/.test(details)||/get_or_register_type\([^)]*, 0\)/.test(details)||/root\/no-parent/.test(details);
-}
 function tinyHeap(){
  const h=[];
  const less=(a,b)=>a.len!==b.len?a.len<b.len:a.id>b.id;
@@ -213,15 +159,20 @@ function summarySplit(segments,total){
 function denominatorLabel(d){
  return `${d.openEnded?"Known perimeter":"Closed denominator"}: ${d.den}`;
 }
-function typeNameFromCacheHandle(name){
- return String(name||"").replace(/^g_type_/,"").replace(/_init_flag$/,"");
+function typeCoverageSegments(typeRows){
+ const c=counts(typeRows,"coverage_class");
+ return [
+  {label:"Named vtable rows",value:c["named-vtable-row"]||0,cls:"seg-accepted"},
+  {label:"Zero-slot rows",value:c["zero-slot-row"]||0,cls:"seg-all"},
+  {label:"Address-only vtable candidates",value:c["address-only-vtable-candidate"]||0,cls:"seg-context"},
+  {label:"Foreign vtable getter use",value:c["foreign-vtable-getter-use"]||0,cls:"seg-some"},
+  {label:"Registered linked only",value:c["registered-linked-only"]||0,cls:"seg-candidate"},
+  {label:"Registered unlinked",value:c["registered-unlinked"]||0,cls:"seg-candidate"},
+  {label:"Computed placeholder",value:c["computed-placeholder"]||0,cls:"seg-support"},
+  {label:"Class row only",value:c["class-row-only"]||0,cls:"seg-nameonly"}
+ ].filter(s=>s.value>0);
 }
-function intersectionSize(a,b){
- let n=0;
- for(const x of a)if(b.has(x))n++;
- return n;
-}
-function coverageSummary(fp,gp,vt,rtti,mapRows){
+function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const wrapperIndirectedFunctionRows=fp.filter(r=>r.status==="wrapper-indirected").length;
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
@@ -232,60 +183,8 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
  const functionOpen=nativeFunctions.filter(r=>r.status==="unidentified").length;
  const globalIdentified=gp.filter(r=>r.status==="identified").length;
  const typeCacheGlobals=gp.filter(r=>r.status==="type-cache");
- const cacheRows=typeCacheRows(mapRows,typeCacheGlobals);
- const ranges=functionRanges(fp);
- let linkedTypeCache=0,namedTypeCache=0;
- const linkedTypeCacheNames=new Set(),namedUnlinkedTypeCacheNames=new Set();
- for(const r of cacheRows){
-  const details=r.details||"";
-  if(r.name)namedTypeCache++;
-  if(r.name&&hasGetterLink(details,ranges)&&hasResolvedParent(details)){
-   linkedTypeCache++;
-   linkedTypeCacheNames.add(typeNameFromCacheHandle(r.name));
-  }else if(r.name)namedUnlinkedTypeCacheNames.add(typeNameFromCacheHandle(r.name));
- }
- const unnamedTypeCache=cacheRows.length-namedTypeCache;
- const namedUnlinkedTypeCache=namedTypeCache-linkedTypeCache;
- const namedClassTypeRows=rtti.filter(r=>r.class&&!r.class.startsWith("vtable_"));
- const namedClassTypeNames=new Set(namedClassTypeRows.map(r=>r.class));
- const namedZeroSlotClassTypeNames=new Set(namedClassTypeRows.filter(r=>Number(r.slot_count||0)===0).map(r=>r.class));
- const namedClassNamesWithoutLinkedSet=new Set([...namedClassTypeNames].filter(n=>!linkedTypeCacheNames.has(n)));
- const linkedClassNameOverlap=intersectionSize(linkedTypeCacheNames,namedClassTypeNames);
- const linkedCacheNamesWithoutClass=linkedTypeCacheNames.size-linkedClassNameOverlap;
- const namedClassNamesWithoutLinked=namedClassNamesWithoutLinkedSet.size;
- const namedClassNamesWithoutLinkedZeroSlot=intersectionSize(namedClassNamesWithoutLinkedSet,namedZeroSlotClassTypeNames);
- const classTypeStats={
-  namedZeroSlot:0,namedAllMembers:0,namedSomeMembers:0,namedNoMembers:0,
-  unnamedZeroSlot:0,unnamedAllMembers:0,unnamedSomeMembers:0,unnamedNoMembers:0
- };
- const classSlots=new Map();
- for(const r of vt){
-  const key=r.vtable||r.class;
-  const row=classSlots.get(key)||{total:0,confirmed:0};
-  row.total++;
-  if(r.status==="confirmed")row.confirmed++;
-  classSlots.set(key,row);
- }
- for(const r of rtti){
-  const named=r.class&&!r.class.startsWith("vtable_");
-  const prefix=named?"named":"unnamed";
-  const slots=Number(r.slot_count||0);
-  const row=classSlots.get(r.vtable||r.class)||{total:slots,confirmed:0};
-  if(slots===0)classTypeStats[`${prefix}ZeroSlot`]++;
-  else if(row.confirmed===row.total)classTypeStats[`${prefix}AllMembers`]++;
-  else if(row.confirmed>0)classTypeStats[`${prefix}SomeMembers`]++;
-  else classTypeStats[`${prefix}NoMembers`]++;
- }
- const classTypeSegments=[
-  {label:"Named zero-slot complete",value:classTypeStats.namedZeroSlot,cls:"seg-all"},
-  {label:"Named all slot identities",value:classTypeStats.namedAllMembers,cls:"seg-all"},
-  {label:"Address-only all slot identities",value:classTypeStats.unnamedAllMembers,cls:"seg-all"},
-  {label:"Named some slot identities",value:classTypeStats.namedSomeMembers,cls:"seg-context"},
-  {label:"Address-only some slot identities",value:classTypeStats.unnamedSomeMembers,cls:"seg-some"},
-  {label:"Named no slot identities",value:classTypeStats.namedNoMembers,cls:"seg-nameonly"},
-  {label:"Address-only zero-slot complete",value:classTypeStats.unnamedZeroSlot,cls:"seg-all"},
-  {label:"Address-only no slot identities",value:classTypeStats.unnamedNoMembers,cls:"seg-none"}
- ].filter(s=>s.value>0);
+ const typeSegments=typeCoverageSegments(typeRows);
+ const typeCounts=counts(typeRows,"coverage_class");
  const vslotDone=vt.filter(r=>r.status==="confirmed").length;
  const bmap=byteMapPartitionStats(mapRows,runtimeExecutable);
  const bmapSectionSplit=sectionCoverageText(mapRows);
@@ -297,8 +196,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Function vtable-method overlap",openEnded:true,den:`${fmt(nativeFunctions.length)} native function entries`,segments:[{label:"Appears in vtable slot",value:virtualMemberFunctions,cls:"seg-some"},{label:"No vtable-slot membership recorded",value:noVirtualMemberEvidence,cls:"seg-support"}],answer:"How many native function entries are also known virtual methods.",uncertainty:"No vtable-slot membership recorded is not proof of a free function; constructors, static members, non-virtual members, and type helpers can still live there."},
   {name:"Wrapper indirection neutralization",openEnded:false,den:`${fmt(indirectedRows.length)} runtime-parent indirected byte-map rows`,segments:[{label:"Neutralized",value:indirectedRows.length,cls:"seg-accepted"},{label:"Open",value:0,cls:"seg-open"}],answer:"Whether current wrapper-mediated callsite/import rows have been neutralized in the depepper/strip pipeline.",uncertainty:`Both wrapper-indirection types are complete: ${fmt(indirectedEditRows)} rows are covered by depepper edits and ${fmt(indirectedImportRows)} rows are covered by the rebuilt import table. ${fmt(wrapperIndirectedFunctionRows)} function-list rows are wrapper-indirected depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function recovery.`},
   {name:"Global/static references",openEnded:true,den:`${fmt(gp.length)} referenced global/static cells`,segments:[{label:"Named type-cache handles",value:typeCacheGlobals.length,cls:"seg-accepted"},{label:"Other identified",value:globalIdentified,cls:"seg-known"},{label:"Unidentified",value:gp.length-typeCacheGlobals.length-globalIdentified,cls:"seg-open"}],answer:"How many referenced static cells are named type-cache handles, other identified statics, or still unidentified.",uncertainty:"Unidentified cells need byte-map facts from initializer writes, consumers, or exact data shape."},
-  {name:"Type-cache handles",openEnded:true,den:`${fmt(cacheRows.length)} known cached type-handle cells`,segments:[{label:"Named + getter + parent/root",value:linkedTypeCache,cls:"seg-accepted"},{label:"Named but unlinked",value:namedUnlinkedTypeCache,cls:"seg-candidate"},{label:"Unnamed known handles",value:unnamedTypeCache,cls:"seg-unnamed"}],answer:"How many known type-cache handles are named and linked to both a getter/helper and a registered parent or root relationship.",uncertainty:`This refines the named type-cache-handle segment of global/static references. By name, ${fmt(linkedClassNameOverlap)} linked cache handles also have named class/type rows and ${fmt(linkedCacheNamesWithoutClass)} linked cache handles do not. The ${fmt(namedClassNamesWithoutLinked)} named class/type names without linked cache evidence are ${fmt(namedClassNamesWithoutLinkedZeroSlot)} zero-slot rows. Registered parent/root coverage is not native C++ inheritance recovery.`},
-  {name:"Class/type recovery",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:classTypeSegments,answer:"How known class/type rows split by recovered name and confirmed virtual-member identity.",uncertainty:`The named class/type surface contains ${fmt(namedClassTypeRows.length)} rows over ${fmt(namedClassTypeNames.size)} distinct names. Named rows still need fields, constructors, inheritance, and non-virtual methods. Address-only rows with confirmed slots still lack a unique owner type signal. No vtable-bearing class currently has all slot identities confirmed.`},
+  {name:"Type identity coverage",openEnded:true,den:`${fmt(typeRows.length)} unique registered/class identity names`,segments:typeSegments,answer:"How registered type-token names reconcile with named vtable rows, zero-slot rows, and vtable owner candidates.",uncertainty:`Driven by zt-type-coverage-reconciliation.tsv. Immediate owner-name candidates: ${fmt(typeCounts["address-only-vtable-candidate"]||0)}. Getter-use rows inside another named vtable: ${fmt(typeCounts["foreign-vtable-getter-use"]||0)}. Registered-only rows need vptr-store evidence, non-polymorphic classification, or non-class identifier classification.`},
   {name:"Virtual slot identities",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
@@ -337,9 +235,10 @@ Promise.all([
  tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"]),
  tsv(["zt-vtable-methods-full.tsv","../docs/analysis/vtable-methods-full.tsv"]),
  tsv(["zt-rtti-classes.tsv","../docs/analysis/rtti-classes.tsv"]),
- tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"])
-]).then(([fp,gp,vt,rtti,mapRows])=>{
- coverageSummary(fp,gp,vt,rtti,mapRows);
+ tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"]),
+ tsv(["zt-type-coverage-reconciliation.tsv","../docs/analysis/type-coverage-reconciliation.tsv"])
+]).then(([fp,gp,vt,rtti,mapRows,typeRows])=>{
+ coverageSummary(fp,gp,vt,rtti,mapRows,typeRows);
  table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
