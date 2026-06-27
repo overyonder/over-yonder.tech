@@ -8421,7 +8421,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00573234	0		entity water-environment side-effect bridge		unidentified		0x008dc610#47	game-entities
 0x0057324d	0		receiver +0x270 environment collection insertion bridge		unidentified		0x008dc610#46	
 0x0057327d	0		manifest/list field accessor for receiver +0x36c		unidentified		0x008dc610#43	
-0x00573284	22		wide string formatting wrapper around vswprintf		unidentified			CRT/runtime
+0x00573284	22	format_wide_string_vswprintf			confirmed			
 0x0057329a	0		generic receiver byte +0x154 setter		unidentified		0x008e4ea8#34	
 0x005732a7	47	get_type_ZTAwardMgr			confirmed			
 0x005732d6	0		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified		0x008dc77c#2	ui
@@ -10127,7 +10127,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aa258	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
 0x005aa2a5	667		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
 0x005aa540	83		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005aa593	27		bounded varargs string formatting wrapper		unidentified	gamebryo		CRT/runtime
+0x005aa593	27	format_256_byte_string_vsprintf_s			confirmed	gamebryo		
 0x005aa5ae	45	get_or_register_bf_safe_handle_base_type			confirmed	gamebryo		
 0x005aa5db	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008bfbac#1	ui
 0x005aa5e0	45	get_or_register_bf_safe_handled_obj_type			confirmed	gamebryo		
@@ -10909,9 +10909,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bc81d	0		BFRegistry appKey and profile event scaffolding		unidentified		0x008e60e0#22	io/assets
 0x005bc851	18		BFRegistry appKey and profile event scaffolding		unidentified	gamebryo		io/assets
 0x005bc863	22		BFRegistry appKey and profile event scaffolding		unidentified	gamebryo		io/assets
-0x005bc879	58		DBCS-aware narrow-string case normalization helpers		unidentified	gamebryo		CRT/runtime
-0x005bc8b3	66		DBCS-aware narrow-string case normalization helpers		unidentified	gamebryo		CRT/runtime
-0x005bc8f5	22		DBCS-aware narrow-string case normalization helpers		unidentified	gamebryo		CRT/runtime
+0x005bc879	58	lowercase_dbcs_string_in_place			confirmed	gamebryo		
+0x005bc8b3	66	lowercase_dbcs_string_prefix_in_place			confirmed	gamebryo		
+0x005bc8f5	22	assign_and_lowercase_inline_string			confirmed	gamebryo		
 0x005bc90b	47	get_type_BFResourceMgr			confirmed	gamebryo		
 0x005bc93a	0		BFResourceMgr type registration and lifecycle helpers		unidentified		0x008e6250#1	io/assets
 0x005bc93f	32		BFResourceMgr type registration and lifecycle helpers		unidentified	gamebryo		io/assets
@@ -11097,32 +11097,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c307a	52		resource cache red-black tree insertion and rebalance helpers		unidentified	gamebryo		io/assets
 0x005c30ae	61		resource cache red-black tree insertion and rebalance helpers		unidentified	gamebryo		io/assets
 0x005c30eb	63		resource cache red-black tree insertion and rebalance helpers		unidentified	gamebryo		io/assets
-0x005c312a	35		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c314d	54		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3183	47		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c31b2	43		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c31dd	45		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c320a	16		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c321a	38		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3240	182		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
+0x005c312a	35	resolve_active_text_account			confirmed	gamebryo		
+0x005c314d	54	allocate_refcounted_text_payload			confirmed	gamebryo		
+0x005c3183	47	release_refcounted_text_payload			confirmed	gamebryo		
+0x005c31b2	43	assign_resource_ref_via_keyed_lookup			confirmed	gamebryo		
+0x005c31dd	45	assign_resource_ref_via_keyed_probe			confirmed	gamebryo		
+0x005c320a	16	clear_refcounted_text_ref			confirmed	gamebryo		
+0x005c321a	38	assign_refcounted_text_ref			confirmed	gamebryo		
+0x005c3240	182	decode_utf8_code_unit			confirmed	gamebryo		
 0x005c32f6	235	append_multibyte_text_to_xml_output_buffer			confirmed	gamebryo		
-0x005c33e1	134		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3467	119		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c34de	763		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c37d9	17		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c37ea	40		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3812	38		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3838	42		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c3862	146		XML text output buffer and UTF-8 transcode helpers		unidentified	gamebryo		CRT/runtime
-0x005c38b8	0	0x005c38b8 callsite_address			confirmed			
+0x005c33e1	134	append_byte_to_xml_output_buffer			confirmed	gamebryo		
+0x005c3467	119	merge_xml_attributes_from_source			confirmed	gamebryo		
+0x005c34de	763	merge_xml_children_by_merge_key			confirmed	gamebryo		
+0x005c37d9	17	is_mbc_space_byte			confirmed	gamebryo		
+0x005c37ea	40	compare_mbs_prefix_equal_optional_casefold			confirmed	gamebryo		
+0x005c3812	38	compare_mbs_cstr_equal_optional_casefold			confirmed	gamebryo		
+0x005c3838	42	skip_mbc_space_prefix			confirmed	gamebryo		
+0x005c3862	146	parse_xml_name_token			confirmed	gamebryo		
 0x005c38f4	279	decode_xml_entity_reference			confirmed	gamebryo		
 0x005c3a0b	336	normalize_xml_text_until_delimiter			confirmed	gamebryo		
-0x005c3b5b	597		XML entity decode and merge-key text resolver		unidentified	gamebryo		CRT/runtime
-0x005c3db0	37		XML entity decode and merge-key text resolver		unidentified	gamebryo		CRT/runtime
-0x005c3dd5	89		XML entity decode and merge-key text resolver		unidentified	gamebryo		CRT/runtime
-0x005c3e2e	37		XML entity decode and merge-key text resolver		unidentified	gamebryo		CRT/runtime
+0x005c3b5b	597	append_xml_escaped_inline_text			confirmed	gamebryo		
+0x005c3db0	37	write_xml_indent_tabs_to_file			confirmed	gamebryo		
+0x005c3dd5	89	append_xml_indent_tabs_to_string			confirmed	gamebryo		
+0x005c3e2e	37	append_xml_indent_tabs_to_existing_string			confirmed	gamebryo		
 0x005c3e53	101	get_nonempty_xml_attribute_cstr			confirmed	gamebryo		
-0x005c3eb8	24		XML entity decode and merge-key text resolver		unidentified	gamebryo		CRT/runtime
+0x005c3eb8	24	format_32_byte_string_vsprintf_s			confirmed	gamebryo		
 0x005c3ed0	25		0x005c3ed0 writes stock GDI object triplet		unidentified	gamebryo		game-entities
 0x005c3ee9	25		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005c3f02	120		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -16577,7 +16576,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00691f14	75		AlphaSort material option reader		unidentified	gamebryo		
 0x00691f5f	117		material parameter validity refresh helpers		unidentified	gamebryo		
 0x00691fd4	129		Quality material option reader		unidentified	gamebryo		
-0x00692055	159		material transform semantic string classifier		unidentified	gamebryo		CRT/runtime
+0x00692055	159	is_material_transform_semantic			confirmed	gamebryo		
 0x006920f4	246		material quality/profile selection helper		unidentified	gamebryo		io/assets
 0x006921ea	0		material parameter payload span-size helper		unidentified		0x008f4eb4#4	io/assets
 0x0069221a	479		material parameter mapping builder		unidentified	gamebryo		ui
@@ -21422,7 +21421,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075ab4e	0		scene/model transform and XML property bridge		unidentified		0x008fe428#0	
 0x0075ab69	18		scene/model transform and XML property bridge		unidentified	gamebryo		ui
 0x0075ab7b	53		scene/model transform and XML property bridge		unidentified	gamebryo	0x008d9e68#19	
-0x0075abb0	77		scene/model transform and XML property bridge		unidentified	gamebryo	0x008d9e68#20	CRT/runtime
+0x0075abb0	77	read_scene_model_update_priority_xml_attr			confirmed	gamebryo	0x008d9e68#20	
 0x0075abfd	0		scene/model transform and XML property bridge		unidentified		0x008fe428#37	
 0x0075ac57	0		scene/model transform and XML property bridge		unidentified		0x008fe428#21	
 0x0075ac5d	47	get_type_BFFPSUDVComponent			confirmed	gamebryo		
