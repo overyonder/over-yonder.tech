@@ -1085,9 +1085,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00440404	22		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044041a	50		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044044c	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x004404c1	40	as_ZTGameMode			candidate			
+0x004404c1	40	as_ZTGameMode			confirmed			
 0x004404e9	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
-0x00440541	40	as_BFScenarioMgr			candidate			
+0x00440541	40	as_BFScenarioMgr			confirmed			
 0x00440569	88	try_get_UIPointObj_value			confirmed			
 0x004405c1	41		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
 0x004405ea	41		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
@@ -1166,11 +1166,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00442e6d	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00442ee2	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00442f3a	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x00442f92	40	as_UILayout			candidate			
-0x00442fba	40	as_UIText			candidate			
+0x00442f92	40	as_UILayout			confirmed			
+0x00442fba	40	as_UIText			confirmed			
 0x00442fe2	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x0044303a	40	as_ZTMode			candidate			
-0x00443062	40	as_ZTMainMode			candidate			
+0x0044303a	40	as_ZTMode			confirmed			
+0x00443062	40	as_ZTMainMode			confirmed			
 0x0044309a	77	advance_tree_iterator_in_place			confirmed			
 0x004430e7	25		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00443100	31		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
@@ -1227,8 +1227,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00446183	153		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00446263	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00446303	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x00446378	40	as_ZTFirstPersonMode			candidate			
-0x004463a0	40	as_ZTPlacementMode			candidate			
+0x00446378	40	as_ZTFirstPersonMode			confirmed			
+0x004463a0	40	as_ZTPlacementMode			confirmed			
 0x004463c8	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
 0x00446420	69		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x004464a5	40		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
@@ -1334,7 +1334,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044c8a8	23		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044c8bf	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044c934	55		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
-0x0044c96b	40	as_ZTAIShowComponent			candidate			
+0x0044c96b	40	as_ZTAIShowComponent			confirmed			
 0x0044c993	53		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
 0x0044c9c8	47	get_type_ZTSaveMode			confirmed			
 0x0044c9fc	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
@@ -1562,28 +1562,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00466f57	57		entity selection and entity information panels		unidentified			ui(high)
 0x00466f90	117		entity selection and entity information panels		unidentified			ui(high)
 0x00467005	23		entity selection and entity information panels		unidentified			ui(medium)
-0x0046701c	40	as_ZTSelectionMode			candidate			
-0x00467044	40	as_UIToggleHoverButton			candidate			
+0x0046701c	40	as_ZTSelectionMode			confirmed			
+0x00467044	40	as_UIToggleHoverButton			confirmed			
 0x0046706c	23		entity selection and entity information panels		unidentified			ui(medium)
-0x00467083	40	as_ZTUITypeList			candidate			
-0x004670ab	40	as_ZTPuzzleMgr			candidate			
-0x004670d3	40	as_UICompositeButton			candidate			
-0x004670fb	40	as_UIWindow			candidate			
-0x00467123	40	as_ZTResearchMgr			candidate			
+0x00467083	40	as_ZTUITypeList			confirmed			
+0x004670ab	40	as_ZTPuzzleMgr			confirmed			
+0x004670d3	40	as_UICompositeButton			confirmed			
+0x004670fb	40	as_UIWindow			confirmed			
+0x00467123	40	as_ZTResearchMgr			confirmed			
 0x0046714b	23		entity selection and entity information panels		unidentified			ui(medium)
-0x00467162	40	as_ZTItemFilter			candidate			
+0x00467162	40	as_ZTItemFilter			confirmed			
 0x0046718a	23		entity selection and entity information panels		unidentified			ui(high)
 0x004671a1	55	resolve_ZTUserCameraData_component		component	confirmed			
-0x004671d8	40	as_ZTAIMgr			candidate			
+0x004671d8	40	as_ZTAIMgr			confirmed			
 0x00467200	55		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00467237	40	as_ZTAIStaffRequestController			candidate			
+0x00467237	40	as_ZTAIStaffRequestController			confirmed			
 0x0046725f	39		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00467286	40	as_ZTAITrickTargetComponent			candidate			
-0x004672ae	40	as_ZTAIShow			candidate			
-0x004672d6	40	as_BFAIRelationshipMgr			candidate			
-0x004672fe	40	as_ZTAIStaffAssignmentComponent			candidate			
-0x00467326	40	as_ZTFeedbackComponent			candidate			
-0x0046734e	40	as_ZTAIViewAnimals			candidate			
+0x00467286	40	as_ZTAITrickTargetComponent			confirmed			
+0x004672ae	40	as_ZTAIShow			confirmed			
+0x004672d6	40	as_BFAIRelationshipMgr			confirmed			
+0x004672fe	40	as_ZTAIStaffAssignmentComponent			confirmed			
+0x00467326	40	as_ZTFeedbackComponent			confirmed			
+0x0046734e	40	as_ZTAIViewAnimals			confirmed			
 0x004673ce	24		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004673e6	53		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00467455	47		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1661,8 +1661,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046b8d9	32		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046b8f9	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046b9b7	88		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0046ba0f	40	as_ZTTransportSkyTrack			candidate			
-0x0046ba37	40	as_ZTTransportSkyCircuit			candidate			
+0x0046ba0f	40	as_ZTTransportSkyTrack			confirmed			
+0x0046ba37	40	as_ZTTransportSkyCircuit			confirmed			
 0x0046bacf	54		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046bb3c	32		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046bb5c	47	get_type_ZTStaffAssignMode			confirmed			
@@ -1820,7 +1820,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00475d9d	153		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00475ece	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00475fc8	23		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00475fdf	40	as_ZTFPSCameraGroundFitComponent			candidate			
+0x00475fdf	40	as_ZTFPSCameraGroundFitComponent			confirmed			
 0x00476133	31		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004761b0	32		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004761d0	39		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1893,8 +1893,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0047a503	271		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047a62d	153		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047a70d	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0047a7ad	40	as_ZTPhotoMode			candidate			
-0x0047a7d5	40	as_BFPoint3Event			candidate			
+0x0047a7ad	40	as_ZTPhotoMode			confirmed			
+0x0047a7d5	40	as_BFPoint3Event			confirmed			
 0x0047a815	47	get_type_ZTFossilFindingMode			confirmed			
 0x0047a849	32		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047a86e	38		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1914,7 +1914,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0047beb3	122		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047bf2d	153		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047c028	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0047c0c8	40	as_BF2DSnd			candidate			
+0x0047c0c8	40	as_BF2DSnd			confirmed			
 0x0047c10e	117		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047c183	55		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047c21e	47	get_type_ZTFPActionModeBase			confirmed			
@@ -1933,7 +1933,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0047ca87	132		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047cb0b	151		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047cba2	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0047cc42	40	as_ZTGate			candidate			
+0x0047cc42	40	as_ZTGate			confirmed			
 0x0047cc6a	47	get_type_ZTFPClimbLadderMode			confirmed			
 0x0047cc9e	32		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047ccc3	73		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -2005,9 +2005,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048227b	33		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004822b2	153		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004823e3	160		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x004824dd	40	as_ZTAITrickMgr			candidate			
+0x004824dd	40	as_ZTAITrickMgr			confirmed			
 0x00482505	23		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x004825e4	40	as_ZTAITrickComponent			candidate			
+0x004825e4	40	as_ZTAITrickComponent			confirmed			
 0x00482688	44		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x004826b4	33		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004826d5	44		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2062,7 +2062,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004846d3	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00484748	37		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x0048476d	46		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
-0x004847ff	40	as_ZTGestureComponent			candidate			
+0x004847ff	40	as_ZTGestureComponent			confirmed			
 0x00484827	162		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004848c9	34		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004848eb	33		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2100,8 +2100,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048794c	77		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00487999	66		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004879db	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x00487a50	40	as_ZTPhotoChallengesComponent			candidate			
-0x00487a78	40	as_ZTPhotoChallengeMgr			candidate			
+0x00487a50	40	as_ZTPhotoChallengesComponent			confirmed			
+0x00487a78	40	as_ZTPhotoChallengeMgr			confirmed			
 0x00487aa0	47		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x00487acf	47	get_type_ZTPuzzleMode			confirmed			
 0x00487b03	32		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2284,7 +2284,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00495cde	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00495d7e	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00495df3	39		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x00495e1a	40	as_ZTEconomyComponent			candidate			
+0x00495e1a	40	as_ZTEconomyComponent			confirmed			
 0x00495e42	47	get_type_ZTGoalPanel			confirmed			
 0x00495e76	32		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x00495e9b	38		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2301,7 +2301,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00496b04	153		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00496be4	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x00496c84	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x00496cf9	40	as_BFScenarioGroup			candidate			
+0x00496cf9	40	as_BFScenarioGroup			confirmed			
 0x00496d21	47	get_type_ZTMoneyText			confirmed			
 0x00496d55	32		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x00496d7a	80		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
@@ -2350,7 +2350,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049bfc9	644		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x0049c24d	61		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x0049c28a	63		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x0049c2c9	40	as_ZTMoneyText			candidate			
+0x0049c2c9	40	as_ZTMoneyText			confirmed			
 0x0049c2f1	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x0049c366	82		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x0049c3b8	54		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2488,7 +2488,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004a6cc0	71		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x004a6d07	69		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x004a6d4c	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004a6dc1	40	as_UITooltip			candidate			
+0x004a6dc1	40	as_UITooltip			confirmed			
 0x004a6de9	79		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004a6e38	153		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004a6ed1	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
@@ -2542,7 +2542,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004abb1f	153		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004abbff	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004abc9f	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004abd14	40	as_UITextEdit			candidate			
+0x004abd14	40	as_UITextEdit			confirmed			
 0x004abd6c	47	get_type_ZTUIFullscreenButton			confirmed			
 0x004abda0	32		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x004abdc5	73		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -2674,7 +2674,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b4faa	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004b504a	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004b50ea	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004b515f	40	as_BFHelpComponent			candidate			
+0x004b515f	40	as_BFHelpComponent			confirmed			
 0x004b5187	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004b5204	27	construct_inline_ui_typed_value			confirmed			
 0x004b521f	47	get_type_ZTZooStatusComponent			confirmed			
@@ -2710,7 +2710,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b8a8c	82		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004b8ade	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004b8b7e	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004b8bf3	40	as_UIGraph			candidate			
+0x004b8bf3	40	as_UIGraph			confirmed			
 0x004b8c1b	47	get_type_ZTZooSurveyComponent			confirmed			
 0x004b8c4f	32		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
 0x004b8c74	80		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
@@ -2842,7 +2842,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004bfb1a	107		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004bfb85	119		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004bfbfc	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004bfc71	40	as_BFGTransactionTracker			candidate			
+0x004bfc71	40	as_BFGTransactionTracker			confirmed			
 0x004bfc99	117		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004bfd0e	134		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004bfd94	134		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
@@ -2859,7 +2859,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004c025b	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004c02fb	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004c039b	160		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
-0x004c043b	40	as_BFStringFloatObj			candidate			
+0x004c043b	40	as_BFStringFloatObj			confirmed			
 0x004c0463	44		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004c04f6	60		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004c0532	118		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
@@ -3101,7 +3101,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ce543	78		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004ce591	77		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004ce5de	86		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(medium)
-0x004ce634	40	as_ZTFeedbackData			candidate			
+0x004ce634	40	as_ZTFeedbackData			confirmed			
 0x004ce65c	47		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004ce68b	48		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
 0x004ce6bb	928		campaign, adoption, buy-panel, filter UI, and economy configurat		unidentified			ui(high)
@@ -3199,17 +3199,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d47a3	148		tankwallglass selector and globe UI handlers		unidentified			ui(high)
 0x004d4837	160		tankwallglass selector and globe UI handlers		unidentified			ui(high)
 0x004d48d7	660		tankwallglass selector and globe UI handlers		unidentified			ui(high)
-0x004d4b6b	40	as_ZTPathBase			candidate			
+0x004d4b6b	40	as_ZTPathBase			confirmed			
 0x004d4b93	39		tankwallglass selector and globe UI handlers		unidentified			ui(high)
 0x004d4bc2	37		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d4be7	58		tankwallglass selector and globe UI handlers		unidentified			ui(high)
-0x004d4c21	40	as_BFSkewComponent			candidate			
+0x004d4c21	40	as_BFSkewComponent			confirmed			
 0x004d4c60	47	get_type_ZTFenceEntity			confirmed			
 0x004d4c94	32		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d4cb9	79		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d55b3	389	read_fence_entity_edge			confirmed			
 0x004d5b71	117		tankwallglass selector and globe UI handlers		unidentified			ui(high)
-0x004d5be6	40	as_ZTTankGateSegment			candidate			
+0x004d5be6	40	as_ZTTankGateSegment			confirmed			
 0x004d5c0e	153		tankwallglass selector and globe UI handlers		unidentified			ui(high)
 0x004d5ca7	160		tankwallglass selector and globe UI handlers		unidentified			ui(high)
 0x004d5d47	35		tankwallglass selector and globe UI handlers		unidentified		0x008f6d28#31	ui(medium)
@@ -3222,7 +3222,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d62d5	73		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d631e	119		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d65ae	254		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
-0x004d66c2	40	as_BFAboveGroundFitComponent			candidate			
+0x004d66c2	40	as_BFAboveGroundFitComponent			confirmed			
 0x004d66f0	63		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
 0x004d672f	47	get_type_ZTFPSUDVComponent			confirmed			
 0x004d6763	32		tankwallglass selector and globe UI handlers		unidentified			ui(medium)
@@ -3494,7 +3494,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e6384	153		map and fame data		unidentified			game-ai(high)
 0x004e6464	115		map and fame data		unidentified			ui(high)
 0x004e64d7	160		map and fame data		unidentified			ui(high)
-0x004e6577	40	as_BFAIEntityDataInstance			candidate			
+0x004e6577	40	as_BFAIEntityDataInstance			confirmed			
 0x004e659f	47	get_type_ZTPathBase			confirmed			
 0x004e65d3	32	init_ZTPlaceEntityComponent_descriptor_ref			confirmed			
 0x004e65f8	40	init_ZTPlaceEntityComponent_callback_registry			confirmed			
@@ -3756,13 +3756,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f9f00	196		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004f9fc4	388		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fa148	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x004fa1e8	40	as_BFAITaskTemplateList			candidate			
-0x004fa210	40	as_BFAITaskTemplate			candidate			
+0x004fa1e8	40	as_BFAITaskTemplateList			confirmed			
+0x004fa210	40	as_BFAITaskTemplate			confirmed			
 0x004fa238	39		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fa25f	41		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x004fa288	40	as_BFAIAttributeFloatMap			candidate			
-0x004fa2b0	40	as_BFGEntityContainer			candidate			
-0x004fa2d8	40	as_BFBehavior			candidate			
+0x004fa288	40	as_BFAIAttributeFloatMap			confirmed			
+0x004fa2b0	40	as_BFGEntityContainer			confirmed			
+0x004fa2d8	40	as_BFBehavior			confirmed			
 0x004fa300	115		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(high)
 0x004fa373	21		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fa388	203		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(high)
@@ -3797,7 +3797,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004fc251	121		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fc2ca	196		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fc3fc	51		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x004fc42f	40	as_UIHoverButton			candidate			
+0x004fc42f	40	as_UIHoverButton			confirmed			
 0x004fc457	284		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x004fc573	47	get_type_ZTTriggeredEventsComponent			confirmed			
 0x004fc5a7	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -3893,7 +3893,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00502aa9	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00502b49	88		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00502ba1	88		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x00502bf9	40	as_ZTFenceEntity			candidate			
+0x00502bf9	40	as_ZTFenceEntity			confirmed			
 0x00502c2e	30		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00502c4c	52		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00502ca2	110		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4192,7 +4192,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00513687	64		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x005136c7	159		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x005137ad	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0051384d	40	as_ZTTourDataAttr			candidate			
+0x0051384d	40	as_ZTTourDataAttr			confirmed			
 0x00513875	74		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x005138bf	47	get_type_ZTTransportationMgr			confirmed			
 0x005138f3	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4233,7 +4233,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00515735	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x005157d5	23		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x005157ec	36		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x00515810	40	as_ZTTourData			candidate			
+0x00515810	40	as_ZTTourData			confirmed			
 0x00515838	54		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051586e	417		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00515a0f	25		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4365,9 +4365,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051a5f2	93		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051a64f	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051a6ef	436		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0051a8a3	40	as_ZTTransportCircuitBase			candidate			
+0x0051a8a3	40	as_ZTTransportCircuitBase			confirmed			
 0x0051a8cb	71		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0051a912	40	as_ZTTransportGroundCircuit			candidate			
+0x0051a912	40	as_ZTTransportGroundCircuit			confirmed			
 0x0051a958	380		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051aad4	114		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051ab46	77		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4402,7 +4402,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051c25b	436		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051c40f	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051c4af	117		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0051c524	40	as_ZTTransportCrossingGate			candidate			
+0x0051c524	40	as_ZTTransportCrossingGate			confirmed			
 0x0051c54c	44		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051c578	45		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0051c5a5	53		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4656,8 +4656,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0052fd41	148		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0052fdd5	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0052fe75	43		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0052fea0	40	as_BFGPhysAnimController			candidate			
-0x0052fec8	40	as_ZTVehicleSky			candidate			
+0x0052fea0	40	as_BFGPhysAnimController			confirmed			
+0x0052fec8	40	as_ZTVehicleSky			confirmed			
 0x0052fef0	73		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0052ff39	84		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0052ff8d	49		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
@@ -4825,10 +4825,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00538bf7	30		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00538c2b	153		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00538d26	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x00538de4	40	as_ZTVehicleGround			candidate			
-0x00538e0c	40	as_BFHeadLookComponent			candidate			
+0x00538de4	40	as_ZTVehicleGround			confirmed			
+0x00538e0c	40	as_BFHeadLookComponent			confirmed			
 0x00538e34	23		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x00538eaf	40	as_BFBehaviorMgr			candidate			
+0x00538eaf	40	as_BFBehaviorMgr			confirmed			
 0x00538edf	21		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00538f24	40		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x00538f4c	47	get_type_ZTVehicleSky			confirmed			
@@ -4901,7 +4901,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053d409	420		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0053d5ad	54		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0053d5e3	52		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
-0x0053d617	40	as_BFGTileFittingSurface			candidate			
+0x0053d617	40	as_BFGTileFittingSurface			confirmed			
 0x0053d6fb	35		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer(medium)
 0x0053d71e	47	get_type_ZTTank			confirmed			
 0x0053d752	32	get_type_ZTTankGateSegment			confirmed			
@@ -5354,7 +5354,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055aa19	106		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055aa83	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055aaa3	921		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
-0x0055ae3c	40	as_ZTDevComponent			candidate			
+0x0055ae3c	40	as_ZTDevComponent			confirmed			
 0x0055aea2	47	get_type_ZTFossilSkeletonComponent			confirmed			
 0x0055aed6	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
 0x0055aefb	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
@@ -5363,7 +5363,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055b96d	64		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055b9ad	159		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055ba93	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
-0x0055bb33	40	as_ZTFossilSkeletonComponent			candidate			
+0x0055bb33	40	as_ZTFossilSkeletonComponent			confirmed			
 0x0055bb5b	113		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055bbcc	262		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0055bcd2	52		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
@@ -5683,23 +5683,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005724b2	93	clone_tree_nodes_recursive			confirmed			
 0x00572725	66	checked range/container copy helper			confirmed			
 0x00572767	88		typed receiver child-node lookup bridge		unidentified			ui(high)
-0x005727bf	40	as_ZTLocationMgr			candidate			
-0x0057284b	40	as_ZTAIStaffMgr			candidate			
-0x005728d7	40	as_ZTWorldSndMgr			candidate			
-0x00572963	40	as_ZTShowMixerManager			candidate			
-0x005729ef	40	as_ZTWorldMgr			candidate			
-0x00572adf	40	as_ZTStatus			candidate			
-0x00572b6b	40	as_ZTPhotoManager			candidate			
-0x00572bf7	40	as_ZTEconomyMgr			candidate			
-0x00572c83	40	as_ZTFeedbackMgr			candidate			
-0x00572d0f	40	as_ZTAIGuestMgr			candidate			
-0x00572d9b	40	as_ZTAdoptionMgr			candidate			
-0x00572e27	40	as_ZTFavoriteAnimalMgr			candidate			
-0x00572eb3	40	as_ZTGestureMgr			candidate			
-0x00572f3f	40	as_ZTTankMgr			candidate			
-0x00572fcb	40	as_ZTDiseaseMgr			candidate			
-0x00573057	40	as_ZTShowTimerManager			candidate			
-0x005730e3	40	as_ZTTrickButtonMgr			candidate			
+0x005727bf	40	as_ZTLocationMgr			confirmed			
+0x0057284b	40	as_ZTAIStaffMgr			confirmed			
+0x005728d7	40	as_ZTWorldSndMgr			confirmed			
+0x00572963	40	as_ZTShowMixerManager			confirmed			
+0x005729ef	40	as_ZTWorldMgr			confirmed			
+0x00572adf	40	as_ZTStatus			confirmed			
+0x00572b6b	40	as_ZTPhotoManager			confirmed			
+0x00572bf7	40	as_ZTEconomyMgr			confirmed			
+0x00572c83	40	as_ZTFeedbackMgr			confirmed			
+0x00572d0f	40	as_ZTAIGuestMgr			confirmed			
+0x00572d9b	40	as_ZTAdoptionMgr			confirmed			
+0x00572e27	40	as_ZTFavoriteAnimalMgr			confirmed			
+0x00572eb3	40	as_ZTGestureMgr			confirmed			
+0x00572f3f	40	as_ZTTankMgr			confirmed			
+0x00572fcb	40	as_ZTDiseaseMgr			confirmed			
+0x00573057	40	as_ZTShowTimerManager			confirmed			
+0x005730e3	40	as_ZTTrickButtonMgr			confirmed			
 0x0057310b	133		heap sift/adjust helper for pointer-vector sorting		unidentified			allocator/CRT(medium)
 0x00573284	22		wide string formatting wrapper around vswprintf		unidentified			CRT/runtime(medium)
 0x005732a7	47	get_type_ZTAwardMgr			confirmed			
@@ -5965,8 +5965,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00585675	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x00585715	88		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0058576d	71		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
-0x005857b4	40	as_BFSnd			candidate			
-0x005857dc	40	as_BFAmbient3DSndGenerator			candidate			
+0x005857b4	40	as_BFSnd			confirmed			
+0x005857dc	40	as_BFAmbient3DSndGenerator			confirmed			
 0x00585804	61		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x00585841	73		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x0058588a	60		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
@@ -6008,7 +6008,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00586eda	225		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x00586fbb	306		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
 0x005870ed	475		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(high)
-0x00587322	40	as_BF3DSnd			candidate			
+0x00587322	40	as_BF3DSnd			confirmed			
 0x0058734a	47	get_type_BF3DSnd			confirmed			
 0x0058737e	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
 0x005873a3	73		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui(medium)
@@ -6799,18 +6799,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ae3b3	73		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui(high)
 0x005ae3fc	659		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui(high)
 0x005ae68f	45		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui(high)
-0x005ae720	40	as_BFPerformanceMonitor			candidate	gamebryo		
-0x005ae7ac	40	as_BFRegistry			candidate	gamebryo		
-0x005ae838	40	as_BFResourceMgr			candidate	gamebryo		
-0x005ae8c4	40	as_BFWindowComponent			candidate	gamebryo		
-0x005ae950	40	as_BFTimeKeeper			candidate	gamebryo		
-0x005ae9dc	40	as_BFUndoMgr			candidate	gamebryo		
-0x005aea68	40	as_BFLocaleMgr			candidate	gamebryo		
-0x005aeaf4	40	as_BFUserProfileMgr			candidate	gamebryo		
-0x005aeb80	40	as_BFBinderRoot			candidate	gamebryo		
-0x005aec0c	40	as_BFXMLSchemaMgr			candidate	gamebryo		
-0x005aec98	40	as_BFLoadListener			candidate	gamebryo		
-0x005aed24	40	as_BFScriptContextMgr			candidate	gamebryo		
+0x005ae720	40	as_BFPerformanceMonitor			confirmed	gamebryo		
+0x005ae7ac	40	as_BFRegistry			confirmed	gamebryo		
+0x005ae838	40	as_BFResourceMgr			confirmed	gamebryo		
+0x005ae8c4	40	as_BFWindowComponent			confirmed	gamebryo		
+0x005ae950	40	as_BFTimeKeeper			confirmed	gamebryo		
+0x005ae9dc	40	as_BFUndoMgr			confirmed	gamebryo		
+0x005aea68	40	as_BFLocaleMgr			confirmed	gamebryo		
+0x005aeaf4	40	as_BFUserProfileMgr			confirmed	gamebryo		
+0x005aeb80	40	as_BFBinderRoot			confirmed	gamebryo		
+0x005aec0c	40	as_BFXMLSchemaMgr			confirmed	gamebryo		
+0x005aec98	40	as_BFLoadListener			confirmed	gamebryo		
+0x005aed24	40	as_BFScriptContextMgr			confirmed	gamebryo		
 0x005aed4c	41		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui(high)
 0x005aed75	30	assign_bf_safe_handle_ref			confirmed	gamebryo		
 0x005af03f	110		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui(high)
@@ -7895,7 +7895,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005fcbce	52		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x005fcc02	87		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x005fcc59	160		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x005fcd5d	40	as_BFAIToken			candidate	gamebryo		
+0x005fcd5d	40	as_BFAIToken			confirmed	gamebryo		
 0x005fcd85	119		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x005fcdfc	55		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x005fce33	69		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8164,7 +8164,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00609bb9	423		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x00609d60	185		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x00609e19	164		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x00609f04	40	as_BFAIBiomeMap			candidate	gamebryo		
+0x00609f04	40	as_BFAIBiomeMap			confirmed	gamebryo		
 0x00609f2c	71		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x00609f73	71		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x00609fba	69		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8411,7 +8411,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00615f90	153		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x00616029	175		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x006160d8	160		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x00616178	40	as_BFAIStateVar			candidate	gamebryo		
+0x00616178	40	as_BFAIStateVar			confirmed	gamebryo		
 0x006161a0	107		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061620b	88		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x00616263	88		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8477,7 +8477,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00619354	125		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x006193d1	25		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x006193ea	417		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x0061958b	40	as_BFAITextureController			candidate	gamebryo		
+0x0061958b	40	as_BFAITextureController			confirmed	gamebryo		
 0x006195b3	55		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x00619659	47	get_type_BFLocomotionMgr			confirmed	gamebryo		
 0x0061968d	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8503,7 +8503,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0061b021	368		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0061b191	160		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061b231	97		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x0061b292	40	as_BFLocomotion			candidate	gamebryo		
+0x0061b292	40	as_BFLocomotion			confirmed	gamebryo		
 0x0061b2ba	39		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061b2e1	194		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061b3a3	44		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8524,7 +8524,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0061c152	50		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0061c197	153		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061c277	160		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x0061c317	40	as_BFSteer			candidate	gamebryo		
+0x0061c317	40	as_BFSteer			confirmed	gamebryo		
 0x0061c33f	73		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0061c388	48		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0061c409	40		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -8540,7 +8540,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0061d35e	159		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061d4bd	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061d4dd	160		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x0061d57d	40	as_BFLocomotionMgr			candidate	gamebryo		
+0x0061d57d	40	as_BFLocomotionMgr			confirmed	gamebryo		
 0x0061d5a5	37		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0061d5ca	40		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0061d5f2	47	get_type_BFBehExecTask			confirmed	gamebryo		
@@ -8803,7 +8803,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0062fa66	193		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0062ff71	30		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0062ffbb	49	free_tree_subtree_nodes			confirmed	gamebryo		
-0x0063006e	40	as_BFAICognitiveMgr			candidate	gamebryo		
+0x0063006e	40	as_BFAICognitiveMgr			confirmed	gamebryo		
 0x00630096	40		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x006300be	48		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x006300ee	56		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -9333,9 +9333,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064de08	148		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0064de9c	394		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
 0x0064e026	677		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(high)
-0x0064e389	40	as_BFSpriteMgr			candidate	gamebryo		
-0x0064e415	40	as_UIRoot			candidate	gamebryo		
-0x0064e4a1	40	as_UISoundMgr			candidate	gamebryo		
+0x0064e389	40	as_BFSpriteMgr			confirmed	gamebryo		
+0x0064e415	40	as_UIRoot			confirmed	gamebryo		
+0x0064e4a1	40	as_UISoundMgr			confirmed	gamebryo		
 0x0064e4c9	47	get_type_UIRoot			confirmed	gamebryo		
 0x0064e4fd	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
 0x0064e522	73		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui(medium)
@@ -11540,10 +11540,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006c8dbe	195		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006c8e97	153		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006c8fe6	160		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x006c9086	40	as_BFDecorativeDetailObjectComponent			candidate	gamebryo		
-0x006c90ae	40	as_BFShadowComponent			candidate	gamebryo		
-0x006c90d6	40	as_BFGEconomyComponent			candidate	gamebryo		
-0x006c90fe	40	as_BFTriggeredEventsComponent			candidate	gamebryo		
+0x006c9086	40	as_BFDecorativeDetailObjectComponent			confirmed	gamebryo		
+0x006c90ae	40	as_BFShadowComponent			confirmed	gamebryo		
+0x006c90d6	40	as_BFGEconomyComponent			confirmed	gamebryo		
+0x006c90fe	40	as_BFTriggeredEventsComponent			confirmed	gamebryo		
 0x006c9126	88		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006c917e	88		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006c91d6	88		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -11615,7 +11615,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cd310	105	register_bfgeconomy_do_transaction_handler			confirmed	gamebryo		
 0x006cd41f	153		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006cd4b8	160		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x006cd558	40	as_BFGTransaction			candidate	gamebryo		
+0x006cd558	40	as_BFGTransaction			confirmed	gamebryo		
 0x006cd580	94	unwrap_bfgeconomy_transaction_data			confirmed	gamebryo		
 0x006cd5de	82		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006cd676	68		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -11650,17 +11650,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cebd9	157		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006cec7e	398		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo	0x008f7f80#31	economy(medium)
 0x006cee80	188		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo	0x008f7f80#58	economy(medium)
-0x006cf2b3	40	as_BFGManager			candidate	gamebryo		
-0x006cf33f	40	as_BFAIMgr			candidate	gamebryo		
-0x006cf3cb	40	as_BFGPlacementGrid			candidate	gamebryo		
-0x006cf457	40	as_BFGPathFinderMgr			candidate	gamebryo		
-0x006cf4e3	40	as_BFGInfluenceMgr			candidate	gamebryo		
-0x006cf56f	40	as_BFGCollisionMgr			candidate	gamebryo		
-0x006cf5fb	40	as_BFGEntityTriggerMgr			candidate	gamebryo		
-0x006cf687	40	as_BFGViewableObjectMgr			candidate	gamebryo		
-0x006cf713	40	as_BFGTransportationMgr			candidate	gamebryo		
-0x006cf79f	40	as_BFGRampageMgr			candidate	gamebryo		
-0x006cf82b	40	as_BFGPuzzleMgr			candidate	gamebryo		
+0x006cf2b3	40	as_BFGManager			confirmed	gamebryo		
+0x006cf33f	40	as_BFAIMgr			confirmed	gamebryo		
+0x006cf3cb	40	as_BFGPlacementGrid			confirmed	gamebryo		
+0x006cf457	40	as_BFGPathFinderMgr			confirmed	gamebryo		
+0x006cf4e3	40	as_BFGInfluenceMgr			confirmed	gamebryo		
+0x006cf56f	40	as_BFGCollisionMgr			confirmed	gamebryo		
+0x006cf5fb	40	as_BFGEntityTriggerMgr			confirmed	gamebryo		
+0x006cf687	40	as_BFGViewableObjectMgr			confirmed	gamebryo		
+0x006cf713	40	as_BFGTransportationMgr			confirmed	gamebryo		
+0x006cf79f	40	as_BFGRampageMgr			confirmed	gamebryo		
+0x006cf82b	40	as_BFGPuzzleMgr			confirmed	gamebryo		
 0x006cfadc	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006cfafd	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006cfb1e	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -11684,7 +11684,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006d062d	153		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d06c6	130		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d078f	160		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x006d082f	40	as_BFGUndoMgr			candidate	gamebryo		
+0x006d082f	40	as_BFGUndoMgr			confirmed	gamebryo		
 0x006d085d	47	get_type_BFGridCollisionComponent			confirmed	gamebryo		
 0x006d0891	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d08b6	189		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -11694,7 +11694,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006d17a3	84		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d17f7	592		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d1a47	547		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x006d1c85	40	as_BFSwimComponent			candidate	gamebryo		
+0x006d1c85	40	as_BFSwimComponent			confirmed	gamebryo		
 0x006d1cad	90		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d1d07	115		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006d1d7a	69		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -12076,7 +12076,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ee7a7	130		collision-test callback/type support tail		unidentified	gamebryo		game-ai(medium)
 0x006ee829	153		collision-test callback/type support tail		unidentified	gamebryo		game-ai(high)
 0x006ee955	160		collision-test callback/type support tail		unidentified	gamebryo		game-ai(medium)
-0x006ee9f5	40	as_BFGEntityContainerSlot			candidate	gamebryo		
+0x006ee9f5	40	as_BFGEntityContainerSlot			confirmed	gamebryo		
 0x006eea1d	40		collision-test callback/type support tail		unidentified	gamebryo		game-ai(medium)
 0x006eea45	40		collision-test callback/type support tail		unidentified	gamebryo		game-ai(medium)
 0x006eea6d	228		collision-test callback/type support tail		unidentified	gamebryo		game-ai(medium)
@@ -12267,7 +12267,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ffb14	153		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006ffbf4	157		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006ffc91	160		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x006ffd31	40	as_BFGridCollisionComponent			candidate	gamebryo		
+0x006ffd31	40	as_BFGridCollisionComponent			confirmed	gamebryo		
 0x006ffd61	90		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x006ffdbb	47	get_type_BFGPathFinderMgr			confirmed	gamebryo		
 0x006ffdef	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -12658,8 +12658,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007149cd	636		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x00714c49	61		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x00714c86	63		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x00714cc5	40	as_BFSharedPhysVars			candidate	gamebryo		
-0x00714ced	40	as_BFSceneGraphComponent			candidate	gamebryo		
+0x00714cc5	40	as_BFSharedPhysVars			confirmed	gamebryo		
+0x00714ced	40	as_BFSceneGraphComponent			confirmed	gamebryo		
 0x00714d15	288		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x00714e35	325		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x00714f7a	111		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -13195,12 +13195,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0073ce1f	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x0073ce40	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x0073ce61	33		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
-0x0073cfb5	40	as_BFDX9Renderer			candidate	gamebryo		
-0x0073d041	40	as_BFAnimManager			candidate	gamebryo		
-0x0073d0cd	40	as_BFTraversabilityMgr			candidate	gamebryo		
-0x0073d159	40	as_BFSoundMgr			candidate	gamebryo		
-0x0073d1e5	40	as_BFSoundStageMgr			candidate	gamebryo		
-0x0073d271	40	as_BFParticleDictionary			candidate	gamebryo		
+0x0073cfb5	40	as_BFDX9Renderer			confirmed	gamebryo		
+0x0073d041	40	as_BFAnimManager			confirmed	gamebryo		
+0x0073d0cd	40	as_BFTraversabilityMgr			confirmed	gamebryo		
+0x0073d159	40	as_BFSoundMgr			confirmed	gamebryo		
+0x0073d1e5	40	as_BFSoundStageMgr			confirmed	gamebryo		
+0x0073d271	40	as_BFParticleDictionary			confirmed	gamebryo		
 0x0073d29f	47	get_type_BFBoundedObjectComponent			confirmed	gamebryo		
 0x0073d2d3	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
 0x0073d366	18		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy(medium)
@@ -16273,9 +16273,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00809b0a	47	get_type_BFLuaResponse			confirmed			
 0x00809b3e	32		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
 0x00809b63	114		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
-0x0080a254	40	as_BFLuaArgs			candidate			
+0x0080a254	40	as_BFLuaArgs			confirmed			
 0x0080a27c	45		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
-0x0080a2a9	40	as_BFXMLNode			candidate			
+0x0080a2a9	40	as_BFXMLNode			confirmed			
 0x0080a2d1	97		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
 0x0080a332	35		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
 0x0080a355	102		renderer/UI resource and container support after GDI bridge		unidentified			renderer(medium)
@@ -16613,7 +16613,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0081a1c1	49		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0081a1f2	68		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0081a236	64		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x0081a2da	40	as_ZTAIShowScheduler			candidate			
+0x0081a2da	40	as_ZTAIShowScheduler			confirmed			
 0x0081a302	210		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0081a3d4	229		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0081a4b9	43		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
@@ -16795,7 +16795,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008241df	153		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008242da	69		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0082431f	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x008243ff	40	as_ZTAIWaterFilterComponent			candidate			
+0x008243ff	40	as_ZTAIWaterFilterComponent			confirmed			
 0x0082448b	74		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008244d5	86	construct_ZTStaffRequestData			confirmed			
 0x00824561	138		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
@@ -16911,7 +16911,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0082c83e	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0082c8de	119		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0082c955	55		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x0082c98c	40	as_ZTAISensorTour			candidate			
+0x0082c98c	40	as_ZTAISensorTour			confirmed			
 0x0082c9cc	47	get_type_ZTAIStaffRequestController			confirmed			
 0x0082ca00	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0082ca25	68		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
@@ -17023,15 +17023,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00832920	50		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x00832952	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008329f2	667		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x00832c8d	40	as_ZTAIStateThinker			candidate			
+0x00832c8d	40	as_ZTAIStateThinker			confirmed			
 0x00832cb5	47	get_type_ZTAITrickData			confirmed			
 0x00832ce9	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x00832d0e	103		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x00832d90	211		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0083346e	129		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008334ef	276		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x0083361b	40	as_ZTAITrickTargetData			candidate			
-0x00833643	40	as_ZTAITrickLevel			candidate			
+0x0083361b	40	as_ZTAITrickTargetData			confirmed			
+0x00833643	40	as_ZTAITrickLevel			confirmed			
 0x00833856	47	get_type_ZTAIGuestMgr			confirmed			
 0x0083388a	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008338af	38		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
@@ -17442,7 +17442,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0084eeee	116		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0084efa9	153		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0084f042	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x0084f0e2	40	as_BFAINeedAdjusts			candidate			
+0x0084f0e2	40	as_BFAINeedAdjusts			confirmed			
 0x0084f10a	107		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0084f175	40		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0084f19d	48		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
@@ -17691,7 +17691,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0086009c	33		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x008600f3	156		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x0086018f	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
-0x0086024d	40	as_BFBehExecPath			candidate			
+0x0086024d	40	as_BFBehExecPath			confirmed			
 0x0086035b	40		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
 0x00860383	47	get_type_ZTBehTestTargetPos			confirmed			
 0x008603b7	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities(medium)
