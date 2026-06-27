@@ -48,7 +48,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Native function behavior</strong> tracks accepted and candidate exact recovery over known original <code>.text</code> function entries in the deobfuscated executable. The current tables do not keep a suspected-only function-entry bucket. Function entries and class methods overlap: the <code>vtable</code> column records virtual-method membership when a function body appears in an enumerated vtable slot. Absence from that column does not prove the function is not a constructor, static member, non-virtual member, or helper associated with a type. Rows marked <code>wrapper-indirected</code> are depepper support records connected to the wrapper indirection bar. <strong>Global/static references</strong> is a separate address surface from native function entries; its named type-cache-handle segment is refined by the type-cache handles bar below. <strong>Class/type names</strong> asks whether the recovered class/type row has a name or only an address placeholder. <strong>Per-class virtual member identity</strong> treats zero-slot types as complete, then tracks none/some/all confirmed slot identities over the vtable-bearing rows.</p>
+  <p><strong>Native function behavior</strong> tracks accepted and candidate exact recovery over known original <code>.text</code> function entries in the deobfuscated executable. The current tables do not keep a suspected-only function-entry bucket. Function entries and class methods overlap: the <code>vtable</code> column records virtual-method membership when a function body appears in an enumerated vtable slot. Absence from that column does not prove the function is not a constructor, static member, non-virtual member, or helper associated with a type. Rows marked <code>wrapper-indirected</code> are depepper support records connected to the wrapper indirection bar. <strong>Global/static references</strong> is a separate address surface from native function entries; its named type-cache-handle segment is refined by the type-cache handles bar below. <strong>Class/type recovery</strong> partitions the known class/type rows by recovered name and virtual-member identity in one denominator.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them.</p>
@@ -211,10 +211,10 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
  }
  const unnamedTypeCache=cacheRows.length-namedTypeCache;
  const namedUnlinkedTypeCache=namedTypeCache-linkedTypeCache;
- const vtableRows=rtti.filter(r=>(r.vtable||"").trim());
- const namedClassTypes=rtti.filter(r=>r.class&&!r.class.startsWith("vtable_")).length;
- const unnamedClassTypes=rtti.length-namedClassTypes;
- const zeroSlotClassTypes=rtti.filter(r=>Number(r.slot_count||0)===0).length;
+ const classTypeStats={
+  namedZeroSlot:0,namedAllMembers:0,namedSomeMembers:0,namedNoMembers:0,
+  unnamedZeroSlot:0,unnamedAllMembers:0,unnamedSomeMembers:0,unnamedNoMembers:0
+ };
  const classSlots=new Map();
  for(const r of vt){
   const key=r.vtable||r.class;
@@ -223,12 +223,26 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   if(r.status==="confirmed")row.confirmed++;
   classSlots.set(key,row);
  }
- let classesNoMembers=0,classesSomeMembers=0,classesAllMembers=0;
- for(const row of classSlots.values()){
-  if(row.confirmed===0)classesNoMembers++;
-  else if(row.confirmed===row.total)classesAllMembers++;
-  else classesSomeMembers++;
+ for(const r of rtti){
+  const named=r.class&&!r.class.startsWith("vtable_");
+  const prefix=named?"named":"unnamed";
+  const slots=Number(r.slot_count||0);
+  const row=classSlots.get(r.vtable||r.class)||{total:slots,confirmed:0};
+  if(slots===0)classTypeStats[`${prefix}ZeroSlot`]++;
+  else if(row.confirmed===row.total)classTypeStats[`${prefix}AllMembers`]++;
+  else if(row.confirmed>0)classTypeStats[`${prefix}SomeMembers`]++;
+  else classTypeStats[`${prefix}NoMembers`]++;
  }
+ const classTypeSegments=[
+  {label:"Named zero-slot complete",value:classTypeStats.namedZeroSlot,cls:"seg-all"},
+  {label:"Named all slot identities",value:classTypeStats.namedAllMembers,cls:"seg-all"},
+  {label:"Named some slot identities",value:classTypeStats.namedSomeMembers,cls:"seg-some"},
+  {label:"Named no slot identities",value:classTypeStats.namedNoMembers,cls:"seg-nameonly"},
+  {label:"Address-only zero-slot complete",value:classTypeStats.unnamedZeroSlot,cls:"seg-all"},
+  {label:"Address-only all slot identities",value:classTypeStats.unnamedAllMembers,cls:"seg-all"},
+  {label:"Address-only some slot identities",value:classTypeStats.unnamedSomeMembers,cls:"seg-some"},
+  {label:"Address-only no slot identities",value:classTypeStats.unnamedNoMembers,cls:"seg-none"}
+ ].filter(s=>s.value>0);
  const vslotDone=vt.filter(r=>r.status==="confirmed").length;
  const bmap=byteMapPartitionStats(mapRows);
  const indirectedRows=mapRows.filter(r=>r.space==="runtime-parent"&&r.status==="indirected");
@@ -240,8 +254,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Wrapper indirection neutralization",openEnded:false,den:`${fmt(indirectedRows.length)} runtime-parent indirected byte-map rows`,segments:[{label:"Neutralized",value:indirectedRows.length,cls:"seg-accepted"},{label:"Open",value:0,cls:"seg-open"}],answer:"Whether current wrapper-mediated callsite/import rows have been neutralized in the depepper/strip pipeline.",uncertainty:`Both wrapper-indirection types are complete: ${fmt(indirectedEditRows)} rows are covered by depepper edits and ${fmt(indirectedImportRows)} rows are covered by the rebuilt import table. ${fmt(wrapperIndirectedFunctionRows)} function-list rows are wrapper-indirected depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function recovery.`},
   {name:"Global/static references",openEnded:true,den:`${fmt(gp.length)} referenced global/static cells`,segments:[{label:"Named type-cache handles",value:typeCacheGlobals.length,cls:"seg-type"},{label:"Other identified",value:globalIdentified,cls:"seg-other"},{label:"Unidentified",value:gp.length-typeCacheGlobals.length-globalIdentified,cls:"seg-open"}],answer:"How many referenced static cells are named type-cache handles, other identified statics, or still unidentified.",uncertainty:"Unidentified cells need byte-map facts from initializer writes, consumers, or exact data shape."},
   {name:"Type-cache handles",openEnded:true,den:`${fmt(cacheRows.length)} known cached type-handle cells`,segments:[{label:"Named + getter + parent/root",value:linkedTypeCache,cls:"seg-accepted"},{label:"Named but unlinked",value:namedUnlinkedTypeCache,cls:"seg-open"},{label:"Unnamed known handles",value:unnamedTypeCache,cls:"seg-unnamed"}],answer:"How many known type-cache handles are named and linked to both a getter/helper and a registered parent or root relationship.",uncertainty:"This refines the named type-cache-handle segment of global/static references. The current known handle population can grow if new cache cells are found; registered parent/root coverage is not native C++ inheritance recovery."},
-  {name:"Class/type names",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:[{label:"Recovered class/type name",value:namedClassTypes,cls:"seg-named"},{label:"Address-only vtable",value:unnamedClassTypes,cls:"seg-unnamed"}],answer:"How many recovered class/type rows have a concrete name.",uncertainty:"A class/type name does not imply fields, constructors, inheritance, or virtual method meanings are complete."},
-  {name:"Per-class virtual member identity",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:[{label:"Complete: zero virtual slots",value:zeroSlotClassTypes,cls:"seg-all"},{label:"All slot identities",value:classesAllMembers,cls:"seg-all"},{label:"Some slot identities",value:classesSomeMembers,cls:"seg-some"},{label:"No slot identities",value:classesNoMembers,cls:"seg-none"}],answer:"Whether each recovered class/type row has zero, none, partial, or complete confirmed virtual slot identities.",uncertainty:"Confirmed slot identity names behavior; unidentified slot addresses still require function recovery. Non-virtual methods and fields are outside this denominator."},
+  {name:"Class/type recovery",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:classTypeSegments,answer:"How known class/type rows split by recovered name and confirmed virtual-member identity.",uncertainty:"Named rows still need fields, constructors, inheritance, and non-virtual methods. No vtable-bearing class currently has all slot identities confirmed."},
   {name:"Virtual slot identities",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
   {name:"Byte-map partition coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} leaf bytes across non-overlapping partitions`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much byte length of the partitioned byte-map surface is covered by known-like statuses.",uncertainty:`The denominator is byte-weighted over ${fmt(bmap.done+bmap.notDone)} resolved leaf partitions; overlapping parent rows do not inflate progress.`}
  ];
