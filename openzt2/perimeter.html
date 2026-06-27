@@ -47,13 +47,13 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels, not recovered behavior. Function entries and class methods overlap: the <code>vtable</code> column records virtual-method membership when a function body appears in an enumerated vtable slot. Absence from that column does not prove a free function; constructors, static members, non-virtual members, and type helpers can still live there. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
+  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels, not recovered behavior. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. The vtable slot bar has its own slot-row denominator because many slots can point at the same function body. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them. Template-only type identities are the zero-slot rows that have no corresponding static cache cell.</p>
 
   <h3>Per-Class Method Perimeter</h3>
-  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a method-shape view, not a second accepted function-name archive.</p>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a slot-level method-shape view. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
@@ -206,14 +206,18 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const wrapperSupportRows=fp.filter(r=>r.status==="wrapper-indirected").length;
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
- const virtualMemberFunctions=nativeFunctions.filter(r=>(r.vtable||"").trim()).length;
- const noVirtualMemberEvidence=nativeFunctions.length-virtualMemberFunctions;
+ const normAddr=a=>String(a||"").trim().toLowerCase();
+ const confirmedVtableSlots=vt.filter(r=>r.status==="confirmed");
+ const confirmedVtableMethodAddrs=new Set(confirmedVtableSlots.map(r=>normAddr(r.method_addr)).filter(Boolean));
+ const functionEntryAddrs=new Set(nativeFunctions.map(r=>normAddr(r.address)).filter(Boolean));
+ const projectedVtableMethodAddrs=[...confirmedVtableMethodAddrs].filter(a=>functionEntryAddrs.has(a)).length;
+ const unprojectedVtableMethodAddrs=confirmedVtableMethodAddrs.size-projectedVtableMethodAddrs;
  const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
  const functionOpenRows=nativeFunctions.filter(r=>r.status==="unidentified");
  const staticType=staticTypeSegments(gp,typeRows);
  const staticTypeTotal=staticType.reduce((n,s)=>n+s.value,0);
  const typePivot=counts(typeRows,"pivot_segment");
- const vslotDone=vt.filter(r=>r.status==="confirmed").length;
+ const vslotDone=confirmedVtableSlots.length;
  const bmap=byteMapPartitionStats(mapRows,runtimeExecutable);
  const bmapSectionSplit=sectionCoverageText(mapRows);
  const indirectedRows=mapRows.filter(r=>r.space==="runtime-parent"&&r.status==="indirected");
@@ -226,9 +230,9 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  ];
  const domains=[
   {name:"Function recovery frontier",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted native function behavior and neutralized wrapper indirection sit beside the remaining known function-entry work.",uncertainty:`The unidentified function slices are suspected structural domains from zt-function-perimeter.tsv, not accepted behavior recovery. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(wrapperSupportRows)} function-perimeter rows are generated depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function-entry recovery.`},
-  {name:"Function vtable-method overlap",openEnded:true,den:`${fmt(nativeFunctions.length)} native function entries`,segments:[{label:"Appears in vtable slot",value:virtualMemberFunctions,cls:"seg-some"},{label:"No vtable-slot membership recorded",value:noVirtualMemberEvidence,cls:"seg-support"}],answer:"How many native function entries are also known virtual methods.",uncertainty:"No vtable-slot membership recorded is not proof of a free function; constructors, static members, non-virtual members, and type helpers can still live there."},
+  {name:"Vtable method address projection",openEnded:true,den:`${fmt(confirmedVtableMethodAddrs.size)} distinct identified vtable method addresses`,segments:[{label:"Present in function perimeter",value:projectedVtableMethodAddrs,cls:"seg-some"},{label:"Missing from function perimeter",value:unprojectedVtableMethodAddrs,cls:"seg-support"}],answer:"Whether confirmed vtable method addresses have corresponding function-perimeter entries.",uncertainty:`This reconciles distinct method addresses, not slot rows. The slot-level denominator is shown separately below: ${fmt(vslotDone)} identified slot rows out of ${fmt(vt.length)} total slot rows.`},
   {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, other identified statics, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:"Driven by zt-type-coverage-reconciliation.tsv. The six address-only vtable owner rows and ten foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape."},
-  {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Method identified",value:vslotDone,cls:"seg-accepted"},{label:"Method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is virtual-slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
+  {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Slot method identified",value:vslotDone,cls:"seg-accepted"},{label:"Slot method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slot rows have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies, inherited helpers, and shared stubs are intentionally counted once per slot row."},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
  document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
