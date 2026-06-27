@@ -9477,7 +9477,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00598c45	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#37	io/assets
 0x00598c4a	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#31	io/assets
 0x00598c4d	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#21	io/assets
-0x00598c59	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008bf7e0#6	io/assets
+0x00598c59	0	return_false_stub			confirmed		0x008bf7e0#6	
 0x00598c5e	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#1	io/assets
 0x00598c64	99		object registry stream version and Ni geometry serialization hel		unidentified	gamebryo		io/assets
 0x00598cc7	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2bd8#0	io/assets
@@ -14827,16 +14827,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006540d9	403	read_ui_help_info			confirmed	gamebryo		
 0x0065426c	446	read_ui_help_info_by_ids			confirmed	gamebryo		
 0x0065442a	356	build_ui_property_keys			confirmed	gamebryo		
-0x0065458e	0		UI layout slider static help and region property parsers		unidentified		0x008efde4#5	ui
+0x0065458e	0	clone_UIRegion_value			confirmed		0x008efde4#5	
 0x006545a8	67		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x006545eb	47	get_type_UIRegion			confirmed	gamebryo		
-0x0065461a	0		UI layout slider static help and region property parsers		unidentified		0x008efde4#1	ui
+0x0065461a	0	get_type_UIRegion_vtable_thunk			confirmed		0x008efde4#1	
 0x0065461f	39		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x00654646	108		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x006546b2	188		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x0065476e	233	read_slider_range			confirmed	gamebryo		
-0x00654857	0		UI layout slider static help and region property parsers		unidentified		0x008efde4#3	ui
-0x00654952	0		UI layout slider static help and region property parsers		unidentified		0x008efde4#4	ui
+0x00654857	0	write_UIRegion_xml_node			confirmed		0x008efde4#3	
+0x00654952	0	read_UIRegion_xml_node			confirmed		0x008efde4#4	
 0x00654a72	88		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x00654aca	108		UI layout slider static help and region property parsers		unidentified	gamebryo		ui
 0x00654b36	47	get_type_UILayout			confirmed	gamebryo		
@@ -18149,10 +18149,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b6b2b	0	get_type_BFGTerrainPlacementTile			confirmed		0x008f6998#41	
 0x006b6b58	94		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006b6bb6	47	get_type_TriangleID			confirmed	gamebryo		
-0x006b6be5	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008bfe50#1	economy
-0x006b6bea	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008bfe50#2	economy
-0x006b6c0a	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008bfe50#3	economy
-0x006b6cc5	296		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo	0x008bfe50#4	economy
+0x006b6be5	0	get_type_TriangleID_vtable_thunk			confirmed		0x008bfe50#1	
+0x006b6bea	0	get_TriangleID_descriptor_ref			confirmed		0x008bfe50#2	
+0x006b6c0a	0	write_TriangleID_xml_node			confirmed		0x008bfe50#3	
+0x006b6cc5	296	read_TriangleID_xml_node			confirmed	gamebryo	0x008bfe50#4	
 0x006b6ded	152		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006b6e85	105		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006b6eee	119		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
@@ -25839,7 +25839,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0080f1f7	445		renderer/UI resource and container support after GDI bridge		unidentified			renderer
 0x0080f3b4	74		renderer/UI resource and container support after GDI bridge		unidentified			renderer
 0x0080f3fe	91		renderer/UI resource and container support after GDI bridge		unidentified			renderer
-0x0080f459	102	get_type_(computed)			confirmed			
+0x0080f459	102	get_type_BFSafeHandle<BFXMLObj>			confirmed			
 0x0080f4bf	0		renderer/UI resource and container support after GDI bridge		unidentified		0x0090a050#39	renderer
 0x0080f4c4	0		renderer/UI resource and container support after GDI bridge		unidentified		0x0090a050#41	renderer
 0x0080f4ff	61		renderer/UI resource and container support after GDI bridge		unidentified			renderer
