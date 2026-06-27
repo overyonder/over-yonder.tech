@@ -1494,9 +1494,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00462159	260		entity selection and entity information panels		unidentified			ui(high)
 0x0046225d	1858	handle_entity_selection_actions			confirmed		0x008c04b0#196	
 0x0046299f	99		entity selection and entity information panels		unidentified		0x008c04b0#195	ui(medium)
-0x00462a02	322	emit_crate_entity_payload			candidate		0x008c04b0#200	
+0x00462a02	322	emit_crate_entity_payload			confirmed		0x008c04b0#200	
 0x00462b44	391		entity selection and entity information panels		unidentified		0x008c04b0#201	ui(high)
-0x00462ccb	488	emit_move_selection_entity_payload			candidate		0x008c04b0#202	
+0x00462ccb	488	emit_move_selection_entity_payload			confirmed		0x008c04b0#202	
 0x00462eb3	200		entity selection and entity information panels		unidentified		0x008c04b0#203	ui(medium)
 0x00462f7b	312	populate_multi_select_lists			confirmed			
 0x00463139	104		entity selection and entity information panels		unidentified		0x008c04b0#206	ui(high)
@@ -1505,14 +1505,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046364f	1402		entity selection and entity information panels		unidentified		0x008c04b0#210	ui(high)
 0x00463c20	94		entity selection and entity information panels		unidentified		0x008c04b0#212	ui(medium)
 0x00463c7e	226		entity selection and entity information panels		unidentified		0x008c04b0#213	ui(medium)
-0x00463d60	244	handle_board_selected_entity		entity	candidate			
-0x00463e54	224	handle_action_confirmed			candidate			
+0x00463d60	244	handle_board_selected_entity		entity	confirmed			
+0x00463e54	224	handle_action_confirmed			confirmed			
 0x00463f34	62		entity selection and entity information panels		unidentified			ui(medium)
 0x00463f72	1611	handle_transport_sell_refund_confirmation			confirmed			
 0x004645bd	160		entity selection and entity information panels		unidentified		0x008c04b0#214	ui(high)
-0x0046465d	576	handle_selectnext_diseased_animal			candidate			
-0x0046489d	235	handle_selectnext_rampaging_animal			candidate			
-0x00464988	74	handle_showmixer_event			candidate			
+0x0046465d	576	handle_selectnext_diseased_animal			confirmed			
+0x0046489d	235	handle_selectnext_rampaging_animal			confirmed			
+0x00464988	74	handle_showmixer_event			confirmed			
 0x004649d2	36		entity selection and entity information panels		unidentified			ui(high)
 0x004649f6	344	handle_showscheduler_addshow			confirmed			
 0x00464b4e	51		entity selection and entity information panels		unidentified			ui(high)
@@ -1526,20 +1526,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004654e9	268	handle_showscheduler_moveup			confirmed			
 0x004655f5	271	handle_showscheduler_movedown			confirmed			
 0x00465704	114		entity selection and entity information panels		unidentified			ui(high)
-0x00465776	145	handle_showscheduler_toggleenable			candidate			
+0x00465776	145	handle_showscheduler_toggleenable			confirmed			
 0x00465807	80		entity selection and entity information panels		unidentified			ui(medium)
 0x00465857	98		entity selection and entity information panels		unidentified			ui(medium)
-0x004658b9	197	handle_set_filter_maintenance			candidate			
-0x0046597e	602	emit_physobjswap_on_payload			candidate			
+0x004658b9	197	handle_set_filter_maintenance			confirmed			
+0x0046597e	602	emit_physobjswap_on_payload			confirmed			
 0x00465bd8	59		entity selection and entity information panels		unidentified			ui(high)
-0x00465c13	208	handle_showplatform_transactcurrentupgrade			candidate			
+0x00465c13	208	handle_showplatform_transactcurrentupgrade			confirmed			
 0x00465ce3	363		entity selection and entity information panels		unidentified			ui(high)
 0x00465e4e	84		entity selection and entity information panels		unidentified			ui(high)
 0x00465ea2	84		entity selection and entity information panels		unidentified			ui(high)
-0x00465ef6	348	handle_sell_physobj			candidate			
-0x00466052	551	handle_showplatform_updateupgradecost			candidate			
-0x004662bf	63	handle_set_show_to_select		select	candidate			
-0x004662fe	66	handle_enable_tutorial_eyedropper			candidate			
+0x00465ef6	348	handle_sell_physobj			confirmed			
+0x00466052	551	handle_showplatform_updateupgradecost			confirmed			
+0x004662bf	63	handle_set_show_to_select		select	confirmed			
+0x004662fe	66	handle_enable_tutorial_eyedropper			confirmed			
 0x00466340	32	advance_ui_child_iterator			confirmed			
 0x00466360	164		entity selection and entity information panels		unidentified			ui(high)
 0x00466404	48		entity selection and entity information panels		unidentified			ui(high)
@@ -1608,8 +1608,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00467d01	152		camera, collision, and geometry helper band		unidentified		0x008c8c60#153	renderer(medium)
 0x00467dc5	358		camera, collision, and geometry helper band		unidentified		0x008c8c60#194	renderer(medium)
 0x00467f2b	81		camera, collision, and geometry helper band		unidentified		0x008c8c60#197	renderer(medium)
-0x00467f7c	259	handle_set_mode_anchor_object			candidate			
-0x0046807f	900	handle_skytower_placement_height		height	candidate			
+0x00467f7c	259	handle_set_mode_anchor_object			confirmed			
+0x0046807f	900	handle_skytower_placement_height		height	confirmed			
 0x00468403	142		camera, collision, and geometry helper band		unidentified		0x008c8c60#198	renderer(medium)
 0x00468491	60		camera, collision, and geometry helper band		unidentified		0x008c8c60#199	renderer(medium)
 0x004684ec	155		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1618,8 +1618,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046866c	39		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00468693	171		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046873e	517		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00468943	526	emit_remove_track_connection_payload			candidate			
-0x00468b51	449	emit_remove_track_connection_payload			candidate			
+0x00468943	526	emit_remove_track_connection_payload			confirmed			
+0x00468b51	449	emit_remove_track_connection_payload			confirmed			
 0x00468d12	355		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00468e75	179		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00468f28	254		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1644,7 +1644,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046a679	583		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046a8c0	162		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046a962	150		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0046a9f8	528	emit_user_dragging_payload			candidate			
+0x0046a9f8	528	emit_user_dragging_payload			confirmed			
 0x0046ac08	1077		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046b04d	590		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046b29b	69		camera, collision, and geometry helper band		unidentified			renderer(medium)
