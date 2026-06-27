@@ -128,7 +128,7 @@ function isConfirmedTypeGetter(row){
  return name.startsWith("get_type_")||/^get_or_register_.*_type$/.test(name);
 }
 function hasResolvedParent(details){
- return /parent type `/.test(details)||/get_or_register_type\([^)]*, 0\)/.test(details);
+ return /parent type `/.test(details)||/get_or_register_type\([^)]*, 0\)/.test(details)||/root\/no-parent/.test(details);
 }
 function tinyHeap(){
  const h=[];
