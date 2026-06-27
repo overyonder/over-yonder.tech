@@ -34,7 +34,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   <p>The class/type identity surface combines recovered names and vtable rows. A class/type can be identified without contributing vtable slots; <code>BFSafeHandle&lt;T&gt;</code> specializations are identified C++ template specializations with zero virtual slots. Slot-level bars count only rows that actually contain vtable slots.</p>
 
   <h3>Recovery Domains</h3>
-  <p>Each bar below answers one completion question with one denominator. Solid bars use a closed denominator for that question. Striped bars use the currently known perimeter; future discoveries can expand the total. The byte-map bar sums the byte length of non-overlapping leaf partitions classified by the most specific covering map row; it is not a count of map rows or partitions.</p>
+  <p>Each bar below answers one completion question with one denominator. Solid bars use a closed denominator for that question. Striped bars use the currently known perimeter; future discoveries can expand the total. The byte-map bar is limited to the mapped runtime executable image at <code>runtime-parent 0x00400000..0x00a92000</code>. It reports bytes rather than row counts or partition counts.</p>
   <div id="coverage-summary" class="coverage-grid" aria-label="Binary recovery domain coverage charts"></div>
   <table class="coverage-table"><thead><tr><th>Recovery domain</th><th>Denominator</th><th>Current split</th><th>What this answers</th><th>Remaining uncertainty</th></tr></thead><tbody id="coverage-rows"></tbody></table>
 
@@ -79,6 +79,15 @@ function num(s){return /^0x/i.test(s||"")?parseInt(s,16):Number(s||0)}
 function hex(s){const n=parseInt(s||"",16);return Number.isFinite(n)?n:null}
 const supportFunctionStatuses=new Set(["wrapper-indirected","mapped-data"]);
 const knownByteStatuses=new Set(["known","assessed","copied","consumed","generated-known","indirected","omitted","matches-runtime","external"]);
+const runtimeExecutable={space:"runtime-parent",start:0x00400000,end:0x00a92000,label:"runtime-parent 0x00400000..0x00a92000"};
+const runtimeExecutableSections=[
+ {name:"headers",start:0x00400000,end:0x00401000},
+ {name:".text",start:0x00401000,end:0x008b8000},
+ {name:".rdata",start:0x008b8000,end:0x00919000},
+ {name:".data",start:0x00919000,end:0x00952000},
+ {name:".rsrc",start:0x00952000,end:0x00a8b000},
+ {name:"post-resource",start:0x00a8b000,end:0x00a92000}
+];
 function typeCacheRows(mapRows,typeCacheGlobals){
  const wanted=new Set(typeCacheGlobals.map(r=>hex(r.address)).filter(Number.isFinite));
  const rows=new Map([...wanted].map(a=>[a,{address:a,name:"",details:""}]));
@@ -144,12 +153,16 @@ function tinyHeap(){
   get length(){return h.length}
  };
 }
-function byteMapPartitionStats(mapRows){
+function byteMapPartitionStats(mapRows,opts={}){
  const bySpace=new Map();
  for(const r of mapRows){
-  const start=hex(r.start),end=hex(r.end);
-  if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)continue;
   const space=r.space||"";
+  if(opts.space&&space!==opts.space)continue;
+  let start=hex(r.start),end=hex(r.end);
+  if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)continue;
+  if(Number.isFinite(opts.start))start=Math.max(start,opts.start);
+  if(Number.isFinite(opts.end))end=Math.min(end,opts.end);
+  if(end<=start)continue;
   if(!bySpace.has(space))bySpace.set(space,[]);
   bySpace.get(space).push({start,end,len:end-start,status:r.status||"",name:r.name||""});
  }
@@ -177,6 +190,16 @@ function byteMapPartitionStats(mapRows){
   }
  }
  return {done,notDone,bytesDone,bytesNotDone};
+}
+function byteSize(n){
+ return n>=1048576?`${(n/1048576).toFixed(2)} MiB`:`${fmt(n)} bytes`;
+}
+function sectionCoverageText(mapRows){
+ return runtimeExecutableSections.map(s=>{
+  const stats=byteMapPartitionStats(mapRows,{space:runtimeExecutable.space,start:s.start,end:s.end});
+  const total=stats.bytesDone+stats.bytesNotDone;
+  return `${s.name}: ${byteSize(stats.bytesDone)} known / ${byteSize(total)} total (${pct(stats.bytesDone,total)})`;
+ }).join("; ");
 }
 function summarySegments(segments,total){
  return segments.map(s=>seg(s.cls,s.value,total,`${s.label}: ${fmt(s.value)}`)).join("");
@@ -244,7 +267,8 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {label:"Address-only no slot identities",value:classTypeStats.unnamedNoMembers,cls:"seg-none"}
  ].filter(s=>s.value>0);
  const vslotDone=vt.filter(r=>r.status==="confirmed").length;
- const bmap=byteMapPartitionStats(mapRows);
+ const bmap=byteMapPartitionStats(mapRows,runtimeExecutable);
+ const bmapSectionSplit=sectionCoverageText(mapRows);
  const indirectedRows=mapRows.filter(r=>r.space==="runtime-parent"&&r.status==="indirected");
  const indirectedImportRows=indirectedRows.filter(r=>/materialized import cells|\.idata/i.test(`${r.name||""} ${r.details||""}`)).length;
  const indirectedEditRows=indirectedRows.length-indirectedImportRows;
@@ -256,7 +280,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows){
   {name:"Type-cache handles",openEnded:true,den:`${fmt(cacheRows.length)} known cached type-handle cells`,segments:[{label:"Named + getter + parent/root",value:linkedTypeCache,cls:"seg-accepted"},{label:"Named but unlinked",value:namedUnlinkedTypeCache,cls:"seg-open"},{label:"Unnamed known handles",value:unnamedTypeCache,cls:"seg-unnamed"}],answer:"How many known type-cache handles are named and linked to both a getter/helper and a registered parent or root relationship.",uncertainty:"This refines the named type-cache-handle segment of global/static references. The current known handle population can grow if new cache cells are found; registered parent/root coverage is not native C++ inheritance recovery."},
   {name:"Class/type recovery",openEnded:true,den:`${fmt(rtti.length)} recovered class/type rows`,segments:classTypeSegments,answer:"How known class/type rows split by recovered name and confirmed virtual-member identity.",uncertainty:"Named rows still need fields, constructors, inheritance, and non-virtual methods. Address-only rows with confirmed slots still lack a unique owner type signal. No vtable-bearing class currently has all slot identities confirmed."},
   {name:"Virtual slot identities",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Confirmed slot identity",value:vslotDone,cls:"seg-accepted"},{label:"Unidentified slot",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slots have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies and inherited/reused slots are still counted as slots."},
-  {name:"Byte-map partition coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} leaf bytes across non-overlapping partitions`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much byte length of the partitioned byte-map surface is covered by known-like statuses.",uncertainty:`The denominator is byte-weighted over ${fmt(bmap.done+bmap.notDone)} resolved leaf partitions; overlapping parent rows do not inflate progress.`}
+  {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
  document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
   <div class="coverage-card ${d.openEnded?"open-ended":"closed"}">
