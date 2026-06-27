@@ -75,7 +75,7 @@ pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important
 </main>
 <script>
 let payload;
-const MAP_URLS=["zt-byte-range-map.tsv?v=b6e02f58365d","../docs/analysis/zt-byte-range-map.tsv?v=b6e02f58365d"];
+const MAP_URLS=["zt-byte-range-map.tsv?v=381c3522f26d","../docs/analysis/zt-byte-range-map.tsv?v=381c3522f26d"];
 async function fetchMap(urls){
  let lastError="";
  for(const url of urls){
@@ -154,6 +154,7 @@ const AUXILIARY_PROCESS_SPACES=new Set(["disk-child-e5","runtime-child-e5","disk
 const DISK_BACKING_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
 const ASSET_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
 const LINKED_PROJECTION_SPACES=new Set(["disk","runtime-parent","unwrapped","depeppered","stripped"]);
+const LINKED_STRUCTURAL_BUCKET_NAMES=new Set(["runtime memory","executable","PE header table"]);
 const MAX_XXD_BYTES=65536;
 function spaceLabel(space){return SPACE_LABELS[space]||space}
 function leafs(n,out=[]){if(n.children?.length)n.children.forEach(c=>leafs(c,out));else out.push(n);return out}
@@ -680,10 +681,11 @@ function makeExplorer(space,tree){const root=createPane(space),axis=root.dataset
  const displayLayout=kids=>zoomedRows(kids);
  const pathToAddress=(node,addr,path=[])=>{if(!containsAddr(node,addr))return null;const next=[...path,node],child=(node.children||[]).find(c=>containsAddr(c,addr));return child?pathToAddress(child,addr,next):next};
  const pathToRange=(node,target,path=[])=>{if(target.start<node.start||node.end<target.end)return null;const next=[...path,node],kids=node.children||[],exact=kids.find(c=>c.start===target.start&&c.end===target.end&&c.name===target.name)||kids.find(c=>c.start===target.start&&c.end===target.end),child=exact||kids.find(c=>c.start<=target.start&&target.end<=c.end);return child?pathToRange(child,target,next):next};
+ const findByName=(node,name)=>node.name===name?node:(node.children||[]).map(child=>findByName(child,name)).find(Boolean)||null;
  const visualAxisValue=(n,parent)=>axisValue(n,axis);
  const visualAxisLabel=(n,parent,value=visualAxisValue(n,parent))=>axisLabel(n,axis,value);
  function cls(n,tiny,parent){const status=visualAxisValue(n,parent);return `seg ${status} ${legendDimClass(status)} ${n.implicit?"implicit-gap":""} ${n.children?.length?"clickable":""} ${tiny?"tiny":""}`}
- function drawTop(container,parent,kids){container.innerHTML="";const frag=document.createDocumentFragment();for(const item of displayLayout(kids)){const k=item.node,w=item.width*100,shownSize=displaySize(k),shownAxis=visualAxisValue(k,parent),shownAxisLabel=visualAxisLabel(k,parent,shownAxis),el=document.createElement("section");el.className=cls(k,w<5,parent);el.style.left=(item.left*100)+"%";el.style.width=w+"%";el.title=`${k.name}\n${rangeText(k)}\nknowledge: ${shownAxisLabel}${detailsText(k)}\n${size(shownSize)}`;el.innerHTML=`<div class="label">${k.name}</div><div class="range">${rangeText(k)} · ${shownAxisLabel} · ${size(shownSize)}</div>`;el.onclick=()=>{if(k.children?.length){api.focusRange(k);syncLinkedProjections(api,peer=>{const target=linkedRangeForPeer(api.space,peer.space,k);if(target)peer.focusRange(target)})}else openXxd(k)};frag.appendChild(el)}container.appendChild(frag)}
+ function drawTop(container,parent,kids){container.innerHTML="";const frag=document.createDocumentFragment();for(const item of displayLayout(kids)){const k=item.node,w=item.width*100,shownSize=displaySize(k),shownAxis=visualAxisValue(k,parent),shownAxisLabel=visualAxisLabel(k,parent,shownAxis),el=document.createElement("section");el.className=cls(k,w<5,parent);el.style.left=(item.left*100)+"%";el.style.width=w+"%";el.title=`${k.name}\n${rangeText(k)}\nknowledge: ${shownAxisLabel}${detailsText(k)}\n${size(shownSize)}`;el.innerHTML=`<div class="label">${k.name}</div><div class="range">${rangeText(k)} · ${shownAxisLabel} · ${size(shownSize)}</div>`;el.onclick=()=>{if(k.children?.length){api.focusRange(k);syncLinkedProjections(api,peer=>peer.focusLinkedRange(api.space,k))}else openXxd(k)};frag.appendChild(el)}container.appendChild(frag)}
  function drawByteNode(ctx,node,left,width,h,clipStart=0,clipEnd=1){
   if(node.children?.length){
    for(const row of clippedRows(node.children,clipStart,clipEnd))drawByteNode(ctx,row.node,left+row.left*width,row.width*width,h,row.clipStart,row.clipEnd);
@@ -737,10 +739,16 @@ function makeExplorer(space,tree){const root=createPane(space),axis=root.dataset
   render();
   return true;
  }
+ function focusLinkedRange(sourceSpace,target){
+  const named=LINKED_STRUCTURAL_BUCKET_NAMES.has(target.name)?findByName(viewRoot,target.name):null;
+  if(named)return focusRange(named);
+  const mapped=linkedRangeForPeer(sourceSpace,space,target);
+  return mapped?focusRange(mapped):false;
+ }
  function localBack(){if(stack.length>1){stack.pop();resetZoom();render();return true}return false}
  function render(){const node=stack.at(-1),kids=node.children?.length?node.children:[node],shownAxis=axisValue(node,axis),zoomLabel=zoomEnd-zoomStart<.999?`  zoom ${(1/(zoomEnd-zoomStart)).toFixed(1)}x`:"";root.hidden=(hideAssets&&isAssetSpace(space))||(hideAuxiliary&&isAuxiliaryProcessSpace(space));if(root.hidden)return;title.textContent=`${node.name}  ${rangeText(node)}  ${axisLabel(node,axis,shownAxis)}  ${size(displaySize(node))}${zoomLabel}`;back.disabled=stack.length===1;drawTop(bar,node,kids);drawBytes(bytebar)}
  function findReplacement(node,newParent){return (newParent.children||[]).find(candidate=>candidate.start===node.start&&candidate.end===node.end&&candidate.name===node.name)||(newParent.children||[]).find(candidate=>candidate.start<=node.start&&node.end<=candidate.end)||newParent}
- api={space,render,focusRange,setZoomRange(start,span){setZoom(start,span);render()},jumpToAddress,backLocal:localBack,root(){stack.length=1;resetZoom();render()},setScale(v){logScale=v;resetZoom();render();updateCommonControls()},scale(){return logScale},setHidden(v){hideOmitted=v;resetZoom();render();updateCommonControls()},hidden(){return hideOmitted},setAssetHidden(v){hideAssets=v;if(hideAssets&&stack.some(isAsset)){stack.length=1}resetZoom();render();updateCommonControls()},assetHidden(){return hideAssets},setAuxiliaryHidden(v){hideAuxiliary=v;resetZoom();render();updateCommonControls()},auxiliaryHidden(){return hideAuxiliary},replaceTree(tree){const oldStack=stack.slice(1);viewRoot.start=tree.start;viewRoot.end=tree.end;viewRoot.children=[tree];stack.length=1;let parent=viewRoot;for(const oldNode of oldStack){const replacement=findReplacement(oldNode,parent);if(replacement===parent)break;stack.push(replacement);parent=replacement}setZoom(zoomStart,zoomEnd-zoomStart);render()}};
+ api={space,render,focusRange,focusLinkedRange,setZoomRange(start,span){setZoom(start,span);render()},jumpToAddress,backLocal:localBack,root(){stack.length=1;resetZoom();render()},setScale(v){logScale=v;resetZoom();render();updateCommonControls()},scale(){return logScale},setHidden(v){hideOmitted=v;resetZoom();render();updateCommonControls()},hidden(){return hideOmitted},setAssetHidden(v){hideAssets=v;if(hideAssets&&stack.some(isAsset)){stack.length=1}resetZoom();render();updateCommonControls()},assetHidden(){return hideAssets},setAuxiliaryHidden(v){hideAuxiliary=v;resetZoom();render();updateCommonControls()},auxiliaryHidden(){return hideAuxiliary},replaceTree(tree){const oldStack=stack.slice(1);viewRoot.start=tree.start;viewRoot.end=tree.end;viewRoot.children=[tree];stack.length=1;let parent=viewRoot;for(const oldNode of oldStack){const replacement=findReplacement(oldNode,parent);if(replacement===parent)break;stack.push(replacement);parent=replacement}setZoom(zoomStart,zoomEnd-zoomStart);render()}};
  function goBack(){if(localBack())syncLinkedProjections(api,peer=>peer.backLocal())}
  function rightClickBack(event){event.preventDefault();goBack()}
  back.onclick=goBack;bar.addEventListener("contextmenu",rightClickBack);bytebar.addEventListener("contextmenu",rightClickBack);bar.addEventListener("wheel",wheelMove,{passive:false});bytebar.addEventListener("wheel",wheelMove,{passive:false});bar.addEventListener("mousedown",startPan);bytebar.addEventListener("mousedown",startPan);document.addEventListener("mousemove",movePan);document.addEventListener("mouseup",endPan);jump.onsubmit=event=>{event.preventDefault();const addr=parseJumpAddr(jumpInput.value);if(!Number.isFinite(addr)||!jumpToAddress(addr)){jumpInput.classList.add("invalid");return}syncLinkedProjections(api,peer=>{const target=linkedAddressForPeer(api.space,peer.space,addr);if(target!==null)peer.jumpToAddress(target)})};jumpInput.oninput=()=>jumpInput.classList.remove("invalid");explorers.push(api);render();updateCommonControls()}
