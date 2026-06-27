@@ -10131,7 +10131,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aa5ae	45	get_or_register_bf_safe_handle_base_type			confirmed	gamebryo		
 0x005aa5db	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008bfbac#1	ui
 0x005aa5e0	45	get_or_register_bf_safe_handled_obj_type			confirmed	gamebryo		
-0x005aa60d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008d83c0#50	ui
+0x005aa60d	0	get_type_BFSafeHandledObj_vtable_thunk			confirmed		0x008d83c0#50	
 0x005aa612	88		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005aa66a	91		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005aa6c5	234		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -11703,7 +11703,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f15b8	0		BFAIEntityData prelude and randomized float-property support		unidentified		0x008e77d0#19	game-entities
 0x005f17d5	0		BFAIEntityData prelude and randomized float-property support		unidentified		0x008e77d0#20	game-entities
 0x005f199e	47	get_type_BFAIEntityData			confirmed	gamebryo		
-0x005f19cd	0		BFAIEntityData prelude and randomized float-property support		unidentified		0x008e77d0#25	game-entities
+0x005f19cd	0	get_type_BFAIEntityData_vtable_thunk			confirmed		0x008e77d0#25	
 0x005f19d2	32		BFAIEntityData prelude and randomized float-property support		unidentified	gamebryo		game-entities
 0x005f19f2	0		BFAIEntityData prelude and randomized float-property support		unidentified		0x008e77d0#26	game-entities
 0x005f19f7	68		BFAIEntityData prelude and randomized float-property support		unidentified	gamebryo		game-entities
@@ -11780,7 +11780,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f3d35	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e77d0#0	ui
 0x005f3d50	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#20	ui
 0x005f3d55	47	get_type_BFAIBiomeMap			confirmed	gamebryo		
-0x005f3d84	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#25	ui
+0x005f3d84	0	get_type_BFAIBiomeMap_vtable_thunk			confirmed		0x008e78d0#25	
 0x005f3d89	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005f3da9	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#26	ui
 0x005f3dae	38		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -11788,7 +11788,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f3e40	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#47	ui
 0x005f3f09	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#24	ui
 0x005f3f31	47	get_type_BFAIAttributeData			confirmed	gamebryo		
-0x005f3f60	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#49	ui
+0x005f3f60	0	get_type_BFAIAttributeData_vtable_thunk			confirmed		0x008e78d0#49	
 0x005f3f65	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005f3f85	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#50	ui
 0x005f3f8a	38		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -12285,7 +12285,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00604875	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#21	ui
 0x00604891	214		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00604967	47	get_type_BFAICreateData			confirmed	gamebryo		
-0x00604996	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#35	ui
+0x00604996	0	get_type_BFAICreateData_vtable_thunk			confirmed		0x008e89d8#35	
 0x0060499b	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x006049bb	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#36	ui
 0x006049c0	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#34	ui
@@ -12371,7 +12371,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00607cde	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#21	ui
 0x00607e80	24		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00607e98	47	get_type_BFAICompletionData			confirmed	gamebryo		
-0x00607ec7	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#30	ui
+0x00607ec7	0	get_type_BFAICompletionData_vtable_thunk			confirmed		0x008e8c34#30	
 0x00607ecc	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00607eec	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#31	ui
 0x00607ef1	59		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -12379,7 +12379,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00607f47	101		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00607fac	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#49	ui
 0x0060821d	47	get_type_BFAIFailureData			confirmed	gamebryo		
-0x0060824c	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#52	ui
+0x0060824c	0	get_type_BFAIFailureData_vtable_thunk			confirmed		0x008e8c34#52	
 0x00608251	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00608271	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#53	ui
 0x00608276	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8c34#51	ui
@@ -15144,7 +15144,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0065e451	164		UI hover/animation registration and interpolation helpers		unidentified	gamebryo		ui
 0x0065e4f5	138		UI hover/animation registration and interpolation helpers		unidentified	gamebryo		ui
 0x0065e57f	45	get_type_UIAnimation			confirmed	gamebryo		
-0x0065e5ac	0		UI hover/animation registration and interpolation helpers		unidentified		0x008f1a40#3	ui
+0x0065e5ac	0	get_type_UIAnimation_vtable_thunk			confirmed		0x008f1a40#3	
 0x0065e5b1	123		UI hover/animation registration and interpolation helpers		unidentified	gamebryo		ui
 0x0065e62c	36		UI hover/animation registration and interpolation helpers		unidentified	gamebryo		ui
 0x0065e650	1339		UI hover/animation registration and interpolation helpers		unidentified	gamebryo		ui
@@ -19620,7 +19620,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006fe3bf	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9e68#6	economy
 0x006fe3db	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9e68#9	economy
 0x006fe3f2	47	get_type_BFGEntityFittingSurface			confirmed	gamebryo		
-0x006fe421	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9e68#2	economy
+0x006fe421	0	get_type_BFGEntityFittingSurface_vtable_thunk			confirmed		0x008f9e68#2	
 0x006fe426	74		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006fe470	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9e68#1	economy
 0x006fe494	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9e68#3	economy
@@ -22976,7 +22976,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0079bf75	52		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079bfa9	23		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079bfc0	45	get_type_BFAnimController			confirmed	gamebryo		
-0x0079bfed	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00901974#1	renderer
+0x0079bfed	0	get_type_BFAnimController_vtable_thunk			confirmed		0x00901974#1	
 0x0079bff2	14		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079c000	53		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079c035	127		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
@@ -23948,7 +23948,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c4c9a	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903790#16	ui
 0x007c4cb5	36		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c4cd9	47	get_type_BFNodeTCBPosAnimController			confirmed	gamebryo		
-0x007c4d08	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903800#1	ui
+0x007c4d08	0	get_type_BFNodeTCBPosAnimController_vtable_thunk			confirmed		0x00903800#1	
 0x007c4d0d	553		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c4f36	1537		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5537	16		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
@@ -23958,7 +23958,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c574f	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903800#2	ui
 0x007c5781	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x008bf7e0#15	ui
 0x007c5784	47	get_type_BFNodeTCBRotAnimController			confirmed	gamebryo		
-0x007c57b3	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903848#1	ui
+0x007c57b3	0	get_type_BFNodeTCBRotAnimController_vtable_thunk			confirmed		0x00903848#1	
 0x007c57b8	887		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5b2f	279		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5c46	173		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
@@ -23970,17 +23970,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c5e7d	22		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5e93	54		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5ec9	47	get_type_BFNodeBezierScaleAnimController			confirmed	gamebryo		
-0x007c5ef8	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903890#2	ui
+0x007c5ef8	0	get_type_BFNodeBezierScaleAnimController_vtable_thunk			confirmed		0x00903890#2	
 0x007c5efd	231		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c5fe4	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903890#8	ui
 0x007c6024	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903890#1	ui
 0x007c6045	47	get_type_BFNodeBezierPosAnimController			confirmed	gamebryo		
-0x007c6074	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009038e0#1	ui
+0x007c6074	0	get_type_BFNodeBezierPosAnimController_vtable_thunk			confirmed		0x009038e0#1	
 0x007c6079	755		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c636c	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009038e0#7	ui
 0x007c63b9	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009038e0#0	ui
 0x007c63da	47	get_type_BFNodeBezierRotAnimController			confirmed	gamebryo		
-0x007c6409	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x0090392c#1	ui
+0x007c6409	0	get_type_BFNodeBezierRotAnimController_vtable_thunk			confirmed		0x0090392c#1	
 0x007c640e	229		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c64f3	328		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c663b	15		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
@@ -23990,20 +23990,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c67b3	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x0090392c#2	ui
 0x007c67e5	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x008bf7e0#21	ui
 0x007c67e8	47	get_type_BFNodePosAnimController			confirmed	gamebryo		
-0x007c6817	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x0090396c#2	ui
+0x007c6817	0	get_type_BFNodePosAnimController_vtable_thunk			confirmed		0x0090396c#2	
 0x007c681c	87		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6873	171		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c691e	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x0090396c#8	ui
 0x007c696f	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x0090396c#1	ui
 0x007c6990	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903890#3	ui
 0x007c6995	47	get_type_BFNodeRotAnimController			confirmed	gamebryo		
-0x007c69c4	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009039b0#2	ui
+0x007c69c4	0	get_type_BFNodeRotAnimController_vtable_thunk			confirmed		0x009039b0#2	
 0x007c69c9	137		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6a52	98		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6ab4	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009039b0#8	ui
 0x007c6b07	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009039b0#1	ui
 0x007c6b28	47	get_type_BFNodeLinearEulerRotAnimController			confirmed	gamebryo		
-0x007c6b57	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a04#1	ui
+0x007c6b57	0	get_type_BFNodeLinearEulerRotAnimController_vtable_thunk			confirmed		0x00903a04#1	
 0x007c6b5c	53		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6b91	174		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6c3f	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a04#7	ui
@@ -24012,13 +24012,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c6cf6	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a04#0	ui
 0x007c6d17	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a04#11	ui
 0x007c6d39	47	get_type_BFNodeLinearScaleAnimController			confirmed	gamebryo		
-0x007c6d68	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a50#2	ui
+0x007c6d68	0	get_type_BFNodeLinearScaleAnimController_vtable_thunk			confirmed		0x00903a50#2	
 0x007c6d6d	43		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6d98	65		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6dd9	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a50#8	ui
 0x007c6e17	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903a50#1	ui
 0x007c6e38	47	get_type_BFNodeBezierEulerRotAnimController			confirmed	gamebryo		
-0x007c6e67	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903aa4#1	ui
+0x007c6e67	0	get_type_BFNodeBezierEulerRotAnimController_vtable_thunk			confirmed		0x00903aa4#1	
 0x007c6e6c	354		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007c6fce	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00903aa4#7	ui
 0x007c7033	29		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
