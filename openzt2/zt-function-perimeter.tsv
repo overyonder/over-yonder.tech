@@ -1037,7 +1037,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0043a20f	140	show_ZTMainMode_wait_cursor	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#179	ui(medium)
 0x0043a2a9	115	handle_ZTMainMode_confirm_exit_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#206	ui(medium)
 0x0043a31c	53	handle_ZTMainMode_set_binderroot_reloadable_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#208	ui(medium)
-0x0043a351	740	emit_run_script_payload			candidate		0x008c47d8#209	
+0x0043a351	740	emit_run_script_payload			confirmed		0x008c47d8#209	
 0x0043a635	175	handle_ZTMainMode_setmode_value	scenario, campaign, map-selection UI, and mode registry		confirmed		0x008c47d8#182	ui(high)
 0x0043a70f	870	handle_tutorial_prompt			confirmed			
 0x0043aa75	109	bind_ZTMainMode_main_menu_event_receiver	scenario and campaign UI value handler registry tail		confirmed			ui(high)
@@ -1061,9 +1061,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0043f097	959	read_campaign_scenario_entry			confirmed		0x008c47d8#212	
 0x0043f456	519	read_expansion_install_info			confirmed			
 0x0043f65d	261	run_customer_feedback_layout_modal_until_answered	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
-0x0043f762	122	handle_accept_logging			candidate			
-0x0043f7dc	121	handle_decline_logging			candidate			
-0x0043f855	77	handle_vince_question_answered			candidate			
+0x0043f762	122	handle_accept_logging			confirmed			
+0x0043f7dc	121	handle_decline_logging			confirmed			
+0x0043f855	77	handle_vince_question_answered			confirmed			
 0x0043f8a2	101	append_refcounted_pointer_to_vector			confirmed			
 0x0043f907	59	clear_refcounted_pointer_vector			confirmed			
 0x0043f942	32	advance_checked_16byte_vector_iterator	scenario, campaign, map-selection UI, and mode registry		confirmed			ui(high)
@@ -1128,9 +1128,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044154c	250		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00441646	56		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
 0x0044167e	68		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c0a10#14	ui(high)
-0x004416c2	93	handle_activate_on_ui_button			candidate			
+0x004416c2	93	handle_activate_on_ui_button			confirmed			
 0x0044171f	227		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008bf7e0#165	ui(high)
-0x00441802	172	handle_blit			candidate			
+0x00441802	172	handle_blit			confirmed			
 0x004418ae	205		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008bf7e0#172	ui(high)
 0x0044197b	77		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008bf7e0#173	ui(medium)
 0x004419c8	154		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008bf7e0#174	ui(high)
@@ -1156,10 +1156,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004426dc	81		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044272d	147		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x004427c0	44		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x004427ec	230	emit_camera_position_payload			candidate			
+0x004427ec	230	emit_camera_position_payload			confirmed			
 0x004428d2	165		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00442977	75		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x00442afc	342	handle_activate_mode_help			candidate			
+0x00442afc	342	handle_activate_mode_help			confirmed			
 0x00442c6d	151		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00442d04	130		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00442dcd	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
@@ -1205,7 +1205,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00444297	171		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#27	ui(high)
 0x00444342	374		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#14	ui(high)
 0x004444cf	910	setup_transportation_tool_tab			confirmed		0x008c5200#138	
-0x004448d6	816	emit_set_selected_entity_payload			candidate		0x008c5200#176	
+0x004448d6	816	emit_set_selected_entity_payload			confirmed		0x008c5200#176	
 0x00444c06	791	register_game_mode_tokens			confirmed		0x008c5200#177	
 0x00444f1d	104		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#178	ui(high)
 0x00444fa2	771		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#180	ui(high)
@@ -1247,10 +1247,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00446cc5	1328		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00447215	459		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00447437	80		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x004474b7	114	handle_undoaction			candidate			
-0x00447529	97	handle_prepare_undo			candidate			
-0x0044758a	227	handle_setplacementpath			candidate			
-0x0044766d	78	handle_setworldposofmouse			candidate			
+0x004474b7	114	handle_undoaction			confirmed			
+0x00447529	97	handle_prepare_undo			confirmed			
+0x0044758a	227	handle_setplacementpath			confirmed			
+0x0044766d	78	handle_setworldposofmouse			confirmed			
 0x004476bb	242		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c55b0#20	ui(medium)
 0x004477ad	108		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00447819	1038		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
@@ -1312,7 +1312,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044aed9	282		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#187	ui(medium)
 0x0044aff3	401		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044b184	155		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#174	ui(high)
-0x0044b21f	65	handle_confirm_entity_placement			candidate			
+0x0044b21f	65	handle_confirm_entity_placement			confirmed			
 0x0044b260	1722	handle_placement_mode_transition			confirmed		0x008c5968#183	
 0x0044b91a	251		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044ba15	57		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#182	ui(high)
@@ -1320,12 +1320,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044baf1	200		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#20	ui(high)
 0x0044bbb9	278		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#193	ui(medium)
 0x0044bccf	442		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
-0x0044be89	386	emit_setplacementobject_payload			candidate			
+0x0044be89	386	emit_setplacementobject_payload			confirmed			
 0x0044c00b	162		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#192	ui(high)
 0x0044c0ad	284		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#154	ui(high)
 0x0044c1c9	138		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#190	ui(high)
 0x0044c253	241		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#194	ui(high)
-0x0044c344	226	handle_is_type_on_cursor			candidate			
+0x0044c344	226	handle_is_type_on_cursor			confirmed			
 0x0044c426	40		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#153	ui(medium)
 0x0044c44e	528		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#14	ui(high)
 0x0044c68a	131		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#196	ui(high)
@@ -1343,7 +1343,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044cad3	225		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x0044cbcf	35		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
 0x0044cbf2	300		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5d14#139	ui(high)
-0x0044cd4c	806	emit_setloadname_payload			candidate			
+0x0044cd4c	806	emit_setloadname_payload			confirmed			
 0x0044d072	317		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5d14#178	ui(high)
 0x0044d1af	1411	handle_save_game_dialog			confirmed		0x008c5d14#179	
 0x0044d732	135		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5d14#180	ui(high)
@@ -1376,7 +1376,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044f36c	75		entity selection and entity information panels		unidentified		0x008c04b0#197	ui(medium)
 0x0044f3b7	160		entity selection and entity information panels		unidentified		0x008c04b0#198	ui(high)
 0x0044f457	150		entity selection and entity information panels		unidentified		0x008c04b0#199	ui(high)
-0x0044f4ed	1102	emit_crate_entity_payload			candidate		0x008c04b0#183	
+0x0044f4ed	1102	emit_crate_entity_payload			confirmed		0x008c04b0#183	
 0x0044f93b	258		entity selection and entity information panels		unidentified		0x008c04b0#184	ui(medium)
 0x0044fa3d	754		entity selection and entity information panels		unidentified			ui(high)
 0x0044fd2f	334		entity selection and entity information panels		unidentified			ui(medium)
@@ -1384,9 +1384,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00450324	135		entity selection and entity information panels		unidentified		0x008c04b0#26	ui(high)
 0x004503ab	221		entity selection and entity information panels		unidentified		0x008c04b0#27	ui(high)
 0x00450488	173		entity selection and entity information panels		unidentified		0x008c8708#154	ui(high)
-0x00450535	195	emit_userclicked_clickableobj_payload			candidate			
+0x00450535	195	emit_userclicked_clickableobj_payload			confirmed			
 0x004505f8	124		entity selection and entity information panels		unidentified			ui(high)
-0x00450674	583	emit_user_dragging_off_payload			candidate			
+0x00450674	583	emit_user_dragging_off_payload			confirmed			
 0x004508bb	230	emit_user_dragging_payload			candidate			
 0x004509d8	434	emit_mouselook_payload			candidate		0x008c8708#150	
 0x00450b8a	437	emit_eventcaptured_payload			candidate		0x008c8708#153	
