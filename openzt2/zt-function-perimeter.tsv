@@ -8774,30 +8774,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005986cb	0	NiObjectNET_graph_compare_vtable_thunk			confirmed		0x008d788c#7	
 0x005986d0	64	emit_named_object_record_to_resource_table			confirmed	gamebryo	0x008e1e74#8	
 0x00598710	45	init_embedded_resource_stream_context			confirmed	gamebryo		
-0x0059873d	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2a80#0	io/assets
+0x0059873d	0	scalar_delete_embedded_resource_stream_context			confirmed		0x008e2a80#0	
 0x00598758	55	destroy_embedded_resource_stream_context			confirmed	gamebryo		
-0x0059878f	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2a80#1	io/assets
-0x00598822	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2a80#2	io/assets
-0x005988aa	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2a80#3	io/assets
+0x0059878f	0	forward_embedded_resource_context_slot3c_with_stack_payload			confirmed		0x008e2a80#1	
+0x00598822	0	forward_embedded_resource_context_slot38_with_stack_payload			confirmed		0x008e2a80#2	
+0x005988aa	0	compare_resource_pair_fields_adapter			confirmed		0x008e2a80#3	
 0x005988ba	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2a80#4	io/assets
 0x005989b4	131	clone_resource_path_with_optional_base_directory			confirmed	gamebryo		
 0x00598a37	45	assign_global_refcounted_resource_default			confirmed	gamebryo		
 0x00598a64	22	compare_resource_pair_fields_18_1c			confirmed	gamebryo		
-0x00598a7a	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#0	io/assets
+0x00598a7a	0	scalar_delete_NiRenderer			confirmed		0x008e2aa0#0	
 0x00598a95	48	destroy_resource_observer_ref_record			confirmed	gamebryo		
 0x00598ac5	121	map_resource_pixel_to_unit_uv			confirmed	gamebryo		
-0x00598b3e	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#43	io/assets
-0x00598b4f	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#45	io/assets
-0x00598ba5	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#46	io/assets
-0x00598bfb	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#42	io/assets
-0x00598c05	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#8	io/assets
-0x00598c45	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#37	io/assets
-0x00598c4a	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#31	io/assets
-0x00598c4d	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#21	io/assets
+0x00598b3e	0	set_NiRenderer_ref_fields_10_14			confirmed		0x008e2aa0#43	
+0x00598b4f	0	copy_source_spatial_refs_then_dispatch_slot_c8			confirmed		0x008e2aa0#45	
+0x00598ba5	0	copy_source_spatial_refs_then_dispatch_slot_cc			confirmed		0x008e2aa0#46	
+0x00598bfb	0	clear_renderer_output_dword_ret8			confirmed		0x008e2aa0#42	
+0x00598c05	0	stream_NiRenderer_viewer_strings			confirmed		0x008e2aa0#8	
+0x00598c45	0	return_false_ret18			confirmed		0x008e2aa0#37	
+0x00598c4a	0	return_unit_float			confirmed		0x008e2aa0#31	
+0x00598c4d	0	return_true_when_byte_argument_zero			confirmed		0x008e2aa0#21	
 0x00598c59	0	return_false_stub			confirmed		0x008bf7e0#6	
-0x00598c5e	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2aa0#1	io/assets
+0x00598c5e	0	get_NiRenderer_rtti			confirmed		0x008e2aa0#1	
 0x00598c64	99	init_spatial_node_child_list_record			confirmed	gamebryo		
-0x00598cc7	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e2bd8#0	io/assets
+0x00598cc7	0	scalar_delete_NiDynamicEffect			confirmed		0x008e2bd8#0	
 0x00598ce2	0		object registry stream version and Ni geometry serialization hel		unidentified		0x008e1fa0#0	io/assets
 0x00598cfd	118	destroy_spatial_node_child_list_record			confirmed	gamebryo		
 0x00598d73	87	link_child_node_to_spatial_record			confirmed	gamebryo		
@@ -8875,7 +8875,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059b052	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#18	io/assets
 0x0059b08e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#19	io/assets
 0x0059b0cc	391		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#3	io/assets
-0x0059b253	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2a40#5	io/assets
+0x0059b253	0	register_NiObject_streamable_self			confirmed		0x008e2a40#5	
 0x0059b260	150		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#6	io/assets
 0x0059b2f6	51		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#7	io/assets
 0x0059b329	162		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#8	io/assets
@@ -8956,17 +8956,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059c722	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3840#13	io/assets
 0x0059c73b	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3840#14	io/assets
 0x0059c789	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3840#15	io/assets
-0x0059c7e3	62		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059c821	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#0	io/assets
-0x0059c83c	69		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059c881	349		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3880#14	io/assets
-0x0059c9de	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#16	io/assets
+0x0059c7e3	62	construct_NiAlphaAccumulator_base			confirmed	gamebryo		
+0x0059c821	0	scalar_delete_NiAlphaAccumulator			confirmed		0x008e3880#0	
+0x0059c83c	69	destroy_NiAlphaAccumulator_base			confirmed	gamebryo		
+0x0059c881	349	flush_NiAlphaAccumulator_queue			confirmed	gamebryo	0x008e3880#14	
+0x0059c9de	0	sort_NiAccumulator_entries_by_depth			confirmed		0x008e3880#16	
 0x0059cb07	200		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
 0x0059cbcf	139		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059cc5a	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#2	io/assets
-0x0059cc9f	17		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3880#7	io/assets
-0x0059ccb0	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#15	io/assets
-0x0059cd07	48		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059cc5a	0	clone_NiAlphaAccumulator			confirmed		0x008e3880#2	
+0x0059cc9f	17	compare_NiAccumulator_base_object			confirmed	gamebryo	0x008e3880#7	
+0x0059ccb0	0	queue_NiAccumulator_object_if_visible			confirmed		0x008e3880#15	
+0x0059cd07	48	append_NiAccumulator_list_node			confirmed	gamebryo		
 0x0059cd37	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#1	io/assets
 0x0059cd3d	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e38c8#1	io/assets
 0x0059cd43	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e38c8#0	io/assets
@@ -9320,7 +9320,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a527d	94		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#12	io/assets
 0x005a52db	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e49e8#1	io/assets
 0x005a52e1	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#15	io/assets
-0x005a5529	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3880#13	io/assets
+0x005a5529	0	set_NiAccumulator_context_once			confirmed		0x008e3880#13	
 0x005a553f	147		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
 0x005a55d2	36		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
 0x005a55f6	83		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
@@ -13871,29 +13871,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0065006c	0		UI event/modal list and container plumbing		unidentified		0x008d71a0#6	ui
 0x00650072	0		UI event/modal list and container plumbing		unidentified		0x00907090#4	ui
 0x00650081	0		UI event/modal list and container plumbing		unidentified		0x008ef530#42	ui
-0x006500bb	65		UI event/modal list and container plumbing		unidentified	gamebryo		ui
+0x006500bb	65	construct_wait_cursor_guard_and_refresh_preview			confirmed	gamebryo		
 0x006500fc	61	destroy_wait_cursor_guard_and_refresh_preview			confirmed	gamebryo		
-0x00650139	203		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650204	48		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650234	116		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x006502a8	62		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x006502e6	31		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650305	160		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x006503a5	116		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650419	0		UI event/modal list and container plumbing		unidentified		0x008ef5f0#2	ui
-0x00650434	153		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650514	371		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650687	156		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650723	87		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x0065077a	213		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x0065084f	175		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x006508fe	396		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650a8a	50		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650abc	160		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650b5c	677		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650e01	75		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650e4c	117		UI event/modal list and container plumbing		unidentified	gamebryo		ui
-0x00650ec1	0		UI event/modal list and container plumbing		unidentified		0x008ef5e4#0	ui
+0x00650139	203	get_or_insert_ui_event_value_tree_payload			confirmed	gamebryo		
+0x00650204	48	clear_ui_event_value_tree_and_free_header			confirmed	gamebryo		
+0x00650234	116	count_ui_event_value_tree_entries_for_key			confirmed	gamebryo		
+0x006502a8	62	clear_ui_assignment_list_and_free_header			confirmed	gamebryo		
+0x006502e6	31	get_first_ui_assignment_list_payload			confirmed	gamebryo		
+0x00650305	160	erase_ui_assignment_list_entries_matching_value			confirmed	gamebryo		
+0x006503a5	116	count_flag15_tree_entries_for_key			confirmed	gamebryo		
+0x00650419	0	allocate_and_construct_ui_container_0x1a4			confirmed		0x008ef5f0#2	
+0x00650434	153	append_unique_global_ui_type_handler_record			confirmed	gamebryo		
+0x006504cd	0	clear_global_ui_type_handler_record_list			confirmed			
+0x00650514	371	insert_or_find_ui_event_value_tree_node			confirmed	gamebryo		
+0x00650687	156	insert_ui_assignment_list_node			confirmed	gamebryo		
+0x00650723	87	erase_ui_assignment_list_node_and_return_next			confirmed	gamebryo		
+0x0065077a	213	find_or_insert_ui_event_value_tree_node			confirmed	gamebryo		
+0x0065084f	175	erase_ui_event_value_tree_range			confirmed	gamebryo		
+0x006508fe	396	insert_ui_event_value_tree_node			confirmed	gamebryo		
+0x00650a8a	50	lower_bound_ui_event_value_tree_key			confirmed	gamebryo		
+0x00650abc	160	append_global_ui_type_handler_record			confirmed	gamebryo		
+0x00650b5c	677	erase_ui_event_value_tree_node			confirmed	gamebryo		
+0x00650e01	75	destroy_ui_event_value_tree_nodes			confirmed	gamebryo		
+0x00650e4c	117	append_global_ui_type_handler_records_from_list			confirmed	gamebryo		
+0x00650ec1	0	adjust_this_and_scalar_delete_UIRoot			confirmed		0x008ef5e4#0	
 0x00650ecc	47	get_type_UIListBox			confirmed	gamebryo		
 0x00650efb	0		UIListBox and balance-sheet graph widget setup		unidentified		0x008ef6a0#1	ui
 0x00650f00	32	init_UIListBox_descriptor_ref			confirmed	gamebryo		
@@ -21558,7 +21559,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0079e64a	37		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079e66f	0		BFUIRenderer and renderer/presentation support span		unidentified		0x009019d8#14	renderer
 0x0079e7d0	0		BFUIRenderer and renderer/presentation support span		unidentified		0x009019d8#2	renderer
-0x0079e7fa	0		BFUIRenderer and renderer/presentation support span		unidentified		0x008e3880#6	renderer
+0x0079e7fa	0	save_NiObject_reference_index_vtable_thunk			confirmed		0x008e3880#6	
 0x0079e7ff	0		BFUIRenderer and renderer/presentation support span		unidentified		0x009019d8#7	renderer
 0x0079e810	49		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079e841	96		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
@@ -21570,7 +21571,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0079ebfc	34		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079ec1e	74		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079ec68	35		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
-0x0079ec8b	89		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo	0x00903af8#13	renderer
+0x0079ec8b	89	queue_NiTextureAccumulator_source_texture			confirmed	gamebryo	0x00903af8#13	
 0x0079ece4	197		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079eda9	299		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x0079eed4	773		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
@@ -27282,20 +27283,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00880530	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008fe218#8	game-entities
 0x00880591	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008fe218#9	game-entities
 0x008805ef	811		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881ad6	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00913858#1	game-entities
-0x00881adc	95		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881b3b	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00913858#0	game-entities
-0x00881b56	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0091389c#0	game-entities
-0x00881b71	56		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881ba9	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00913858#2	game-entities
-0x00881be3	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00913858#14	game-entities
-0x00881c14	252		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881d10	76		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881d5c	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008e3880#3	game-entities
-0x00881d61	17		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00913858#7	game-entities
-0x00881d72	49		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00881da3	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008f3db8#5	game-entities
-0x00881daf	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008f3db8#6	game-entities
+0x00881ad6	0	get_NiTextureAccumulator_rtti			confirmed		0x00913858#1	
+0x00881adc	95	construct_NiTextureAccumulator			confirmed			
+0x00881b3b	0	scalar_delete_NiTextureAccumulator			confirmed		0x00913858#0	
+0x00881b56	0	scalar_delete_NiTextureAccumulator_node_pool			confirmed		0x0091389c#0	
+0x00881b71	56	destroy_NiTextureAccumulator			confirmed			
+0x00881ba9	0	clone_NiTextureAccumulator			confirmed		0x00913858#2	
+0x00881be3	0	flush_NiTextureAccumulator_queue			confirmed		0x00913858#14	
+0x00881c14	252	queue_NiTextureAccumulator_bucket_node			confirmed			
+0x00881d10	76	pop_NiTextureAccumulator_bucket_node			confirmed			
+0x00881d5c	0	load_NiObject_reference_index_vtable_thunk			confirmed		0x008e3880#3	
+0x00881d61	17	compare_NiTextureAccumulator_base_object			confirmed		0x00913858#7	
+0x00881d72	49	destroy_NiTextureAccumulator_node_pool			confirmed			
+0x00881da3	0	allocate_NiTextureAccumulator_queue_node			confirmed		0x008f3db8#5	
+0x00881daf	0	free_NiTextureAccumulator_queue_node			confirmed		0x008f3db8#6	
 0x00881dc0	128		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x008822a3	85		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x008822f8	362		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
