@@ -8440,7 +8440,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057361f	3855		cross-domain type availability checker		unidentified			game-ai
 0x0057452e	47	get_type_ZTDevConsole			confirmed			
 0x0057455d	0		ZTDevConsole type registry and object helpers		unidentified		0x008dc7f8#1	scripting
-0x00574562	32		ZTDevConsole type registry and object helpers		unidentified			scripting
+0x00574562	32	init_ZTDevConsole_vtable_storage			confirmed			
 0x00574582	0		ZTDevConsole type registry and object helpers		unidentified		0x008dc7f8#2	scripting
 0x00574587	0		ZTDevConsole type registry and object helpers		unidentified		0x008dc7f8#22	scripting
 0x005745ae	0		ZTDevConsole type registry and object helpers		unidentified		0x008d1f30#0	scripting
@@ -10990,38 +10990,38 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bfa7a	16		file path reserved-name and recursive directory helpers		unidentified	gamebryo		world/pathing
 0x005bfa8a	27		file path reserved-name and recursive directory helpers		unidentified	gamebryo		world/pathing
 0x005bfaa5	47	get_type_BFScriptContextMgr			confirmed	gamebryo		
-0x005bfad4	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e63fc#2	scripting
-0x005bfad9	32		BFScriptContextMgr type registration and config lifecycle		unidentified	gamebryo		scripting
-0x005bfaf9	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e63fc#3	scripting
-0x005bfbf7	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e63fc#1	scripting
-0x005bfc12	227		BFScriptContextMgr type registration and config lifecycle		unidentified	gamebryo		scripting
-0x005bfcf5	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e63fc#24	scripting
-0x005bfd9f	61		script context lookup and script binding helpers		unidentified	gamebryo		scripting
-0x005bfddc	70		script context lookup and script binding helpers		unidentified	gamebryo		scripting
-0x005bfe22	211		script context lookup and script binding helpers		unidentified	gamebryo		scripting
-0x005bfef5	138		script context lookup and script binding helpers		unidentified	gamebryo		scripting
-0x005bff7f	90		script context lookup and script binding helpers		unidentified	gamebryo		scripting
-0x005bffd9	213		BFScriptContext createData/contextName binder helper		unidentified	gamebryo		scripting
-0x005c00ae	0		BFScriptContext createData/contextName binder helper		unidentified		0x008e63fc#26	scripting
-0x005c00c1	0		BFScriptContext createData/contextName binder helper		unidentified		0x008e63fc#22	scripting
+0x005bfad4	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e6400#1	scripting
+0x005bfad9	32	init_BFScriptContextMgr_vtable_storage			confirmed	gamebryo		
+0x005bfaf9	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e6400#2	scripting
+0x005bfbf7	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e6400#0	scripting
+0x005bfc12	227	destroy_BFScriptContextMgr			confirmed	gamebryo		
+0x005bfcf5	0		BFScriptContextMgr type registration and config lifecycle		unidentified		0x008e6400#23	scripting
+0x005bfd9f	61	bind_give_balloons_misc_script_context			confirmed	gamebryo		
+0x005bfddc	70	bind_script_context_by_name			confirmed	gamebryo		
+0x005bfe22	211	bind_script_context_data_payload			confirmed	gamebryo		
+0x005bfef5	138	find_script_context_by_name			confirmed	gamebryo		
+0x005bff7f	90	lookup_or_create_script_context			confirmed	gamebryo		
+0x005bffd9	213	create_script_context_from_name			confirmed	gamebryo		
+0x005c00ae	0		BFScriptContext createData/contextName binder helper		unidentified		0x008e6400#25	scripting
+0x005c00c1	0		BFScriptContext createData/contextName binder helper		unidentified		0x008e6400#21	scripting
 0x005c00c9	47	get_type_BFHelpComponent			confirmed	gamebryo		
 0x005c00f8	0		BFHelpComponent and BFScriptComponent XML/script binding		unidentified		0x008e6488#1	scripting
-0x005c00fd	32		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
+0x005c00fd	32	init_BFHelpComponent_vtable_storage			confirmed	gamebryo		
 0x005c011d	0		BFHelpComponent and BFScriptComponent XML/script binding		unidentified		0x008e6488#2	scripting
 0x005c0122	0		BFHelpComponent and BFScriptComponent XML/script binding		unidentified		0x008e6488#0	scripting
-0x005c013d	32		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c015d	32		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
+0x005c013d	32	destroy_BFHelpComponent_entry_storage			confirmed	gamebryo		
+0x005c015d	32	destroy_BFHelpComponent			confirmed	gamebryo		
 0x005c017d	0		BFHelpComponent and BFScriptComponent XML/script binding		unidentified		0x008e6488#20	scripting
-0x005c023c	175		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
+0x005c023c	175	load_BFHelpComponent_entries_from_xml			confirmed	gamebryo		
 0x005c02eb	364	read_help_entry			confirmed	gamebryo		
-0x005c0457	232		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
+0x005c0457	232	get_or_insert_help_entry_record			confirmed	gamebryo		
 0x005c053f	0		BFHelpComponent and BFScriptComponent XML/script binding		unidentified		0x008e6488#22	scripting
-0x005c0583	395		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c070e	48		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c073e	141		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c07cb	207		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c089a	175		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
-0x005c0949	65		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
+0x005c0583	395	insert_help_entry_tree_node_with_hint			confirmed	gamebryo		
+0x005c070e	48	clear_help_entry_tree			confirmed	gamebryo		
+0x005c073e	141	copy_help_entry_tree_state			confirmed	gamebryo		
+0x005c07cb	207	lower_bound_or_insert_help_entry_node			confirmed	gamebryo		
+0x005c089a	175	erase_help_entry_tree_range			confirmed	gamebryo		
+0x005c0949	65	init_help_entry_tree_sentinel			confirmed	gamebryo		
 0x005c098a	341		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
 0x005c0adf	97		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
 0x005c0b40	677		BFHelpComponent and BFScriptComponent XML/script binding		unidentified	gamebryo		scripting
@@ -17811,19 +17811,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006abc8c	85		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006abce1	332		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006abe2d	206		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
-0x006abefb	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#41	ui
-0x006abf17	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#45	ui
-0x006abfd2	402		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo	0x008f5df4#46	ui
+0x006abefb	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#0	ui
+0x006abf17	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#4	ui
+0x006abfd2	402		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo	0x008f5e98#5	ui
 0x006ac164	700		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006ac420	748		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006ac70c	133		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
-0x006ac791	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#47	ui
-0x006ac7ca	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#48	ui
+0x006ac791	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#6	ui
+0x006ac7ca	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#7	ui
 0x006ac80a	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008e72b0#15	ui
-0x006ac80e	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#49	ui
+0x006ac80e	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#8	ui
 0x006ac82f	114		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
-0x006ac8a1	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#71	ui
-0x006ac8ce	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#67	ui
+0x006ac8a1	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#30	ui
+0x006ac8ce	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#26	ui
 0x006ac8d3	70		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006ac919	57		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006ac952	44		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
@@ -18020,13 +18020,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b2395	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f6518#51	ui
 0x006b23c0	108		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
 0x006b242c	37		platform window/input/paint boundary and unresolved UI platform 		unidentified	gamebryo		ui
-0x006b2451	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#56	ui
-0x006b2471	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#57	ui
-0x006b2505	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#58	ui
-0x006b250c	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#59	ui
-0x006b2519	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#60	ui
-0x006b2520	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#61	ui
-0x006b252d	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5df4#62	ui
+0x006b2451	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#15	ui
+0x006b2471	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#16	ui
+0x006b2505	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#17	ui
+0x006b250c	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#18	ui
+0x006b2519	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#19	ui
+0x006b2520	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#20	ui
+0x006b252d	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f5e98#21	ui
 0x006b2534	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f6368#24	ui
 0x006b255f	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f6368#25	ui
 0x006b258b	0		platform window/input/paint boundary and unresolved UI platform 		unidentified		0x008f6518#82	ui
@@ -22356,7 +22356,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0078139a	121		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x00781413	205		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007814e0	48		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
-0x00781510	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x009004ec#3	ui
+0x00781510	0		containers, UI dependency references, window/dialog boundary, cr		unidentified		0x00900498#24	ui
 0x00781525	374		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x0078169b	51		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
 0x007816ce	210		containers, UI dependency references, window/dialog boundary, cr		unidentified	gamebryo		ui
