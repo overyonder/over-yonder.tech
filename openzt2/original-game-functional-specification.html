@@ -79,19 +79,18 @@ in each layer are registered native types.</p>
   Mgrs["Native game/domain managers<br/>ZTApp, ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr, ZTDiseaseMgr,<br/>ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr, ZTTankMgr, ZTTransportationMgr,<br/>BFGTraversabilityMgr, BFGPathFinderMgr, BFGRampageMgr,<br/>BFGInfluenceMgr, BFGCollisionMgr, BFSteeringMgr, BFLocomotionMgr,<br/>ZTAI*Mgr, BFSoundMgr/BFSoundStageMgr, BFRenderer/BFSpriteMgr, ZTUndoMgr"]
   State["Original native runtime state<br/>entities (component graphs), AI tokens/tasks, world grid,<br/>UI widget tree, profile/save/scenario/photo/status state"]
   Proj["Projection + host adapters (REPLACEABLE)<br/>Gamebryo/D3D, sound factories, Win32/winit,<br/>registry/profile/fs, Lua/CRT, network/MOTD"]
-  Open["Open / unidentified native surfaces<br/>anonymous vtables, candidate byte-map rows,<br/>unmodeled helper globals/functions"]
+  Open["Open / unidentified native surfaces<br/>anonymous vtables, unknown byte-map spans,<br/>unmodeled helper globals/functions"]
   Source --> Runtime --> Mgrs --> State
   Mgrs -.project.-> Proj
   State -.project.-> Proj
   Mgrs -.residual evidence.-> Open</pre>
 <h3>Foundational Type System</h3>
-<p>Every native object is a node in one single-inheritance hierarchy rooted at
-<code>BFTypedObj</code>. Each class registers lazily: a per-type cache global guarded by an init
-flag, the parent obtained from the parent's own getter, and the class-name string
-interned by <code>register_type</code>. The type registry enumerates this
-hierarchy completely — 2,068 registered types over 128 distinct parents; the spine is
-<code>BFComponent</code> (186 direct children), then <code>BFXMLObj</code> (75), <code>BFBehavior</code> (78),
-<code>BFPhysComponent</code> (42), and <code>ZTMode</code> (24).</p>
+<p>Native type identity is represented by overlapping evidence surfaces: lazy
+type-cache globals, parent/getter links, vtable rows, and surviving type names.
+Those ledgers establish a broad registered-type surface, but they do not
+canonically enumerate a complete native C++ inheritance hierarchy. Parent/root
+linkage and virtual-slot identity remain recovery axes tracked in the Binary
+Perimeter.</p>
 <pre class="mermaid">classDiagram
   BFTypedObj <|-- BFSafeHandledObj
   BFSafeHandledObj <|-- BFXMLObj
@@ -3554,7 +3553,7 @@ source data and authored content. Cross-cutting unknowns:</p>
 </tr>
 <tr>
   <td>Discovery coverage</td>
-  <td>anonymous <code>vtable_*</code> surfaces, candidate byte-map rows, and address-only helper functions still include unnamed native surfaces</td>
+  <td>anonymous <code>vtable_*</code> surfaces, unknown byte-map spans, and address-only helper functions still include unnamed native surfaces</td>
   <td>Binary Perimeter</td>
 </tr>
 </tbody>

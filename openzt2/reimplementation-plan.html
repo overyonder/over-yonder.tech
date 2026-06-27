@@ -191,18 +191,25 @@ uses <code>runtime_resources_ready</code>, and loaded-world systems add concrete
 such as <code>in_loaded_world</code>. The former closed <code>OpenZt2AppSet</code>
 menu/game/overlay buckets have been removed.</p>
 <p>The current refactor boundary is: no private <code>game_runtime</code> module, no
-<code>RuntimeSupport</code> resource or seed type, no root feature compatibility prelude,
-and no compatibility owner that other systems ask for unrelated facts.
+<code>RuntimeSupport</code> resource, seed type, or compatibility namespace, no root
+feature compatibility prelude, and no compatibility owner that other systems ask
+for unrelated facts.
 <code>FeatureRuntimePlugin</code> only composes feature-owned registrations. Startup uses
 explicit seed/composition values such as <code>StartupResourceSeeds</code> and
-<code>StartupHostSources</code> while source documents are being hydrated; once runtime
+<code>startup_sources::HostSources</code> while source documents are being hydrated; once runtime
 resources are published, live facts sit in narrower resources such as runtime
 configuration, session/profile/time, diagnostics, external/web state, random
 state, mode registry, active mode, active layouts, active keymap, and current
-cursor. UI source events are recorded in order as <code>UiSourceEventRecorded</code>, then
-decoded by runtime systems into the typed effects owned by their feature
-boundary. This is not the final completion of every UI message family; it is
-the ownership rule for finishing those families.</p>
+cursor. Their code owners are concrete core modules for configuration, session,
+profile, time, diagnostics, external/web, and startup source hydration. UI source
+events are recorded in order as <code>UiSourceEventRecorded</code>, then decoded by runtime
+systems into the typed effects owned by their feature boundary. This is not the
+final completion of every UI message family; it is the ownership rule for
+finishing those families. The shared core message module owns only the ordered
+source-event clock/path and the runtime-ready marker; feature effects such as
+mode/input, world, time, terrain, undo, path, zoopedia, audio, camera, photo,
+AI, animal, staff, save, web, and renderer requests live beside their owning
+runtime modules.</p>
 <p>The work board below uses actual owners. Product concepts, runtime boundaries,
 source-format families, and host boundaries may all own rows when they carry real
 implementation work. Aggregate progress buckets are invalid owners.</p>
@@ -222,9 +229,9 @@ panel effects are decoded and handled by their owning feature systems;</li>
 <li>the remaining large UI command surfaces and startup builder surfaces are split
 only at real owners: command families, source-specific startup builders,
 renderer asset loading, UI projection, and world projection;</li>
-<li>remaining item-level <code>#[allow(dead_code)]</code> sites have been audited: stale
-scaffolding is deleted, and unrecovered original surfaces are documented at
-the owner that will recover them;</li>
+<li>remaining unused-code markers have been audited: stale scaffolding is
+deleted, and unrecovered original surfaces are documented at the owner that
+will recover them;</li>
 <li>active UI root order, hover ownership, click dispatch, screenshot capture,
 resize projection, and startup-root despawn are verified through the Bevy
 runtime path rather than by a fabricated tool path;</li>
@@ -245,7 +252,9 @@ Bevy/domain cleanup grep has no broad wildcard imports, and
 core runtime messages, startup resource hydration/publication, UI
 binding/source helpers, camera presentation, population dispatch, and
 manager-contract exports now name their concrete owner dependencies
-explicitly.
+explicitly. The former <code>features/core/runtime_support.rs</code> namespace has been
+split into configuration, session, profile, time, diagnostics, external/web,
+and startup source-hydration owners.
 <code>presentation/ui/mod.rs</code> no longer re-exports every UI submodule as a root
 prelude; it keeps narrow exports only for startup-facing UI resource/despawn
 APIs. Startup submodules no longer import the parent module wholesale, UI
@@ -261,26 +270,44 @@ decodes into the transport command owner through world dispatch; generic
 <code>UI_SCROLL</code>, <code>UI_SET_VALUE</code>, and <code>UI_MOUSE_DRAG</code> slider/value messages now
 resolve through the UI presentation dispatch owner, with the separate
 value-dispatch router hook removed; child-wrapped selected-entity, filter,
-and list population messages now decode in the population dispatch owner;
-several source UI message families still pass through a central router layer
-before reaching owners;</li>
+and list population messages now decode in the population dispatch owner; the
+former core message catalogue now keeps only the ordered UI source-event path
+and readiness marker, while feature messages live with their mode/input,
+world, time, terrain, undo, path, zoopedia, audio, camera, photo, AI, animal,
+staff, save, web, and renderer owners. UI input actions now have a separate
+presentation <code>input_actions</code> system for hover-help, UI sounds, and
+gesture-trace input effects instead of running inside source-event replay;
+the former broad integration dispatch bucket is split into app, script,
+scenario, save, UI-binding, and random owners. Source UI message replay still
+passes through one ordered router for fanout, with remaining router cases to
+collapse into owner-local typed handlers as those contracts close;</li>
 <li>partly completed: UI projection files are separated into projection, tree,
 dispatch, commands, rendering, visibility, widgets, lists, text, layout,
 visuals, triggers, and sliders owners. UI source-event fanout and returned
 command application live in the UI dispatch owner; retained-tree construction
 exposes dispatch-value collection without importing the feature dispatch
-layer. Trigger, layout, slider, visual, text, widget, and list <code>UiCommand</code>
-variants now apply through their owning UI modules, while visibility commands
-fire their show/hide triggers after mutating visibility. <code>commands.rs</code> remains
-the orchestration surface for visibility, cursor, and trigger fanout plumbing;</li>
+layer. Trigger, show/hide, and timed-event sources now record back into the
+ordered <code>UiSourceEventRecorded</code> path before replay. Trigger, layout, slider,
+visual, text, widget, and list <code>UiCommand</code> variants apply through their owning
+UI modules, while visibility commands fire their show/hide triggers after
+mutating visibility. <code>commands.rs</code> remains the orchestration surface for
+visibility, cursor, and trigger plumbing;</li>
 <li>partly completed: startup code moved into startup modules, while locale source
 resolution and hydration now own <code>BFLocaleMgr</code> config, MOTD message document
 lookup, localization path discovery, and table hydration; audio source
 resolution/hydration, gesture source resolution/hydration, show source
 resolution/hydration, staff source resolution/hydration, animal source
 validation/hydration, world source validation/hydration, economy source
-hydration, disease/path/photo/tank/transport source validation, and
+hydration, entity-trigger/disease/path/photo/tank/transport source validation, and
 source-mode dependency discovery also live behind source-specific helpers.
+App bootstrap, user profile, user options, renderer-config validation,
+startup phys-obj, and startup terrain contract hydration now live in the
+startup bootstrap owner. Guest AI manager validation, influence manager
+validation, and AI seed construction now live in the startup AI owner.
+Entity-trigger manager validation now lives in the startup entity-trigger
+owner.
+Feedback-manager hydration into <code>UiBindingContent</code> now lives in the startup
+UI-binding owner.
 Unused source-mode transfer fields plus stale startup/UI imports have been
 removed; each startup submodule now declares its concrete owners instead of
 importing the startup parent wholesale;
@@ -288,33 +315,57 @@ importing the startup parent wholesale;
 whose remaining hydration and publication work should keep moving into
 source-specific builders;</li>
 <li>partly completed: source-node hover, click, and resize behavior now has
-Bevy-runtime smoke evidence through splash close, main-menu Freeform
-hover/click, real OS resize without splash reset, map selection, and Play Map
-entry into game-mode layouts; durable runtime acceptance harness coverage
-remains open;</li>
-<li>partly completed: crate-level and item-level <code>#[allow(dead_code)]</code> masking
-from the review era is absent from reconstruction source, and the loose
+Bevy-runtime smoke evidence through loader-root despawn, source-authored
+splash with no loader residue, splash close, main-menu Freeform hover/click,
+viewport resize preserving <code>mode_main</code>, manifest-filtered map selection rows,
+and Play Map leaving load mode into
+<code>mode_main/mode_game/mode_overhead/mode_camera</code>. The <code>ui_screenshots</code> binary
+now provides durable headless Bevy Screenshot API coverage for loading,
+splash, main-menu hover/click, viewport resize, map selection, and gameplay
+entry. The current fullscreen remote-resize path preserves shell state; physical
+live-window resize and richer gameplay/material assertions remain
+acceptance-harness work;</li>
+<li>partly completed: crate-level and broad item-level <code>#[allow(dead_code)]</code>
+masking from the review era is absent from reconstruction source, and the loose
 generic source-object descriptor catalogue has been removed from
 <code>domain::foundation::binding</code>. Stale profile-path accessors, the unused audio
 source-ref event helper, the duplicate terrain-config runtime mutator, the
-unused research-manager accessor, unused mode convenience helpers, stale
-placement click/drag/preview helpers, and the unused feedback-record publish
-wrapper, the unused save-load request wrapper, and the duplicate staff-action
-record constructor have been deleted. Animal native commands now consume
-source payloads as entity-target fallbacks, staff request queueing applies
-default priority through the owning staff job record, and AI task roots with
-missing execution data now settle through the AI failure result path. The
-loaded-world fixed tick now advances disease runtime timers through the
-disease feature owner and staff bad-entity cleanup timers through the staff
-feature owner; successful profile result messages now close as completed
-save/runtime effects in the save-profile owner; active-world replacement now
-emits the recovered detach-world event before loading and attaching the new
-world. Audited warning residue now sits on concrete owners: <code>BFG_MOVE_ENTITY</code>
-payload and handler recovery belongs to the world row, <code>ZT_FORCE_DISEASE</code>
-Lua/native-manager binding belongs to disease and scripting rows, and tank
-manipulation/topology hydration belongs to the tank row. The current Bevy
-crate check reports 41 recovered-unused warnings that still need
-owner-by-owner deletion or contract comments;</li>
+unused research-manager accessor, unused mode convenience and forwarding
+helpers, stale placement click/drag/preview helpers, the unused
+feedback-record publish wrapper, the unused save-load request wrapper, the
+duplicate staff-action record constructor, the unused world movement facade,
+unused economy typed-value wrappers, speculative tank topology/filter helpers,
+unused gesture projection helpers, and the unused photo-analysis runtime helper
+have been deleted. Model assets no longer keep duplicate source mirrors whose
+current renderer consumers read the retained source document, while material
+assets keep their parsed <code>.bfmat</code> source contract beside the Bevy
+<code>StandardMaterial</code> output. Animal native commands now consume source payloads
+as entity-target fallbacks, staff request queueing applies default priority
+through the owning staff job record, and AI task roots with missing execution
+data now settle through the AI failure result path. The loaded-world fixed tick
+now advances disease runtime timers through the disease feature owner and
+staff bad-entity cleanup timers through the staff feature owner; successful
+profile result messages now close as completed save/runtime effects in the
+save-profile owner; active-world replacement now emits the recovered
+detach-world event before loading and attaching the new world. Photo, AI,
+disease, audio, camera, animal, staff, undo, path, zoopedia, mode/input,
+world, time, terrain, save, web, and renderer request/event messages now live
+with their owning feature modules instead of the core message surface. The
+hollow cure-mode command queue has been removed;
+disease keeps targeted comments for recovered sample/cure behavior classes
+whose producers still need source or native callsite recovery. Generic
+authored text/byte asset wrappers keep local <code>#[allow(dead_code)]</code> markers
+with owner comments because the Bevy asset value is the retained source
+payload. Disease sample/cure command variants use local <code>#[expect(dead_code)]</code>
+markers with owner-specific reasons, so the compiler will flag the marker once
+recovered producers or consumers land.
+Audited warning residue now sits on concrete owners: <code>BFG_MOVE_ENTITY</code>
+payload and handler recovery belongs
+to the world row, <code>ZT_FORCE_DISEASE</code> Lua/native-manager binding belongs to
+disease and scripting rows, and tank manipulation/topology hydration belongs
+to the tank row. Only local source-payload <code>#[allow(dead_code)]</code> annotations
+remain on generic authored asset wrappers, and the Bevy crate check is
+currently warning-free;</li>
 <li>partly completed: fixed-step/runtime scheduling exists mechanically, while
 the original update cadence and manager order remain unrecovered;</li>
 <li>not completed: full BFXML/MAXML/XDR/BFTypedBinder source-object semantics,
@@ -449,15 +500,15 @@ remain in the functional specification.</p>
   <td>Refactor checkpoint</td>
   <td>Feature boundary cleanup</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources, and startup/UI helpers import concrete owners. Broad owner imports are removed from core runtime messages, startup resource hydration/publication, UI binding/source helpers, camera presentation, population dispatch, and manager-contract exports. The UI root keeps narrow startup-facing exports for UI resource insertion and UI tree despawn. UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>; active UI assets rebuild when their loaded asset changes; rich-text resize scaling is scoped to changed owners; source UI hover uses Bevy pointer <code>Over</code>/<code>Out</code> observers; source-event fanout and command application live in the UI dispatch owner, with trigger, layout, slider, visual, text, widget, and list command families applying through their owning UI modules. Source-authored menu transition tokens resolve in the menu dispatch owner, mode runtime message decoding resolves in the mode dispatch owner, native app-message effects apply through the app dispatch owner, placement actions resolve through the world dispatch owner, transport UI selection decodes into the transport command owner through world dispatch, generic slider/value source messages resolve through the UI presentation dispatch owner, and child-wrapped selected-entity/filter/list messages decode in the population dispatch owner. Startup remains centered on <code>build_loaded_startup_from_assets</code>, with locale, gesture, audio, show, staff, animal, world, economy, disease, path, photo, tank, transport, source-contract, loading-system, UI-template, and source-mode dependency work split into concrete owner helpers. Removed cleanup scaffolding includes source-mode transfer fields, stale startup/UI imports, the duplicate AI aggregate advance path, the tank dirty-flag helper, stale profile-path accessors, the unused audio source-ref event helper, the duplicate terrain-config runtime mutator, the unused research-manager accessor, unused mode convenience helpers, stale placement click/drag/preview helpers, the unused feedback-record publish wrapper, the unused save-load request wrapper, the duplicate staff-action record constructor, the generic source-object descriptor catalogue in <code>domain::foundation::binding</code>, and duplicate Bevy asset source mirrors for material/model assets whose current renderer consumers read the retained source document or material resource. Animal native commands consume source payloads as entity-target fallbacks, staff request queueing applies default priority through the owning staff job record, AI task roots with missing execution data settle through the AI failure result path, the loaded-world fixed tick advances disease runtime timers through the disease feature owner plus staff bad-entity cleanup timers through the staff feature owner, successful profile result messages close as completed save/runtime effects in the save-profile owner, and active-world replacement emits the recovered detach-world event before loading and attaching the new world. Runtime smoke evidence covers loader-root despawn, splash close, main-menu hover/click, real OS resize preserving shell state, map selection, and Play Map entry into game-mode layouts. Stale checkpoint command aliases have been removed from the canonical plan; acceptance commands must resolve in the current workspace.</td>
-  <td>Finish splitting the remaining UI event router families into feature-owned typed message handlers, continue breaking startup hydration and publication into source-specific builders, reduce the 41 remaining recovered-unused warnings by deleting stale scaffolding or documenting unrecovered original surfaces, and replace the ad hoc runtime smoke path with a durable acceptance harness.</td>
+  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources, and startup/UI helpers import concrete owners. The former <code>features/core/runtime_support.rs</code> namespace is split into configuration, session, profile, time, diagnostics, external/web, and startup source-hydration owners. The shared core message surface owns only <code>RuntimeMessageClock</code>/<code>RuntimeMessageOrder</code>, <code>UiSourceEventRecorded</code>, <code>write_ui_source_events</code>, and <code>RuntimeResourcesReady</code>; feature request/event messages live with mode/input, world, time, terrain, undo, path, zoopedia, audio, camera, photo, AI, animal, staff, save, web, and renderer owners. Broad owner imports are removed from startup resource hydration/publication, UI binding/source helpers, camera presentation, population dispatch, and manager-contract exports. The UI root keeps narrow startup-facing exports for UI resource insertion and UI tree despawn. UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>; active UI assets rebuild when their loaded asset changes; rich-text resize scaling is scoped to changed owners; source UI hover uses Bevy pointer <code>Over</code>/<code>Out</code> observers; source-event fanout and command application live in the UI dispatch owner; UI input actions run through a separate input-actions system; trigger, show/hide, and timed-event sources record into <code>UiSourceEventRecorded</code> before replay; trigger, visibility/show-hide, layout, slider, visual, text, widget, and list command families apply through their owning UI modules. The former broad integration dispatch bucket is split into concrete app, script, scenario, save, UI-binding, and random owners. Source-authored menu transition tokens resolve in the menu dispatch owner, mode runtime message decoding resolves in the mode dispatch owner, graphics-options mode UI effects resolve in the gfx dispatch owner, native app-message effects apply through the app dispatch owner, placement actions resolve through the world dispatch owner, transport UI selection decodes into the transport command owner through world dispatch, generic slider/value source messages resolve through the UI presentation dispatch owner, and child-wrapped selected-entity/filter/list messages decode in the population dispatch owner. Startup builder work now shares app-init path discovery with the asset request path, resolves root mode/layout sources in the mode startup owner, and keeps remaining hydration centered on <code>build_loaded_startup_from_assets</code>, with locale, gesture, audio, show, staff, animal, world, economy, entity-trigger, disease, path, photo, tank, transport, source-contract, loading-system, UI-template, source-mode dependency, app bootstrap, user profile, user options, renderer-config validation, startup phys-obj, startup terrain, AI guest/influence validation, and feedback-to-UI-binding hydration split into concrete owner helpers. Removed cleanup scaffolding includes source-mode transfer fields, stale startup/UI imports, the duplicate AI aggregate advance path, the tank dirty-flag helper, stale profile-path accessors, the unused audio source-ref event helper, the duplicate terrain-config runtime mutator, the unused research-manager accessor, unused mode convenience and forwarding helpers, stale placement click/drag/preview helpers, the unused feedback-record publish wrapper, the unused save-load request wrapper, the duplicate staff-action record constructor, unused world movement facade, unused economy typed-value wrappers, speculative tank topology/filter helpers, unused gesture projection helpers, the unused photo-analysis runtime helper, the hollow cure-mode command queue, former duplicate core-owned feature message surfaces, and the generic source-object descriptor catalogue in <code>domain::foundation::binding</code>. Model assets no longer keep duplicate source mirrors whose current renderer consumers read the retained source document, while material assets keep their parsed <code>.bfmat</code> source contract beside the Bevy <code>StandardMaterial</code> output. Animal native commands consume source payloads as entity-target fallbacks, staff request queueing applies default priority through the owning staff job record, AI task roots with missing execution data settle through the AI failure result path, the loaded-world fixed tick advances disease runtime timers through the disease feature owner plus staff bad-entity cleanup timers through the staff feature owner, successful profile result messages close as completed save/runtime effects in the save-profile owner, and active-world replacement emits the recovered detach-world event before loading and attaching the new world. The <code>ui_screenshots</code> binary provides durable Bevy Screenshot API acceptance coverage for loader-root despawn, splash close, main-menu hover/click, main-menu viewport resize preserving shell state, map selection, and Play Map entry into game-mode layouts. Fresh remote-control smoke covers loader despawn, source-authored splash without loader residue, real pointer hover/click through splash and Freeform, fullscreen resize-event preservation of <code>mode_main</code>, manifest-filtered map rows, and Play Map leaving load mode into <code>mode_main/mode_game/mode_overhead/mode_camera</code>. Stale checkpoint command aliases have been removed from the canonical plan; acceptance commands must resolve in the current workspace. Only local source-payload <code>#[allow(dead_code)]</code> annotations remain on generic authored asset wrappers, and the Bevy crate check is currently warning-free.</td>
+  <td>Collapse remaining ordered-router cases into owner-local typed handlers, continue breaking startup hydration and publication into source-specific builders, keep recovered-unused warnings at zero by deleting stale scaffolding or documenting unrecovered original surfaces at their owners, and extend the durable acceptance harness with physical live-window resize plus richer gameplay/material assertions.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
   <td>Bevy asset system</td>
   <td>Asset sources, handles, loaders, loading states</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets.</td>
+  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets. Runtime UI visual and localized text-format refresh now requires the mounted Z2F manifest before resolving authored texture handles, so source UI refresh cannot silently fall back to host-relative texture paths.</td>
   <td>Convert remaining extraction/temp reads into archive-backed asset loads.</td>
 </tr>
 <tr>
@@ -705,8 +756,8 @@ remain in the functional specification.</p>
   <td>Source formats</td>
   <td>Text and metadata wrappers: <code>.bat</code>, <code>.corelog</code>, <code>.h</code>, <code>.kfinfo</code>, <code>.kfm</code>, <code>.txt</code></td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Authored text or metadata is preserved for files without recovered runtime semantics.</td>
-  <td>Add structured loaders only when a runtime consumer requires structure.</td>
+  <td>Authored text or metadata is preserved for files without recovered runtime semantics; Bevy asset wrappers retain the loaded text payload even though no recovered runtime consumer reads these wrapper assets yet.</td>
+  <td>Add structured loaders only when a runtime consumer requires structure, then collapse wrappers that prove to be archive-inspection-only.</td>
 </tr>
 <tr>
   <td>Particle assets</td>
@@ -721,7 +772,7 @@ remain in the functional specification.</p>
   <td>Source formats</td>
   <td>Raw and marker inputs: extensionless entries and <code>.psd</code></td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>PSD bytes have a raw asset owner, and extensionless archive marker entries are counted in the Z2F manifest while their runtime meaning remains open.</td>
+  <td>PSD bytes have a raw asset owner, and extensionless archive marker entries are counted in the Z2F manifest while their runtime meaning remains open; the PSD asset wrapper retains bytes without a recovered runtime consumer.</td>
   <td>Classify marker semantics and decode PSD only when a recovered source reference needs it.</td>
 </tr>
 <tr>
@@ -745,7 +796,7 @@ remain in the functional specification.</p>
   <td>Startup hydration</td>
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages. The builder entrypoint has a neutral name and source-specific helper seams for locale source resolution/hydration, gesture source resolution/hydration, audio source resolution/hydration, show source resolution/hydration, staff source resolution/hydration, animal source validation/hydration, world source validation/hydration, economy source hydration, disease/path/photo/tank/transport source validation, and source-mode dependency resolution.</td>
+  <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages. The builder entrypoint has a neutral name and source-specific helper seams for locale source resolution/hydration, gesture source resolution/hydration, audio source resolution/hydration, show source resolution/hydration, staff source resolution/hydration, animal source validation/hydration, world source validation/hydration, economy source hydration, entity-trigger/disease/path/photo/tank/transport source validation, source-mode dependency resolution, app bootstrap, user profile, user options, renderer-config validation, startup phys-obj, and startup terrain hydration.</td>
   <td>Recover original manager/load-listener order, continue splitting source-specific startup hydration and publication, and replace seeded defaults with source-backed initialization where evidence exists.</td>
 </tr>
 <tr>
@@ -777,7 +828,7 @@ remain in the functional specification.</p>
   <td>Menu flow</td>
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime smoke reaches splash close, main-menu Freeform hover/click, map selection, and Play Map entry into game-mode layouts through projected source nodes.</td>
+  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime smoke reaches splash close, main-menu Freeform hover/click, manifest-filtered map selection, and Play Map leaving load mode into <code>mode_main/mode_game/mode_overhead/mode_camera</code> through projected source nodes. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
   <td>Recover original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
 </tr>
 <tr>
@@ -809,7 +860,7 @@ remain in the functional specification.</p>
   <td>Tool modes</td>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in source mode records and Bevy ECS resources/components; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests land on <code>ModeRuntime</code> with source definitions read from <code>ModeRegistry</code>.</td>
+  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in source mode records and Bevy ECS resources/components; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests land on <code>ModeRuntime</code> with source definitions read from <code>ModeRegistry</code>. Mode-specific command helpers remain inactive until the original <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers are recovered.</td>
   <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers, then move mode fields that are really entity/world facts onto their owning ECS resources/components.</td>
 </tr>
 <tr>
@@ -993,8 +1044,8 @@ remain in the functional specification.</p>
   <td>Tanks</td>
   <td>Aquatic construction</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Startup validates <code>ZTTankMgr</code>; <code>TankRuntime</code> owns live topology, tank volume/cleanliness, command-reader state, and folded command/result records without retaining an unused manager mirror. Source manipulation tokens such as floor, wall, fill, drain, and mode changes are represented, and only recovered <code>ZT_SETTANKMODE</code> dispatch currently reaches the runtime.</td>
-  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, topology and gate hydration, command payload routing for the remaining manipulation tokens, and gate behavior against ECS tank entities.</td>
+  <td>Startup validates <code>ZTTankMgr</code>; <code>TankRuntime</code> owns live topology, tank volume/cleanliness, command-reader state, and folded command/result records without retaining an unused manager mirror. Source manipulation tokens such as floor, wall, fill, drain, delete, replace walls, and mode changes decode into tank command records; <code>ZT_SETTANKMODE</code> is the recovered path that currently mutates tank mode, while the other command records stay rejected or inert until payload and topology algorithms are recovered.</td>
+  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, topology and gate hydration, payload routing for manipulation tokens, and gate behavior against ECS tank entities.</td>
 </tr>
 <tr>
   <td>Transport</td>
@@ -1121,8 +1172,8 @@ remain in the functional specification.</p>
   <td>Gestures</td>
   <td>Gesture recognition and minigames</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Gesture definitions, traces, recognizer, spline editor, projection frames, event textures, and score bands are represented.</td>
-  <td>Recover <code>ZTGestureMgr</code> and gesture trace component callsites.</td>
+  <td>Gesture definitions, traces, recognizer, spline editor, projection frames, event textures, score bands, and spline-editor command records are represented. Spline-editor source tokens now route to the gesture owner; runtime trace scoring remains inactive until the gesture manager and input/component callsites are recovered.</td>
+  <td>Recover <code>ZTGestureMgr</code>, gesture trace component callsites, and full spline-editor command entry points.</td>
 </tr>
 <tr>
   <td>Feedback</td>
@@ -1153,8 +1204,8 @@ remain in the functional specification.</p>
   <td>Economy</td>
   <td>Runtime status and price selections</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Loaded zoo fame, half-star, open-state, and admission values are retained by <code>EconomyRuntime</code>; admission selection, non-admission price selection state, and Bevy economy command/result messages live in Bevy runtime owners.</td>
-  <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics and status forwarding effects.</td>
+  <td>Loaded zoo fame, half-star, open-state, and admission values are retained by <code>EconomyRuntime</code>; admission selection, non-admission price selection state, fame value handlers, and Bevy economy command/result messages live in Bevy runtime owners. Fame/status forwarding methods remain inactive until the original value-handler and status update callers are recovered.</td>
+  <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics, fame update callsites, and status forwarding effects.</td>
 </tr>
 <tr>
   <td>Donation</td>
@@ -1177,7 +1228,7 @@ remain in the functional specification.</p>
   <td>Fame</td>
   <td>Fame and zoo rating</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain recovery surfaces.</td>
+  <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain recovery surfaces; current Bevy fame helpers record the surface without a recovered caller cadence.</td>
   <td>Recover <code>ZTFameData</code> update and value-handler callsites.</td>
 </tr>
 <tr>
@@ -1193,8 +1244,8 @@ remain in the functional specification.</p>
   <td>Disease</td>
   <td>Disease and cure mode</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions are represented; cure-mode sample/cure command messages bridge into the disease native command queue when target and disease tokens are available. Scenario Lua evidence calls <code>ZTDiseaseMgr:ZT_FORCE_DISEASE</code> with table-shaped disease/target payloads, while the current script adapter has no native manager binding for that call.</td>
-  <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code> table payload semantics, and remaining <code>ZTCureDiseaseMode</code> selection/details.</td>
+  <td>Disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions are represented. The disease feature owns the Bevy native command message; recovered UI/source dispatch currently sends check/force requests, and sample/cure behavior classes remain documented unrecovered producers. Scenario Lua evidence calls <code>ZTDiseaseMgr:ZT_FORCE_DISEASE</code> with table-shaped disease/target payloads, while the current script adapter has no native manager binding for that call.</td>
+  <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code> table payload semantics, and remaining <code>ZTCureDiseaseMode</code> sample/cure selection callsites.</td>
 </tr>
 <tr>
   <td>Status</td>
@@ -1281,8 +1332,8 @@ remain in the functional specification.</p>
   <td>Photos</td>
   <td>Photo challenges</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, and results are represented.</td>
-  <td>Recover <code>ZTPA*</code> getter bindings and scoring.</td>
+  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, analysis pass records, and results are represented in source/domain records. Runtime analysis waits on the recovered photo-analysis caller context.</td>
+  <td>Recover <code>ZTPA*</code> getter bindings, photo-analysis caller context, and scoring.</td>
 </tr>
 <tr>
   <td>Undo</td>
