@@ -1213,10 +1213,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004453d4	134		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#182	ui(medium)
 0x00445492	108		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#185	ui(high)
 0x004454fe	352		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#188	ui(high)
-0x0044565e	335	emit_prepare_undo_payload			candidate		0x008c5200#187	
+0x0044565e	335	handle_overhead_prepare_undo_transition			confirmed		0x008c5200#187	
 0x004457e2	66		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#163	ui(high)
 0x00445824	149		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#192	ui(high)
-0x004458b9	631	emit_setmode_payload			candidate		0x008c5200#193	
+0x004458b9	631	enter_first_person_training_for_trick			confirmed		0x008c5200#193	
 0x00445b30	376		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(high)
 0x00445ca8	126		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#20	ui(medium)
 0x00445d26	197		scenario, campaign, map-selection UI, and mode registry		unidentified			ui(medium)
@@ -1782,26 +1782,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004721ac	112		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047221c	310		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00472352	514		camera, collision, and geometry helper band		unidentified		0x008c9ef8#138	renderer(medium)
-0x00472554	979	emit_fp_setfloatingcam_state_payload			candidate		0x008c9ef8#139	
+0x00472554	979	deactivate_ZTCloningGestureMode			confirmed		0x008c9ef8#139	
 0x00472927	139		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004729b2	459	read_show_performance_config			confirmed		0x008c9ef8#20	
-0x00472b7d	433	emit_fp_setfloatingcam_state_payload			candidate		0x008c9ef8#14	
+0x00472b7d	433	update_ZTCloningGestureMode_frame			confirmed		0x008c9ef8#14	
 0x00472d55	758		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0047304b	355		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004731ae	634		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00473428	754	emit_displayspline_payload			candidate			
+0x00473428	754	advance_cloning_gesture_goo_progress			confirmed			
 0x0047371a	190		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x004737d8	799	emit_crate_entity_payload			candidate			
+0x004737d8	799	crate_cloning_gesture_entity_from_placement			confirmed			
 0x00473af7	79		camera, collision, and geometry helper band		unidentified		0x008c9ef8#176	renderer(medium)
 0x00473baf	417	handle_set_cloning_center			confirmed			
 0x00473d6b	224		camera, collision, and geometry helper band		unidentified		0x008c9ef8#166	renderer(medium)
 0x00473e62	85	handle_allow_failure			confirmed			
 0x00473eb7	135		camera, collision, and geometry helper band		unidentified		0x008c9ef8#184	renderer(medium)
 0x00473f3e	2361	update_cloning_lab_feedback			confirmed			
-0x00474877	934	emit_displayspline_payload			candidate			
+0x00474877	934	sync_cloning_gesture_camera_display			confirmed			
 0x00474c1d	154		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00474cb7	74		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00474d01	164	emit_displayspline_payload			candidate			
+0x00474d01	164	hide_cloning_gesture_display_spline			confirmed			
 0x00474da5	338		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00474ef7	244		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00474feb	309		camera, collision, and geometry helper band		unidentified			renderer(medium)
@@ -1811,7 +1811,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0047551b	952		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x004758d3	340		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00475a27	23		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x00475a3e	417	emit_displayspline_payload			candidate			
+0x00475a3e	417	restart_cloning_gesture_display_spline			confirmed			
 0x00475bdf	301		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00475d0c	27		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x00475d27	33		camera, collision, and geometry helper band		unidentified			renderer(medium)
