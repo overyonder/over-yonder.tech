@@ -11171,7 +11171,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c4daa	0		Blue Fang component container/list runtime		unidentified		0x008e6778#30	game-ai
 0x005c4de8	47	get_type_BFComponentContainer			confirmed	gamebryo		
 0x005c4e17	47	get_type_BFComponentList			confirmed	gamebryo		
-0x005c4e46	0		Blue Fang component container/list runtime		unidentified		0x008e4ea8#59	game-ai
+0x005c4e46	0	get_type_BFComponentList_vtable_thunk			confirmed		0x008e4ea8#59	
 0x005c4e4b	32		Blue Fang component container/list runtime		unidentified	gamebryo		game-ai
 0x005c4e6b	0		Blue Fang component container/list runtime		unidentified		0x008e4ea8#60	game-ai
 0x005c4e70	37		Blue Fang component container/list runtime		unidentified	gamebryo		game-ai
@@ -11800,7 +11800,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f4146	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e78d0#68	ui
 0x005f4165	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7660#62	ui
 0x005f46e9	47	get_type_BFAISubjectData			confirmed	gamebryo		
-0x005f4718	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7660#41	ui
+0x005f4718	0	get_type_BFAISubjectData_vtable_thunk			confirmed		0x008e7660#41	
 0x005f471d	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005f473d	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7660#42	ui
 0x005f4742	38		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -12069,7 +12069,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005fe267	1243		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005fe742	135		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005fe7c9	47	get_type_BFAIRelationData			confirmed	gamebryo		
-0x005fe7f8	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7ee0#24	ui
+0x005fe7f8	0	get_type_BFAIRelationData_vtable_thunk			confirmed		0x008e7ee0#24	
 0x005fe7fd	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x005fe81d	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7ee0#25	ui
 0x005fe822	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e7ee0#26	ui
@@ -12121,11 +12121,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060037e	128		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x006003fe	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8038#31	ui
 0x00600458	47	get_type_BFAITrickMgrData			confirmed	gamebryo		
-0x00600487	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x0090c058#25	ui
+0x00600487	0	get_type_BFAITrickMgrData_vtable_thunk			confirmed		0x0090c058#25	
 0x0060048c	47	get_type_BFAITrickMgr			confirmed	gamebryo		
 0x006004bb	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x0090c058#1	ui
 0x006004c0	47	get_type_BFAIRemoveTokenInfo			confirmed	gamebryo		
-0x006004ef	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008c9ef8#209	ui
+0x006004ef	0	get_type_BFAIRemoveTokenInfo_vtable_thunk			confirmed		0x008c9ef8#209	
 0x006004f4	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008c9ef8#210	ui
 0x00600514	47	get_type_BFAIToken			confirmed	gamebryo		
 0x00600543	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8130#1	ui
@@ -12278,7 +12278,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006047c9	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8760#49	ui
 0x006047d0	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e8760#24	ui
 0x006047dd	47	get_type_BFAIValidationData			confirmed	gamebryo		
-0x0060480c	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#22	ui
+0x0060480c	0	get_type_BFAIValidationData_vtable_thunk			confirmed		0x008e89d8#22	
 0x00604811	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x00604831	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008e89d8#23	ui
 0x00604836	63		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -13522,7 +13522,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0062bf95	32		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0062bfb5	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008eb938#2	ui
 0x0062bfba	47	get_type_BFBehScriptParams			confirmed	gamebryo		
-0x0062bfe9	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008eb938#39	ui
+0x0062bfe9	0	get_type_BFBehScriptParams_vtable_thunk			confirmed		0x008eb938#39	
 0x0062bfee	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008eb938#40	ui
 0x0062c00e	100		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0062c072	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008eb938#0	ui
@@ -18403,7 +18403,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006c1ef8	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006c1f18	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f6d28#95	economy
 0x006c1f1d	47	get_type_BFGBooleanAttribute			confirmed	gamebryo		
-0x006c1f4c	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f6d28#107	economy
+0x006c1f4c	0	get_type_BFGBooleanAttribute_vtable_thunk			confirmed		0x008f6d28#107	
 0x006c1f51	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006c1f71	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f6d28#108	economy
 0x006c1f76	47	get_type_BFGStringAttribute			confirmed	gamebryo		
@@ -18627,7 +18627,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cb7f1	247		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006cb900	88		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006cb958	47	get_type_BFGEconomyData			confirmed	gamebryo		
-0x006cb987	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008d2868#42	economy
+0x006cb987	0	get_type_BFGEconomyData_vtable_thunk			confirmed		0x008d2868#42	
 0x006cb98c	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006cb9ac	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008d2868#43	economy
 0x006cb9b1	60		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
@@ -18691,16 +18691,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cd950	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#2	economy
 0x006cd955	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#3	economy
 0x006cd975	47	get_type_BFGEntitySharedEventData			confirmed	gamebryo		
-0x006cd9a4	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f6d28#73	economy
+0x006cd9a4	0	get_type_BFGEntitySharedEventData_vtable_thunk			confirmed		0x008f6d28#73	
 0x006cd9a9	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f6d28#74	economy
 0x006cd9c9	47	get_type_BFGFakePhysicsData			confirmed	gamebryo		
-0x006cd9f8	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#15	economy
+0x006cd9f8	0	get_type_BFGFakePhysicsData_vtable_thunk			confirmed		0x008f7dbc#15	
 0x006cd9fd	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#16	economy
 0x006cda1d	47	get_type_BFGRealPhysicsKickData			confirmed	gamebryo		
 0x006cda4c	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#28	economy
 0x006cda51	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#29	economy
 0x006cda71	47	get_type_BFGEntityMorphData			confirmed	gamebryo		
-0x006cdaa0	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#41	economy
+0x006cdaa0	0	get_type_BFGEntityMorphData_vtable_thunk			confirmed		0x008f7dbc#41	
 0x006cdaa5	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006cdac5	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#42	economy
 0x006cdaca	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#43	economy
@@ -18718,13 +18718,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cde10	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#69	economy
 0x006cdf1f	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#70	economy
 0x006ce058	47	get_type_BFGBiomeFeatureData			confirmed	gamebryo		
-0x006ce087	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#54	economy
+0x006ce087	0	get_type_BFGBiomeFeatureData_vtable_thunk			confirmed		0x008f7dbc#54	
 0x006ce08c	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006ce0ac	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#55	economy
 0x006ce0b1	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#56	economy
 0x006ce130	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#57	economy
 0x006ce1ca	47	get_type_BFGElevatedTileData			confirmed	gamebryo		
-0x006ce1f9	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#80	economy
+0x006ce1f9	0	get_type_BFGElevatedTileData_vtable_thunk			confirmed		0x008f7dbc#80	
 0x006ce1fe	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006ce21e	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#81	economy
 0x006ce223	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f7dbc#82	economy
@@ -19294,11 +19294,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ed509	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#1	game-entities
 0x006ed50e	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#2	game-entities
 0x006ed52e	47	get_type_BFGEntityContainerSlotLight			confirmed	gamebryo		
-0x006ed55d	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#19	game-entities
+0x006ed55d	0	get_type_BFGEntityContainerSlotLight_vtable_thunk			confirmed		0x008f9218#19	
 0x006ed562	32		BFGEntityContainer and slot schema cluster		unidentified	gamebryo		game-entities
 0x006ed582	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#20	game-entities
 0x006ed587	47	get_type_BFGEntityContainerSlotHeavy			confirmed	gamebryo		
-0x006ed5b6	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#37	game-entities
+0x006ed5b6	0	get_type_BFGEntityContainerSlotHeavy_vtable_thunk			confirmed		0x008f9218#37	
 0x006ed5bb	32		BFGEntityContainer and slot schema cluster		unidentified	gamebryo		game-entities
 0x006ed5db	0		BFGEntityContainer and slot schema cluster		unidentified		0x008f9218#38	game-entities
 0x006ed5e0	43		BFGEntityContainer and slot schema cluster		unidentified	gamebryo		game-entities
@@ -19333,7 +19333,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eea45	40		collision-test callback/type support tail		unidentified	gamebryo		game-ai
 0x006eea6d	228		collision-test callback/type support tail		unidentified	gamebryo		game-ai
 0x006eeb51	47	get_type_BFGCollisionTest			confirmed	gamebryo		
-0x006eeb80	0		collision-test callback/type support tail		unidentified		0x008f9408#24	game-ai
+0x006eeb80	0	get_type_BFGCollisionTest_vtable_thunk			confirmed		0x008f9408#24	
 0x006eeb85	32		collision-test callback/type support tail		unidentified	gamebryo		game-ai
 0x006eeba5	0		collision-test callback/type support tail		unidentified		0x008f9408#25	game-ai
 0x006eebaa	0		collision-test callback/type support tail		unidentified		0x008f9408#23	game-ai
@@ -19503,7 +19503,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f97de	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9868#42	economy
 0x006f97e6	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9868#118	economy
 0x006f97ea	47	get_type_BFGEconomyTransactionData			confirmed	gamebryo		
-0x006f9819	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008d2868#29	economy
+0x006f9819	0	get_type_BFGEconomyTransactionData_vtable_thunk			confirmed		0x008d2868#29	
 0x006f981e	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008d2868#30	economy
 0x006f983e	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008d2868#33	economy
 0x006f9892	56		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
@@ -19638,7 +19638,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006fea21	583		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006fec68	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9eec#4	economy
 0x006fed83	47	get_type_BFGDetachInfo			confirmed	gamebryo		
-0x006fedb2	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9eec#14	economy
+0x006fedb2	0	get_type_BFGDetachInfo_vtable_thunk			confirmed		0x008f9eec#14	
 0x006fedb7	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
 0x006fedd7	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008f9eec#15	economy
 0x006feddc	92		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
@@ -21466,7 +21466,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075b76f	355		scene/model transform and XML property bridge		unidentified	gamebryo		ui
 0x0075b8d2	591		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#20	ui
 0x0075bb21	47	get_type_BFColorInterpolateSkyLayer			confirmed	gamebryo		
-0x0075bb50	0		scene/model transform and XML property bridge		unidentified		0x008fe758#25	
+0x0075bb50	0	get_type_BFColorInterpolateSkyLayer_vtable_thunk			confirmed		0x008fe758#25	
 0x0075bb55	32		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075bb75	0		scene/model transform and XML property bridge		unidentified		0x008fe758#26	
 0x0075bb7a	86		scene/model transform and XML property bridge		unidentified	gamebryo		ui
