@@ -8710,7 +8710,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00583368	107		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005833d3	107		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0058343e	106		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005834a8	134		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x005834a8	134	update_Miles_3d_listener_pose			confirmed			
 0x0058352e	56		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00583566	41		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0058358f	73		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8794,7 +8794,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00585b2e	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e13a4#1	ui
 0x00585b49	93	destroy_Miles_3d_sample_members			confirmed			
 0x00585ba6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e13a4#23	ui
-0x00585c8a	65		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e13a4#26	audio
+0x00585c8a	65	stop_BF2DSnd_playback			confirmed		0x008e13a4#26	
 0x00585ccb	22		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00585ce1	18		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00585cf3	22		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8825,7 +8825,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0058656e	60		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005865aa	160	open_Miles_3d_sample_handle			confirmed			
 0x0058664a	22		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00586660	82		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00586660	82	destroy_BFSoundMgr_miles_runtime			confirmed			
 0x005866b2	0	get_type_BFSndCrossFader			confirmed		0x008e14bc#2	
 0x005866df	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e14bc#3	ui
 0x005866ff	68		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8864,7 +8864,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0058769f	41	mark_Miles_3d_sample_end_of_stream			confirmed		0x008e15a8#25	
 0x005876c8	22		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005876de	113		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0058774f	45		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x0058774f	45	stop_BF3DSnd_playback			confirmed			
 0x0058777c	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e15a8#23	ui
 0x00587798	31		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005877b7	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e15a8#21	ui
@@ -8886,9 +8886,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00587c8e	76		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00587cda	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e1930#0	ui
 0x00587d21	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e1930#20	ui
-0x00587faa	92		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x00588006	66		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x00588048	102		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00587faa	92	apply_soundstage_room_type_to_Miles			confirmed			
+0x00588006	66	apply_Miles_3d_sample_environment_filters			confirmed			
+0x00588048	102	apply_Miles_sample_reverb_lowpass			confirmed			
 0x005880ae	107		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00588119	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e1930#24	ui
 0x00588173	47	get_type_BFSoundtag			confirmed			
@@ -8941,26 +8941,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0058931a	149		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005893af	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e1b0c#25	ui
 0x0058940e	374		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00589584	74		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00589584	74	allocate_Miles_2d_sample_handle			confirmed			
 0x005895ce	62	open_Miles_stream_from_filename			confirmed			
-0x0058960c	112		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x0058967c	72		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x005896c4	31		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x005896e3	90		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x0058973d	397		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x005898e1	37		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x00589906	111		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x0058960c	112	update_Miles_sample_volume_pan			confirmed			
+0x0058967c	72	configure_Miles_sample_looping			confirmed			
+0x005896c4	31	start_Miles_sample_or_stream			confirmed			
+0x005896e3	90	close_Miles_sample_or_stream			confirmed			
+0x0058973d	397	load_and_start_Miles_2d_source			confirmed			
+0x005898e1	37	register_Miles_sample_eos_callback			confirmed			
+0x00589906	111	construct_BFSoundMgr_miles_runtime			confirmed			
 0x00589975	75		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005899c0	404		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x005899c0	404	open_Miles_digital_driver_and_3d_provider			confirmed			
 0x00589b54	67		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00589b97	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00589b97	160	prepare_Miles_3d_sample_file_buffer			confirmed			
 0x00589c4e	79	update_Miles_3d_sample_volume			confirmed			
-0x00589c9d	313		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
-0x00589dd6	64		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00589c9d	313	start_Miles_3d_sample_playback			confirmed			
+0x00589dd6	64	release_Miles_3d_sample_handle			confirmed			
 0x00589e16	35	update_Miles_3d_sample_position			confirmed			
 0x00589e39	144		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00589ec9	114		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00589f3b	59		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			audio
+0x00589f3b	59	release_Miles_3d_sample_user_data			confirmed			
 0x00589f76	722	read_ambient_sound_config			confirmed			
 0x0058a248	194		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0058a30a	184		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -10684,17 +10684,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b6a2d	153		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b6b0d	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b6bad	47	get_type_BFTimeKeeper			confirmed	gamebryo		
-0x005b6bdc	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#2	ui
+0x005b6bdc	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59c0#1	ui
 0x005b6be1	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b6c01	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#3	ui
+0x005b6c01	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59c0#2	ui
 0x005b6c06	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b6c2c	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#22	ui
-0x005b6c42	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#23	ui
+0x005b6c2c	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5a14#0	ui
+0x005b6c42	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5a14#1	ui
 0x005b6c95	47	get_type_BFHeartbeatData			confirmed	gamebryo		
 0x005b6cc4	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008c4d58#194	ui
 0x005b6cc9	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008c4d58#195	ui
-0x005b6ce9	248		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		audio
-0x005b6de1	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#1	ui
+0x005b6ce9	248	construct_BFTimeKeeper_runtime			confirmed	gamebryo		
+0x005b6de1	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59c0#0	ui
 0x005b6dfc	54	destroy_time_manager_members			confirmed	gamebryo		
 0x005b6e32	97	sample_game_time_milliseconds			confirmed	gamebryo		
 0x005b6e93	102		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -10706,7 +10706,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b71ce	109		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b723b	88		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7293	75		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b7345	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#21	ui
+0x005b7345	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59c0#20	ui
 0x005b7556	98		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b75b8	106		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7622	210		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -10715,10 +10715,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b795d	58		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7997	69	initialize_high_resolution_time_period			confirmed	gamebryo		
 0x005b79dc	68		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b7a20	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#25	ui
+0x005b7a20	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5a14#3	ui
 0x005b7a38	64		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7a78	159		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b7b5e	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e59bc#27	ui
+0x005b7b5e	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5a14#5	ui
 0x005b7b71	156		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7c0d	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b7cad	66		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -21067,7 +21067,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074781d	47	get_type_BF2LegsGroundFitComponent			confirmed	gamebryo		
 0x0074784c	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008fda60#1	economy
 0x00747851	32		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy
-0x00747865	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008e59bc#0	economy
+0x00747865	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008e6504#0	economy
 0x00747871	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008fda60#2	economy
 0x0074790d	0		biome, entity XML, economy components, traversability, collision		unidentified		0x008fda60#0	economy
 0x00747928	117		biome, entity XML, economy components, traversability, collision		unidentified	gamebryo		economy

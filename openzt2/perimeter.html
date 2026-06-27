@@ -47,13 +47,13 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels, not recovered behavior. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. The vtable slot bar has its own slot-row denominator because many slots can point at the same function body. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
+  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels, not recovered behavior. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. Every distinct vtable method address is already represented in the function perimeter, so the remaining vtable bar uses the slot-row denominator. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them. Template-only type identities are the zero-slot rows that have no corresponding static cache cell.</p>
 
   <h3>Per-Class Method Perimeter</h3>
-  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a slot-level method-shape view. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address.</p>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a slot-level method-shape view. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address; the address-level method body appears in the function perimeter.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
@@ -178,9 +178,35 @@ function suspectedDomainSegments(rows){
   .sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))
   .map(([label,value],i)=>({label:`Unidentified: ${label}`,value,cls:classes[i%classes.length]}));
 }
+function identifiedGlobalSegments(gp){
+ const cats=[
+  {label:"Other identified: partly resolved mixed/static spans",cls:"seg-partial",match:/\bunresolved\b|mixed .*\b(static|runtime|data)|runtime island/i},
+  {label:"Other identified: type/token initialization flags",cls:"seg-known",match:/\bg_type_/i},
+  {label:"Other identified: AI/behavior/steering metadata",cls:"seg-domain-d",match:/bfai|bfbeh|bfbehavior|steering|steer_|task|action|docktap|syncset|followentity|fade|hide|animate|sendevent|force-priority|trick/i},
+  {label:"Other identified: renderer/graphics runtime",cls:"seg-domain-c",match:/renderer|render|direct3d|d3d|netimmerse|nisystem|nianimation|graphics|gfx|backbuffer|mesh|texture|material|terrain|effect|vertex|pixel|color-key|bounding-volume|gdi monitor|dxdiag|transparent|resource record|resource manager|resource collection|current renderer|capability summary|capability diagnostics|adapter capability|adapter query|device capability|frame\/update copied|vector routine tier|height\/sample/i},
+  {label:"Other identified: UI/app/input/platform state",cls:"seg-domain-a",match:/\b(ui|ime|imeuilib|keyboard|window|hwconfig|hw config|app-shell|profile|mode-context|motd|gesturetrace|gesture-trace|readoutbar|fullscreen-button|sendmessagea|vista|aero|status\/ui|presentation|process startup|startup\/shutdown|platform counter|active object\/window|object-detail|game-mode\/profile|static ui|inline ui|typed-value adapter|typed-value projection|typed-value cache|typed lookup|handler registry)\b|g_ui_|shared_inline_ui|shared_globe_ui|dependent_update_registry/i},
+  {label:"Other identified: XML/resource/serialization support",cls:"seg-domain-f",match:/xml|resource|serialization|serial|locale|language-id|output buffer|entity match|known-name|curve|interpolation|sample serialization|string intern|marker string|static asset/i},
+  {label:"Other identified: gameplay/entity lookup caches",cls:"seg-domain-b",match:/guest|animal|entity|path|fence|tank|tankgate|gate|transport|tour|tranq|cloning|dino|training|groundstation|zooboundary|placement|category|species|food|cure|disease|b_disease|adoption|economy|globe|buy-panel|catalog|rampage|physics|collision|fitting|dropoff|suitability|animation|decal|locomotion|skeleton|target|view|icon\/name|base\/decal|fall\/impact|staff|grandstand|tankplatform|cloningcenter|mode_climb_ladder|notrainingplatform|ground-track|tool|component\/property|event scoring|visible-animal|score-divider|high-score|gift|show_num|bfg/i},
+  {label:"Other identified: platform/CRT/network/logging support",cls:"seg-domain-g",match:/crt|msvcrt|security|debugger|fdiv|invalid-parameter|x87|sse|com apartment|network|dll module|proc-pointer|function-pointer|logging|survey|gameid|winmm|imm proc|d3d9 loader|direct3dcreate9|module global|hinstance|startup handle|low-system-memory|strings module|upload/i},
+  {label:"Other identified: runtime allocators/counters/lists",cls:"seg-domain-e",match:/counter|allocator|freelist|list head|list|pool|bucket|small_pool|object\/id|runtime storage|allocation pointer|callback dispatch count|helper-return cache|scratch object|scalar cache|capacity|cursor cache|id word counter|record table|sentinel|shared runtime object|runtime record serial|default selector|global mode\/detail selector|mode word global|copied global|linked-list|singleton pointer|collection pointer|manager object pointer|receiver-owner family|holder vtable sequence|lazy two-record|lazy runtime|serial\/id|object serial|secondary shared runtime|shared runtime|value object global/i}
+ ];
+ const counts={};
+ for(const r of gp.filter(r=>r.status==="identified")){
+  const name=r.name||"";
+  const cat=cats.find(c=>c.match.test(name));
+  const label=cat?cat.label:"Other identified: miscellaneous named statics";
+  counts[label]=(counts[label]||0)+1;
+ }
+ return cats
+  .map((c,i)=>({label:c.label,value:counts[c.label]||0,cls:c.cls,order:i}))
+  .concat(counts["Other identified: miscellaneous named statics"]?[{label:"Other identified: miscellaneous named statics",value:counts["Other identified: miscellaneous named statics"],cls:"seg-nameonly",order:cats.length}]:[])
+  .filter(s=>s.value>0)
+  .sort((a,b)=>b.value-a.value||a.order-b.order)
+  .map(({label,value,cls})=>({label,value,cls}));
+}
 function staticTypeSegments(gp,typeRows){
  const p=pivotWeights(typeRows);
- const otherIdentified=gp.filter(r=>r.status==="identified").length;
+ const otherIdentified=identifiedGlobalSegments(gp);
  const unidentified=gp.filter(r=>r.status==="unidentified").length;
  const order=[
   ["Template-only: zero virtual slots","seg-all"],
@@ -198,7 +224,7 @@ function staticTypeSegments(gp,typeRows){
  const known=new Set(order.map(([label])=>label));
  const segments=order.map(([label,cls])=>({label,value:p[label]||0,cls}));
  for(const [label,value] of Object.entries(p))if(!known.has(label))segments.push({label,value,cls:"seg-nameonly"});
- segments.push({label:"Other identified global/static cells",value:otherIdentified,cls:"seg-known"});
+ segments.push(...otherIdentified);
  segments.push({label:"Unidentified global/static cells",value:unidentified,cls:"seg-open"});
  return segments.filter(s=>s.value>0);
 }
@@ -206,12 +232,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const wrapperSupportRows=fp.filter(r=>r.status==="wrapper-indirected").length;
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
- const normAddr=a=>String(a||"").trim().toLowerCase();
  const confirmedVtableSlots=vt.filter(r=>r.status==="confirmed");
- const confirmedVtableMethodAddrs=new Set(confirmedVtableSlots.map(r=>normAddr(r.method_addr)).filter(Boolean));
- const functionEntryAddrs=new Set(nativeFunctions.map(r=>normAddr(r.address)).filter(Boolean));
- const projectedVtableMethodAddrs=[...confirmedVtableMethodAddrs].filter(a=>functionEntryAddrs.has(a)).length;
- const unprojectedVtableMethodAddrs=confirmedVtableMethodAddrs.size-projectedVtableMethodAddrs;
  const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
  const functionOpenRows=nativeFunctions.filter(r=>r.status==="unidentified");
  const staticType=staticTypeSegments(gp,typeRows);
@@ -230,8 +251,7 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  ];
  const domains=[
   {name:"Function recovery frontier",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted native function behavior and neutralized wrapper indirection sit beside the remaining known function-entry work.",uncertainty:`The unidentified function slices are suspected structural domains from zt-function-perimeter.tsv, not accepted behavior recovery. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(wrapperSupportRows)} function-perimeter rows are generated depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function-entry recovery.`},
-  {name:"Vtable method address projection",openEnded:true,den:`${fmt(confirmedVtableMethodAddrs.size)} distinct identified vtable method addresses`,segments:[{label:"Present in function perimeter",value:projectedVtableMethodAddrs,cls:"seg-some"},{label:"Missing from function perimeter",value:unprojectedVtableMethodAddrs,cls:"seg-support"}],answer:"Whether confirmed vtable method addresses have corresponding function-perimeter entries.",uncertainty:`This reconciles distinct method addresses, not slot rows. The slot-level denominator is shown separately below: ${fmt(vslotDone)} identified slot rows out of ${fmt(vt.length)} total slot rows.`},
-  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, other identified statics, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:"Driven by zt-type-coverage-reconciliation.tsv. The six address-only vtable owner rows and ten foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape."},
+  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, name-family groups for other identified statics, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:"Driven by zt-type-coverage-reconciliation.tsv. The six address-only vtable owner rows and ten foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Other identified global/static cells are grouped by their accepted row names. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape."},
   {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Slot method identified",value:vslotDone,cls:"seg-accepted"},{label:"Slot method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slot rows have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies, inherited helpers, and shared stubs are intentionally counted once per slot row."},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
