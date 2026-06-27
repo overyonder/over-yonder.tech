@@ -154,7 +154,7 @@ const AUXILIARY_PROCESS_SPACES=new Set(["disk-child-e5","runtime-child-e5","disk
 const DISK_BACKING_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
 const ASSET_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
 const LINKED_PROJECTION_SPACES=new Set(["disk","runtime-parent","unwrapped","depeppered","stripped"]);
-const LINKED_STRUCTURAL_BUCKET_NAMES=new Set(["runtime memory","executable","PE header table"]);
+const LINKED_STRUCTURAL_BUCKET_NAMES=new Set(["runtime memory","zt.exe","executable","PE header table"]);
 const MAX_XXD_BYTES=65536;
 function spaceLabel(space){return SPACE_LABELS[space]||space}
 function leafs(n,out=[]){if(n.children?.length)n.children.forEach(c=>leafs(c,out));else out.push(n);return out}
@@ -659,6 +659,11 @@ function linkedRangeForPeer(sourceSpace,peerSpace,node){
  if(sourceSpace!=="disk"&&peerSpace==="disk")return runtimeToDiskRange(node);
  return node;
 }
+function linkedStructuralBucketName(peerSpace,target){
+ if(target.name==="zt.exe"&&peerSpace!=="disk")return "runtime memory";
+ if(target.name==="runtime memory"&&peerSpace==="disk")return "zt.exe";
+ return LINKED_STRUCTURAL_BUCKET_NAMES.has(target.name)?target.name:null;
+}
 function makeExplorer(space,tree){const root=createPane(space),axis=root.dataset.axis,viewRoot={space,start:tree.start,end:tree.end,name:spaceLabel(space),status:"",details:"",children:[tree]},stack=[viewRoot];let logScale=true,hideOmitted=true,hideAssets=false,hideAuxiliary=false,zoomStart=0,zoomEnd=1;
  let panDrag=null;
  let api=null;
@@ -740,7 +745,8 @@ function makeExplorer(space,tree){const root=createPane(space),axis=root.dataset
   return true;
  }
  function focusLinkedRange(sourceSpace,target){
-  const named=LINKED_STRUCTURAL_BUCKET_NAMES.has(target.name)?findByName(viewRoot,target.name):null;
+  const structuralName=linkedStructuralBucketName(space,target);
+  const named=structuralName?findByName(viewRoot,structuralName):null;
   if(named)return focusRange(named);
   const mapped=linkedRangeForPeer(sourceSpace,space,target);
   return mapped?focusRange(mapped):false;
