@@ -18556,189 +18556,189 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00892e1c	31		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-ai(medium)
 0x00892e3b	129		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-ai(medium)
 0x00892ebc	522		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-ai(medium)
-0x0089315c	6	import_thunk_D3D9_D3DPERF_BeginEvent			candidate	d3d9		
-0x00893162	6	import_thunk_D3D9_D3DPERF_EndEvent			candidate	d3d9		
-0x00893168	6	import_thunk_MSVCR80_rand			candidate			
+0x0089315c	6	import_thunk_D3D9_D3DPERF_BeginEvent			confirmed	d3d9		
+0x00893162	6	import_thunk_D3D9_D3DPERF_EndEvent			confirmed	d3d9		
+0x00893168	6	import_thunk_MSVCR80_rand			confirmed			
 0x0089316e	6	call_invalid_parameter_handler			confirmed			
-0x00893174	6	import_thunk_MSVCR80_atoi			candidate			
-0x0089317a	6	import_thunk_MSVCR80_mbscmp			candidate			
-0x00893186	6	import_thunk_MSVCR80_memcpy_s			candidate			
+0x00893174	6	import_thunk_MSVCR80_atoi			confirmed			
+0x0089317a	6	import_thunk_MSVCR80_mbscmp			confirmed			
+0x00893186	6	import_thunk_MSVCR80_memcpy_s			confirmed			
 0x008931d5	156		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893271	9		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x0089327a	18	register_onexit_callback			confirmed			
-0x0089328c	6	import_thunk_MSVCR80_memmove_s			candidate			
-0x00893292	6	import_thunk_MSVCR80_mbsnbcmp			candidate			
-0x00893298	6	import_thunk_MSVCR80_strstr			candidate			
-0x0089329e	6	import_thunk_MSVCR80_mbsinc			candidate			
-0x008932a4	6	import_thunk_MSVCR80_mbsrchr			candidate			
-0x008932aa	6	import_thunk_MSVCR80_mbsnbcpy_s			candidate			
-0x008932b0	6	import_thunk_MSVCR80_mbschr			candidate			
-0x008932b6	6	import_thunk_MSVCR80_mbsdec			candidate			
-0x008932bc	6	import_thunk_MSVCR80_ismbcspace			candidate			
-0x008932c2	6	import_thunk_MSVCR80_mbsicmp			candidate			
+0x0089328c	6	import_thunk_MSVCR80_memmove_s			confirmed			
+0x00893292	6	import_thunk_MSVCR80_mbsnbcmp			confirmed			
+0x00893298	6	import_thunk_MSVCR80_strstr			confirmed			
+0x0089329e	6	import_thunk_MSVCR80_mbsinc			confirmed			
+0x008932a4	6	import_thunk_MSVCR80_mbsrchr			confirmed			
+0x008932aa	6	import_thunk_MSVCR80_mbsnbcpy_s			confirmed			
+0x008932b0	6	import_thunk_MSVCR80_mbschr			confirmed			
+0x008932b6	6	import_thunk_MSVCR80_mbsdec			confirmed			
+0x008932bc	6	import_thunk_MSVCR80_ismbcspace			confirmed			
+0x008932c2	6	import_thunk_MSVCR80_mbsicmp			confirmed			
 0x008932c8	6	crt_heap_alloc_trampoline			confirmed			
-0x008932ce	6	import_thunk_MSVCR80_exit			candidate			
-0x008932d4	6	import_thunk_MSVCR80_sprintf			candidate			
-0x008932da	6	import_thunk_MSVCR80_strncpy			candidate			
-0x008932e0	6	import_thunk_MSVCR80_strrchr			candidate			
-0x008932e6	6	import_thunk_MSVCR80_strncat			candidate			
-0x008932ec	6	import_thunk_MSVCR80_strtol			candidate			
-0x008932f2	6	import_thunk_MSVCR80_ceil			candidate			
-0x008932f8	6	import_thunk_MSVCR80_sprintf_s			candidate			
-0x008932fe	6	import_thunk_MSVCR80_vswprintf			candidate			
-0x00893304	6	import_thunk_MSVCR80_get_winmajor			candidate			
-0x0089330a	6	import_thunk_MSVCR80_get_winminor			candidate			
-0x00893310	6	import_thunk_MSVCR80_get_osver			candidate			
-0x00893316	6	import_thunk_MSVCR80_setlocale			candidate			
-0x0089331c	6	import_thunk_MSVCR80_time64			candidate			
-0x00893322	6	import_thunk_MSVCR80_srand			candidate			
-0x00893328	6	import_thunk_MSVCR80_mbsstr			candidate			
-0x0089332e	6	import_thunk_MSVCR80_ismbcdigit			candidate			
-0x0089364a	6	import_thunk_MSVCR80_fprintf			candidate			
-0x00893650	6	import_thunk_MSVCR80_fclose			candidate			
-0x00893656	6	import_thunk_MSVCR80_strcpy_s			candidate			
-0x0089365c	6	import_thunk_MSVCR80_strncpy_s			candidate			
-0x00893662	6	import_thunk_MSVCR80_strcat_s			candidate			
-0x00893668	6	import_thunk_MSVCR80_strtok_s			candidate			
-0x0089366e	6	import_thunk_MSVCR80_qsort			candidate			
-0x00893674	6	import_thunk_MSVCR80_vsprintf_s			candidate			
-0x0089367a	6	import_thunk_MSVCR80_mbsnbcat_s			candidate			
-0x00893680	6	import_thunk_MSVCR80_mbslen			candidate			
-0x00893686	6	import_thunk_MSVCR80_mbtowc			candidate			
-0x0089368c	6	import_thunk_MSVCR80_mbclen			candidate			
-0x00893692	6	import_thunk_MSVCR80_tolower			candidate			
-0x00893698	6	import_thunk_MSVCR80_toupper			candidate			
-0x0089369e	6	import_thunk_MSVCR80_vsnprintf_s			candidate			
-0x008936a4	6	import_thunk_MSVCR80_fwrite			candidate			
-0x008936aa	6	import_thunk_MSVCR80_fread			candidate			
-0x008936b0	6	import_thunk_MSVCR80_fopen_s			candidate			
-0x008936b6	6	import_thunk_MSVCR80_fseek			candidate			
-0x008936bc	6	import_thunk_MSVCR80_ftell			candidate			
-0x008936c2	6	import_thunk_MSVCR80_ismbcalpha			candidate			
-0x008936c8	6	import_thunk_MSVCR80_snprintf_s			candidate			
-0x008936ce	6	import_thunk_MSVCR80_fullpath			candidate			
-0x008936d4	6	import_thunk_MSVCR80_strdup			candidate			
+0x008932ce	6	import_thunk_MSVCR80_exit			confirmed			
+0x008932d4	6	import_thunk_MSVCR80_sprintf			confirmed			
+0x008932da	6	import_thunk_MSVCR80_strncpy			confirmed			
+0x008932e0	6	import_thunk_MSVCR80_strrchr			confirmed			
+0x008932e6	6	import_thunk_MSVCR80_strncat			confirmed			
+0x008932ec	6	import_thunk_MSVCR80_strtol			confirmed			
+0x008932f2	6	import_thunk_MSVCR80_ceil			confirmed			
+0x008932f8	6	import_thunk_MSVCR80_sprintf_s			confirmed			
+0x008932fe	6	import_thunk_MSVCR80_vswprintf			confirmed			
+0x00893304	6	import_thunk_MSVCR80_get_winmajor			confirmed			
+0x0089330a	6	import_thunk_MSVCR80_get_winminor			confirmed			
+0x00893310	6	import_thunk_MSVCR80_get_osver			confirmed			
+0x00893316	6	import_thunk_MSVCR80_setlocale			confirmed			
+0x0089331c	6	import_thunk_MSVCR80_time64			confirmed			
+0x00893322	6	import_thunk_MSVCR80_srand			confirmed			
+0x00893328	6	import_thunk_MSVCR80_mbsstr			confirmed			
+0x0089332e	6	import_thunk_MSVCR80_ismbcdigit			confirmed			
+0x0089364a	6	import_thunk_MSVCR80_fprintf			confirmed			
+0x00893650	6	import_thunk_MSVCR80_fclose			confirmed			
+0x00893656	6	import_thunk_MSVCR80_strcpy_s			confirmed			
+0x0089365c	6	import_thunk_MSVCR80_strncpy_s			confirmed			
+0x00893662	6	import_thunk_MSVCR80_strcat_s			confirmed			
+0x00893668	6	import_thunk_MSVCR80_strtok_s			confirmed			
+0x0089366e	6	import_thunk_MSVCR80_qsort			confirmed			
+0x00893674	6	import_thunk_MSVCR80_vsprintf_s			confirmed			
+0x0089367a	6	import_thunk_MSVCR80_mbsnbcat_s			confirmed			
+0x00893680	6	import_thunk_MSVCR80_mbslen			confirmed			
+0x00893686	6	import_thunk_MSVCR80_mbtowc			confirmed			
+0x0089368c	6	import_thunk_MSVCR80_mbclen			confirmed			
+0x00893692	6	import_thunk_MSVCR80_tolower			confirmed			
+0x00893698	6	import_thunk_MSVCR80_toupper			confirmed			
+0x0089369e	6	import_thunk_MSVCR80_vsnprintf_s			confirmed			
+0x008936a4	6	import_thunk_MSVCR80_fwrite			confirmed			
+0x008936aa	6	import_thunk_MSVCR80_fread			confirmed			
+0x008936b0	6	import_thunk_MSVCR80_fopen_s			confirmed			
+0x008936b6	6	import_thunk_MSVCR80_fseek			confirmed			
+0x008936bc	6	import_thunk_MSVCR80_ftell			confirmed			
+0x008936c2	6	import_thunk_MSVCR80_ismbcalpha			confirmed			
+0x008936c8	6	import_thunk_MSVCR80_snprintf_s			confirmed			
+0x008936ce	6	import_thunk_MSVCR80_fullpath			confirmed			
+0x008936d4	6	import_thunk_MSVCR80_strdup			confirmed			
 0x008936da	6	crt_free_trampoline			confirmed			
-0x008936e0	6	import_thunk_MSVCR80_atof			candidate			
-0x008936e6	6	import_thunk_MSVCR80_ismbcalnum			candidate			
-0x008936ec	6	import_thunk_MSVCR80_mbctolower			candidate			
-0x008936f2	6	import_thunk_MSVCR80_mb_cur_max_func			candidate			
-0x008936f8	6	import_thunk_MSVCR80_wctomb_s			candidate			
-0x008936fe	6	import_thunk_MSVCR80_mbsnbicmp			candidate			
-0x00893704	6	import_thunk_MSVCR80_fflush			candidate			
-0x0089370a	6	import_thunk_MSVCR80_wcscpy_s			candidate			
+0x008936e0	6	import_thunk_MSVCR80_atof			confirmed			
+0x008936e6	6	import_thunk_MSVCR80_ismbcalnum			confirmed			
+0x008936ec	6	import_thunk_MSVCR80_mbctolower			confirmed			
+0x008936f2	6	import_thunk_MSVCR80_mb_cur_max_func			confirmed			
+0x008936f8	6	import_thunk_MSVCR80_wctomb_s			confirmed			
+0x008936fe	6	import_thunk_MSVCR80_mbsnbicmp			confirmed			
+0x00893704	6	import_thunk_MSVCR80_fflush			confirmed			
+0x0089370a	6	import_thunk_MSVCR80_wcscpy_s			confirmed			
 0x00893710	6	crt_malloc_trampoline			confirmed			
-0x00893716	6	import_thunk_MSVCR80_splitpath_s			candidate			
-0x0089371c	6	import_thunk_MSVCR80_strncmp			candidate			
-0x00893722	6	import_thunk_MSVCR80_fileno			candidate			
-0x00893728	6	import_thunk_MSVCR80_dup			candidate			
-0x0089372e	6	import_thunk_MSVCR80_fdopen			candidate			
-0x00893734	6	import_thunk_MSVCR80_sscanf_s			candidate			
-0x0089373a	6	import_thunk_MSVCR80_fputs			candidate			
-0x00893740	6	import_thunk_MSVCR80_itoa_s			candidate			
-0x00893746	6	import_thunk_MSVCR80_ismbcprint			candidate			
-0x0089374c	6	import_thunk_MSVCR80_stricmp			candidate			
-0x00893752	6	import_thunk_MSVCR80_calloc			candidate			
-0x00893758	6	import_thunk_MSVCR80_memmove			candidate			
-0x0089375e	6	import_thunk_MSVCR80_wcstombs_s			candidate			
-0x00893764	6	import_thunk_MSVCR80_strncat_s			candidate			
-0x0089376a	6	import_thunk_MSVCR80_strchr			candidate			
-0x00893770	6	import_thunk_MSVCR80_ldiv			candidate			
-0x00893776	6	import_thunk_MSVCR80_isspace			candidate			
-0x0089377c	6	import_thunk_MSVCR80_longjmp			candidate			
-0x00893782	6	import_thunk_MSVCR80_p_iob			candidate			
-0x00893788	6	import_thunk_MSVCR80_dupenv_s			candidate			
-0x0089378e	6	import_thunk_MSVCR80_snprintf			candidate			
-0x00893794	6	import_thunk_MSVCR80_fgets			candidate			
-0x0089379a	6	import_thunk_MSVCR80_fopen			candidate			
-0x008937a0	6	import_thunk_MSVCR80_feof			candidate			
-0x008937a6	6	import_thunk_MSVCR80_sscanf			candidate			
-0x008937ac	6	import_thunk_MSVCR80_strcspn			candidate			
-0x008937b2	6	import_thunk_MSVCR80_strlwr_s			candidate			
-0x008937b8	6	import_thunk_MSVCR80_strnicmp			candidate			
-0x008937be	6	import_thunk_MSVCR80_mkdir			candidate			
-0x008937c4	6	import_thunk_MSVCR80_getenv			candidate			
-0x008937ca	6	import_thunk_MSVCR80_access			candidate			
-0x008937d0	6	import_thunk_MSVCR80_makepath_s			candidate			
-0x008937d6	6	import_thunk_MSVCR80_isalpha			candidate			
-0x008937dc	6	import_thunk_MSVCR80_strcoll			candidate			
-0x008937e2	6	import_thunk_MSVCR80_strtod			candidate			
-0x008937e8	6	import_thunk_MSVCR80_isalnum			candidate			
-0x008937ee	6	import_thunk_MSVCR80_isdigit			candidate			
-0x008937f4	6	import_thunk_MSVCR80_iscntrl			candidate			
-0x008937fa	6	import_thunk_MSVCR80_realloc			candidate			
-0x00893800	6	import_thunk_MSVCR80_type_info_name		name	candidate			
+0x00893716	6	import_thunk_MSVCR80_splitpath_s			confirmed			
+0x0089371c	6	import_thunk_MSVCR80_strncmp			confirmed			
+0x00893722	6	import_thunk_MSVCR80_fileno			confirmed			
+0x00893728	6	import_thunk_MSVCR80_dup			confirmed			
+0x0089372e	6	import_thunk_MSVCR80_fdopen			confirmed			
+0x00893734	6	import_thunk_MSVCR80_sscanf_s			confirmed			
+0x0089373a	6	import_thunk_MSVCR80_fputs			confirmed			
+0x00893740	6	import_thunk_MSVCR80_itoa_s			confirmed			
+0x00893746	6	import_thunk_MSVCR80_ismbcprint			confirmed			
+0x0089374c	6	import_thunk_MSVCR80_stricmp			confirmed			
+0x00893752	6	import_thunk_MSVCR80_calloc			confirmed			
+0x00893758	6	import_thunk_MSVCR80_memmove			confirmed			
+0x0089375e	6	import_thunk_MSVCR80_wcstombs_s			confirmed			
+0x00893764	6	import_thunk_MSVCR80_strncat_s			confirmed			
+0x0089376a	6	import_thunk_MSVCR80_strchr			confirmed			
+0x00893770	6	import_thunk_MSVCR80_ldiv			confirmed			
+0x00893776	6	import_thunk_MSVCR80_isspace			confirmed			
+0x0089377c	6	import_thunk_MSVCR80_longjmp			confirmed			
+0x00893782	6	import_thunk_MSVCR80_p_iob			confirmed			
+0x00893788	6	import_thunk_MSVCR80_dupenv_s			confirmed			
+0x0089378e	6	import_thunk_MSVCR80_snprintf			confirmed			
+0x00893794	6	import_thunk_MSVCR80_fgets			confirmed			
+0x0089379a	6	import_thunk_MSVCR80_fopen			confirmed			
+0x008937a0	6	import_thunk_MSVCR80_feof			confirmed			
+0x008937a6	6	import_thunk_MSVCR80_sscanf			confirmed			
+0x008937ac	6	import_thunk_MSVCR80_strcspn			confirmed			
+0x008937b2	6	import_thunk_MSVCR80_strlwr_s			confirmed			
+0x008937b8	6	import_thunk_MSVCR80_strnicmp			confirmed			
+0x008937be	6	import_thunk_MSVCR80_mkdir			confirmed			
+0x008937c4	6	import_thunk_MSVCR80_getenv			confirmed			
+0x008937ca	6	import_thunk_MSVCR80_access			confirmed			
+0x008937d0	6	import_thunk_MSVCR80_makepath_s			confirmed			
+0x008937d6	6	import_thunk_MSVCR80_isalpha			confirmed			
+0x008937dc	6	import_thunk_MSVCR80_strcoll			confirmed			
+0x008937e2	6	import_thunk_MSVCR80_strtod			confirmed			
+0x008937e8	6	import_thunk_MSVCR80_isalnum			confirmed			
+0x008937ee	6	import_thunk_MSVCR80_isdigit			confirmed			
+0x008937f4	6	import_thunk_MSVCR80_iscntrl			confirmed			
+0x008937fa	6	import_thunk_MSVCR80_realloc			confirmed			
+0x00893800	6	import_thunk_MSVCR80_type_info_name		name	confirmed			
 0x00893806	50		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893864	75		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x008938af	24		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x008938c8	6	import_thunk_MSVCR80_unlock			candidate			
-0x008938ce	6	import_thunk_MSVCR80_dllonexit			candidate			
-0x008938d4	6	import_thunk_MSVCR80_lock			candidate			
+0x008938c8	6	import_thunk_MSVCR80_unlock			confirmed			
+0x008938ce	6	import_thunk_MSVCR80_dllonexit			confirmed			
+0x008938d4	6	import_thunk_MSVCR80_lock			confirmed			
 0x008938dc	69		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893921	20		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x008939a4	6	import_thunk_MSVCR80_amsg_exit			candidate			
+0x008939a4	6	import_thunk_MSVCR80_amsg_exit			confirmed			
 0x008939aa	36		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x008939f2	6	import_thunk_MSVCR80_XcptFilter			candidate			
+0x008939f2	6	import_thunk_MSVCR80_XcptFilter			confirmed			
 0x00893a00	41		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893a30	66		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893a80	164		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x00893b3c	6	import_thunk_MSVCR80_initterm			candidate			
-0x00893b42	6	import_thunk_MSVCR80_initterm_e			candidate			
+0x00893b3c	6	import_thunk_MSVCR80_initterm			confirmed			
+0x00893b42	6	import_thunk_MSVCR80_initterm_e			confirmed			
 0x00893b48	41		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893b71	3		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893b74	148		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x00893c08	6	import_thunk_MSVCR80_terminate			candidate			
-0x00893c0e	6	import_thunk_MSVCR80_type_info_type_info_dtor_internal_method			candidate			
+0x00893c08	6	import_thunk_MSVCR80_terminate			confirmed			
+0x00893c0e	6	import_thunk_MSVCR80_type_info_type_info_dtor_internal_method			confirmed			
 0x00893c14	15		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x00893c24	6	import_thunk_MSVCR80_except_handler4_common			candidate			
-0x00893c2a	6	import_thunk_MSVCR80_invoke_watson			candidate			
-0x00893c30	6	import_thunk_MSVCR80_controlfp_s			candidate			
+0x00893c24	6	import_thunk_MSVCR80_except_handler4_common			confirmed			
+0x00893c2a	6	import_thunk_MSVCR80_invoke_watson			confirmed			
+0x00893c30	6	import_thunk_MSVCR80_controlfp_s			confirmed			
 0x00893c36	260		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x00893d3a	6	import_thunk_MSVCR80_crt_debugger_hook			candidate			
+0x00893d3a	6	import_thunk_MSVCR80_crt_debugger_hook			confirmed			
 0x00893d40	63		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893d7f	58		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x00893dd1	63		CRT, compiler, allocator, and numeric helper tail		unidentified	crt		allocator/CRT(medium)
-0x00893e28	6	import_thunk_D3DX9_32_D3DXVec3Normalize			candidate	d3d9		
-0x00893e2e	6	import_thunk_D3DX9_32_D3DXLoadSurfaceFromSurface			candidate	d3d9		
-0x00893e34	6	import_thunk_D3DX9_32_D3DXAssembleShaderFromFileA			candidate	d3d9		
-0x00893e3a	6	import_thunk_D3DX9_32_D3DXMatrixInverse			candidate	d3d9		
-0x00893e40	6	import_thunk_D3DX9_32_D3DXVec4Transform			candidate	d3d9		
-0x00893e46	6	import_thunk_D3DX9_32_D3DXMatrixMultiply			candidate	d3d9		
-0x00893e4c	6	import_thunk_D3DX9_32_D3DXMatrixRotationAxis			candidate	d3d9		
-0x00893e52	6	import_thunk_D3DX9_32_D3DXMatrixRotationQuaternion			candidate	d3d9		
-0x00893e58	6	import_thunk_D3DX9_32_D3DXMatrixTranspose			candidate	d3d9		
-0x00893e5e	6	import_thunk_D3DX9_32_D3DXVec3Transform			candidate	d3d9		
-0x00893e64	6	import_thunk_D3DX9_32_D3DXCreateTextureFromFileInMemory			candidate	d3d9		
-0x00893e6a	6	import_thunk_D3DX9_32_D3DXCreateTextureFromFileInMemoryEx			candidate	d3d9		
-0x00893e70	6	import_thunk_D3DX9_32_D3DXGetImageInfoFromFileInMemory			candidate	d3d9		
-0x00893e76	6	import_thunk_D3DX9_32_D3DXCreateCubeTextureFromFileInMemory			candidate	d3d9		
-0x00893e7c	6	import_thunk_D3DX9_32_D3DXCreateEffect			candidate	d3d9		
-0x00893e82	6	import_thunk_D3DX9_32_D3DXCreateFontA			candidate	d3d9		
-0x00893e88	6	import_thunk_D3DX9_32_D3DXCreateSprite			candidate	d3d9		
-0x00893e8e	6	import_thunk_D3DX9_32_D3DXQuaternionRotationAxis			candidate	d3d9		
-0x00893e94	6	import_thunk_D3DX9_32_D3DXQuaternionMultiply			candidate	d3d9		
-0x00893e9a	6	import_thunk_D3DX9_32_D3DXQuaternionToAxisAngle			candidate	d3d9		
-0x00893ea0	6	import_thunk_D3DX9_32_D3DXVec2Normalize			candidate	d3d9		
-0x00893ea6	6	import_thunk_D3DX9_32_D3DXQuaternionNormalize			candidate	d3d9		
-0x00893eac	6	import_thunk_D3D9_Direct3DCreate9			candidate	d3d9		
-0x00893eb2	6	import_thunk_DSOUND_GetDeviceID			candidate			
+0x00893e28	6	import_thunk_D3DX9_32_D3DXVec3Normalize			confirmed	d3d9		
+0x00893e2e	6	import_thunk_D3DX9_32_D3DXLoadSurfaceFromSurface			confirmed	d3d9		
+0x00893e34	6	import_thunk_D3DX9_32_D3DXAssembleShaderFromFileA			confirmed	d3d9		
+0x00893e3a	6	import_thunk_D3DX9_32_D3DXMatrixInverse			confirmed	d3d9		
+0x00893e40	6	import_thunk_D3DX9_32_D3DXVec4Transform			confirmed	d3d9		
+0x00893e46	6	import_thunk_D3DX9_32_D3DXMatrixMultiply			confirmed	d3d9		
+0x00893e4c	6	import_thunk_D3DX9_32_D3DXMatrixRotationAxis			confirmed	d3d9		
+0x00893e52	6	import_thunk_D3DX9_32_D3DXMatrixRotationQuaternion			confirmed	d3d9		
+0x00893e58	6	import_thunk_D3DX9_32_D3DXMatrixTranspose			confirmed	d3d9		
+0x00893e5e	6	import_thunk_D3DX9_32_D3DXVec3Transform			confirmed	d3d9		
+0x00893e64	6	import_thunk_D3DX9_32_D3DXCreateTextureFromFileInMemory			confirmed	d3d9		
+0x00893e6a	6	import_thunk_D3DX9_32_D3DXCreateTextureFromFileInMemoryEx			confirmed	d3d9		
+0x00893e70	6	import_thunk_D3DX9_32_D3DXGetImageInfoFromFileInMemory			confirmed	d3d9		
+0x00893e76	6	import_thunk_D3DX9_32_D3DXCreateCubeTextureFromFileInMemory			confirmed	d3d9		
+0x00893e7c	6	import_thunk_D3DX9_32_D3DXCreateEffect			confirmed	d3d9		
+0x00893e82	6	import_thunk_D3DX9_32_D3DXCreateFontA			confirmed	d3d9		
+0x00893e88	6	import_thunk_D3DX9_32_D3DXCreateSprite			confirmed	d3d9		
+0x00893e8e	6	import_thunk_D3DX9_32_D3DXQuaternionRotationAxis			confirmed	d3d9		
+0x00893e94	6	import_thunk_D3DX9_32_D3DXQuaternionMultiply			confirmed	d3d9		
+0x00893e9a	6	import_thunk_D3DX9_32_D3DXQuaternionToAxisAngle			confirmed	d3d9		
+0x00893ea0	6	import_thunk_D3DX9_32_D3DXVec2Normalize			confirmed	d3d9		
+0x00893ea6	6	import_thunk_D3DX9_32_D3DXQuaternionNormalize			confirmed	d3d9		
+0x00893eac	6	import_thunk_D3D9_Direct3DCreate9			confirmed	d3d9		
+0x00893eb2	6	import_thunk_DSOUND_GetDeviceID			confirmed			
 0x00893ed0	16		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
-0x00893ee0	6	import_thunk_VERSION_GetFileVersionInfoSizeA			candidate			
-0x00893ee6	6	import_thunk_VERSION_GetFileVersionInfoA			candidate			
-0x00893eec	6	import_thunk_VERSION_VerQueryValueA			candidate			
-0x00893ef2	6	import_thunk_IMM32_ImmNotifyIME			candidate			
-0x00893ef8	6	import_thunk_IMM32_ImmIsIME			candidate			
-0x00893efe	6	import_thunk_IMM32_ImmGetOpenStatus			candidate			
-0x00893f04	6	import_thunk_IMM32_ImmGetCandidateListW			candidate			
-0x00893f10	6	import_thunk_IMM32_ImmReleaseContext			candidate			
-0x00893f1c	6	import_thunk_IMM32_ImmGetIMEFileNameA			candidate			
-0x00893f22	6	import_thunk_IMM32_ImmAssociateContext			candidate			
-0x00893f28	6	import_thunk_IMM32_ImmGetDefaultIMEWnd			candidate			
-0x00893f2e	6	import_thunk_IMM32_ImmGetContext			candidate			
-0x00893f34	6	import_thunk_IMM32_ImmGetVirtualKey			candidate			
-0x00893f3a	6	import_thunk_IMM32_ImmGetConversionStatus			candidate			
-0x00893f40	6	import_thunk_IMM32_ImmGetCompositionStringW			candidate			
-0x00893f46	6	import_thunk_IMM32_ImmSetConversionStatus			candidate			
+0x00893ee0	6	import_thunk_VERSION_GetFileVersionInfoSizeA			confirmed			
+0x00893ee6	6	import_thunk_VERSION_GetFileVersionInfoA			confirmed			
+0x00893eec	6	import_thunk_VERSION_VerQueryValueA			confirmed			
+0x00893ef2	6	import_thunk_IMM32_ImmNotifyIME			confirmed			
+0x00893ef8	6	import_thunk_IMM32_ImmIsIME			confirmed			
+0x00893efe	6	import_thunk_IMM32_ImmGetOpenStatus			confirmed			
+0x00893f04	6	import_thunk_IMM32_ImmGetCandidateListW			confirmed			
+0x00893f10	6	import_thunk_IMM32_ImmReleaseContext			confirmed			
+0x00893f1c	6	import_thunk_IMM32_ImmGetIMEFileNameA			confirmed			
+0x00893f22	6	import_thunk_IMM32_ImmAssociateContext			confirmed			
+0x00893f28	6	import_thunk_IMM32_ImmGetDefaultIMEWnd			confirmed			
+0x00893f2e	6	import_thunk_IMM32_ImmGetContext			confirmed			
+0x00893f34	6	import_thunk_IMM32_ImmGetVirtualKey			confirmed			
+0x00893f3a	6	import_thunk_IMM32_ImmGetConversionStatus			confirmed			
+0x00893f40	6	import_thunk_IMM32_ImmGetCompositionStringW			confirmed			
+0x00893f46	6	import_thunk_IMM32_ImmSetConversionStatus			confirmed			
 0x00893f50	114		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(high)
 0x00893fd0	270		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
 0x008940e0	54		CRT, compiler, allocator, and numeric helper tail		unidentified			allocator/CRT(medium)
