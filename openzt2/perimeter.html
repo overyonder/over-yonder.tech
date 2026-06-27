@@ -26,7 +26,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
- <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type identity, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, <code>zt-rtti-classes.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
+ <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type identity, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
 
  <section class="narrative">
   <h2>Authority Model</h2>
@@ -47,18 +47,18 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels, not recovered behavior. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. Every distinct vtable method address is already represented in the function perimeter, so the remaining vtable bar uses the slot-row denominator. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
+  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels. Every distinct vtable method address is already represented in the function perimeter, so vtable membership is shown in the function table rather than as a separate progress bar. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them. Template-only type identities are the zero-slot rows that have no corresponding static cache cell. The family column is explanatory grouping only; the name and status still come from the byte map.</p>
 
   <h3>Per-Class Method Perimeter</h3>
-  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. They are a slot-level method-shape view. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address; the address-level method body appears in the function perimeter.</p>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address; the address-level method body appears in the function perimeter.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
  <div class="controls"><input class="search" id="fsearch" placeholder="filter by name / status / address / provenance / domain"><select id="fstatus"><option value="">all statuses</option></select><span class="sub" id="fshown"></span></div>
- <div class="tablewrap"><table><thead><tr><th data-k="address">address</th><th data-k="size">size</th><th data-k="name">name</th><th data-k="region">region</th><th data-k="status">status</th><th data-k="provenance">provenance</th><th data-k="vtable">vtable slot</th><th data-k="domain">inferred domain</th></tr></thead><tbody id="frows"></tbody></table></div>
+ <div class="tablewrap"><table><thead><tr><th data-k="address">address</th><th data-k="size">size</th><th data-k="name">name</th><th data-k="region">region</th><th data-k="status">status</th><th data-k="provenance">provenance</th><th data-k="vtable_slot_rows">vtable slot rows</th><th data-k="vtable_slot_example">example vtable slot</th><th data-k="domain">inferred domain</th></tr></thead><tbody id="frows"></tbody></table></div>
 
  <h2>Global / static perimeter <span class="sub" id="gcount"></span></h2>
  <div class="controls"><input class="search" id="gsearch" placeholder="filter globals"><select id="gstatus"><option value="">all statuses</option></select><span class="sub" id="gshown"></span></div>
@@ -206,11 +206,34 @@ function staticTypeSegments(gp,typeRows){
  segments.push({label:"Unidentified global/static cells",value:unidentified,cls:"seg-open"});
  return segments.filter(s=>s.value>0);
 }
-function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
+function vtableMethodStats(vt){
+ const stats=new Map();
+ for(const r of vt){
+  const addr=(r.method_addr||"").toLowerCase();
+  if(!addr)continue;
+  let s=stats.get(addr);
+  if(!s){s={count:0,confirmed:0,example:"",name:""};stats.set(addr,s)}
+  s.count++;
+  if(r.status==="confirmed")s.confirmed++;
+  if(!s.example)s.example=`${r.vtable}#${r.slot}`;
+  if(!s.name&&r.method_name)s.name=r.method_name;
+ }
+ return stats;
+}
+function enrichFunctionRowsWithVtableStats(fp,vtStats){
+ return fp.map(r=>{
+  const s=vtStats.get((r.address||"").toLowerCase());
+  return {...r,vtable_slot_rows:s?String(s.count):"",vtable_slot_example:s?s.example:""};
+ });
+}
+function coverageSummary(fp,gp,vt,mapRows,typeRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const wrapperSupportRows=fp.filter(r=>r.status==="wrapper-indirected").length;
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
- const confirmedVtableSlots=vt.filter(r=>r.status==="confirmed");
+ const fpStatusByAddr=new Map(fp.map(r=>[(r.address||"").toLowerCase(),r.status]));
+ const vtStats=vtableMethodStats(vt);
+ const vbodyRows=[...vtStats.entries()];
+ const acceptedVtableBodies=vbodyRows.filter(([addr])=>fpStatusByAddr.get(addr)==="confirmed").length;
  const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
  const functionOpenRows=nativeFunctions.filter(r=>r.status==="unidentified");
  const staticType=staticTypeSegments(gp,typeRows);
@@ -218,7 +241,6 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
  const typePivot=counts(typeRows,"pivot_segment");
  const addressOnlySignalRows=typeRows.filter(r=>r.address_only_vtable_signals).length;
  const foreignGetterUseRows=typeRows.filter(r=>r.foreign_vtable_getter_uses).length;
- const vslotDone=confirmedVtableSlots.length;
  const bmap=byteMapPartitionStats(mapRows,runtimeExecutable);
  const bmapSectionSplit=sectionCoverageText(mapRows);
  const indirectedRows=mapRows.filter(r=>r.space==="runtime-parent"&&r.status==="indirected");
@@ -230,9 +252,8 @@ function coverageSummary(fp,gp,vt,rtti,mapRows,typeRows){
   ...suspectedDomainSegments(functionOpenRows)
  ];
  const domains=[
-  {name:"Function recovery frontier",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted native function behavior and neutralized wrapper indirection sit beside the remaining known function-entry work.",uncertainty:`The unidentified function slices are suspected structural domains from zt-function-perimeter.tsv, not accepted behavior recovery. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(wrapperSupportRows)} function-perimeter rows are generated depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function-entry recovery.`},
-  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, one identified non-type static segment, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:`Driven by zt-type-coverage-reconciliation.tsv and zt-global-perimeter.tsv. ${fmt(addressOnlySignalRows)} address-only vtable signal rows and ${fmt(foreignGetterUseRows)} foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Identified non-type global/static cells keep their byte-map names and explanatory families in the table, but those families are not completion axes. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape.`},
-  {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Slot method identified",value:vslotDone,cls:"seg-accepted"},{label:"Slot method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slot rows have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies, inherited helpers, and shared stubs are intentionally counted once per slot row."},
+  {name:"Function recovery frontier",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted native function behavior and neutralized wrapper indirection sit beside the remaining known function-entry work.",uncertainty:`The unidentified function slices are suspected structural domains from zt-function-perimeter.tsv; they are triage labels. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(wrapperSupportRows)} function-perimeter rows are generated depepper support records, and ${fmt(mappedData)} rows are non-text data excluded from original function-entry recovery. The ${fmt(vbodyRows.length)} distinct vtable method addresses are all represented here; ${fmt(acceptedVtableBodies)} are currently accepted function entries.`},
+  {name:"Global/static and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} global/static cells + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known static/type perimeter splits into unidentified cells, one identified non-type static segment, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:`Driven by zt-type-coverage-reconciliation.tsv and zt-global-perimeter.tsv. ${fmt(addressOnlySignalRows)} address-only vtable signal rows and ${fmt(foreignGetterUseRows)} foreign getter-use rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Identified non-type global/static cells keep their byte-map names and explanatory families in the table; those families sit outside the completion axes. Unidentified global/static cells still need byte-map facts from initializer writes, consumers, or exact data shape.`},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
  document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
@@ -269,12 +290,11 @@ Promise.all([
  tsv(["zt-function-perimeter.tsv","../docs/analysis/function-perimeter.tsv"]),
  tsv(["zt-global-perimeter.tsv","../docs/analysis/global-perimeter.tsv"]),
  tsv(["zt-vtable-methods-full.tsv","../docs/analysis/vtable-methods-full.tsv"]),
- tsv(["zt-rtti-classes.tsv","../docs/analysis/rtti-classes.tsv"]),
  tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"]),
  tsv(["zt-type-coverage-reconciliation.tsv","../docs/analysis/type-coverage-reconciliation.tsv"])
-]).then(([fp,gp,vt,rtti,mapRows,typeRows])=>{
- coverageSummary(fp,gp,vt,rtti,mapRows,typeRows);
- table(fp,"frows",["address","size","name","region","status","provenance","vtable","domain"],"fsearch","fstatus","fshown","fcount");
+]).then(([fp,gp,vt,mapRows,typeRows])=>{
+ coverageSummary(fp,gp,vt,mapRows,typeRows);
+ table(enrichFunctionRowsWithVtableStats(fp,vtableMethodStats(vt)),"frows",["address","size","name","region","status","provenance","vtable_slot_rows","vtable_slot_example","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status","family"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
 </script>
