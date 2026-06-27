@@ -1387,14 +1387,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00450535	195	emit_userclicked_clickableobj_payload			confirmed			
 0x004505f8	124		entity selection and entity information panels		unidentified			ui(high)
 0x00450674	583	emit_user_dragging_off_payload			confirmed			
-0x004508bb	230	emit_user_dragging_payload			candidate			
-0x004509d8	434	emit_mouselook_payload			candidate		0x008c8708#150	
-0x00450b8a	437	emit_eventcaptured_payload			candidate		0x008c8708#153	
+0x004508bb	230	emit_user_dragging_payload			confirmed			
+0x004509d8	434	emit_mouselook_payload			confirmed		0x008c8708#150	
+0x00450b8a	437	emit_eventcaptured_payload			confirmed		0x008c8708#153	
 0x00450d3f	103		entity selection and entity information panels		unidentified			ui(medium)
-0x00450da6	289	emit_eventcaptured_payload			candidate			
+0x00450da6	289	emit_eventcaptured_payload			confirmed			
 0x00450ec7	313		entity selection and entity information panels		unidentified		0x008c04b0#192	ui(high)
 0x00451000	82		entity selection and entity information panels		unidentified		0x008c04b0#194	ui(medium)
-0x00451052	345	emit_eventcaptured_payload			candidate		0x008c8708#205	
+0x00451052	345	emit_eventcaptured_payload			confirmed		0x008c8708#205	
 0x004511ab	5678	update_selected_entity_info_panel			confirmed			
 0x004527d9	140		entity selection and entity information panels		unidentified			ui(medium)
 0x00452865	136		entity selection and entity information panels		unidentified			ui(medium)
@@ -1403,9 +1403,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00452d80	282	update_crate_uncrate_button_visibility			confirmed			
 0x00452e9a	1044	populate_family_members_panel			confirmed			
 0x004532ae	741	populate_animal_family_tree_list			confirmed			
-0x00453593	1366	emit_setmode_payload			candidate		0x008c04b0#215	
+0x00453593	1366	emit_setmode_payload			confirmed		0x008c04b0#215	
 0x00453ae9	187		entity selection and entity information panels		unidentified		0x008c04b0#216	ui(medium)
-0x00453ba4	495	emit_setmode_payload			candidate			
+0x00453ba4	495	emit_setmode_payload			confirmed			
 0x00453d93	2769	update_animal_info_panel			confirmed			
 0x00454864	538	update_guest_info_panel			confirmed			
 0x00454a7e	386		entity selection and entity information panels		unidentified			ui(medium)
@@ -1425,17 +1425,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00457980	872		entity selection and entity information panels		unidentified			ui(high)
 0x00457ce8	130	update_training_area_info_panel			confirmed			
 0x00457d6a	72		entity selection and entity information panels		unidentified			ui(high)
-0x00457db2	1020	emit_set_cloning_species_payload			candidate			
+0x00457db2	1020	emit_set_cloning_species_payload			confirmed			
 0x004581ae	992	populate_puzzle_list_panel			confirmed			
 0x004585a5	935	populate_disease_info_panel			confirmed			
 0x0045894c	1212	populate_fossil_finding_panel			confirmed			
-0x00458e08	247	handle_set_cloning_species		species	candidate			
-0x00458eff	250	handle_set_puzzle_species		species	candidate			
-0x00458ff9	162	handle_enter_fossil_mode		mode	candidate			
-0x0045909b	335	handle_enter_puzzle_mode		mode	candidate			
-0x004591ea	320	handle_enter_cloning_mode		mode	candidate			
-0x0045932a	366	handle_enter_disease_mode		mode	candidate			
-0x00459498	162	handle_enter_tranq_mode		mode	candidate			
+0x00458e08	247	handle_set_cloning_species		species	confirmed			
+0x00458eff	250	handle_set_puzzle_species		species	confirmed			
+0x00458ff9	162	handle_enter_fossil_mode		mode	confirmed			
+0x0045909b	335	handle_enter_puzzle_mode		mode	confirmed			
+0x004591ea	320	handle_enter_cloning_mode		mode	confirmed			
+0x0045932a	366	handle_enter_disease_mode		mode	confirmed			
+0x00459498	162	handle_enter_tranq_mode		mode	confirmed			
 0x0045953a	500		entity selection and entity information panels		unidentified			ui(high)
 0x0045972e	405	populate_show_manager_panels			confirmed			
 0x004598c3	48		entity selection and entity information panels		unidentified			ui(high)
@@ -1445,7 +1445,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0045a032	509		entity selection and entity information panels		unidentified			ui(high)
 0x0045a22f	269		entity selection and entity information panels		unidentified			ui(high)
 0x0045a33c	689		entity selection and entity information panels		unidentified			ui(high)
-0x0045a5ed	138	handle_set_current_show_for_donations			candidate			
+0x0045a5ed	138	handle_set_current_show_for_donations			confirmed			
 0x0045a677	624	populate_show_donation_filter_list			confirmed			
 0x0045a8e7	599		entity selection and entity information panels		unidentified			ui(high)
 0x0045ab3e	1295	populate_entity_financial_history_panel			confirmed			
@@ -1674,17 +1674,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046be3d	202		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046bf07	346		camera, collision, and geometry helper band		unidentified		0x008c91d4#129	renderer(medium)
 0x0046c061	175		camera, collision, and geometry helper band		unidentified			renderer(medium)
-0x0046c12a	79	emit_eventcaptured_payload			candidate		0x008c91d4#17	
-0x0046c179	133	emit_eventcaptured_payload			candidate		0x008c91d4#18	
+0x0046c12a	79	emit_eventcaptured_payload			confirmed		0x008c91d4#17	
+0x0046c179	133	emit_eventcaptured_payload			confirmed		0x008c91d4#18	
 0x0046c236	588		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046c482	687		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046c796	178		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046c848	323		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046c9e0	453		camera, collision, and geometry helper band		unidentified		0x008c91d4#5	renderer(medium)
 0x0046cba5	290		camera, collision, and geometry helper band		unidentified		0x008c91d4#167	renderer(medium)
-0x0046ccc7	462	emit_camera_position_payload			candidate		0x008c91d4#168	
+0x0046ccc7	462	emit_camera_position_payload			confirmed		0x008c91d4#168	
 0x0046ce95	322		camera, collision, and geometry helper band		unidentified		0x008c91d4#169	renderer(medium)
-0x0046cfd7	807	emit_camera_position_payload			candidate		0x008c91d4#170	
+0x0046cfd7	807	emit_camera_position_payload			confirmed		0x008c91d4#170	
 0x0046d2fe	701	read_animal_selector_config			confirmed		0x008c91d4#11	
 0x0046d5bb	285		camera, collision, and geometry helper band		unidentified			renderer(medium)
 0x0046d6d8	525		camera, collision, and geometry helper band		unidentified			renderer(medium)
