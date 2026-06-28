@@ -5272,7 +5272,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0050189f	0	make_ZTWorldMgr_child_inline_value			confirmed		0x008d7000#35	
 0x00501969	0	make_ZTWorldMgr_child_boolean_value			confirmed		0x008d7000#36	
 0x00501a18	0	make_ZTWorldMgr_prefixed_world_string_value			confirmed		0x008d7000#37	
-0x00501ab7	470		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00501ab7	470	try_apply_ZTWorldMgr_preview_placement			confirmed			
 0x00501c8d	0	apply_ZTWorldMgr_placement_info_to_preview			confirmed		0x008d7000#38	
 0x00501d12	0	make_ZTWorldMgr_real_time_value			confirmed		0x008d7000#39	
 0x00501d5d	0	apply_ZTWorldMgr_zooboundary_fence_batch			confirmed		0x008d7000#40	
@@ -5282,21 +5282,21 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005024b0	0	read_ZTZooMessageData_xml			confirmed		0x008d70cc#4	
 0x00502597	0	write_ZTPlacementInfo_xml			confirmed		0x008d7100#3	
 0x005026e2	0	read_ZTPlacementInfo_xml			confirmed		0x008d7100#4	
-0x00502861	153		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00502861	153	register_ZTZooMessageData_action_registry_entry			confirmed			
 0x00502941	0	allocate_default_ZTZooMessageData			confirmed		0x008d713c#1	
 0x00502982	0	allocate_default_ZTPlacementInfo			confirmed		0x008d713c#3	
-0x005029cc	93		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502a29	128		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502aa9	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502b49	88		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502ba1	88		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x005029cc	93	append_ZTWorldMgr_placement_vector_record			confirmed			
+0x00502a29	128	insert_ZTWorldMgr_placement_vector_range			confirmed			
+0x00502aa9	160	insert_ZTZooMessageData_action_registry_node			confirmed			
+0x00502b49	88	resolve_ZTZooMessageData_from_typed_owner			confirmed			
+0x00502ba1	88	resolve_ZTPlacementInfo_from_typed_owner			confirmed			
 0x00502bf9	40	as_ZTFenceEntity			confirmed			
 0x00502c21	0	adjusted_scalar_delete_ZTWorldMgr_secondary			confirmed		0x008d70c0#0	
-0x00502c2e	30		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502c4c	52		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502ca2	110		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00502c2e	30	has_complete_world_render_bridge_payload			confirmed			
+0x00502c4c	52	apply_world_render_bridge_visibility_float			confirmed			
+0x00502ca2	110	construct_world_render_bridge_object			confirmed			
 0x00502d10	0	scalar_delete_world_render_bridge_object			confirmed		0x008d73dc#0	
-0x00502d2b	60		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00502d2b	60	destroy_world_render_bridge_object			confirmed			
 0x00502d67	0	update_world_render_bridge_attachment			confirmed		0x008d73dc#1	
 0x00502de3	0	forward_world_render_bridge_static_selection			confirmed		0x008d73dc#2	
 0x00502e68	71		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
@@ -7201,21 +7201,21 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055aa83	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055aaa3	921		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055ae3c	40	as_ZTDevComponent			confirmed			
-0x0055ae64	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db0dc#5	ui
+0x0055ae64	0	clone_BFAIFadeHoldData			confirmed		0x008db0dc#5	
 0x0055aea2	47	get_type_ZTFossilSkeletonComponent			confirmed			
 0x0055aed1	0	get_type_ZTFossilSkeletonComponent_vtable_thunk			confirmed		0x008db110#1	
 0x0055aed6	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055aef6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db110#2	ui
+0x0055aef6	0	init_ZTFossilSkeletonComponent_descriptor_ref_vtable_thunk			confirmed		0x008db110#2	
 0x0055aefb	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055af21	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db164#0	ui
-0x0055af37	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db164#1	ui
-0x0055aff6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db110#0	ui
+0x0055af21	0	copy_ZTFossilSkeletonComponent_callback_dependents			confirmed		0x008db164#0	
+0x0055af37	0	resolve_ZTFossilSkeletonComponent_callback_value			confirmed		0x008db164#1	
+0x0055aff6	0	scalar_delete_ZTFossilSkeletonComponent			confirmed		0x008db110#0	
 0x0055b011	50		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055b043	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db110#19	ui
-0x0055b10c	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db110#20	ui
+0x0055b043	0	write_ZTFossilSkeletonComponent_reward_xml			confirmed		0x008db110#19	
+0x0055b10c	0	read_ZTFossilSkeletonComponent_reward_xml			confirmed		0x008db110#20	
 0x0055b3e3	1023	emit_crate_entity_payload			confirmed			
-0x0055b7e2	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db110#14	ui
-0x0055b95a	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db164#3	ui
+0x0055b7e2	0	update_ZTFossilSkeletonComponent_reward_timer			confirmed		0x008db110#14	
+0x0055b95a	0	allocate_ZTFossilSkeletonComponent_instance			confirmed		0x008db164#3	
 0x0055b96d	64		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055b9ad	159		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055ba93	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8779,28 +8779,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059ac2e	61	propagate_NiGeometry_collision_flags			confirmed	gamebryo	0x008e2574#16	
 0x0059ac6b	21	dispatch_NiGeometry_child_payload_update			confirmed	gamebryo		
 0x0059ac80	0	update_NiGeometry_controller_children_and_extra_data			confirmed		0x008e2574#9	
-0x0059ad53	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#10	io/assets
-0x0059ad8e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#3	io/assets
-0x0059ae22	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#4	io/assets
-0x0059ae61	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#5	io/assets
-0x0059ae96	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#6	io/assets
-0x0059af06	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#7	io/assets
+0x0059ad53	0	copy_NiGeometry_extra_data_ref			confirmed		0x008e2574#10	
+0x0059ad8e	0	load_NiGeometry_collision_and_extra_data			confirmed		0x008e3168#3	
+0x0059ae22	0	link_NiGeometry_resource_refs			confirmed		0x008e3168#4	
+0x0059ae61	0	register_NiGeometry_streamables			confirmed		0x008e3168#5	
+0x0059ae96	0	save_NiGeometry_collision_and_extra_data			confirmed		0x008e3168#6	
+0x0059af06	0	compare_NiGeometry_resource_refs			confirmed		0x008e3168#7	
 0x0059af5d	64	load_Ni_property_object_tail			confirmed	gamebryo	0x008e3168#8	
-0x0059af9d	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#1	io/assets
-0x0059afa3	61		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059afe0	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#0	io/assets
-0x0059affb	34		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b01d	53		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b052	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#18	io/assets
-0x0059b08e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#19	io/assets
-0x0059b0cc	391		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#3	io/assets
+0x0059af9d	0	get_NiGeometry_rtti_record			confirmed		0x008e3168#1	
+0x0059afa3	61	construct_NiTriShapeData_with_triangles			confirmed	gamebryo		
+0x0059afe0	0	scalar_delete_NiTriShapeData			confirmed		0x008e3210#0	
+0x0059affb	34	construct_empty_NiTriShapeData			confirmed	gamebryo		
+0x0059b01d	53	destroy_NiTriShapeData			confirmed	gamebryo		
+0x0059b052	0	get_NiTriShapeData_triangle_indices			confirmed		0x008e3210#18	
+0x0059b08e	0	get_NiTriShapeData_triangle_list			confirmed		0x008e3210#19	
+0x0059b0cc	391	load_NiTriShapeData_triangle_lists			confirmed	gamebryo	0x008e3210#3	
 0x0059b253	0	register_NiObject_streamable_self			confirmed		0x008e2a40#5	
-0x0059b260	150		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#6	io/assets
-0x0059b2f6	51		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#7	io/assets
-0x0059b329	162		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e3210#8	io/assets
-0x0059b3cb	19		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b3de	19		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b3f1	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#17	io/assets
+0x0059b260	150	save_NiTriShapeData_triangle_lists			confirmed	gamebryo	0x008e3210#6	
+0x0059b2f6	51	compare_NiTriShapeData_triangle_list			confirmed	gamebryo	0x008e3210#7	
+0x0059b329	162	emit_NiTriShapeData_viewer_strings			confirmed	gamebryo	0x008e3210#8	
+0x0059b3cb	19	read_NiTriShapeData_index_words			confirmed	gamebryo		
+0x0059b3de	19	write_NiTriShapeData_index_words			confirmed	gamebryo		
+0x0059b3f1	0	get_NiTriShapeData_triangle_count			confirmed		0x008e3210#17	
 0x0059b3f6	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#14	io/assets
 0x0059b3fb	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#1	io/assets
 0x0059b401	44		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
@@ -26138,16 +26138,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008656b0	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911290#39	game-entities
 0x008656c1	47	get_type_ZTAIStaffSensorSelf			confirmed			
 0x008656f0	0	get_type_ZTAIStaffSensorSelf_vtable_thunk			confirmed		0x00911348#1	
-0x008656f5	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865715	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911348#2	game-entities
-0x0086571a	38		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865740	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0091141c#0	game-entities
-0x00865756	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0091141c#1	game-entities
-0x0086581c	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911348#0	game-entities
-0x00865837	18		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865849	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911348#21	game-entities
-0x00865a2b	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0091141c#3	game-entities
-0x00865a5c	87		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x008656f5	32	init_ZTAIStaffSensorSelf_descriptor_ref			confirmed			
+0x00865715	0	init_ZTAIStaffSensorSelf_descriptor_ref_vtable_thunk			confirmed		0x00911348#2	
+0x0086571a	38	get_ZTAIStaffSensorSelf_handler_registry			confirmed			
+0x00865740	0	copy_ZTAIStaffSensorSelf_dependents_from_registry			confirmed		0x0091141c#0	
+0x00865756	0	resolve_ZTAIStaffSensorSelf_handler_value			confirmed		0x0091141c#1	
+0x0086581c	0	scalar_delete_ZTAIStaffSensorSelf			confirmed		0x00911348#0	
+0x00865837	18	destroy_ZTAIStaffSensorSelf_members			confirmed			
+0x00865849	0	update_ZTAIStaffSensorSelf_scan_state			confirmed		0x00911348#21	
+0x00865a2b	0	allocate_ZTAIStaffSensorSelf_instance			confirmed		0x0091141c#3	
+0x00865a5c	87	construct_ZTAIStaffSensorSelf_handler_registry			confirmed			
 0x00865afa	117		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00865b6f	153		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00865c08	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
