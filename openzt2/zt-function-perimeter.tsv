@@ -5299,14 +5299,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00502d2b	60	destroy_world_render_bridge_object			confirmed			
 0x00502d67	0	update_world_render_bridge_attachment			confirmed		0x008d73dc#1	
 0x00502de3	0	forward_world_render_bridge_static_selection			confirmed		0x008d73dc#2	
-0x00502e68	71		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502eaf	41		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502ed8	29		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502ef5	118		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502f6b	59		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00502fa6	95		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00503005	63		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00503044	201		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00502e68	71	draw_world_render_bridge_selection_pass			confirmed			
+0x00502eaf	41	enable_world_render_bridge_overlay			confirmed			
+0x00502ed8	29	disable_world_render_bridge_overlay			confirmed			
+0x00502ef5	118	submit_world_render_bridge_target_height			confirmed			
+0x00502f6b	59	submit_world_render_bridge_default_vector			confirmed			
+0x00502fa6	95	visit_world_render_bridge_child_nodes			confirmed			
+0x00503005	63	draw_world_render_bridge_geometry			confirmed			
+0x00503044	201	sync_world_render_bridge_render_flags			confirmed			
 0x0050310d	2768	render_world_draw_passes			confirmed			
 0x00503bdd	352		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
 0x00503d3d	269		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
@@ -6997,10 +6997,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054fecd	110	construct_and_apply_area_membership_candidate			confirmed			
 0x0054ff3b	284		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
 0x00550057	318		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
-0x00550195	334		tank, tankwallglass, material selector, and area relocation syst		unidentified			game-entities
+0x00550195	334	refresh_tank_selector_entry_after_area_update			confirmed			
 0x005502e3	79		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
 0x00550332	138		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
-0x005503bc	230		tank, tankwallglass, material selector, and area relocation syst		unidentified			game-entities
+0x005503bc	230	insert_tank_support_selector_entry			confirmed			
 0x005504a2	62	resolve_tank_support_from_entity_handle			confirmed			
 0x005504e0	174		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
 0x0055058e	94		tank, tankwallglass, material selector, and area relocation syst		unidentified			ui
@@ -7229,18 +7229,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055bdf5	47	get_type_ZTPuzzlePiece			confirmed			
 0x0055be24	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#1	ui
 0x0055be29	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055be49	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#2	ui
+0x0055be49	0	init_ZTPuzzlePiece_descriptor_ref_vtable_thunk			confirmed		0x008db2d0#2	
 0x0055be4e	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055bedd	509	read_entity_placement_transform			confirmed			
 0x0055c0da	414	write_entity_placement_transform			confirmed			
 0x0055c278	78		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055c2c6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#0	ui
+0x0055c2c6	0	scalar_delete_ZTPuzzlePiece			confirmed		0x008db2d0#0	
 0x0055c2e1	57		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055c31a	311		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055c451	114		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055c4c3	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#19	ui
-0x0055c6c3	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#20	ui
-0x0055c7a6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db2d0#21	ui
+0x0055c4c3	0	write_ZTPuzzlePiece_placement_xml			confirmed		0x008db2d0#19	
+0x0055c6c3	0	read_ZTPuzzlePiece_placement_xml			confirmed		0x008db2d0#20	
+0x0055c7a6	0	clear_ZTPuzzlePiece_entity_ref_after_validation			confirmed		0x008db2d0#21	
 0x0055c7d1	67		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055c814	414		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055c9b2	91		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7252,11 +7252,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055cdc4	47	get_type_ZTPuzzle			confirmed			
 0x0055cdf3	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#1	ui
 0x0055cdf8	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055ce18	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#2	ui
+0x0055ce18	0	init_ZTPuzzle_descriptor_ref_vtable_thunk			confirmed		0x008db270#2	
 0x0055ce1d	68		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055ce61	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#21	ui
-0x0055cecd	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#22	ui
-0x0055cf87	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#0	ui
+0x0055ce61	0	copy_ZTPuzzle_callback_dependents			confirmed		0x008db270#21	
+0x0055cecd	0	resolve_ZTPuzzle_callback_value			confirmed		0x008db270#22	
+0x0055cf87	0	scalar_delete_ZTPuzzle			confirmed		0x008db270#0	
 0x0055cfa2	194		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055d064	270		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055d172	189		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7265,8 +7265,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055d3a9	220		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055d485	21		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055d49a	246		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055d590	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#19	ui
-0x0055d823	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db270#20	ui
+0x0055d590	0	write_ZTPuzzle_state_xml			confirmed		0x008db270#19	
+0x0055d823	0	read_ZTPuzzle_state_xml			confirmed		0x008db270#20	
 0x0055dc06	357		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055dd6b	127		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055ddea	282		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7274,10 +7274,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055dfb6	71		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055dffd	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055e023	95		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055e082	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db330#1	ui
+0x0055e082	0	allocate_ZTPuzzlePiece_instance			confirmed		0x008db330#1	
 0x0055e09a	64		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055e0da	159		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055e1c0	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008db330#3	ui
+0x0055e1c0	0	allocate_ZTPuzzle_instance			confirmed		0x008db330#3	
 0x0055e21a	113		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055e28b	51		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055e2be	120		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8801,30 +8801,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059b3cb	19	read_NiTriShapeData_index_words			confirmed	gamebryo		
 0x0059b3de	19	write_NiTriShapeData_index_words			confirmed	gamebryo		
 0x0059b3f1	0	get_NiTriShapeData_triangle_count			confirmed		0x008e3210#17	
-0x0059b3f6	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#14	io/assets
-0x0059b3fb	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3210#1	io/assets
-0x0059b401	44		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b42d	36		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b451	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e27f4#2	io/assets
-0x0059b4d0	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e27f4#3	io/assets
-0x0059b50f	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e27f4#6	io/assets
-0x0059b545	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e27f4#7	io/assets
-0x0059b56f	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e27f4#8	io/assets
-0x0059b5e2	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3278#1	io/assets
-0x0059b5e8	24		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b600	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3278#2	io/assets
-0x0059b637	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3278#3	io/assets
-0x0059b63c	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3278#8	io/assets
-0x0059b6b7	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#2	io/assets
-0x0059b6fa	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#3	io/assets
-0x0059b73e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#6	io/assets
-0x0059b771	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#7	io/assets
-0x0059b79e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#8	io/assets
-0x0059b8a1	29		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059b8be	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008d7884#2	io/assets
-0x0059b8d9	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3334#1	io/assets
-0x0059b8df	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e33e0#1	io/assets
-0x0059b8e5	64		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059b3f6	0	get_NiTriShapeData_vertex_count			confirmed		0x008e3210#14	
+0x0059b3fb	0	get_NiTriShapeData_rtti_record			confirmed		0x008e3210#1	
+0x0059b401	44	allocate_NiTriShapeData_segment_node_storage			confirmed	gamebryo		
+0x0059b42d	36	destroy_NiTriShapeData_segment_node_storage			confirmed	gamebryo		
+0x0059b451	0	clone_NiBinaryExtraData_payload			confirmed		0x008e27f4#2	
+0x0059b4d0	0	load_NiBinaryExtraData_payload			confirmed		0x008e27f4#3	
+0x0059b50f	0	save_NiBinaryExtraData_payload			confirmed		0x008e27f4#6	
+0x0059b545	0	compare_NiBinaryExtraData_payload			confirmed		0x008e27f4#7	
+0x0059b56f	0	emit_NiBinaryExtraData_viewer_strings			confirmed		0x008e27f4#8	
+0x0059b5e2	0	get_NiDitherProperty_rtti_record			confirmed		0x008e3278#1	
+0x0059b5e8	24	construct_NiDitherProperty			confirmed	gamebryo		
+0x0059b600	0	clone_NiDitherProperty			confirmed		0x008e3278#2	
+0x0059b637	0	load_NiDitherProperty_flags_thunk			confirmed		0x008e3278#3	
+0x0059b63c	0	emit_NiDitherProperty_viewer_strings			confirmed		0x008e3278#8	
+0x0059b6b7	0	clone_NiVertexColorProperty			confirmed		0x008e3334#2	
+0x0059b6fa	0	load_NiVertexColorProperty_modes			confirmed		0x008e3334#3	
+0x0059b73e	0	save_NiVertexColorProperty_modes			confirmed		0x008e3334#6	
+0x0059b771	0	compare_NiVertexColorProperty_modes			confirmed		0x008e3334#7	
+0x0059b79e	0	emit_NiVertexColorProperty_viewer_strings			confirmed		0x008e3334#8	
+0x0059b8a1	29	construct_NiVertexColorProperty			confirmed	gamebryo		
+0x0059b8be	0	scalar_delete_NiSimpleProperty			confirmed		0x008d7884#2	
+0x0059b8d9	0	get_NiVertexColorProperty_rtti_record			confirmed		0x008e3334#1	
+0x0059b8df	0	get_NiFogProperty_rtti_record			confirmed		0x008e33e0#1	
+0x0059b8e5	64	construct_NiFogProperty			confirmed	gamebryo		
 0x0059b925	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e33e0#2	io/assets
 0x0059b972	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e33e0#3	io/assets
 0x0059b9ea	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e33e0#6	io/assets
@@ -17585,9 +17585,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ebd18	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f90cc#4	
 0x006ebd33	153	insert_rampage_handler_for_unseen_type			confirmed	gamebryo		
 0x006ebe13	117		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
-0x006ebe88	58		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-entities
+0x006ebe88	58	copy_construct_named_value_assignment_records			confirmed	gamebryo		
 0x006ebec2	74		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006ebf0c	479		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
+0x006ebf0c	479		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
 0x006ec0eb	160	insert_BFGRampage_handler_list_node			confirmed	gamebryo		
 0x006ec18b	68		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
 0x006ec1cf	52		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
