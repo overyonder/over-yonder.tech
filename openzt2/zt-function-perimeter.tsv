@@ -5219,40 +5219,40 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ff8c8	0	write_ZTWitheredPlantComponent_xml			confirmed		0x008d6ea8#19	
 0x004ff8dd	0	read_ZTWitheredPlantComponent_xml			confirmed		0x008d6ea8#20	
 0x004ffa65	0	accept_AI_show_or_trick_target_ref			confirmed		0x0090a8b8#21	
-0x004ffa98	148		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x004ffa98	148	collect_ZTWitheredPlantComponent_preview_objects			confirmed			
 0x004ffb2c	0	update_ZTWitheredPlantComponent_targets			confirmed		0x008d6ea8#14	
-0x004ffe0a	97		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x004ffe0a	97	append_ZTWitheredPlantComponent_ref_record			confirmed			
 0x004ffe6b	0	allocate_ZTWitheredPlantComponent_instance			confirmed		0x008d6ea8#24	
-0x004ffe7e	64		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x004ffebe	159		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x004fffa4	131		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x004ffe7e	64	populate_ZTWitheredPlantComponent_action_registry			confirmed			
+0x004ffebe	159	register_ZTWitheredPlantComponent_action_registry_entry			confirmed			
+0x004fffa4	131	insert_ZTWitheredPlantComponent_ref_record_range			confirmed			
 0x00500020	0	return_vtable_008d720c_slot2_tail_fragment			confirmed		0x008d720c#2	
-0x00500027	50		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00500059	25		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00500072	385		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x005001f3	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x00500293	45		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x005002c0	71		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00500027	50	copy_construct_ZTWitheredPlantComponent_ref_record_range			confirmed			
+0x00500059	25	destroy_ZTWitheredPlantComponent_ref_record_range			confirmed			
+0x00500072	385	insert_ZTWitheredPlantComponent_ref_record_with_growth			confirmed			
+0x005001f3	160	insert_ZTWitheredPlantComponent_action_registry_node			confirmed			
+0x00500293	45	copy_construct_ZTWitheredPlantComponent_ref_record_range_forward			confirmed			
+0x005002c0	71	copy_construct_ZTWitheredPlantComponent_ref_record_range_backward			confirmed			
 0x00500307	0	clone_ZTZooMessageData			confirmed		0x008d70cc#5	
 0x00500348	0	clone_ZTPlacementInfo			confirmed		0x008d7100#5	
 0x00500395	47	get_type_ZTWorldMgr			confirmed			
-0x005003c4	0		entity files, user camera data, grid lookup, and UI dependency s		unidentified		0x008d7000#1	renderer
-0x005003c9	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x005003c4	0	get_type_ZTWorldMgr_vtable_thunk			confirmed		0x008d7000#1	
+0x005003c9	32	return_ZTWorldMgr_descriptor_ref			confirmed			
 0x005003e9	0	init_ZTWorldMgr_descriptor_ref_vtable_thunk			confirmed		0x008d7000#2	
-0x005003ee	73		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x005003ee	73	return_ZTZooMessageData_action_registry			confirmed			
 0x005004a0	47	get_type_ZTZooMessageData			confirmed			
 0x005004cf	0	get_type_ZTZooMessageData_vtable_thunk			confirmed		0x008d70cc#1	
-0x005004d4	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x005004d4	32	return_ZTZooMessageData_descriptor_ref			confirmed			
 0x005004f4	0	init_ZTZooMessageData_descriptor_ref_vtable_thunk			confirmed		0x008d70cc#2	
 0x005004f9	47	get_type_ZTPlacementInfo			confirmed			
 0x00500528	0	get_type_ZTPlacementInfo_vtable_thunk			confirmed		0x008d7100#1	
-0x0050052d	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x0050052d	32	return_ZTPlacementInfo_descriptor_ref			confirmed			
 0x0050054d	0	init_ZTPlacementInfo_descriptor_ref_vtable_thunk			confirmed		0x008d7100#2	
-0x00500552	70		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x00500552	70	construct_ZTWorldMgr			confirmed			
 0x00500598	0	scalar_delete_ZTWorldMgr			confirmed		0x008d7000#0	
-0x005005b3	154		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x0050064d	510		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
-0x0050084b	259		entity files, user camera data, grid lookup, and UI dependency s		unidentified			renderer
+0x005005b3	154	destroy_ZTWorldMgr			confirmed			
+0x0050064d	510	populate_ZTZooMessageData_action_registry			confirmed			
+0x0050084b	259	sync_ZTWorldMgr_runtime_environment_state			confirmed			
 0x0050094e	0	write_ZTWorldMgr_environment_xml			confirmed		0x008d7000#19	
 0x00500ab3	0	read_ZTWorldMgr_environment_xml			confirmed		0x008d7000#20	
 0x00500da0	0	make_ZTWorldMgr_camera_position_x_value			confirmed		0x008d7000#21	
@@ -7083,12 +7083,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005549ea	47	get_type_ZTCloningCenterComponent			confirmed			
 0x00554a19	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#1	ui
 0x00554a1e	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00554a3e	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#2	ui
+0x00554a3e	0	init_ZTCloningCenterComponent_descriptor_ref_vtable_thunk			confirmed		0x008dabd0#2	
 0x00554a43	68		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00554a87	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#21	ui
-0x00554af3	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#22	ui
+0x00554a87	0	copy_ZTCloningCenterComponent_callback_dependents			confirmed		0x008dabd0#21	
+0x00554af3	0	resolve_ZTCloningCenterComponent_callback_value			confirmed		0x008dabd0#22	
 0x00554b49	103		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00554bb0	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#0	ui
+0x00554bb0	0	scalar_delete_ZTCloningCenterComponent			confirmed		0x008dabd0#0	
 0x00554bcb	44		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00554bf7	379		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00554d72	55		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7096,22 +7096,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00554e28	112		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00554e98	119		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00554f0f	66		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00554f51	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dabd0#20	ui
+0x00554f51	0	read_ZTCloningCenterComponent_config_xml			confirmed		0x008dabd0#20	
 0x0055546c	47	get_type_ZTCloningCenterInstanceComponent			confirmed			
 0x0055549b	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac34#0	ui
 0x005554a0	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005554c0	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac34#1	ui
+0x005554c0	0	init_ZTCloningCenterInstanceComponent_descriptor_ref_vtable_thunk			confirmed		0x008dac34#1	
 0x005554c5	38		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x0055556f	18		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00555581	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac34#13	ui
+0x00555581	0	update_ZTCloningCenterInstance_ready_timer			confirmed		0x008dac34#13	
 0x005556a8	67		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005556eb	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac34#18	ui
-0x00555751	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac34#19	ui
+0x005556eb	0	write_ZTCloningCenterInstance_timer_xml			confirmed		0x008dac34#18	
+0x00555751	0	read_ZTCloningCenterInstance_timer_xml			confirmed		0x008dac34#19	
 0x00555ab3	101		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00555b18	36		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00555b3c	49		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00555b6d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac8c#1	ui
-0x00555c03	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008dac8c#3	ui
+0x00555b6d	0	allocate_ZTCloningCenterComponent_instance			confirmed		0x008dac8c#1	
+0x00555c03	0	allocate_ZTCloningCenterInstanceComponent_instance			confirmed		0x008dac8c#3	
 0x00555c3a	130		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00555cbc	153		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00555d9c	112		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7153,18 +7153,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055802a	47	get_type_ZTDiseaseMgr			confirmed			
 0x00558059	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#1	ui
 0x0055805e	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055807e	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#2	ui
+0x0055807e	0	init_ZTDiseaseMgr_descriptor_ref_vtable_thunk			confirmed		0x008daf38#2	
 0x00558083	73		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00558135	210		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00558207	176		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005582b7	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#0	ui
+0x005582b7	0	scalar_delete_ZTDiseaseMgr			confirmed		0x008daf38#0	
 0x005582d2	91		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x0055832d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#14	ui
+0x0055832d	0	update_ZTDiseaseMgr_disease_state			confirmed		0x008daf38#14	
 0x0055861e	121		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00558697	307		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005587ca	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005587ea	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#19	ui
-0x005589b3	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf38#20	ui
+0x005587ea	0	write_ZTDiseaseMgr_state_xml			confirmed		0x008daf38#19	
+0x005589b3	0	read_ZTDiseaseMgr_state_xml			confirmed		0x008daf38#20	
 0x00558dff	123		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00558f0b	577	handle_check_for_disease			confirmed			
 0x005594ad	208		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7173,7 +7173,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055972d	90		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559787	204		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559853	91		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x005598ae	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf94#4	ui
+0x005598ae	0	allocate_ZTDiseaseMgr_instance			confirmed		0x008daf94#4	
 0x005598c6	0	get_validated_child_or_delete			confirmed		0x008bfaec#5	
 0x005598f1	153		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x005599d1	115		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -7183,7 +7183,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00559c56	160		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559cf6	45		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559d23	44		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
-0x00559d4f	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008daf94#0	ui
+0x00559d4f	0	scalar_delete_ZTDiseaseMgr_secondary_this_adjustor			confirmed		0x008daf94#0	
 0x00559d72	299		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559e9d	113		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
 0x00559f0e	403		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified			ui
@@ -8759,26 +8759,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00599db5	0	compare_NiScreenTexture_records			confirmed		0x008e2ce8#7	
 0x00599e6e	0	stream_NiScreenTexture_viewer_strings_thunk			confirmed		0x008e2ce8#8	
 0x00599e73	59	append_NiScreenTexture_entry			confirmed	gamebryo		
-0x00599eae	160		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x00599f4e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2ce8#1	io/assets
-0x0059a6e0	18		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059a6f2	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#29	io/assets
-0x0059a6f7	64		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e30cc#7	io/assets
-0x0059a737	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e30cc#0	io/assets
-0x0059a73d	64		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059a77d	47		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059a7ac	165		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059a851	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#22	io/assets
-0x0059a889	61		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e30cc#28	io/assets
-0x0059a8c6	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#30	io/assets
-0x0059a8f9	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#30	io/assets
-0x0059a904	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#24	io/assets
-0x0059a932	165		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e2574#20	io/assets
-0x0059a9d7	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#21	io/assets
-0x0059aa1e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#14	io/assets
-0x0059ac2e	61		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo	0x008e2574#16	io/assets
-0x0059ac6b	21		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059ac80	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#9	io/assets
+0x00599eae	160	grow_NiScreenTexture_entry_vector			confirmed	gamebryo		
+0x00599f4e	0	get_NiScreenTexture_rtti_record			confirmed		0x008e2ce8#1	
+0x0059a6e0	18	construct_NiTriBasedGeom_from_geometry_base			confirmed	gamebryo		
+0x0059a6f2	0	destroy_NiTriBasedGeom_geometry_payloads_thunk			confirmed		0x008e2574#29	
+0x0059a6f7	64	load_NiTriBasedGeom_stream_tail			confirmed	gamebryo	0x008e30cc#7	
+0x0059a737	0	get_NiTriBasedGeom_rtti_record			confirmed		0x008e30cc#0	
+0x0059a73d	64	construct_NiGeometry_resource_refs_from_parent			confirmed	gamebryo		
+0x0059a77d	47	construct_empty_NiGeometry_resource_refs			confirmed	gamebryo		
+0x0059a7ac	165	destroy_NiGeometry_resource_refs			confirmed	gamebryo		
+0x0059a851	0	bind_NiGeometry_renderer_context			confirmed		0x008e2574#22	
+0x0059a889	61	emit_NiGeometry_viewer_state			confirmed	gamebryo	0x008e30cc#28	
+0x0059a8c6	0	destroy_NiGeometry_optional_payloads			confirmed		0x008e3168#30	
+0x0059a8f9	0	forward_NiGeometry_parent_slot_0x3c			confirmed		0x008e2574#30	
+0x0059a904	0	copy_NiGeometry_bound_from_parent_payload			confirmed		0x008e2574#24	
+0x0059a932	165	assign_NiGeometry_resource_owner			confirmed	gamebryo	0x008e2574#20	
+0x0059a9d7	0	assign_NiGeometry_aux_resource_if_distinct			confirmed		0x008e2574#21	
+0x0059aa1e	0	build_NiGeometry_world_vertex_normal_arrays			confirmed		0x008e2574#14	
+0x0059ac2e	61	propagate_NiGeometry_collision_flags			confirmed	gamebryo	0x008e2574#16	
+0x0059ac6b	21	dispatch_NiGeometry_child_payload_update			confirmed	gamebryo		
+0x0059ac80	0	update_NiGeometry_controller_children_and_extra_data			confirmed		0x008e2574#9	
 0x0059ad53	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e2574#10	io/assets
 0x0059ad8e	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#3	io/assets
 0x0059ae22	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3168#4	io/assets
@@ -9311,44 +9311,44 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a81b0	249		inline UI currency/text-ref resolution helpers		unidentified	gamebryo		ui
 0x005a82a9	188		inline UI currency/text-ref resolution helpers		unidentified	gamebryo		ui
 0x005a8365	0		UI text/rendering configuration XML loader		unidentified		0x008e4d58#20	renderer
-0x005a8b6c	191		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8c2b	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8c5b	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8c7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8cf2	160		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8d92	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8e05	34		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8e27	0		ordered container/index helpers used by inline text config paths		unidentified		0x008e4d58#22	world/pathing
-0x005a8e42	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8ee8	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8f0c	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8f7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a8ff2	384		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9172	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a91bf	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9348	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a93ee	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9577	57		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a95b0	65		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a95f1	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9621	212		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a96f5	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9789	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9912	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9947	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9a16	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9a73	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9bc8	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9c97	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9d2b	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9d88	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9edd	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9f12	97		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005a9f73	677		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005aa218	64		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005aa258	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005aa2a5	667		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
-0x005aa540	83		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		world/pathing
+0x005a8b6c	191		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8c2b	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8c5b	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8c7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8cf2	160		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8d92	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8e05	34		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8e27	0		ordered container/index helpers used by inline text config paths		unidentified		0x008e4d58#22	ui
+0x005a8e42	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8ee8	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8f0c	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8f7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8ff2	384		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9172	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a91bf	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9348	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a93ee	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9577	57		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a95b0	65		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a95f1	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9621	212		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a96f5	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9789	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9912	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9947	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9a16	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9a73	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9bc8	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9c97	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9d2b	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9d88	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9edd	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9f12	97		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9f73	677		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005aa218	64		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005aa258	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005aa2a5	667		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005aa540	83		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
 0x005aa593	27	format_256_byte_string_vsprintf_s			confirmed	gamebryo		
 0x005aa5ae	45	get_or_register_bf_safe_handle_base_type			confirmed	gamebryo		
 0x005aa5db	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008bfbac#1	ui
@@ -10071,7 +10071,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bedd3	274		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
 0x005beee5	157		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
 0x005bef82	290		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
-0x005bf0a4	184		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
+0x005bf0a4	184		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		io/assets
 0x005bf15c	62		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
 0x005bf19a	165		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		ui
 0x005bf23f	181		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		ui
@@ -11500,12 +11500,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060c0c3	141		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060c150	0		AI shared data, fade/controller data, typed UI construction, and		unidentified		0x008eb020#0	ui
 0x0060c1e1	99		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008eb020#1	ui
-0x0060c244	89		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
+0x0060c244	89	resolve_and_remove_behavior_child_slot64			confirmed	gamebryo		
 0x0060c29d	87		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060c2f4	58		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060c32e	0	propagate_behavior_arg_to_children_slot58			confirmed		0x008e8e30#22	
-0x0060c3a2	100		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008e90ac#22	ui
-0x0060c406	168		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008e8fc0#24	ui
+0x0060c3a2	100	propagate_behavior_arg_to_children_slot5c			confirmed	gamebryo	0x008e90ac#22	
+0x0060c406	168	resolve_behavior_target_and_propagate_slot60			confirmed	gamebryo	0x008e8fc0#24	
 0x0060c4ae	0	insert_validated_child_before_first			confirmed		0x008e8e30#26	
 0x0060c4fa	0	insert_validated_child_at_end			confirmed		0x008e8e30#27	
 0x0060c544	0	get_first_behavior_child_or_null			confirmed		0x008e8e30#28	
@@ -11523,9 +11523,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060c821	56		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060c859	56		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060c891	56		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
-0x0060c8c9	473		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008e90ac#18	ui
-0x0060caa2	334		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008e90ac#19	ui
-0x0060cbf0	231		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo	0x008e90ac#35	ui
+0x0060c8c9	473	write_BFBehavior_xml			confirmed	gamebryo	0x008e90ac#18	
+0x0060caa2	334	read_BFBehavior_xml			confirmed	gamebryo	0x008e90ac#19	
+0x0060cbf0	231	copy_BFBehavior_child_and_key_state			confirmed	gamebryo	0x008e90ac#35	
 0x0060ccd7	28		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060ccf3	67		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
 0x0060cd36	115		AI shared data, fade/controller data, typed UI construction, and		unidentified	gamebryo		ui
@@ -19560,48 +19560,48 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00757633	536		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		ui
 0x0075784b	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#19	
 0x007578e4	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#20	
-0x00757997	39		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x007579be	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe140#44	world/pathing
-0x007579d6	147		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757a69	75		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757ab4	483		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757c97	58		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757cd1	214		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757da7	41		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757dd0	160		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00757e70	515		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758073	151		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x0075810a	54		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758140	1126		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x007585a6	673		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758847	199		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x0075890e	833		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758c4f	550		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758e75	326		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00758fbb	413		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759158	130		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x007591da	365		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759347	683		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x007595f2	347		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x0075974d	49		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x0075977e	177		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x0075982f	104		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759897	94		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x007598f5	403		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759a88	127		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759b07	508		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759d03	115		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759d76	63		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759db5	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#21	world/pathing
+0x00757997	39		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x007579be	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe140#44	io/assets
+0x007579d6	147		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757a69	75		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757ab4	483		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757c97	58		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757cd1	214		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757da7	41		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757dd0	160		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00757e70	515		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758073	151		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x0075810a	54		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758140	1126		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x007585a6	673		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758847	199		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x0075890e	833		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758c4f	550		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758e75	326		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00758fbb	413		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759158	130		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x007591da	365		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759347	683		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x007595f2	347		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x0075974d	49		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x0075977e	177		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x0075982f	104		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759897	94		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x007598f5	403		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759a88	127		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759b07	508		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759d03	115		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759d76	63		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759db5	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#21	io/assets
 0x00759dbb	47	get_type_BFSkewComponent			confirmed	gamebryo		
-0x00759dea	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#1	world/pathing
-0x00759def	32		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759e0f	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#2	world/pathing
-0x00759e8f	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#0	world/pathing
-0x00759eaa	18		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
-0x00759ebc	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#31	world/pathing
-0x00759ee4	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#36	world/pathing
-0x0075a361	58		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		world/pathing
+0x00759dea	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#1	io/assets
+0x00759def	32		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759e0f	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#2	io/assets
+0x00759e8f	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#0	io/assets
+0x00759eaa	18		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
+0x00759ebc	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#31	io/assets
+0x00759ee4	0		resource path variant and refcounted asset lookup helpers		unidentified		0x008fe288#36	io/assets
+0x0075a361	58		resource path variant and refcounted asset lookup helpers		unidentified	gamebryo		io/assets
 0x0075a39b	293		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075a4c0	0		scene/model transform and XML property bridge		unidentified		0x008fe288#22	
 0x0075a4ca	0		scene/model transform and XML property bridge		unidentified		0x008fe288#19	
@@ -24073,35 +24073,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00816481	56	compute_show_session_effect_duration			confirmed			
 0x008164b9	78	increment_show_session_effect_counter			confirmed			
 0x00816507	613	validate_show_animals_available			confirmed			
-0x0081676c	220	validate_show_performer_happiness	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816848	198	advance_show_session_effect_phase	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x0081690e	110	handle_show_session_participant_state_change	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x0081697c	98	set_show_session_participant_active_flag_and_emit_update	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008169de	171	attach_show_entity_to_container_slot	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816a89	137	detach_show_entity_from_container_slot	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816b12	79	compute_show_session_next_state_time	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816b61	72	refresh_show_session_target_point_handles	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816ba9	91	clear_show_session_active_state	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816c04	122	add_show_instance_to_component_vector	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816c7e	46	get_show_vector_entry_or_null	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816cac	61	find_show_vector_entry_index	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816ce9	233	remove_show_instance_from_component_vector	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816dd2	80	cache_show_animal_slot_validity	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816e22	176	refresh_show_session_guest_or_target_assignments	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816ed2	192	emit_crate_payloads_and_clear_show_records	AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00816f92	599		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008171e9	806		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x0081676c	220	validate_show_performer_happiness			confirmed			
+0x00816848	198	advance_show_session_effect_phase			confirmed			
+0x0081690e	110	handle_show_session_participant_state_change			confirmed			
+0x0081697c	98	set_show_session_participant_active_flag_and_emit_update			confirmed			
+0x008169de	171	attach_show_entity_to_container_slot			confirmed			
+0x00816a89	137	detach_show_entity_from_container_slot			confirmed			
+0x00816b12	79	compute_show_session_next_state_time			confirmed			
+0x00816b61	72	refresh_show_session_target_point_handles			confirmed			
+0x00816ba9	91	clear_show_session_active_state			confirmed			
+0x00816c04	122	add_show_instance_to_component_vector			confirmed			
+0x00816c7e	46	get_show_vector_entry_or_null			confirmed			
+0x00816cac	61	find_show_vector_entry_index			confirmed			
+0x00816ce9	233	remove_show_instance_from_component_vector			confirmed			
+0x00816dd2	80	cache_show_animal_slot_validity			confirmed			
+0x00816e22	176	refresh_show_session_guest_or_target_assignments			confirmed			
+0x00816ed2	192	emit_crate_payloads_and_clear_show_records			confirmed			
+0x00816f92	599	find_nearest_show_tank_portal			confirmed			
+0x008171e9	806	validate_show_trick_participant_readiness			confirmed			
 0x0081750f	551	emit_crate_entity_payload			confirmed			
-0x00817736	122		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008177b0	142		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x00817736	122	are_cached_show_participants_ready			confirmed			
+0x008177b0	142	is_show_participant_ready_for_current_cue			confirmed			
 0x0081783e	265		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00817947	285		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00817a64	812		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00817d90	875		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008180fb	130		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x0081817d	340		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008182d1	109		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x0081833e	140		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x008180fb	130	emit_show_entity_payload_to_current_target			confirmed			
+0x0081817d	340	increment_show_keyed_counter_record			confirmed			
+0x008182d1	109	get_show_keyed_counter_record_count			confirmed			
+0x0081833e	140	compute_show_trick_effect_score_value			confirmed			
 0x008183ca	535		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x008185e1	24		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x008185f9	128		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
@@ -25592,7 +25592,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0085329f	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f5c8#19	game-entities
 0x00853347	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f5c8#20	game-entities
 0x0085344e	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f5c8#21	game-entities
-0x0085347a	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x008ec81c#35	game-entities
+0x0085347a	0	copy_BFBehavior_child_and_key_state_vtable_thunk			confirmed		0x008ec81c#35	
 0x0085347f	438		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00853635	845	emit_feedback_event_payload			confirmed			
 0x00853982	700		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
@@ -25680,7 +25680,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00855c83	18		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00855c95	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f6b0#23	game-entities
 0x00855cb3	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f910#25	game-entities
-0x00855f11	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090cf38#20	game-entities
+0x00855f11	0	read_BFBehavior_xml_vtable_thunk			confirmed		0x0090cf38#20	
 0x00855f16	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f910#21	game-entities
 0x00855f42	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090f910#39	game-entities
 0x00855f53	40		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
@@ -26153,31 +26153,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00865c08	160		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
 0x00865ca8	47	get_type_ZTBehVehicleBase			confirmed			
 0x00865cd7	0	get_type_ZTBehVehicleBase_vtable_thunk			confirmed		0x00911440#1	
-0x00865cdc	29		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865cf9	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911440#0	game-entities
-0x00865d14	29		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865d31	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090cf38#19	game-entities
-0x00865d36	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090cf38#24	game-entities
-0x00865d75	97		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00865dd6	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090cf38#38	game-entities
-0x00865f9a	725		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x0086626f	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090cf38#25	game-entities
-0x00866328	66		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x00865cdc	29	construct_ZTBehVehicleBase_members			confirmed			
+0x00865cf9	0	scalar_delete_ZTBehVehicleBase			confirmed		0x00911440#0	
+0x00865d14	29	destroy_ZTBehVehicleBase_members			confirmed			
+0x00865d31	0	write_BFBehavior_xml_vtable_thunk			confirmed		0x0090cf38#19	
+0x00865d36	0	resolve_ZTBehVehicleBase_vehicle_route_ref			confirmed		0x0090cf38#24	
+0x00865d75	97	test_ZTBehVehicleBase_route_station_candidate			confirmed			
+0x00865dd6	0	select_ZTBehVehicleBase_route_station			confirmed		0x0090cf38#38	
+0x00865f9a	725	advance_ZTBehVehicleBase_route_state			confirmed			
+0x0086626f	0	update_ZTBehVehicleBase_route_behavior			confirmed		0x0090cf38#25	
+0x00866328	66	link_ZTBehVehicleBase_entity_to_world_root			confirmed			
 0x0086636a	47	get_type_ZTBehFollowBase			confirmed			
 0x00866399	0	get_type_ZTBehFollowBase_vtable_thunk			confirmed		0x00911528#1	
-0x0086639e	52		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x008663d2	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00911528#0	game-entities
-0x008663ed	59		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00866428	32		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
+0x0086639e	52	construct_ZTBehFollowBase_members			confirmed			
+0x008663d2	0	scalar_delete_ZTBehFollowBase			confirmed		0x00911528#0	
+0x008663ed	59	construct_ZTBehFollowBase_from_track_fields			confirmed			
+0x00866428	32	destroy_ZTBehFollowBase_members			confirmed			
 0x00866448	322	read_track_target_state			confirmed		0x00911528#19	
 0x0086658a	233	write_track_target_state			confirmed		0x00911528#20	
-0x00866673	53		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e9a8#38	game-entities
-0x008666a8	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e7b0#21	game-entities
-0x008666d8	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e7b0#36	game-entities
-0x008666fd	633		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e9a8#25	game-entities
-0x00866976	169		AI staff, guest viewing, donations, and edDonate behavior		unidentified			game-entities
-0x00866a1f	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e7b0#42	game-entities
-0x00866ac3	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x0090e7b0#45	game-entities
+0x00866673	53	resolve_ZTBehFollowBase_target_name_value			confirmed		0x0090e9a8#38	
+0x008666a8	0	create_ZTBehFollowTrack_from_follow_base			confirmed		0x0090e7b0#21	
+0x008666d8	0	copy_ZTBehFollowBase_track_state			confirmed		0x0090e7b0#36	
+0x008666fd	633	update_ZTBehFollowBase_track_target			confirmed		0x0090e9a8#25	
+0x00866976	169	validate_ZTBehFollowBase_track_target			confirmed			
+0x00866a1f	0	advance_ZTBehFollowBase_track_progress			confirmed		0x0090e7b0#42	
+0x00866ac3	0	set_ZTBehFollowBase_target_index_from_node			confirmed		0x0090e7b0#45	
 0x00866af5	47	get_type_ZTPhotoManager			confirmed			
 0x00866b24	0	get_type_ZTPhotoManager_vtable_thunk			confirmed		0x00911848#1	
 0x00866b29	32	init_ZTPhotoManager_descriptor_ref			confirmed			
@@ -27059,60 +27059,60 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0088d8a3	145	insert_char_into_inline_string			confirmed			
 0x0088d934	81	log_last_system_error_message			confirmed			
 0x0088da4b	122	lua_argerror_with_method_self_adjustment			confirmed			
-0x0088dac5	52	luaL_typerror	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088daf9	94	luaL_where	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088dac5	52	luaL_typerror			confirmed	lua		
+0x0088daf9	94	luaL_where			confirmed	lua		
 0x0088db57	63	luaL_error			confirmed	lua		
 0x0088db96	63		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
-0x0088dbd5	114	luaL_newmetatable_FILE_handle	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088dc47	93	lua_io_to_file_handle	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088dca4	37	luaL_checktype	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088dbd5	114	luaL_newmetatable_FILE_handle			confirmed	lua		
+0x0088dc47	93	lua_io_to_file_handle			confirmed	lua		
+0x0088dca4	37	luaL_checktype			confirmed	lua		
 0x0088dcc9	37	luaL_checkany			confirmed	lua		
-0x0088dcee	55	luaL_checklstring	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088dcee	55	luaL_checklstring			confirmed	lua		
 0x0088dd25	72		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
-0x0088dd6d	70	luaL_checknumber	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088ddb3	61	luaL_getmetafield	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088ddf0	200	luaL_openlib	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088deb8	63	lua_aux_checkint_and_pop	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088def7	117	lua_aux_getsizes	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088df6c	144	luaL_setn	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088dffc	139	luaL_getn	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088dd6d	70	luaL_checknumber			confirmed	lua		
+0x0088ddb3	61	luaL_getmetafield			confirmed	lua		
+0x0088ddf0	200	luaL_openlib			confirmed	lua		
+0x0088deb8	63	lua_aux_checkint_and_pop			confirmed	lua		
+0x0088def7	117	lua_aux_getsizes			confirmed	lua		
+0x0088df6c	144	luaL_setn			confirmed	lua		
+0x0088dffc	139	luaL_getn			confirmed	lua		
 0x0088e087	39	luaL_emptybuffer			confirmed	lua		
-0x0088e0ae	96	luaL_buffer_adjuststack	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088e0ae	96	luaL_buffer_adjuststack			confirmed	lua		
 0x0088e10e	22	luaL_prepbuffer			confirmed	lua		
 0x0088e124	51	luaL_addlstring			confirmed	lua		
 0x0088e157	32	luaL_pushresult			confirmed	lua		
-0x0088e177	98	luaL_addvalue	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088e215	93	luaL_loadfile_read_error	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088e272	359	luaL_loadfile	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088e177	98	luaL_addvalue			confirmed	lua		
+0x0088e215	93	luaL_loadfile_read_error			confirmed	lua		
+0x0088e272	359	luaL_loadfile			confirmed	lua		
 0x0088e3f4	39		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
-0x0088e41b	132	lua_base_alert	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088e41b	132	lua_base_alert			confirmed	lua		
 0x0088e49f	32		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
-0x0088e4bf	43	lua_base_set_table_entry_pair	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088e793	170	lua_base_indexed_table_get_or_set	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088e4bf	43	lua_base_set_table_entry_pair			confirmed	lua		
+0x0088e793	170	lua_base_indexed_table_get_or_set			confirmed	lua		
 0x0088e8ef	75		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
 0x0088f75d	165	lua_base_getfenv			confirmed	lua		
-0x0088f802	97	lua_base_getfenv_metafield	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x0088ffcd	84	lua_base_get_path	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x00890021	127	lua_base_push_composed_path	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x00890294	126	lua_base_auxresume	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x008903dc	79	luaB_cocreate	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x008904d7	181	luaopen_base	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x0088f802	97	lua_base_getfenv_metafield			confirmed	lua		
+0x0088ffcd	84	lua_base_get_path			confirmed	lua		
+0x00890021	127	lua_base_push_composed_path			confirmed	lua		
+0x00890294	126	lua_base_auxresume			confirmed	lua		
+0x008903dc	79	luaB_cocreate			confirmed	lua		
+0x008904d7	181	luaopen_base			confirmed	lua		
 0x008905d5	27		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
 0x008905f0	139		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
 0x0089067b	40	lua_io_tofile			confirmed	lua		
 0x008906e3	38	lua_io_getopenfile			confirmed	lua		
-0x00890709	57	lua_io_new_file_handle	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x00890742	71	lua_io_register_file_handle	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x00890709	57	lua_io_new_file_handle			confirmed	lua		
+0x00890742	71	lua_io_register_file_handle			confirmed	lua		
 0x00890789	84	lua_io_aux_close			confirmed	lua		
-0x00890957	42	lua_io_aux_lines	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x00890a81	65	lua_io_create_file_metatable	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x00890957	42	lua_io_aux_lines			confirmed	lua		
+0x00890a81	65	lua_io_create_file_metatable			confirmed	lua		
 0x00890ac2	31	lua_file_lines			confirmed	lua		
 0x00890ba5	59	lua_io_read_number			confirmed	lua		
 0x00890be0	181	lua_io_read_line			confirmed	lua		
 0x00890c95	134	lua_io_read_chars			confirmed	lua		
 0x00890d1b	337	lua_lib_error			confirmed	lua		
-0x008910c3	45	lua_os_setfield	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x008910f0	85	lua_os_getfield	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x008910c3	45	lua_os_setfield			confirmed	lua		
+0x008910f0	85	lua_os_getfield			confirmed	lua		
 0x00891a43	33	lua_string_check_capture			confirmed	lua		
 0x00891a64	73	lua_string_classend			confirmed	lua		
 0x00891aad	175	lua_string_match_class			confirmed	lua		
@@ -27130,8 +27130,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00892684	161	lua_string_addquoted			confirmed	lua		
 0x00892725	195	lua_string_scanformat			confirmed	lua		
 0x00892e1c	31		expanded mixed tail after platform handle cleanup callsites		unidentified	lua		
-0x00892e3b	129	lua_table_sort_compare	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
-0x00892ebc	522	lua_table_auxsort	expanded mixed tail after platform handle cleanup callsites		unidentified	lua		game-entities
+0x00892e3b	129	lua_table_sort_compare			confirmed	lua		
+0x00892ebc	522	lua_table_auxsort			confirmed	lua		
 0x0089315c	6	import_thunk_D3D9_D3DPERF_BeginEvent			confirmed	d3d9		
 0x00893162	6	import_thunk_D3D9_D3DPERF_EndEvent			confirmed	d3d9		
 0x00893168	6	import_thunk_MSVCR80_rand			confirmed			
