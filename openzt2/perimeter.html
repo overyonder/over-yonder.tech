@@ -26,7 +26,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
- <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type identity, vtable, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
+ <p class="sub">The stripped Zoo Tycoon 2 binary's function, global/static, type identity, and byte-map recovery surfaces. Source: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, and <code>zt-byte-range-map.tsv</code>. <code>zt-vtable-methods-full.tsv</code> supplies function-row overlay and containment validation.</p>
 
  <section class="narrative">
   <h2>Authority Model</h2>
@@ -47,13 +47,13 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Vtable membership is an overlay on those same function entries; deploy validation requires every distinct vtable method body to appear in the function perimeter. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
+  <p><strong>Function recovery</strong> places accepted native function behavior, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Vtable membership is an overlay on those same function entries; deploy validation requires every distinct vtable method body to appear in the function perimeter. That containment is the completion check, so the page does not render a separate vtable-method progress bar. <strong>Global/static and type identities</strong> combines referenced static cells with the template-only type rows needed to complete the known type surface.</p>
 
   <h3>Globals / Statics</h3>
   <p>The global/static table is generated from absolute references in <code>.text</code>. Type-cache and identified global names come from byte-map rows; unidentified cells remain raw referenced addresses until a byte-map fact names them. Template-only type identities are the zero-slot rows that have no corresponding static cache cell. The family column is explanatory grouping only; the name and status still come from the byte map.</p>
 
   <h3>Per-Class Method Overlay</h3>
-  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address; deploy validation requires every distinct address-level method body to appear in the function perimeter.</p>
+  <p>Vtable method rows are generated from enumerated <code>.rdata</code> pointer runs and labelled from byte-map class evidence, early-slot type-getter evidence, constructor/vptr-store evidence, accepted byte-map function rows, and the function perimeter. Shared stubs and inherited helper bodies can occupy many slot rows while representing one function address. Each distinct method address belongs to the address-level function perimeter denominator.</p>
  </section>
 
  <h2>Function perimeter <span class="sub" id="fcount"></span></h2>
@@ -226,7 +226,7 @@ function enrichFunctionRowsWithVtableStats(fp,vtStats){
   return {...r,vtable_slot_rows:s?String(s.count):"",vtable_slot_example:s?s.example:""};
  });
 }
-function coverageSummary(fp,gp,vt,mapRows,typeRows){
+function coverageSummary(fp,gp,mapRows,typeRows){
  const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
  const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
@@ -288,7 +288,7 @@ Promise.all([
  tsv(["zt-byte-range-map.tsv","../docs/analysis/zt-byte-range-map.tsv"]),
  tsv(["zt-type-coverage-reconciliation.tsv","../docs/analysis/type-coverage-reconciliation.tsv"])
 ]).then(([fp,gp,vt,mapRows,typeRows])=>{
- coverageSummary(fp,gp,vt,mapRows,typeRows);
+ coverageSummary(fp,gp,mapRows,typeRows);
  table(enrichFunctionRowsWithVtableStats(fp,vtableMethodStats(vt)),"frows",["address","size","name","region","status","provenance","vtable_slot_rows","vtable_slot_example","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status","family"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
