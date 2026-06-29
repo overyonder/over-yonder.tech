@@ -3001,41 +3001,42 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004974f3	153	register_ZTMoneyText_handler_if_absent			confirmed			
 0x0049758c	160	append_ZTMoneyText_handler_record			confirmed			
 0x0049762c	103	compare_named_ui_assignment_sort_values			confirmed			
-0x00497693	221		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00497770	356		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00497a35	483		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00497c18	456		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00497693	221	compare_multilist_need_sort_values			confirmed			
+0x00497770	356	compare_multilist_pregnancy_sort_values			confirmed			
+0x00497a35	483	compare_multilist_integer_child_values			confirmed			
+0x00497c18	456	compare_multilist_string_child_values			confirmed			
 0x00497de0	47	get_type_ZTMultiList			confirmed			
-0x00497e0f	0		buy info, goal, money, and multi-list panels		unidentified		0x008cf018#1	ui
-0x00497e14	32		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00497e0f	0	get_type_ZTMultiList_vtable_thunk			confirmed		0x008cf018#1	
+0x00497e14	32	init_ZTMultiList_descriptor_ref			confirmed			
 0x00497e34	0	init_ZTMultiList_descriptor_ref_vtable_thunk			confirmed		0x008cf018#2	
-0x00497e39	73		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00497e39	73	get_ZTMultiList_ui_handler_registry			confirmed			
 0x00497e82	0	register_ZTMultiList_action_value			confirmed		0x008cf270#0	
 0x00497e98	0	resolve_ZTMultiList_action_value			confirmed		0x008cf270#1	
-0x00497eeb	282		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00497eeb	282	register_ZTMultiList_ui_handlers			confirmed			
 0x0049813d	0	scalar_delete_ZTMultiList			confirmed		0x008cf018#0	
-0x00498158	55		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00498158	55	destroy_ZTMultiList_members			confirmed			
 0x0049818f	0	read_multi_list_layout_config			confirmed		0x008cf018#20	
 0x00498211	0	layout_multi_list_children			confirmed		0x008cf0ec#90	
 0x0049870c	0	update_multi_info_panel			confirmed		0x008cf018#14	
-0x0049977a	192		buy info, goal, money, and multi-list panels		unidentified			ui
-0x0049983a	146		buy info, goal, money, and multi-list panels		unidentified			ui
+0x0049977a	192	prune_empty_multi_info_child_entries			confirmed			
+0x0049983a	146	reattach_multi_info_child_entries			confirmed			
 0x004998cc	1040	resolve_entity_category_name			confirmed			
 0x00499cdc	675	show_selected_animal_multi_info_panel			confirmed			
-0x00499f7f	849		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049a2d0	651		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049a55b	777		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049a864	789		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x00499f7f	849	refresh_guest_multi_info_entry			confirmed			
+0x0049a2d0	651	refresh_staff_multi_info_entry			confirmed			
+0x0049a55b	777	refresh_vehicle_multi_info_entry			confirmed			
+0x0049a864	789	refresh_donation_box_multi_info_entry			confirmed			
 0x0049ab79	852	populate_multi_building_finance_panel			confirmed			
-0x0049aecd	78		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049aecd	78	is_multi_info_layout_region_invalid			confirmed			
 0x0049af1b	884	populate_animal_multi_info_selector			confirmed			
-0x0049b28f	351		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049b3ee	237		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049b4db	133		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049b560	95		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049b28f	351	align_multi_info_child_row_heights			confirmed			
+0x0049b3ee	237	assign_multi_info_pointer_vector			confirmed			
+0x0049b4db	133	get_or_insert_multi_info_tree_value_slot			confirmed			
+0x0049b560	95	append_multi_info_child_entry			confirmed			
 0x0049b5bf	107		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x0049b62a	173		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x0049b71b	112		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049b78b	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008cf270#3	
 0x0049b7a1	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x0049b881	132		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x0049b905	321		multi-info, overview map, photo album, and UI widgets		unidentified			ui
@@ -18307,7 +18308,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00705714	27		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070574a	26		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705764	36		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x00705a2d	26		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a47	44		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a73	1133	register_entity_component_type_pairs			confirmed	gamebryo		
