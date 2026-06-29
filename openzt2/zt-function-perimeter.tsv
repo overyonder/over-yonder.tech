@@ -1932,7 +1932,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00466404	48	clear_ui_value_tree			confirmed			
 0x00466434	72	deref_checked_8byte_deque_iterator			confirmed			
 0x0046647c	36	advance_checked_8byte_deque_iterator			confirmed			
-0x004664a0	0		UI child iteration, donation-filter cleanup, and type acceptors		unidentified		0x008c86c8#14	ui
+0x004664a0	0	allocate_ZTSelectionMode_instance			confirmed		0x008c86c8#14	
 0x004664b8	153	register_ui_command_handler_if_absent			confirmed			
 0x00466598	24	count_show_schedule_entries			confirmed			
 0x004665b0	23	get_show_schedule_entry_at_index			confirmed			
@@ -2530,7 +2530,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00482688	44	insert_ui_assignment_dependent_refs_1b8_1c4			confirmed			
 0x004826b4	33	insert_ui_assignment_dependent_ref_1b8			confirmed			
 0x004826d5	44	construct_gesture_training_helper_object			confirmed			
-0x00482701	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc1d0#0	
+0x00482701	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc1d0#0	ui
 0x00482748	33	read_gesture_target_collision_metric			confirmed			
 0x00482769	221	compute_gesture_target_bounds_center_vec3			confirmed			
 0x00482846	127	age_gesture_trace_new_value_flags			confirmed			
@@ -2545,7 +2545,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00482a52	142	register_ZTGestureTraceModeBase_ui_handlers			confirmed			
 0x00482ae0	419	construct_ZTGestureTraceModeBase			confirmed			
 0x00482c83	0	scalar_delete_ZTGestureTraceModeBase			confirmed		0x008cc2f0#0	
-0x00482c9e	172		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00482c9e	172	destroy_ZTGestureTraceModeBase_body			confirmed			
 0x00482d4a	66	activate_gesture_trace_mode_base			confirmed		0x008cc3c4#85	
 0x00482d8c	40	deactivate_gesture_trace_mode_base			confirmed		0x008cc3c4#86	
 0x00482db4	46	forward_child_mode_value_result			confirmed		0x008c41a0#4	
@@ -2554,27 +2554,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00482e82	0	apply_gesture_trace_selection_value			confirmed		0x008ca1a8#8	
 0x00482f15	48	update_gesture_trace_mode_base_frame			confirmed		0x008cc2f0#14	
 0x00482f45	285	read_gesture_trace_mode_base_config			confirmed		0x008cc2f0#20	
-0x00483062	154		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004830fc	135		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004831a8	289		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00483062	154	assign_gesture_trace_target_geometry			confirmed			
+0x004830fc	135	gesture_trace_event_gate_is_open			confirmed			
+0x004831a8	289	compute_gesture_trace_event_score_component			confirmed			
 0x004832c9	0	start_gesture_trace_run_from_active_target			confirmed		0x008ca1a8#11	
-0x004834b4	147		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483547	416		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004836e7	731		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004839c2	51		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004834b4	147	sample_gesture_trace_target_completion			confirmed			
+0x00483547	416	evaluate_gesture_trace_event_hit			confirmed		0x008cc5a0#12	
+0x004836e7	731	update_gesture_trace_event_bitvectors			confirmed			
+0x004839c2	51	apply_gesture_trace_target_visual_state			confirmed			
 0x004839f5	46	refresh_gesture_trace_score_field			confirmed		0x008ca1a8#15	
-0x00483a23	91		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483a7e	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483a9f	149		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00483a23	91	emit_gesture_trace_preview_payload			confirmed			
+0x00483a7e	33	compute_gesture_trace_total_score			confirmed			
+0x00483a9f	149	compute_gesture_trace_target_score_component			confirmed			
 0x00483b34	0	compute_gesture_trace_next_event_time			confirmed		0x008ca1a8#10	
-0x00483c59	88		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483cb1	117		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483d26	125		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483da3	105		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483e0c	145		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483e9d	140		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483f29	36		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483f4d	105		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00483c59	88	emit_gesture_trace_completion_event_value			confirmed			
+0x00483cb1	117	clear_gesture_trace_sound_event_handle			confirmed			
+0x00483d26	125	refresh_gesture_trace_countdown_speed			confirmed			
+0x00483da3	105	are_gesture_trace_event_bitvectors_empty			confirmed			
+0x00483e0c	145	get_or_insert_u32_keyed_tree_payload			confirmed			
+0x00483e9d	140	replace_u32_tree_equal_range_and_count			confirmed			
+0x00483f29	36	clear_u32_keyed_tree			confirmed			
+0x00483f4d	105	count_u32_keyed_tree_equal_range			confirmed			
 0x00483fb6	22		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00483fcc	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00483fed	87		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
@@ -4423,7 +4423,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d9aa4	242		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d9b96	84		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004d9bea	214		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d9cc0	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d9cc0	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d9d22	304		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d9e52	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004d9ec0	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
@@ -4435,7 +4435,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004da26a	56		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004da2a2	130		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004da324	44		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004da350	188		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004da350	188		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004da40c	111		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004da47b	154		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004da515	187		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4443,7 +4443,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004da65e	657		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004da8ef	368		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004daa5f	452		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004dac23	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004dac23	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004dacaf	150		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004dad45	126		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004dadc3	100		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
@@ -4530,8 +4530,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004de001	0	read_ZTGestureMgr_xml			confirmed		0x008d4338#20	
 0x004de0b6	88		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004de10e	202		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004de1d8	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004de264	99		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004de1d8	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004de264	99		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de2c7	243		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004de3ba	331		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004de505	31		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4544,7 +4544,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004de683	69		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de6c8	164		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004de76c	154		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004de806	148		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004de806	148		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-ai
 0x004de89a	81		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de8eb	134		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004de971	47	get_type_ZTGlobe			confirmed			
