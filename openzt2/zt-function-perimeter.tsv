@@ -2809,7 +2809,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048ef59	68		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f05f	74		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f0a9	0	scalar_delete_ZTAdoptionSlot			confirmed		0x008ce298#0	
-0x0048f0c4	119		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048f0c4	119	destroy_ZTAdoptionSlot_members			confirmed			
 0x0048f13b	144	bind_adoption_slot_button_and_refresh_ui			confirmed			
 0x0048f1cb	0	update_ZTAdoptionSlot_timers_and_ui_state			confirmed		0x008ce298#14	
 0x0048f27f	947	read_adoption_timing_config			confirmed			
@@ -2821,7 +2821,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048f7a1	61		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f7de	61		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f81b	35		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f83e	23		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048f83e	23	is_selected_adoption_slot_count_available			confirmed			
 0x0048f855	71		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f89c	177		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f94d	35	get_adoption_slot_profile_type_name			confirmed			
@@ -2886,7 +2886,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049290d	36		adoption slots, adoption manager, and slot manager		unidentified			
 0x00492931	0	allocate_ZTUIAdoptionButton_instance			confirmed		0x008ce3cc#1	
 0x00492947	82	register_ZTUIAdoptionButton_ui_handlers			confirmed			
-0x00492999	153		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x00492999	153	register_ZTUIAdoptionButton_handler_if_absent			confirmed			
 0x00492a79	0	allocate_ZTAdoptionSlot_instance			confirmed		0x008ce3cc#3	
 0x00492ad3	111		adoption slots, adoption manager, and slot manager		unidentified			
 0x00492b42	0	allocate_ZTAdoptionMgr_instance			confirmed		0x008ce3dc#1	
@@ -2898,12 +2898,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00492d50	61	fill_adoption_fame_slot_records			confirmed			
 0x00492d8d	26	destroy_adoption_fame_slot_record_range			confirmed			
 0x00492da7	383	insert_adoption_fame_slot_record			confirmed			
-0x00492f26	160		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x00492f26	160	append_ZTUIAdoptionButton_handler_record			confirmed			
 0x00492fc6	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x00493066	0	get_type_vtable_008ce2f4_safe_handle_specialization			confirmed		0x008ce2f4#1	
 0x004930a6	0	get_type_vtable_008ce308_safe_handle_specialization			confirmed		0x008ce308#1	
 0x004930ab	0	assign_UIContainer_safe_handle_value			confirmed		0x008ce308#3	
-0x004930c4	117		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x004930c4	117	inherit_ZTUIAdoptionButton_handlers_from_registry			confirmed			
 0x00493139	41		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493162	117		adoption slots, adoption manager, and slot manager		unidentified			
 0x004931d7	155		adoption slots, adoption manager, and slot manager		unidentified			
@@ -2937,30 +2937,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00494567	0	start_research_for_current_buy_info_item			confirmed		0x008ce6ac#87	
 0x004945dc	216	populate_buy_info_entity_name_label			confirmed			
 0x004946b4	159	populate_buy_info_entity_image_display			confirmed			
-0x00494753	380		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00494753	380	update_buy_info_rotate_control_visibility			confirmed			
 0x004948cf	581	populate_cost_upkeep_panel			confirmed			
-0x00494b14	447		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00494b14	447	populate_research_cost_display			confirmed			
 0x00494cd3	993	populate_biome_info_display			confirmed			
 0x004950b4	1212	populate_buy_panel_conservation			confirmed			
 0x00495570	348	update_buy_panel_zoopedia_link			confirmed			
-0x004956cc	203		buy info, goal, money, and multi-list panels		unidentified			ui
+0x004956cc	203	populate_items_sold_display			confirmed			
 0x00495797	484	populate_gender_display			confirmed			
-0x0049597b	82		buy info, goal, money, and multi-list panels		unidentified			ui
-0x004959cd	82		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495a1f	85		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495a74	28		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495a90	344		buy info, goal, money, and multi-list panels		unidentified			ui
+0x0049597b	82	set_named_child_visibility			confirmed			
+0x004959cd	82	set_named_child_enabled_state			confirmed			
+0x00495a1f	85	apply_buy_info_child_dynamic_position_and_advance			confirmed			
+0x00495a74	28	position_named_buy_info_child_and_advance			confirmed			
+0x00495a90	344	refresh_buy_info_research_progress_bar			confirmed			
 0x00495be8	0	allocate_ZTBuyInfoPanel_instance			confirmed		0x008ce80c#3	
-0x00495bfe	153		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495cde	160		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495d7e	117		buy info, goal, money, and multi-list panels		unidentified			ui
-0x00495df3	39		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00495bfe	153	register_ZTBuyInfoPanel_handler_if_absent			confirmed			
+0x00495cde	160	append_ZTBuyInfoPanel_handler_record			confirmed			
+0x00495d7e	117	inherit_ZTBuyInfoPanel_handlers_from_registry			confirmed			
+0x00495df3	39	resolve_current_ZTEconomyComponent			confirmed			
 0x00495e1a	40	as_ZTEconomyComponent			confirmed			
 0x00495e42	47	get_type_ZTGoalPanel			confirmed			
-0x00495e71	0		buy info, goal, money, and multi-list panels		unidentified		0x008ce8c0#1	ui
-0x00495e76	32		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00495e71	0	get_type_ZTGoalPanel_vtable_thunk			confirmed		0x008ce8c0#1	
+0x00495e76	32	init_ZTGoalPanel_descriptor_ref			confirmed			
 0x00495e96	0	init_ZTGoalPanel_descriptor_ref_vtable_thunk			confirmed		0x008ce8c0#2	
-0x00495e9b	38		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00495e9b	38	get_ZTGoalPanel_ui_handler_registry			confirmed			
 0x00495ec1	0	register_ZTGoalPanel_action_value			confirmed		0x008ceb0c#0	
 0x00495ed7	0	resolve_ZTGoalPanel_action_value			confirmed		0x008ceb0c#1	
 0x00495f2a	26		buy info, goal, money, and multi-list panels		unidentified			ui
@@ -4805,7 +4805,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004eb2b9	0	forward_ZTResearchMgr_aux_object_to_primary_slot38			confirmed		0x008d53e0#2	
 0x004eb2f7	0	write_ZTResearchMgr_xml			confirmed		0x008d5378#19	
 0x004eb41a	0	read_ZTResearchMgr_xml			confirmed		0x008d5378#20	
-0x004eb54a	135		research item and research manager handlers		unidentified			
+0x004eb54a	135		research item and research manager handlers		unidentified			game-entities
 0x004eb5d1	178	test_research_item_button_refresh_needed			confirmed			
 0x004eb683	0	flag_ZTResearchMgr_research_buttons_from_object			confirmed		0x008d5378#21	
 0x004eb6f5	109	flag_research_button_entries_for_type			confirmed			
@@ -10195,7 +10195,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bec32	66	destroy_BFBinderRoot_state			confirmed	gamebryo		
 0x005bec74	0	load_BFBinderRoot_children_from_xml			confirmed		0x008e62c0#20	
 0x005bedd3	274		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
-0x005beee5	157		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
+0x005beee5	157		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		
 0x005bef82	290		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
 0x005bf0a4	184		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		io/assets
 0x005bf15c	62		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
