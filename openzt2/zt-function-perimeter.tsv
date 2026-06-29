@@ -2809,7 +2809,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048ef59	68		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f05f	74		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f0a9	0	scalar_delete_ZTAdoptionSlot			confirmed		0x008ce298#0	
-0x0048f0c4	119		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f0c4	119		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x0048f13b	144	bind_adoption_slot_button_and_refresh_ui			confirmed			
 0x0048f1cb	0	update_ZTAdoptionSlot_timers_and_ui_state			confirmed		0x008ce298#14	
 0x0048f27f	947	read_adoption_timing_config			confirmed			
@@ -2821,10 +2821,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048f7a1	61		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f7de	61		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f81b	35		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f83e	23		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f83e	23		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x0048f855	71		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f89c	177		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f94d	35		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048f94d	35	get_adoption_slot_profile_type_name			confirmed			
 0x0048f970	751		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048fc5f	32		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048fc7f	554	read_adoption_profile			confirmed			
@@ -2873,7 +2873,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004919e6	0	activate_matching_adoption_slot_primary			confirmed		0x008ce320#23	
 0x00491a58	0	consume_matching_adoption_slot_count			confirmed		0x008ce320#24	
 0x00491adc	0	release_matching_adoption_slots			confirmed		0x008ce320#25	
-0x00491b44	910		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x00491b44	910	activate_matching_adoption_slot_gender_ui			confirmed			
 0x00491ed2	0	rebuild_matching_adoption_slot_records			confirmed		0x008ce320#26	
 0x00491f99	0	rebuild_actionable_adoption_slot_records			confirmed		0x008ce320#27	
 0x0049204f	0	collect_adoption_slot_payload_keys			confirmed		0x008ce320#28	
@@ -2881,12 +2881,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049226d	0	sync_adoption_blank_slots_to_slot_count			confirmed		0x008ce320#37	
 0x004924c4	0	write_ZTAdoptionSlotMgr_config			confirmed		0x008ce320#19	
 0x0049255a	0	read_ZTAdoptionSlotMgr_config			confirmed		0x008ce320#20	
-0x004928ce	30		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x004928ec	33		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x004928ce	30	destroy_adoption_button_safe_handle_value			confirmed			
+0x004928ec	33	destroy_UIContainer_safe_handle_value			confirmed			
 0x0049290d	36		adoption slots, adoption manager, and slot manager		unidentified			
 0x00492931	0	allocate_ZTUIAdoptionButton_instance			confirmed		0x008ce3cc#1	
-0x00492947	82		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00492999	153		adoption slots, adoption manager, and slot manager		unidentified			
+0x00492947	82	register_ZTUIAdoptionButton_ui_handlers			confirmed			
+0x00492999	153		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x00492a79	0	allocate_ZTAdoptionSlot_instance			confirmed		0x008ce3cc#3	
 0x00492ad3	111		adoption slots, adoption manager, and slot manager		unidentified			
 0x00492b42	0	allocate_ZTAdoptionMgr_instance			confirmed		0x008ce3dc#1	
@@ -2895,23 +2895,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00492c96	0	scalar_delete_vtable_008ce2f4_safe_handle_value			confirmed		0x008ce2f4#0	
 0x00492cb1	0	scalar_delete_vtable_008ce308_safe_handle_value			confirmed		0x008ce308#0	
 0x00492ccc	132		adoption slots, adoption manager, and slot manager		unidentified			
-0x00492d50	61		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00492d8d	26		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00492da7	383		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00492f26	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x00492d50	61	fill_adoption_fame_slot_records			confirmed			
+0x00492d8d	26	destroy_adoption_fame_slot_record_range			confirmed			
+0x00492da7	383	insert_adoption_fame_slot_record			confirmed			
+0x00492f26	160		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x00492fc6	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x00493066	0	get_type_vtable_008ce2f4_safe_handle_specialization			confirmed		0x008ce2f4#1	
 0x004930a6	0	get_type_vtable_008ce308_safe_handle_specialization			confirmed		0x008ce308#1	
 0x004930ab	0	assign_UIContainer_safe_handle_value			confirmed		0x008ce308#3	
-0x004930c4	117		adoption slots, adoption manager, and slot manager		unidentified			
+0x004930c4	117		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x00493139	41		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493162	117		adoption slots, adoption manager, and slot manager		unidentified			
 0x004931d7	155		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493272	47		adoption slots, adoption manager, and slot manager		unidentified			
-0x004932a1	82		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x004932f3	68		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00493337	45		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x00493364	80		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x004932a1	82	move_adoption_fame_slot_records_to_range			confirmed			
+0x004932f3	68	copy_adoption_fame_slot_records_to_range			confirmed			
+0x00493337	45	move_construct_adoption_fame_slot_records_forward			confirmed			
+0x00493364	80	move_construct_adoption_fame_slot_records_backward			confirmed			
 0x004933b4	153		adoption slots, adoption manager, and slot manager		unidentified			
 0x0049344d	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x004935b5	0	scalar_delete_ZTAdoptionSlotMgr_embedded_dispatcher			confirmed		0x008ce3c0#0	
@@ -2919,24 +2919,24 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004935cd	27		adoption slots, adoption manager, and slot manager		unidentified			io/assets
 0x004935e8	27		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493603	47	get_type_ZTBuyInfoPanel			confirmed			
-0x00493632	0		buy info, goal, money, and multi-list panels		unidentified		0x008ce5d8#1	ui
-0x00493637	32		buy info, goal, money, and multi-list panels		unidentified			ui
+0x00493632	0	get_type_ZTBuyInfoPanel_vtable_thunk			confirmed		0x008ce5d8#1	
+0x00493637	32	init_ZTBuyInfoPanel_descriptor_ref			confirmed			
 0x00493657	0	init_ZTBuyInfoPanel_descriptor_ref_vtable_thunk			confirmed		0x008ce5d8#2	
-0x0049365c	73		buy info, goal, money, and multi-list panels		unidentified			ui
+0x0049365c	73	get_ZTBuyInfoPanel_ui_handler_registry			confirmed			
 0x004936a5	0	register_ZTBuyInfoPanel_action_value			confirmed		0x008ce80c#0	
 0x004936bb	0	resolve_ZTBuyInfoPanel_action_value			confirmed		0x008ce80c#1	
-0x0049370e	119		buy info, goal, money, and multi-list panels		unidentified			ui
+0x0049370e	119	register_ZTBuyInfoPanel_ui_handlers			confirmed			
 0x004937d6	0	scalar_delete_ZTBuyInfoPanel			confirmed		0x008ce5d8#0	
-0x004937f1	42		buy info, goal, money, and multi-list panels		unidentified			ui
+0x004937f1	42	destroy_ZTBuyInfoPanel_members			confirmed			
 0x0049381b	0	read_buy_info_panel_dynamic_start_position			confirmed		0x008ce614#5	
 0x004938ba	0	hide_buy_info_layout_and_research_bump			confirmed		0x008ce614#20	
 0x004939ad	0	show_buy_info_layout_and_refresh_research_bump			confirmed		0x008ce614#19	
-0x004939cb	364		buy info, goal, money, and multi-list panels		unidentified			ui
+0x004939cb	364	refresh_buy_info_research_bump_state			confirmed			
 0x00493b84	0	refresh_buy_info_panel_for_selected_object			confirmed		0x008ce6ac#85	
 0x0049420c	0	refresh_research_object_panel_state			confirmed		0x008ce6ac#86	
 0x00494567	0	start_research_for_current_buy_info_item			confirmed		0x008ce6ac#87	
-0x004945dc	216		buy info, goal, money, and multi-list panels		unidentified			ui
-0x004946b4	159		buy info, goal, money, and multi-list panels		unidentified			ui
+0x004945dc	216	populate_buy_info_entity_name_label			confirmed			
+0x004946b4	159	populate_buy_info_entity_image_display			confirmed			
 0x00494753	380		buy info, goal, money, and multi-list panels		unidentified			ui
 0x004948cf	581	populate_cost_upkeep_panel			confirmed			
 0x00494b14	447		buy info, goal, money, and multi-list panels		unidentified			ui
@@ -7890,7 +7890,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057b8e5	361		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ba4e	279		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057bb65	154		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057bbff	142		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057bbff	142		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057bc8d	141		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057bd1a	84		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			economy
 0x0057bd6e	43		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
