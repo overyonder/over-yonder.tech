@@ -556,8 +556,8 @@ remain in the functional specification.</p>
   <td>Platform APIs</td>
   <td>Window, input, filesystem, OS, network, diagnostics, decoder backends</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on the <code>ModeSamples</code> resource.</td>
-  <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support.</td>
+  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on the <code>ModeSamples</code> resource. Source-resolved dev-console, diagnostic, debug-feature, sprite-debug, and performance command records belong to the diagnostics/runtime-state owner until recovered callsites require narrower feature handlers.</td>
+  <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support; recover dev-console and diagnostic command effects through Bevy diagnostics/runtime state before delegating host-only mechanics.</td>
 </tr>
 <tr>
   <td>Archive assets</td>
@@ -818,10 +818,10 @@ remain in the functional specification.</p>
 <tr>
   <td>UI</td>
   <td>UI behavior</td>
-  <td>Widget behavior</td>
+  <td>Widget behavior and help surfaces</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Native hit-test, focus, edit validation, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
-  <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, and font/text callsites.</td>
+  <td>Native hit-test, focus, edit validation, hover-help/<code>BFHelpComponent</code> routing, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
+  <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, <code>BFHelpComponent</code>, and font/text callsites.</td>
 </tr>
 <tr>
   <td>Menu</td>
@@ -906,10 +906,10 @@ remain in the functional specification.</p>
 <tr>
   <td>Entity</td>
   <td>Entity model</td>
-  <td>Component factories and validation</td>
+  <td>Component factories, validation, and help components</td>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Recovered component sets instantiate through original type/factory contracts.</td>
-  <td>Recover factory callsites and representative binder families.</td>
+  <td>Recovered component sets instantiate through original type/factory contracts; source-authored help components remain entity/component surfaces until UI help routing proves their live Bevy presentation effects.</td>
+  <td>Recover factory callsites, representative binder families, and <code>BFHelpComponent</code> producer/consumer paths.</td>
 </tr>
 <tr>
   <td>Entity</td>
