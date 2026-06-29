@@ -3115,30 +3115,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049edc7	125	place_heap_hole_multilist_by_pregnancy			confirmed			
 0x0049ee44	134	pop_heap_multilist_entries_by_pregnancy			confirmed			
 0x0049eeca	120	place_heap_hole_multilist_with_callback			confirmed			
-0x0049ef42	134		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049efc8	130		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f04a	130		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f0cc	129		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f14d	129		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f1ce	129		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f24f	209		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049ef42	134	pop_heap_multilist_entries_with_callback			confirmed			
+0x0049efc8	130	place_heap_hole_multilist_by_integer_child			confirmed			
+0x0049f04a	130	place_heap_hole_multilist_by_string_child			confirmed			
+0x0049f0cc	129	pop_heap_named_ui_assignment_entries_by_value			confirmed			
+0x0049f14d	129	pop_heap_multilist_entries_by_integer_child			confirmed			
+0x0049f1ce	129	pop_heap_multilist_entries_by_string_child			confirmed			
+0x0049f24f	209	intersect_ui_regions_into_cache			confirmed			
 0x0049f320	0	scalar_delete_ZTOverviewData			confirmed		0x008cf518#0	
-0x0049f352	22		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049f352	22	release_ZTOverviewData_payload_ref			confirmed			
 0x0049f368	47	get_type_ZTOverviewComponent			confirmed			
-0x0049f397	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008cf570#1	ui
-0x0049f39c	32		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049f397	0	get_type_ZTOverviewComponent_vtable_thunk			confirmed		0x008cf570#1	
+0x0049f39c	32	init_ZTOverviewComponent_descriptor_ref			confirmed			
 0x0049f3bc	0	init_ZTOverviewComponent_descriptor_ref_vtable_thunk			confirmed		0x008cf570#2	
-0x0049f3c1	38		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f450	60		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049f3c1	38	get_ZTOverviewComponent_action_registry			confirmed			
+0x0049f450	60	allocate_dynamic_overview_layer_key_string			confirmed			
 0x0049f4d7	0	scalar_delete_ZTOverviewComponent			confirmed		0x008cf570#0	
-0x0049f4f3	213		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f5c8	142		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f656	136		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f6de	145		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f76f	148		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f803	451		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x0049f9c6	786		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a0176	113		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x0049f4f3	213	destroy_ZTOverviewComponent_members			confirmed			
+0x0049f5c8	142	paint_overview_edge_triplet_inset			confirmed			
+0x0049f656	136	paint_overview_edge_triplet_full_span			confirmed			
+0x0049f6de	145	paint_overview_opposite_edge_triplet_full_span			confirmed			
+0x0049f76f	148	paint_overview_opposite_edge_triplet_inset			confirmed			
+0x0049f803	451	resolve_overview_path_edge_color_code			confirmed			
+0x0049f9c6	786	paint_overview_path_edge_pixels			confirmed			
+0x004a0176	113	append_overview_placement_vector_record			confirmed			
 0x004a01e7	0	populate_animal_overhead_map			confirmed			
 0x004a0b0f	35		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x004a0df7	1538		multi-info, overview map, photo album, and UI widgets		unidentified			ui
