@@ -2759,9 +2759,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048d2c2	22	destroy_inline_string_list_with_sentinel			confirmed			
 0x0048d2d8	50	clear_inline_string_list_nodes			confirmed			
 0x0048d30a	0	allocate_ZTTranquilizeMode_instance			confirmed		0x008cd998#3	
-0x0048d325	153	register_ZTUILayoutMode_handler_if_absent			confirmed			
-0x0048d405	160	append_ZTUILayoutMode_handler_record			confirmed			
-0x0048d4a5	117	inherit_ZTUILayoutMode_handlers_from_registry			confirmed			
+0x0048d325	153	register_ZTTranquilizeMode_handler_if_absent			confirmed			
+0x0048d405	160	append_ZTTranquilizeMode_handler_record			confirmed			
+0x0048d4a5	117	inherit_ZTTranquilizeMode_handlers_from_registry			confirmed			
 0x0048d51a	52	apply_tranquilizer_recoil_slot_140_delta			confirmed			
 0x0048d54e	52	apply_tranquilizer_recoil_slot_13c_delta			confirmed			
 0x0048d582	47	get_type_ZTUILayoutMode			confirmed			
@@ -2779,30 +2779,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048dfe9	0	query_editor_layout_target_value			confirmed		0x008cdce8#6	
 0x0048e0ae	0	modify_editor_layout_target_value			confirmed		0x008cdce8#7	
 0x0048e11d	180	load_ui_layout_mode_overlay_layout			confirmed			
-0x0048e1d1	114		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e1d1	114	clear_ui_layout_mode_overlay_layouts			confirmed			
 0x0048e243	0	allocate_ZTUILayoutMode_instance			confirmed		0x008cdce8#11	
-0x0048e259	153		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048e339	160		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048e3d9	117		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e259	153	register_ZTUILayoutMode_handler_if_absent			confirmed			
+0x0048e339	160	append_ZTUILayoutMode_handler_record			confirmed			
+0x0048e3d9	117	inherit_ZTUILayoutMode_handlers_from_registry			confirmed			
 0x0048e456	47	get_type_ZTUIAdoptionButton			confirmed			
-0x0048e485	0		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified		0x008ce030#1	ui
+0x0048e485	0	get_type_ZTUIAdoptionButton_vtable_thunk			confirmed		0x008ce030#1	
 0x0048e48a	32	init_ZTUIAdoptionButton_descriptor_ref			confirmed			
 0x0048e4aa	0	init_ZTUIAdoptionButton_descriptor_ref_vtable_thunk			confirmed		0x008ce030#2	
-0x0048e4af	38		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e4af	38	get_ZTUIAdoptionButton_ui_handler_registry			confirmed			
 0x0048e4d5	0	register_adoption_button_action_value			confirmed		0x008ce104#98	
 0x0048e4eb	0	resolve_adoption_button_action_value			confirmed		0x008ce104#99	
-0x0048e53e	87		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e53e	87	construct_ZTUIAdoptionButton_members			confirmed			
 0x0048e595	0	scalar_delete_ZTUIAdoptionButton			confirmed		0x008ce030#0	
-0x0048e5b0	79		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e5b0	79	destroy_ZTUIAdoptionButton_members			confirmed			
 0x0048e5ff	0	forward_adoption_button_slot44_to_base			confirmed		0x008ce104#91	
 0x0048e613	0	forward_adoption_button_slot45_to_base			confirmed		0x008ce104#92	
 0x0048e627	0	send_adoption_button_string_to_resolved_target			confirmed		0x008ce104#97	
-0x0048e6bc	188		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048e778	188		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048e834	1144		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048ecac	90		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048ed06	241		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048edf7	94		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048e6bc	188	set_adoption_button_primary_icon_layout			confirmed			
+0x0048e778	188	set_adoption_button_secondary_icon_layout			confirmed			
+0x0048e834	1144	update_adoption_button_option_states			confirmed			
+0x0048ecac	90	set_adoption_button_count_value			confirmed			
+0x0048ed06	241	set_adoption_button_progress_range			confirmed			
+0x0048edf7	94	set_adoption_button_progress_value			confirmed			
 0x0048ee55	0	read_ZTUIAdoptionButton_layout_refs			confirmed		0x008ce06c#5	
 0x0048ef0c	0	get_type_ZTAdoptionSlot			confirmed		0x008ce298#1	
 0x0048ef39	0	init_ZTAdoptionSlot_descriptor_ref			confirmed		0x008ce298#2	
@@ -2810,11 +2810,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048f05f	74		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f0a9	0	scalar_delete_ZTAdoptionSlot			confirmed		0x008ce298#0	
 0x0048f0c4	119		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f13b	144		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048f13b	144	bind_adoption_slot_button_and_refresh_ui			confirmed			
 0x0048f1cb	0	update_ZTAdoptionSlot_timers_and_ui_state			confirmed		0x008ce298#14	
 0x0048f27f	947	read_adoption_timing_config			confirmed			
 0x0048f632	33		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f653	248		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048f653	248	bind_adoption_decline_button_payload			confirmed			
 0x0048f74b	42		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f775	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f78b	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
@@ -2824,13 +2824,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048f83e	23		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f855	71		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f89c	177		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f94d	35		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f94d	35		adoption slots, adoption manager, and slot manager		unidentified			ui
 0x0048f970	751		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048fc5f	32		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048fc7f	554	read_adoption_profile			confirmed			
-0x0048fea9	103		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x0048ff10	194		adoption slots, adoption manager, and slot manager		unidentified			ui
-0x0048ffd2	272		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0048fea9	103	create_adoption_profile_icon_layout			confirmed			
+0x0048ff10	194	resolve_female_adoption_profile_for_type			confirmed			
+0x0048ffd2	272	refresh_adoption_slot_button_state			confirmed			
 0x004900e2	0	write_adoption_slot_xml_attributes			confirmed		0x008ce298#19	
 0x00490268	0	read_adoption_slot_xml_attributes			confirmed		0x008ce298#20	
 0x00490440	47	get_type_ZTAdoptionMgr			confirmed			
@@ -2841,7 +2841,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049054b	130		adoption slots, adoption manager, and slot manager		unidentified			
 0x004905cd	135		adoption slots, adoption manager, and slot manager		unidentified			
 0x00490654	0	scalar_delete_ZTAdoptionMgr			confirmed		0x008cdf88#0	
-0x0049066f	274		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x0049066f	274	destroy_ZTAdoptionMgr_members			confirmed			
 0x00490781	120		adoption slots, adoption manager, and slot manager		unidentified			
 0x004907f9	0	emit_adoption_price_value			confirmed		0x008cdf88#31	
 0x004908b4	0	emit_adoption_available_value			confirmed		0x008cdf88#32	
@@ -2904,7 +2904,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004930a6	0	get_type_vtable_008ce308_safe_handle_specialization			confirmed		0x008ce308#1	
 0x004930ab	0	assign_UIContainer_safe_handle_value			confirmed		0x008ce308#3	
 0x004930c4	117		adoption slots, adoption manager, and slot manager		unidentified			
-0x00493139	41		adoption slots, adoption manager, and slot manager		unidentified			ui
+0x00493139	41		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493162	117		adoption slots, adoption manager, and slot manager		unidentified			
 0x004931d7	155		adoption slots, adoption manager, and slot manager		unidentified			
 0x00493272	47		adoption slots, adoption manager, and slot manager		unidentified			
