@@ -1932,7 +1932,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00466404	48	clear_ui_value_tree			confirmed			
 0x00466434	72	deref_checked_8byte_deque_iterator			confirmed			
 0x0046647c	36	advance_checked_8byte_deque_iterator			confirmed			
-0x004664a0	0		UI child iteration, donation-filter cleanup, and type acceptors		unidentified		0x008c86c8#14	
+0x004664a0	0		UI child iteration, donation-filter cleanup, and type acceptors		unidentified		0x008c86c8#14	ui
 0x004664b8	153	register_ui_command_handler_if_absent			confirmed			
 0x00466598	24	count_show_schedule_entries			confirmed			
 0x004665b0	23	get_show_schedule_entry_at_index			confirmed			
@@ -1945,22 +1945,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00466917	402	insert_show_donation_filter_record			confirmed			
 0x00466aa9	196	find_or_insert_ui_value_tree_node			confirmed			
 0x00466b6d	175	erase_ui_value_tree_range			confirmed			
-0x00466c1c	160		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466cbc	667		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466f57	57		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466f90	117		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00467005	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466c1c	160	append_ui_command_handler_registry_entry			confirmed			
+0x00466cbc	667	erase_ui_value_tree_node			confirmed			
+0x00466f57	57	delete_ui_value_tree_subtree			confirmed			
+0x00466f90	117	inherit_ui_command_handlers_from_registry			confirmed			
+0x00467005	23	resolve_ZTAITrickTargetComponent_from_virtual_slot64			confirmed			
 0x0046701c	40	as_ZTSelectionMode			confirmed			
 0x00467044	40	as_UIToggleHoverButton			confirmed			
-0x0046706c	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x0046706c	23	resolve_ZTAIStaffAssignmentComponent_from_virtual_slot64			confirmed			
 0x00467083	40	as_ZTUITypeList			confirmed			
 0x004670ab	40	as_ZTPuzzleMgr			confirmed			
 0x004670d3	40	as_UICompositeButton			confirmed			
 0x004670fb	40	as_UIWindow			confirmed			
 0x00467123	40	as_ZTResearchMgr			confirmed			
-0x0046714b	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x0046714b	23	resolve_ZTFeedbackComponent_from_virtual_slot6c			confirmed			
 0x00467162	40	as_ZTItemFilter			confirmed			
-0x0046718a	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x0046718a	23	resolve_ZTAIViewAnimals_from_virtual_slot6c			confirmed			
 0x004671a1	55	resolve_ZTUserCameraData_component			confirmed			
 0x004671d8	40	as_ZTAIMgr			confirmed			
 0x00467200	55	resolve_ZTAIShow_child_component			confirmed			
@@ -2511,7 +2511,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004821cd	95	find_training_uint_key_tree_lower_bound			confirmed			
 0x0048222c	79	clear_training_pointer_vector_contents			confirmed			
 0x0048227b	33	destroy_training_timed_events_value_ref			confirmed			
-0x0048229c	0	allocate_ZTFPTrainingMode_instance			confirmed		0x008cc1b4#6	
+0x0048229c	0	allocate_ZTFPTrainingMode_instance			confirmed			
 0x004822b2	153	register_ZTFPTrainingMode_handler_entry			confirmed			
 0x00482392	0	scalar_delete_training_trick_target_value_table			confirmed		0x008cbe68#0	
 0x004823ad	0	scalar_delete_training_trick_component_value_table			confirmed		0x008cbe7c#0	
@@ -2527,22 +2527,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00482505	23	resolve_trick_component_from_virtual_slot64			confirmed			
 0x004825e4	40	as_ZTAITrickComponent			confirmed			
 0x00482680	0	handle_set_campaign_ui_value			confirmed			
-0x00482688	44		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004826b4	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004826d5	44		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00482748	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00482769	221		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00482846	127		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004828c5	75		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00482910	58		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00482688	44	insert_ui_assignment_dependent_refs_1b8_1c4			confirmed			
+0x004826b4	33	insert_ui_assignment_dependent_ref_1b8			confirmed			
+0x004826d5	44	construct_gesture_training_helper_object			confirmed			
+0x00482701	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc1d0#0	
+0x00482748	33	read_gesture_target_collision_metric			confirmed			
+0x00482769	221	compute_gesture_target_bounds_center_vec3			confirmed			
+0x00482846	127	age_gesture_trace_new_value_flags			confirmed			
+0x004828c5	75	mark_gesture_trace_value_seen			confirmed			
+0x00482910	58	is_gesture_trace_value_new			confirmed			
 0x0048294a	47	get_type_ZTGestureTraceModeBase			confirmed			
-0x00482979	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc2f0#1	ui
+0x00482979	0	get_type_ZTGestureTraceModeBase_vtable_thunk			confirmed		0x008cc2f0#1	
 0x0048297e	0	init_ZTGestureTraceModeBase_descriptor_ref			confirmed		0x008cc2f0#2	
-0x0048299e	75		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x0048299e	75	get_ZTGestureTraceModeBase_ui_handler_registry			confirmed			
 0x004829e9	0	scalar_delete_ZTGestureTraceModeBase_descriptor_entry			confirmed		0x008cc5e0#0	
 0x004829ff	0	dispatch_ZTGestureTraceModeBase_handler_value			confirmed		0x008cc5e0#1	
-0x00482a52	142		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00482ae0	419		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00482a52	142	register_ZTGestureTraceModeBase_ui_handlers			confirmed			
+0x00482ae0	419	construct_ZTGestureTraceModeBase			confirmed			
 0x00482c83	0	scalar_delete_ZTGestureTraceModeBase			confirmed		0x008cc2f0#0	
 0x00482c9e	172		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00482d4a	66	activate_gesture_trace_mode_base			confirmed		0x008cc3c4#85	
@@ -17262,11 +17263,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006cdaca	0		entity economy, transaction, and component/type registry support		unidentified		0x008f7e5c#3	economy
 0x006cdbb5	0		entity economy, transaction, and component/type registry support		unidentified		0x008f7e5c#4	economy
 0x006cdcc2	47	get_type_BFPoint3Event			confirmed	gamebryo		
-0x006cdcf1	0	get_type_BFPoint3Event_vtable_thunk			confirmed		0x008cc1d4#0	
-0x006cdcf6	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d4#1	economy
-0x006cdd16	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d4#2	economy
-0x006cdd3e	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d4#3	economy
-0x006cdda5	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d4#5	economy
+0x006cdcf1	0	get_type_BFPoint3Event_vtable_thunk			confirmed		0x008cc1d0#1	
+0x006cdcf6	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d0#2	economy
+0x006cdd16	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d0#3	economy
+0x006cdd3e	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d0#4	economy
+0x006cdda5	0		entity economy, transaction, and component/type registry support		unidentified		0x008cc1d0#6	economy
 0x006cddb7	47	get_type_BFGSetTextureData			confirmed	gamebryo		
 0x006cdde6	0	get_type_BFGSetTextureData_vtable_thunk			confirmed		0x008f7ec4#1	
 0x006cddeb	32		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
