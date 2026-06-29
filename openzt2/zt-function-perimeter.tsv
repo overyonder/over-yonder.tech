@@ -2583,7 +2583,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00484123	0	allocate_ZTGestureTraceModeBase_instance			confirmed		0x008cc5e0#3	
 0x0048413e	153	register_ZTGestureTraceModeBase_handler_if_absent			confirmed			
 0x0048421e	0	scalar_delete_ZTGestureComponent_value_table			confirmed		0x008cc2d8#0	
-0x00484239	139	resize_dword_vector_with_fill			confirmed			
+0x00484239	139	resize_float_vector_with_fill			confirmed			
 0x004842c4	200	erase_bit_vector_range			confirmed			
 0x0048438c	374	insert_u32_keyed_float_tree_node_or_return_existing			confirmed			
 0x00484502	137	set_bit_vector_size_and_mask_tail			confirmed			
@@ -2594,40 +2594,40 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004846b5	0	get_type_ZTGestureComponent_value_table_thunk			confirmed		0x008cc2d8#1	
 0x004846ba	0	assign_ZTGestureComponent_value			confirmed		0x008cc2d8#3	
 0x004846d3	117	inherit_ZTGestureTraceModeBase_handlers_from_registry			confirmed			
-0x00484748	37	fill_dword_range_from_value_thunk			confirmed			
+0x00484748	37	fill_float_range_from_value_thunk			confirmed			
 0x0048476d	46	move_dword_range_backward			confirmed			
 0x004847ff	40	as_ZTGestureComponent			confirmed			
 0x00484827	162	copy_bit_vector_range_values			confirmed			
-0x004848c9	34	fill_dword_range_from_value			confirmed			
-0x004848eb	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484914	61		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484951	39		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484978	40		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004849a0	383		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484b1f	63		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484b5e	32		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484b7e	40		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484ba6	30		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484bc4	70		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004848c9	34	fill_float_range_from_value			confirmed			
+0x004848eb	33	fill_float_range_from_value_loop			confirmed			
+0x00484914	61	erase_4byte_vector_range			confirmed			
+0x00484951	39	checked_4byte_vector_iterators_share_current			confirmed			
+0x00484978	40	copy_4byte_range_forward_wrapper			confirmed			
+0x004849a0	383	insert_fill_float_vector_range			confirmed			
+0x00484b1f	63	allocate_4byte_vector_storage			confirmed			
+0x00484b5e	32	fill_float_range_and_return_end			confirmed			
+0x00484b7e	40	move_4byte_range_backward_wrapper			confirmed			
+0x00484ba6	30	clear_4byte_vector_storage			confirmed			
+0x00484bc4	70	init_4byte_vector_storage			confirmed			
 0x00484c0a	0	read_photo_mode_field_1bc			confirmed		0x008cc974#118	
 0x00484c11	47	get_type_ZTPhotoMode			confirmed			
-0x00484c40	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc8a0#1	ui
-0x00484c45	32		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00484c40	0	get_type_ZTPhotoMode_vtable_thunk			confirmed		0x008cc8a0#1	
+0x00484c45	32	init_ZTPhotoMode_descriptor_ref			confirmed			
 0x00484c65	0	init_ZTPhotoMode_descriptor_ref_vtable_thunk			confirmed		0x008cc8a0#2	
-0x00484c6a	73		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00484c6a	73	get_ZTPhotoMode_ui_handler_registry			confirmed			
 0x00484cb3	0	scalar_delete_ZTPhotoMode_descriptor_entry			confirmed		0x008ccb74#1	
 0x00484cc9	0	dispatch_ZTPhotoMode_handler_value			confirmed		0x008ccb74#2	
-0x00484d1c	199		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00484d1c	199	register_ZTPhotoMode_ui_handlers			confirmed			
 0x00484e58	0	scalar_delete_ZTPhotoMode			confirmed		0x008cc8a0#0	
 0x00484e80	0	activate_photo_mode_and_seed_ui			confirmed		0x008cc974#85	
 0x00485255	0	deactivate_photo_mode_and_clear_messages			confirmed		0x008cc974#86	
 0x004853e8	0	update_photo_mode_frame_and_zoom_input			confirmed		0x008cc8c4#5	
-0x004855a0	20		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004855b4	279		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004856cb	290		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004857ed	221		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004858ca	217		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004859a3	123		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004855a0	20	round_up_to_power_of_two_u32			confirmed			
+0x004855b4	279	load_photo_thumbnail_into_photo_widget			confirmed			
+0x004856cb	290	write_ZTPhotoInfo_xml			confirmed			
+0x004857ed	221	write_enlarged_photo_jpeg			confirmed			
+0x004858ca	217	write_photo_thumbnail_jpeg			confirmed			
+0x004859a3	123	write_photo_image_files			confirmed			
 0x00485a1e	618		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00485c88	392	emit_photoevent_num_pictures_payload			confirmed			
 0x00485e10	40		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
@@ -4471,10 +4471,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004db9dd	122		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004dba57	19		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004dba6a	99		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
-0x004dbacd	33		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004dbacd	33		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004dbaee	33		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
-0x004dbb0f	61		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004dbb4c	383		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004dbb0f	61		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004dbb4c	383		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004dbccb	160		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004dbd6b	37		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004dbd90	40		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4875,7 +4875,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ed479	0	register_ZTFameData_fame_config_value			confirmed		0x008d56d4#0	
 0x004ed48f	0	resolve_ZTFameData_fame_config_value			confirmed		0x008d56d4#1	
 0x004ed550	0	scalar_delete_ZTFameData_fame_config			confirmed		0x008d5680#0	
-0x004ed56b	110		fame config, star display, admission, and status setup		unidentified			ui
+0x004ed56b	110		fame config, star display, admission, and status setup		unidentified			game-entities
 0x004ed5d9	1012	emit_bf3devent_object_animation_add_listener_payload			confirmed			
 0x004ed9cd	202	clear_ZTMapData_object_vectors			confirmed			
 0x004eda97	0	tick_ZTFameData_fame_config_star_display			confirmed		0x008d5680#14	
@@ -4958,7 +4958,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f3561	0	ZTFameData_accept_add_animal_for_creation_value			confirmed			
 0x004f35fb	0	ZTFameData_make_num_dinos_tranquilized_value			confirmed		0x008d5b98#4	
 0x004f364f	0	ZTFameData_accept_adoption_enabled_value			confirmed			
-0x004f3691	136		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			
+0x004f3691	136		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			io/assets
 0x004f3719	174		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
 0x004f37c7	48	destroy_ZTFameData_handler_tree_storage			confirmed			
 0x004f37f7	36	clear_ZTFameData_handler_tree			confirmed			
@@ -5003,9 +5003,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f4d0f	0		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified		0x008d5e58#1	
 0x004f4d14	32	init_ZTToolMgr_descriptor_ref			confirmed			
 0x004f4d34	0	init_ZTSunLayer_descriptor_ref_vtable_thunk			confirmed		0x008d5e58#2	
-0x004f4d39	134		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f4d39	134		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			
 0x004f4dbf	0	scalar_delete_ZTSunLayer			confirmed		0x008d5e58#0	
-0x004f4ddb	579		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f4ddb	579		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			
 0x004f501e	0	update_ZTSunLayer_sun_transform			confirmed		0x008d5e58#21	
 0x004f51e6	0	render_ZTSunLayer_dependent_objects			confirmed		0x008d5e58#22	
 0x004f528d	0	refresh_ZTSunLayer_static_transform			confirmed		0x008d5e58#23	
@@ -9773,7 +9773,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b2612	49		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b2643	39	find_xml_attribute_node_by_name			confirmed	gamebryo		
 0x005b266a	61	ensure_xml_attribute_node_by_name			confirmed	gamebryo		
-0x005b26a7	85		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b26a7	85		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b26fc	32		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b271c	31		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b273b	28		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -15694,7 +15694,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00692acd	395	insert_40byte_vector_record			confirmed	gamebryo		
 0x00692c58	374		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
 0x00692dce	66		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
-0x00692e10	118		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
+0x00692e10	118		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692e86	41		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692f21	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
@@ -17908,7 +17908,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ef44b	782	BFGCollisionTester_read_attribute_fields			confirmed	gamebryo		
 0x006ef759	711		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006efa20	188		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006efadc	1197		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x006efadc	1197		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006eff89	310		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f00bf	177		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f0170	73		collision tester and fitting-surface component XML		unidentified	gamebryo		game-ai
@@ -19879,9 +19879,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075bb50	0	get_type_BFColorInterpolateSkyLayer_vtable_thunk			confirmed		0x008fe7b8#1	
 0x0075bb55	32		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075bb75	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#2	
-0x0075bb7a	86		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075bb7a	86		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075bbd0	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#0	
-0x0075bbec	217		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075bbec	217		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075bcc5	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#21	
 0x0075bd2a	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#22	
 0x0075bddb	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#23	
