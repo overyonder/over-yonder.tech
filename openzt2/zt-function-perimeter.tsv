@@ -6699,7 +6699,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053e7b9	424		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x0053e961	163		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x0053ea04	324		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x0053eb48	254		tank gate segment, tank manager, and area relocation setup		unidentified			animation
+0x0053eb48	254	update_ZTTankGateSegment_clearance_height			confirmed			
 0x0053ec46	459		tank gate segment, tank manager, and area relocation setup		unidentified			world/pathing
 0x0053ee11	52		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x0053ee45	336	collect_ZTTankGateSegment_child_link_refs			confirmed			
@@ -17746,7 +17746,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e97f6	47		vector copy/assign/destruct helper tail		unidentified	gamebryo		
 0x006e9825	63		vector copy/assign/destruct helper tail		unidentified	gamebryo		ui
 0x006e9864	88		vector copy/assign/destruct helper tail		unidentified	gamebryo		
-0x006e98bc	55		vector copy/assign/destruct helper tail		unidentified	gamebryo		animation
+0x006e98bc	55	resolve_BFGEnvironmentComponent_from_owner_value			confirmed	gamebryo		
 0x006e98f3	80		vector copy/assign/destruct helper tail		unidentified	gamebryo		
 0x006e9943	83		vector copy/assign/destruct helper tail		unidentified	gamebryo		
 0x006e9996	83		vector copy/assign/destruct helper tail		unidentified	gamebryo		
@@ -17954,7 +17954,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f5634	665		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x006f58cd	0		collision tester and fitting-surface component XML		unidentified		0x008f97c0#7	
 0x006f5906	0		collision tester and fitting-surface component XML		unidentified		0x008f97c0#8	
-0x006f5d9e	71		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x006f5d9e	71	resolve_selected_BFRealPhysicsComponent			confirmed	gamebryo		
 0x006f5de5	0		collision tester and fitting-surface component XML		unidentified		0x008f9768#19	
 0x006f6313	0		collision tester and fitting-surface component XML		unidentified		0x008f9768#20	
 0x006f6f52	319		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
@@ -18100,11 +18100,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006fc1c4	242		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006fc2b6	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#14	
 0x006fc3f4	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#13	
-0x006fc40b	56		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
-0x006fc443	96		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
-0x006fc4a3	111		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x006fc40b	56	init_object_animation_listener_registry_once			confirmed	gamebryo		
+0x006fc443	96	select_object_animation_listener_entry			confirmed	gamebryo		
+0x006fc4a3	111	add_object_animation_listener_entry			confirmed	gamebryo		
 0x006fc736	590	emit_bf3devent_object_animation_add_listener_payload			confirmed	gamebryo		
-0x006fc984	132		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x006fc984	132	resolve_object_animation_listener_BFPhysObj			confirmed	gamebryo		
 0x006fca08	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#19	
 0x006fcb5c	888	read_phys_anim_state_list			confirmed	gamebryo		
 0x006fced4	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#20	
@@ -18223,7 +18223,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00700d3d	1262		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0070122b	85		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00701280	992		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x00701660	43		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00701660	43		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070168b	143		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070171a	87		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00701771	47	get_type_BFGInfluenceComponent			confirmed	gamebryo		
@@ -18252,7 +18252,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007034e0	218		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007035ba	470		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703790	109		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007037fd	69		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x007037fd	69	get_fitting_surface_cell_show_record_payload			confirmed	gamebryo		
 0x00703842	211		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703915	116		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703989	62		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18354,7 +18354,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00707657	684		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707903	67		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707946	67		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00707989	325		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x00707989	325	accumulate_environment_surface_weighted_value			confirmed	gamebryo		
 0x00707ace	273		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707bdf	0		collision tester and fitting-surface component XML		unidentified		0x008fa900#1	
 0x00707bf7	64		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18377,7 +18377,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070887b	178		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070892d	130		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x007089af	68		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x007089f3	72		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x007089f3	72	compact_dword_vector_suffix_to_begin			confirmed	gamebryo		
 0x00708a3b	128		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00708abb	73		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00708b04	69		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18475,9 +18475,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070c247	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#0	
 0x0070c262	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070c29a	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#31	
-0x0070c35a	70		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x0070c35a	70	release_active_animation_controller_object			confirmed	gamebryo		
 0x0070c3a0	35		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070c3c3	134		collision tester and fitting-surface component XML		unidentified	gamebryo		animation
+0x0070c3c3	134	create_active_animation_controller_object			confirmed	gamebryo		
 0x0070c449	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#19	
 0x0070c7e9	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#20	
 0x0070cbcd	19		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
@@ -27555,39 +27555,39 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00893f46	6	import_thunk_IMM32_ImmSetConversionStatus			confirmed			
 0x00893f50	114	construct_anim_track_by_type_key			confirmed			
 0x00893fd0	270	load_material_anim_track_from_xml			confirmed			
-0x008940e0	54		animation track collection and material animation loaders		unidentified			animation
+0x008940e0	54	copy_8byte_anim_sample_records			confirmed			
 0x00894120	106	erase_float_pair_curve_sample_range			confirmed			
-0x00894190	57		animation track collection and material animation loaders		unidentified			animation
-0x008941d0	79		animation track collection and material animation loaders		unidentified			animation
-0x00894220	293		animation track collection and material animation loaders		unidentified			animation
-0x00894350	93		animation track collection and material animation loaders		unidentified			animation
+0x00894190	57	clear_float_pair_curve_samples			confirmed			
+0x008941d0	79	reserve_float_pair_curve_vector_storage			confirmed			
+0x00894220	293	assign_float_pair_curve_vector			confirmed			
+0x00894350	93	copy_uv_transform_anim_track_state			confirmed			
 0x008943b0	240	clone_anim_track_by_runtime_type_key			confirmed			
 0x008944a0	0	disable_anim_track_by_name_key			confirmed		0x008bc53c#7	
 0x008944c0	1	noop_anim_track_collection_method			confirmed		0x008bc53c#1	
-0x008944d0	110		animation track collection and material animation loaders		unidentified			animation
+0x008944d0	110	allocate_dword_anim_vector_storage			confirmed			
 0x00894540	0	dispatch_anim_track_index_to_output			confirmed		0x008bc53c#10	
 0x008945a0	84	get_anim_track_entry_path_length			confirmed			
 0x00894600	88	map_anim_track_entry_distance_to_time			confirmed			
 0x00894660	85	map_anim_track_entry_time_to_distance			confirmed			
 0x008946c0	30	fill_dword_range_from_value_pointer			confirmed			
 0x008946e0	0	find_anim_track_index_by_name_key			confirmed		0x008bc53c#5	
-0x00894770	90		animation track collection and material animation loaders		unidentified			animation
+0x00894770	90	erase_dword_anim_vector_range			confirmed			
 0x008947d0	233	destroy_anim_track_collection_storage			confirmed			
 0x008948c0	0	get_anim_track_collection_duration_ticks			confirmed		0x008bc53c#9	
 0x008948d0	0	count_anim_track_collection_entries			confirmed		0x008bc53c#4	
 0x008948e3	13	return_relative_indirect_jump_11cb			confirmed			
 0x008948f0	0	delete_anim_track_collection			confirmed		0x008bc53c#0	
-0x00894910	79		animation track collection and material animation loaders		unidentified			animation
-0x00894960	217		animation track collection and material animation loaders		unidentified			animation
-0x00894a40	443		animation track collection and material animation loaders		unidentified			animation
-0x00894c00	111		animation track collection and material animation loaders		unidentified			animation
-0x00894c70	92		animation track collection and material animation loaders		unidentified			animation
-0x00894cd0	137		animation track collection and material animation loaders		unidentified			animation
-0x00894d60	38		animation track collection and material animation loaders		unidentified			animation
+0x00894910	79	reserve_dword_anim_vector_storage			confirmed			
+0x00894960	217	throw_invalid_anim_vector_subscript			confirmed			
+0x00894a40	443	insert_repeated_dword_anim_vector_values			confirmed			
+0x00894c00	111	copy_dword_anim_vector			confirmed			
+0x00894c70	92	checked_dword_anim_vector_at			confirmed			
+0x00894cd0	137	insert_one_dword_anim_vector_value			confirmed			
+0x00894d60	38	construct_anim_track_collection			confirmed			
 0x00894d90	0	set_anim_track_enabled_by_name_key			confirmed		0x008bc53c#6	
 0x00894dd0	0	get_anim_track_enabled_by_index			confirmed		0x008bc53c#8	
 0x00894e10	139	max_anim_track_collection_record_count			confirmed			
-0x00894ea0	105		animation track collection and material animation loaders		unidentified			animation
+0x00894ea0	105	append_dword_anim_vector_value			confirmed			
 0x00894f10	444	load_anim_track_collection_records			confirmed			
 0x008950d0	0	prune_single_keyframe_anim_tracks			confirmed		0x008bc53c#11	
 0x00895210	94	initialize_animation_transform_defaults			confirmed			
@@ -27597,53 +27597,53 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008954c0	42	get_animation_transform_cached_matrix			confirmed			
 0x008954f0	147	lerp_vec3_keyframe_components			confirmed			
 0x00895583	13	return_relative_indirect_jump_0ccb			confirmed			
-0x00895590	137		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895590	137	interpolate_anim_transform_keyframe			confirmed			
 0x00895620	79	populate_wrapped_transform_pair_entries			confirmed			
 0x00895730	22	find_dword_key_index_return_output			confirmed			
 0x00895750	56	get_animation_track_entry_vtable			confirmed			
 0x00895790	204	configure_animation_track_entry_timing			confirmed			
-0x00895860	70		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x008958b0	72		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895860	70	get_transform_source_entry_enabled			confirmed			
+0x008958b0	72	set_transform_source_entry_enabled			confirmed			
 0x00895900	108	set_animation_track_entry_current_index			confirmed			
 0x00895970	60	get_animation_track_entry_current_index			confirmed			
 0x008959b0	69	set_animation_track_entry_float_payload			confirmed			
-0x00895a00	104		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00895a70	95		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00895ad0	47		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00895b00	69		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00895b50	250		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895a00	104	set_transform_source_entry_time_ticks			confirmed			
+0x00895a70	95	mark_transform_source_key_entry			confirmed			
+0x00895ad0	47	move_dword_range_backward			confirmed			
+0x00895b00	69	for_each_dword_vector_entry			confirmed			
+0x00895b50	250	clear_transform_source_entry_vectors			confirmed			
 0x00895c50	49	update_animation_controller_target			confirmed			
-0x00895c90	57		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895c90	57	set_anim_controller_duration_and_refresh_outputs			confirmed			
 0x00895cd0	80	destroy_animation_controller_resource_vectors			confirmed			
-0x00895d20	69		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895d20	69	construct_anim_transform_controller_state			confirmed			
 0x00895d70	117	create_registered_transform_source_entry			confirmed			
-0x00895df0	118		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00895e70	81		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00895df0	118	clear_transform_source_entry_slot			confirmed			
+0x00895e70	81	remove_transform_source_entry			confirmed			
 0x00895ed0	0	scalar_delete_vtable_008bc594_object			confirmed		0x008bc594#0	
-0x00895ef0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#1	animation
-0x00895f50	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#2	animation
+0x00895ef0	0	write_uv_transform_anim_track_channels			confirmed		0x008bc5c0#1	
+0x00895f50	0	read_uv_transform_anim_track_channels			confirmed		0x008bc5c0#2	
 0x00895fd0	56	get_last_float_pair_curve_sample			confirmed			
-0x00896010	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#5	animation
-0x008961a0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#6	animation
-0x00896210	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#4	animation
-0x00896400	146		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x008964a0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#3	animation
-0x008964b0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5c0#0	animation
+0x00896010	0	apply_uv_transform_anim_track			confirmed		0x008bc5c0#5	
+0x008961a0	0	bind_material_anim_track_target			confirmed		0x008bc5c0#6	
+0x00896210	0	get_uv_transform_anim_track_duration			confirmed		0x008bc5c0#4	
+0x00896400	146	destroy_uv_transform_anim_track_storage			confirmed			
+0x008964a0	0	get_uv_transform_anim_track_type_key			confirmed		0x008bc5c0#3	
+0x008964b0	0	scalar_delete_uv_transform_anim_track			confirmed		0x008bc5c0#0	
 0x008964d0	75	construct_uv_transform_anim_track			confirmed			
-0x00896520	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#5	animation
-0x008965b0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#1	animation
-0x008965e0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#2	animation
-0x00896610	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#3	animation
-0x00896620	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#4	animation
-0x00896660	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc5e8#0	animation
+0x00896520	0	apply_alpha_anim_track			confirmed		0x008bc5e8#5	
+0x008965b0	0	write_alpha_anim_track_channels			confirmed		0x008bc5e8#1	
+0x008965e0	0	read_alpha_anim_track_channels			confirmed		0x008bc5e8#2	
+0x00896610	0	get_alpha_anim_track_type_key			confirmed		0x008bc5e8#3	
+0x00896620	0	get_alpha_anim_track_duration			confirmed		0x008bc5e8#4	
+0x00896660	0	scalar_delete_alpha_anim_track			confirmed		0x008bc5e8#0	
 0x008966b0	39	construct_alpha_anim_track			confirmed			
-0x008966e0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#5	animation
-0x008967a0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#1	animation
-0x008967e0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#2	animation
-0x00896830	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#4	animation
-0x008968f0	96		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896950	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#3	animation
-0x00896960	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc61c#0	animation
+0x008966e0	0	apply_color_rgb_anim_track			confirmed		0x008bc61c#5	
+0x008967a0	0	write_color_rgb_anim_track_channels			confirmed		0x008bc61c#1	
+0x008967e0	0	read_color_rgb_anim_track_channels			confirmed		0x008bc61c#2	
+0x00896830	0	get_color_rgb_anim_track_duration			confirmed		0x008bc61c#4	
+0x008968f0	96	destroy_color_rgb_anim_track_storage			confirmed			
+0x00896950	0	get_color_rgb_anim_track_type_key			confirmed		0x008bc61c#3	
+0x00896960	0	scalar_delete_color_rgb_anim_track			confirmed		0x008bc61c#0	
 0x00896980	57	construct_color_rgb_anim_track			confirmed			
 0x008969c0	62	get_color_rgb_anim_track_path_length			confirmed			
 0x008969e0	30	map_color_rgb_anim_track_distance_to_time			confirmed			
@@ -27654,43 +27654,43 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00896af0	99	construct_anim_keyframe_track			confirmed			
 0x00896b60	151	dispatch_anim_keyframe_track_chunk			confirmed			
 0x00896c20	74	load_anim_keyframe_track_chunks			confirmed			
-0x00896c70	110		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896ce0	174		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896d90	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc648#0	animation
-0x00896da0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc648#1	animation
-0x00896db0	0		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified		0x008bc648#2	animation
+0x00896c70	110	allocate_8byte_anim_record_storage			confirmed			
+0x00896ce0	174	set_anim_transform_update_bit			confirmed			
+0x00896d90	0	get_wrapped_transform_pair_payload			confirmed		0x008bc648#0	
+0x00896da0	0	update_wrapped_transform_pair_payload_children			confirmed		0x008bc648#1	
+0x00896db0	0	clone_wrapped_transform_pair_entry			confirmed		0x008bc648#2	
 0x00896de0	36	fill_8byte_pair_records			confirmed			
 0x00896e10	134	find_dword_key_in_8byte_record_vector			confirmed			
-0x00896ea0	59		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896ee0	59		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896f20	59		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896f60	59		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00896fa0	181		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00896ea0	59	set_transform_source_entry_field_14			confirmed			
+0x00896ee0	59	add_transform_source_entry_frame_offset			confirmed			
+0x00896f20	59	set_transform_source_entry_frame_offset			confirmed			
+0x00896f60	59	set_transform_source_entry_flag_byte			confirmed			
+0x00896fa0	181	reset_anim_transform_entry_outputs_to_default			confirmed			
 0x00897060	84	copy_refcounted_8byte_records_backward			confirmed			
 0x008970c0	360	evaluate_anim_transform_entry_for_index			confirmed			
-0x00897230	56		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00897270	48		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897230	56	fill_8byte_anim_pair_records			confirmed			
+0x00897270	48	copy_dword_range_forward			confirmed			
 0x008972a0	72	assign_refcounted_8byte_records_forward			confirmed			
 0x008972f0	90	uninitialized_copy_refcounted_8byte_record_range			confirmed			
 0x00897350	35	destroy_refcounted_8byte_record_range			confirmed			
-0x00897380	49		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x008973c0	46		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897380	49	copy_construct_8byte_anim_pair_records			confirmed			
+0x008973c0	46	fill_dword_range_from_value			confirmed			
 0x008973f0	80	uninitialized_fill_refcounted_8byte_records			confirmed			
-0x00897440	217		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897440	217	throw_anim_vector_too_long			confirmed			
 0x00897520	76	copy_refcounted_8byte_records_backward_to_end			confirmed			
 0x00897570	465	insert_repeated_float_pair_curve_samples			confirmed			
 0x00897750	51	uninitialized_fill_refcounted_8byte_records_n			confirmed			
-0x00897790	128		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897790	128	destroy_float_pair_curve_vector_owner			confirmed			
 0x00897810	137	insert_one_float_pair_curve_sample			confirmed			
-0x008978a0	92		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x008978a0	92	checked_float_pair_curve_sample_at			confirmed			
 0x00897900	41	uninitialized_copy_refcounted_8byte_record_range_wrapper			confirmed			
-0x00897930	257		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00897a40	69		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00897a90	116		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00897b10	123		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
-0x00897b90	180		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897930	257	clear_float_pair_curve_owner_vectors			confirmed			
+0x00897a40	69	construct_float_pair_curve_owner			confirmed			
+0x00897a90	116	is_anim_transform_key_active			confirmed			
+0x00897b10	123	insert_sorted_float_pair_curve_sample			confirmed			
+0x00897b90	180	set_anim_transform_key_bit_for_value			confirmed			
 0x00897c50	597	evaluate_all_anim_transform_entries			confirmed			
-0x00897eb0	71		animation transform, UV/alpha/color tracks, and keyframe chunk l		unidentified			animation
+0x00897eb0	71	reset_anim_transform_output_to_default			confirmed			
 0x00897f00	584	insert_repeated_refcounted_8byte_records			confirmed			
 0x00898150	191	reserve_indexed_object_slot			confirmed			
 0x00898210	90	construct_keyed_transform_pair_table			confirmed			
