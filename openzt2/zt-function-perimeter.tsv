@@ -2628,11 +2628,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004857ed	221	write_enlarged_photo_jpeg			confirmed			
 0x004858ca	217	write_photo_thumbnail_jpeg			confirmed			
 0x004859a3	123	write_photo_image_files			confirmed			
-0x00485a1e	618		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00485a1e	618	save_photo_capture_to_album_and_update_ui			confirmed			
 0x00485c88	392	emit_photoevent_num_pictures_payload			confirmed			
-0x00485e10	40		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00485e10	40	assign_ui_helpinfo_text_refs			confirmed			
 0x00485e38	1350	populate_photo_challenges_panel			confirmed			
-0x0048637e	59		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x0048637e	59	find_ZTPhotoChallengeMgr_component			confirmed			
 0x004863b9	209	emit_photoevent_get_current_challenge_payload			confirmed			
 0x0048648a	1011	populate_photo_challenge_entry			confirmed			
 0x0048687d	1232	emit_photoevent_payload			confirmed			
@@ -2641,25 +2641,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00486f4c	0	sync_photo_challenges_layout_visibility			confirmed		0x008cc974#123	
 0x00487033	0	refresh_photo_counter_and_challenge_progress			confirmed		0x008cc974#124	
 0x00487240	755	populate_photo_challenge_list_item			confirmed			
-0x004876fc	186		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004876fc	186	get_or_insert_u32_keyed_refcounted_ui_value_payload			confirmed			
 0x004877b6	0	allocate_ZTPhotoMode_instance			confirmed		0x008ccb74#4	
-0x004877cc	153		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004878ac	160		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048794c	77		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00487999	66		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004879db	117		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004877cc	153	register_ZTPhotoMode_handler_if_absent			confirmed			
+0x004878ac	160	append_ZTPhotoMode_handler_record			confirmed			
+0x0048794c	77	advance_checked_tree_iterator_in_place			confirmed			
+0x00487999	66	rotate_tree_node_left			confirmed			
+0x004879db	117	inherit_ZTPhotoMode_handlers_from_registry			confirmed			
 0x00487a50	40	as_ZTPhotoChallengesComponent			confirmed			
 0x00487a78	40	as_ZTPhotoChallengeMgr			confirmed			
-0x00487aa0	47		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00487aa0	47	copy_32byte_value_record			confirmed			
 0x00487acf	47	get_type_ZTPuzzleMode			confirmed			
-0x00487afe	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008ccce0#1	ui
-0x00487b03	32		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00487afe	0	get_type_ZTPuzzleMode_vtable_thunk			confirmed		0x008ccce0#1	
+0x00487b03	32	init_ZTPuzzleMode_descriptor_ref			confirmed			
 0x00487b23	0	init_ZTPuzzleMode_descriptor_ref_vtable_thunk			confirmed		0x008ccce0#2	
-0x00487b28	73		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00487bda	356		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00487b28	73	get_ZTPuzzleMode_ui_handler_registry			confirmed			
+0x00487bda	356	construct_ZTPuzzleMode_members			confirmed			
 0x00487d3e	0	scalar_delete_ZTPuzzleMode			confirmed		0x008ccce0#0	
-0x00487d59	67		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00487d9c	162		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00487d59	67	destroy_ZTPuzzleMode_members			confirmed			
+0x00487d9c	162	register_ZTPuzzleMode_ui_handlers			confirmed			
 0x00487e3e	0	activate_puzzle_mode_and_seed_drag_state			confirmed		0x008ccdb4#85	
 0x00488082	0	deactivate_puzzle_mode_and_release_drag_state			confirmed		0x008ccdb4#86	
 0x00488250	0	update_puzzle_mode_frame_and_auto_exit_timer			confirmed		0x008ccce0#14	
@@ -2671,10 +2671,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004885ac	0	handle_puzzle_mouse_wheel_rotate_value			confirmed		0x008ccce0#28	
 0x0048862e	0	read_puzzle_mode_config			confirmed		0x008ccce0#20	
 0x00488987	0	update_puzzle_placement_camera_and_prompt_state			confirmed		0x008ccdb4#113	
-0x00488c03	766		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00488f01	135		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00488f88	354		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x004890ea	25		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00488c03	766	update_puzzle_camera_basis_and_prompt_values			confirmed			
+0x00488f01	135	sync_puzzle_camera_component_with_target			confirmed			
+0x00488f88	354	bind_active_puzzle_piece_and_tiles			confirmed			
+0x004890ea	25	clear_active_puzzle_piece			confirmed			
 0x00489103	96		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x00489163	414		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x00489301	352		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
@@ -4777,7 +4777,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e9c50	312	ZTResearchItem_init_from_entity_shared_data			confirmed			
 0x004e9d88	118		research item and research manager handlers		unidentified			renderer
 0x004e9dfe	378	ZTResearchItem_build_research_button			confirmed			
-0x004e9f78	107		research item and research manager handlers		unidentified			ui
+0x004e9f78	107		research item and research manager handlers		unidentified			
 0x004e9fe3	0	write_ZTResearchItem_xml			confirmed		0x008d52c0#19	
 0x004ea128	0	read_ZTResearchItem_xml			confirmed		0x008d52c0#20	
 0x004ea2c2	166		research item and research manager handlers		unidentified			ui
@@ -6751,7 +6751,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00542acb	33		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00542aec	0	scalar_delete_ZTTankGateSegment_safe_handle_value			confirmed		0x008da39c#0	
 0x00542b07	139	resize_pointer_vector_to_count			confirmed			
-0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			
+0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			game-entities
 0x00542cd8	127	prepare_named_ui_assignment_ref_vector_insert			confirmed			
 0x00542d57	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00542d92	127		tank gate segment, tank manager, and area relocation setup		unidentified			ui
@@ -7282,7 +7282,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055cfa2	194		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055d064	270		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055d172	189		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x0055d22f	189		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055d22f	189		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055d2ec	189		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055d3a9	220		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055d485	21		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7291,8 +7291,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055d823	0	read_ZTPuzzle_state_xml			confirmed		0x008db270#20	
 0x0055dc06	357		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055dd6b	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055ddea	282		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x0055df04	178		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055ddea	282		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
+0x0055df04	178		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055dfb6	71		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055dffd	38		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055e023	95		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7321,7 +7321,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055eae3	0	write_ZTPuzzleMgr_state_xml			confirmed		0x008db518#19	
 0x0055eed0	0	read_ZTPuzzleMgr_state_xml			confirmed		0x008db518#20	
 0x0055fb47	0	update_ZTPuzzleMgr_frame			confirmed		0x008db518#14	
-0x0055fd79	49		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055fd79	49		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055fdaa	858		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00560104	63		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x00560143	381		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7360,7 +7360,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005624f5	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0056263a	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005626ce	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00562709	324		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00562709	324		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x0056284d	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562914	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00562baf	393		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
@@ -9436,7 +9436,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ab8d8	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab913	340		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005aba67	192		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005abb27	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005abb27	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005abbbb	398		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005abd49	198		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005abe0f	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -9446,9 +9446,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ac37a	404		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005ac50e	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ac55b	46		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005ac589	636		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005ac805	61		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ac842	63		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005ac589	636		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005ac805	61		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005ac842	63		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ac881	644		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005acb05	61		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005acb42	63		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -9514,7 +9514,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ae144	277		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ae259	111		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005ae2c8	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae3b3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		economy
 0x005ae3fc	659		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae68f	45		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -9787,7 +9787,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b2840	27	ensure_xml_attribute_node_and_refresh_value			confirmed	gamebryo		
 0x005b285b	60	get_xml_attribute_string_value_or_default			confirmed	gamebryo		
 0x005b2897	53	get_xml_attribute_value_or_default			confirmed	gamebryo		
-0x005b28cc	62		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005b28cc	62		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
 0x005b290a	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b2941	62		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b297f	54		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -10024,7 +10024,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b9a32	28		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9a61	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9b23	105		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b9b8c	372		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b9b8c	372		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9d00	205		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9dcd	341		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b9f22	210		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -14495,10 +14495,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006672ed	153	append_unique_global_UICompositeHoverButton_handler_record			confirmed	gamebryo		
 0x00667386	160	append_global_UICompositeHoverButton_handler_record			confirmed	gamebryo		
 0x00667426	22	init_unit_first_zero_quad_defaults			confirmed	gamebryo		
-0x0066743c	160		vector plane construction helpers		unidentified	gamebryo		
+0x0066743c	160		vector plane construction helpers		unidentified	gamebryo		renderer
 0x006674dc	81		vector plane construction helpers		unidentified	gamebryo		renderer
 0x0066752d	222		vector plane construction helpers		unidentified	gamebryo		
-0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		
+0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		renderer
 0x0066763a	44	copy_two_vectors_and_normalize_second			confirmed	gamebryo		
 0x00667666	214		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
 0x0066773c	48		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
@@ -17568,7 +17568,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006de447	89		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006de4a0	150		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006de536	79	release_traversability_slot_if_unmatched			confirmed	gamebryo		
-0x006de585	125		traversability slot/index table helpers		unidentified	gamebryo		
+0x006de585	125		traversability slot/index table helpers		unidentified	gamebryo		game-entities
 0x006de602	43		traversability slot/index table helpers		unidentified	gamebryo		
 0x006de62d	33	test_traversability_slot_index_record_present			confirmed	gamebryo		
 0x006de64e	300		traversability candidate and area-list support		unidentified	gamebryo		ui
@@ -17677,12 +17677,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e6e4d	124		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e6ec9	149	insert_ordered_map_entry_if_absent			confirmed	gamebryo		
 0x006e6f5e	132		ordered map/list helper cluster		unidentified	gamebryo		ui
-0x006e6fe2	132		ordered map/list helper cluster		unidentified	gamebryo		
+0x006e6fe2	132		ordered map/list helper cluster		unidentified	gamebryo		game-entities
 0x006e7066	110		ordered map/list helper cluster		unidentified	gamebryo		ui
 0x006e70d4	71		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e711b	144		ordered map/list helper cluster		unidentified	gamebryo		game-entities
 0x006e71ab	110	lower_bound_ordered_map_iterator			confirmed	gamebryo		
-0x006e7219	105		ordered map/list helper cluster		unidentified	gamebryo		
+0x006e7219	105		ordered map/list helper cluster		unidentified	gamebryo		world/pathing
 0x006e7282	38		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e72a8	122		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e7322	49		ordered map/list helper cluster		unidentified	gamebryo		
@@ -18605,7 +18605,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00710b67	56		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x00710b9f	298		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710cc9	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#0	
-0x00710ce4	390		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00710ce4	390		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00710e6a	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#13	
 0x00710e86	144		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x00710f16	166		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
@@ -18639,7 +18639,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00712a03	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a4a	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a91	23		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
-0x00712aa8	24		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00712aa8	24		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712ac0	52		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712af4	54		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712b2a	18	tankwallglass_selector_has_active_water_object			confirmed	gamebryo		
@@ -19673,14 +19673,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007521d1	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075225c	48	clear_presentation_registry_tree_storage			confirmed	gamebryo		
 0x0075228c	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
-0x00752527	187		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
+0x00752527	187		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x007525e2	105		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075264b	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
 0x007526d6	341		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075282b	49		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x0075285c	145		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
-0x007528ed	374		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
-0x00752a63	148		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
+0x007528ed	374		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
+0x00752a63	148		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x00752af7	145		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x00752b88	61	allocate_presentation_registry_entry			confirmed	gamebryo		
 0x00752bc5	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
@@ -19870,7 +19870,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075b4b5	0	return_virtual_payload_plus4			confirmed		0x008cdf88#13	
 0x0075b4be	215		scene/model transform and XML property bridge		unidentified	gamebryo		ui
 0x0075b595	0		scene/model transform and XML property bridge		unidentified		0x008fe758#0	
-0x0075b5b1	240		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075b5b1	240		scene/model transform and XML property bridge		unidentified	gamebryo		world/pathing
 0x0075b6a1	132		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#21	ui
 0x0075b725	74		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#22	
 0x0075b76f	355		scene/model transform and XML property bridge		unidentified	gamebryo		ui
@@ -19935,7 +19935,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075d825	290		presentation controller registry and tree containers		unidentified	gamebryo		ui
 0x0075d947	225		presentation controller registry and tree containers		unidentified	gamebryo		ui
 0x0075da28	106		presentation controller registry and tree containers		unidentified	gamebryo		renderer
-0x0075da92	133		presentation controller registry and tree containers		unidentified	gamebryo		renderer
+0x0075da92	133		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075db17	133		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075db9c	266		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075dca6	141		presentation controller registry and tree containers		unidentified	gamebryo		renderer
