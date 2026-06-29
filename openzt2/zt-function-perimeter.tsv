@@ -2530,7 +2530,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00482688	44	insert_ui_assignment_dependent_refs_1b8_1c4			confirmed			
 0x004826b4	33	insert_ui_assignment_dependent_ref_1b8			confirmed			
 0x004826d5	44	construct_gesture_training_helper_object			confirmed			
-0x00482701	0		campaign UI, gesture/photo/puzzle mode handlers		unidentified		0x008cc1d0#0	ui
+0x00482701	0	scalar_delete_gesture_training_helper_object			confirmed		0x008cc1d0#0	
 0x00482748	33	read_gesture_target_collision_metric			confirmed			
 0x00482769	221	compute_gesture_target_bounds_center_vec3			confirmed			
 0x00482846	127	age_gesture_trace_new_value_flags			confirmed			
@@ -2575,30 +2575,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00483e9d	140	replace_u32_tree_equal_range_and_count			confirmed			
 0x00483f29	36	clear_u32_keyed_tree			confirmed			
 0x00483f4d	105	count_u32_keyed_tree_equal_range			confirmed			
-0x00483fb6	22		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483fcc	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00483fed	87		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484044	69		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484089	154		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00483fb6	22	resize_dword_vector_zero_fill			confirmed			
+0x00483fcc	33	destroy_ZTGestureComponent_value_table_body			confirmed			
+0x00483fed	87	resize_bit_vector_zero_fill			confirmed			
+0x00484044	69	fill_bit_vector_with_false			confirmed			
+0x00484089	154	get_or_insert_u32_keyed_float_payload			confirmed			
 0x00484123	0	allocate_ZTGestureTraceModeBase_instance			confirmed		0x008cc5e0#3	
-0x0048413e	153		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x0048413e	153	register_ZTGestureTraceModeBase_handler_if_absent			confirmed			
 0x0048421e	0	scalar_delete_ZTGestureComponent_value_table			confirmed		0x008cc2d8#0	
-0x00484239	139		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004842c4	200		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048438c	374		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484502	137		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048458b	160		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048462b	51		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048465e	47		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048468d	40		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00484239	139	resize_dword_vector_with_fill			confirmed			
+0x004842c4	200	erase_bit_vector_range			confirmed			
+0x0048438c	374	insert_u32_keyed_float_tree_node_or_return_existing			confirmed			
+0x00484502	137	set_bit_vector_size_and_mask_tail			confirmed			
+0x0048458b	160	append_ZTGestureTraceModeBase_handler_record			confirmed			
+0x0048462b	51	lower_bound_u32_keyed_tree			confirmed			
+0x0048465e	47	copy_dword_range_forward			confirmed			
+0x0048468d	40	move_dword_range_backward_wrapper			confirmed			
 0x004846b5	0	get_type_ZTGestureComponent_value_table_thunk			confirmed		0x008cc2d8#1	
 0x004846ba	0	assign_ZTGestureComponent_value			confirmed		0x008cc2d8#3	
-0x004846d3	117		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x00484748	37		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x0048476d	46		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x004846d3	117	inherit_ZTGestureTraceModeBase_handlers_from_registry			confirmed			
+0x00484748	37	fill_dword_range_from_value_thunk			confirmed			
+0x0048476d	46	move_dword_range_backward			confirmed			
 0x004847ff	40	as_ZTGestureComponent			confirmed			
-0x00484827	162		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
-0x004848c9	34		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
+0x00484827	162	copy_bit_vector_range_values			confirmed			
+0x004848c9	34	fill_dword_range_from_value			confirmed			
 0x004848eb	33		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00484914	61		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
 0x00484951	39		campaign UI, gesture/photo/puzzle mode handlers		unidentified			ui
