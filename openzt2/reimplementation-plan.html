@@ -24,13 +24,13 @@ th{background:var(--soft)}
 .plan-progress-card h3{margin:0 0 7px;font-size:15px}
 .plan-stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
 .plan-seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}
-.plan-seg-done{background:#79740e}.plan-seg-runs{background:#98971a}.plan-seg-loaded{background:#076678}.plan-seg-recorded{background:#7c6f64}.plan-seg-recover{background:#b57614}.plan-seg-map{background:#9d0006}.plan-seg-adapter{background:#8f3f71}
+.plan-seg-done{background:#79740e}.plan-seg-runs{background:#98971a}.plan-seg-loaded{background:#076678}.plan-seg-recorded{background:#7c6f64}.plan-seg-planned{background:#b57614}.plan-seg-map{background:#9d0006}.plan-seg-adapter{background:#8f3f71}
 .plan-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}
 .plan-legend-row{display:flex;align-items:center;gap:6px}.plan-swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}
 .plan-progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 .plan-metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.plan-metric-list dt{color:var(--muted)}.plan-metric-list dd{margin:0;font-weight:700}
 .plan-status{display:inline-block;padding:0 6px;border:1px solid var(--control-border);border-radius:9px;font:700 11px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.plan-status-done{background:color-mix(in srgb,#79740e 28%,transparent)}.plan-status-runs{background:color-mix(in srgb,#98971a 28%,transparent)}.plan-status-loaded{background:color-mix(in srgb,#076678 24%,transparent)}.plan-status-recorded{background:color-mix(in srgb,#7c6f64 24%,transparent)}.plan-status-recover{background:color-mix(in srgb,#b57614 28%,transparent)}.plan-status-map{background:color-mix(in srgb,#9d0006 20%,transparent)}.plan-status-adapter{background:color-mix(in srgb,#8f3f71 22%,transparent)}
+.plan-status-done{background:color-mix(in srgb,#79740e 28%,transparent)}.plan-status-runs{background:color-mix(in srgb,#98971a 28%,transparent)}.plan-status-loaded{background:color-mix(in srgb,#076678 24%,transparent)}.plan-status-recorded{background:color-mix(in srgb,#7c6f64 24%,transparent)}.plan-status-planned{background:color-mix(in srgb,#b57614 28%,transparent)}.plan-status-map{background:color-mix(in srgb,#9d0006 20%,transparent)}.plan-status-adapter{background:color-mix(in srgb,#8f3f71 22%,transparent)}
 @media(max-width:880px){.plan-progress-grid{grid-template-columns:1fr}.plan-seg{font-size:10px}}
 .spec-diagram{display:block;width:100%;height:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg)}
 .mermaid{margin:14px 0 22px;text-align:center;background:transparent}.mermaid svg{max-width:100%;height:auto}
@@ -231,7 +231,8 @@ implementation work. Aggregate progress buckets are invalid owners.</p>
 durable work-board owner is <code>Bevy runtime / Refactor checkpoint / Feature boundary cleanup</code>; adjacent rows inherit work only when the change crosses their
 real owner boundary.</p>
 <p>Completion means closing the remaining refactor-cleanup class in code, or moving
-the residue to the owning row as explicit unrecovered contract work. The
+the residue to the functional specification as explicit missing ownership or
+behavior. The
 checkpoint is complete when:</p>
 <ul>
 <li>the feature tree has no compatibility aggregate, broad prelude, private
@@ -243,8 +244,8 @@ panel effects are decoded and handled by their owning feature systems;</li>
 only at real owners: command families, source-specific startup builders,
 renderer asset loading, UI projection, and world projection;</li>
 <li>remaining unused-code markers have been audited: stale scaffolding is
-deleted, and unrecovered original surfaces are documented at the owner that
-will recover them;</li>
+deleted, and missing original surfaces are documented in the functional
+specification under the owner that will specify them;</li>
 <li>active UI root order, hover ownership, click dispatch, screenshot capture,
 resize projection, and startup-root despawn are verified through the Bevy
 runtime path rather than by a fabricated tool path;</li>
@@ -253,9 +254,9 @@ static checks: missing durable smoke paths or runtime acceptance harnesses are
 implemented or recorded on the owner row that needs them;</li>
 <li>documented commands and aliases used as acceptance evidence resolve in the
 current workspace before they count as a checkpoint gate;</li>
-<li>fixed-step/update ordering is either recovered into runtime schedules and run
-conditions, or left as named unrecovered contract work on the row that owns
-the manager/update family.</li>
+<li>fixed-step/update ordering is either specified into runtime schedules and run
+conditions, or left as a named specification gap on the row that owns the
+manager/update family.</li>
 </ul>
 <p>The checkpoint inventory is:</p>
 <ul>
@@ -401,8 +402,9 @@ in the current workspace before they count as evidence.</li>
 source-to-runtime path. BFXML/MAXML/XDR/BFTypedBinder semantics, replacement and
 repopulation, complete UI focus/capture/bubbling semantics, terrain/material
 fidelity, placement/undo/pathfinding/AI/save/load/disease/scenario behavior, and
-animation/audio semantics must stay on their owning rows until each contract is
-recovered and running.</p>
+animation/audio semantics stay in the functional specification until ownership
+and behavior are described well enough for implementation, then stay on their
+owning work-board rows until they run.</p>
 <p>This cleanup may delete compatibility surfaces, split modules, and rename
 messages when the owner becomes clearer. It must not add hardcoded menu/layout
 fixes, duplicate source state beside ECS facts, restore closed Rust state
@@ -418,12 +420,8 @@ row through documentation-only churn.</p>
 </thead>
 <tbody>
 <tr>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Implementation owner is known; missing specification detail or source integration blocks the row.</td>
-</tr>
-<tr>
-  <td><code>specified</code></td>
-  <td>Original ownership and behavior are understood well enough to implement.</td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
+  <td>The functional specification has an owning behavior surface for this row; implementation has not yet recorded, loaded, run, or adapted it.</td>
 </tr>
 <tr>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
@@ -439,7 +437,7 @@ row through documentation-only churn.</p>
 </tr>
 <tr>
   <td><code>closed</code></td>
-  <td>Closed finite surface with no current recovery or implementation work.</td>
+  <td>Closed finite surface with no current implementation work.</td>
 </tr>
 <tr>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
@@ -451,18 +449,18 @@ row through documentation-only churn.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 18, loaded 21, recorded 49, recover 24, adapter 5">
+  <div class="plan-stacked-bar" role="img" aria-label="runs 18, loaded 21, recorded 49, planned 24, adapter 5">
     <div class="plan-seg plan-seg-runs" style="width:15.384615%" title="Runs: 18">15.4%</div>
     <div class="plan-seg plan-seg-loaded" style="width:17.948718%" title="Loaded: 21">17.9%</div>
     <div class="plan-seg plan-seg-recorded" style="width:41.880342%" title="Recorded: 49">41.9%</div>
-    <div class="plan-seg plan-seg-recover" style="width:20.512821%" title="Recover: 24">20.5%</div>
+    <div class="plan-seg plan-seg-planned" style="width:20.512821%" title="Planned: 24">20.5%</div>
     <div class="plan-seg plan-seg-adapter" style="width:4.273504%" title="Adapter: 5">4.3%</div>
   </div>
   <div class="plan-legend">
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 18</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 21</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 49</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recover"></span>Recover: 24</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 24</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
   <p class="plan-progress-note">117 work-board rows across 67 top-level domains.</p>
@@ -471,14 +469,14 @@ row through documentation-only churn.</p>
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
    <dt>Live / loaded / recorded</dt><dd>88</dd>
-   <dt>Open recovery / mapping</dt><dd>24</dd>
+   <dt>Planned / mapping</dt><dd>24</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
  </div>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>18</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>49</dd><dt>Recover</dt><dd>24</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>18</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>49</dd><dt>Planned</dt><dd>24</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -487,7 +485,9 @@ row through documentation-only churn.</p>
 <p>The <code>Owner</code>, <code>Subdomain</code>, and <code>Feature</code> hierarchy is the active task axis.
 <code>Owner</code> names the real product domain, runtime boundary, source-format family,
 or host boundary that owns implementation work. Detailed original type surfaces
-remain in the functional specification.</p>
+remain in the functional specification. Rows blocked by missing ownership or
+behavior point back to specification coverage; the work board tracks the next
+implementation action for behavior the specification has already made visible.</p>
 <table>
 <thead>
 <tr>
@@ -496,7 +496,7 @@ remain in the functional specification.</p>
   <th>Feature</th>
   <th>Status</th>
   <th>Reimplementation description</th>
-  <th>Next recovery/implementation</th>
+  <th>Next implementation step</th>
 </tr>
 </thead>
 <tbody>
@@ -536,7 +536,7 @@ remain in the functional specification.</p>
   <td>Asset graph</td>
   <td>Consumer migration</td>
   <td>Startup and document discovery</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Startup validates required loose host inputs, mounts archives, loads loose host-file <code>ztapp4.xml</code>, reports Bevy asset-load failures, and hydrates source documents through Bevy <code>AssetServer</code> handles; <code>ztapp4.xml</code> is a pre-archive host bootstrap input while <code>ztappstrings.xml</code> remains archive-local localization data.</td>
   <td>Collapse startup document-handle tracking into manifest/load-state ownership and recover original manager/load-listener ordering.</td>
 </tr>
@@ -544,7 +544,7 @@ remain in the functional specification.</p>
   <td>Asset graph</td>
   <td>Consumer migration</td>
   <td>Renderer, UI, and audio handles</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Renderer, UI projection, and audio still have transitional helper paths around loader-emitted assets.</td>
   <td>Consume loader-emitted model/scene/mesh/material/image/audio handles; route UI images and authored sounds through the source manifest; remove direct consumer parsing once equivalent handles exist.</td>
 </tr>
@@ -592,7 +592,7 @@ remain in the functional specification.</p>
   <td>Source schema</td>
   <td>Documents</td>
   <td><code>BFXMLSchemaMgr</code> validation</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Original source document validation is represented as an unrecovered schema contract.</td>
   <td>Recover schema readers and validation failure behavior.</td>
 </tr>
@@ -720,7 +720,7 @@ remain in the functional specification.</p>
   <td>Audio</td>
   <td>Source formats</td>
   <td>Sound tags and ambient documents</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Sound-tag and ambient source documents load as policy records for playback selection.</td>
   <td>Recover tag variants, aliases, random policy, distance policy, stages, categories, ducking, and cross-fades.</td>
 </tr>
@@ -776,7 +776,7 @@ remain in the functional specification.</p>
   <td>Particle assets</td>
   <td>Source formats</td>
   <td>Loose particle source: <code>.psys</code></td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>The shipped loose <code>particle/</code> tree contains <code>.psys</code> files; no current asset loader or runtime particle owner hydrates them.</td>
   <td>Add a particle-system source loader, classify the loose-file boundary, and target Bevy particle/simulation output.</td>
 </tr>
@@ -792,7 +792,7 @@ remain in the functional specification.</p>
   <td>Save</td>
   <td>Source formats</td>
   <td>Save/package containers: <code>.z2s</code> and <code>.zip</code></td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>The Z2F classifier recognizes save/package containers, and save/load modes own persisted game data recovery.</td>
   <td>Recover <code>.z2s</code> sections, ordering, versions, member boundaries, and any <code>.zip</code> package behavior from save/profile evidence.</td>
 </tr>
@@ -832,7 +832,7 @@ remain in the functional specification.</p>
   <td>UI</td>
   <td>UI behavior</td>
   <td>Widget behavior and help surfaces</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Native hit-test, focus, edit validation, hover-help/<code>BFHelpComponent</code> routing, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
   <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, <code>BFHelpComponent</code>, and font/text callsites.</td>
 </tr>
@@ -920,7 +920,7 @@ remain in the functional specification.</p>
   <td>Entity</td>
   <td>Entity model</td>
   <td>Component factories, validation, and help components</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Recovered component sets instantiate through original type/factory contracts; source-authored help components remain entity/component surfaces until UI help routing proves their live Bevy presentation effects.</td>
   <td>Recover factory callsites, representative binder families, and <code>BFHelpComponent</code> producer/consumer paths.</td>
 </tr>
@@ -952,7 +952,7 @@ remain in the functional specification.</p>
   <td>Animal</td>
   <td>Animal model</td>
   <td>Lifecycle and breeding</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Birth, pregnancy, offspring selection, family tree effects, and status flag reads remain recovery surfaces.</td>
   <td>Recover lifecycle callsites and component-to-status readers.</td>
 </tr>
@@ -960,7 +960,7 @@ remain in the functional specification.</p>
   <td>Animal</td>
   <td>Animal model</td>
   <td>Adoption and release</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Adoption manager, adoption-slot, and favorite-animal source contracts parse at startup; adoption slots, rarity, decline/adopt/release side effects, crate state, conservation rewards, and panel refresh remain recovery surfaces.</td>
   <td>Recover <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and panel handlers.</td>
 </tr>
@@ -976,7 +976,7 @@ remain in the functional specification.</p>
   <td>Animal</td>
   <td>Behavior slice</td>
   <td>Species behavior slice</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>One species must connect through source definition, AI task/behavior, locomotion, animation, sound, and needs.</td>
   <td>Implement a vertical behavior pack from one representative species family.</td>
 </tr>
@@ -1032,7 +1032,7 @@ remain in the functional specification.</p>
   <td>Placement</td>
   <td>Placement</td>
   <td>Validation, preview, commit, transactions, undo</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Footprints, affordability, research, slope, headroom, traversability, cursor preview, special placement rules, and accepted commit effects are Bevy runtime state; accepted entity commits spawn through <code>BFGWorldRuntime</code> without duplicate placement command records.</td>
   <td>Trace <code>ZT_SETPLACEMENT*</code>, <code>ZT_PLACEOBJECT</code>, <code>BFG_PLACE_ENTITY</code>, and result tokens.</td>
 </tr>
@@ -1072,7 +1072,7 @@ remain in the functional specification.</p>
   <td>World</td>
   <td>Traversability/pathfinding</td>
   <td>Collision, traversability, pathfinding, ground-fit</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Startup validates traversability/world/entity-trigger contracts; <code>BFGWorldRuntime</code> keeps active world/session state, default-world-size context, traversability invalidation generation, traversability visibility toggles, loaded entity source data through <code>active_world</code>, placement/autoplacement entity creation, and source <code>BFGEventRecord</code> publication as Bevy world events. Active-world replacement now publishes the recovered detach-world fact before loading and attaching the new world. <code>BFG_MOVE_ENTITY</code> is represented as a native/source token, with payload and handler semantics still unrecovered.</td>
   <td>Recover <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, ground-fit callsites, and the <code>BFG_MOVE_ENTITY</code> payload/handler path.</td>
 </tr>
@@ -1088,7 +1088,7 @@ remain in the functional specification.</p>
   <td>AI</td>
   <td>AI runtime</td>
   <td>Scoring, thinker scheduler, tokens</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects remain recovery surfaces.</td>
   <td>Recover <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
 </tr>
@@ -1112,7 +1112,7 @@ remain in the functional specification.</p>
   <td>Movement</td>
   <td>Movement</td>
   <td>Steering and locomotion</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain recovery surfaces; <code>BFAIMgr</code> records locomotion and steering source-request statuses until the recovered runtimes can execute them.</td>
   <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
 </tr>
@@ -1128,7 +1128,7 @@ remain in the functional specification.</p>
   <td>Guest</td>
   <td>Guests</td>
   <td>Needs, satisfaction, movement, lifecycle</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Live guest need/path/spending/group state belongs in Bevy components/resources.</td>
   <td>Recover <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
 </tr>
@@ -1144,7 +1144,7 @@ remain in the functional specification.</p>
   <td>Guest</td>
   <td>Guests</td>
   <td>Education donation execution</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Source parse and range lookup exist for <code>edDonate</code> and education donation values.</td>
   <td>Recover candidate generation, target selection, box routing, economy effects, feedback publication, and spend timing.</td>
 </tr>
@@ -1232,7 +1232,7 @@ remain in the functional specification.</p>
   <td>Donation</td>
   <td>Donations</td>
   <td>Donation scoring formula</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Recovered source factors stay separate from guessed arithmetic until the native formula is known.</td>
   <td>Recover exact animal donation scoring before runtime execution.</td>
 </tr>
@@ -1240,7 +1240,7 @@ remain in the functional specification.</p>
   <td>Fame</td>
   <td>Fame</td>
   <td>Fame and zoo rating</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain recovery surfaces; current Bevy fame helpers record the surface without a recovered caller cadence.</td>
   <td>Recover <code>ZTFameData</code> update and value-handler callsites.</td>
 </tr>
@@ -1264,7 +1264,7 @@ remain in the functional specification.</p>
   <td>Status</td>
   <td>Zoo status and predicates</td>
   <td>Status aggregate, zoo messages, and predicates</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td><code>ZTStatus</code>, zoo message data, predicate-driven eligibility, status UI values, and status forwarding are represented across managers.</td>
   <td>Inventory <code>ZTStatus</code>, <code>ZTPredicate</code>, status UI tokens, and status update callers.</td>
 </tr>
@@ -1312,7 +1312,7 @@ remain in the functional specification.</p>
   <td>Scripting</td>
   <td>Scripting</td>
   <td>Compiled scenario and VINCE payloads</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td><code>.bin</code> payload bytes plus LOP, Vince, and telemetry command payloads remain decode targets.</td>
   <td>Decode compiled scenario assets and <code>BFS_PROCESS_VINCE</code>.</td>
 </tr>
@@ -1328,7 +1328,7 @@ remain in the functional specification.</p>
   <td>Save</td>
   <td>Persistence</td>
   <td>Save/load package format</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter consumes save/delete/load-after-save commands into explicit unrecovered-contract result messages when writer, confirmation, path, or save-root semantics are missing.</td>
   <td>Recover <code>.z2s</code> container structure, host write/delete execution, and per-component <code>write_xml_node</code> scope.</td>
 </tr>
@@ -1384,7 +1384,7 @@ remain in the functional specification.</p>
   <td>Materials</td>
   <td>Materials/effects</td>
   <td>Materials, effects, particles</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td><code>.bfmat</code>/<code>.fx</code> records, particle dictionaries, selectors, render states, emitters, and params are represented while exact slot binding remains recovery work.</td>
   <td>Recover parsers and slot binding.</td>
 </tr>
@@ -1392,7 +1392,7 @@ remain in the functional specification.</p>
   <td>Animation</td>
   <td>Animation</td>
   <td>Animation controllers, graphs, requests</td>
-  <td><span class="plan-status plan-status-recover">recover</span></td>
+  <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; <code>BFAIMgr</code> records animation graph evaluation statuses pending the recovered graph runtime.</td>
   <td>Recover <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key callsites.</td>
 </tr>

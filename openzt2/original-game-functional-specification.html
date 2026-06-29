@@ -24,13 +24,13 @@ th{background:var(--soft)}
 .plan-progress-card h3{margin:0 0 7px;font-size:15px}
 .plan-stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
 .plan-seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}
-.plan-seg-done{background:#79740e}.plan-seg-runs{background:#98971a}.plan-seg-loaded{background:#076678}.plan-seg-recorded{background:#7c6f64}.plan-seg-recover{background:#b57614}.plan-seg-map{background:#9d0006}.plan-seg-adapter{background:#8f3f71}
+.plan-seg-done{background:#79740e}.plan-seg-runs{background:#98971a}.plan-seg-loaded{background:#076678}.plan-seg-recorded{background:#7c6f64}.plan-seg-planned{background:#b57614}.plan-seg-map{background:#9d0006}.plan-seg-adapter{background:#8f3f71}
 .plan-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}
 .plan-legend-row{display:flex;align-items:center;gap:6px}.plan-swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}
 .plan-progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 .plan-metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.plan-metric-list dt{color:var(--muted)}.plan-metric-list dd{margin:0;font-weight:700}
 .plan-status{display:inline-block;padding:0 6px;border:1px solid var(--control-border);border-radius:9px;font:700 11px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.plan-status-done{background:color-mix(in srgb,#79740e 28%,transparent)}.plan-status-runs{background:color-mix(in srgb,#98971a 28%,transparent)}.plan-status-loaded{background:color-mix(in srgb,#076678 24%,transparent)}.plan-status-recorded{background:color-mix(in srgb,#7c6f64 24%,transparent)}.plan-status-recover{background:color-mix(in srgb,#b57614 28%,transparent)}.plan-status-map{background:color-mix(in srgb,#9d0006 20%,transparent)}.plan-status-adapter{background:color-mix(in srgb,#8f3f71 22%,transparent)}
+.plan-status-done{background:color-mix(in srgb,#79740e 28%,transparent)}.plan-status-runs{background:color-mix(in srgb,#98971a 28%,transparent)}.plan-status-loaded{background:color-mix(in srgb,#076678 24%,transparent)}.plan-status-recorded{background:color-mix(in srgb,#7c6f64 24%,transparent)}.plan-status-planned{background:color-mix(in srgb,#b57614 28%,transparent)}.plan-status-map{background:color-mix(in srgb,#9d0006 20%,transparent)}.plan-status-adapter{background:color-mix(in srgb,#8f3f71 22%,transparent)}
 @media(max-width:880px){.plan-progress-grid{grid-template-columns:1fr}.plan-seg{font-size:10px}}
 .spec-diagram{display:block;width:100%;height:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg)}
 .mermaid{margin:14px 0 22px;text-align:center;background:transparent}.mermaid svg{max-width:100%;height:auto}
@@ -3503,66 +3503,96 @@ anonymous-vtable atlas.</p>
 <li><strong>&lt; BFAISensorSelf</strong>: <code>ZTAIStaffSensorSelf</code></li>
 <li><strong>&lt; BFScriptComponent</strong>: <code>ZTPAPTEntityStub</code></li>
 </ul>
-<h3>Ownership and Behavior Gaps</h3>
-<p>These rows track ownership and behavior that remain unspecified at this gate.</p>
+<h3>Specification Coverage</h3>
+<p>These rows track gate-3 coverage for recovered original things. <code>specified</code>
+means the ownership or behavior is described well enough for the implementation
+plan to consume. <code>recover</code> means the original thing is known and has a spec
+section, while ownership or behavior still needs to be described here.</p>
 <table>
 <thead>
 <tr>
-  <th>Surface</th>
-  <th>What is unrecovered</th>
-  <th>Owning section</th>
+  <th>Original thing</th>
+  <th>Ownership status</th>
+  <th>Behavior status</th>
+  <th>Spec section</th>
+  <th>Missing ownership/behavior</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>Source schemas</td>
-  <td>full entity shared-data schema, profile/save/<code>.z2s</code> and scenario field layouts, descriptor-table shapes</td>
-  <td>Source Data and Hydration, Persistence</td>
+  <td>Source document layer (<code>BFXML*</code>, <code>BFXMLSchemaMgr</code>, <code>BFTypedBinder</code>, shared entity data, task templates)</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Source Data and Hydration</td>
+  <td>Include/default/write-order behavior, schema validation failures, binder precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, descriptor-table fields, and task-template attachment behavior.</td>
 </tr>
 <tr>
-  <td>Vtable behavior</td>
-  <td>widget/manager vtable method bodies (<code>UI_*</code>/<code>BFAI_*</code> handlers); only message sets + inheritance modeled</td>
-  <td>UI, AI, Managers</td>
+  <td>Runtime managers and clocks</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Runtime Managers</td>
+  <td>Construction order, per-tick update order, <code>BFTimeKeeper</code> fan-out, manager persistence scope, and manager teardown/recreation rules.</td>
 </tr>
 <tr>
-  <td>AI/sim policy</td>
-  <td>task scoring/tie-break, <code>ThinkerInterval</code> cadence, token lifetime, steering blend weights</td>
-  <td>AI</td>
+  <td>App shell, UI, widgets, and modes</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>App, UI, and Modes</td>
+  <td>Widget vtable bodies, focus/capture/bubbling, modal routing, hit-test/edit/query behavior, font/text metrics, skin/animation routing, per-mode input/tick/message handlers, and host file/profile side effects.</td>
 </tr>
 <tr>
-  <td>World placement</td>
-  <td>grid units, footprint schema, slope thresholds, elevated topology rules, terrain visual mechanism</td>
-  <td>World</td>
+  <td>Entities, components, animals, catalog, and selection panels</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Entities, Animals, Catalog, and Selection</td>
+  <td>Component factory callers, representative binder-family readers, <code>BFGEntity</code> instance mutation path, help-component routing, animal lifecycle/breeding/adoption side effects, catalog paging/filtering, and panel action handlers.</td>
 </tr>
 <tr>
-  <td>Economy/fame/disease</td>
-  <td>half-star thresholds, non-admission price selection, donation formulae, disease spread/cure cadence, research dependency/tree rules</td>
-  <td>Economy</td>
+  <td>World, terrain, placement, paths, fences, tanks, and transport</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>World, Terrain, Construction, and Navigation</td>
+  <td>Grid units, terrain document layout, footprint schema, slope/headroom/traversability rules, elevated/tank topology, water and wall payload routing, path graph connectivity, ground-fit math, and commit/undo coupling.</td>
 </tr>
 <tr>
-  <td>Renderer/audio</td>
-  <td><code>.bfmat</code>/<code>.fx</code> parameter+animation syntax, material slot binding, anim blend/transition, mixing categories</td>
-  <td>Renderer</td>
+  <td>AI, behavior, movement, guests, staff, shows, tours, gestures, and feedback</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>AI, Behavior, Guests, Staff, and Shows</td>
+  <td>Task scoring, tie-breaks, <code>ThinkerInterval</code> cadence, token lifetime/conflicts, steering/locomotion blend weights, relationship mutation, guest/staff lifecycle scheduling, show/trick execution, tour waypoints, gesture scoring, and feedback routing.</td>
 </tr>
 <tr>
-  <td>Scenario/scripts</td>
-  <td>rule evaluation order, Lua arg/stack marshalling, compiled <code>.bin</code>/<code>.lop</code> + <code>VINCE</code> telemetry</td>
-  <td>Scenario</td>
+  <td>Economy, donation, fame, research, disease, status, awards, and surveys</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Economy, Progression, Disease, and Status</td>
+  <td>Non-admission price selection, donation scoring and routing, half-star/fame update cadence, award criteria, zoo status predicates, survey adjustment formulas, disease spread/cure cadence, and native manager bindings for scripted disease commands.</td>
 </tr>
 <tr>
-  <td>Manager runtime</td>
-  <td>construction/update order per tick, <code>BFTimeKeeper</code> fan-out, which managers persist</td>
-  <td>Managers</td>
+  <td>Scenario, scripting, profile, save/load, photos, undo, and persistence</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Scenario, Scripting, Profile, Photos, and Persistence; Transactions and Undo</td>
+  <td>Rule evaluation order, campaign progression, Lua package/cache/marshalling/error behavior, compiled <code>.bin</code>/<code>.lop</code> and <code>VINCE</code> payload semantics, <code>.z2s</code> sections/order/versioning, component serialization scope, profile/options write order, photo output/result/HTML side effects, and transaction replay/reversal ordering.</td>
 </tr>
 <tr>
-  <td>Host adapters</td>
-  <td>Win32 pump/dialog/IME edges, registry/profile mapping, network/download/MOTD</td>
-  <td>Renderer, Persistence (adapter boundary)</td>
+  <td>Presentation: renderer, scene graph, materials, animation, camera, UI rendering, and audio</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Presentation: Renderer, Animation, Camera, and Audio</td>
+  <td>Material/effect parameter syntax, slot binding, render-state mapping, particle simulation, scene-graph projection, animation graph/controller playback, text-key handling, camera curves/projection math, sprite/text renderer behavior, sound-tag policy, categories, mixing, ducking, and cross-fades.</td>
+</tr>
+<tr>
+  <td>Host adapter edges</td>
+  <td><code>specified</code></td>
+  <td><code>recover</code></td>
+  <td>Adapter Boundary</td>
+  <td>Win32 pump/dialog/IME behavior, registry/profile root mapping, network/download/MOTD completion semantics, filesystem dialogs/enumeration, host diagnostics, and backend result events.</td>
 </tr>
 </tbody>
 </table>
 <p>Unresolved methods, globals, payloads, and formulae stay attached to the nearest
-original class or manager.</p>
+original class or manager in this specification.</p>
 
 </main>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
