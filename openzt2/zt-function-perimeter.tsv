@@ -2712,25 +2712,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048a245	559	refresh_super_staff_usage_target_from_view			confirmed			
 0x0048a474	33	clear_super_staff_usage_target_handle			confirmed			
 0x0048a495	80	hide_super_staff_usage_feedback_layout			confirmed			
-0x0048a4e5	417		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a686	106		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a6f0	263		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048a4e5	417	show_super_staff_usage_feedback_layout			confirmed			
+0x0048a686	106	refresh_super_staff_usage_feedback_state			confirmed			
+0x0048a6f0	263	find_nearest_super_staff_usage_target			confirmed			
 0x0048a7f7	0	allocate_ZTSuperStaffMode_instance			confirmed		0x008cd0fc#130	
-0x0048a83d	153		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a91d	160		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a9bd	117		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048aa32	43		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048a83d	153	register_ZTSuperStaffMode_handler_if_absent			confirmed			
+0x0048a91d	160	append_ZTSuperStaffMode_handler_record			confirmed			
+0x0048a9bd	117	inherit_ZTSuperStaffMode_handlers_from_registry			confirmed			
+0x0048aa32	43	is_tranquilizer_charge_ready			confirmed			
 0x0048aa5d	47	get_type_ZTTranquilizeMode			confirmed			
-0x0048aa8c	0		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified		0x008cd6c8#1	ui
-0x0048aa91	32		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048aa8c	0	get_type_ZTTranquilizeMode_vtable_thunk			confirmed		0x008cd6c8#1	
+0x0048aa91	32	init_ZTTranquilizeMode_descriptor_ref			confirmed			
 0x0048aab1	0	init_ZTTranquilizeMode_descriptor_ref_vtable_thunk			confirmed		0x008cd6c8#2	
-0x0048aab6	73		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048aab6	73	get_ZTTranquilizeMode_ui_handler_registry			confirmed			
 0x0048aaff	0	register_tranquilize_action_value			confirmed		0x008cd998#0	
 0x0048ab15	0	resolve_tranquilize_action_value			confirmed		0x008cd998#1	
-0x0048ab68	102		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048abce	442		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048ab68	102	register_ZTTranquilizeMode_ui_handlers			confirmed			
+0x0048abce	442	construct_ZTTranquilizeMode_members			confirmed			
 0x0048ad88	0	scalar_delete_ZTTranquilizeMode			confirmed		0x008cd6c8#0	
-0x0048ada3	174		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048ada3	174	destroy_ZTTranquilizeMode_members			confirmed			
 0x0048ae51	0	activate_tranquilize_mode_and_seed_gun_ui			confirmed		0x008cd79c#85	
 0x0048b13d	0	deactivate_tranquilize_mode_and_clear_gun_ui			confirmed		0x008cd79c#86	
 0x0048b307	0	update_tranquilize_mode_frame_and_charge_state			confirmed		0x008cd6ec#5	
@@ -2738,14 +2738,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048b4b4	0	clear_tranquilize_target_value			confirmed		0x008cd978#5	
 0x0048b4fa	0	set_tranquilize_hold_fire_value			confirmed		0x008cd978#7	
 0x0048b56d	0	read_tranquilize_mode_config			confirmed		0x008cd6ec#11	
-0x0048b851	965		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048bc16	135		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048bc9d	120		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048bd15	248		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048be0d	552		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048c035	340		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048b851	965	fire_tranquilizer_shot_or_misfire			confirmed			
+0x0048bc16	135	measure_tranquilize_target_distance_in_range			confirmed			
+0x0048bc9d	120	reset_tranquilizer_charge_and_targeting_ui			confirmed			
+0x0048bd15	248	bind_tranquilize_target_and_required_charge			confirmed			
+0x0048be0d	552	update_tranquilizer_charge_meter			confirmed			
+0x0048c035	340	resolve_tranquilize_pick_target			confirmed			
 0x0048c189	560	handle_tranq_gun_targeting			confirmed			
-0x0048c3b9	330		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048c3b9	330	set_tranquilizer_readout_bar_fill			confirmed			
 0x0048c503	261		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x0048c608	672		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x0048c8a8	203		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
