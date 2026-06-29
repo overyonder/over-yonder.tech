@@ -479,7 +479,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0040eed2	28	construct_inline_ui_payload_value_from_source			confirmed			
 0x0040eeee	0	scalar_delete_BFXMLObjEvent			confirmed		0x008c0840#0	
 0x0040ef09	36	destroy_inline_ui_payload_value			confirmed			
-0x0040ef2d	0	clone_inline_payload_owned_value_to_output			confirmed		0x008c0878#9	
+0x0040ef2d	0	clone_inline_payload_owned_value_to_output			confirmed		0x008c085c#16	
 0x0040ef47	22	init_opaque_black_color			confirmed			
 0x0040ef5d	68	wrap_float_nonnegative_mod_period			confirmed			
 0x0040efa1	45	compute_vec2_distance_squared			confirmed			
@@ -4625,7 +4625,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e1a78	168		globe location list refresh and recursive directory binding help		unidentified			ui
 0x004e1b20	123	lookup_location_mgr_entry_by_key			confirmed			
 0x004e1b9b	167	insert_ui_value_assignment_dependent_ref			confirmed			
-0x004e1c77	71		map and fame data		unidentified			ui
+0x004e1c77	71		map and fame data		unidentified			
 0x004e1cbe	47	get_type_ZTMapData			confirmed			
 0x004e1ced	0		map and fame data		unidentified		0x008d4980#1	
 0x004e1cf2	32	init_ZTMovieList_descriptor_ref			confirmed			
@@ -9473,7 +9473,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ad25b	0	compute_app_system_time_fraction			confirmed		0x008e4ea8#29	
 0x005ad2d6	247		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005ad3cd	191		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005ad48c	45		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
+0x005ad48c	45	resolve_typed_value_named_object			confirmed	gamebryo		
 0x005ad4b9	128	collect_BFApp_context_message_types			confirmed	gamebryo	0x008e4f60#0	
 0x005ad539	114	find_BFApp_context_component_by_type			confirmed	gamebryo	0x008e4f60#1	
 0x005ad5ab	0	add_BFApp_component_and_refresh_handles			confirmed		0x008dc610#22	
@@ -9677,10 +9677,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b044d	0	get_type_BFXMLObjHandleEvent_vtable_thunk			confirmed		0x008c0d50#1	
 0x005b0452	32		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b0472	0	get_BFXMLObjHandleEvent_msgtype_descriptor_vtable_thunk			confirmed		0x008c0d50#2	
-0x005b0477	0	get_type_BFRefCountedXMLObjEvent			confirmed		0x008e531c#0	
-0x005b04a4	0	get_BFRefCountedXMLObjEvent_msgtype_descriptor			confirmed		0x008e531c#1	
-0x005b04c4	0	get_type_BFXMLNodeEvent			confirmed		0x008e53a4#0	
-0x005b04f1	0	get_BFXMLNodeEvent_msgtype_descriptor			confirmed		0x008e53a4#1	
+0x005b0477	0	get_type_BFRefCountedXMLObjEvent			confirmed		0x008e5318#1	
+0x005b04a4	0	get_BFRefCountedXMLObjEvent_msgtype_descriptor			confirmed		0x008e5318#2	
+0x005b04c4	0	get_type_BFXMLNodeEvent			confirmed		0x008e53a0#1	
+0x005b04f1	0	get_BFXMLNodeEvent_msgtype_descriptor			confirmed		0x008e53a0#2	
 0x005b0511	24		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b0529	88	ui_typed_value_write_msgtype_node			confirmed	gamebryo	0x008bfbf8#3	
 0x005b0581	112	ui_typed_value_read_msgtype_node			confirmed	gamebryo	0x008bfbf8#4	
@@ -9699,11 +9699,24 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b0942	0	ui_typed_value_write_float_payload_node			confirmed		0x008bfd08#3	
 0x005b09ad	0	ui_typed_value_read_float_payload_node			confirmed		0x008bfd08#4	
 0x005b0a2d	0	ui_typed_value_emit_float_payload			confirmed		0x008bfd08#6	
-0x005b106d	39		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b1288	41		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b12b1	40		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b12f4	36		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
-0x005b134d	48		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
+0x005b106d	39	assign_refcounted_object_pointer			confirmed	gamebryo		
+0x005b1218	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#1	
+0x005b1242	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#3	
+0x005b1265	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#5	
+0x005b1288	41	try_resolve_BFRefCountedXMLObj_value			confirmed	gamebryo		
+0x005b12b1	40	as_BFRefCountedXMLObj_type_chain			confirmed	gamebryo		
+0x005b12d9	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e53a0#0	
+0x005b12f4	36	destroy_BFXMLNodeEvent_payload			confirmed	gamebryo		
+0x005b1318	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5400#0	
+0x005b1332	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5318#0	
+0x005b134d	48	destroy_BFRefCountedXMLObjEvent_payload			confirmed	gamebryo		
+0x005b137d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008c085c#6	
+0x005b138b	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5334#16	
+0x005b13a6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#3	
+0x005b13c4	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#4	
+0x005b13d2	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#5	
+0x005b13ea	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#6	
+0x005b1403	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#7	
 0x005b141c	219		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b14f7	94	bf_string_ctor_from_cstr			confirmed	gamebryo		
 0x005b1555	78		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
