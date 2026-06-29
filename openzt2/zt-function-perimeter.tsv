@@ -1424,28 +1424,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004406e1	17	refcounted_string_payload_equals_cstr			confirmed			
 0x004406f2	95	append_pointer_to_vector			confirmed			
 0x00440751	137	grow_pointer_vector_for_insert			confirmed			
-0x004407da	43		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440805	31		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004407da	43		scenario UI state, expansion/customer-feedback, and registry con		unidentified			ui
+0x00440805	31		scenario UI state, expansion/customer-feedback, and registry con		unidentified			ui
 0x00440824	0	scalar_delete_BFXMLAttribute			confirmed		0x008c4b64#0	
 0x0044083f	23	destroy_BFXMLAttribute_value_fields			confirmed			
 0x00440856	28	get_ui_child_iterator_state			confirmed			
 0x00440872	28	reset_ui_child_iterator			confirmed			
-0x0044088e	62		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044088e	62		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004408cc	23	destroy_BFStringVector			confirmed			
 0x004408e3	0	scalar_delete_BFStringVector			confirmed		0x008c4b6c#0	
 0x004408fe	0	clone_BFStringVector_value			confirmed		0x008c4b6c#5	
-0x0044091d	36		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440941	116		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004409b5	72		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044091d	36		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440941	116		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x004409b5	72		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004409fd	0	clone_ZTFeedbackClickTarget_value			confirmed		0x008c5020#5	
 0x00440a3c	47	get_type_ZTMode			confirmed			
-0x00440a6b	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c4d58#1	ui
+0x00440a6b	0		ZTMode base, UI child dispatch, and mode camera helpers		unidentified		0x008c4d58#1	renderer
 0x00440a70	0	init_ZTMode_descriptor_ref			confirmed		0x008c4d58#2	
-0x00440a90	75		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440af1	83		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440b44	342		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440c9a	218		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00440d74	244		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00440a90	75		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440af1	83		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440b44	342		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440c9a	218		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440d74	244		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00440e68	65	activate_ZTMode_base_state			confirmed		0x008c23a4#85	
 0x00440ea9	86	deactivate_ZTMode_base_state			confirmed		0x008c23a4#86	
 0x00440eff	16	assign_shared_inline_ui_typed_value_ref_and_return_output			confirmed		0x008bf8b4#99	
@@ -1456,10 +1456,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00441024	149	record_mode_pointer_state_key_from_payload			confirmed		0x008bf8b4#109	
 0x004410b9	186	record_mode_pointer_state_count_and_notify_child			confirmed		0x008bf8b4#110	
 0x00441173	243	build_string_value_from_BFKeyValObj_or_payload			confirmed		0x008bf8b4#111	
-0x00441288	528		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441498	180		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044154c	250		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441646	56		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00441288	528		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441498	180		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044154c	250		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441646	56		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x0044167e	68	update_ZTMode_frame_and_assign_shared_result			confirmed		0x008c0a10#14	
 0x004416c2	93	handle_activate_on_ui_button			confirmed			
 0x0044171f	227	handle_UINotifyData_value_with_mode_fallback			confirmed		0x008bf8b4#112	
@@ -1468,72 +1468,72 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044197b	77	detach_delete_global_ui_object_ref			confirmed		0x008bfa90#1	
 0x004419c8	154	ensure_cursor_money_container_ui_object			confirmed		0x008bfa90#2	
 0x00441a62	449	read_tool_mode_input_config			confirmed		0x008c0a10#20	
-0x00441c23	108		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441c8f	31		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00441c23	108		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441c8f	31		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00441cae	259	build_or_delegate_active_child_mode_value			confirmed		0x008bf8b4#96	
-0x00441db1	26		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441dcb	278		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441ee1	27		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00441efc	136		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00441db1	26		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441dcb	278		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441ee1	27		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441efc	136		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00441f84	120	refresh_mode_camera_state_for_target			confirmed			
 0x00441ffc	0	reset_active_view_focus_target			confirmed		0x008bfa90#3	
 0x0044202e	164	bind_registered_mode_ui_children_to_receiver			confirmed		0x008bf8b4#87	
 0x004420d2	101	clear_registered_mode_ui_children			confirmed		0x008bf8b4#88	
 0x00442137	109	set_registered_mode_ui_children_visible			confirmed		0x008bf8b4#90	
-0x004421a4	90		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004421a4	90		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004421fe	32	refresh_mode_camera_target_and_return_shared_value			confirmed		0x008bf8b4#113	
-0x0044221e	459		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044221e	459		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004423e9	0	query_active_context_value_is_empty			confirmed		0x008bf8b4#93	
 0x00442416	127	set_cursor_preview_asset_from_string_payload			confirmed		0x008bf8b4#106	
 0x00442495	435	open_zoopedia_hyperlink_entry			confirmed		0x008bf8b4#107	
 0x00442648	83	find_ui_component_by_name			confirmed			
-0x0044269b	65		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004426dc	81		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044272d	147		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004427c0	44		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044269b	65		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x004426dc	81		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044272d	147		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x004427c0	44		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004427ec	230	emit_camera_position_payload			confirmed			
-0x004428d2	165		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00442977	75		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004428d2	165		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00442977	75		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x004429c2	0	delegate_mode_slot_2a0_to_active_child			confirmed		0x008bf8b4#114	
 0x00442a5f	0	delegate_mode_slot_2a8_to_active_child			confirmed		0x008bf8b4#116	
 0x00442afc	342	handle_activate_mode_help			confirmed			
 0x00442c52	0	create_ZTMode_instance			confirmed		0x008c5020#14	
-0x00442c6d	151		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00442d04	130		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00442dcd	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00442e6d	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00442c6d	151		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00442d04	130		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00442dcd	160		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00442e6d	117		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00442ee2	88	try_get_UIKeyData_value			confirmed			
 0x00442f3a	88	try_get_BFKeyValObj_value			confirmed			
 0x00442f92	40	as_UILayout			confirmed			
 0x00442fba	40	as_UIText			confirmed			
-0x00442fe2	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00442fe2	88		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x0044303a	40	as_ZTMode			confirmed			
 0x00443062	40	as_ZTMainMode			confirmed			
 0x0044309a	77	advance_tree_iterator_in_place			confirmed			
-0x004430e7	25		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004430e7	25		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00443100	31	apply_assignment_value_and_mark_dirty_bit8			confirmed			
-0x0044311f	102		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00443185	51		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004431b8	50		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004431ea	42		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044311f	102		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00443185	51		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x004431b8	50		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x004431ea	42		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00443214	0	clone_BFHeartbeatData_value			confirmed		0x008c505c#5	
-0x0044322e	67		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044322e	67		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00443271	116	count_and_clear_mode_pointer_state_tree			confirmed			
-0x004432e5	145		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00443376	667		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004432e5	145		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00443376	667		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x00443611	183	get_or_insert_mode_pointer_state_tree_entry			confirmed			
-0x004436c8	341		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044381d	63		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044385c	49		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004436c8	341		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044381d	63		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044385c	49		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x0044388d	47	get_type_ZTOverheadMode			confirmed			
-0x004438bc	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5200#1	ui
+0x004438bc	0		overhead/path mode transitions and selection routing		unidentified		0x008c5200#1	world/pathing
 0x004438c1	32	init_ZTOverheadMode_descriptor_ref			confirmed			
 0x004438e1	0	init_ZTOverheadMode_descriptor_ref_vtable_thunk			confirmed		0x008c5200#2	
-0x004438e6	73		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00443945	83		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00443998	736		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004438e6	73		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00443945	83		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00443998	736		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00443cdd	0	scalar_delete_ZTOverheadMode			confirmed		0x008c5200#0	
-0x00443d56	331		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00443d56	331		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00443ea1	119	forward_overhead_child_slot_258_and_enable_receiver_capture			confirmed		0x008c52d4#97	
 0x00443f18	99	forward_overhead_slot_25c_and_disable_receiver_capture			confirmed		0x008c52d4#98	
 0x00443f7b	124	forward_overhead_slot_264_with_prompt_refresh			confirmed		0x008c52d4#100	
@@ -1545,7 +1545,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004441b0	104	broadcast_overhead_mouse_payload_slot_268			confirmed		0x008c52d4#101	
 0x00444218	127	assign_overhead_value_list_then_notify_child_and_global_ui			confirmed		0x008c523c#11	
 0x00444297	171	assign_overhead_event_result_then_notify_receivers			confirmed		0x008c523c#12	
-0x00444342	374		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00444342	374		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x004444b8	0	mark_overhead_refresh_pending_and_return_shared_value			confirmed		0x008c52d4#13	
 0x004444cf	910	setup_transportation_tool_tab			confirmed		0x008c52d4#85	
 0x0044485d	0	deactivate_ZTOverheadMode_and_clear_mode_state			confirmed		0x008c52d4#86	
@@ -1564,124 +1564,124 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004457e2	66	forward_ZTOverheadMode_payload_then_record_pointer_state			confirmed		0x008c52d4#110	
 0x00445824	149	resolve_ZTOverheadMode_child_or_pending_value			confirmed		0x008c54e4#7	
 0x004458b9	631	enter_first_person_training_for_trick			confirmed		0x008c54e4#8	
-0x00445b30	376		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00445b30	376		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00445ca8	126	read_ZTOverheadMode_config_and_ingame_options			confirmed		0x008c523c#5	
-0x00445d26	197		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00445deb	51		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00445d26	197		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00445deb	51		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00445e1e	237	dispatch_string_payload_to_active_ui_context_target			confirmed		0x008c54e4#5	
 0x00445f0b	237	dispatch_string_payload_to_active_ui_context_target_alt			confirmed		0x008c54e4#6	
-0x00446047	260		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00446047	260		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x0044614b	0	refresh_ZTOverheadMode_camera_target_and_emit_pending_camera_position			confirmed		0x008c52d4#113	
-0x00446183	153		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00446263	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00446303	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00446183	153		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446263	160		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446303	117		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00446378	40	as_ZTFirstPersonMode			confirmed			
 0x004463a0	40	as_ZTPlacementMode			confirmed			
-0x004463c8	88		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00446420	69		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004464a5	40		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004463c8	88		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446420	69		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004464a5	40		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x004464cd	47	get_type_ZTPathMode			confirmed			
-0x004464fc	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c55b0#1	ui
-0x00446501	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004464fc	0		overhead/path mode transitions and selection routing		unidentified		0x008c55b0#1	world/pathing
+0x00446501	32		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00446521	0	init_ZTPathMode_descriptor_ref_vtable_thunk			confirmed		0x008c55b0#2	
-0x00446526	73		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00446526	73		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x0044656f	0	copy_ZTPathMode_ui_value_assignment_dependents			confirmed		0x008c5870#0	
 0x00446585	83	resolve_ZTPathMode_registered_ui_value			confirmed		0x008c5870#1	
 0x004465d8	537	read_path_curb_config			confirmed			
-0x004467f1	170		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044689b	203		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00446966	122		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004469e0	384		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004467f1	170		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044689b	203		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446966	122		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004469e0	384		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00446b60	0	scalar_delete_ZTPathMode			confirmed		0x008c55b0#0	
-0x00446b7b	137		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00446b7b	137		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00446c04	83	activate_path_mode_and_reset_cursor_state			confirmed		0x008c5684#85	
 0x00446c57	87	deactivate_path_mode_and_clear_preview_state			confirmed		0x008c5684#86	
 0x00446cae	0	mark_path_mode_refresh_pending_and_return_shared_value			confirmed		0x008c5684#101	
-0x00446cc5	1328		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00446cc5	1328		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x004471f5	0	refresh_path_mode_preview_then_update_input_state			confirmed		0x008c5684#97	
-0x00447215	459		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00447215	459		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x004473e0	0	build_path_mode_selected_value_or_return_shared_value			confirmed		0x008c5684#100	
-0x00447437	80		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00447437	80		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00447487	0	flush_pending_path_mode_refresh_and_return_shared_value			confirmed		0x008c55b0#14	
 0x004474b7	114	handle_undoaction			confirmed			
 0x00447529	97	handle_prepare_undo			confirmed			
 0x0044758a	227	handle_setplacementpath			confirmed			
 0x0044766d	78	handle_setworldposofmouse			confirmed			
 0x004476bb	242	read_ZTPathMode_steep_slope_and_color_config			confirmed		0x008c55b0#20	
-0x004477ad	108		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00447819	1038		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00447c27	559		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00447e56	824		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044818e	473		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448367	387		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004484ea	107		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448555	74		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044859f	113		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x004477ad	108		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00447819	1038		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00447c27	559		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00447e56	824		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044818e	473		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448367	387		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004484ea	107		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448555	74		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044859f	113		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00448610	1074	commit_path_mode_pending_path_updates			confirmed			
-0x00448a42	312		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448b7a	263		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448c81	255		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448d80	203		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448e4b	352		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448fab	72		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00448ff3	516		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004491f7	1132		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449663	902		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x004499e9	350		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449b47	40		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449b6f	58		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449ba9	167		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449c50	48		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449c80	36		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449ca4	115		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449d17	91		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449d72	52		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00448a42	312		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448b7a	263		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448c81	255		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448d80	203		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448e4b	352		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448fab	72		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00448ff3	516		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004491f7	1132		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449663	902		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004499e9	350		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449b47	40		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449b6f	58		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449ba9	167		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449c50	48		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449c80	36		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449ca4	115		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449d17	91		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449d72	52		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00449da6	0	create_ZTPathMode_instance			confirmed		0x008c5870#3	
-0x00449dbe	153		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x00449e9e	369		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a00f	125		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a08c	59		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a0c7	203		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a192	148		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a226	387		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a3a9	50		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a3db	397		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a568	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a608	77		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a655	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a6ca	57		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a703	39		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a72a	84		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x00449dbe	153		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00449e9e	369		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a00f	125		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a08c	59		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a0c7	203		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a192	148		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a226	387		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a3a9	50		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a3db	397		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a568	160		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a608	77		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a655	117		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a6ca	57		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a703	39		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x0044a72a	84		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x0044a77e	42	write_vector3_scaled_by_inverse_scalar			confirmed			
-0x0044a7a8	49		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a7d9	92		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044a7a8	49		placement and save mode tail		unidentified			io/assets
+0x0044a7d9	92		placement and save mode tail		unidentified			io/assets
 0x0044a835	47	get_type_ZTPlacementMode			confirmed			
-0x0044a864	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5968#1	ui
-0x0044a869	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044a864	0		placement and save mode tail		unidentified		0x008c5968#1	io/assets
+0x0044a869	32		placement and save mode tail		unidentified			io/assets
 0x0044a889	0	init_ZTPlacementMode_descriptor_ref_vtable_thunk			confirmed		0x008c5968#2	
-0x0044a88e	75		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044a88e	75		placement and save mode tail		unidentified			io/assets
 0x0044a8d9	0	copy_ZTPlacementMode_ui_value_assignment_dependents			confirmed		0x008c5c7c#0	
 0x0044a8ef	83	resolve_ZTPlacementMode_registered_ui_value			confirmed		0x008c5c7c#1	
-0x0044a942	68		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044a986	122		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044aa00	128		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044a942	68		placement and save mode tail		unidentified			io/assets
+0x0044a986	122		placement and save mode tail		unidentified			io/assets
+0x0044aa00	128		placement and save mode tail		unidentified			io/assets
 0x0044aa80	0	scalar_delete_ZTPlacementMode			confirmed		0x008c5968#0	
-0x0044aa9b	87		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044aa9b	87		placement and save mode tail		unidentified			io/assets
 0x0044aaf2	205	activate_ZTPlacementMode_and_setup_buy_preview			confirmed		0x008c5a3c#85	
 0x0044abbf	32	deactivate_ZTPlacementMode_and_clear_buy_preview			confirmed		0x008c5a3c#86	
 0x0044abdf	762	setup_scenery_tool_buttons			confirmed			
 0x0044aed9	282	update_placement_target_escape_state_and_handle			confirmed		0x008c5c18#15	
-0x0044aff3	401		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044aff3	401		placement and save mode tail		unidentified			io/assets
 0x0044b184	155	show_negative_cursor_money_for_expensive_target			confirmed		0x008c5c18#2	
 0x0044b21f	65	handle_confirm_entity_placement			confirmed			
 0x0044b260	1722	handle_placement_mode_transition			confirmed		0x008c5c18#11	
-0x0044b91a	251		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044b91a	251		placement and save mode tail		unidentified			io/assets
 0x0044ba15	57	capture_placement_input_when_confirm_gate_fails			confirmed		0x008c5c18#10	
-0x0044ba4e	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044ba4e	117		placement and save mode tail		unidentified			io/assets
 0x0044bac3	0	update_placement_rotation_from_target_then_frame			confirmed		0x008c5c18#12	
 0x0044baf1	200	read_placement_mode_effect_and_wizard_config			confirmed		0x008c5968#20	
 0x0044bbb9	278	update_placement_target_preview_and_selection_context			confirmed		0x008c5c18#21	
-0x0044bccf	442		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044bccf	442		placement and save mode tail		unidentified			io/assets
 0x0044be89	386	emit_setplacementobject_payload			confirmed			
 0x0044c00b	162	clear_placement_preview_and_refresh_selected_target_state			confirmed		0x008c5c18#20	
 0x0044c0ad	284	handle_placement_mouse_move_and_cursor_position_payload			confirmed		0x008c5a3c#101	
@@ -1693,23 +1693,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044c65e	0	set_placement_mode_flag_and_forward_boolean_payload			confirmed		0x008c5c18#23	
 0x0044c68a	131	assign_animal_placement_target_handle			confirmed		0x008c5c18#24	
 0x0044c70d	0	create_ZTPlacementMode_instance			confirmed		0x008c5c7c#3	
-0x0044c728	153		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044c808	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044c8a8	23		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044c8bf	117		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044c934	55		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044c728	153		placement and save mode tail		unidentified			io/assets
+0x0044c808	160		placement and save mode tail		unidentified			io/assets
+0x0044c8a8	23		placement and save mode tail		unidentified			io/assets
+0x0044c8bf	117		placement and save mode tail		unidentified			io/assets
+0x0044c934	55		placement and save mode tail		unidentified			io/assets
 0x0044c96b	40	as_ZTAIShowComponent			confirmed			
-0x0044c993	53		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044c993	53		placement and save mode tail		unidentified			io/assets
 0x0044c9c8	47	get_type_ZTSaveMode			confirmed			
-0x0044c9f7	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c5d18#1	ui
-0x0044c9fc	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044c9f7	0		placement and save mode tail		unidentified		0x008c5d18#1	io/assets
+0x0044c9fc	32		placement and save mode tail		unidentified			io/assets
 0x0044ca1c	0	init_ZTSaveMode_descriptor_ref_vtable_thunk			confirmed		0x008c5d18#2	
-0x0044ca21	73		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044ca21	73		placement and save mode tail		unidentified			io/assets
 0x0044ca6a	0	copy_ZTSaveMode_ui_value_assignment_dependents			confirmed		0x008c5fe8#0	
 0x0044ca80	83	resolve_ZTSaveMode_registered_ui_value			confirmed		0x008c5fe8#1	
-0x0044cad3	225		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044cad3	225		placement and save mode tail		unidentified			io/assets
 0x0044cbb4	0	scalar_delete_ZTSaveMode			confirmed		0x008c5d18#0	
-0x0044cbcf	35		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044cbcf	35		placement and save mode tail		unidentified			io/assets
 0x0044cbf2	300	activate_ZTSaveMode_and_populate_save_dialog			confirmed		0x008c5dec#85	
 0x0044cd1e	0	deactivate_ZTSaveMode_and_clear_name_state			confirmed		0x008c3fc4#86	
 0x0044cd47	0	bind_ZTSaveMode_registered_ui_children_thunk			confirmed		0x008c5dec#87	
@@ -1717,64 +1717,64 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044d072	317	update_save_dialog_name_and_delete_button_state			confirmed		0x008c5fc8#5	
 0x0044d1af	1411	handle_save_game_dialog			confirmed		0x008c5fc8#6	
 0x0044d732	135	handle_save_name_text_change_and_refresh_loadname_list			confirmed		0x008c5fc8#7	
-0x0044d7b9	442		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044d7b9	442		placement and save mode tail		unidentified			io/assets
 0x0044d973	0	create_ZTSaveMode_instance			confirmed		0x008c5fe8#3	
-0x0044d99e	153		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044da7e	160		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044db1e	35		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044db41	131		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044dbc4	66		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044dc06	66		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044dc48	53		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044d99e	153		placement and save mode tail		unidentified			io/assets
+0x0044da7e	160		placement and save mode tail		unidentified			io/assets
+0x0044db1e	35		placement and save mode tail		unidentified			io/assets
+0x0044db41	131		placement and save mode tail		unidentified			io/assets
+0x0044dbc4	66		placement and save mode tail		unidentified			io/assets
+0x0044dc06	66		placement and save mode tail		unidentified			io/assets
+0x0044dc48	53		placement and save mode tail		unidentified			io/assets
 0x0044dc7d	0	clone_BFXMLObj_with_payload_field			confirmed		0x008c86c8#5	
 0x0044dcb1	0	scalar_delete_feedback_click_target_or_xml_obj_value			confirmed		0x008c5020#0	
-0x0044dccc	24		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044dccc	24		placement and save mode tail		unidentified			io/assets
 0x0044dce4	47	get_type_ZTSelectionMode			confirmed			
-0x0044dd13	0		scenario, campaign, map-selection UI, and mode registry		unidentified		0x008c8708#1	ui
-0x0044dd18	32		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044dd13	0		placement and save mode tail		unidentified		0x008c8708#1	io/assets
+0x0044dd18	32		placement and save mode tail		unidentified			io/assets
 0x0044dd38	0	init_ZTSelectionMode_descriptor_ref_vtable_thunk			confirmed		0x008c8708#2	
-0x0044dd3d	75		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044dd3d	75		placement and save mode tail		unidentified			io/assets
 0x0044dd88	0	append_ZTSelectionMode_registered_handler_entry			confirmed		0x008c8a60#3	
 0x0044dd9e	83	resolve_ZTSelectionMode_registered_handler_result			confirmed		0x008c8a60#4	
-0x0044ddf1	58		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044de2b	234		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044ddf1	58		placement and save mode tail		unidentified			io/assets
+0x0044de2b	234		placement and save mode tail		unidentified			io/assets
 0x0044df15	1353	register_ZTSelectionMode_message_handlers			confirmed			
-0x0044e45e	427		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044e45e	427		placement and save mode tail		unidentified			io/assets
 0x0044e609	0	scalar_delete_ZTSelectionMode			confirmed		0x008c8708#0	
-0x0044e624	165		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044e624	165		placement and save mode tail		unidentified			io/assets
 0x0044e6c9	0	activate_selection_mode_and_clear_selection_state			confirmed		0x008c87dc#85	
 0x0044e759	129	deactivate_selection_mode_and_clear_selected_entity_help			confirmed		0x008c87dc#86	
 0x0044e7da	575	update_selection_mode_frame_and_target_state			confirmed		0x008c8708#14	
-0x0044ea19	63		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044ea58	42		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044ea82	61		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
-0x0044eabf	532		scenario, campaign, map-selection UI, and mode registry		unidentified			ui
+0x0044ea19	63		placement and save mode tail		unidentified			io/assets
+0x0044ea58	42		placement and save mode tail		unidentified			io/assets
+0x0044ea82	61		placement and save mode tail		unidentified			io/assets
+0x0044eabf	532		placement and save mode tail		unidentified			io/assets
 0x0044ecd3	1659	select_entity			confirmed			
-0x0044f34e	30		entity selection and entity information panels		unidentified			ui
-0x0044f36c	75		entity selection and entity information panels		unidentified			ui
-0x0044f3b7	160		entity selection and entity information panels		unidentified			ui
-0x0044f457	150		entity selection and entity information panels		unidentified			ui
+0x0044f34e	30		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044f36c	75		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044f3b7	160		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044f457	150		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
 0x0044f4ed	1102	emit_crate_entity_payload			confirmed		0x008c0760#11	
 0x0044f93b	258	refresh_crate_or_selection_target_state			confirmed		0x008c0760#12	
-0x0044fa3d	754		entity selection and entity information panels		unidentified			ui
-0x0044fd2f	334		entity selection and entity information panels		unidentified			ui
+0x0044fa3d	754		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044fd2f	334		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
 0x0044fe7d	1191	read_entity_selection_config			confirmed		0x008c8708#20	
 0x00450324	135	resolve_child_mode_list_value_or_default_list_result			confirmed		0x008c04b0#26	
 0x004503ab	221	resolve_child_mode_event_value_or_default_event_result			confirmed		0x008c04b0#27	
 0x00450488	173	handle_selection_mouse_move_or_child_drag_value			confirmed		0x008c87dc#101	
 0x00450535	195	emit_userclicked_clickableobj_payload			confirmed			
-0x004505f8	124		entity selection and entity information panels		unidentified			ui
+0x004505f8	124		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
 0x00450674	583	emit_user_dragging_off_payload			confirmed			
 0x004508bb	230	emit_user_dragging_payload			confirmed			
 0x004509a1	0	handle_selection_primary_release_click_or_drag_off			confirmed		0x008c87dc#98	
 0x004509d8	434	emit_mouselook_payload			confirmed		0x008c87dc#97	
 0x00450b8a	437	emit_eventcaptured_payload			confirmed		0x008c87dc#100	
-0x00450d3f	103		entity selection and entity information panels		unidentified			ui
+0x00450d3f	103		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
 0x00450da6	289	emit_eventcaptured_payload			confirmed			
 0x00450ec7	313	route_selected_entity_context_string_to_object_state			confirmed		0x008c0760#20	
 0x00451000	82	handle_selected_entity_boolean_payload_and_refresh_context			confirmed		0x008c0760#22	
 0x00451052	345	emit_eventcaptured_payload			confirmed		0x008c8a28#5	
-0x004511ab	5678	update_selected_entity_info_panel			confirmed			
+0x004511ab	5678	selected entity info-panel dispatch and animal/guest/keeper panels			confirmed			
 0x004527d9	140		entity selection and entity information panels		unidentified			ui
 0x00452865	136		entity selection and entity information panels		unidentified			ui
 0x004528ed	918	update_crated_animal_info_panel			confirmed			
@@ -1804,11 +1804,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00455f18	471	update_egg_info_panel			confirmed			
 0x00455fba	0	call_populate_conservation_status_display_for_00455f18			confirmed			
 0x00455fed	0	call_populate_entity_biome_display_for_00455f18			confirmed			
-0x004560ef	243		entity selection and entity information panels		unidentified			ui
+0x004560ef	243		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x004561e2	6046	populate_transport_station_info_panel			confirmed			
-0x00457980	872		entity selection and entity information panels		unidentified			ui
+0x00457980	872		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x00457ce8	130	update_training_area_info_panel			confirmed			
-0x00457d6a	72		entity selection and entity information panels		unidentified			ui
+0x00457d6a	72		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x00457db2	1020	emit_set_cloning_species_payload			confirmed			
 0x004581ae	992	populate_puzzle_list_panel			confirmed			
 0x004585a5	935	populate_disease_info_panel			confirmed			
@@ -1820,28 +1820,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004591ea	320	handle_enter_cloning_mode			confirmed			
 0x0045932a	366	handle_enter_disease_mode			confirmed			
 0x00459498	162	handle_enter_tranq_mode			confirmed			
-0x0045953a	500		entity selection and entity information panels		unidentified			ui
+0x0045953a	500		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045972e	405	populate_show_manager_panels			confirmed			
-0x004598c3	48		entity selection and entity information panels		unidentified			ui
-0x004598f3	109		entity selection and entity information panels		unidentified			ui
-0x00459960	473		entity selection and entity information panels		unidentified			ui
+0x004598c3	48		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x004598f3	109		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x00459960	473		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x00459b39	1273	populate_show_schedule_panel			confirmed			
-0x0045a032	509		entity selection and entity information panels		unidentified			ui
-0x0045a22f	269		entity selection and entity information panels		unidentified			ui
-0x0045a33c	689		entity selection and entity information panels		unidentified			ui
+0x0045a032	509		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045a22f	269		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045a33c	689		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045a5ed	138	handle_set_current_show_for_donations			confirmed			
 0x0045a677	624	populate_show_donation_filter_list			confirmed			
-0x0045a8e7	599		entity selection and entity information panels		unidentified			ui
+0x0045a8e7	599		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045ab3e	1295	populate_entity_financial_history_panel			confirmed			
 0x0045b04d	828	populate_show_attendance_panel			confirmed			
-0x0045b389	117		entity selection and entity information panels		unidentified			ui
-0x0045b3fe	189		entity selection and entity information panels		unidentified			ui
-0x0045b4bb	241		entity selection and entity information panels		unidentified			ui
-0x0045b5ac	122		entity selection and entity information panels		unidentified			ui
-0x0045b626	267		entity selection and entity information panels		unidentified			ui
-0x0045b731	329		entity selection and entity information panels		unidentified			ui
+0x0045b389	117		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b3fe	189		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b4bb	241		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b5ac	122		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b626	267		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b731	329		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045b87a	930	populate_filter_cleanliness_panel			confirmed			
-0x0045bc1c	139		entity selection and entity information panels		unidentified			ui
+0x0045bc1c	139		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045bca7	1906	populate_entity_donation_info_panel			confirmed			
 0x0045c419	799	update_animal_status_action_buttons			confirmed			
 0x0045c738	354	update_entity_zoopedia_link			confirmed			
@@ -1852,7 +1852,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0045d1bb	601	update_animal_pickup_release_conservation_controls			confirmed			
 0x0045d414	305	update_entity_task_label			confirmed			
 0x0045d545	1751	populate_guest_happiness_info_panel			confirmed			
-0x0045dc1c	211		entity selection and entity information panels		unidentified			ui
+0x0045dc1c	211		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045dcef	921	populate_entity_biome_display			confirmed			
 0x0045e088	863	populate_entity_location_display			confirmed			
 0x0045e3e7	533	populate_conservation_status_display			confirmed			
@@ -1860,22 +1860,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0045e8f0	2464	populate_entity_finance_info_panel			confirmed			
 0x0045f290	796	populate_animal_status_info			confirmed			
 0x0045f5ac	1516	populate_animal_needs_info			confirmed			
-0x0045fb98	218		entity selection and entity information panels		unidentified			ui
-0x0045fc72	137		entity selection and entity information panels		unidentified			ui
+0x0045fb98	218		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045fc72	137		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x0045fcfb	2428	populate_egg_timer_ui			confirmed			
 0x00460677	330	populate_guest_needs_panel			confirmed			
-0x004607c1	436		entity selection and entity information panels		unidentified			ui
+0x004607c1	436		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x00460975	1520	populate_entity_inventory_panel			confirmed			
-0x00460f65	485		entity selection and entity information panels		unidentified			ui
-0x0046114a	126		entity selection and entity information panels		unidentified			ui
-0x004611c8	241		entity selection and entity information panels		unidentified			ui
+0x00460f65	485		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0046114a	126		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x004611c8	241		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x004612b9	1481	populate_entity_users_upkeep_panel			confirmed			
-0x00461882	359		entity selection and entity information panels		unidentified			ui
+0x00461882	359		specialized entity panels, donation/show data, and common displa		unidentified			ui
 0x004619e9	920	populate_animal_gender_display			confirmed			
 0x00461d81	375	populate_food_level_display			confirmed			
 0x00461ef8	375	populate_trash_level_display			confirmed			
 0x0046206f	234	update_animal_ride_swim_with_controls			confirmed			
-0x00462159	260		entity selection and entity information panels		unidentified			ui
+0x00462159	260		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x0046225d	1858	handle_entity_selection_actions			confirmed		0x008c0760#24	
 0x0046299f	99	refresh_selected_entity_food_level_and_info_panel			confirmed		0x008c0760#23	
 0x00462a02	322	emit_crate_entity_payload			confirmed		0x008c07d0#0	
@@ -1888,20 +1888,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004631a1	104	handle_selected_entity_named_action_8273c6			confirmed		0x008c07d0#7	
 0x00463209	0	refresh_selected_entity_mode_and_follow_context			confirmed		0x008c07d0#8	
 0x0046324f	1024	populate_vehicle_purchase_panel			confirmed		0x008c07d0#9	
-0x0046364f	1402		entity selection and entity information panels		unidentified			ui
-0x00463c20	94		entity selection and entity information panels		unidentified			ui
-0x00463c7e	226		entity selection and entity information panels		unidentified			ui
+0x0046364f	1402		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00463c20	94		selection actions, scheduler, transport, and show-platform comma		unidentified			renderer
+0x00463c7e	226		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x00463d60	244	handle_board_selected_entity			confirmed			
 0x00463e54	224	handle_action_confirmed			confirmed			
-0x00463f34	62		entity selection and entity information panels		unidentified			ui
+0x00463f34	62		selection actions, scheduler, transport, and show-platform comma		unidentified			
 0x00463f72	1611	handle_transport_sell_refund_confirmation			confirmed			
 0x004645bd	160	set_selection_mode_action_target_from_string_payload			confirmed		0x008c0808#0	
 0x0046465d	576	handle_selectnext_diseased_animal			confirmed			
 0x0046489d	235	handle_selectnext_rampaging_animal			confirmed			
 0x00464988	74	handle_showmixer_event			confirmed			
-0x004649d2	36		entity selection and entity information panels		unidentified			ui
+0x004649d2	36		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x004649f6	344	handle_showscheduler_addshow			confirmed			
-0x00464b4e	51		entity selection and entity information panels		unidentified			ui
+0x00464b4e	51		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x00464b81	297	handle_showscheduler_editshow			confirmed			
 0x00464caa	339	handle_showscheduler_viewshow			confirmed			
 0x00464dfd	341	handle_showscheduler_deleteshow			confirmed			
@@ -1911,54 +1911,54 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046539c	333	handle_showscheduler_addbreak			confirmed			
 0x004654e9	268	handle_showscheduler_moveup			confirmed			
 0x004655f5	271	handle_showscheduler_movedown			confirmed			
-0x00465704	114		entity selection and entity information panels		unidentified			ui
+0x00465704	114		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x00465776	145	handle_showscheduler_toggleenable			confirmed			
-0x00465807	80		entity selection and entity information panels		unidentified			ui
-0x00465857	98		entity selection and entity information panels		unidentified			ui
+0x00465807	80		selection actions, scheduler, transport, and show-platform comma		unidentified			
+0x00465857	98		selection actions, scheduler, transport, and show-platform comma		unidentified			
 0x004658b9	197	handle_set_filter_maintenance			confirmed			
 0x0046597e	602	emit_physobjswap_on_payload			confirmed			
-0x00465bd8	59		entity selection and entity information panels		unidentified			ui
+0x00465bd8	59		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x00465c13	208	handle_showplatform_transactcurrentupgrade			confirmed			
-0x00465ce3	363		entity selection and entity information panels		unidentified			ui
-0x00465e4e	84		entity selection and entity information panels		unidentified			ui
-0x00465ea2	84		entity selection and entity information panels		unidentified			ui
+0x00465ce3	363		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00465e4e	84		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00465ea2	84		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
 0x00465ef6	348	handle_sell_physobj			confirmed			
 0x00466052	551	handle_showplatform_updateupgradecost			confirmed			
 0x004662bf	63	handle_set_show_to_select			confirmed			
 0x004662fe	66	handle_enable_tutorial_eyedropper			confirmed			
 0x00466340	32	advance_ui_child_iterator			confirmed			
-0x00466360	164		entity selection and entity information panels		unidentified			ui
-0x00466404	48		entity selection and entity information panels		unidentified			ui
-0x00466434	72		entity selection and entity information panels		unidentified			ui
-0x0046647c	36		entity selection and entity information panels		unidentified			ui
-0x004664b8	153		entity selection and entity information panels		unidentified			ui
-0x00466598	24		entity selection and entity information panels		unidentified			ui
-0x004665b0	23		entity selection and entity information panels		unidentified			ui
-0x004665c7	113		entity selection and entity information panels		unidentified			ui
-0x00466638	132		entity selection and entity information panels		unidentified			ui
-0x004666bc	97		entity selection and entity information panels		unidentified			ui
-0x0046671d	53		entity selection and entity information panels		unidentified			ui
-0x00466752	324		entity selection and entity information panels		unidentified			ui
+0x00466360	164		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466404	48		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466434	72		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x0046647c	36		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x004664b8	153		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466598	24		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x004665b0	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x004665c7	113		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466638	132		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x004666bc	97		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x0046671d	53		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466752	324		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x00466896	129	clear_show_donation_filter_show_vector			confirmed			
-0x00466917	402		entity selection and entity information panels		unidentified			ui
-0x00466aa9	196		entity selection and entity information panels		unidentified			ui
-0x00466b6d	175		entity selection and entity information panels		unidentified			ui
-0x00466c1c	160		entity selection and entity information panels		unidentified			ui
-0x00466cbc	667		entity selection and entity information panels		unidentified			ui
-0x00466f57	57		entity selection and entity information panels		unidentified			ui
-0x00466f90	117		entity selection and entity information panels		unidentified			ui
-0x00467005	23		entity selection and entity information panels		unidentified			ui
+0x00466917	402		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466aa9	196		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466b6d	175		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466c1c	160		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466cbc	667		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466f57	57		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466f90	117		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00467005	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x0046701c	40	as_ZTSelectionMode			confirmed			
 0x00467044	40	as_UIToggleHoverButton			confirmed			
-0x0046706c	23		entity selection and entity information panels		unidentified			ui
+0x0046706c	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x00467083	40	as_ZTUITypeList			confirmed			
 0x004670ab	40	as_ZTPuzzleMgr			confirmed			
 0x004670d3	40	as_UICompositeButton			confirmed			
 0x004670fb	40	as_UIWindow			confirmed			
 0x00467123	40	as_ZTResearchMgr			confirmed			
-0x0046714b	23		entity selection and entity information panels		unidentified			ui
+0x0046714b	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x00467162	40	as_ZTItemFilter			confirmed			
-0x0046718a	23		entity selection and entity information panels		unidentified			ui
+0x0046718a	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x004671a1	55	resolve_ZTUserCameraData_component			confirmed			
 0x004671d8	40	as_ZTAIMgr			confirmed			
 0x00467200	55	resolve_ZTAIShow_child_component			confirmed			
@@ -6646,7 +6646,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053c1a4	301	build_BFTerrainShadowComponent_vertex_grid			confirmed			
 0x0053c2d1	1062	build_BFTerrainShadowComponent_fitting_surface_vertices			confirmed			
 0x0053c6f7	318	build_BFTerrainShadowComponent_index_grid			confirmed			
-0x0053c835	516		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x0053c835	516		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
 0x0053ca39	0	compute_BFTerrainShadowComponent_mesh_counts			confirmed		0x008da1a0#54	
 0x0053cb52	193	compute_BFTerrainShadowComponent_fitting_surface_mesh_counts			confirmed			
 0x0053cc13	0	build_BFTerrainShadowComponent_mesh_buffers			confirmed		0x008da1a0#52	
@@ -7898,7 +7898,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057c33d	29	find_path_or_groundtrack_near_global_pick_coords			confirmed			
 0x0057c35a	288	find_typed_entity_at_screen_point			confirmed			
 0x0057c47a	1165	find_path_or_groundtrack_near_pick			confirmed			
-0x0057c907	108		picked coordinate clamp to active viewport extents		unidentified			ui
+0x0057c907	108		picked coordinate clamp to active viewport extents		unidentified			world/pathing
 0x0057c973	48	selected object adapter through component/view lookup			confirmed			
 0x0057c9a3	63	lookup_active_object_child_by_token			confirmed			
 0x0057c9e2	477	collect_adoptable_species_by_rarity_threshold			confirmed			
@@ -9700,23 +9700,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b09ad	0	ui_typed_value_read_float_payload_node			confirmed		0x008bfd08#4	
 0x005b0a2d	0	ui_typed_value_emit_float_payload			confirmed		0x008bfd08#6	
 0x005b106d	39	assign_refcounted_object_pointer			confirmed	gamebryo		
-0x005b1218	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#1	
-0x005b1242	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#3	
-0x005b1265	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#5	
+0x005b1218	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#1	ui
+0x005b1242	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#3	ui
+0x005b1265	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5274#5	ui
 0x005b1288	41	try_resolve_BFRefCountedXMLObj_value			confirmed	gamebryo		
 0x005b12b1	40	as_BFRefCountedXMLObj_type_chain			confirmed	gamebryo		
-0x005b12d9	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e53a0#0	
+0x005b12d9	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e53a0#0	ui
 0x005b12f4	36	destroy_BFXMLNodeEvent_payload			confirmed	gamebryo		
-0x005b1318	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5400#0	
-0x005b1332	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5318#0	
+0x005b1318	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5400#0	ui
+0x005b1332	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5318#0	ui
 0x005b134d	48	destroy_BFRefCountedXMLObjEvent_payload			confirmed	gamebryo		
-0x005b137d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008c085c#6	
-0x005b138b	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5334#16	
-0x005b13a6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#3	
-0x005b13c4	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#4	
-0x005b13d2	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#5	
-0x005b13ea	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#6	
-0x005b1403	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#7	
+0x005b137d	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008c085c#6	ui
+0x005b138b	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e5334#16	ui
+0x005b13a6	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#3	ui
+0x005b13c4	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#4	ui
+0x005b13d2	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#5	ui
+0x005b13ea	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#6	ui
+0x005b1403	0		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified		0x008e52f0#7	ui
 0x005b141c	219		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
 0x005b14f7	94	bf_string_ctor_from_cstr			confirmed	gamebryo		
 0x005b1555	78		zoo fame predicates, scenario/transactions, typed UI values, XML		unidentified	gamebryo		ui
@@ -16739,9 +16739,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b6a96	43		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b6ac1	0	return_receiver_plus_0x10			confirmed		0x008e07f8#13	
 0x006b6ac5	45	get_type_BFGPlacementTile			confirmed	gamebryo		
-0x006b6af2	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6888#1	gameplay systems
+0x006b6af2	0	get_type_BFGPlacementTile_vtable_thunk			confirmed		0x008f6888#1	
 0x006b6af7	47	get_type_BFGElevatedPlacementTile			confirmed	gamebryo		
-0x006b6b26	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f699c#0	gameplay systems
+0x006b6b26	0	get_type_BFGElevatedPlacementTile_vtable_thunk			confirmed		0x008f699c#0	
 0x006b6b2b	0	get_type_BFGTerrainPlacementTile			confirmed		0x008f6a38#1	
 0x006b6b58	94		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b6bb6	47	get_type_TriangleID			confirmed	gamebryo		
@@ -16754,14 +16754,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b6eee	119		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b6f65	143		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b6ff4	169		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
-0x006b709d	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6888#0	gameplay systems
+0x006b709d	0	scalar_delete_BFGPlacementTile			confirmed		0x008f6888#0	
 0x006b70c2	118		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b7138	99		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
-0x006b719b	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6888#8	gameplay systems
-0x006b71d1	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6888#9	gameplay systems
-0x006b7295	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f69c8#0	gameplay systems
-0x006b72c5	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f69c8#1	gameplay systems
-0x006b72fb	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#2	gameplay systems
+0x006b719b	0	write_BFGPlacementTile_center_world_point			confirmed		0x008f6888#8	
+0x006b71d1	0	dispatch_BFGPlacementTile_direction_point_query			confirmed		0x008f6888#9	
+0x006b7295	0	write_BFGPlacementTile_min_corner_world_point			confirmed		0x008f69c8#0	
+0x006b72c5	0	write_BFGPlacementTile_max_x_corner_world_point			confirmed		0x008f69c8#1	
+0x006b72fb	0	apply_BFGPlacementTile_grid_cell_probe			confirmed		0x008f6a68#2	
 0x006b7326	101		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b738b	107		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b73f6	278		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
@@ -16773,15 +16773,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b77f6	36		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b781a	34		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b783c	29		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
-0x006b7859	108		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6888#4	gameplay systems
-0x006b78c5	106		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6888#5	gameplay systems
+0x006b7859	108	add_BFGPlacementTile_direction_record			confirmed	gamebryo	0x008f6888#4	
+0x006b78c5	106	remove_BFGPlacementTile_direction_record			confirmed	gamebryo	0x008f6888#5	
 0x006b792f	302		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b7a5d	500		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b7c51	80		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
-0x006b7ca1	104		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6918#1	gameplay systems
-0x006b7d29	104		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6918#0	gameplay systems
-0x006b7db1	130		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6888#6	gameplay systems
-0x006b7e33	115		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo	0x008f6888#7	gameplay systems
+0x006b7ca1	104	resolve_BFGPlacementTile_secondary_direction_storage			confirmed	gamebryo	0x008f6918#1	
+0x006b7d29	104	resolve_BFGPlacementTile_primary_direction_storage			confirmed	gamebryo	0x008f6918#0	
+0x006b7db1	130	attach_BFGPlacementTile_neighbor_record			confirmed	gamebryo	0x008f6888#6	
+0x006b7e33	115	detach_BFGPlacementTile_neighbor_record			confirmed	gamebryo	0x008f6888#7	
 0x006b7ea6	110		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b7f14	73		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006b7f5d	50		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
@@ -16850,18 +16850,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006bb2c6	1310		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006bb808	81		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006bb859	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a38#2	gameplay systems
-0x006bb860	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#3	gameplay systems
-0x006bb86e	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#4	gameplay systems
-0x006bb87c	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#5	gameplay systems
-0x006bb88a	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#6	gameplay systems
-0x006bb898	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#7	gameplay systems
-0x006bb8a6	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#8	gameplay systems
-0x006bb936	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#9	gameplay systems
+0x006bb860	0	read_BFGPlacementTile_grid_cell_height_30			confirmed		0x008f6a68#3	
+0x006bb86e	0	read_BFGPlacementTile_grid_cell_height_28			confirmed		0x008f6a68#4	
+0x006bb87c	0	read_BFGPlacementTile_grid_cell_height_2c			confirmed		0x008f6a68#5	
+0x006bb88a	0	read_BFGPlacementTile_grid_cell_height_20			confirmed		0x008f6a68#6	
+0x006bb898	0	read_BFGPlacementTile_grid_cell_height_24			confirmed		0x008f6a68#7	
+0x006bb8a6	0	get_or_create_BFGPlacementTile_child			confirmed		0x008f6a68#8	
+0x006bb936	0	remove_BFGPlacementTile_child_by_kind			confirmed		0x008f6a68#9	
 0x006bb9be	105		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
 0x006bba27	142		BFG gameplay systems placement entity XML economy traversability		unidentified	gamebryo		gameplay systems
-0x006bbab5	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#26	gameplay systems
-0x006bbb23	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#10	gameplay systems
-0x006bbb93	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#12	gameplay systems
+0x006bbab5	0	dispatch_BFGPlacementTile_vector_callbacks			confirmed		0x008f6a68#26	
+0x006bbb23	0	find_BFGPlacementTile_child_fitting_surface_for_point			confirmed		0x008f6a68#10	
+0x006bbb93	0	find_BFGPlacementTile_child_by_kind			confirmed		0x008f6a68#12	
 0x006bbbb9	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#11	gameplay systems
 0x006bbcb9	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#13	gameplay systems
 0x006bbe03	0		BFG gameplay systems placement entity XML economy traversability		unidentified		0x008f6a68#14	gameplay systems
@@ -17663,7 +17663,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e63ed	274		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e64ff	131		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
 0x006e6582	23		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
-0x006e6599	311		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
+0x006e6599	311		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e66d0	1226		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6b9a	143		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		gameplay systems
 0x006e6c29	72		session-global payload bridge helper		unidentified	gamebryo		io/assets
@@ -17724,7 +17724,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e85bf	443		vector/list element movement helpers		unidentified	gamebryo		ui
 0x006e877a	134	erase_16byte_vector_range			confirmed	gamebryo		
 0x006e8800	454		vector/list element movement helpers		unidentified	gamebryo		ui
-0x006e89c6	177		vector/list element movement helpers		unidentified	gamebryo		ui
+0x006e89c6	177		vector/list element movement helpers		unidentified	gamebryo		
 0x006e8a77	277	grow_4byte_vector_with_zero_fill			confirmed	gamebryo		
 0x006e8b8c	205		vector/list element movement helpers		unidentified	gamebryo		ui
 0x006e8c59	341		vector/list element movement helpers		unidentified	gamebryo		ui
@@ -17739,7 +17739,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e93cc	55		static vector and ordered-container support		unidentified	gamebryo		ui
 0x006e9403	51		static vector and ordered-container support		unidentified	gamebryo		ui
 0x006e9436	104	copy_construct_nested_24byte_record_vector			confirmed	gamebryo		
-0x006e949e	673		map/set erase and rebalancing helper		unidentified	gamebryo		ui
+0x006e949e	673		map/set erase and rebalancing helper		unidentified	gamebryo		
 0x006e973f	50		vector copy/assign/destruct helper tail		unidentified	gamebryo		
 0x006e9771	110		vector copy/assign/destruct helper tail		unidentified	gamebryo		ui
 0x006e97df	23	destroy_16byte_nested_vector_records			confirmed	gamebryo		
@@ -17783,7 +17783,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eadf7	518		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006eaffd	233		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
 0x006eb0e6	535	update_rampage_dino_recovery_crate_team			confirmed	gamebryo		
-0x006eb2fd	332		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006eb2fd	332		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006eb449	204		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
 0x006eb515	142		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
 0x006eb5a3	152		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
@@ -19696,7 +19696,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075350d	0		scene/view node update and child visibility propagation		unidentified		0x008fde20#0	
 0x00753535	0		scene/view node update and child visibility propagation		unidentified		0x008fde20#27	
 0x0075353f	0		scene/view node update and child visibility propagation		unidentified		0x008fde20#31	
-0x007536c8	191		scene/view node update and child visibility propagation		unidentified	gamebryo		
+0x007536c8	191		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x00753787	111		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x007537f6	0		scene/view node update and child visibility propagation		unidentified		0x008fde20#20	
 0x007537fb	103	emit_bf3devent_interpolate_complete_payload			confirmed	gamebryo		
