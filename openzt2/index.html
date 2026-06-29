@@ -15,6 +15,7 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 .pipeline{border:1px solid var(--line);border-radius:6px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:12px 14px;margin:12px 0 18px}.pipeline h2{margin:0 0 8px;border:0;padding:0}.pipeline ol{margin:0;padding-left:22px}.pipeline li{margin:4px 0;color:var(--muted)}.pipeline strong{color:var(--fg)}
 .progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 18px}
 .progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:10px 12px}.progress-card h3{margin:0 0 7px;font-size:15px}.progress-card h3 a{text-decoration:none}
+.progress-card.primary{grid-column:1/-1}
 .stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
 .seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-accepted,.seg-known,.seg-named,.seg-all{background:#79740e}.seg-candidate,.seg-some{background:#b57614}.seg-open,.seg-unnamed,.seg-none{background:#9d0006}.seg-mid,.seg-type{background:#076678}.seg-support{background:#7c6f64}.mini-label{margin:8px 0 3px;font-size:12px;color:var(--muted)}
 .seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-planned{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
@@ -91,17 +92,17 @@ function legend(cls,label){return `<div class="legend-row"><span class="swatch $
 text(["reimplementation-plan.html","../docs/REIMPLEMENTATION-PLAN.md"]).then(planText=>{
  const plan=planProgress(planText);
  document.getElementById("progress-bars").innerHTML=[
-   `<div class="progress-card">
-    <h3><a href="perimeter.html">Binary Recovery</a></h3>
-    <p class="progress-note">Evidence coverage remains available on the <a href="perimeter.html">Binary Perimeter</a>. Specification and implementation progress are tracked by the later gates.</p>
-   </div>`,
-   `<div class="progress-card">
+   `<div class="progress-card primary">
     <h3><a href="reimplementation-plan.html">Reconstruction Work Board</a></h3>
     <div class="stacked-bar" role="img" aria-label="${esc(plan.aria)}">
      ${plan.segments}
     </div>
     <div class="legend">${plan.legend}</div>
     <p class="progress-note">${plan.note}</p>
+   </div>`,
+   `<div class="progress-card">
+    <h3><a href="perimeter.html">Evidence Gates</a></h3>
+    <p class="progress-note">Byte range and binary perimeter coverage remain on their evidence pages. The dashboard bar starts at the implementation gate.</p>
    </div>`
  ].join("");
 }).catch(e=>{document.getElementById("progress-bars").insertAdjacentHTML("afterend",`<p class="sub">Failed to load progress data: ${esc(e.message)}</p>`)});

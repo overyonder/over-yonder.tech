@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<title>Byte Range Maps</title>
+<title>Byte Range Map</title>
 <link rel="prefetch" href="index.html">
-<link rel="prefetch" href="reconstruction_model.rs" as="fetch" crossorigin>
 <style>
 :root{--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--status-alpha:.82;--implicit-gap-alpha:.24}*{box-sizing:border-box}
 body{margin:0;font:14px/1.3 system-ui,sans-serif}.map-content{padding:0 22px 12px;font-size:13px}
-a{color:var(--link)}.tabs{display:flex;gap:8px;margin:0 0 22px;flex-wrap:wrap}.tabs a{color:inherit;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:7px 11px;background:transparent}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}
+a{color:var(--link)}
 section.pane+section.pane{margin-top:8px}.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:4px;color:var(--muted);flex-wrap:wrap}
 button,.jump input{background:var(--control);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:2px 7px;font-size:12px;font-weight:400;line-height:1.2}button{cursor:pointer}button[aria-pressed="true"]{background:var(--active)!important;outline:2px solid currentColor;outline-offset:1px}button:disabled{opacity:.35;cursor:default}.jump{display:flex;align-items:center;gap:6px}.jump input{width:136px;font:400 12px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.jump input.invalid{border-color:#e05252;outline:1px solid #e05252}
 .title{color:var(--muted);font-weight:400}.axis{font-weight:400;color:var(--muted)}.toolbar button,.toolbar input{color:var(--muted)!important;font-weight:400}.pane.linked-secondary .back,.pane.linked-secondary .jump,.pane.linked-secondary .title{display:none}.bar{position:relative;height:44px;display:block;border:1px solid var(--line);background:var(--panel);overflow:hidden}.bar.panning,.bytebar.panning{cursor:grabbing}.bytebar{height:10px;margin-top:0;width:100%;display:block;border:1px solid var(--line);border-top:0;background:var(--panel)}.seg{position:absolute;top:0;bottom:0;min-width:0;cursor:pointer;overflow:hidden}
@@ -786,10 +785,4 @@ function initCommonControls(){
 initLegendFilter();
 initCommonControls();
 loadPayload().then(()=>{for(const [space,tree] of Object.entries(payload))makeExplorer(space,tree)}).catch(error=>{document.getElementById("spaces").innerHTML=`<p style="color:#e05252">Failed to load byte range map: ${error.message}</p>`});
-</script><script>
-(()=>{
- const assets=["index.html", "investigation-record.html", "protection-model.html", "recovery.html", "investigation-repro.html", "reconstruction_model.rs"];
- const warm=()=>{for(const href of assets)fetch(href).catch(()=>{})};
- (window.requestIdleCallback||((fn)=>setTimeout(fn,700)))(warm);
-})();
 </script></body></html>
