@@ -59,15 +59,29 @@ th{background:var(--soft)}
 <div class="doc-source">Rendered from <code>docs/ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code></div>
 <main>
 <h1>OpenZT2 Original Game Functional Specification</h1>
-<p>Zoo Tycoon 2's original product-domain contract consists of native types,
-source-hydrated data, runtime managers, hardcoded message/method surfaces,
-state transitions, and adapter boundaries. Z2F XML/MAXML, localization,
-scripts, materials, models, sounds, and scenario files remain data-driven
-inputs; native C++ managers, widget classes, message handlers, registries,
-mode classes, and algorithms remain native-domain contracts. Renderer, audio,
-windowing, archive, parser, script, and OS mechanics may be replaced only
-behind adapters that preserve the registered native type, data, runtime, and
-message contracts.</p>
+<h2>Reconstruction Pipeline</h2>
+<ol>
+<li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether
+each mapped byte or range exists and what it is.</li>
+<li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded
+evidence by functions, type identities, vtables, globals, and broad evidence
+families.</li>
+<li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes
+recovered evidence and records which original systems own state/data and
+what behavior is understood or still missing.</li>
+<li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified
+ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or
+still needs to build.</li>
+</ol>
+<p>This document is gate 3. It records Zoo Tycoon 2's original ownership and
+behavior: native types, source-hydrated data, runtime managers, message/method
+surfaces, state transitions, and adapter responsibilities. Z2F XML/MAXML,
+localization, scripts, materials, models, sounds, and scenario files remain
+data-driven inputs; native C++ managers, widget classes, message handlers,
+registries, mode classes, and algorithms remain original-game behavior.
+Renderer, audio, windowing, archive, parser, script, and OS mechanics may be
+replaced only behind adapters that preserve the original type, data, runtime,
+and message semantics.</p>
 <h2>Orientation</h2>
 <p>Every concrete game object is a <code>BFTyped</code> object; almost everything is a <code>BFComponent</code>.
 Authored Z2F data hydrates these objects; singleton managers interpret them; the
@@ -79,18 +93,17 @@ in each layer are registered native types.</p>
   Mgrs["Native game/domain managers<br/>ZTApp, ZTWorldMgr, ZTAIMgr, ZTEconomyMgr, ZTResearchMgr, ZTDiseaseMgr,<br/>ZTAdoptionMgr, ZTAwardMgr, ZTScenarioMgr, ZTTankMgr, ZTTransportationMgr,<br/>BFGTraversabilityMgr, BFGPathFinderMgr, BFGRampageMgr,<br/>BFGInfluenceMgr, BFGCollisionMgr, BFSteeringMgr, BFLocomotionMgr,<br/>ZTAI*Mgr, BFSoundMgr/BFSoundStageMgr, BFRenderer/BFSpriteMgr, ZTUndoMgr"]
   State["Original native runtime state<br/>entities (component graphs), AI tokens/tasks, world grid,<br/>UI widget tree, profile/save/scenario/photo/status state"]
   Proj["Projection + host adapters (REPLACEABLE)<br/>Gamebryo/D3D, sound factories, Win32/winit,<br/>registry/profile/fs, Lua/CRT, network/MOTD"]
-  Open["Open / unidentified native surfaces<br/>anonymous vtables, unknown byte-map spans,<br/>unmodeled helper globals/functions"]
+  Gaps["Ownership/behavior gaps<br/>unresolved methods, payloads, formulae,<br/>update order, persistence scope"]
   Source --> Runtime --> Mgrs --> State
   Mgrs -.project.-> Proj
   State -.project.-> Proj
-  Mgrs -.residual evidence.-> Open</pre>
+  Mgrs -.unspecified behavior.-> Gaps</pre>
 <h3>Foundational Type System</h3>
-<p>Native type identity is represented by overlapping evidence surfaces: lazy
-type-cache globals, parent/getter links, vtable rows, and surviving type names.
-Those ledgers establish a broad registered-type surface, but they do not
-canonically enumerate a complete native C++ inheritance hierarchy. Parent/root
-linkage and virtual-slot identity remain recovery axes tracked in the Binary
-Perimeter.</p>
+<p>Native type identity enters this specification where it explains ownership or
+behavior: lazy type-cache globals, parent/getter links, vtable rows, and
+surviving type names. Those inputs establish a broad registered-type surface,
+but they do not canonically enumerate a complete native C++ inheritance
+hierarchy.</p>
 <pre class="mermaid">classDiagram
   BFTypedObj <|-- BFSafeHandledObj
   BFSafeHandledObj <|-- BFXMLObj
@@ -116,7 +129,7 @@ algorithms.</p>
 <tr>
   <th>Surface</th>
   <th>Data-driven source</th>
-  <th>Hardcoded native contract</th>
+  <th>Hardcoded native behavior</th>
 </tr>
 </thead>
 <tbody>
@@ -273,7 +286,7 @@ through four <code>BFTyped</code> surfaces: the <strong>XML DOM</strong>, <stron
   BFAITaskTemplate ..> BFAIEvalData : eval/runtime
   BFAITaskTemplate ..> BFBehExecTask : execution
   BFAITaskTemplate ..> BFAICompletionData : complete/fail</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li><code>BFXMLObj</code> virtual read/write method names, node storage layout, and include
 resolution are not yet reconstructed; only its position in the type chain is established.</li>
@@ -382,7 +395,7 @@ singleton lifetime, then stack in three layers under the application.</p>
   Domain --> Proj
   Tools --> Domain
   Other --> Domain</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Manager construction order and inter-manager update sequencing per frame/tick are not yet
 reconstructed.</li>
@@ -558,7 +571,7 @@ of 183 interned <code>UI_*</code> tokens; widget values are bound to game state 
   Note over Bus,H: native-owned: legal UI_* semantics, value-handler registration, focus/input routing, widget vtable methods
   Note over H: Lua remains scenario/script surface
   H->>W: UI_MODIFY / push value back (make_*_value)</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Widget vtable method bodies (<code>UI_HIT_TEST</code>/<code>UI_MODIFY</code>/<code>UI_QUERY</code> handlers) are not
 reconstructed; only the message set and inheritance are established.</li>
@@ -712,7 +725,7 @@ reconstructed; only the message set and inheritance are established.</li>
   ZTGfxOptionsFloatMessageRecorded "1" --> ZTGfxOptionsFloatMessage : message
   ZTGfxOptionsAcceptance --> ZTGraphicsSafeMode : safe graphics restore
   ZTOptionsSelectedSetting "*" --> ZTOptionsTypedValue : values</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Per-mode input state machines, full <code>event_blocks</code>/<code>message_handlers</code>
 dispatch, tick/transition logic, and individual mode method bodies are not yet
@@ -818,7 +831,7 @@ Adoption/buy is owned by <code>ZTAdoptionMgr</code> / <code>ZTAdoptionSlot</code
 <code>ZTUITypeList</code> (<code>root_type</code>/<code>type_filter</code>/<code>selected_type</code>) over <code>ZTUITypeListEntry</code>
 (<code>entity_type</code>/<code>display_name</code>/<code>icon</code>/<code>loc_id</code>) with <code>ZTUITypeListFilter</code>
 (<code>property_name</code>/<code>selected_value</code>).</p>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>The exact component set attached per binder type (animal vs guest vs scenery vs
 tank) is authored data; the universal <code>BFGEntity</code> shape is the native surface.</li>
@@ -1030,7 +1043,7 @@ undo stack can reverse.</p>
   }</pre>
 <p><strong>Consumers.</strong> <code>ZTWorldMgr</code>, <code>BFGManager</code>, <code>ZTAIMgr</code> (pathing/rampage), the economy
 (charges), and the renderer (terrain/decal/shadow projection).</p>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Grid coordinate units, exact footprint-shape schema, and slope thresholds are not yet
 reconstructed.</li>
@@ -1285,7 +1298,7 @@ and donations are behavior-driven (<code>ZTBehViewAnimals</code>, <code>ZTBehVie
   AiMessageRegistry *-- AiCommandMessages
   AiMessageRegistry *-- AiAttributeMessages
   AiMessageRegistry *-- AiLayerEventRoots</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>The task scoring/tie-break formula and the exact <code>ThinkerInterval</code> cadence per
 cognitive type are not yet reconstructed.</li>
@@ -1564,7 +1577,7 @@ UI binds to (<code>make_&lt;x&gt;_value</code> produces, <code>accept_&lt;x&gt;_
     +ZT_RESEARCH_IS_UNLOCKED; +ZT_RESEARCH_UNLOCK_ENTITY_KIND
     +ZT_DISEASE_CURE_QUERY
   }</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Fame half-star thresholds and donation weighting are not yet reconstructed.
 Admission price/index handling is partially recovered: price thresholds select
@@ -1694,7 +1707,7 @@ context:</p>
   Lua->>Mgr: BFS_SETRULESTATE / BFS_SETGLOBALVAR / BFS_GETLOCID
   Mgr-->>Menu: goal/status updates (ZTGoalPanel)
   Note over Menu,Mgr: lifecycle tokens: ZT_LOADGAME, ZT_SAVEGAME, ZT_SETMODE, ZT_SCENARIO_SELECTION_CHANGED, ZT_LOAD_AFTER_SAVE, ZT_SAVE_SCREENSHOT</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>Rule trigger/condition evaluation order and the campaign progression graph are not yet
 reconstructed.</li>
@@ -1753,7 +1766,7 @@ and components. Save and load are file-mode tools.</p>
   File->>Tree: read_xml_node() per component (load)
   Mode->>File: handle_saveEntityFile_command uses same path for single entity export
   Mode-->>UI: ZT_SAVE_SCREENSHOT attaches thumbnail / ZT_LOAD_AFTER_SAVE</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li>The <code>.z2s</code> byte/container format, section ordering, and version handling are
 unrecovered. The recovered contract is the <code>write_xml_node</code> tree.</li>
@@ -1929,7 +1942,7 @@ loaded-world camera state or transform changes.</p>
   Backend["Gamebryo/NetImmerse BFNi* + D3D + sound engine (REPLACEABLE)"]
   Domain -->|preserved component inputs<br/>BFRActorComponent transforms, BFAnimController selections,<br/>BFSpriteMgr UI projection, BFSND_* cues| Render
   ModeVfx --> Render --> Host --> Backend</pre>
-<p><strong>Open contracts.</strong></p>
+<p><strong>Open ownership/behavior gaps.</strong></p>
 <ul>
 <li><code>.bfmat</code>/<code>.fx</code> parameter/animation syntax and material slot binding are not modeled.</li>
 <li><code>BFAnimController</code> blend/transition rules and <code>BFAnimGraph</code> structure are unrecovered.</li>
@@ -1937,16 +1950,12 @@ loaded-world camera state or transform changes.</p>
 <li>Sound mixing categories/ducking policy beyond the message set are unknown.</li>
 </ul>
 <h2>Evidence Appendices</h2>
-<h3>Reference Boundaries</h3>
-<p>Complete registered-class rosters are byte/range evidence and stay in the
-byte-range map and Binary Perimeter. The appendices below preserve relationship
-maps, message-family counts, and a thin functional class roster that support the
-contract sections above.</p>
+<p>The appendices preserve relationship maps, message-family counts, and a thin
+functional class roster that support the ownership and behavior sections above.</p>
 <h3>Message Family Coverage</h3>
-<p>The full token list is byte/range evidence and stays in the byte-range map and
-Binary Perimeter. <code>UI_EVENT</code> is the UI event root; the <code>UI_</code> count below is the
-non-root command/message-token count used by the UI message bus. The recovered
-family counts are:</p>
+<p><code>UI_EVENT</code> is the UI event root; the <code>UI_</code> count below is the non-root
+command/message-token count used by the UI message bus. The recovered family
+counts are:</p>
 <table>
 <thead>
 <tr>
@@ -2083,7 +2092,7 @@ family counts are:</p>
 </table>
 <h3>Relationship Maps</h3>
 <p>These maps preserve recovered relationship inventories that support the
-contract sections above. They are grouped here so the body of the
+ownership and behavior sections above. They are grouped here so the body of the
 specification stays organized by domain responsibility and runtime behavior.</p>
 <h4>Source Data and Hydration</h4>
 <p><strong>Catalog relationships.</strong></p>
@@ -3460,9 +3469,9 @@ specification stays organized by domain responsibility and runtime behavior.</p>
   NetImmerseShaderTextureSlot "0..1" --> NetImmerseTextureSlot : texture</pre>
 <h3>Registered Class Roster</h3>
 <p>Thin registered subtypes/records (behaviour in base + message vocabulary), with parent:
-this roster is a functional appendix, not the complete 2,068-entry type registry
-or the full anonymous-vtable atlas. Complete byte/function/vtable evidence remains
-in the byte-range map and perimeter TSVs.</p>
+this roster is a functional appendix for names used by ownership and behavior
+descriptions; it is not the complete 2,068-entry type registry or the full
+anonymous-vtable atlas.</p>
 <ul>
 <li><strong>&lt; (root)</strong>: <code>BFAIStateVarBaseType</code>, <code>BFColor</code>, <code>BFRect</code>, <code>getActiveSequenceName</code>, <code>getActiveSequenceTime</code>, <code>getBM</code>, <code>getCM</code>, <code>getCurrTask</code>, <code>getCurrentPlaySet</code>, <code>getDistFromCamera</code>, <code>getEDI</code>, <code>getFirstContainedEntity</code>, <code>getFirstInterestingEntity</code>, <code>getFirstInterestingEntity2</code>, <code>getFirstPhysObj</code>, <code>getID</code>, <code>getIsCrated</code>, <code>getIsDiseased</code>, <code>getIsElevatedShot</code>, <code>getIsInWater</code>, <code>getIsOnElevatedTile</code>, <code>getIsSuper</code>, <code>getIsUnderwaterShot</code>, <code>getNextContainedEntity</code>, <code>getNextInterestingEntity</code>, <code>getNextInterestingEntity2</code>, <code>getPAC</code>, <code>getPercentOfScreen</code>, <code>getPercentSeen</code>, <code>getPercentSeenInCenter</code>, <code>getPosition</code>, <code>getRotation</code>, <code>getSharedVar</code>, <code>getStateVar</code>, <code>getTaskTarget</code>, <code>getType</code>, <code>getVar</code>, <code>getVehicleShot</code>, <code>hasRelationship</code>, <code>isKindOf</code>, <code>isPlaySetInContext</code>, <code>localize</code>, <code>testRelationship</code></li>
 <li><strong>&lt; BFComponent</strong>: <code>BFAITrickMgrData</code>, <code>BFAIUnhideComponent</code>, <code>BFBehSetMap</code>, <code>BFGBiomeData</code>, <code>BFGDetachInfo</code>, <code>BFLoadListener</code>, <code>BFSharedPhysVars</code>, <code>BFSkyLayer</code>, <code>BFSndComponent</code>, <code>BFXMLNodeComp</code>, <code>ZTAIEducationData</code>, <code>ZTAISharedInfluenceWatcher</code>, <code>ZTAIStaffTrainerComponent</code>, <code>ZTAITourTakerData</code>, <code>ZTAITrickComponentData</code>, <code>ZTAITrickTargetComponent</code>, <code>ZTAIVehicleData</code>, <code>ZTAIWaterFilterComponent</code>, <code>ZTCDCheck</code>, <code>ZTCloningCenterComponent</code>, <code>ZTCloningCenterInstanceComponent</code>, <code>ZTElevatedTriangleGraphic</code>, <code>ZTEntityCrater</code>, <code>ZTEntityDestructionComponent</code>, <code>ZTEntityDestructionData</code>, <code>ZTExtraPaths</code>, <code>ZTFossilSkeletonComponent</code>, <code>ZTItemFilter</code>, <code>ZTLocationEntry</code>, <code>ZTOverviewData</code>, <code>ZTOverviewModeAnimalIcon</code>, <code>ZTOverviewModeBuildingIcon</code>, <code>ZTPhysObjSwapComponent</code>, <code>ZTPuzzlePiece</code>, <code>ZTTransportGroundTrackShared</code>, <code>ZTVehicleBase</code>, <code>ZTWebComponent</code>, <code>ZTWetsuitComponent</code>, <code>ZTWitheredPlantComponent</code></li>
@@ -3494,9 +3503,8 @@ in the byte-range map and perimeter TSVs.</p>
 <li><strong>&lt; BFAISensorSelf</strong>: <code>ZTAIStaffSensorSelf</code></li>
 <li><strong>&lt; BFScriptComponent</strong>: <code>ZTPAPTEntityStub</code></li>
 </ul>
-<h3>Open Contract Register</h3>
-<p>Open contracts mark native surfaces that remain explicit until established from
-source data and authored content. Cross-cutting unknowns:</p>
+<h3>Ownership and Behavior Gaps</h3>
+<p>These rows track ownership and behavior that remain unspecified at this gate.</p>
 <table>
 <thead>
 <tr>
@@ -3551,20 +3559,10 @@ source data and authored content. Cross-cutting unknowns:</p>
   <td>Win32 pump/dialog/IME edges, registry/profile mapping, network/download/MOTD</td>
   <td>Renderer, Persistence (adapter boundary)</td>
 </tr>
-<tr>
-  <td>Discovery coverage</td>
-  <td>anonymous <code>vtable_*</code> surfaces, unknown byte-map spans, and address-only helper functions still include unnamed native surfaces</td>
-  <td>Binary Perimeter</td>
-</tr>
 </tbody>
 </table>
 <p>Unresolved methods, globals, payloads, and formulae stay attached to the nearest
 original class or manager.</p>
-<h3>Binary Perimeter</h3>
-<p>The binary's function/global perimeter, library boundaries, vtable enumeration,
-and identification coverage live in the Binary Perimeter (<code>perimeter.html</code>) as
-red-team analysis artifacts. They stay separate from the product-domain contract
-to preserve the clean-room boundary between binary analysis and specification.</p>
 
 </main>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>

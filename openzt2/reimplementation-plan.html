@@ -59,10 +59,23 @@ th{background:var(--soft)}
 <div class="doc-source">Rendered from <code>docs/REIMPLEMENTATION-PLAN.md</code></div>
 <main>
 <h1>OpenZT2 Reimplementation Plan</h1>
-<p><code>ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code> owns the original Zoo Tycoon 2
-contract: source-owned data, native classes, managers, messages, state
-transitions, and adapter boundaries. This plan owns the current Rust execution
-shape for that contract.</p>
+<h2>Reconstruction Pipeline</h2>
+<ol>
+<li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether
+each mapped byte or range exists and what it is.</li>
+<li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded
+evidence by functions, type identities, vtables, globals, and broad evidence
+families.</li>
+<li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes
+recovered evidence and records which original systems own state/data and
+what behavior is understood or still missing.</li>
+<li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified
+ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or
+still needs to build.</li>
+</ol>
+<p>This document is gate 4. It starts from the ownership and behavior described in
+<code>ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code> and tracks the Rust/Bevy execution
+shape for that specified work.</p>
 <p>The reconstruction keeps original source formats data-driven: Z2F archives,
 XML/MAXML/BFXML documents, localization, Lua, AI task/behavior files, materials,
 models, textures, audio, saves, scenarios, and packages. Rust may change storage
@@ -82,12 +95,12 @@ authority.</p>
 <tr>
   <td>Source formats and source classification</td>
   <td><code>domain::source_format</code>, <code>domain::source_asset</code>, <code>domain::source_support</code></td>
-  <td>Parse original files, classify source documents, model <code>BFResourceMgr</code>, <code>BFXML*</code>, <code>BFXMLSchemaMgr</code>, <code>BFLocaleMgr</code>, <code>BFTypedBinder</code>, <code>BFRegistry</code>, <code>BFScriptContextMgr</code>, <code>BFUserProfileMgr</code>, and <code>BFTimeKeeper</code> contracts.</td>
+  <td>Parse original files, classify source documents, and model <code>BFResourceMgr</code>, <code>BFXML*</code>, <code>BFXMLSchemaMgr</code>, <code>BFLocaleMgr</code>, <code>BFTypedBinder</code>, <code>BFRegistry</code>, <code>BFScriptContextMgr</code>, <code>BFUserProfileMgr</code>, and <code>BFTimeKeeper</code> behavior.</td>
 </tr>
 <tr>
   <td>Product semantics</td>
   <td><code>domain::*</code> modules named for product concepts</td>
-  <td>Define source-derived values, pure rules, manager contracts, message tokens, and open native surfaces. Domain modules do not own live runtime state, retained runtime collections, queues, caches, app/session state, or presentation state.</td>
+  <td>Define source-derived values, pure rules, manager behavior, message tokens, and unspecified original surfaces. Domain modules do not own live runtime state, retained runtime collections, queues, caches, app/session state, or presentation state.</td>
 </tr>
 <tr>
   <td>Live runtime and projection</td>
@@ -96,10 +109,10 @@ authority.</p>
 </tr>
 </tbody>
 </table>
-<p>The default implementation rule is to represent a recovered concept directly in
-Bevy ECS/runtime types whenever Bevy can express the original contract. Bevy
+<p>The default implementation rule is to represent a specified concept directly in
+Bevy ECS/runtime types whenever Bevy can express the original behavior. Bevy
 <code>States</code> are available for finite, code-owned protocols only after the original
-contract proves such a closed protocol exists. The current app flow does not use
+behavior proves such a closed protocol exists. The current app flow does not use
 closed Bevy app/menu/game states: startup loading is the absence of
 <code>RuntimeResourcesReady</code>, and the original game shell owns the live flow through
 ECS-visible resources such as <code>ModeRegistry</code>, <code>ActiveMode</code>,
@@ -108,10 +121,10 @@ such as shell-mode tokens, layout paths, hotkeys, cursors, and authored UI
 events stays data-driven: load it into registries/assets, then expose the live
 choice as ECS resources, components, entities, and messages. Domain ownership is
 exceptional: keep a concept in <code>domain</code> only when it is source-authored data,
-host-independent source or message contract, pure rule, manager/native type
+host-independent source or message behavior, pure rule, manager/native type
 identity, or another original surface that cannot live directly as Bevy
 components, resources, messages, or assets. Bevy runtime resources may store
-domain values as loaded contracts or semantic payloads; the owning live
+domain values as loaded records or semantic payloads; the owning live
 collection remains the Bevy resource, component, message stream, or asset.</p>
 <h2>Bevy State, Registries, and Source Modes</h2>
 <p>Data-driven state still needs a runtime fact somewhere. The target shape is one
@@ -406,15 +419,15 @@ row through documentation-only churn.</p>
 <tbody>
 <tr>
   <td><span class="plan-status plan-status-recover">recover</span></td>
-  <td>Owner and scope are known; original contract or implementation work remains to be specified.</td>
+  <td>Implementation owner is known; missing specification detail or source integration blocks the row.</td>
 </tr>
 <tr>
   <td><code>specified</code></td>
-  <td>Original contract is understood well enough to implement.</td>
+  <td>Original ownership and behavior are understood well enough to implement.</td>
 </tr>
 <tr>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Rust/domain/runtime types represent the contract, messages, or state shape.</td>
+  <td>Rust/domain/runtime types represent the specified messages, behavior, or state shape.</td>
 </tr>
 <tr>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
@@ -430,7 +443,7 @@ row through documentation-only churn.</p>
 </tr>
 <tr>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Host/backend mechanics are intentionally delegated while OpenZT2 preserves the original boundary contract.</td>
+  <td>Host/backend mechanics are intentionally delegated while OpenZT2 preserves the original behavior at that edge.</td>
 </tr>
 </tbody>
 </table>
@@ -1487,13 +1500,13 @@ backends.</p>
 </tbody>
 </table>
 <h2>Expansion Rule</h2>
-<p>Add or split a row when the specification, source data, or Rust code gives a
+<p>Add or split a row when the functional specification gives a
 distinct implementation owner: a manager, native class family, source file
 family with a consumer, state transition, message handler group, formula,
-persisted surface, or adapter boundary. Attach unresolved behavior, payloads,
-and formulae to that owning row. If the owner is unclear, keep the fact in the
-functional specification until source, code, or accepted contract evidence gives
-it a blue-team implementation home.</p>
+persisted surface, or adapter edge. Unspecified ownership, behavior, payloads,
+and formulae stay in the functional specification. Work-board rows track
+implementation of specified ownership/behavior and link back to specification
+gaps when implementation is blocked.</p>
 
 </main>
 

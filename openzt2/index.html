@@ -12,6 +12,7 @@ button,input,select{background:var(--control);color:var(--fg);border:1px solid v
 .tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
 .nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
 main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
+.pipeline{border:1px solid var(--line);border-radius:6px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:12px 14px;margin:12px 0 18px}.pipeline h2{margin:0 0 8px;border:0;padding:0}.pipeline ol{margin:0;padding-left:22px}.pipeline li{margin:4px 0;color:var(--muted)}.pipeline strong{color:var(--fg)}
 .progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 18px}
 .progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:10px 12px}.progress-card h3{margin:0 0 7px;font-size:15px}.progress-card h3 a{text-decoration:none}
 .stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
@@ -19,12 +20,6 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 .seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-recover{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
-.phases{display:grid;gap:14px;margin:10px 0}
-.phase{border:1px solid var(--line);border-left:4px solid var(--accent,var(--control-border));border-radius:6px;background:var(--soft);padding:12px 16px}
-.phase.red{--accent:var(--bad)}.phase.green{--accent:var(--ok)}.phase.blue{--accent:var(--link)}
-.phase h3{margin:0 0 6px;font-size:15px;display:flex;align-items:baseline;gap:8px}.phase h3 .tag{font-size:11px;color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.04em}
-.phase h4{margin:12px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.phase p{margin:0;font-size:13px;line-height:1.6}.phase p+p{margin-top:8px}
 .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:10px 0 18px}
 .doc-card{border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px}
 .doc-card h3{margin:0 0 6px;font-size:15px}.doc-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.doc-card a{font-weight:700;text-decoration:none}
@@ -40,7 +35,18 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 <nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
- <p class="sub">A map of the reconstruction evidence, original-game contract, and implementation strategy.</p>
+ <p class="sub">A map of the reconstruction pipeline: evidence, ownership/behavior, and implementation.</p>
+
+ <section class="pipeline" aria-label="Reconstruction pipeline">
+  <h2>Pipeline</h2>
+  <ol>
+   <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
+   <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
+   <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
+   <li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+  </ol>
+ </section>
+
  <div class="progress-grid" id="progress-bars" aria-label="Project progress summary"></div>
 
  <h2>Pages</h2>
@@ -55,38 +61,16 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
   </div>
   <div class="doc-card">
    <h3><a href="original-game-functional-specification.html">Functional Specification</a></h3>
-   <p>Outlines the original game contract: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and open native-behavior contracts.</p>
+   <p>Records original-game ownership and behavior: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and remaining behavior gaps.</p>
   </div>
   <div class="doc-card">
    <h3><a href="reimplementation-plan.html">Reimplementation Plan</a></h3>
-   <p>Presents the Rust/Bevy implementation strategy: which original contracts are rebuilt as OpenZT2 domains, which responsibilities move to libraries or adapters, and how remaining product-domain work is tracked.</p>
-  </div>
- </div>
-
- <h2>How the project is structured</h2>
- <div class="phases">
-  <div class="phase red">
-   <h3>Phase 1 <span class="tag">Red team — adversarial analysis</span></h3>
-   <p>The project began as an adversarial reverse-engineering investigation of the retail <code>zt.exe</code>, captured across ~11 sub-phase records. Cursory triage (PE-structure dump, section walk, string extraction) exposed the executable's shape and large runs of human-readable strings that seeded the first focus; <strong>radare2</strong> disassembly showed several sections were obfuscated/encrypted, and <strong>GDB</strong> dynamic analysis recovered the execution flow and identified the packer as <strong>Macrovision SafeDisc 4.90.10</strong> (the “SecServ” wrapper family). A legal moratorium then identified the rights-holders — copyright and patents — for SafeDisc (summarized in <code>legal.md</code>) and concluded the investigation could continue.</p>
-   <p>The protection was fully characterized (see the Byte Range Map): a SafeDisc <strong>overlay appended to the PE on disc</strong>, a <strong>record scanner</strong> that carves protected records, <strong>unpacking</strong> of those records into temporary files (the SecServ <code>~df394b.tmp</code> and AuthServ <code>~de37fc.tmp</code> services and the <code>PfdRun.pfd</code> sidecar), and <strong>decryption + decompression</strong> of the encrypted sections into the true runtime static image. The packing algorithms were reverse-engineered into a <strong>freestanding, independent unpacker</strong>: <strong>AES</strong> for the encrypted <code>.text</code> and SecServ <code>.txt</code>/<code>.txt2</code> sections, <strong>PKWARE DCL</strong> (implode/explode) and <strong>zlib</strong> inflate/deflate for compressed payloads, and <strong>TEA</strong> for the <code>PfdRun.pfd</code> heap-trampoline package.</p>
-   <p>Five indirection mechanisms were characterized — direct <code>.stxt774</code> function-pointer obfuscation; <code>.rdata</code> import-slot indirection (<code>call [slot]</code>); heap trampolines built from the <code>PfdRun.pfd</code> sidecar record tables; a cookie-parameterized SecServ dispatcher; and the <code>.stxt</code> table-routed call path. The <strong>11-pronged anti-debug block</strong> was neutralized to permit dynamic analysis, and every indirected call was traced from callsite to final API. Each caller was then rewritten to a <strong>freestanding resolver installed in a code cave</strong> at the back of the <code>.stxt</code> sections (leaving PE record sizes unchanged); an independent import loader and IAT thunk table were reconstructed into the same cave to replace the wrapper's import loading; the wrapper overlay was <strong>resected entirely</strong> and the PE header pointers rewritten to begin execution directly at the CRT/WinMain entrypoint; finally each callsite was stepped through to reconcile the stack-frame and return contract for every resolver until functionality was restored — yielding the freestanding <strong>unwrapped → depeppered → stripped</strong> image used for all further analysis.</p>
-   <h4>Prior Art</h4>
-   <p>Before treating the red-team archive as original recovery work, we checked the relevant public reference projects. <a href="https://github.com/ZtModArchive/Zoo-Tycoon-2-Libraries">Zoo-Tycoon-2-Libraries</a> is useful as an archive of decompiled compiled-Lua scenario, UI, photo, and gameplay helper scripts. It preserves script-facing names such as <code>queryObject</code>, <code>BFGManager</code>, <code>BFScenarioMgr</code>, <code>UI_*</code>, and <code>BFAI_*</code> messages, and it helps identify authored scenario logic. It does not recover the native managers behind those calls, the executable wrapper, type registries, vtables, object ownership, runtime message implementations, or the SecServ materialization path; many recovered scripts also retain decompiler gaps.</p>
-   <p><a href="https://github.com/nckstwrt/SafeDiscLoader2">SafeDiscLoader2</a> is likewise a helpful SafeDisc-family runtime loader and comparison reference. It provided orientation for version detection, the SecServ/AuthServ naming pattern, temporary service DLLs, and some SafeDisc table-repair idioms. It is not a Zoo Tycoon 2 engine reconstruction and did not supply the ZT2-specific SafeDisc 4.90.10 contract: <code>PfdRun.pfd</code> sidecar semantics, slot/trampoline/<code>.stxt</code> call paths, callsite-by-callsite resolver contracts, stripped import reconstruction, or the BlueFang/Gamebryo class and manager perimeter. These projects were useful landmarks, but they left the deep wrapper and engine architecture to be recovered locally.</p>
-   <p>Subsequent campaigns used <strong>r2ghidra</strong> to recover the original BlueFang and Zoo Tycoon 2 classes — from the polymorphic <strong>vtables</strong>, the <code>register_type</code> <strong>global type-getter cache</strong>, and constructor/reference topology (<strong>MSVC RTTI could not be used</strong>: the linker stripped the Complete Object Locators and class-hierarchy descriptors, leaving only 99 type-descriptor strings) — together with inheritance graphs, the type system, the <strong>BFXML</strong> document model, and per-domain reference indexes. The <strong>binary perimeter</strong> tracked understanding across the full function and global/static surfaces, and the search space was reduced by de-duplicating polymorphic functions and bounding middleware that did not require decompilation: the <strong>NetImmerse/Gamebryo</strong> engine identified by <code>NiSystem NetImmerse Version 10.0.1.0</code>, <code>NiAnimation NetImmerse Version 10.0.1.0</code>, <code>NiDX9 NetImmerse Version 10.0.1.0</code>, <code>$NiCollision NetImmerse Version 10.0.1.0</code>, and <code>NiMain NetImmerse Version 10.0.1.0</code>, plus the <strong>Lua</strong> runtime. All original binary artifacts were then removed, presenting a clean red-team ledger to the green team.</p>
-  </div>
-  <div class="phase green">
-   <h3>Phase 2 <span class="tag">Green team — specification</span></h3>
-   <p>From that red-team archive — and nothing else — the green team authored the detailed <strong>functional specification</strong> (<code>specification.md</code>). Working only from the recovered structure (classes, fields, vtable shapes, the type registry, the document model, and the per-domain reference indexes), it describes what each subsystem <em>does</em> — the entity/component model, economy, AI, terrain, UI, scripting, and save formats — as concept models rather than transcribed code. The deliverable is a specification carrying <strong>zero content derived from the original implementation</strong>, establishing the clean-room boundary that separates analysis from re-implementation.</p>
-  </div>
-  <div class="phase blue">
-   <h3>Phase 3 <span class="tag">Blue team — re-implementation</span></h3>
-   <p>The blue team rebuilds the game from the specification in a different language, target, and paradigm: <strong>Rust</strong> instead of C++, a <strong>64-bit</strong> target instead of 32-bit, a data-oriented <strong>ECS</strong> architecture instead of the original's polymorphic object graph, and the <strong>Bevy</strong> engine as the foundation instead of Gamebryo. The <a href="reimplementation-plan.html">Reimplementation Plan</a> covers how the 2008 single-threaded object model is adapted to a parallel, cache-friendly ECS while preserving the game's observable behaviour.</p>
+   <p>Tracks Rust/Bevy implementation progress for the specified ownership and behavior: what is recorded, loaded, running, adapted, or still blocked.</p>
   </div>
  </div>
 
  <div class="legalrow">
-  <span>Clean-room project — analysis and re-implementation are kept strictly separated.</span>
+  <span>Clean-room project reference.</span>
   <button type="button" id="legal-open">§ Legal &amp; clean-room roadmap</button>
  </div>
 </main>
@@ -109,7 +93,7 @@ text(["reimplementation-plan.html","../docs/REIMPLEMENTATION-PLAN.md"]).then(pla
  document.getElementById("progress-bars").innerHTML=[
    `<div class="progress-card">
     <h3><a href="perimeter.html">Binary Recovery</a></h3>
-    <p class="progress-note">Sufficient behaviour was recovered to define the specification, so the project moved into the next phase. Binary coverage progress remains available on the <a href="perimeter.html">Binary Perimeter</a>, and recovery work will continue for posterity.</p>
+    <p class="progress-note">Evidence coverage remains available on the <a href="perimeter.html">Binary Perimeter</a>. Specification and implementation progress are tracked by the later gates.</p>
    </div>`,
    `<div class="progress-card">
     <h3><a href="reimplementation-plan.html">Reconstruction Work Board</a></h3>
