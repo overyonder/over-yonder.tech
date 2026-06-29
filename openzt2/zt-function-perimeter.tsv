@@ -5686,7 +5686,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051430c	124		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00514388	151		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0051441f	160		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x005144bf	14		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x005144bf	14	resolve_transport_endpoint_metadata_by_object_key			confirmed			
 0x005144cd	133		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00514552	125		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005145cf	0	read_ZTTransportationMgr_message_timeout_xml			confirmed		0x008d8310#20	
@@ -5781,9 +5781,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00517b05	83		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00517b58	384	attach_ZTTransportCircuitBase_transport_link_object			confirmed			
 0x00517cd8	210	detach_ZTTransportCircuitBase_transport_link_range			confirmed			
-0x00517daa	79		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00517daa	79	advance_ZTTransportCircuitBase_link_iterator_and_get_object			confirmed			
 0x00517df9	0	sample_ZTTransportCircuit_segment_distance			confirmed		0x008d85d8#35	
-0x00517f41	133		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00517f41	133	compare_transport_segment_positions_wrapped			confirmed			
 0x00517fc6	20	is_user_camera_mode_active			confirmed			
 0x00517fda	70		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00518020	193		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
@@ -5794,9 +5794,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00518393	180	apply_transport_traversability_config			confirmed		0x008d8454#1	
 0x00518447	118		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005184bd	100		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00518521	365		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x0051868e	184		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00518746	187		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
+0x00518521	365		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x0051868e	184		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x00518746	187		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00518801	188		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005188bd	215		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00518994	126		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
@@ -5824,7 +5824,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005199a0	22	construct_ZTViewableSubMgrStation_handle_entry			confirmed			
 0x005199b6	29		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005199d3	52		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00519a07	67		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00519a07	67	init_transport_safe_handle_tree_storage			confirmed			
 0x00519a4a	131		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00519acd	36		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00519af1	104		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
@@ -5974,8 +5974,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051f9b8	0	assign_ZTTransportTrack_ref_88			confirmed		0x008d8978#31	
 0x0051f9ce	0	assign_ZTTransportTrack_ref_90			confirmed		0x008d8978#32	
 0x0051f9e4	0	scalar_delete_ZTTransportGroundTrackTextureData			confirmed		0x008d8a28#0	
-0x0051fa3e	23		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
-0x0051fa55	25		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x0051fa3e	23	is_ZTTransportGroundTrackTextureData_elevated_piece_type			confirmed			
+0x0051fa55	25		entity files, user camera data, grid lookup, and UI dependency s		unidentified			io/assets
 0x0051fa6e	47	get_type_ZTTransportGroundTrack			confirmed			
 0x0051fa9d	0		entity files, user camera data, grid lookup, and UI dependency s		unidentified		0x008d8978#1	
 0x0051faa2	32		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
@@ -5998,7 +5998,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00520856	204		entity files, user camera data, grid lookup, and UI dependency s		unidentified			gameplay systems
 0x00520922	745	resolve_path_entry_exit_points			confirmed			
 0x00520c0b	244		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00520cff	704		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00520cff	704	refresh_ZTTransportGroundTrack_endpoint_heights_and_track_decal			confirmed			
 0x00520fbf	46		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x005210ca	0	emit_ground_track_placement_mode_payload			confirmed		0x008d8978#25	
 0x00521185	0	test_ZTTransportGroundTrack_resolved_component_present			confirmed		0x008d8978#33	
@@ -6006,20 +6006,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005213e1	0	refresh_ZTTransportGroundTrack_endpoint_flags			confirmed		0x008d8978#30	
 0x0052146a	31		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00521489	68		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x005214cd	55		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x005214cd	55	set_ZTTransportGroundTrack_endpoint_mode			confirmed			
 0x00521504	96	collect_entity_dependency_ids			confirmed			
 0x00521564	646		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005217ea	0	enable_ZTTransportGroundTrack_linked_objects			confirmed		0x008d8978#34	
 0x0052187e	0	disable_ZTTransportGroundTrack_linked_objects			confirmed		0x008d8978#35	
-0x00521917	30		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00521917	30	refresh_ZTTransportGroundTrack_heading_from_shared_data			confirmed			
 0x00521935	278		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00521a4b	334		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00521b99	80		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
-0x00521be9	312		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
+0x00521b99	80	refresh_ZTTransportGroundTrack_entry_exit_payloads			confirmed			
+0x00521be9	312		entity files, user camera data, grid lookup, and UI dependency s		unidentified			io/assets
 0x00521d21	1108		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00522175	248		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x0052226d	267		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x00522378	87		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x00522378	87		entity files, user camera data, grid lookup, and UI dependency s		unidentified			io/assets
 0x005223cf	222		entity files, user camera data, grid lookup, and UI dependency s		unidentified			io/assets
 0x005224ad	210		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052257f	621		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
@@ -6035,7 +6035,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00522c7a	386	fill_groundtrack_neighbor_candidates			confirmed			
 0x00522dfc	153		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00522e95	613		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x005230fa	701		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x005230fa	701	test_ZTTransportGroundTrack_elevated_path_neighbors			confirmed			
 0x005233b7	236		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x005234a3	336		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x005235f3	155		entity files, user camera data, grid lookup, and UI dependency s		unidentified			gameplay systems
@@ -6046,7 +6046,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005238d3	960		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00523c93	310		entity files, user camera data, grid lookup, and UI dependency s		unidentified			gameplay systems
 0x00523dc9	224		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
-0x00523ea9	233		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00523ea9	233	update_groundtrack_construction_marker_path_cells			confirmed			
 0x00523f92	0	sync_ZTTransportGroundTrack_construction_markers			confirmed		0x008d8978#40	
 0x005240a4	451		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00524267	0	get_ZTTransportGroundTrack_current_object_position			confirmed		0x008d8978#37	
@@ -6120,11 +6120,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00526dcb	0	refresh_ZTTransportSkyTrack_after_layout_change			confirmed		0x008d8e34#3	
 0x00526e62	0	ensure_ZTTransportSkyTrack_aux_payload_and_clear_output			confirmed		0x008d8e50#13	
 0x00526ff1	0	emit_sky_track_placement_mode_payload			confirmed		0x008d8e34#4	
-0x00527210	194		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
+0x00527210	194		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005272d2	633		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052754b	0	refresh_ZTTransportSkyTrack_render_state			confirmed		0x008d8e34#5	
-0x0052755b	96		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
-0x005275bb	314		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0052755b	96	get_ZTTransportSkyTrack_max_tower_height			confirmed			
+0x005275bb	314	compute_ZTTransportSkyTrack_tower_clearance_height			confirmed			
 0x005276f5	29		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00527712	0	get_ZTTransportSkyTrack_effective_type_chain			confirmed		0x008d8de0#13	
 0x0052772f	0	test_ZTTransportSkyTrack_station_ref_present			confirmed		0x008d8e50#5	
@@ -6152,7 +6152,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005297a4	27		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x005297bf	27		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005297da	27		entity files, user camera data, grid lookup, and UI dependency s		unidentified			io/assets
-0x005297f5	100		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x005297f5	100	resolve_ZTTransportSkyTrack_return_trip_neighbor			confirmed			
 0x00529859	138		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005298e3	363		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00529a4e	123		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
@@ -6216,16 +6216,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0052de57	31		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052de76	78	create_ZTTransportStationBase_docked_payload			confirmed		0x008d9058#21	
 0x0052dec4	0	clear_ZTTransportStationBase_docked_payload			confirmed		0x008d9058#22	
-0x0052dede	48		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0052dede	48	clear_station_docked_payload_and_deactivate_track_ref			confirmed			
 0x0052df0e	383		entity files, user camera data, grid lookup, and UI dependency s		unidentified			gameplay systems
 0x0052e08d	355		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x0052e1f0	122	has_nonempty_entity_container_child			confirmed			
 0x0052e26a	237		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052e357	356		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052e4bb	1283		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x0052e9be	179		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0052e9be	179	lookup_ZTTransportStationBase_schedule_range			confirmed			
 0x0052ea71	24	cleanup_and_attach_entity_container_refs			confirmed			
-0x0052ea89	123		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
+0x0052ea89	123		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x0052eb04	495		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052ecf3	281		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0052ee0c	189		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
@@ -6323,12 +6323,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005316a4	0	refresh_ZTTransportTrack_state_and_clear_output			confirmed		0x008d8978#14	
 0x005316b6	0	dispatch_ZTTransportTrack_construction_marker_refresh			confirmed		0x008d8978#36	
 0x005316be	65		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
-0x005316ff	59		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x005316ff	59	test_ZTTransportTrack_station_position_changed			confirmed			
 0x0053173a	594		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0053198c	0	refresh_ZTTransportTrack_rope_path_visuals			confirmed		0x008d8978#38	
 0x00531e8a	164		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00531f2e	266	release_ZTTransportTrack_rope_path_visuals			confirmed		0x008d8978#39	
-0x00532038	87		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00532038	87	refresh_ZTTransportTrack_segment_vectors			confirmed			
 0x0053208f	48	is_blocking_nonvehicle_transport_object			confirmed			
 0x005320bf	130		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x00532141	153		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
@@ -6444,13 +6444,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00536e73	0	advance_ZTVehicle_stop_timers			confirmed		0x008d9738#14	
 0x00536e9a	80		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00536eea	135		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
-0x00536f71	232		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x00536f71	232	refresh_ZTVehicleBase_stop_list_and_find_current_target			confirmed			
 0x00537059	271		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x00537168	71		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x005371af	114	activate_first_entity_container_slot_ref			confirmed			
 0x00537221	46		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
-0x0053724f	155		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
-0x005372ea	109		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0053724f	155	compare_ZTVehicleBase_stop_order_on_circuit			confirmed			
+0x005372ea	109	read_ZTVehicleBase_passenger_load_timers			confirmed			
 0x00537357	87		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x005373ae	276	test_ZTVehicleData_track_constraint			confirmed			
 0x005374c2	320	select_ZTVehicleData_track_constraint_band			confirmed			
@@ -6644,7 +6644,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053c176	29	test_BFTerrainShadowComponent_bounds_order			confirmed			
 0x0053c193	0	refresh_BFTerrainShadowComponent_cells_then_update_geometry			confirmed		0x008da1a0#46	
 0x0053c1a4	301	build_BFTerrainShadowComponent_vertex_grid			confirmed			
-0x0053c2d1	1062		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0053c2d1	1062	build_BFTerrainShadowComponent_fitting_surface_vertices			confirmed			
 0x0053c6f7	318	build_BFTerrainShadowComponent_index_grid			confirmed			
 0x0053c835	516		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
 0x0053ca39	0	compute_BFTerrainShadowComponent_mesh_counts			confirmed		0x008da1a0#54	
@@ -6655,7 +6655,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053ce26	783	refresh_BFTerrainShadowComponent_tracked_cells_and_surfaces			confirmed			
 0x0053d135	0	mark_BFTerrainShadowComponent_secondary_record_dirty			confirmed		0x008da280#0	
 0x0053d153	207	clear_BFTerrainShadowComponent_render_records			confirmed			
-0x0053d222	84		entity files, user camera data, grid lookup, and UI dependency s		unidentified			world/pathing
+0x0053d222	84	resolve_BFTerrainShadowComponent_elevated_path_candidate			confirmed			
 0x0053d276	52	accept_BFTerrainShadowComponent_shadow_surface_kind			confirmed			
 0x0053d2aa	30		entity files, user camera data, grid lookup, and UI dependency s		unidentified			ui
 0x0053d2c8	38		entity files, user camera data, grid lookup, and UI dependency s		unidentified			
@@ -17554,7 +17554,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006de536	79	release_traversability_slot_if_unmatched			confirmed	gamebryo		
 0x006de585	125		traversability slot/index table helpers		unidentified	gamebryo		
 0x006de602	43		traversability slot/index table helpers		unidentified	gamebryo		
-0x006de62d	33		traversability slot/index table helpers		unidentified	gamebryo		world/pathing
+0x006de62d	33	test_traversability_slot_index_record_present			confirmed	gamebryo		
 0x006de64e	300		traversability candidate and area-list support		unidentified	gamebryo		ui
 0x006de77a	33		traversability candidate and area-list support		unidentified	gamebryo		
 0x006de79b	305		traversability candidate and area-list support		unidentified	gamebryo		gameplay systems
@@ -19840,8 +19840,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075b178	18		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075b18a	0		scene/model transform and XML property bridge		unidentified		0x008fe610#38	
 0x0075b19d	144	construct_scene_model_transform_record			confirmed	gamebryo		
-0x0075b22d	91		scene/model transform and XML property bridge		unidentified	gamebryo		ui
-0x0075b288	91		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075b22d	91		scene/model transform and XML property bridge		unidentified	gamebryo		io/assets
+0x0075b288	91		scene/model transform and XML property bridge		unidentified	gamebryo		io/assets
 0x0075b2e3	222		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075b3c1	0		scene/model transform and XML property bridge		unidentified		0x008fe6b8#0	
 0x0075b3dc	86		scene/model transform and XML property bridge		unidentified	gamebryo		ui
@@ -26016,16 +26016,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00859703	125	construct_ZTBehViewAnimals_members			confirmed			
 0x00859780	0	scalar_delete_ZTBehViewAnimals			confirmed		0x009100d8#0	
 0x008597aa	143	destroy_ZTBehViewAnimals_members			confirmed			
-0x00859839	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x009100d8#23	game-entities
-0x008598a2	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x009100d8#24	game-entities
+0x00859839	0	bind_ZTBehViewAnimals_context			confirmed		0x009100d8#23	
+0x008598a2	0	resolve_ZTBehViewAnimals_target_and_cache_view_component			confirmed		0x009100d8#24	
 0x008598d6	634	select_ed_donate_viewpoint_swap_target			confirmed			
 0x00859b50	0	update_ed_donate_task			confirmed		0x00910140#12	
 0x00859fdc	156	select_ed_donate_value_by_range			confirmed			
 0x0085a350	461	select_ZTBehViewAnimals_species_donation_target			confirmed			
-0x0085a51d	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x009100d8#19	game-entities
-0x0085a7d8	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x009100d8#20	game-entities
-0x0085ac28	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x009100d8#21	game-entities
-0x0085ac54	0		AI staff, guest viewing, donations, and edDonate behavior		unidentified		0x00910140#10	game-entities
+0x0085a51d	0	write_ZTBehViewAnimals_xml			confirmed		0x009100d8#19	
+0x0085a7d8	0	read_ZTBehViewAnimals_xml			confirmed		0x009100d8#20	
+0x0085ac28	0	clone_ZTBehViewAnimals_from_behavior			confirmed		0x009100d8#21	
+0x0085ac54	0	copy_ZTBehViewAnimals_state			confirmed		0x00910140#10	
 0x0085ad43	64	init_ZTBehViewAnimals_value_registry			confirmed			
 0x0085ad83	159	register_ZTBehViewAnimals_value_registry_entry			confirmed			
 0x0085ae69	160	insert_ZTBehViewAnimals_value_registry_node			confirmed			

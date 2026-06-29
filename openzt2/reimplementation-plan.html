@@ -165,33 +165,8 @@ hotkeys, command queues, transition side effects, and private dispatch rules,
 then other systems ask that manager what app they are in. That pattern recreates
 a second runtime beside ECS. It should be collapsed into registries, ECS facts,
 messages, and systems.</p>
-<p>The design history matters because the code has already moved through these
-shapes:</p>
-<ul>
-<li><code>f6966524</code> (<code>Start game reconstruction workspace</code>, 2026-06-14) created the
-pre-Bevy domain-first scaffold. It had source/domain/host boundaries,
-host-independent UI contract records, and only a tiny placeholder
-<code>GameMode::{MainMenu, LoadingWorld, InWorld}</code>. It was an architectural
-starting point before recovered data-driven runtime behavior existed.</li>
-<li><code>a3c0142f</code> (<code>Set up Bevy reconstruction shell</code>, 2026-06-14) introduced the
-Bevy host shell.</li>
-<li><code>b6317954</code> (<code>Replace fake app phase with domain UI dispatch</code>, 2026-06-14)
-moved behavior into <code>ZTAppRuntime</code> and <code>UiRuntimeContext</code>, where UI messages
-such as <code>ZT_SPLASH_CLOSED</code> changed an active layout. That was source-aware,
-and it also put live app/UI state in a domain-side shadow runtime.</li>
-<li><code>f0d35051</code> (<code>Sync shell mode transitions to native owners</code>, 2026-06-16)
-recovered the more useful semantic shape: source-token mode transitions
-resolved through a shell-mode catalogue, computed mode paths, on/off events,
-layouts, cursors, and hotkeys. The semantic direction was right; the live
-owner still needs to be ECS rather than a domain manager.</li>
-<li>By <code>6c95b926</code> (<code>Split Cargo and flake roots by project</code>, 2026-06-19), the
-Bevy runtime had closed menu/in-game mode variants into <code>States</code>/<code>SubStates</code>
-and mapped source messages into those Rust enums. That improved native Bevy
-ownership for finite lifecycle phases, and it overreached when it turned
-source-authored modes into fixed Rust state variants.</li>
-</ul>
-<p>The intended final arrangement is therefore: use closed Bevy <code>States</code> only when
-the recovered original contract is genuinely finite and code-owned; load
+<p>The target arrangement is: use closed Bevy <code>States</code> only when the specified
+original contract is genuinely finite and code-owned; load
 source-authored modes and UI layouts as data; keep the current source-selected
 mode/layout as ECS-visible facts; express behavior as systems reacting to
 messages, events, components, resources, and assets.</p>
@@ -201,8 +176,8 @@ phase-oriented ordering sets such as <code>InputCollection</code>,
 <code>RenderPreparation</code>. Runtime systems carry explicit run conditions:
 startup/loading work runs before <code>RuntimeResourcesReady</code>, normal runtime work
 uses <code>runtime_resources_ready</code>, and loaded-world systems add concrete ECS gates
-such as <code>in_loaded_world</code>. The former closed <code>OpenZt2AppSet</code>
-menu/game/overlay buckets have been removed.</p>
+such as <code>in_loaded_world</code>. The scheduler has no closed <code>OpenZt2AppSet</code>
+menu/game/overlay buckets.</p>
 <p>The current refactor boundary is: no private <code>game_runtime</code> module, no
 <code>RuntimeSupport</code> resource, seed type, or compatibility namespace, no root
 feature compatibility prelude, and no compatibility owner that other systems ask
@@ -227,189 +202,19 @@ runtime modules.</p>
 source-format families, and host boundaries may all own rows when they carry real
 implementation work. Aggregate progress buckets are invalid owners.</p>
 <h2>Active Cleanup Goal</h2>
-<p>The active cleanup goal is the native Bevy runtime cleanup checkpoint. Its
-durable work-board owner is <code>Bevy runtime / Refactor checkpoint / Feature boundary cleanup</code>; adjacent rows inherit work only when the change crosses their
-real owner boundary.</p>
-<p>Completion means closing the remaining refactor-cleanup class in code, or moving
-the residue to the functional specification as explicit missing ownership or
-behavior. The
-checkpoint is complete when:</p>
-<ul>
-<li>the feature tree has no compatibility aggregate, broad prelude, private
-runtime owner, or root re-export that hides the feature that owns a fact;</li>
-<li>source UI events keep one ordered recording path, while typed app, shell,
-economy, world, population, presentation, save, script, mode, input, and
-panel effects are decoded and handled by their owning feature systems;</li>
-<li>the remaining large UI command surfaces and startup builder surfaces are split
-only at real owners: command families, source-specific startup builders,
-renderer asset loading, UI projection, and world projection;</li>
-<li>remaining unused-code markers have been audited: stale scaffolding is
-deleted, and missing original surfaces are documented in the functional
-specification under the owner that will specify them;</li>
-<li>active UI root order, hover ownership, click dispatch, screenshot capture,
-resize projection, and startup-root despawn are verified through the Bevy
-runtime path rather than by a fabricated tool path;</li>
-<li>acceptance evidence for this checkpoint covers more than compile, format, and
-static checks: missing durable smoke paths or runtime acceptance harnesses are
-implemented or recorded on the owner row that needs them;</li>
-<li>documented commands and aliases used as acceptance evidence resolve in the
-current workspace before they count as a checkpoint gate;</li>
-<li>fixed-step/update ordering is either specified into runtime schedules and run
-conditions, or left as a named specification gap on the row that owns the
-manager/update family.</li>
-</ul>
-<p>The checkpoint inventory is:</p>
-<ul>
-<li>partly completed: real module boundaries are better than before, and
-<code>features/mod.rs</code> now exposes only the feature plugin entry point. The current
-Bevy/domain cleanup grep has no broad wildcard imports, and
-core runtime messages, startup resource hydration/publication, UI
-binding/source helpers, camera presentation, population dispatch, and
-manager-contract exports now name their concrete owner dependencies
-explicitly. The former <code>features/core/runtime_support.rs</code> namespace has been
-split into configuration, session, profile, time, diagnostics, external/web,
-and startup source-hydration owners.
-<code>presentation/ui/mod.rs</code> no longer re-exports every UI submodule as a root
-prelude; it keeps narrow exports only for startup-facing UI resource/despawn
-APIs. Startup submodules no longer import the parent module wholesale, UI
-presentation modules import concrete owner modules directly, and slider
-projection binding plus slider range/orientation/thumb-track math now live in
-the slider owner;</li>
-<li>partly completed: message ownership is much improved, and source-authored
-menu transition tokens now resolve inside the menu dispatch owner; mode
-runtime message decoding now resolves inside the mode dispatch owner; native
-app-message effects now apply through the app dispatch owner; placement
-actions resolve through the world dispatch owner; transport UI selection now
-decodes into the transport command owner through world dispatch; generic
-<code>UI_SCROLL</code>, <code>UI_SET_VALUE</code>, and <code>UI_MOUSE_DRAG</code> slider/value messages now
-resolve through the UI presentation dispatch owner, with the separate
-value-dispatch router hook removed; child-wrapped selected-entity, filter,
-and list population messages now decode in the population dispatch owner; the
-former core message catalogue now keeps only the ordered UI source-event path
-and readiness marker, while feature messages live with their mode/input,
-world, time, terrain, undo, path, zoopedia, audio, camera, photo, AI, animal,
-staff, save, web, and renderer owners. UI input actions now have a separate
-presentation <code>input_actions</code> system for hover-help, UI sounds, and
-gesture-trace input effects instead of running inside source-event replay;
-the former broad integration dispatch bucket is split into app, script,
-scenario, save, UI-binding, and random owners. Source UI message replay still
-passes through one ordered router for fanout, with remaining router cases to
-collapse into owner-local typed handlers as those contracts close;</li>
-<li>partly completed: UI projection files are separated into projection, tree,
-dispatch, commands, rendering, visibility, widgets, lists, text, layout,
-visuals, triggers, and sliders owners. UI source-event fanout and returned
-command application live in the UI dispatch owner; retained-tree construction
-exposes dispatch-value collection without importing the feature dispatch
-layer. Trigger, show/hide, and timed-event sources now record back into the
-ordered <code>UiSourceEventRecorded</code> path before replay. Trigger, layout, slider,
-visual, text, widget, and list <code>UiCommand</code> variants apply through their owning
-UI modules, while visibility commands fire their show/hide triggers after
-mutating visibility. <code>commands.rs</code> remains the orchestration surface for
-visibility, cursor, and trigger plumbing;</li>
-<li>partly completed: startup code moved into startup modules, while locale source
-resolution and hydration now own <code>BFLocaleMgr</code> config, MOTD message document
-lookup, localization path discovery, and table hydration; audio source
-resolution/hydration, gesture source resolution/hydration, show source
-resolution/hydration, staff source resolution/hydration, animal source
-validation/hydration, world source validation/hydration, economy source
-hydration, entity-trigger/disease/path/photo/tank/transport source validation, and
-source-mode dependency discovery also live behind source-specific helpers.
-App bootstrap, user profile, user options, renderer-config validation,
-startup phys-obj, and startup terrain contract hydration now live in the
-startup bootstrap owner. Guest AI manager validation, influence manager
-validation, and AI seed construction now live in the startup AI owner.
-Entity-trigger manager validation now lives in the startup entity-trigger
-owner.
-Feedback-manager hydration into <code>UiBindingContent</code> now lives in the startup
-UI-binding owner.
-Unused source-mode transfer fields plus stale startup/UI imports have been
-removed; each startup submodule now declares its concrete owners instead of
-importing the startup parent wholesale;
-<code>build_loaded_startup_from_assets</code> still acts as a large composition function
-whose remaining hydration and publication work should keep moving into
-source-specific builders;</li>
-<li>partly completed: source-node hover, click, and resize behavior now has
-Bevy-runtime smoke evidence through loader-root despawn, source-authored
-splash with no loader residue, splash close, main-menu Freeform hover/click,
-viewport resize preserving <code>mode_main</code>, manifest-filtered map selection rows,
-and Play Map leaving load mode into
-<code>mode_main/mode_game/mode_overhead/mode_camera</code>. The <code>ui_screenshots</code> binary
-now provides durable headless Bevy Screenshot API coverage for loading,
-splash, main-menu hover/click, viewport resize, map selection, and gameplay
-entry. The current fullscreen remote-resize path preserves shell state; physical
-live-window resize and richer gameplay/material assertions remain
-acceptance-harness work;</li>
-<li>partly completed: crate-level and broad item-level <code>#[allow(dead_code)]</code>
-masking from the review era is absent from reconstruction source, and the loose
-generic source-object descriptor catalogue has been removed from
-<code>domain::foundation::binding</code>. Stale profile-path accessors, the unused audio
-source-ref event helper, the duplicate terrain-config runtime mutator, the
-unused research-manager accessor, unused mode convenience and forwarding
-helpers, stale placement click/drag/preview helpers, the unused
-feedback-record publish wrapper, the unused save-load request wrapper, the
-duplicate staff-action record constructor, the unused world movement facade,
-unused economy typed-value wrappers, speculative tank topology/filter helpers,
-unused gesture projection helpers, and the unused photo-analysis runtime helper
-have been deleted. Model assets no longer keep duplicate source mirrors whose
-current renderer consumers read the retained source document, while material
-assets keep their parsed <code>.bfmat</code> source contract beside the Bevy
-<code>StandardMaterial</code> output. Animal native commands now consume source payloads
-as entity-target fallbacks, staff request queueing applies default priority
-through the owning staff job record, and AI task roots with missing execution
-data now settle through the AI failure result path. The loaded-world fixed tick
-now advances disease runtime timers through the disease feature owner and
-staff bad-entity cleanup timers through the staff feature owner; successful
-profile result messages now close as completed save/runtime effects in the
-save-profile owner; active-world replacement now emits the recovered
-detach-world event before loading and attaching the new world. Photo, AI,
-disease, audio, camera, animal, staff, undo, path, zoopedia, mode/input,
-world, time, terrain, save, web, and renderer request/event messages now live
-with their owning feature modules instead of the core message surface. The
-hollow cure-mode command queue has been removed;
-disease keeps targeted comments for recovered sample/cure behavior classes
-whose producers still need source or native callsite recovery. Generic
-authored text/byte asset wrappers keep local <code>#[allow(dead_code)]</code> markers
-with owner comments because the Bevy asset value is the retained source
-payload. Disease sample/cure command variants use local <code>#[expect(dead_code)]</code>
-markers with owner-specific reasons, so the compiler will flag the marker once
-recovered producers or consumers land.
-Audited warning residue now sits on concrete owners: <code>BFG_MOVE_ENTITY</code>
-payload and handler recovery belongs
-to the world row, <code>ZT_FORCE_DISEASE</code> Lua/native-manager binding belongs to
-disease and scripting rows, and tank manipulation/topology hydration belongs
-to the tank row. Only local source-payload <code>#[allow(dead_code)]</code> annotations
-remain on generic authored asset wrappers, and the Bevy crate check is
-currently warning-free;</li>
-<li>partly completed: fixed-step/runtime scheduling exists mechanically, while
-the original update cadence and manager order remain unrecovered;</li>
-<li>not completed: full BFXML/MAXML/XDR/BFTypedBinder source-object semantics,
-replacement/repopulation behavior, includes/defaults, and schema validation;</li>
-<li>not completed: closed vertical feature contracts for economy, construction,
-AI, animals, guests, staff, scenarios, persistence, and other product owners;</li>
-<li>not completed: complete UI runtime semantics for focus, capture/bubbling,
-modal behavior, exact widget methods, and full message/value bus parity;</li>
-<li>not completed: terrain/material fidelity beyond the current presentation
-slices;</li>
-<li>not completed: placement/transactions/undo, pathfinding, AI loop, save/load,
-disease, scenarios, animation, and audio semantics;</li>
-<li>not completed: test and acceptance suite expansion beyond compile, format,
-and static checks;</li>
-<li>completed for the current canonical plan: stale checkpoint command aliases no
-longer appear in acceptance docs; future acceptance gates must still resolve
-in the current workspace before they count as evidence.</li>
-</ul>
-<p>Broad product domains remain open until their own rows close a representative
-source-to-runtime path. BFXML/MAXML/XDR/BFTypedBinder semantics, replacement and
-repopulation, complete UI focus/capture/bubbling semantics, terrain/material
-fidelity, placement/undo/pathfinding/AI/save/load/disease/scenario behavior, and
-animation/audio semantics stay in the functional specification until ownership
-and behavior are described well enough for implementation, then stay on their
-owning work-board rows until they run.</p>
-<p>This cleanup may delete compatibility surfaces, split modules, and rename
-messages when the owner becomes clearer. It must not add hardcoded menu/layout
-fixes, duplicate source state beside ECS facts, restore closed Rust state
-variants for source-authored modes, create a second status ledger, or close a
-row through documentation-only churn.</p>
+<p>The active cleanup checkpoint is tracked by the
+<code>Bevy runtime / Refactor checkpoint / Feature boundary cleanup</code> work-board row.
+Adjacent rows inherit work only when the change crosses their real owner
+boundary.</p>
+<p>Completion means the implementation has no compatibility aggregate, broad
+prelude, private runtime owner, or root re-export that hides the feature that
+owns a fact. Source UI events keep one ordered recording path, while typed app,
+shell, economy, world, population, presentation, save, script, mode, input, and
+panel effects are decoded and handled by their owning feature systems.</p>
+<p>Residue with unspecified ownership or behavior returns to the functional
+specification under the owner that will specify it. Remaining implementation
+work stays on the owning work-board row until it runs through the Bevy runtime
+path and its acceptance command resolves in the current workspace.</p>
 <h2>Status Values</h2>
 <table>
 <thead>
@@ -485,9 +290,10 @@ row through documentation-only churn.</p>
 <p>The <code>Owner</code>, <code>Subdomain</code>, and <code>Feature</code> hierarchy is the active task axis.
 <code>Owner</code> names the real product domain, runtime boundary, source-format family,
 or host boundary that owns implementation work. Detailed original type surfaces
-remain in the functional specification. Rows blocked by missing ownership or
-behavior point back to specification coverage; the work board tracks the next
-implementation action for behavior the specification has already made visible.</p>
+remain in the functional specification. Rows with unspecified ownership or
+behavior use specification coverage as their upstream dependency; the work board
+tracks the next implementation action for behavior the specification has already
+made visible.</p>
 <table>
 <thead>
 <tr>
@@ -506,15 +312,15 @@ implementation action for behavior the specification has already made visible.</
   <td>App, ECS, schedules, resources, time, tasks</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Bevy is the live runtime store, scheduler, change tracker, frame loop, retained runtime collection owner, and cross-owner request/effect transport. Startup systems run while <code>RuntimeResourcesReady</code> is absent; active runtime systems use explicit run conditions against the readiness marker and other ECS facts. Source-authored mode and layout choices are ECS-visible resources resolved from source registries rather than closed Rust state variants. Runtime configuration, session/profile/time, diagnostics, external/web state, and RNG now publish as separate Bevy resources; emitted <code>BFTimeEvent</code> facts publish as Bevy messages from the loaded-world tick system.</td>
-  <td>Recover remaining startup/bootstrap order and transition evidence; add narrower run conditions for specific source-mode classes and loaded-world facts as recovered contracts require them.</td>
+  <td>Specification gap: remaining startup/bootstrap order and transition behavior; add narrower run conditions for specific source-mode classes and loaded-world facts as specified contracts require them.</td>
 </tr>
 <tr>
   <td>Bevy runtime</td>
   <td>Refactor checkpoint</td>
   <td>Feature boundary cleanup</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>The private <code>game_runtime</code> aggregate and the <code>RuntimeSupport</code>/<code>UiDispatch</code> god objects are removed. <code>FeatureRuntimePlugin</code> composes feature-owned registrations, the feature root exposes only the plugin entry point, crate-local adapters import concrete owner modules, startup hydration params live under startup resources, and startup/UI helpers import concrete owners. The former <code>features/core/runtime_support.rs</code> namespace is split into configuration, session, profile, time, diagnostics, external/web, and startup source-hydration owners. The shared core message surface owns only <code>RuntimeMessageClock</code>/<code>RuntimeMessageOrder</code>, <code>UiSourceEventRecorded</code>, <code>write_ui_source_events</code>, and <code>RuntimeResourcesReady</code>; feature request/event messages live with mode/input, world, time, terrain, undo, path, zoopedia, audio, camera, photo, AI, animal, staff, save, web, and renderer owners. Broad owner imports are removed from startup resource hydration/publication, UI binding/source helpers, camera presentation, population dispatch, and manager-contract exports. The UI root keeps narrow startup-facing exports for UI resource insertion and UI tree despawn. UI roots are ordered through active layout order and Bevy <code>GlobalZIndex</code>; active UI assets rebuild when their loaded asset changes; rich-text resize scaling is scoped to changed owners; source UI hover uses Bevy pointer <code>Over</code>/<code>Out</code> observers; source-event fanout and command application live in the UI dispatch owner; UI input actions run through a separate input-actions system; trigger, show/hide, and timed-event sources record into <code>UiSourceEventRecorded</code> before replay; trigger, visibility/show-hide, layout, slider, visual, text, widget, and list command families apply through their owning UI modules. The former broad integration dispatch bucket is split into concrete app, script, scenario, save, UI-binding, and random owners. Source-authored menu transition tokens resolve in the menu dispatch owner, mode runtime message decoding resolves in the mode dispatch owner, graphics-options mode UI effects resolve in the gfx dispatch owner, native app-message effects apply through the app dispatch owner, placement actions resolve through the world dispatch owner, transport UI selection decodes into the transport command owner through world dispatch, generic slider/value source messages resolve through the UI presentation dispatch owner, and child-wrapped selected-entity/filter/list messages decode in the population dispatch owner. Startup builder work now shares app-init path discovery with the asset request path, resolves root mode/layout sources in the mode startup owner, and keeps remaining hydration centered on <code>build_loaded_startup_from_assets</code>, with locale, gesture, audio, show, staff, animal, world, economy, entity-trigger, disease, path, photo, tank, transport, source-contract, loading-system, UI-template, source-mode dependency, app bootstrap, user profile, user options, renderer-config validation, startup phys-obj, startup terrain, AI guest/influence validation, and feedback-to-UI-binding hydration split into concrete owner helpers. Removed cleanup scaffolding includes source-mode transfer fields, stale startup/UI imports, the duplicate AI aggregate advance path, the tank dirty-flag helper, stale profile-path accessors, the unused audio source-ref event helper, the duplicate terrain-config runtime mutator, the unused research-manager accessor, unused mode convenience and forwarding helpers, stale placement click/drag/preview helpers, the unused feedback-record publish wrapper, the unused save-load request wrapper, the duplicate staff-action record constructor, unused world movement facade, unused economy typed-value wrappers, speculative tank topology/filter helpers, unused gesture projection helpers, the unused photo-analysis runtime helper, the hollow cure-mode command queue, former duplicate core-owned feature message surfaces, and the generic source-object descriptor catalogue in <code>domain::foundation::binding</code>. Model assets no longer keep duplicate source mirrors whose current renderer consumers read the retained source document, while material assets keep their parsed <code>.bfmat</code> source contract beside the Bevy <code>StandardMaterial</code> output. Animal native commands consume source payloads as entity-target fallbacks, staff request queueing applies default priority through the owning staff job record, AI task roots with missing execution data settle through the AI failure result path, the loaded-world fixed tick advances disease runtime timers through the disease feature owner plus staff bad-entity cleanup timers through the staff feature owner, successful profile result messages close as completed save/runtime effects in the save-profile owner, and active-world replacement emits the recovered detach-world event before loading and attaching the new world. The <code>ui_screenshots</code> binary provides durable Bevy Screenshot API acceptance coverage for loader-root despawn, splash close, main-menu hover/click, main-menu viewport resize preserving shell state, map selection, and Play Map entry into game-mode layouts. Fresh remote-control smoke covers loader despawn, source-authored splash without loader residue, real pointer hover/click through splash and Freeform, fullscreen resize-event preservation of <code>mode_main</code>, manifest-filtered map rows, and Play Map leaving load mode into <code>mode_main/mode_game/mode_overhead/mode_camera</code>. Stale checkpoint command aliases have been removed from the canonical plan; acceptance commands must resolve in the current workspace. Only local source-payload <code>#[allow(dead_code)]</code> annotations remain on generic authored asset wrappers, and the Bevy crate check is currently warning-free.</td>
-  <td>Collapse remaining ordered-router cases into owner-local typed handlers, continue breaking startup hydration and publication into source-specific builders, keep recovered-unused warnings at zero by deleting stale scaffolding or documenting unrecovered original surfaces at their owners, and extend the durable acceptance harness with physical live-window resize plus richer gameplay/material assertions.</td>
+  <td>Feature runtime composition, core message ownership, startup hydration helpers, UI dispatch/projection ownership, source-event ordering, feature-owned request/effect messages, and screenshot/smoke acceptance paths are implemented through concrete Bevy runtime owners. The row remains open while ordered-router cases, startup publication, warning cleanup, and durable runtime acceptance still need owner-local completion.</td>
+  <td>Collapse remaining ordered-router cases into owner-local typed handlers, split startup hydration/publication into source-specific builders, keep stale scaffolding deleted or moved to specification coverage when behavior is unspecified, and extend acceptance with physical live-window resize plus richer gameplay/material assertions.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -538,7 +344,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Startup and document discovery</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Startup validates required loose host inputs, mounts archives, loads loose host-file <code>ztapp4.xml</code>, reports Bevy asset-load failures, and hydrates source documents through Bevy <code>AssetServer</code> handles; <code>ztapp4.xml</code> is a pre-archive host bootstrap input while <code>ztappstrings.xml</code> remains archive-local localization data.</td>
-  <td>Collapse startup document-handle tracking into manifest/load-state ownership and recover original manager/load-listener ordering.</td>
+  <td>Collapse startup document-handle tracking into manifest/load-state ownership and wait for specification coverage of original manager/load-listener ordering.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -554,7 +360,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Kira-backed playback and instances</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
   <td>Original sound command surfaces, selected <code>BFSND_*</code> play/stop/volume families, UI sound events, main-menu music commands, and mode audio hooks route through Bevy/Kira audio state where playback bindings exist.</td>
-  <td>Recover pause/resume, fading, listener placement, category ducking, and remaining <code>BFSND_*</code> semantics.</td>
+  <td>Specification gap: pause/resume, fading, listener placement, category ducking, and remaining <code>BFSND_*</code> semantics.</td>
 </tr>
 <tr>
   <td>Scripting adapter</td>
@@ -562,15 +368,15 @@ implementation action for behavior the specification has already made visible.</
   <td><code>mlua</code> Lua 5.1 host with compatibility prelude</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
   <td>Lua 5.1 host support exists with compatibility-prelude and recorded BFS binding surfaces.</td>
-  <td>Recover package/cache behavior and BFS argument/return shapes.</td>
+  <td>Specification gap: package/cache behavior and BFS argument/return shapes.</td>
 </tr>
 <tr>
   <td>Host adapters</td>
   <td>Platform APIs</td>
   <td>Window, input, filesystem, OS, network, diagnostics, decoder backends</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on the <code>ModeSamples</code> resource. Source-resolved dev-console, diagnostic, debug-feature, sprite-debug, and performance command records belong to the diagnostics/runtime-state owner until recovered callsites require narrower feature handlers.</td>
-  <td>Add adapter code at platform boundaries when a recovered source format or message contract needs host support; recover dev-console and diagnostic command effects through Bevy diagnostics/runtime state before delegating host-only mechanics.</td>
+  <td>Bevy, Kira, mlua, decoder crates, and host APIs sit behind original file/message contracts; host input consumes Bevy mode-input sample messages and records captured modifier state on the <code>ModeSamples</code> resource. Source-resolved dev-console, diagnostic, debug-feature, sprite-debug, and performance command records belong to the diagnostics/runtime-state owner until specified call sites require narrower feature handlers.</td>
+  <td>Add adapter code at platform boundaries when a specified source format or message contract needs host support; specification gap: dev-console and diagnostic command effects through Bevy diagnostics/runtime state before delegating host-only mechanics.</td>
 </tr>
 <tr>
   <td>Archive assets</td>
@@ -593,8 +399,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Documents</td>
   <td><code>BFXMLSchemaMgr</code> validation</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Original source document validation is represented as an unrecovered schema contract.</td>
-  <td>Recover schema readers and validation failure behavior.</td>
+  <td>Original source document validation is represented as an unspecified schema contract.</td>
+  <td>Specification gap: schema readers and validation failure behavior.</td>
 </tr>
 <tr>
   <td>Locale</td>
@@ -602,7 +408,7 @@ implementation action for behavior the specification has already made visible.</
   <td><code>BFLocaleMgr</code> tables and formatting</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Locale string tables load and expose original loc-id/value formatting.</td>
-  <td>Recover remaining formatting and fallback rules.</td>
+  <td>Specification gap: remaining formatting and fallback rules.</td>
 </tr>
 <tr>
   <td>Binder</td>
@@ -610,7 +416,7 @@ implementation action for behavior the specification has already made visible.</
   <td><code>BFTypedBinder</code> source objects</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Binder identity, type/version keys, shared/instance XML, components, and event nodes hydrate from source.</td>
-  <td>Recover precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, and lookup semantics.</td>
+  <td>Specification gap: precedence, <code>versionReplace</code>, <code>repopulateMethod</code>, and lookup semantics.</td>
 </tr>
 <tr>
   <td>Entity</td>
@@ -634,7 +440,7 @@ implementation action for behavior the specification has already made visible.</
   <td><code>.bmp</code> splash and host image inputs</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>The original helper splash is a host-level pre-source surface: <code>Splash.EXE</code> imports Win32 image/window APIs and carries a loose <code>splash.bmp</code> path literal, while the shipped loose <code>SplashImage.bmp</code> is projected by the Bevy startup loading surface through the host-file asset source; the later in-game splash remains source-authored UI driven by <code>ZT_SPLASH_CLOSED</code>.</td>
-  <td>Recover the exact filename handoff between <code>Splash.EXE</code>'s <code>splash.bmp</code> literal and the shipped <code>SplashImage.bmp</code>, then decide whether the Bevy launcher should rename/map that host input or preserve the shipped filename as the source boundary.</td>
+  <td>Specification gap: the exact filename handoff between <code>Splash.EXE</code>'s <code>splash.bmp</code> literal and the shipped <code>SplashImage.bmp</code>, then decide whether the Bevy launcher should rename/map that host input or preserve the shipped filename as the source boundary.</td>
 </tr>
 <tr>
   <td>Model assets</td>
@@ -642,7 +448,7 @@ implementation action for behavior the specification has already made visible.</
   <td>NetImmerse models: <code>.nif</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>NIF parses into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata.</td>
-  <td>Recover controllers, skinning, material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
+  <td>Specification gap: controllers, skinning, material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
 </tr>
 <tr>
   <td>Model assets</td>
@@ -650,7 +456,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Blue Fang models: <code>.bfb</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>BFB parses into <code>Zt2Model</code>, Bevy scene output, per-source mesh subassets, and material or BFMat handles.</td>
-  <td>Recover axis/orientation, material completeness, skinning, animation linkage, and remaining source semantics.</td>
+  <td>Specification gap: axis/orientation, material completeness, skinning, animation linkage, and remaining source semantics.</td>
 </tr>
 <tr>
   <td>Material assets</td>
@@ -658,7 +464,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Materials: <code>.bfmat</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Source material data parses and emits Bevy <code>StandardMaterial</code> output with texture dependencies and optional shader references.</td>
-  <td>Recover Direct3D material state, technique/pass mapping, render states, and exact shader specialization.</td>
+  <td>Specification gap: Direct3D material state, technique/pass mapping, render states, and exact shader specialization.</td>
 </tr>
 <tr>
   <td>Shader assets</td>
@@ -673,15 +479,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Source formats</td>
   <td>Terrain source: <code>.dat</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Terrain data parses into <code>BFTerrainDataSource</code>, terrain mesh output, and recovered bounds.</td>
-  <td>Recover terrain materials, splat/biome layers, water interaction, chunking, and runtime terrain systems.</td>
+  <td>Terrain data parses into <code>BFTerrainDataSource</code>, terrain mesh output, and specified bounds.</td>
+  <td>Specification gap: terrain materials, splat/biome layers, water interaction, chunking, and runtime terrain systems.</td>
 </tr>
 <tr>
   <td>Animation assets</td>
   <td>Source formats</td>
   <td>Animation clips: <code>.bf</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Blue Fang animation clips parse and emit Bevy <code>AnimationClip</code> handles with recovered duration.</td>
+  <td>Blue Fang animation clips parse and emit Bevy <code>AnimationClip</code> handles with specified duration.</td>
   <td>Translate curves/channels and bind clips to model skeletons.</td>
 </tr>
 <tr>
@@ -690,7 +496,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Animation graphs: <code>.bfm</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Animation graphs parse and emit Bevy animation graph output with referenced clip handles.</td>
-  <td>Recover original graph semantics, model/skeleton association, and playback integration.</td>
+  <td>Specification gap: original graph semantics, model/skeleton association, and playback integration.</td>
 </tr>
 <tr>
   <td>Animation assets</td>
@@ -698,14 +504,14 @@ implementation action for behavior the specification has already made visible.</
   <td>Biped animation metadata: <code>.bip</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>BIP metadata parses and retains a placeholder Bevy animation output.</td>
-  <td>Recover channels, retargeting, and skeleton binding.</td>
+  <td>Specification gap: channels, retargeting, and skeleton binding.</td>
 </tr>
 <tr>
   <td>Audio assets</td>
   <td>Source formats</td>
   <td>GPK audio streams: <code>.gpk</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Recovered GPK stream metadata parses and retains a custom sound-clip asset.</td>
+  <td>Specified GPK stream metadata parses and retains a custom sound-clip asset.</td>
   <td>Decode to playable Bevy/Kira audio or another native streaming source.</td>
 </tr>
 <tr>
@@ -714,7 +520,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Archive audio: <code>.wav</code>, <code>.mp3</code> plus supported <code>.ogg</code></td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Mounted archives contain <code>.wav</code> and <code>.mp3</code>; Kira also supports <code>.ogg</code>; supported audio files are requested as <code>AudioSource</code> handles through the runtime sound path.</td>
-  <td>Confirm exact source references and playback events as sound systems are recovered.</td>
+  <td>Confirm exact source references and playback events as sound systems are specified.</td>
 </tr>
 <tr>
   <td>Audio</td>
@@ -722,7 +528,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Sound tags and ambient documents</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Sound-tag and ambient source documents load as policy records for playback selection.</td>
-  <td>Recover tag variants, aliases, random policy, distance policy, stages, categories, ducking, and cross-fades.</td>
+  <td>Specification gap: tag variants, aliases, random policy, distance policy, stages, categories, ducking, and cross-fades.</td>
 </tr>
 <tr>
   <td>Source documents</td>
@@ -737,7 +543,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Source formats</td>
   <td>AI task and behavior documents: <code>.tsk</code>, <code>.beh</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Task/behavior source documents parse and hydrate current task-catalog records where recovered.</td>
+  <td>Task/behavior source documents parse and hydrate current task-catalog records where specified.</td>
   <td>Execute task and behavior data through Bevy AI/runtime systems.</td>
 </tr>
 <tr>
@@ -761,15 +567,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Source formats</td>
   <td>Compiled script/scenario payloads: <code>.bin</code> and LOP/VINCE payloads</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>.bin</code> payload bytes are preserved; LOP and VINCE remain recovered command/payload surfaces rather than mounted archive extensions.</td>
-  <td>Decode bytecode/object semantics and route recovered payloads through scenario/script runtime.</td>
+  <td><code>.bin</code> payload bytes are preserved; LOP and VINCE remain specified command/payload surfaces rather than mounted archive extensions.</td>
+  <td>Decode bytecode/object semantics and route specified payloads through scenario/script runtime.</td>
 </tr>
 <tr>
   <td>Source support</td>
   <td>Source formats</td>
   <td>Text and metadata wrappers: <code>.bat</code>, <code>.corelog</code>, <code>.h</code>, <code>.kfinfo</code>, <code>.kfm</code>, <code>.txt</code></td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Authored text or metadata is preserved for files without recovered runtime semantics; Bevy asset wrappers retain the loaded text payload even though no recovered runtime consumer reads these wrapper assets yet.</td>
+  <td>Authored text or metadata is preserved for files without specified runtime semantics; Bevy asset wrappers retain the loaded text payload even though no specified runtime consumer reads these wrapper assets yet.</td>
   <td>Add structured loaders only when a runtime consumer requires structure, then collapse wrappers that prove to be archive-inspection-only.</td>
 </tr>
 <tr>
@@ -785,16 +591,16 @@ implementation action for behavior the specification has already made visible.</
   <td>Source formats</td>
   <td>Raw and marker inputs: extensionless entries and <code>.psd</code></td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>PSD bytes have a raw asset owner, and extensionless archive marker entries are counted in the Z2F manifest while their runtime meaning remains open; the PSD asset wrapper retains bytes without a recovered runtime consumer.</td>
-  <td>Classify marker semantics and decode PSD only when a recovered source reference needs it.</td>
+  <td>PSD bytes have a raw asset owner, and extensionless archive marker entries are counted in the Z2F manifest while their runtime meaning remains open; the PSD asset wrapper retains bytes without a specified runtime consumer.</td>
+  <td>Classify marker semantics and decode PSD only when a specified source reference needs it.</td>
 </tr>
 <tr>
   <td>Save</td>
   <td>Source formats</td>
   <td>Save/package containers: <code>.z2s</code> and <code>.zip</code></td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>The Z2F classifier recognizes save/package containers, and save/load modes own persisted game data recovery.</td>
-  <td>Recover <code>.z2s</code> sections, ordering, versions, member boundaries, and any <code>.zip</code> package behavior from save/profile evidence.</td>
+  <td>The Z2F classifier recognizes save/package containers, and save/load modes own persisted game data coverage.</td>
+  <td>Specification gap: <code>.z2s</code> sections, ordering, versions, member boundaries, and any <code>.zip</code> package behavior from specification coverage.</td>
 </tr>
 <tr>
   <td>App</td>
@@ -802,7 +608,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Boot and plugin wiring</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>The executable runtime builds from Bevy plugins, windows, task pools, archives, loaders, and startup systems.</td>
-  <td>Recover original manager/load-listener order.</td>
+  <td>Specification gap: original manager/load-listener order.</td>
 </tr>
 <tr>
   <td>App</td>
@@ -810,7 +616,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Startup documents and runtime publication</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td><code>StartupRuntimeResources</code> publishes source-derived startup splash surfaces, catalogues, manager contracts, world, terrain, mode, save, audio, renderer, scenario, support resources, and the initial <code>ActiveLayoutPaths</code> into Bevy. Hydrated UI documents load as <code>UiAsset</code> entries. Startup flow is gated by <code>RuntimeResourcesReady</code>; source UI and source-mode transitions mutate ECS facts, layout resources, and runtime messages. The builder entrypoint has a neutral name and source-specific helper seams for locale source resolution/hydration, gesture source resolution/hydration, audio source resolution/hydration, show source resolution/hydration, staff source resolution/hydration, animal source validation/hydration, world source validation/hydration, economy source hydration, entity-trigger/disease/path/photo/tank/transport source validation, source-mode dependency resolution, app bootstrap, user profile, user options, renderer-config validation, startup phys-obj, and startup terrain hydration.</td>
-  <td>Recover original manager/load-listener order, continue splitting source-specific startup hydration and publication, and replace seeded defaults with source-backed initialization where evidence exists.</td>
+  <td>Specification gap: original manager/load-listener order, continue splitting source-specific startup hydration and publication, and replace seeded defaults with source-backed initialization where specification coverage exists.</td>
 </tr>
 <tr>
   <td>UI</td>
@@ -833,8 +639,8 @@ implementation action for behavior the specification has already made visible.</
   <td>UI behavior</td>
   <td>Widget behavior and help surfaces</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Native hit-test, focus, edit validation, hover-help/<code>BFHelpComponent</code> routing, sound binding, text metrics, and show/hide animation remain recovery surfaces.</td>
-  <td>Recover <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, <code>BFHelpComponent</code>, and font/text callsites.</td>
+  <td>Native hit-test, focus, edit validation, hover-help/<code>BFHelpComponent</code> routing, sound binding, text metrics, and show/hide animation remain specification gaps.</td>
+  <td>Specification gap: <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, <code>BFHelpComponent</code>, and font/text call sites.</td>
 </tr>
 <tr>
   <td>Menu</td>
@@ -842,7 +648,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime smoke reaches splash close, main-menu Freeform hover/click, manifest-filtered map selection, and Play Map leaving load mode into <code>mode_main/mode_game/mode_overhead/mode_camera</code> through projected source nodes. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
-  <td>Recover original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
+  <td>Specification gap: original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
 </tr>
 <tr>
   <td>Location</td>
@@ -850,7 +656,7 @@ implementation action for behavior the specification has already made visible.</
   <td>World locations, biomes, coordinates, and globe dots</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td><code>ZTLocationMgr</code>, location-entry documents, biome/location hierarchy, coordinates, icons, and menu globe-dot projection hydrate from source records.</td>
-  <td>Recover location resolution against saved/world entity state and map/campaign launch effects.</td>
+  <td>Specification gap: location resolution against saved/world entity state and map/campaign launch effects.</td>
 </tr>
 <tr>
   <td>Modes</td>
@@ -858,14 +664,14 @@ implementation action for behavior the specification has already made visible.</
   <td>Source mode registry and active ECS mode</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Source mode records, hotkeys, event blocks, path transitions, requests, and lifecycle events hydrate from <code>modes.xml</code> into <code>ModeRegistry</code>. The live owner is ECS-visible state: <code>ActiveMode</code> stores the current resolved source path, <code>ActiveLayoutPaths</code> stores requested UI layouts, <code>ActiveKeymap</code> stores the current hotkey bindings, and <code>CurrentCursor</code> stores the current cursor token. Transition systems resolve requests against the registry, update those facts, and publish layout, cursor, hotkey, audio, and handler-request effects.</td>
-  <td>Recover per-mode input, tick, and message handlers; add finer run conditions for systems that should only run for particular active mode classes.</td>
+  <td>Specification gap: per-mode input, tick, and message handlers; add finer run conditions for systems that should only run for particular active mode classes.</td>
 </tr>
 <tr>
   <td>Modes</td>
   <td>Tool modes</td>
   <td>Selection, delete, overview, guest-view modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Selection records, recovered delete-mode value, overview filtering, and guest-view camera/tool state are represented in source mode records and Bevy ECS resources/components; delete request, confirmation, and entity removal execution remain unrecovered implementation surfaces.</td>
+  <td>Selection records, specified delete-mode value, overview filtering, and guest-view camera/tool state are represented in source mode records and Bevy ECS resources/components; delete request, confirmation, and entity removal execution remain unspecified implementation surfaces.</td>
   <td>Bind modes against live ECS entity/world state.</td>
 </tr>
 <tr>
@@ -873,8 +679,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Tool modes</td>
   <td>First-person, training, fossil, cloning, tranquilize modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in source mode records and Bevy ECS resources/components; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests land on <code>ModeRuntime</code> with source definitions read from <code>ModeRegistry</code>. Mode-specific command helpers remain inactive until the original <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers are recovered.</td>
-  <td>Recover <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers, then move mode fields that are really entity/world facts onto their owning ECS resources/components.</td>
+  <td>First-person action tools, mouse-look transitions, training feedback, gesture traces, fossil sonar, cloning score, and tranquilizer target/range state are represented in source mode records and Bevy ECS resources/components; training reward visuals publish as Bevy visual-effect requests, mouse-look transitions feed the camera command-reader runtime, and first-person climb-ladder duration requests land on <code>ModeRuntime</code> with source definitions read from <code>ModeRegistry</code>. Mode-specific command helpers remain inactive until the original <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers are specified.</td>
+  <td>Specification gap: <code>ZT_ENTER_*</code>, <code>ZT_FP_*</code>, gesture, and behavior handlers, then move mode fields that are really entity/world facts onto their owning ECS resources/components.</td>
 </tr>
 <tr>
   <td>Puzzle</td>
@@ -882,7 +688,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Puzzle manager, steps, mode requests, and actions</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>ZTPuzzleMgr</code>, <code>ZTPuzzle</code>, <code>ZTPuzzleStep</code>, puzzle-mode requests, and solved/action runtime state are represented.</td>
-  <td>Recover puzzle XML layout/step parsing, completion conditions, camera coupling, and reward/exit side effects.</td>
+  <td>Specification gap: puzzle XML layout/step parsing, completion conditions, camera coupling, and reward/exit side effects.</td>
 </tr>
 <tr>
   <td>Modes</td>
@@ -890,15 +696,15 @@ implementation action for behavior the specification has already made visible.</
   <td>File, load, save, download, options, graphics modes</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Original mode records, UI messages, Bevy save/load command/result messages, profile events, file rows, save/load alerts, downloads, options snapshots, graphics/audio settings, returned graphics accept/revert effects, and graphics float-message publication are represented; loaded-game hydration consumes load command messages, late map-data enrichment republishes an updated load command, save/load host adapter systems consume save/delete/load-after-save/profile commands into <code>SaveRuntime</code> host command handling and publish explicit result messages, menu-side download/options/load shell modes resolve to active source mode/layout ECS facts from the source mode path, and <code>ZT_EXIT_DOWNLOADS</code> exits through the shell-mode transition stack.</td>
-  <td>Recover exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
+  <td>Specification gap: exact file/profile host writes, network completions, and <code>.z2s</code> integration.</td>
 </tr>
 <tr>
   <td>Web</td>
   <td>Web/downloads/MOTD</td>
   <td>Online index, downloads, update prompts, and MOTD</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the recovered source URL template and downloads-root target, and the active-runtime host-policy system records fetch-ready, missing-URL, or template-expansion request status on the external/web runtime resource.</td>
-  <td>Recover URL template expansion, then bind ready web requests to host fetch, local file writes, UI list updates, cancellation, and completion events.</td>
+  <td><code>ZTWeb*</code> command records, request/completion event shapes, MOTD source records, download-mode state, and download-mode entry index requests are represented; entering <code>ZTDownloadMode</code> publishes a Bevy web command with the specified source URL template and downloads-root target, and the active-runtime host-policy system records fetch-ready, missing-URL, or template-expansion request status on the external/web runtime resource.</td>
+  <td>Specification gap: URL template expansion, then bind ready web requests to host fetch, local file writes, UI list updates, cancellation, and completion events.</td>
 </tr>
 <tr>
   <td>Entity</td>
@@ -906,14 +712,14 @@ implementation action for behavior the specification has already made visible.</
   <td>Entity/component catalog</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Entity definitions, shared/instance nodes, component refs, authored events, and binder subtrees hydrate from source.</td>
-  <td>Recover component readers by binder family.</td>
+  <td>Specification gap: component readers by binder family.</td>
 </tr>
 <tr>
   <td>Entity</td>
   <td>Entity model</td>
   <td>Loaded-world ECS bootstrap</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the recovered surfaces.</td>
+  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the specified surfaces.</td>
   <td>Complete one <code>BFGEntity</code> instance path through source load, ECS components, runtime mutation, AI, selection, and render projection.</td>
 </tr>
 <tr>
@@ -921,8 +727,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Entity model</td>
   <td>Component factories, validation, and help components</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Recovered component sets instantiate through original type/factory contracts; source-authored help components remain entity/component surfaces until UI help routing proves their live Bevy presentation effects.</td>
-  <td>Recover factory callsites, representative binder families, and <code>BFHelpComponent</code> producer/consumer paths.</td>
+  <td>Specified component sets instantiate through original type/factory contracts; source-authored help components remain entity/component surfaces until UI help routing proves their live Bevy presentation effects.</td>
+  <td>Specification gap: factory call sites, representative binder families, and <code>BFHelpComponent</code> producer/consumer paths.</td>
 </tr>
 <tr>
   <td>Entity</td>
@@ -930,15 +736,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Entity and time-trigger components</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>BFGEntityTriggerMgr</code>, <code>BFGEntityTriggerRule</code>, <code>BFTriggeredEventsComponent</code>, <code>BFTimeTriggersComponent</code>, and <code>ZTTriggeredEventsComponent</code> records are represented, and selected trigger records dispatch through the world event queue.</td>
-  <td>Recover trigger condition evaluation, time scheduling, on/off message ordering, and entity payload semantics.</td>
+  <td>Specification gap: trigger condition evaluation, time scheduling, on/off message ordering, and entity payload semantics.</td>
 </tr>
 <tr>
   <td>Entity</td>
   <td>Interaction affordances</td>
   <td>Usage objects</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Super-staff usage-object selection lives in mode runtime as an interaction target; <code>ZTUsageObject</code> source records stay in domain until discovery/activation evidence assigns a live owner.</td>
-  <td>Recover usage-object discovery, activation/deactivation rules, user prompts, and owning behavior side effects.</td>
+  <td>Super-staff usage-object selection lives in mode runtime as an interaction target; <code>ZTUsageObject</code> source records stay in domain until specified discovery/activation behavior assigns a live owner.</td>
+  <td>Specification gap: usage-object discovery, activation/deactivation rules, user prompts, and owning behavior side effects.</td>
 </tr>
 <tr>
   <td>Animal</td>
@@ -953,16 +759,16 @@ implementation action for behavior the specification has already made visible.</
   <td>Animal model</td>
   <td>Lifecycle and breeding</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Birth, pregnancy, offspring selection, family tree effects, and status flag reads remain recovery surfaces.</td>
-  <td>Recover lifecycle callsites and component-to-status readers.</td>
+  <td>Birth, pregnancy, offspring selection, family tree effects, and status flag reads remain specification gaps.</td>
+  <td>Specification gap: lifecycle call sites and component-to-status readers.</td>
 </tr>
 <tr>
   <td>Animal</td>
   <td>Animal model</td>
   <td>Adoption and release</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Adoption manager, adoption-slot, and favorite-animal source contracts parse at startup; adoption slots, rarity, decline/adopt/release side effects, crate state, conservation rewards, and panel refresh remain recovery surfaces.</td>
-  <td>Recover <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and panel handlers.</td>
+  <td>Adoption manager, adoption-slot, and favorite-animal source contracts parse at startup; adoption slots, rarity, decline/adopt/release side effects, crate state, conservation rewards, and panel refresh remain specification gaps.</td>
+  <td>Specification gap: <code>ZTAdoptionMgr</code>, <code>ZTAdoptionSlotMgr</code>, and panel handlers.</td>
 </tr>
 <tr>
   <td>Animal</td>
@@ -970,7 +776,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Escaped-animal rampage and dino recovery</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>BFGRampageMgr</code>, rampage config, rampage events, suppression effects, and sound policy surfaces are represented.</td>
-  <td>Recover rampage scoring/cadence, DRT timing, suppression lifetime, recovery-team dispatch, crate routing, and sound/message effects.</td>
+  <td>Specification gap: rampage scoring/cadence, DRT timing, suppression lifetime, recovery-team dispatch, crate routing, and sound/message effects.</td>
 </tr>
 <tr>
   <td>Animal</td>
@@ -994,15 +800,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Donation panel rows</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>By-species summaries and donation-box rows build from Bevy-owned donation runtime slices while domain keeps source-shaped panel templates.</td>
-  <td>Recover score-only/range donation production, exact amount formula, economy commit, and feedback timing.</td>
+  <td>Specification gap: score-only/range donation production, exact amount formula, economy commit, and feedback timing.</td>
 </tr>
 <tr>
   <td>Catalog</td>
   <td>Catalog/UI</td>
   <td>Type lists, multi-lists, buy info, filters, and purchase rows</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source-authored type lists, multi-lists, buy info, filters, purchase rows, selected list values, and multi-list sort tokens populate from recovered records and Bevy UI runtime state.</td>
-  <td>Recover catalog paging, filtering, purchase row selection, and placement handoff semantics.</td>
+  <td>Source-authored type lists, multi-lists, buy info, filters, purchase rows, selected list values, and multi-list sort tokens populate from specified records and Bevy UI runtime state.</td>
+  <td>Specification gap: catalog paging, filtering, purchase row selection, and placement handoff semantics.</td>
 </tr>
 <tr>
   <td>Zoopedia</td>
@@ -1010,7 +816,7 @@ implementation action for behavior the specification has already made visible.</
   <td>TOC, entries, pages, and navigation</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>ZTZoopediaComponent</code>, <code>ZTZoopediaTOC</code>, TOC entries, article entries, pages, navigation directions, page-open state, and <code>ZT_ZOOPEDIA_BACK</code>/<code>ZT_ZOOPEDIA_FORWARD</code> navigation records published as Bevy messages are represented.</td>
-  <td>Recover TOC population, page loading, back/forward history, entity/catalog entry links, and UI navigation handlers.</td>
+  <td>Specification gap: TOC population, page loading, back/forward history, entity/catalog entry links, and UI navigation handlers.</td>
 </tr>
 <tr>
   <td>Terrain</td>
@@ -1018,7 +824,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Heightfield, biome, water, autoplacement</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Terrain grid, biome definitions, brushes, maps, mesh patches, selected biome state, changed-triangle state, and authored autoplacement rules are stored in Bevy terrain runtime; terrain event, water-edit, and flattening-deletion records return as dispatch effects, terrain command records refresh the loaded-world terrain bootstrap for ECS chunk projection, final charges dispatch into <code>EconomyRuntime</code>, terrain undo transactions are retained by <code>UndoRuntime</code>, and autoplacement spawn requests feed <code>BFGWorldRuntime</code> entity creation and world-spawn projection.</td>
-  <td>Recover terrain document layout, <code>BFTERRAIN_*</code> messages, and edit algorithms.</td>
+  <td>Specification gap: terrain document layout, <code>BFTERRAIN_*</code> messages, and edit algorithms.</td>
 </tr>
 <tr>
   <td>Terrain</td>
@@ -1026,7 +832,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Bevy terrain projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
-  <td>Feed recovered terrain/world data into mesh/material/entity projection.</td>
+  <td>Feed specified terrain/world data into mesh/material/entity projection.</td>
 </tr>
 <tr>
   <td>Placement</td>
@@ -1042,14 +848,14 @@ implementation action for behavior the specification has already made visible.</
   <td>Paths and elevated supports</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Startup validates the source path-finder config; <code>PathRuntime</code> owns active placement/type/height state while staff candidate path request/result records publish as Bevy messages; obsolete placement-side elevated-height request state and duplicate path command records have been removed.</td>
-  <td>Recover path placement modes, live graph/ECS connectivity, and <code>BFGElevatedSupportTracker</code>.</td>
+  <td>Specification gap: path placement modes, live graph/ECS connectivity, and <code>BFGElevatedSupportTracker</code>.</td>
 </tr>
 <tr>
   <td>Fence</td>
   <td>Fences</td>
   <td>Fences, gates, portals</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Loaded fence, segment, gate, and tank-portal source records stay with loaded-world entity/source data; <code>FenceRuntime</code> owns placement mode state and applies recovered fence mode-command decisions directly to the Bevy resource.</td>
+  <td>Loaded fence, segment, gate, and tank-portal source records stay with loaded-world entity/source data; <code>FenceRuntime</code> owns placement mode state and applies specified fence mode-command decisions directly to the Bevy resource.</td>
   <td>Implement <code>ZTFenceMode</code> command decisions against placement grid/ECS fence entities.</td>
 </tr>
 <tr>
@@ -1057,8 +863,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Tanks</td>
   <td>Aquatic construction</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Startup validates <code>ZTTankMgr</code>; <code>TankRuntime</code> owns live topology, tank volume/cleanliness, command-reader state, and folded command/result records without retaining an unused manager mirror. Source manipulation tokens such as floor, wall, fill, drain, delete, replace walls, and mode changes decode into tank command records; <code>ZT_SETTANKMODE</code> is the recovered path that currently mutates tank mode, while the other command records stay rejected or inert until payload and topology algorithms are recovered.</td>
-  <td>Recover <code>ZTTankCommandReader</code>, wall/floor/water messages, topology and gate hydration, payload routing for manipulation tokens, and gate behavior against ECS tank entities.</td>
+  <td>Startup validates <code>ZTTankMgr</code>; <code>TankRuntime</code> owns live topology, tank volume/cleanliness, command-reader state, and folded command/result records without retaining an unused manager mirror. Source manipulation tokens such as floor, wall, fill, drain, delete, replace walls, and mode changes decode into tank command records; <code>ZT_SETTANKMODE</code> is the specified path that currently mutates tank mode, while the other command records stay rejected or inert until payload and topology algorithms are specified.</td>
+  <td>Specification gap: <code>ZTTankCommandReader</code>, wall/floor/water messages, topology and gate hydration, payload routing for manipulation tokens, and gate behavior against ECS tank entities.</td>
 </tr>
 <tr>
   <td>Transport</td>
@@ -1066,22 +872,22 @@ implementation action for behavior the specification has already made visible.</
   <td>Transport rides</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Source transport circuit, track, station, vehicle, crossing, tour-recorder, and route-query records are represented; <code>TransportRuntime</code> owns minimal circuit runtime state plus station-component and vehicle-type UI selection state.</td>
-  <td>Recover <code>ZTTransportationMgr</code> loading into ECS-owned route entities and <code>ZTBehVehicle*</code>/route behaviors.</td>
+  <td>Specification gap: <code>ZTTransportationMgr</code> loading into ECS-owned route entities and <code>ZTBehVehicle*</code>/route behaviors.</td>
 </tr>
 <tr>
   <td>World</td>
   <td>Traversability/pathfinding</td>
   <td>Collision, traversability, pathfinding, ground-fit</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Startup validates traversability/world/entity-trigger contracts; <code>BFGWorldRuntime</code> keeps active world/session state, default-world-size context, traversability invalidation generation, traversability visibility toggles, loaded entity source data through <code>active_world</code>, placement/autoplacement entity creation, and source <code>BFGEventRecord</code> publication as Bevy world events. Active-world replacement now publishes the recovered detach-world fact before loading and attaching the new world. <code>BFG_MOVE_ENTITY</code> is represented as a native/source token, with payload and handler semantics still unrecovered.</td>
-  <td>Recover <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, ground-fit callsites, and the <code>BFG_MOVE_ENTITY</code> payload/handler path.</td>
+  <td>Startup validates traversability/world/entity-trigger contracts; <code>BFGWorldRuntime</code> keeps active world/session state, default-world-size context, traversability invalidation generation, traversability visibility toggles, loaded entity source data through <code>active_world</code>, placement/autoplacement entity creation, and source <code>BFGEventRecord</code> publication as Bevy world events. Active-world replacement now publishes the specified detach-world fact before loading and attaching the new world. <code>BFG_MOVE_ENTITY</code> is represented as a native/source token, with payload and handler semantics still unspecified.</td>
+  <td>Specification gap: <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, ground-fit call sites, and the <code>BFG_MOVE_ENTITY</code> payload/handler path.</td>
 </tr>
 <tr>
   <td>AI</td>
   <td>AI source</td>
   <td>Task templates and behavior documents</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; <code>BFAIMgr</code> records those source-request statuses while recovered execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; <code>BFAIMgr</code> records those source-request statuses while specified execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
   <td>Hydrate one task document end to end, instantiate <code>BFAITaskRoot</code>, and advance it through <code>BFAIMgr</code>.</td>
 </tr>
 <tr>
@@ -1089,16 +895,16 @@ implementation action for behavior the specification has already made visible.</
   <td>AI runtime</td>
   <td>Scoring, thinker scheduler, tokens</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects remain recovery surfaces.</td>
-  <td>Recover <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
+  <td>Task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects remain specification gaps.</td>
+  <td>Specification gap: <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
 </tr>
 <tr>
   <td>AI</td>
   <td>Relationships</td>
   <td>AI relationship manager and records</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>BFAIRelationshipMgr</code> and relationship event surfaces are represented as native/domain records; live relationship score storage and mutation are not recovered.</td>
-  <td>Recover relationship type taxonomy, score mutation rules, event callers, live Bevy state ownership, and downstream behavior/feedback effects.</td>
+  <td><code>BFAIRelationshipMgr</code> and relationship event surfaces are represented as native/domain records; live relationship score storage and mutation are not specified.</td>
+  <td>Specification gap: relationship type taxonomy, score mutation rules, event callers, live Bevy state ownership, and downstream behavior/feedback effects.</td>
 </tr>
 <tr>
   <td>Behavior</td>
@@ -1113,8 +919,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Movement</td>
   <td>Steering and locomotion</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain recovery surfaces; <code>BFAIMgr</code> records locomotion and steering source-request statuses until the recovered runtimes can execute them.</td>
-  <td>Recover <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
+  <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain specification gaps; <code>BFAIMgr</code> records locomotion and steering source-request statuses until the specified runtimes can execute them.</td>
+  <td>Specification gap: <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
 </tr>
 <tr>
   <td>Influence</td>
@@ -1122,7 +928,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Influence manager, components, terrain rules, and AI watchers</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>BFGInfluenceMgr</code>, terrain rules/effects, <code>BFGInfluenceComponent</code>, and <code>ZTAI*InfluenceWatcher</code> records are represented.</td>
-  <td>Recover influence-field propagation, falloff math, watcher dispatch, AI consumption, and terrain/entity coupling.</td>
+  <td>Specification gap: influence-field propagation, falloff math, watcher dispatch, AI consumption, and terrain/entity coupling.</td>
 </tr>
 <tr>
   <td>Guest</td>
@@ -1130,7 +936,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Needs, satisfaction, movement, lifecycle</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Live guest need/path/spending/group state belongs in Bevy components/resources.</td>
-  <td>Recover <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
+  <td>Specification gap: <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
 </tr>
 <tr>
   <td>Guest</td>
@@ -1138,7 +944,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Viewing and donation candidates</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Per-guest viewed-species memory, donation candidates, pruning, viewpoint filters, education values, feedback gates, and view/donate score factors are Bevy runtime state.</td>
-  <td>Recover donation orchestration and <code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> execution.</td>
+  <td>Specification gap: donation orchestration and <code>ZTBehViewAnimals</code>/<code>ZTBehViewEvent</code> execution.</td>
 </tr>
 <tr>
   <td>Guest</td>
@@ -1146,7 +952,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Education donation execution</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
   <td>Source parse and range lookup exist for <code>edDonate</code> and education donation values.</td>
-  <td>Recover candidate generation, target selection, box routing, economy effects, feedback publication, and spend timing.</td>
+  <td>Specification gap: candidate generation, target selection, box routing, economy effects, feedback publication, and spend timing.</td>
 </tr>
 <tr>
   <td>Staff</td>
@@ -1154,7 +960,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Jobs and assignment UI</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Staff requests, roles, candidates, real job queues, assignments, trainers, clean-tank/water-filter actions, hire/fire, lifecycle state, candidate selections, native command results with explicit accepted/rejected/missing-scope/missing-owner/missing-target/missing-source/candidate-empty statuses, work-order effects, assignment effects, action effects, and trainer-training effects are represented through Bevy staff runtime owners and returned command records.</td>
-  <td>Recover keeper assignment payloads and one staff role lifecycle.</td>
+  <td>Specification gap: keeper assignment payloads and one staff role lifecycle.</td>
 </tr>
 <tr>
   <td>Staff</td>
@@ -1162,7 +968,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Keeper role, keeper-panel tasks, and animal care links</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>StaffRole::Keeper</code>, <code>UseForKeeperPanel</code> task flags, animal <code>s_KeeperEatType</code>/<code>s_KeeperDrinkType</code> fields, keeper recommendations, and staff request/assignment records are represented.</td>
-  <td>Recover keeper task selection, feeding/drinking object resolution, panel recommendations, job completion, and animal status effects.</td>
+  <td>Specification gap: keeper task selection, feeding/drinking object resolution, panel recommendations, job completion, and animal status effects.</td>
 </tr>
 <tr>
   <td>Show</td>
@@ -1170,7 +976,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Shows and trick training</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Show scheduler, states, songs, score bands, tricks, targets, mixer/timer UI, and reward/feedback flow are represented; startup validates show/timer/button contracts while <code>ShowRuntime</code> keeps the live trick-training manager, active trick-training requests, mixer resolver, active trick state, active mixer activation, timer-panel visibility, and audio-hook effects.</td>
-  <td>Recover show scheduler and one trick execution path.</td>
+  <td>Specification gap: show scheduler and one trick execution path.</td>
 </tr>
 <tr>
   <td>Tour</td>
@@ -1178,15 +984,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Tours and viewable objects</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Tour taker data, recorder rating ranges/source attributes, station view sets, viewable object managers, and tour star rating are represented.</td>
-  <td>Recover <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, waypoint ownership, and star-rating queries.</td>
+  <td>Specification gap: <code>ZTAITourTaskThinker</code>, <code>ZTBehTour</code>, waypoint ownership, and star-rating queries.</td>
 </tr>
 <tr>
   <td>Gesture</td>
   <td>Gestures</td>
   <td>Gesture recognition and minigames</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Gesture definitions, traces, recognizer, spline editor, projection frames, event textures, score bands, and spline-editor command records are represented. Spline-editor source tokens now route to the gesture owner; runtime trace scoring remains inactive until the gesture manager and input/component callsites are recovered.</td>
-  <td>Recover <code>ZTGestureMgr</code>, gesture trace component callsites, and full spline-editor command entry points.</td>
+  <td>Gesture definitions, traces, recognizer, spline editor, projection frames, event textures, score bands, and spline-editor command records are represented. Spline-editor source tokens now route to the gesture owner; runtime trace scoring remains inactive until the gesture manager and input/component call sites are specified.</td>
+  <td>Specification gap: <code>ZTGestureMgr</code>, gesture trace component call sites, and full spline-editor command entry points.</td>
 </tr>
 <tr>
   <td>Feedback</td>
@@ -1194,15 +1000,15 @@ implementation action for behavior the specification has already made visible.</
   <td>AI/show feedback routing</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Feedback manager source records stay in domain; Bevy owns active feedback messages, timing intervals, and UI publication.</td>
-  <td>Recover watch-show score calculation, selected behavior-set dispatch, feedback/thought/emoticon routing, sound dispatch, task scheduling, and reservations.</td>
+  <td>Specification gap: watch-show score calculation, selected behavior-set dispatch, feedback/thought/emoticon routing, sound dispatch, task scheduling, and reservations.</td>
 </tr>
 <tr>
   <td>Economy</td>
   <td>Economy</td>
   <td>Cash and admission price</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge cost transactions, and selected immediate transaction commits run from recovered records.</td>
-  <td>Recover live transaction callers, countdown timing, aggregate/parent-cost paths.</td>
+  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge cost transactions, and selected immediate transaction commits run from specified records.</td>
+  <td>Specification gap: live transaction callers, countdown timing, aggregate/parent-cost paths.</td>
 </tr>
 <tr>
   <td>Economy</td>
@@ -1217,8 +1023,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Economy</td>
   <td>Runtime status and price selections</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Loaded zoo fame, half-star, open-state, and admission values are retained by <code>EconomyRuntime</code>; admission selection, non-admission price selection state, fame value handlers, and Bevy economy command/result messages live in Bevy runtime owners. Fame/status forwarding methods remain inactive until the original value-handler and status update callers are recovered.</td>
-  <td>Recover non-admission <code>ZT_SET_PRICE_INDEX</code> semantics, fame update callsites, and status forwarding effects.</td>
+  <td>Loaded zoo fame, half-star, open-state, and admission values are retained by <code>EconomyRuntime</code>; admission selection, non-admission price selection state, fame value handlers, and Bevy economy command/result messages live in Bevy runtime owners. Fame/status forwarding methods remain inactive until the original value-handler and status update callers are specified.</td>
+  <td>Specification gap: non-admission <code>ZT_SET_PRICE_INDEX</code> semantics, fame update call sites, and status forwarding effects.</td>
 </tr>
 <tr>
   <td>Donation</td>
@@ -1226,23 +1032,23 @@ implementation action for behavior the specification has already made visible.</
   <td>Donation boxes and guest spending</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Donation totals, buckets, box state, contribution history, donation-box rows, and selected economy handoff surfaces are recorded.</td>
-  <td>Recover candidate scoring, box routing, and contribution handlers.</td>
+  <td>Specification gap: candidate scoring, box routing, and contribution handlers.</td>
 </tr>
 <tr>
   <td>Donation</td>
   <td>Donations</td>
   <td>Donation scoring formula</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Recovered source factors stay separate from guessed arithmetic until the native formula is known.</td>
-  <td>Recover exact animal donation scoring before runtime execution.</td>
+  <td>Specified source factors stay separate from guessed arithmetic until the native formula is known.</td>
+  <td>Specification gap: exact animal donation scoring before runtime execution.</td>
 </tr>
 <tr>
   <td>Fame</td>
   <td>Fame</td>
   <td>Fame and zoo rating</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain recovery surfaces; current Bevy fame helpers record the surface without a recovered caller cadence.</td>
-  <td>Recover <code>ZTFameData</code> update and value-handler callsites.</td>
+  <td>Half-star value handlers, fame history, release/all-species values, admission coupling, status cadence, and award coupling remain specification gaps; current Bevy fame helpers record the surface without a specified caller cadence.</td>
+  <td>Specification gap: <code>ZTFameData</code> update and value-handler call sites.</td>
 </tr>
 <tr>
   <td>Research</td>
@@ -1250,15 +1056,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Research and unlocks</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Research items/buttons, source-state flags, costs, timers, unlock state, feedback messages, and selected placement/research UI paths run through Bevy <code>ResearchRuntime</code>.</td>
-  <td>Recover dependency consumers, remaining placement gates, and catalog behavior.</td>
+  <td>Specification gap: dependency consumers, remaining placement gates, and catalog behavior.</td>
 </tr>
 <tr>
   <td>Disease</td>
   <td>Disease</td>
   <td>Disease and cure mode</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions are represented. The disease feature owns the Bevy native command message; recovered UI/source dispatch currently sends check/force requests, and sample/cure behavior classes remain documented unrecovered producers. Scenario Lua evidence calls <code>ZTDiseaseMgr:ZT_FORCE_DISEASE</code> with table-shaped disease/target payloads, while the current script adapter has no native manager binding for that call.</td>
-  <td>Recover <code>ZTDiseaseMgr::update</code>, <code>force_disease</code> table payload semantics, and remaining <code>ZTCureDiseaseMode</code> sample/cure selection callsites.</td>
+  <td>Disease records, qualifiers, filters, cases, cure UI state, infection/cure requests, clues, rewards, and staff/vet interactions are represented. The disease feature owns the Bevy native command message; specified UI/source dispatch currently sends check/force requests, and sample/cure behavior classes remain documented unspecified producers. Scenario Lua specification describes <code>ZTDiseaseMgr:ZT_FORCE_DISEASE</code> with table-shaped disease/target payloads, while the current script adapter has no native manager binding for that call.</td>
+  <td>Specification gap: <code>ZTDiseaseMgr::update</code>, <code>force_disease</code> table payload semantics, and remaining <code>ZTCureDiseaseMode</code> sample/cure selection call sites.</td>
 </tr>
 <tr>
   <td>Status</td>
@@ -1273,8 +1079,8 @@ implementation action for behavior the specification has already made visible.</
   <td>Awards</td>
   <td>Award manager and award panel</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>ZTAwardMgr</code>, award context config, and source-authored award-panel rows are represented; live award grants and persistent award state remain recovery work.</td>
-  <td>Recover award criteria, grant timing, persistence, feedback coupling, and panel refresh effects.</td>
+  <td><code>ZTAwardMgr</code>, award context config, and source-authored award-panel rows are represented; live award grants and persistent award state remain specification gaps.</td>
+  <td>Specification gap: award criteria, grant timing, persistence, feedback coupling, and panel refresh effects.</td>
 </tr>
 <tr>
   <td>Status</td>
@@ -1282,7 +1088,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Zoo survey component, questions, answers, and adjustments</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>ZTZooSurveyComponent</code>, survey questions/answers, and native survey adjustment records are retained by <code>BFGWorldRuntime</code>.</td>
-  <td>Recover survey population, adjustment formulas, answer persistence, and UI value/message handlers.</td>
+  <td>Specification gap: survey population, adjustment formulas, answer persistence, and UI value/message handlers.</td>
 </tr>
 <tr>
   <td>Scenario</td>
@@ -1290,7 +1096,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Rule tree, campaign, tutorial, challenges</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Scenario groups, rules, tests, fired-action state, Bevy action/command/result messages, objectives, challenge state, campaign progression, and map selection launch effects are represented.</td>
-  <td>Recover <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
+  <td>Specification gap: <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
 </tr>
 <tr>
   <td>Scripting</td>
@@ -1305,7 +1111,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Scripting</td>
   <td>Lua execution</td>
   <td><span class="plan-status plan-status-adapter">adapter</span></td>
-  <td>The <code>mlua</code> Lua 5.1 substrate compiles loaded source assets with the compatibility prelude; domain records context/cache config and function-call response surfaces. The current adapter handles the recovered UI replacement-text helper, while manager method bindings such as <code>queryObject(&quot;ZTDiseaseMgr&quot;):ZT_FORCE_DISEASE(payload)</code> remain unrecovered.</td>
+  <td>The <code>mlua</code> Lua 5.1 substrate compiles loaded source assets with the compatibility prelude; domain records context/cache config and function-call response surfaces. The current adapter handles the specified UI replacement-text helper, while manager method bindings such as <code>queryObject(&quot;ZTDiseaseMgr&quot;):ZT_FORCE_DISEASE(payload)</code> remain unspecified.</td>
   <td>Implement runtime bindings, manager lookup/method dispatch, table marshalling, package/cache behavior, and error semantics.</td>
 </tr>
 <tr>
@@ -1322,15 +1128,15 @@ implementation action for behavior the specification has already made visible.</
   <td>Profile/options persistence</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
   <td>Graphics, audio, user settings, profile events, safe graphics state, registry/path behavior, and options-file values load through startup seed data into runtime configuration and session/profile resources, then record through <code>SaveRuntime</code> effects.</td>
-  <td>Recover <code>BFUserProfileMgr</code> directory resolution and write order.</td>
+  <td>Specification gap: <code>BFUserProfileMgr</code> directory resolution and write order.</td>
 </tr>
 <tr>
   <td>Save</td>
   <td>Persistence</td>
   <td>Save/load package format</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter consumes save/delete/load-after-save commands into explicit unrecovered-contract result messages when writer, confirmation, path, or save-root semantics are missing.</td>
-  <td>Recover <code>.z2s</code> container structure, host write/delete execution, and per-component <code>write_xml_node</code> scope.</td>
+  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter consumes save/delete/load-after-save commands into explicit unspecified-contract result messages when writer, confirmation, path, or save-root semantics are missing.</td>
+  <td>Specification gap: <code>.z2s</code> container structure, host write/delete execution, and per-component <code>write_xml_node</code> scope.</td>
 </tr>
 <tr>
   <td>Photo</td>
@@ -1338,23 +1144,23 @@ implementation action for behavior the specification has already made visible.</
   <td>Photo albums and camera</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Capture requests, albums, photo info, subject bounds, host-capture status records, UI tokens, move/delete/enlarge/shrink, challenge completion, and last capture result are represented in <code>PhotoRuntime</code> and Bevy capture-request messages; capture host requests with concrete output files spawn Bevy primary-window screenshot captures through the render screenshot API.</td>
-  <td>Recover original photo output path generation, screenshot completion/result events, and HTML export side effects for <code>ZTPhotoManager</code>.</td>
+  <td>Specification gap: original photo output path generation, screenshot completion/result events, and HTML export side effects for <code>ZTPhotoManager</code>.</td>
 </tr>
 <tr>
   <td>Photo</td>
   <td>Photos</td>
   <td>Photo challenges</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, analysis pass records, and results are represented in source/domain records. Runtime analysis waits on the recovered photo-analysis caller context.</td>
-  <td>Recover <code>ZTPA*</code> getter bindings, photo-analysis caller context, and scoring.</td>
+  <td>Challenge sets, score thresholds, parse trees, getters, abstractions, stars, submissions, analysis pass records, and results are represented in source/domain records. Runtime analysis waits on the specified photo-analysis caller context.</td>
+  <td>Specification gap: <code>ZTPA*</code> getter bindings, photo-analysis caller context, and scoring.</td>
 </tr>
 <tr>
   <td>Undo</td>
   <td>Undo system</td>
   <td>Undo managers, transactions, actions, and stations</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records; Bevy <code>UndoRuntime</code> publishes and consumes <code>ZT_UNDOACTION</code> command messages with recovered event/saveable context, classifying them as ready for recovered replay or missing their event root, and retains terrain undo transactions from the <code>BFTERRAIN_*</code> command flow.</td>
-  <td>Recover transaction replay, action payload schemas, reversal ordering, station returns, and integration with placement/show/delete commands.</td>
+  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records; Bevy <code>UndoRuntime</code> publishes and consumes <code>ZT_UNDOACTION</code> command messages with specified event/saveable context, classifying them as ready for specified replay or missing their event root, and retains terrain undo transactions from the <code>BFTERRAIN_*</code> command flow.</td>
+  <td>Specification gap: transaction replay, action payload schemas, reversal ordering, station returns, and integration with placement/show/delete commands.</td>
 </tr>
 <tr>
   <td>Renderer</td>
@@ -1385,16 +1191,16 @@ implementation action for behavior the specification has already made visible.</
   <td>Materials/effects</td>
   <td>Materials, effects, particles</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td><code>.bfmat</code>/<code>.fx</code> records, particle dictionaries, selectors, render states, emitters, and params are represented while exact slot binding remains recovery work.</td>
-  <td>Recover parsers and slot binding.</td>
+  <td><code>.bfmat</code>/<code>.fx</code> records, particle dictionaries, selectors, render states, emitters, and params are represented while exact slot binding remains a specification gap.</td>
+  <td>Specification gap: parsers and slot binding.</td>
 </tr>
 <tr>
   <td>Animation</td>
   <td>Animation</td>
   <td>Animation controllers, graphs, requests</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; <code>BFAIMgr</code> records animation graph evaluation statuses pending the recovered graph runtime.</td>
-  <td>Recover <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key callsites.</td>
+  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; <code>BFAIMgr</code> records animation graph evaluation statuses pending the specified graph runtime.</td>
+  <td>Specification gap: <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key call sites.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1402,7 +1208,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Camera commands and projection</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td>Overhead, first-person, follow, rail, guest-view, frustum, output states, command-reader state/effects, first-person mouse-look transition handling, selected <code>ZT_CAMERA_*</code> command surfaces, and <code>ZT_CAMERA_MOVED</code> BF message publication are recorded in Bevy.</td>
-  <td>Recover curves, timing, coupling, and projection math.</td>
+  <td>Specification gap: curves, timing, coupling, and projection math.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1410,7 +1216,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Vista camera targets and activation requests</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
   <td><code>ZTVista</code> records and activation requests preserve authored camera position, look-at, and preview-image data.</td>
-  <td>Recover vista source loading, activation messages, interpolation, and UI/renderer projection effects.</td>
+  <td>Specification gap: vista source loading, activation messages, interpolation, and UI/renderer projection effects.</td>
 </tr>
 <tr>
   <td>UI rendering</td>
@@ -1418,7 +1224,7 @@ implementation action for behavior the specification has already made visible.</
   <td>Sprite/text rendering</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
   <td>Source UI renders through Bevy with recorded sprite manager, font, text buffer, rich text, hitmask, and visual-state contracts; Bevy stores live text-render options and presentation entities rather than a parked sprite-manager bootstrap mirror.</td>
-  <td>Recover <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior as ECS/asset-backed behavior.</td>
+  <td>Specification gap: <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior as ECS/asset-backed behavior.</td>
 </tr>
 <tr>
   <td>Audio</td>
@@ -1460,7 +1266,7 @@ backends.</p>
 <tr>
   <td>GPU device management, D3D driver behavior, swapchain, and render scheduling</td>
   <td>Bevy/wgpu</td>
-  <td>Emit recovered Gamebryo/NetImmerse scene graph, material, texture, shader, UI sprite/text, camera, and render-state records into Bevy render resources.</td>
+  <td>Emit specified Gamebryo/NetImmerse scene graph, material, texture, shader, UI sprite/text, camera, and render-state records into Bevy render resources.</td>
 </tr>
 <tr>
   <td>Window creation, OS input, cursor plumbing, IME, and focus events</td>
@@ -1485,7 +1291,7 @@ backends.</p>
 <tr>
   <td>Frame scheduling, task pools, and clock delivery</td>
   <td>Bevy schedules/tasks/time</td>
-  <td>Preserve <code>BFTimeKeeper</code>, publish time event records through Bevy messages, and keep simulation tick/slow-tick surfaces plus manager update ordering once recovered.</td>
+  <td>Preserve <code>BFTimeKeeper</code>, publish time event records through Bevy messages, and keep simulation tick/slow-tick surfaces plus manager update ordering once specified.</td>
 </tr>
 <tr>
   <td>Filesystem dialogs, directory enumeration, and platform profile roots</td>
