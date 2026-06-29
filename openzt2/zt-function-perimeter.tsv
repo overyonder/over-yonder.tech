@@ -1424,8 +1424,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004406e1	17	refcounted_string_payload_equals_cstr			confirmed			
 0x004406f2	95	append_pointer_to_vector			confirmed			
 0x00440751	137	grow_pointer_vector_for_insert			confirmed			
-0x004407da	43		scenario UI state, expansion/customer-feedback, and registry con		unidentified			ui
-0x00440805	31		scenario UI state, expansion/customer-feedback, and registry con		unidentified			ui
+0x004407da	43	set_BFXMLAttribute_int_value			confirmed			
+0x00440805	31	construct_BFXMLAttribute			confirmed			
 0x00440824	0	scalar_delete_BFXMLAttribute			confirmed		0x008c4b64#0	
 0x0044083f	23	destroy_BFXMLAttribute_value_fields			confirmed			
 0x00440856	28	get_ui_child_iterator_state			confirmed			
@@ -1734,8 +1734,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044dd18	32		placement and save mode tail		unidentified			io/assets
 0x0044dd38	0	init_ZTSelectionMode_descriptor_ref_vtable_thunk			confirmed		0x008c8708#2	
 0x0044dd3d	75		placement and save mode tail		unidentified			io/assets
-0x0044dd88	0	append_ZTSelectionMode_registered_handler_entry			confirmed		0x008c8a60#3	
-0x0044dd9e	83	resolve_ZTSelectionMode_registered_handler_result			confirmed		0x008c8a60#4	
+0x0044dd88	0	append_ZTSelectionMode_registered_handler_entry			confirmed		0x008c8a5c#4	
+0x0044dd9e	83	resolve_ZTSelectionMode_registered_handler_result			confirmed		0x008c8a5c#5	
 0x0044ddf1	58		placement and save mode tail		unidentified			io/assets
 0x0044de2b	234		placement and save mode tail		unidentified			io/assets
 0x0044df15	1353	register_ZTSelectionMode_message_handlers			confirmed			
@@ -1775,8 +1775,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00451000	82	handle_selected_entity_boolean_payload_and_refresh_context			confirmed		0x008c0760#22	
 0x00451052	345	emit_eventcaptured_payload			confirmed		0x008c8a28#5	
 0x004511ab	5678	selected entity info-panel dispatch and animal/guest/keeper panels			confirmed			
-0x004527d9	140		entity selection and entity information panels		unidentified			ui
-0x00452865	136		entity selection and entity information panels		unidentified			ui
+0x004527d9	140	update_entity_info_panel_with_users_upkeep			confirmed			
+0x00452865	136	update_entity_info_panel_with_finance			confirmed			
 0x004528ed	918	update_crated_animal_info_panel			confirmed			
 0x00452974	0	call_populate_entity_biome_display_for_004528ed			confirmed			
 0x00452a06	0	call_populate_conservation_status_display_for_004528ed			confirmed			
@@ -1784,31 +1784,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00452d80	282	update_crate_uncrate_button_visibility			confirmed			
 0x00452e9a	1044	populate_family_members_panel			confirmed			
 0x004532ae	741	populate_animal_family_tree_list			confirmed			
-0x00453593	1366	emit_setmode_payload			confirmed		0x008c0808#1	
-0x00453ae9	187	queue_selected_animal_mode_payload			confirmed		0x008c0808#2	
+0x00453593	1366	emit_setmode_payload			confirmed		0x008c0804#2	
+0x00453ae9	187	queue_selected_animal_mode_payload			confirmed		0x008c0804#3	
 0x00453ba4	495	emit_setmode_payload			confirmed			
 0x00453d93	2769	update_animal_info_panel			confirmed			
 0x00454864	538	update_guest_info_panel			confirmed			
-0x00454a7e	386		entity selection and entity information panels		unidentified			ui
-0x00454c00	430		entity selection and entity information panels		unidentified			ui
+0x00454a7e	386	update_staff_info_panel			confirmed			
+0x00454c00	430	populate_staff_salary_months_panel			confirmed			
 0x00454dae	1047	populate_maintenance_worker_assignment_panel			confirmed			
-0x004551c5	386		entity selection and entity information panels		unidentified			ui
+0x004551c5	386	update_educator_info_panel			confirmed			
 0x00455347	386	update_keeper_info_panel			confirmed			
-0x004554c9	410		entity selection and entity information panels		unidentified			ui
-0x00455663	386		entity selection and entity information panels		unidentified			ui
-0x004557e5	386		entity selection and entity information panels		unidentified			ui
+0x004554c9	410	update_maintenance_worker_info_panel			confirmed			
+0x00455663	386	update_trainer_info_panel			confirmed			
+0x004557e5	386	update_entertainer_info_panel			confirmed			
 0x00455967	229	update_entity_biome_location_info_panel			confirmed			
 0x004559d6	0	call_populate_entity_biome_display_for_00455967			confirmed			
 0x00455a4c	1007	populate_animal_info_panel			confirmed			
-0x00455e3b	221		entity selection and entity information panels		unidentified			ui
+0x00455e3b	221	update_animal_summary_info_panel			confirmed			
 0x00455f18	471	update_egg_info_panel			confirmed			
 0x00455fba	0	call_populate_conservation_status_display_for_00455f18			confirmed			
 0x00455fed	0	call_populate_entity_biome_display_for_00455f18			confirmed			
-0x004560ef	243		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x004560ef	243	set_ui_child_value_and_enabled_state			confirmed			
 0x004561e2	6046	populate_transport_station_info_panel			confirmed			
-0x00457980	872		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x00457980	872	update_entity_container_capacity_occupancy_panel			confirmed			
 0x00457ce8	130	update_training_area_info_panel			confirmed			
-0x00457d6a	72		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x00457d6a	72	update_training_area_mode_panels			confirmed			
 0x00457db2	1020	emit_set_cloning_species_payload			confirmed			
 0x004581ae	992	populate_puzzle_list_panel			confirmed			
 0x004585a5	935	populate_disease_info_panel			confirmed			
@@ -1820,28 +1820,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004591ea	320	handle_enter_cloning_mode			confirmed			
 0x0045932a	366	handle_enter_disease_mode			confirmed			
 0x00459498	162	handle_enter_tranq_mode			confirmed			
-0x0045953a	500		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045953a	500	update_fossil_skeleton_bone_count_panel			confirmed			
 0x0045972e	405	populate_show_manager_panels			confirmed			
-0x004598c3	48		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x004598f3	109		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x00459960	473		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x004598c3	48	get_current_show_schedule_entry			confirmed			
+0x004598f3	109	is_current_show_schedule_entry_selected			confirmed			
+0x00459960	473	update_show_schedule_navigation_buttons			confirmed			
 0x00459b39	1273	populate_show_schedule_panel			confirmed			
-0x0045a032	509		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045a22f	269		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045a33c	689		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045a032	509	update_current_show_star_rating_widget			confirmed			
+0x0045a22f	269	sync_show_schedule_filter_toggle_buttons			confirmed			
+0x0045a33c	689	refresh_show_schedule_controls_and_stars			confirmed			
 0x0045a5ed	138	handle_set_current_show_for_donations			confirmed			
 0x0045a677	624	populate_show_donation_filter_list			confirmed			
-0x0045a8e7	599		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045a8e7	599	update_show_donation_summary_amounts			confirmed			
 0x0045ab3e	1295	populate_entity_financial_history_panel			confirmed			
 0x0045b04d	828	populate_show_attendance_panel			confirmed			
-0x0045b389	117		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045b3fe	189		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045b4bb	241		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045b5ac	122		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045b626	267		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045b731	329		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045b389	117	update_show_thoughts_list			confirmed			
+0x0045b3fe	189	query_scenario_bool_flag_default_true			confirmed			
+0x0045b4bb	241	apply_water_filter_schedule_toggle_payloads			confirmed			
+0x0045b5ac	122	clear_water_filter_schedule_toggles			confirmed			
+0x0045b626	267	update_water_filter_schedule_controls			confirmed			
+0x0045b731	329	sync_water_filter_schedule_toggle_selection			confirmed			
 0x0045b87a	930	populate_filter_cleanliness_panel			confirmed			
-0x0045bc1c	139		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045bc1c	139	update_entity_info_panel_with_donation			confirmed			
 0x0045bca7	1906	populate_entity_donation_info_panel			confirmed			
 0x0045c419	799	update_animal_status_action_buttons			confirmed			
 0x0045c738	354	update_entity_zoopedia_link			confirmed			
@@ -1852,7 +1852,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0045d1bb	601	update_animal_pickup_release_conservation_controls			confirmed			
 0x0045d414	305	update_entity_task_label			confirmed			
 0x0045d545	1751	populate_guest_happiness_info_panel			confirmed			
-0x0045dc1c	211		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045dc1c	211	update_guest_cash_display			confirmed			
 0x0045dcef	921	populate_entity_biome_display			confirmed			
 0x0045e088	863	populate_entity_location_display			confirmed			
 0x0045e3e7	533	populate_conservation_status_display			confirmed			
@@ -1860,22 +1860,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0045e8f0	2464	populate_entity_finance_info_panel			confirmed			
 0x0045f290	796	populate_animal_status_info			confirmed			
 0x0045f5ac	1516	populate_animal_needs_info			confirmed			
-0x0045fb98	218		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0045fc72	137		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x0045fb98	218	bind_ui_component_child_payload_value			confirmed			
+0x0045fc72	137	create_iconitem_ui_component_with_payload			confirmed			
 0x0045fcfb	2428	populate_egg_timer_ui			confirmed			
 0x00460677	330	populate_guest_needs_panel			confirmed			
-0x004607c1	436		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x004607c1	436	populate_guest_favorite_animals_list			confirmed			
 0x00460975	1520	populate_entity_inventory_panel			confirmed			
-0x00460f65	485		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x0046114a	126		specialized entity panels, donation/show data, and common displa		unidentified			ui
-0x004611c8	241		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x00460f65	485	populate_thoughts_listbox			confirmed			
+0x0046114a	126	update_entity_thoughts_panel			confirmed			
+0x004611c8	241	create_ui_component_for_text_payload			confirmed			
 0x004612b9	1481	populate_entity_users_upkeep_panel			confirmed			
-0x00461882	359		specialized entity panels, donation/show data, and common displa		unidentified			ui
+0x00461882	359	update_endangered_births_info_panel			confirmed			
 0x004619e9	920	populate_animal_gender_display			confirmed			
 0x00461d81	375	populate_food_level_display			confirmed			
 0x00461ef8	375	populate_trash_level_display			confirmed			
 0x0046206f	234	update_animal_ride_swim_with_controls			confirmed			
-0x00462159	260		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00462159	260	emit_selected_entity_action_feedback			confirmed			
 0x0046225d	1858	handle_entity_selection_actions			confirmed		0x008c0760#24	
 0x0046299f	99	refresh_selected_entity_food_level_and_info_panel			confirmed		0x008c0760#23	
 0x00462a02	322	emit_crate_entity_payload			confirmed		0x008c07d0#0	
@@ -1888,14 +1888,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004631a1	104	handle_selected_entity_named_action_8273c6			confirmed		0x008c07d0#7	
 0x00463209	0	refresh_selected_entity_mode_and_follow_context			confirmed		0x008c07d0#8	
 0x0046324f	1024	populate_vehicle_purchase_panel			confirmed		0x008c07d0#9	
-0x0046364f	1402		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x0046364f	1402	handle_buy_vehicle_for_selected_transport			confirmed		0x008c07d0#10	
+0x00463bc9	0		selection actions, scheduler, transport, and show-platform comma		unidentified		0x008c07d0#11	
 0x00463c20	94		selection actions, scheduler, transport, and show-platform comma		unidentified			renderer
-0x00463c7e	226		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00463c7e	226	show_transportation_confirmation_or_execute_action			confirmed		0x008c0804#0	
 0x00463d60	244	handle_board_selected_entity			confirmed			
 0x00463e54	224	handle_action_confirmed			confirmed			
 0x00463f34	62		selection actions, scheduler, transport, and show-platform comma		unidentified			economy
 0x00463f72	1611	handle_transport_sell_refund_confirmation			confirmed			
-0x004645bd	160	set_selection_mode_action_target_from_string_payload			confirmed		0x008c0808#0	
+0x004645bd	160	set_selection_mode_action_target_from_string_payload			confirmed		0x008c0804#1	
 0x0046465d	576	handle_selectnext_diseased_animal			confirmed			
 0x0046489d	235	handle_selectnext_rampaging_animal			confirmed			
 0x00464988	74	handle_showmixer_event			confirmed			
@@ -1911,38 +1912,39 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046539c	333	handle_showscheduler_addbreak			confirmed			
 0x004654e9	268	handle_showscheduler_moveup			confirmed			
 0x004655f5	271	handle_showscheduler_movedown			confirmed			
-0x00465704	114		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00465704	114	handle_showscheduler_selectrow			confirmed			
 0x00465776	145	handle_showscheduler_toggleenable			confirmed			
 0x00465807	80		selection actions, scheduler, transport, and show-platform comma		unidentified			
 0x00465857	98		selection actions, scheduler, transport, and show-platform comma		unidentified			game-ai
 0x004658b9	197	handle_set_filter_maintenance			confirmed			
 0x0046597e	602	emit_physobjswap_on_payload			confirmed			
-0x00465bd8	59		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00465bd8	59	get_selected_water_filter_schedule_toggle			confirmed			
 0x00465c13	208	handle_showplatform_transactcurrentupgrade			confirmed			
-0x00465ce3	363		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
-0x00465e4e	84		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
-0x00465ea2	84		selection actions, scheduler, transport, and show-platform comma		unidentified			ui
+0x00465ce3	363	update_water_filter_schedule_option_control			confirmed			
+0x00465e4e	84	update_first_filter_maintenance_option_control			confirmed			
+0x00465ea2	84	update_second_filter_maintenance_option_control			confirmed			
 0x00465ef6	348	handle_sell_physobj			confirmed			
 0x00466052	551	handle_showplatform_updateupgradecost			confirmed			
 0x004662bf	63	handle_set_show_to_select			confirmed			
 0x004662fe	66	handle_enable_tutorial_eyedropper			confirmed			
 0x00466340	32	advance_ui_child_iterator			confirmed			
-0x00466360	164		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466404	48		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466434	72		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x0046647c	36		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x004664b8	153		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466598	24		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x004665b0	23		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x004665c7	113		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466638	132		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x004666bc	97		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x0046671d	53		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466752	324		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466360	164	get_or_insert_ui_value_tree_payload			confirmed			
+0x00466404	48	clear_ui_value_tree			confirmed			
+0x00466434	72	deref_checked_8byte_deque_iterator			confirmed			
+0x0046647c	36	advance_checked_8byte_deque_iterator			confirmed			
+0x004664a0	0		UI child iteration, donation-filter cleanup, and type acceptors		unidentified		0x008c86c8#14	
+0x004664b8	153	register_ui_command_handler_if_absent			confirmed			
+0x00466598	24	count_show_schedule_entries			confirmed			
+0x004665b0	23	get_show_schedule_entry_at_index			confirmed			
+0x004665c7	113	append_show_schedule_entry_record			confirmed			
+0x00466638	132	insert_show_schedule_entry_record			confirmed			
+0x004666bc	97	clear_show_schedule_entry_vector			confirmed			
+0x0046671d	53	deref_checked_list_iterator_value			confirmed			
+0x00466752	324	insert_or_find_ui_value_tree_entry			confirmed			
 0x00466896	129	clear_show_donation_filter_show_vector			confirmed			
-0x00466917	402		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466aa9	196		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
-0x00466b6d	175		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
+0x00466917	402	insert_show_donation_filter_record			confirmed			
+0x00466aa9	196	find_or_insert_ui_value_tree_node			confirmed			
+0x00466b6d	175	erase_ui_value_tree_range			confirmed			
 0x00466c1c	160		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x00466cbc	667		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
 0x00466f57	57		UI child iteration, donation-filter cleanup, and type acceptors		unidentified			ui
@@ -4490,7 +4492,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004dc026	168		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004dc0ce	1030		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004dc8e6	323	read_gesture_trace_config			confirmed			
-0x004dca29	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004dca29	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004dca8b	103		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004dcb17	191		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			io/assets
 0x004dcbd6	209		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
@@ -9510,7 +9512,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ae0d1	115		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae144	277		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ae259	111		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005ae2c8	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ae2c8	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005ae3b3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		economy
 0x005ae3fc	659		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -9774,7 +9776,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b26fc	32		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b271c	31		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b273b	28		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b2757	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b2757	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b2771	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b278b	34		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b27ad	30		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -17695,7 +17697,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e75e0	101		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e7645	197		ordered map/list helper cluster		unidentified	gamebryo		game-entities
 0x006e770a	116		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e777e	99		ordered map/list helper cluster		unidentified	gamebryo		ui
+0x006e777e	99		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e77e1	39		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e7808	0		ordered map/list helper cluster		unidentified		0x008f8dc8#1	
 0x006e7823	64		ordered map/list helper cluster		unidentified	gamebryo		
@@ -18249,14 +18251,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00702708	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#19	
 0x007030d2	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#20	
 0x0070348b	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#21	
-0x007034e0	218		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x007035ba	470		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007034e0	218		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007035ba	470		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703790	109		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007037fd	69	get_fitting_surface_cell_show_record_payload			confirmed	gamebryo		
 0x00703842	211		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703915	116		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703989	62		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007039c7	144		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007039c7	144		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703a57	34		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703a79	92		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703ad5	245		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18264,7 +18266,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00703c59	0		collision tester and fitting-surface component XML		unidentified		0x008fa4f8#1	
 0x00703c74	90		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703cce	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00703dae	31		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00703dae	31		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703dcd	382		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x00703f4b	172		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703ff7	147		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18291,10 +18293,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00704f74	93		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704fd1	83		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705024	46		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00705052	1121		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00705052	1121		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007054b3	70		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007054f9	102		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070555f	110		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070555f	110		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007055cd	0		collision tester and fitting-surface component XML		unidentified		0x008fa4e4#0	
 0x007055d5	148		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705669	69		collision tester and fitting-surface component XML		unidentified	gamebryo		
