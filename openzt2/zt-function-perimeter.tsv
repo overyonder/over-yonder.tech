@@ -3140,35 +3140,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0049f9c6	786	paint_overview_path_edge_pixels			confirmed			
 0x004a0176	113	append_overview_placement_vector_record			confirmed			
 0x004a01e7	0	populate_animal_overhead_map			confirmed			
-0x004a0b0f	35		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a0df7	1538		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a169b	194		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a175d	417		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a1e90	46		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a1ebe	226		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a0b0f	35	destroy_overview_icon_work_record			confirmed			
+0x004a0df7	1538	populate_overview_map_icon_objects			confirmed			
+0x004a169b	194	paint_overview_connector_edge_pixels			confirmed			
+0x004a175d	417	paint_overview_tile_edge_pattern			confirmed			
+0x004a1e90	46	set_overview_map_pixel_color			confirmed			
+0x004a1ebe	226	draw_overview_map_line_pixels			confirmed			
 0x004a2966	47	get_type_ZTOverviewData			confirmed			
-0x004a2995	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008cf518#1	ui
-0x004a299a	32		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a2995	0	get_type_ZTOverviewData_vtable_thunk			confirmed		0x008cf518#1	
+0x004a299a	32	init_ZTOverviewData_descriptor_ref			confirmed			
 0x004a29ba	0	init_ZTOverviewData_descriptor_ref_vtable_thunk			confirmed		0x008cf518#2	
 0x004a29bf	0	read_ZTOverviewData_icon_xml			confirmed		0x008cf518#20	
-0x004a29fe	638		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a29fe	638	select_foliage_overview_data_icon_for_tile_block			confirmed			
 0x004a2f15	0	exit_overview_component_and_emit_exit_value			confirmed		0x008cf570#14	
 0x004a2fac	0	read_overview_component_layout_and_map_layers			confirmed		0x008cf570#20	
-0x004a3b4f	115		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a3b4f	115	set_overview_layer_painter_callback_by_name			confirmed			
 0x004a3bc2	648	build_filter_legend_categories			confirmed			
 0x004a3fdb	0	refresh_overview_filter_layout_or_clear_output			confirmed		0x008cf5fc#0	
 0x004a400d	709	populate_legend_filter_list			confirmed			
-0x004a42d2	415		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a4471	245		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a4566	86		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a4ffa	211		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5111	49		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5142	22		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a42d2	415	rebuild_overview_layer_canvases_and_filter_legend			confirmed			
+0x004a4471	245	refresh_overview_filter_layout_children			confirmed			
+0x004a4566	86	build_overview_map_export_folder_path			confirmed			
+0x004a4ffa	211	get_or_insert_overview_value_cache_entry			confirmed			
+0x004a5111	49	clear_overview_value_cache_tree			confirmed			
+0x004a5142	22	init_ui_value_assignment_ref_vtable_008c383c			confirmed			
 0x004a5158	0	allocate_ZTOverviewComponent_instance			confirmed		0x008cf7a0#1	
-0x004a516e	122		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a51e8	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a52c8	187		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5383	52		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a516e	122	init_ZTOverviewComponent_action_registry_entries			confirmed			
+0x004a51e8	153	register_ZTOverviewComponent_action_handler			confirmed			
+0x004a52c8	187	get_or_insert_overview_icon_group_by_key			confirmed			
+0x004a5383	52	clear_overview_icon_group_tree			confirmed			
 0x004a53b7	170		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x004a5461	48		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x004a5491	78		multi-info, overview map, photo album, and UI widgets		unidentified			ui
@@ -7890,7 +7890,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057b55f	902		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057b8e5	361		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ba4e	279		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057bb65	154		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057bb65	154		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057bbff	142		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057bc8d	141		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057bd1a	84		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			economy
