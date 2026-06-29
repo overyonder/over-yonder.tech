@@ -2675,31 +2675,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00488f01	135	sync_puzzle_camera_component_with_target			confirmed			
 0x00488f88	354	bind_active_puzzle_piece_and_tiles			confirmed			
 0x004890ea	25	clear_active_puzzle_piece			confirmed			
-0x00489103	96		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489163	414		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489301	352		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00489103	96	refresh_active_puzzle_piece_depth_and_transform			confirmed			
+0x00489163	414	commit_active_puzzle_piece_placement			confirmed			
+0x00489301	352	refresh_hovered_puzzle_tile_selection			confirmed			
 0x00489461	0	apply_puzzle_rotate_command_to_active_piece			confirmed		0x008ccf90#4	
-0x004895d6	430		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489784	285		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x004895d6	430	finalize_puzzle_completion_feedback_or_auto_exit			confirmed			
+0x00489784	285	spawn_puzzle_completion_burst_effect			confirmed			
 0x004898a1	0	advance_puzzle_completion_burst_counter			confirmed		0x008ccfac#0	
-0x004898df	92		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048993b	78		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489989	157		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489a26	258		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x004898df	92	start_puzzle_music_value			confirmed			
+0x0048993b	78	stop_active_puzzle_music_value			confirmed			
+0x00489989	157	register_active_puzzle_objects_for_screen_bounds			confirmed			
+0x00489a26	258	project_puzzle_cursor_to_world_point			confirmed			
 0x00489b28	0	allocate_ZTPuzzleMode_instance			confirmed		0x008ccfac#3	
-0x00489b40	153		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489c20	160		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489cc0	117		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x00489d35	38		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00489b40	153	register_ZTPuzzleMode_handler_if_absent			confirmed			
+0x00489c20	160	append_ZTPuzzleMode_handler_record			confirmed			
+0x00489cc0	117	inherit_ZTPuzzleMode_handlers_from_registry			confirmed			
+0x00489d35	38	write_axis_angle_rotation_matrix3			confirmed			
 0x00489d5b	0	read_super_staff_usage_distance_value			confirmed		0x008cd0fc#118	
 0x00489d62	47	get_type_ZTSuperStaffMode			confirmed			
-0x00489d91	0		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified		0x008cd028#1	ui
-0x00489d96	32		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00489d91	0	get_type_ZTSuperStaffMode_vtable_thunk			confirmed		0x008cd028#1	
+0x00489d96	32	init_ZTSuperStaffMode_descriptor_ref			confirmed			
 0x00489db6	0	init_ZTSuperStaffMode_descriptor_ref_vtable_thunk			confirmed		0x008cd028#2	
-0x00489dbb	73		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00489dbb	73	get_ZTSuperStaffMode_ui_handler_registry			confirmed			
 0x00489e04	0	register_super_staff_usage_action_value			confirmed		0x008cd0fc#127	
 0x00489e1a	0	resolve_super_staff_usage_action_value			confirmed		0x008cd0fc#128	
-0x00489e6d	102		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x00489e6d	102	register_ZTSuperStaffMode_ui_handlers			confirmed			
 0x00489ed3	0	scalar_delete_ZTSuperStaffMode			confirmed		0x008cd028#0	
 0x00489f14	0	activate_super_staff_mode_and_seed_usage_ui			confirmed		0x008cd0fc#85	
 0x0048a0e8	0	deactivate_super_staff_mode_and_clear_usage_ui			confirmed		0x008cd0fc#86	
@@ -2709,9 +2709,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048a171	0	update_super_staff_mode_frame_and_usage_feedback			confirmed		0x008cd04c#5	
 0x0048a1bb	0	read_super_staff_mode_config			confirmed		0x008cd04c#11	
 0x0048a22a	0	mark_super_staff_usage_feedback_dirty			confirmed		0x008cd0fc#113	
-0x0048a245	559		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a474	33		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
-0x0048a495	80		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
+0x0048a245	559	refresh_super_staff_usage_target_from_view			confirmed			
+0x0048a474	33	clear_super_staff_usage_target_handle			confirmed			
+0x0048a495	80	hide_super_staff_usage_feedback_layout			confirmed			
 0x0048a4e5	417		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x0048a686	106		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
 0x0048a6f0	263		puzzle, super-staff, tranquilize, layout, and adoption-button mo		unidentified			ui
@@ -7114,7 +7114,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00554bcb	44		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00554bf7	379		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00554d72	55		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
-0x00554da9	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x00554da9	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x00554e28	112		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00554e98	119		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00554f0f	66		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7263,14 +7263,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055c4c3	0	write_ZTPuzzlePiece_placement_xml			confirmed		0x008db2d0#19	
 0x0055c6c3	0	read_ZTPuzzlePiece_placement_xml			confirmed		0x008db2d0#20	
 0x0055c7a6	0	clear_ZTPuzzlePiece_entity_ref_after_validation			confirmed		0x008db2d0#21	
-0x0055c7d1	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055c7d1	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055c814	414		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055c9b2	91		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055ca0d	481		cloning/disease/fossil/puzzle components and TA filters		unidentified			renderer
 0x0055cbee	100		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055cc52	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x0055cc8d	186		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055cd47	125		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055cc52	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
+0x0055cc8d	186		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
+0x0055cd47	125		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055cdc4	47	get_type_ZTPuzzle			confirmed			
 0x0055cdf3	0		cloning/disease/fossil/puzzle components and TA filters		unidentified		0x008db270#1	
 0x0055cdf8	32	init_ZTPuzzle_descriptor_ref			confirmed			
@@ -7293,7 +7293,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055dd6b	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055ddea	282		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055df04	178		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055dfb6	71		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055dfb6	71		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x0055dffd	38		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055e023	95		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055e082	0	allocate_ZTPuzzlePiece_instance			confirmed		0x008db330#1	
@@ -9724,7 +9724,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b14f7	94	bf_string_ctor_from_cstr			confirmed	gamebryo		
 0x005b1555	78		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b15a3	32	bf_string_dtor			confirmed	gamebryo		
-0x005b15c3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b15c3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b160c	100	assign_interned_inline_ui_string			confirmed	gamebryo		
 0x005b1670	175		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b171f	47	get_type_BFUndoMgr			confirmed	gamebryo		
@@ -13790,7 +13790,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064d58a	178		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064d63c	92		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064d698	236		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d784	240		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064d784	240		globe drag/preview state and display diagnostics		unidentified	gamebryo		
 0x0064d874	27		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064d99b	33		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064d9bc	33		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
@@ -14497,7 +14497,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00667426	22	init_unit_first_zero_quad_defaults			confirmed	gamebryo		
 0x0066743c	160		vector plane construction helpers		unidentified	gamebryo		renderer
 0x006674dc	81		vector plane construction helpers		unidentified	gamebryo		renderer
-0x0066752d	222		vector plane construction helpers		unidentified	gamebryo		
+0x0066752d	222		vector plane construction helpers		unidentified	gamebryo		ui
 0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		renderer
 0x0066763a	44	copy_two_vectors_and_normalize_second			confirmed	gamebryo		
 0x00667666	214		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
@@ -18639,7 +18639,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00712a03	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a4a	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a91	23		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
-0x00712aa8	24		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00712aa8	24		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00712ac0	52		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712af4	54		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712b2a	18	tankwallglass_selector_has_active_water_object			confirmed	gamebryo		
