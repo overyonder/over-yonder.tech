@@ -18440,9 +18440,9 @@ BFAIFadeController	0x008e7ae0	22	0x0060f2fc	bind_BFAIDataController_target_sourc
 BFAIFadeController	0x008e7ae0	23	0x005f67e4	apply_BFAIFadeController_fade_value	confirmed
 BFAIFadeController	0x008e7ae0	24	0x0043f08d	clear_output_dword_ret8	confirmed
 BFAIFadeController	0x008e7ae0	25	0x0043f08d	clear_output_dword_ret8	confirmed
-BFAIFadeController	0x008e7b48	0	0x005f663f	copy_BFAIFadeController_value_assignment_dependents	confirmed
-BFAIFadeController	0x008e7b48	1	0x005f6655	resolve_BFAIFadeController_handler_value	confirmed
-BFAIFadeController	0x008e7b48	2	0x005598c6	get_validated_child_or_delete	confirmed
+BFAIDataController	0x008e7b48	0	0x005f663f	copy_BFAIFadeController_value_assignment_dependents	confirmed
+BFAIDataController	0x008e7b48	1	0x005f6655	resolve_BFAIFadeController_handler_value	confirmed
+BFAIDataController	0x008e7b48	2	0x005598c6	get_validated_child_or_delete	confirmed
 BFBehSetMap	0x008e7c1c	0	0x005f7582	get_type_BFBehSetMap_vtable_thunk	confirmed
 BFBehSetMap	0x008e7c1c	1	0x005f75a7	get_BFBehSetMap_descriptor_ref_vtable_thunk	confirmed
 BFBehSetMap	0x008e7c1c	2	0x005b1bae	create_and_attach_xml_child_node	confirmed
@@ -31457,7 +31457,7 @@ BFFPSUDVComponent	0x008fe508	27	0x00597bec	noop_virtual_callback_ret4	confirmed
 BFFPSUDVComponent	0x008fe508	28	0x007c67e5	return_true_virtual_default	confirmed
 BFFPSUDVComponent	0x008fe508	29	0x0059330a	noop_virtual_callback	confirmed
 BFFPSUDVComponent	0x008fe508	30	0x0059330a	noop_virtual_callback	confirmed
-BFFPSUDVComponent	0x008fe508	31	0x0075ad1c	slot_31	unidentified
+BFFPSUDVComponent	0x008fe508	31	0x0075ad1c	update_BFFPSUDV_above_ground_offset	confirmed
 BFFPSUDVComponent	0x008fe508	32	0x00597bec	noop_virtual_callback_ret4	confirmed
 BFFPSUDVComponent	0x008fe508	33	0x00597bec	noop_virtual_callback_ret4	confirmed
 BFFPSUDVComponent	0x008fe508	34	0x0059330a	noop_virtual_callback	confirmed
@@ -31544,7 +31544,7 @@ BFSkyLayer	0x008fe758	17	0x007c5781	return_false_virtual_default	confirmed
 BFSkyLayer	0x008fe758	18	0x007c5781	return_false_virtual_default	confirmed
 BFSkyLayer	0x008fe758	19	0x00597bec	noop_virtual_callback_ret4	confirmed
 BFSkyLayer	0x008fe758	20	0x0075b8d2	slot_20	unidentified
-BFSkyLayer	0x008fe758	21	0x0075b6a1	slot_21	unidentified
+BFSkyLayer	0x008fe758	21	0x0075b6a1	refresh_BFSkyLayer_child_nodes	confirmed
 BFSkyLayer	0x008fe758	22	0x0075b725	slot_22	unidentified
 BFSkyLayer	0x008fe758	23	0x00597bec	noop_virtual_callback_ret4	confirmed
 BFColorInterpolateSkyLayer	0x008fe7b8	0	0x0075bbd0	scalar_deleting_dtor	unidentified
@@ -33267,7 +33267,7 @@ BFDX9Renderer	0x00901798	18	0x007c5781	return_false_virtual_default	confirmed
 BFDX9Renderer	0x00901798	19	0x0079946f	slot_19	unidentified
 BFDX9Renderer	0x00901798	20	0x007994ae	slot_20	unidentified
 BFDX9Renderer	0x00901798	21	0x007995dc	slot_21	unidentified
-BFDX9Renderer	0x00901798	22	0x00799a01	slot_22	unidentified
+BFDX9Renderer	0x00901798	22	0x00799a01	apply_BFDX9Renderer_pending_display_reset	confirmed
 BFDX9Renderer	0x00901798	23	0x00799b38	slot_23	unidentified
 BFDX9Renderer	0x00901798	24	0x00799b73	slot_24	unidentified
 BFDX9Renderer	0x00901798	25	0x00799bbd	slot_25	unidentified
@@ -33798,9 +33798,9 @@ BFAnimTable	0x00902270	17	0x007c5781	return_false_virtual_default	confirmed
 BFAnimTable	0x00902270	18	0x007c5781	return_false_virtual_default	confirmed
 BFAnimTable	0x00902270	19	0x007ab243	slot_19	unidentified
 BFAnimTable	0x00902270	20	0x007ab2c3	slot_20	unidentified
-vtable_009022c4	0x009022c4	0	0x005598c6	get_validated_child_or_delete	confirmed
-vtable_009022c4	0x009022c4	1	0x007ab311	slot_1	unidentified
-vtable_009022c4	0x009022c4	2	0x007ad824	slot_2	unidentified
+vtable_009022d0	0x009022d0	0	0x007b15f8	scalar_deleting_dtor	unidentified
+vtable_009022d0	0x009022d0	1	0x007b162f	slot_1	unidentified
+vtable_009022d0	0x009022d0	2	0x007b1d8d	slot_2	unidentified
 vtable_009022e8	0x009022e8	0	0x007b1f75	scalar_deleting_dtor	unidentified
 vtable_009022e8	0x009022e8	1	0x007b8407	slot_1	unidentified
 vtable_009022e8	0x009022e8	2	0x007b87cd	slot_2	unidentified
@@ -38089,10 +38089,10 @@ ZTAISensor	0x0090d518	49	0x0059330a	noop_virtual_callback	confirmed
 ZTAISensor	0x0090d518	50	0x00597bec	noop_virtual_callback_ret4	confirmed
 ZTAISensor	0x0090d518	51	0x00612a27	read_sensor_candidate_radius_or_default	confirmed
 ZTAISensor	0x0090d518	52	0x00612a74	measure_BFAISensor_attached_target_distance_or_default	confirmed
-BFAISensor	0x0090d5ec	0	0x0083e3b3	scalar_delete_ZTAISensor_secondary_subobject	confirmed
-BFAISensor	0x0090d5ec	1	0x0083e3c9	bind_ZTAISensor_secondary_context	confirmed
-BFAISensor	0x0090d5ec	2	0x005598c6	get_validated_child_or_delete	confirmed
-BFAISensor	0x0090d5ec	3	0x0083e4f1	create_ZTAISensor_descriptor_child	confirmed
+ZTAISensor	0x0090d5ec	0	0x0083e3b3	scalar_delete_ZTAISensor_secondary_subobject	confirmed
+ZTAISensor	0x0090d5ec	1	0x0083e3c9	bind_ZTAISensor_secondary_context	confirmed
+ZTAISensor	0x0090d5ec	2	0x005598c6	get_validated_child_or_delete	confirmed
+ZTAISensor	0x0090d5ec	3	0x0083e4f1	create_ZTAISensor_descriptor_child	confirmed
 ZTBehDockPortal	0x0090d610	0	0x0083e7f0	scalar_delete_ZTBehDockPortal	confirmed
 ZTBehDockPortal	0x0090d610	1	0x0083e7c6	get_type_ZTBehDockPortal_vtable_thunk	confirmed
 ZTBehDockPortal	0x0090d610	2	0x0083e7eb	init_ZTBehDockPortal_descriptor_ref_vtable_thunk	confirmed

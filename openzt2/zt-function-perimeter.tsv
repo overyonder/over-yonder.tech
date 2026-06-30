@@ -15722,7 +15722,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00692dce	66		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
 0x00692e10	118	append_dword_to_chunked_4slot_vector			confirmed	gamebryo		
 0x00692e86	41		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
-0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
+0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
 0x00692f21	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692f62	418	insert_repeated_12byte_records			confirmed	gamebryo		
 0x00693104	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
@@ -19762,13 +19762,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075453a	95		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754599	111		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754608	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#4	
-0x00754625	75		scene/view node update and child visibility propagation		unidentified	gamebryo		ui
-0x0075468b	24		scene/view node update and child visibility propagation		unidentified	gamebryo		ui
+0x00754625	75	copy_construct_BFAnimRequestData_fields			confirmed	gamebryo		
+0x0075468b	24	destroy_BFAnimRequestData_fields			confirmed	gamebryo		
 0x007546a3	47	get_type_BFAnimRequestData			confirmed	gamebryo		
 0x007546d2	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#0	
 0x007546d7	32		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x007546f7	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#1	
-0x007546fc	171		scene/view node update and child visibility propagation		unidentified	gamebryo		ui
+0x007546fc	171	clone_BFAnimRequestData_as_inline_ui_payload			confirmed	gamebryo		
 0x007547a7	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#2	
 0x00754916	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#3	
 0x00754abc	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#13	
@@ -19807,7 +19807,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007574af	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
 0x007574f3	125		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		io/assets
 0x00757570	67		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
-0x007575b3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		ui
+0x007575b3	64	copy_preview_transform_vector_if_source_present			confirmed	gamebryo		
 0x007575f3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		world/pathing
 0x00757633	536		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x0075784b	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#19	
@@ -19866,7 +19866,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075a7ff	45		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075a82c	0		scene/model transform and XML property bridge		unidentified		0x008fe350#0	
 0x0075a847	18		scene/model transform and XML property bridge		unidentified	gamebryo		
-0x0075a859	208		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075a859	208	update_above_ground_fit_lag_distance			confirmed	gamebryo		
 0x0075a929	73	read_can_go_underwater_xml_property			confirmed	gamebryo	0x008fe350#20	
 0x0075a98c	41		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075a9cb	47	get_type_BFPhysComponent			confirmed	gamebryo		
@@ -19890,13 +19890,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075acb6	57		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075acef	0		scene/model transform and XML property bridge		unidentified		0x008fe508#0	
 0x0075ad0a	18		scene/model transform and XML property bridge		unidentified	gamebryo		
-0x0075ad1c	384		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe508#31	ui
+0x0075ad1c	384	update_BFFPSUDV_above_ground_offset			confirmed	gamebryo	0x008fe508#31	
 0x0075ae9c	0		scene/model transform and XML property bridge		unidentified		0x008d3c20#26	
 0x0075aea3	0		scene/model transform and XML property bridge		unidentified		0x008fe508#41	
 0x0075aee5	152	write_jump_gravity_xml_properties			confirmed	gamebryo	0x008fe508#19	
 0x0075af7d	161	read_jump_gravity_xml_properties			confirmed	gamebryo	0x008fe508#20	
 0x0075b01e	0		scene/model transform and XML property bridge		unidentified		0x008fe508#47	
-0x0075b031	186		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075b031	186	make_user_driven_component_vector_payload			confirmed	gamebryo		
 0x0075b0eb	47	get_type_BFUserDrivenComponent			confirmed	gamebryo		
 0x0075b11a	0		scene/model transform and XML property bridge		unidentified		0x008fe610#1	
 0x0075b11f	0		scene/model transform and XML property bridge		unidentified		0x008fe610#2	
@@ -19909,7 +19909,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075b288	91		scene/model transform and XML property bridge		unidentified	gamebryo		world/pathing
 0x0075b2e3	222		scene/model transform and XML property bridge		unidentified	gamebryo		io/assets
 0x0075b3c1	0		scene/model transform and XML property bridge		unidentified		0x008fe6b8#0	
-0x0075b3dc	86		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075b3dc	86	get_WindBlock_scene_model_bridge_record			confirmed	gamebryo		
 0x0075b432	37	reset_vtable_008fe6b8_scene_model_bridge			confirmed	gamebryo		
 0x0075b457	0		scene/model transform and XML property bridge		unidentified		0x008fe6b8#3	
 0x0075b45c	47	get_type_BFSkyLayer			confirmed	gamebryo		
@@ -19917,10 +19917,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075b490	32		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075b4b0	0		scene/model transform and XML property bridge		unidentified		0x008fe758#2	
 0x0075b4b5	0	return_virtual_payload_plus4			confirmed		0x008cdf88#13	
-0x0075b4be	215		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075b4be	215	construct_BFSkyLayer			confirmed	gamebryo		
 0x0075b595	0		scene/model transform and XML property bridge		unidentified		0x008fe758#0	
 0x0075b5b1	240		scene/model transform and XML property bridge		unidentified	gamebryo		
-0x0075b6a1	132		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#21	ui
+0x0075b6a1	132	refresh_BFSkyLayer_child_nodes			confirmed	gamebryo	0x008fe758#21	
 0x0075b725	74		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#22	
 0x0075b76f	355		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075b8d2	591		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe758#20	
@@ -19979,10 +19979,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075d5dc	240		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075d6cc	0		presentation controller registry and tree containers		unidentified		0x008fe928#0	
 0x0075d6e7	127		presentation controller registry and tree containers		unidentified	gamebryo		
-0x0075d766	95		presentation controller registry and tree containers		unidentified	gamebryo		ui
-0x0075d7c5	96		presentation controller registry and tree containers		unidentified	gamebryo		ui
-0x0075d825	290		presentation controller registry and tree containers		unidentified	gamebryo		ui
-0x0075d947	225		presentation controller registry and tree containers		unidentified	gamebryo		ui
+0x0075d766	95	merge_presentation_controller_child_entries			confirmed	gamebryo		
+0x0075d7c5	96	find_presentation_controller_registry_value			confirmed	gamebryo		
+0x0075d825	290	build_presentation_controller_entry_from_key			confirmed	gamebryo		
+0x0075d947	225	create_or_copy_presentation_controller_object			confirmed	gamebryo		
 0x0075da28	106		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075da92	133		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075db17	133		presentation controller registry and tree containers		unidentified	gamebryo		renderer
@@ -19994,14 +19994,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075df81	99		presentation controller registry and tree containers		unidentified	gamebryo		game-entities
 0x0075dfe4	70		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e02a	127		presentation controller registry and tree containers		unidentified	gamebryo		
-0x0075e0a9	341		presentation controller registry and tree containers		unidentified	gamebryo		ui
+0x0075e0a9	341	build_presentation_controller_dependency_index			confirmed	gamebryo		
 0x0075e1fe	143		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e28d	0		presentation controller registry and tree containers		unidentified		0x008fe928#21	
 0x0075e394	102		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e3fa	52		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e42e	667		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e6c9	93		presentation controller registry and tree containers		unidentified	gamebryo		
-0x0075e726	102		presentation controller registry and tree containers		unidentified	gamebryo		
+0x0075e726	102		presentation controller registry and tree containers		unidentified	gamebryo		ui
 0x0075e78c	49		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e7bd	36		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e7e1	112		presentation controller registry and tree containers		unidentified	gamebryo		
@@ -21307,7 +21307,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00799559	0	0x00799553 callsite_address			confirmed			
 0x0079956a	114		VinceLog setup and BFUIRenderer/presentation support		unidentified	gamebryo		renderer
 0x007995dc	0		VinceLog setup and BFUIRenderer/presentation support		unidentified		0x00901798#21	renderer
-0x00799a01	0		VinceLog setup after GUID creation		unidentified		0x00901798#22	ui
+0x00799a01	0	apply_BFDX9Renderer_pending_display_reset			confirmed		0x00901798#22	
 0x00799b38	59		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo	0x00901798#23	renderer
 0x00799b73	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00901798#24	renderer
 0x00799bbd	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00901798#25	renderer
@@ -21765,7 +21765,6 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ab1d7	108		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ab243	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#19	renderer
 0x007ab2c3	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#20	renderer
-0x007ab311	0		BFUIRenderer and renderer/presentation support span		unidentified		0x009022c4#1	renderer
 0x007ab329	213		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ab3fe	176		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ab4ae	1355		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
@@ -21793,7 +21792,6 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ad652	44		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ad67e	62		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ad6bc	360		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
-0x007ad824	0		BFUIRenderer and renderer/presentation support span		unidentified		0x009022c4#2	renderer
 0x007ad83f	101		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ad8a4	78		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007ad8f2	100		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
@@ -21838,10 +21836,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007afeb8	28		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007afed4	129		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		renderer
 0x007aff55	48	lower_bound_ui_value_assignment_dependent_ref			confirmed	gamebryo		
-0x007aff85	388		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0109	140		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0195	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0226	397		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007aff85	388	insert_ui_dependency_reference_tree_node			confirmed	gamebryo		
+0x007b0109	140	insert_point3_array_range_and_return_iterator			confirmed	gamebryo		
+0x007b0195	145	resize_8byte_record_vector			confirmed	gamebryo		
+0x007b0226	397	insert_20byte_viewable_record			confirmed	gamebryo		
 0x007b03b3	67		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b03f6	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b0487	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
@@ -21867,10 +21865,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b138c	217		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1465	211		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1538	192		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b15f8	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022d0#0	
 0x007b1613	28		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b162f	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022d0#1	
 0x007b18f5	651	bind_water_wave_shader			confirmed	gamebryo		
 0x007b1b80	487		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1d67	38		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b1d8d	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022d0#2	
 0x007b1da8	36		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1dcc	167		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1e73	61		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
