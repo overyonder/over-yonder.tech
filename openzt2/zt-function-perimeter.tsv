@@ -6987,7 +6987,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054d66a	508	rebuild_tankwallglass_material_selectors			confirmed			
 0x0054d866	234	refresh_dirty_tankwallglass_material_selectors			confirmed			
 0x0054d950	310		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054da86	105		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054da86	105	count_distinct_tankwallglass_selector_point_groups			confirmed			
 0x0054daef	214	test_tankwallglass_selector_points_equivalent			confirmed			
 0x0054dbc5	108		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054dc31	99		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
@@ -7036,33 +7036,33 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005505ec	91	resolve_tank_fence_preview_height			confirmed			
 0x00550647	182	remove_tank_segment_from_area_membership_candidates			confirmed			
 0x005506fd	152	clear_tank_area_membership_candidate_segments			confirmed			
-0x00550795	116		area membership and tank selector data structures		unidentified			ui
+0x00550795	116	propagate_area_membership_height_to_candidates			confirmed			
 0x00550809	18	clear_area_membership_candidate_vector			confirmed			
 0x0055081b	250		area membership and tank selector data structures		unidentified			world/pathing
-0x00550915	252		area membership and tank selector data structures		unidentified			
-0x00550a11	245		area membership and tank selector data structures		unidentified			ui
+0x00550915	252		area membership and tank selector data structures		unidentified			ui
+0x00550a11	245	remove_named_ui_assignment_selector_entry			confirmed			
 0x00550b06	167	update_min_named_ui_assignment_entry_float			confirmed			
 0x00550bad	217		area membership and tank selector data structures		unidentified			
 0x00550c86	1731		area membership and tank selector data structures		unidentified			world/pathing
-0x00551349	261		area membership and tank selector data structures		unidentified			ui
-0x0055144e	130		area membership and tank selector data structures		unidentified			
+0x00551349	261	flush_area_membership_traversability_refresh			confirmed			
+0x0055144e	130		area membership and tank selector data structures		unidentified			ui
 0x005514d0	659	erase_tank_selector_tree_node_and_return_next			confirmed			
-0x00551763	104		area membership and tank selector data structures		unidentified			
+0x00551763	104		area membership and tank selector data structures		unidentified			ui
 0x005517cb	52	clear_area_membership_pointer_vector_storage			confirmed			
-0x005517ff	152		area membership and tank selector data structures		unidentified			ui
+0x005517ff	152	get_or_insert_area_membership_named_tree_payload			confirmed			
 0x00551897	48	destroy_named_ui_assignment_tree_storage			confirmed			
 0x005518c7	667	erase_named_ui_assignment_tree_node			confirmed			
-0x00551b62	36		area membership and tank selector data structures		unidentified			ui
+0x00551b62	36	clear_named_ui_assignment_tree_header			confirmed			
 0x00551b86	98	select_named_ui_assignment_tree_bound			confirmed			
 0x00551be8	36		area membership and tank selector data structures		unidentified			renderer
-0x00551c0c	381		area membership and tank selector data structures		unidentified			ui
-0x00551d89	66		area membership and tank selector data structures		unidentified			
+0x00551c0c	381	insert_named_ui_assignment_vec3_key_with_hint			confirmed			
+0x00551d89	66		area membership and tank selector data structures		unidentified			ui
 0x00551dcb	48	clear_area_membership_tree_storage			confirmed			
-0x00551dfb	326		area membership and tank selector data structures		unidentified			ui
+0x00551dfb	326	insert_named_ui_assignment_u32_key_with_hint			confirmed			
 0x00551f41	59	clear_named_ui_assignment_tree_nodes_recursive			confirmed			
 0x00551f7c	105	clone_named_ui_assignment_tree_header			confirmed			
 0x00551fe5	198	find_or_insert_named_ui_assignment_vec3_key			confirmed			
-0x005520ab	148		area membership and tank selector data structures		unidentified			ui
+0x005520ab	148	erase_named_ui_assignment_tree_iterator_range			confirmed			
 0x0055213f	341	insert_named_ui_assignment_vec3_tree_node			confirmed			
 0x00552294	196	find_or_insert_named_ui_assignment_u32_key			confirmed			
 0x00552358	148	erase_named_ui_assignment_tree_range			confirmed			
@@ -7119,7 +7119,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00554b49	103		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00554bb0	0	scalar_delete_ZTCloningCenterComponent			confirmed		0x008dabd0#0	
 0x00554bcb	44		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00554bf7	379		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00554bf7	379	select_ZTCloningCenter_failure_animal_entry			confirmed			
 0x00554d72	55		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00554da9	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x00554e28	112		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7136,41 +7136,41 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005556a8	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x005556eb	0	write_ZTCloningCenterInstance_timer_xml			confirmed		0x008dac34#18	
 0x00555751	0	read_ZTCloningCenterInstance_timer_xml			confirmed		0x008dac34#19	
-0x00555ab3	101		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x00555ab3	101		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00555b18	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555b3c	49		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555b6d	0	allocate_ZTCloningCenterComponent_instance			confirmed		0x008dac8c#1	
 0x00555c03	0	allocate_ZTCloningCenterInstanceComponent_instance			confirmed		0x008dac8c#3	
 0x00555c3a	130		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555cbc	153		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00555d9c	112		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00555e0c	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x00555d9c	112	insert_refcounted_ui_value_vector_range_and_return_iterator			confirmed			
+0x00555e0c	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00555e31	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555e55	128		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00555ed5	50		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00555ed5	50	construct_ZTCloningCenter_failure_animal_record_range			confirmed			
 0x00555f07	131		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00555f8a	50		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555fbc	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00555fdf	450		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00555fdf	450	insert_fill_ZTCloningCenter_failure_animal_record_vector			confirmed			
 0x005561a1	429		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x0055634e	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00556391	160		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
-0x00556431	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00556431	37	copy_construct_ZTCloningCenter_failure_animal_record			confirmed			
 0x00556456	60		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00556492	116		cloning/disease/fossil/puzzle components and TA filters		unidentified			renderer
 0x00556506	44		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
-0x00556532	49		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00556532	49	copy_construct_ZTCloningCenter_failure_animal_record_range			confirmed			
 0x00556563	49		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00556594	68		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x005565d8	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x005565fd	60		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00556639	302		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x005565d8	37	assign_ZTCloningCenter_failure_animal_record			confirmed			
+0x005565fd	60		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00556639	302	assign_refcounted_ui_value_pointer_vector			confirmed			
 0x00556767	253		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0055687f	50		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005568b1	170		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055695b	604		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00556bb7	343		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00556d0e	373		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055695b	604	evaluate_ZTCloningCenter_disease_events			confirmed			
+0x00556bb7	343	roll_ZTCloningCenter_disease_detection_chance			confirmed			
+0x00556d0e	373	emit_ZTCloningCenter_disease_found_feedback			confirmed			
 0x00556e83	134		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00556f09	799		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00557228	143		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7189,12 +7189,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005582b7	0	scalar_delete_ZTDiseaseMgr			confirmed		0x008daf38#0	
 0x005582d2	91		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x0055832d	0	update_ZTDiseaseMgr_disease_state			confirmed		0x008daf38#14	
-0x0055861e	121		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x0055861e	121		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00558697	307		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005587ca	32		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x005587ea	0	write_ZTDiseaseMgr_state_xml			confirmed		0x008daf38#19	
 0x005589b3	0	read_ZTDiseaseMgr_state_xml			confirmed		0x008daf38#20	
-0x00558dff	123		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00558dff	123		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00558f0b	577	handle_check_for_disease			confirmed			
 0x005594ad	208		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x0055957d	213		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
