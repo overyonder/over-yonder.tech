@@ -3308,45 +3308,45 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004abdc5	73	get_ZTUIFullscreenButton_action_registry			confirmed			
 0x004abe0e	0	register_ZTUIFullscreenButton_action_value			confirmed		0x008d0234#0	
 0x004abe24	0	resolve_ZTUIFullscreenButton_action_value			confirmed		0x008d0234#1	
-0x004abe77	210		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004abf49	74		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004abe77	210	init_ZTUIFullscreenButton_action_registry_entries			confirmed			
+0x004abf49	74	construct_ZTUIFullscreenButton_members			confirmed			
 0x004abf93	0	scalar_delete_ZTUIFullscreenButton			confirmed		0x008cff78#0	
-0x004abfae	47		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004abfae	47	destroy_ZTUIFullscreenButton_members			confirmed			
 0x004abfdd	0	advance_fullscreen_button_delay_and_hide_control			confirmed		0x008cff78#14	
 0x004ac0c3	0	read_fullscreen_button_layout_options			confirmed		0x008cff78#20	
 0x004ac130	0	reset_fullscreen_button_target_visibility_and_delegate			confirmed		0x008cff78#35	
-0x004ac1bb	463		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ac38a	40		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac1bb	463	bind_fullscreen_button_target_layout			confirmed			
+0x004ac38a	40	clear_fullscreen_button_target_binding			confirmed			
 0x004ac405	0	forward_fullscreen_button_deferred_refresh			confirmed		0x008d01e8#5	
 0x004ac435	0	forward_fullscreen_button_child_selection_with_guard			confirmed		0x008d0080#72	
 0x004ac457	0	allocate_ZTUIFullscreenButton_instance			confirmed		0x008d0234#3	
-0x004ac472	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ac552	160		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ac5f2	88		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac472	153	register_ZTUIFullscreenButton_action_handler			confirmed			
+0x004ac552	160	append_ZTUIFullscreenButton_action_registry_entry			confirmed			
+0x004ac5f2	88	try_resolve_UIComponent_from_value			confirmed			
 0x004ac64a	47	get_type_ZTUIResearchButton			confirmed			
-0x004ac679	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008d0270#1	ui
+0x004ac679	0	get_type_ZTUIResearchButton_vtable_thunk			confirmed		0x008d0270#1	
 0x004ac67e	32	init_ZTUIResearchButton_descriptor_ref			confirmed			
 0x004ac69e	0	init_ZTUIResearchButton_descriptor_ref_vtable_thunk			confirmed		0x008d0270#2	
-0x004ac6a3	80		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac6a3	80	get_ZTUIResearchButton_action_registry			confirmed			
 0x004ac6f3	0	register_ZTUIResearchButton_action_value			confirmed		0x008d04c8#0	
 0x004ac709	0	resolve_ZTUIResearchButton_action_value			confirmed		0x008d04c8#1	
-0x004ac75c	100		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac75c	100	construct_ZTUIResearchButton_members			confirmed			
 0x004ac7c0	0	scalar_delete_ZTUIResearchButton			confirmed		0x008d0270#0	
-0x004ac7db	85		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac7db	85	destroy_ZTUIResearchButton_members			confirmed			
 0x004ac830	0	activate_research_button_fullcolor_state			confirmed		0x008d0344#91	
 0x004ac879	0	deactivate_research_button_fullcolor_state			confirmed		0x008d0344#92	
-0x004ac8c1	342		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004aca17	124		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004aca93	274		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004acba5	339		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ac8c1	342	bind_research_button_selection_and_progress_targets			confirmed			
+0x004aca17	124	show_research_button_bound_control			confirmed			
+0x004aca93	274	set_research_button_progress_max			confirmed			
+0x004acba5	339	set_research_button_progress_value			confirmed			
 0x004accf8	0	write_ui_grid_region_layout_attributes			confirmed		0x008ce06c#4	
 0x004accfd	0	read_research_button_layout_children			confirmed		0x008d02ac#5	
 0x004acdb4	0	allocate_ZTUIResearchButton_instance			confirmed		0x008d04c8#3	
-0x004ace11	132		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ace95	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004acf2e	160		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ace11	132	register_ZTUIResearchButton_action_registry_range			confirmed			
+0x004ace95	153	register_ZTUIResearchButton_action_handler			confirmed			
+0x004acf2e	160	append_ZTUIResearchButton_action_registry_entry			confirmed			
 0x004acfce	47	get_type_ZTUITimedEvents			confirmed			
-0x004acffd	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008d0500#1	ui
+0x004acffd	0	get_type_ZTUITimedEvents_vtable_thunk			confirmed		0x008d0500#1	
 0x004ad002	32	init_ZTUITimedEvents_descriptor_ref			confirmed			
 0x004ad022	0	init_ZTUITimedEvents_descriptor_ref_vtable_thunk			confirmed		0x008d0500#2	
 0x004ad027	38		multi-info, overview map, photo album, and UI widgets		unidentified			ui
@@ -4778,7 +4778,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e9c50	312	ZTResearchItem_init_from_entity_shared_data			confirmed			
 0x004e9d88	118		research item and research manager handlers		unidentified			renderer
 0x004e9dfe	378	ZTResearchItem_build_research_button			confirmed			
-0x004e9f78	107		research item and research manager handlers		unidentified			
+0x004e9f78	107		research item and research manager handlers		unidentified			ui
 0x004e9fe3	0	write_ZTResearchItem_xml			confirmed		0x008d52c0#19	
 0x004ea128	0	read_ZTResearchItem_xml			confirmed		0x008d52c0#20	
 0x004ea2c2	166		research item and research manager handlers		unidentified			ui
