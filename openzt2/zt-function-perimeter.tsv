@@ -3253,13 +3253,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004a8563	350	refresh_camera_photo_strip_and_count			confirmed			
 0x004a86c1	165	refresh_album_photo_slot_selection_states			confirmed			
 0x004a8766	683	emit_photoevent_payload			confirmed			
-0x004a8a11	220		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a8aed	263		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a8bf4	590		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a8e42	381		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a8a11	220	disable_camera_exposure_frame_toggles			confirmed			
+0x004a8aed	263	enable_camera_exposure_frame_toggles			confirmed			
+0x004a8bf4	590	refresh_photo_album_thumbnail_slot			confirmed			
+0x004a8e42	381	refresh_photo_album_caption_edit			confirmed			
 0x004a8fbf	576	handle_photo_album_actions			confirmed			
-0x004a91ff	513		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a9400	208		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a91ff	513	refresh_photo_album_page_number_text			confirmed			
+0x004a9400	208	refresh_photo_album_name_text			confirmed			
 0x004a94d0	0	previous_photo_album_page			confirmed		0x008cfd34#90	
 0x004a953e	0	next_photo_album_page			confirmed		0x008cfd34#91	
 0x004a95a3	0	select_photo_album_value			confirmed		0x008cfd34#110	
@@ -3272,9 +3272,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004aa142	0	cancel_photo_album_drag_or_pending_selection			confirmed		0x008cfd34#97	
 0x004aa1b6	0	select_album_photo_index_value			confirmed		0x008cfd34#99	
 0x004aa226	0	clear_selected_album_photo_controls			confirmed		0x008cfd34#112	
-0x004aa32b	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004aa3c4	79		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004aa413	31		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004aa32b	153	clear_photo_album_slot_visual			confirmed			
+0x004aa3c4	79	clear_photo_album_slot_caption_text			confirmed			
+0x004aa413	31	clear_photo_album_slot_visual_and_caption			confirmed			
 0x004aa432	0	delete_selected_album_photo			confirmed		0x008cfd34#98	
 0x004aa683	0	select_camera_photo_index_value			confirmed		0x008cfd34#100	
 0x004aa6fe	0	clear_selected_camera_photo_controls			confirmed		0x008cfd34#111	
@@ -3284,28 +3284,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004aaa21	0	select_photo_album_by_string_index			confirmed		0x008cfd34#109	
 0x004aab22	0	enlarge_camera_photo_selection			confirmed		0x008cfd34#104	
 0x004aabe6	0	enlarge_album_photo_selection			confirmed		0x008cfd34#105	
-0x004aacc6	844		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004aacc6	844	show_photo_album_enlarged_photo			confirmed			
 0x004ab012	0	shrink_photo_album_enlarged_view			confirmed		0x008cfd34#106	
 0x004ab0e9	0	edit_photo_album_caption_or_description			confirmed		0x008cfd34#113	
 0x004ab319	0	update_dragged_photo_exposure_overlay			confirmed		0x008cfd34#87	
 0x004ab5cb	0	hide_or_update_dragged_photo_exposure_overlay			confirmed		0x008cfd34#86	
 0x004ab7fa	16	assign_shared_globe_ui_refresh_value_wrapper			confirmed		0x008bf8b4#56	
 0x004ab80a	0	clear_dragged_photo_exposure_overlay			confirmed		0x008cfd34#89	
-0x004ab8a8	77		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ab8f5	129		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004ab976	213		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004aba4b	95		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004abaaa	95		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004ab8a8	77	begin_photo_album_selection_drag_state			confirmed			
+0x004ab8f5	129	hide_dragged_photo_exposure_overlay			confirmed			
+0x004ab976	213	retarget_dragged_photo_assignment_list			confirmed			
+0x004aba4b	95	show_album_photo_selection_control			confirmed			
+0x004abaaa	95	hide_album_photo_selection_control			confirmed			
 0x004abb09	0	allocate_ZTPhotoAlbumComponent_instance			confirmed		0x008cfd34#117	
-0x004abb1f	153		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004abbff	160		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004abc9f	117		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004abb1f	153	register_ZTPhotoAlbumComponent_action_handler			confirmed			
+0x004abbff	160	append_ZTPhotoAlbumComponent_action_registry_entry			confirmed			
+0x004abc9f	117	register_ZTPhotoAlbumComponent_action_registry_range			confirmed			
 0x004abd14	40	as_UITextEdit			confirmed			
 0x004abd6c	47	get_type_ZTUIFullscreenButton			confirmed			
-0x004abd9b	0		multi-info, overview map, photo album, and UI widgets		unidentified		0x008cff78#1	ui
+0x004abd9b	0	get_type_ZTUIFullscreenButton_vtable_thunk			confirmed		0x008cff78#1	
 0x004abda0	32	init_ZTUIFullscreenButton_descriptor_ref			confirmed			
 0x004abdc0	0	init_ZTUIFullscreenButton_descriptor_ref_vtable_thunk			confirmed		0x008cff78#2	
-0x004abdc5	73		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004abdc5	73	get_ZTUIFullscreenButton_action_registry			confirmed			
 0x004abe0e	0	register_ZTUIFullscreenButton_action_value			confirmed		0x008d0234#0	
 0x004abe24	0	resolve_ZTUIFullscreenButton_action_value			confirmed		0x008d0234#1	
 0x004abe77	210		multi-info, overview map, photo album, and UI widgets		unidentified			ui
