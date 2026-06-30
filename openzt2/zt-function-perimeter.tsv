@@ -9611,9 +9611,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005af387	37		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005af3b8	43		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005af3e3	0	scalar_delete_vtable_008e50f8_child_table			confirmed		0x008e50e4#5	
-0x005af3fe	54		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af434	183		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af4eb	723		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005af3fe	54	is_inline_ui_cjk_hangul_or_fullwidth_codepoint			confirmed	gamebryo		
+0x005af434	183	is_inline_ui_opening_punctuation_codepoint			confirmed	gamebryo		
+0x005af4eb	723	is_inline_ui_closing_punctuation_or_small_kana_codepoint			confirmed	gamebryo		
 0x005af7be	73	allocate_inline_ui_string_storage			confirmed	gamebryo		
 0x005af807	28	clear_inline_ui_string			confirmed	gamebryo		
 0x005af823	113	is_inline_ui_token_split_boundary			confirmed	gamebryo		
@@ -9783,7 +9783,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b266a	61	ensure_xml_attribute_node_by_name			confirmed	gamebryo		
 0x005b26a7	85		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b26fc	32		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
-0x005b271c	31		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005b271c	31	set_xml_attribute_string_value			confirmed	gamebryo		
 0x005b273b	28		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b2757	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b2771	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
@@ -9791,7 +9791,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b27ad	30	set_xml_attribute_float_array_value			confirmed	gamebryo		
 0x005b27cb	30	set_xml_attribute_joined_string_vector_value			confirmed	gamebryo		
 0x005b27e9	61	set_xml_attribute_float_value			confirmed	gamebryo		
-0x005b2826	26		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005b2826	26	set_xml_attribute_bool_value			confirmed	gamebryo		
 0x005b2840	27	ensure_xml_attribute_node_and_refresh_value			confirmed	gamebryo		
 0x005b285b	60	get_xml_attribute_string_value_or_default			confirmed	gamebryo		
 0x005b2897	53	get_xml_attribute_value_or_default			confirmed	gamebryo		
@@ -9899,31 +9899,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b5519	0	get_BFUserProfileMgr_xml_descriptor_vtable_thunk			confirmed		0x008e588c#1	
 0x005b551e	38		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b5544	0	collect_BFUserProfileMgr_profile_value_refs			confirmed		0x008e588c#20	
-0x005b55ad	190		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b55ad	190	construct_BFUserProfileMgr			confirmed	gamebryo		
 0x005b5686	145		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b5717	111		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b5786	74		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b57d0	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
+0x005b57d0	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b5811	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b585e	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b589f	68		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b58e3	40		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b585e	65	set_BFUserProfileMgr_options_bool_attribute			confirmed	gamebryo		
+0x005b589f	68	set_BFUserProfileMgr_options_string_attribute			confirmed	gamebryo		
+0x005b58e3	40	get_BFUserProfileMgr_options_attribute_or_default			confirmed	gamebryo		
 0x005b590b	40		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
-0x005b5933	108		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b5933	108	dispatch_BFUserProfileMgr_options_changed			confirmed	gamebryo		
 0x005b599f	0	read_BFUserProfileMgr_options_xml			confirmed		0x008e588c#19	
-0x005b5e22	128		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b5e22	128	ensure_BFUserProfileMgr_attributes_xml_child			confirmed	gamebryo		
 0x005b5ea2	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
-0x005b5f04	313		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b5f04	313	create_special_folder_profile_directory			confirmed	gamebryo		
 0x005b603d	225	initialize_user_profile_temp_and_save_directories			confirmed	gamebryo		
 0x005b611e	301	enumerate_saved_profile_directories			confirmed	gamebryo		
 0x005b624b	147		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
-0x005b62de	153		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b6377	342		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b64cd	316		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b6609	374		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b677f	180		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b6833	137		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b68bc	232		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b62de	153	validate_BFUserProfileMgr_profile_name			confirmed	gamebryo		
+0x005b6377	342	create_BFUserProfileMgr_profile_directories			confirmed	gamebryo		
+0x005b64cd	316	delete_BFUserProfileMgr_saved_profile			confirmed	gamebryo		
+0x005b6609	374	activate_BFUserProfileMgr_profile			confirmed	gamebryo		
+0x005b677f	180	load_or_create_BFUserProfileMgr_options_xml			confirmed	gamebryo		
+0x005b6833	137	save_BFUserProfileMgr_options_xml			confirmed	gamebryo		
+0x005b68bc	232	resolve_BFUserProfileMgr_all_users_root_directory			confirmed	gamebryo		
 0x005b69bf	110		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b6a2d	153		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b6b0d	160		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
@@ -9941,16 +9941,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b6e32	97	sample_game_time_milliseconds			confirmed	gamebryo		
 0x005b6e93	102		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		audio
 0x005b6ef9	56		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		audio
-0x005b6f31	417		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b6f31	417	tick_BFTimeKeeper_timer_list			confirmed	gamebryo		
 0x005b70d2	86		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005b7128	83		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		audio
 0x005b717b	83		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b71ce	109		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b71ce	109	register_BFTimeKeeper_timer			confirmed	gamebryo		
 0x005b723b	88		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b7293	75		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b7293	75	find_BFTimeKeeper_timer_iterator			confirmed	gamebryo		
 0x005b7345	0	read_BFTimeKeeper_timing_xml			confirmed		0x008e59c0#20	
 0x005b7556	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		audio
-0x005b75b8	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b75b8	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7622	210		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b76f4	0	write_BFHeartbeatData_xml_node			confirmed		0x008c505c#3	
 0x005b7811	0	read_BFHeartbeatData_xml_node			confirmed		0x008c505c#4	
@@ -9961,7 +9961,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b7a38	64		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7a78	159		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7b5e	0	create_BFHeartbeatData_from_descriptor_table			confirmed		0x008e5a1c#3	
-0x005b7b71	156		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b7b71	156		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005b7c0d	160		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005b7cad	66		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7cef	0	forward_to_receiver_vtable_slot_2			confirmed		0x008c0cec#1	
@@ -10139,7 +10139,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bc5a6	224		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005bc686	27		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005bc6a1	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
-0x005bc703	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005bc703	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005bc76a	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005bc7d1	0	read_BFRegistry_app_key_xml			confirmed		0x008e60e0#20	
 0x005bc81d	0	allocate_default_BFRegistry			confirmed		0x008e60e0#22	
