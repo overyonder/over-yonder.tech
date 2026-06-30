@@ -13729,29 +13729,29 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064b472	56	set_UIAspect_primary_rgba_color_and_propagate			confirmed	gamebryo		
 0x0064b4aa	68	set_UIAspect_primary_alpha_across_state_entries			confirmed	gamebryo		
 0x0064b4ee	50	propagate_UIAspect_secondary_color_to_state_table			confirmed	gamebryo		
-0x0064b520	68		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b564	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b584	348		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b6e0	57		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b719	304		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b849	124		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b8c5	337		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ba16	140		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064baa2	164		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064b520	68	set_UIAspect_secondary_alpha_across_state_entries			confirmed	gamebryo		
+0x0064b564	32	refresh_UIAspect_default_text_projection			confirmed	gamebryo		
+0x0064b584	348	apply_UIAspect_text_color_alignment_projection			confirmed	gamebryo		
+0x0064b6e0	57	dispatch_UIAspect_state_sound_resource			confirmed	gamebryo		
+0x0064b719	304	apply_UIAspect_secondary_resource_projection			confirmed	gamebryo		
+0x0064b849	124	write_UIAspect_state_resource_table			confirmed	gamebryo		
+0x0064b8c5	337	write_UIAspect_state_resource_entry_node			confirmed	gamebryo		
+0x0064ba16	140	parse_UIAspect_state_name			confirmed	gamebryo		
+0x0064baa2	164	read_UIAspect_state_resource_nodes			confirmed	gamebryo		
 0x0064bb46	329	make_typed_ui_resource			confirmed	gamebryo		
-0x0064bc8f	145		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064bd20	22		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064bd36	62		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064bd74	60		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064bc8f	145	read_UIAspect_font_and_state_resources			confirmed	gamebryo		
+0x0064bd20	22	refresh_UIAspect_active_state_resource_pointer			confirmed	gamebryo		
+0x0064bd36	62	compare_UIAspect_color_dwords_not_equal			confirmed	gamebryo		
+0x0064bd74	60	compare_UIAspect_color_dwords_equal			confirmed	gamebryo		
 0x0064bdb0	47	get_type_UIToggleSet			confirmed	gamebryo		
-0x0064bddf	0		typed UI value construction and forwarding		unidentified		0x008eecb0#1	ui
+0x0064bddf	0	get_type_UIToggleSet_vtable_thunk			confirmed		0x008eecb0#1	
 0x0064bde4	32	init_UIToggleSet_descriptor_ref			confirmed	gamebryo		
 0x0064be04	0	init_UIToggleSet_descriptor_ref_vtable_thunk			confirmed		0x008eecb0#2	
-0x0064be09	75		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064bebd	142		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064bf4b	56		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064be09	75	init_global_UIToggleSet_handler_list			confirmed	gamebryo		
+0x0064bebd	142	register_UIToggleSet_value_adapters_from_global_list			confirmed	gamebryo		
+0x0064bf4b	56	construct_UIToggleSet_fields			confirmed	gamebryo		
 0x0064bf83	0	scalar_delete_UIToggleSet			confirmed		0x008eecb0#0	
-0x0064bf9e	35		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064bf9e	35	destroy_UIToggleSet_fields			confirmed	gamebryo		
 0x0064bfc1	0	forward_UIChildData_then_fallback_parent_value_receiver			confirmed		0x008ce030#105	
 0x0064c007	600	select_toggle_set_child_and_emit_value			confirmed	gamebryo	0x008cf018#144	
 0x0064c25f	152	clear_toggle_set_selection_or_dispatch_payload			confirmed	gamebryo	0x008cf018#145	
@@ -13759,8 +13759,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064c325	0	advance_toggle_set_selection_and_emit_value			confirmed		0x008ce030#147	
 0x0064c3ed	0	retreat_toggle_set_selection_and_emit_value			confirmed		0x008ce030#148	
 0x0064c4bf	0	allocate_UIToggleSet_descriptor_instance			confirmed			
-0x0064c4da	151		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064c5b8	160		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064c4da	151	register_UIToggleSet_value_adapter_unique			confirmed	gamebryo		
+0x0064c5b8	160	insert_UIToggleSet_handler_node_before			confirmed	gamebryo		
 0x0064c658	117		typed UI value construction and forwarding		unidentified	gamebryo		ui
 0x0064c6e5	47	get_type_UIButton			confirmed	gamebryo		
 0x0064c714	0		typed UI value construction and forwarding		unidentified		0x008eef28#1	ui
