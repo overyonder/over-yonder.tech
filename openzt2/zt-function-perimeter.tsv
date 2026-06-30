@@ -5903,7 +5903,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051bea5	22	construct_ZTTransportCrossingGate_groundtrack_ref			confirmed			
 0x0051bebb	144	remove_ui_value_assignment_dependent_ref_range			confirmed			
 0x0051bf4b	98	clear_ZTTransportCrossingGate_groundtrack_ref_vector			confirmed			
-0x0051bfad	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d8528#26	
+0x0051bfad	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d8528#26	ui
 0x0051bfe5	122	populate_ZTTransportCrossingGate_action_registry			confirmed			
 0x0051c05f	153	register_ZTTransportCrossingGate_action_handler			confirmed			
 0x0051c13f	111	insert_ZTTransportCrossingGate_groundtrack_ref_vector_at			confirmed			
@@ -5920,12 +5920,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051c5fd	49	copy_construct_transport_ref_from_front_link			confirmed			
 0x0051c62e	65	copy_construct_transport_ref_from_back_link			confirmed			
 0x0051c66f	58	init_ZTTransportGroundCircuit_segment_record_defaults			confirmed			
-0x0051c6a9	63		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051c6a9	63	construct_ZTTransportGroundCircuit_segment_record			confirmed			
 0x0051c6e8	0	count_ZTTransportGroundCircuit_segment_records			confirmed		0x008d85d8#32	
 0x0051c6f3	0	get_ZTTransportGroundCircuit_total_segment_distance			confirmed		0x008d85d8#36	
 0x0051c6fa	0	scalar_delete_ZTTransportGroundCircuit			confirmed		0x008d85d8#0	
 0x0051c745	47	get_type_ZTTransportGroundCircuit			confirmed			
-0x0051c774	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d85d8#1	ui
+0x0051c774	0	get_type_ZTTransportGroundCircuit_vtable_thunk			confirmed		0x008d85d8#1	
 0x0051c779	0	init_ZTTransportGroundCircuit_descriptor_ref			confirmed		0x008d85d8#2	
 0x0051c799	79	init_ZTTransportGroundCircuit_action_registry			confirmed			
 0x0051c7e8	0	copy_ZTTransportGroundCircuit_ui_value_assignment_dependents			confirmed		0x008d8680#0	
@@ -5936,37 +5936,37 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0051cdbf	0	activate_ZTTransportGroundCircuit_segment_cache			confirmed		0x008d85d8#29	
 0x0051cde3	0	deactivate_ZTTransportGroundCircuit_segment_cache			confirmed		0x008d85d8#30	
 0x0051ce0a	0	collect_ZTTransportGroundCircuit_ground_track_refs			confirmed		0x008d85d8#41	
-0x0051cec7	594		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051cec7	594	append_ZTTransportGroundCircuit_segment_samples_from_track			confirmed			
 0x0051d119	0	rebuild_ZTTransportGroundCircuit_segment_samples			confirmed		0x008d85d8#31	
 0x0051d3b5	0	get_transport_circuit_payload_segment_value			confirmed		0x008d85d8#26	
 0x0051d3c5	0	get_ZTTransportGroundCircuit_segment_record_value			confirmed		0x008d85d8#27	
 0x0051d3de	46	get_ZTTransportGroundCircuit_segment_record			confirmed			
 0x0051d40c	0	read_ZTTransportGroundCircuit_segment_length			confirmed		0x008d85d8#33	
 0x0051d43c	0	sample_ZTTransportGroundCircuit_segment_curve			confirmed		0x008d85d8#34	
-0x0051dac1	55		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051daf8	105		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051db61	57		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051db9a	286		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051dcb8	302		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051dac1	55	get_ZTTransportGroundCircuit_segment_sample_slot			confirmed			
+0x0051daf8	105	advance_ZTTransportGroundCircuit_segment_sample_slot			confirmed			
+0x0051db61	57	append_ground_circuit_interpolated_point			confirmed			
+0x0051db9a	286	emit_ZTTransportGroundCircuit_sampled_path_points			confirmed			
+0x0051dcb8	302	advance_ZTTransportGroundCircuit_distance_over_segments			confirmed			
 0x0051dde6	0	apply_ZTTransportGroundCircuit_traversability_config			confirmed		0x008d85d8#38	
 0x0051de0d	0	test_ZTTransportGroundCircuit_path_value_presence			confirmed		0x008d85d8#37	
-0x0051de25	234		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051df0f	24		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051df27	2413		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051de25	234	prepare_ZTTransportGroundCircuit_traversability_refs			confirmed			
+0x0051df0f	24	is_transport_segment_delta_within_threshold			confirmed			
+0x0051df27	2413	reconcile_ZTTransportGroundTrack_endpoint_join			confirmed			
 0x0051e894	0	reverse_ZTTransportGroundCircuit_path_records			confirmed		0x008d85d8#40	
-0x0051ea1f	125		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051ea9c	562		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051ecce	358		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051ee34	406		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051ea1f	125	test_ZTTransportGroundCircuit_track_ref_connection			confirmed			
+0x0051ea9c	562	select_ZTTransportGroundTrack_endpoint_connection_order			confirmed			
+0x0051ecce	358	intersect_ZTTransportGroundCircuit_segment_line			confirmed			
+0x0051ee34	406	intersect_ZTTransportGroundCircuit_segment_ray			confirmed			
 0x0051efca	122	clear_ZTTransportGroundCircuit_segment_vector			confirmed			
 0x0051f044	22	count_transport_segment_records			confirmed			
 0x0051f05a	31	checked_transport_segment_record_at			confirmed			
-0x0051f079	97		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051f079	97	append_ZTTransportGroundCircuit_segment_record			confirmed			
 0x0051f0da	0	allocate_ZTTransportGroundCircuit_instance			confirmed		0x008d8680#3	
-0x0051f13c	24		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051f154	23		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051f16b	121		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0051f1e4	50		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0051f13c	24	count_ground_circuit_scratch_points			confirmed			
+0x0051f154	23	checked_ground_circuit_scratch_point_at			confirmed			
+0x0051f16b	121	insert_ZTTransportGroundCircuit_segment_record_at_iterator			confirmed			
+0x0051f1e4	50	construct_ZTTransportGroundCircuit_segment_record_range			confirmed			
 0x0051f216	181		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0051f2cb	114		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0051f33d	415	insert_transport_segment_record_fill_range			confirmed			
