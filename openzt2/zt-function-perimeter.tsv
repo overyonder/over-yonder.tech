@@ -7805,7 +7805,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00577cf4	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00577da6	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00577ede	0	scalar_delete_ZTScenarioMgr			confirmed		0x008e07f8#0	
-0x00577ef9	44		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00577ef9	44		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x00577f25	25	get_ZTApp_active_ui_root			confirmed			
 0x005780ca	0	synchronize_ZTScenarioMgr_uimod_state_then_delegate			confirmed		0x008e0870#4	
 0x005780eb	287	apply_ZTScenarioMgr_uimod_value_to_ui_object			confirmed			
@@ -7813,7 +7813,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057833f	0	write_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#19	
 0x005784c8	0	read_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#20	
 0x0057876c	186	get_or_insert_ZTScenarioMgr_uimod_record			confirmed			
-0x00578826	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00578826	48	destroy_ZTScenarioMgr_uimod_tree_storage			confirmed			
 0x00578856	36	clear_ZTScenarioMgr_uimod_tree_nodes			confirmed			
 0x0057887a	105	find_ZTScenarioMgr_uimod_insert_hint			confirmed			
 0x005788e3	0	allocate_ZTScenarioMgr_instance			confirmed		0x008e0898#4	
@@ -7825,7 +7825,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00578ca7	148	erase_ZTScenarioMgr_uimod_tree_range			confirmed			
 0x00578d3b	361	insert_ZTScenarioMgr_uimod_tree_node			confirmed			
 0x00578ea4	160		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x00578f44	678		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00578f44	678	erase_ZTScenarioMgr_uimod_tree_node			confirmed			
 0x005791ea	83	construct_ZTScenarioMgr_uimod_tree_node_payload			confirmed			
 0x0057923d	0	scalar_delete_ZTScenarioMgr_secondary_this_adjustor			confirmed		0x008e0898#0	
 0x00579245	47	get_type_ZTTankCommandReader			confirmed			
@@ -7966,13 +7966,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057f941	117	apply_object_icon_component_to_ui_value			confirmed			
 0x0057f9b6	199	apply_named_object_icon_component_to_ui_value			confirmed			
 0x0057fa7d	204		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x0057fb49	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-ai
-0x0057fb79	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057fc28	102		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fb49	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fb79	175	erase_UIHotKeys_binding_map_range			confirmed			
+0x0057fc28	102	clone_UIHotKeys_binding_map_subtree			confirmed			
 0x0057fc8e	196		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0057fd52	388	insert_UIHotKeys_binding_map_node			confirmed			
 0x0057fed6	677	erase_UIHotKeys_binding_map_node			confirmed			
-0x0058017b	75		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x0058017b	75		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x005801c6	83	allocate_UIHotKeys_binding_map_node_copy			confirmed			
 0x00580219	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0058023d	59		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
@@ -7991,31 +7991,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00581a35	0	clone_BFXMLObj_0c_value			confirmed		0x008e10f8#5	
 0x00581a61	0	clone_BFXMLObj_three_vector_value			confirmed		0x008e112c#5	
 0x00581aa6	0	ui_typed_value_dtor			confirmed		0x008bfbc0#0	
-0x00581ac7	162		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00581ac7	162	wrap_sound_event_payload_default_position			confirmed			
 0x00581b69	39	init_sound_event_payload_defaults			confirmed			
 0x00581b90	151	wrap_sound_event_payload_at_position			confirmed			
 0x00581c27	198	wrap_sound_event_payload_from_entity_position			confirmed			
 0x00581ced	78	assign_refcounted_sound_event_value_from_token			confirmed			
-0x00581d3b	113		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00581d3b	113	wrap_inline_payload_source_as_refcounted_value			confirmed			
 0x00581dac	47	get_type_BFSoundMgr			confirmed			
 0x00581ddb	0		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified		0x008e12b8#1	
 0x00581de0	32		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00581e00	0	init_BFSoundMgr_descriptor_ref_vtable_thunk			confirmed		0x008e12b8#2	
 0x00581e05	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00581eb7	579		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00581eb7	579	construct_BFSoundMgr_fields			confirmed			
 0x005820fa	0	scalar_delete_BFSoundMgr			confirmed		0x008e12b8#0	
-0x00582115	339		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00582115	339	destroy_BFSoundMgr_fields			confirmed			
 0x00582268	62		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x005822a6	234		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00582390	110		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
-0x005823fe	46		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x005823fe	46	destroy_BFSoundMgr_runtime_sound_config_value			confirmed			
 0x0058242c	135		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x005824b3	30		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x005824d1	1711		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00582b80	150		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
 0x00582c16	170		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00582cc0	614		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x00582f26	192		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00582cc0	614	release_BFSoundMgr_active_sound_lists			confirmed			
+0x00582f26	192	shutdown_BFSoundMgr_runtime_state			confirmed			
 0x00582fe6	238		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x005830d4	109		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00583141	98		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
@@ -8035,17 +8035,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00583daa	0	read_BFSoundMgr_sound_options_xml			confirmed		0x008e12b8#20	
 0x00583e20	0	write_BFSoundMgr_volume_options_xml			confirmed		0x008e12b8#19	
 0x00583e9f	330		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00583fe9	122		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x00584063	76		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00583fe9	122	read_BFSoundMgr_soundtag_entry			confirmed			
+0x00584063	76		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x005840af	161		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584150	172		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00584150	172	read_BFSoundMgr_sounddirs_xml			confirmed			
 0x005841fc	0	handle_BFSoundMgr_add_sound_value			confirmed		0x008e1320#0	
 0x00584232	0	mute_BFSoundMgr_master_volume_and_mark_paused			confirmed		0x008e1320#2	
 0x005842d4	0	duck_BFSoundMgr_master_volume_and_mark_ducking			confirmed		0x008e1320#1	
 0x0058430e	0	restore_BFSoundMgr_master_volume_and_clear_ducking			confirmed		0x008e1320#3	
 0x005843a0	0	handle_BFSoundMgr_add_typed_sound_payload			confirmed		0x008e1338#0	
-0x00584409	126		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x00584487	172		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00584409	126	set_BFSoundMgr_soundtag_payload			confirmed			
+0x00584487	172	lookup_BFSoundMgr_soundtag_payload			confirmed			
 0x00584619	0	handle_BFSoundMgr_listener_pose_payload			confirmed		0x008e1338#1	
 0x0058472d	0	set_BFSoundMgr_music_volume_from_value			confirmed		0x008e1338#2	
 0x005847ac	0	get_BFSoundMgr_music_volume_value			confirmed		0x008e1338#3	
@@ -8054,15 +8054,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005849ba	156		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584a56	82		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00584aa8	23		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
-0x00584abf	222		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x00584b9d	208		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00584abf	222	upsert_BFSoundMgr_named_volume_modifier			confirmed			
+0x00584b9d	208	remove_BFSoundMgr_named_volume_modifier			confirmed			
 0x00584c6d	212		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x00584d41	70		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00584d87	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584dd8	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584e08	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
-0x00584e2c	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584e50	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00584dd8	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
+0x00584e08	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00584e2c	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
+0x00584e50	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584e74	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
 0x00584ee0	153		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00584fc0	139		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
@@ -9342,9 +9342,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a718b	221		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005a7268	201		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005a7331	47	resolve_localized_inline_ui_text_string			confirmed	gamebryo		
-0x005a7360	187		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a741b	713		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a76e4	173		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005a7360	187	lookup_BFLocaleMgr_text_ref_row			confirmed	gamebryo		
+0x005a741b	713	format_localized_inline_ui_text_ref_args			confirmed	gamebryo		
+0x005a76e4	173	load_BFLocaleMgr_source_string_tables			confirmed	gamebryo		
 0x005a7791	263		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005a7898	105		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005a7901	169		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
@@ -18282,7 +18282,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00704109	371		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x0070427c	90		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007042d6	205		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
-0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007044f8	50		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070452a	443		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007046e5	213		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18314,7 +18314,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00705714	27		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070574a	26		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705764	36		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a2d	26		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a47	44		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a73	1133	register_entity_component_type_pairs			confirmed	gamebryo		
