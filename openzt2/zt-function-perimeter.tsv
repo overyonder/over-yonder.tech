@@ -22023,27 +22023,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007bac49	254	refresh_BFSndComponent_3d_sound_positions			confirmed	gamebryo		
 0x007bad47	0	emit_BFSndComponent_sound_update_events_wrapper			confirmed		0x00902538#23	
 0x007bad57	187	emit_BFSndComponent_sound_update_events			confirmed	gamebryo		
-0x007bae12	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#25	ui
-0x007baec4	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#26	ui
-0x007baf76	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#27	ui
-0x007bb00d	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025a8#3	ui
-0x007bb042	153		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb122	160		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb1c2	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025e8#21	ui
+0x007bae12	0	emit_BFSndComponent_pause_events			confirmed		0x00902538#25	
+0x007baec4	0	emit_BFSndComponent_resume_events			confirmed		0x00902538#26	
+0x007baf76	0	remove_BFSndComponent_sound_from_value			confirmed		0x00902538#27	
+0x007bb00d	0	allocate_BFSndComponent_from_descriptor			confirmed		0x009025a8#3	
+0x007bb042	153	register_unique_BFSndComponent_sound_event_value_handler			confirmed	gamebryo		
+0x007bb122	160	append_BFSndComponent_sound_event_value_handler_entry			confirmed	gamebryo		
+0x007bb1c2	0	get_BFMultiGroundFitComponent_type_name_string_global			confirmed		0x009025e8#21	
 0x007bb1c8	47	get_type_BFMultiGroundFitComponent			confirmed	gamebryo		
-0x007bb1f7	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025e8#1	ui
-0x007bb1fc	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb21c	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025e8#2	ui
-0x007bb221	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025e8#0	ui
-0x007bb23c	18		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb24e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902668#4	ui
-0x007bb2b1	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025e8#20	ui
-0x007bb2bf	523		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb4ca	53		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb4ff	287		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb61e	157		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb6bb	308		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bb7ef	153		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007bb1f7	0	get_type_BFMultiGroundFitComponent_vtable_thunk			confirmed		0x009025e8#1	
+0x007bb1fc	32	init_BFMultiGroundFitComponent_descriptor_ref			confirmed	gamebryo		
+0x007bb21c	0	init_BFMultiGroundFitComponent_descriptor_ref_vtable_thunk			confirmed		0x009025e8#2	
+0x007bb221	0	scalar_delete_BFMultiGroundFitComponent			confirmed		0x009025e8#0	
+0x007bb23c	18	destroy_BFMultiGroundFitComponent			confirmed	gamebryo		
+0x007bb24e	0	update_BFMultiGroundFitComponent_ground_fit			confirmed		0x00902668#4	
+0x007bb2b1	0	read_BFMultiGroundFitComponent_xml			confirmed		0x009025e8#20	
+0x007bb2bf	523	fit_BFMultiGroundFitComponent_scene_nodes			confirmed	gamebryo		
+0x007bb4ca	53	fit_BFMultiGroundFitComponent_child_attachment_nodes			confirmed	gamebryo		
+0x007bb4ff	287	fit_BFMultiGroundFitComponent_attachment_node_to_ground			confirmed	gamebryo		
+0x007bb61e	157	refresh_BFMultiGroundFitComponent_attachment_transform			confirmed	gamebryo		
+0x007bb6bb	308	fit_BFMultiGroundFitComponent_renderer_resource_attachment			confirmed	gamebryo		
+0x007bb7ef	153	walk_BFMultiGroundFitComponent_attachment_tree_for_ground_fit			confirmed	gamebryo		
 0x007bb888	278		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007bb9c2	0		UI dependency references, movement/view components, and animatio		unidentified		0x009026e0#21	ui
 0x007bb9c8	47	get_type_BFMovingComponent			confirmed	gamebryo		
