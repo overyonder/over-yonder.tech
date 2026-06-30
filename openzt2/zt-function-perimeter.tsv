@@ -19654,33 +19654,33 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074e5f8	710	accumulate_scene_node_xy_bounds			confirmed	gamebryo		
 0x0074e8be	307	write_scaled_rotation_translation_matrix4			confirmed	gamebryo		
 0x0074e9f1	538	decompose_matrix4_uniform_scale_rotation_translation			confirmed	gamebryo		
-0x0074ec0b	24		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074ec0b	24	global_animation_payload_vector_count			confirmed	gamebryo		
 0x0074ec23	47	get_type_BFRenderer			confirmed	gamebryo		
-0x0074ec52	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdd78#1	ui
-0x0074ec57	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ec77	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdd78#2	ui
-0x0074ec7c	38		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ed0b	208		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074eddb	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdd78#0	ui
+0x0074ec52	0	get_type_BFRenderer_vtable_thunk			confirmed		0x008fdd78#1	
+0x0074ec57	32	get_BFPosInterpolateComponent_object_detail_record			confirmed	gamebryo		
+0x0074ec77	0	get_BFPosInterpolateComponent_object_detail_record_thunk			confirmed		0x008fdd78#2	
+0x0074ec7c	38	get_object_detail_type_handler_list			confirmed	gamebryo		
+0x0074ed0b	208	construct_BFRenderer			confirmed	gamebryo		
+0x0074eddb	0	scalar_delete_BFRenderer			confirmed		0x008fdd78#0	
 0x0074edf6	170	destroy_display_settings_dialog_members			confirmed	gamebryo		
-0x0074eea0	57		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fdd78#23	ui
-0x0074ef77	40		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ef9f	18		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fdd78#19	ui
+0x0074eea0	57	release_BFRenderer_display_resources			confirmed	gamebryo	0x008fdd78#23	
+0x0074ef77	40	forward_vector3_to_BFRenderer_context_slot74			confirmed	gamebryo		
+0x0074ef9f	18	BFRenderer_write_display_settings_config_slot			confirmed	gamebryo	0x008fdd78#19	
 0x0074efb1	666	read_graphics_particle_budget			confirmed	gamebryo	0x008fdd78#20	
 0x0074f24b	281	write_display_settings_config			confirmed	gamebryo		
 0x0074f364	740	read_display_settings_config			confirmed	gamebryo		
 0x0074f686	0	0x0074f680 callsite_address			confirmed			
 0x0074f6b6	325	enumerate_display_device_modes			confirmed	gamebryo		
 0x0074f70c	0	0x0074f706 callsite_address			confirmed			
-0x0074f7fb	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdd78#26	ui
-0x0074f894	372		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074fa08	25		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074fa21	16		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fdd78#21	ui
+0x0074f7fb	0	rebuild_supported_display_mode_tree			confirmed		0x008fdd78#26	
+0x0074f894	372	choose_best_display_mode_for_settings			confirmed	gamebryo		
+0x0074fa08	25	set_display_mode_invalid_flag			confirmed	gamebryo		
+0x0074fa21	16	apply_display_resolution_from_settings			confirmed	gamebryo	0x008fdd78#21	
 0x0074fa31	101	save_graphics_config_and_release_display_resources			confirmed	gamebryo	0x008fdd78#22	
 0x0074fa96	646	read_graphics_detail_settings			confirmed	gamebryo		
-0x0074fd1c	19		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074fd2f	104		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074fd97	61		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074fd1c	19	append_pending_display_preview_ref_if_present			confirmed	gamebryo		
+0x0074fd2f	104	append_pending_display_preview_ref			confirmed	gamebryo		
+0x0074fd97	61	pop_pending_display_preview_ref			confirmed	gamebryo		
 0x0074fdd4	2062	refresh_display_preview_backbuffer			confirmed	gamebryo		
 0x0074fe43	0	0x0074fe3d callsite_address			confirmed			
 0x007505e2	95	select_object_detail_entry			confirmed	gamebryo		
@@ -19724,7 +19724,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075228c	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x00752527	187		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x007525e2	105		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
-0x0075264b	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
+0x0075264b	139	find_or_insert_presentation_registry_value			confirmed	gamebryo		
 0x007526d6	341		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075282b	49		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x0075285c	145		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
@@ -19736,7 +19736,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00752e60	36		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
 0x00752e84	66		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		economy
 0x00752ec6	210		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
-0x00752f98	394		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
+0x00752f98	394	insert_presentation_registry_tree_node			confirmed	gamebryo		
 0x00753122	677		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x007533c7	59		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
 0x00753402	0		map/set erase and red-black-tree helpers for presentation regist		unidentified		0x008fde20#21	
@@ -19752,7 +19752,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00753787	111		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x007537f6	0		scene/view node update and child visibility propagation		unidentified		0x008fde20#20	
 0x007537fb	103	emit_bf3devent_interpolate_complete_payload			confirmed	gamebryo		
-0x00753878	68		scene/view node update and child visibility propagation		unidentified	gamebryo		ui
+0x00753878	68	clear_scene_view_node_update_storage			confirmed	gamebryo		
 0x007538bc	1044		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00753cd0	872		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x00754038	420		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
