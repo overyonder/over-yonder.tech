@@ -13707,28 +13707,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064aaa4	50	set_UIAspect_active_state_and_refresh			confirmed	gamebryo		
 0x0064aad6	18	select_UIAspect_alternate_state_table_and_refresh			confirmed	gamebryo		
 0x0064aae8	50	insert_UIAspect_child_layout_link			confirmed	gamebryo		
-0x0064ab1a	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ab4c	62		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ab8a	56		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064abc2	48		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064abf2	124		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ac6e	80		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064acbe	62		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064acfc	142		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ad8a	120		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ae02	40		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064ae2a	33		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064ab1a	50	append_UIAspect_child_layout_link			confirmed	gamebryo		
+0x0064ab4c	62	set_UIAspect_direct_text_string_and_refresh			confirmed	gamebryo		
+0x0064ab8a	56	set_UIAspect_parsed_text_ref_and_refresh			confirmed	gamebryo		
+0x0064abc2	48	set_UIAspect_text_source_object_and_refresh			confirmed	gamebryo		
+0x0064abf2	124	resolve_UIAspect_text_ref_and_refresh_layout			confirmed	gamebryo		
+0x0064ac6e	80	ensure_UIAspect_text_layout_state			confirmed	gamebryo		
+0x0064acbe	62	get_UIAspect_text_layout_extent_or_zero			confirmed	gamebryo		
+0x0064acfc	142	propagate_UIAspect_resource_ref_to_state_entries			confirmed	gamebryo		
+0x0064ad8a	120	propagate_UIAspect_region_rect_to_state_entries			confirmed	gamebryo		
+0x0064ae02	40	select_UIAspect_state_rect_or_default			confirmed	gamebryo		
+0x0064ae2a	33	format_UIAspect_alwayshit_mode_name			confirmed	gamebryo		
 0x0064ae4b	343	write_ui_aspect_element			confirmed	gamebryo		
-0x0064afa2	76		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064afee	103		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b055	113		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064afa2	76	parse_UIAspect_alwayshit_mode			confirmed	gamebryo		
+0x0064afee	103	compare_UIAspect_state_resource_entries			confirmed	gamebryo		
+0x0064b055	113	prune_matching_UIAspect_state_resource_entries			confirmed	gamebryo		
 0x0064b0c6	705	read_ui_aspect_element			confirmed	gamebryo		
-0x0064b387	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b3a7	153		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b440	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b472	56		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b4aa	68		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064b4ee	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064b387	32	detach_UIAspect_primary_resource_from_layout_owner			confirmed	gamebryo		
+0x0064b3a7	153	refresh_UIAspect_active_state_resources			confirmed	gamebryo		
+0x0064b440	50	propagate_UIAspect_primary_color_to_state_table			confirmed	gamebryo		
+0x0064b472	56	set_UIAspect_primary_rgba_color_and_propagate			confirmed	gamebryo		
+0x0064b4aa	68	set_UIAspect_primary_alpha_across_state_entries			confirmed	gamebryo		
+0x0064b4ee	50	propagate_UIAspect_secondary_color_to_state_table			confirmed	gamebryo		
 0x0064b520	68		typed UI value construction and forwarding		unidentified	gamebryo		ui
 0x0064b564	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
 0x0064b584	348		typed UI value construction and forwarding		unidentified	gamebryo		ui
