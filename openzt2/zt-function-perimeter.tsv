@@ -7913,8 +7913,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057c9a3	63	lookup_active_object_child_by_token			confirmed			
 0x0057c9e2	477	collect_adoptable_species_by_rarity_threshold			confirmed			
 0x0057cbbf	23		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057cbd6	331		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057cd21	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057cbd6	331	resolve_traversability_candidate_payload_for_key			confirmed			
+0x0057cd21	105	clone_traversability_candidate_tree_storage			confirmed			
 0x0057cd8a	123		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057ce05	60		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ce41	313	resolve_main_mode_or_scenario_state_value			confirmed			
@@ -9366,25 +9366,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a8c2b	48	destroy_BFLocaleMgr_text_category_map_storage			confirmed	gamebryo		
 0x005a8c5b	36	clear_BFLocaleMgr_text_category_map_nodes			confirmed	gamebryo		
 0x005a8c7f	115	count_BFLocaleMgr_text_category_matches			confirmed	gamebryo		
-0x005a8cf2	160		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8d92	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8e05	34		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8cf2	160	find_or_insert_BFLocaleMgr_loaded_source_marker			confirmed	gamebryo		
+0x005a8d92	115	count_BFLocaleMgr_loaded_source_matches			confirmed	gamebryo		
+0x005a8e05	34	resize_BFLocaleMgr_inline_string_vector_default			confirmed	gamebryo		
 0x005a8e27	0	create_BFLocaleMgr_default_instance			confirmed		0x008e4d58#22	
-0x005a8e42	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8ee8	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8f0c	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8f7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8ff2	384		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9172	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a91bf	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9348	166		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a93ee	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9577	57		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a95b0	65		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a95f1	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9621	212		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a96f5	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9789	393		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8e42	166	find_or_insert_BFLocaleMgr_text_payload_record			confirmed	gamebryo		
+0x005a8ee8	36	clear_BFLocaleMgr_text_payload_map_nodes			confirmed	gamebryo		
+0x005a8f0c	115	lower_bound_BFLocaleMgr_text_payload_record			confirmed	gamebryo		
+0x005a8f7f	115	count_BFLocaleMgr_text_payload_matches			confirmed	gamebryo		
+0x005a8ff2	384	insert_BFLocaleMgr_text_category_record_with_hint			confirmed	gamebryo		
+0x005a9172	77	free_BFLocaleMgr_text_category_subtree			confirmed	gamebryo		
+0x005a91bf	393	insert_BFLocaleMgr_loaded_source_marker_with_hint			confirmed	gamebryo		
+0x005a9348	166	resize_BFLocaleMgr_inline_string_vector			confirmed	gamebryo		
+0x005a93ee	393	insert_BFLocaleMgr_text_payload_record_with_hint			confirmed	gamebryo		
+0x005a9577	57	free_BFLocaleMgr_text_payload_subtree			confirmed	gamebryo		
+0x005a95b0	65	init_BFLocaleMgr_text_payload_tree_storage			confirmed	gamebryo		
+0x005a95f1	48	destroy_BFLocaleMgr_text_payload_tree_storage			confirmed	gamebryo		
+0x005a9621	212	find_or_insert_BFLocaleMgr_text_category_record			confirmed	gamebryo		
+0x005a96f5	148	erase_BFLocaleMgr_text_category_map_range			confirmed	gamebryo		
+0x005a9789	393	insert_BFLocaleMgr_text_category_map_node			confirmed	gamebryo		
 0x005a9912	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
 0x005a9947	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
 0x005a9a16	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
@@ -18282,7 +18282,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00704109	371		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x0070427c	90		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007042d6	205		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
-0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x007044f8	50		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070452a	443		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007046e5	213		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18314,7 +18314,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00705714	27		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070574a	26		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705764	36		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x00705a2d	26		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a47	44		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705a73	1133	register_entity_component_type_pairs			confirmed	gamebryo		
