@@ -7811,7 +7811,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00577ede	0	scalar_delete_ZTScenarioMgr			confirmed		0x008e07f8#0	
 0x00577ef9	44	destroy_ZTScenarioMgr_fields			confirmed			
 0x00577f25	25	get_ZTApp_active_ui_root			confirmed			
-0x005780ca	0	synchronize_ZTScenarioMgr_uimod_state_then_delegate			confirmed		0x008e0870#4	
+0x005780ca	0	synchronize_ZTScenarioMgr_uimod_state_then_delegate			confirmed		0x008e07f8#34	
 0x005780eb	287	apply_ZTScenarioMgr_uimod_value_to_ui_object			confirmed			
 0x0057820a	309	restore_ZTScenarioMgr_uimod_states_and_clear			confirmed			
 0x0057833f	0	write_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#19	
@@ -8043,7 +8043,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00583e9f	330		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00583fe9	122	read_BFSoundMgr_soundtag_entry			confirmed			
 0x00584063	76		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
-0x005840af	161		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x005840af	161	load_BFSoundMgr_soundtags_from_sounddir_key			confirmed			
 0x00584150	172	read_BFSoundMgr_sounddirs_xml			confirmed			
 0x005841fc	0	handle_BFSoundMgr_add_sound_value			confirmed		0x008e1320#0	
 0x00584232	0	mute_BFSoundMgr_master_volume_and_mark_paused			confirmed		0x008e1320#2	
@@ -8063,8 +8063,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00584abf	222	upsert_BFSoundMgr_named_volume_modifier			confirmed			
 0x00584b9d	208	remove_BFSoundMgr_named_volume_modifier			confirmed			
 0x00584c6d	212	refresh_BFSoundMgr_named_volume_modifier_aggregate			confirmed			
-0x00584d41	70		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584d87	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00584d41	70	append_BFSoundMgr_cross_fader			confirmed			
+0x00584d87	81	map_BFSoundMgr_soundstage_room_type_to_mask			confirmed			
 0x00584dd8	48	destroy_inline_string_tree_storage			confirmed			
 0x00584e08	36	clear_inline_string_tree_header			confirmed			
 0x00584e2c	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
@@ -10727,25 +10727,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005cf790	1458	build_NiCapsuleBV_debug_mesh			confirmed	gamebryo		
 0x005cfd42	1332	build_NiSphereBV_debug_mesh			confirmed	gamebryo		
 0x005d0276	2255	build_NiLozengeBV_debug_mesh			confirmed	gamebryo		
-0x005d0b45	209		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d0b45	209	build_NiUnionBV_debug_children			confirmed	gamebryo		
 0x005d0c16	0	copy_construct_NiSphereBV			confirmed			
 0x005d0c3b	0	allocate_default_NiSphereBV			confirmed		0x008e71e0#6	
-0x005d0c5a	54		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d0c5a	54	construct_NiSphereBV_from_sphere_source			confirmed	gamebryo		
 0x005d0c90	42	construct_NiSphereBV_from_center_radius			confirmed	gamebryo		
 0x005d0cba	0	copy_assign_NiSphereBV			confirmed		0x008e71e0#8	
 0x005d0ccf	0	test_NiSphereBV_equal			confirmed		0x008e71e0#9	
 0x005d0cfd	0	transform_NiSphereBV			confirmed		0x008e71e0#5	
-0x005d0d78	253		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d0e75	1589		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d14aa	312		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d15e2	33		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d1603	98		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d1665	1077		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d0d78	253	test_swept_sphere_sphere_overlap			confirmed	gamebryo		
+0x005d0e75	1589	solve_swept_sphere_sphere_contact			confirmed	gamebryo		
+0x005d14aa	312	test_swept_sphere_triangle_distance			confirmed	gamebryo		
+0x005d15e2	33	clear_three_vector_collision_scratch			confirmed	gamebryo		
+0x005d1603	98	eval_swept_sphere_triangle_distance_minus_radius			confirmed	gamebryo		
+0x005d1665	1077	solve_swept_sphere_triangle_contact			confirmed	gamebryo		
 0x005d1a9a	0	clone_NiSphereBV			confirmed		0x008e71e0#7	
 0x005d1ae4	0	transfer_NiSphereBV_fields_via_stream_channel			confirmed		0x008e71e0#0	
 0x005d1b05	0	save_NiSphereBV			confirmed		0x008e71e0#1	
 0x005d1b2f	0	append_NiSphereBV_debug_text			confirmed		0x008e71e0#11	
-0x005d1c2c	56		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d1c2c	56	register_NiBoundingVolume_collision_callbacks			confirmed	gamebryo		
 0x005d1fbd	0	get_NiCollisionData_rtti			confirmed		0x008e72b0#1	
 0x005d1fc3	128	construct_NiCollisionData_with_scene_object			confirmed	gamebryo		
 0x005d2043	0	scalar_delete_NiCollisionData			confirmed		0x008e72b0#0	
@@ -10756,10 +10756,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005d2164	0	invoke_NiCollisionData_scene_object_world_bound_update			confirmed		0x008e72b0#13	
 0x005d2171	0	update_NiCollisionData_scene_object_world_bound_from_parent			confirmed		0x008e72b0#14	
 0x005d2179	0	refresh_NiCollisionData_world_abv_state			confirmed		0x008e72b0#21	
-0x005d2228	322		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d2228	322	ensure_NiCollisionData_obb_root_cache			confirmed	gamebryo		
 0x005d236a	91	set_NiCollisionData_model_abv			confirmed	gamebryo		
-0x005d23c5	127		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d2444	97		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d23c5	127	allocate_NiCollisionData_geometry_vertex_cache			confirmed	gamebryo		
+0x005d2444	97	refresh_NiCollisionData_geometry_vertex_cache			confirmed	gamebryo		
 0x005d24a5	0	copy_NiCollisionData_propagation_and_model_abv			confirmed		0x008e72b0#22	
 0x005d24d4	0	append_NiCollisionData_header_debug_text			confirmed		0x008e72b0#8	
 0x005d2520	0	append_NiCollisionData_debug_text			confirmed		0x008e72b0#9	
@@ -10772,17 +10772,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005d2758	0	save_NiCollisionData_binary			confirmed		0x008e72b0#6	
 0x005d27ae	0	compare_NiCollisionData_graph			confirmed		0x008e72b0#7	
 0x005d2839	0	get_NiCollisionObject_rtti			confirmed		0x008fd21c#6	
-0x005d283f	3865		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3758	1592		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3d90	28		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3dac	168		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3e54	208		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3f24	206		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
-0x005d3ff2	43		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d283f	3865	compute_point_triangle_closest_distance			confirmed	gamebryo		
+0x005d3758	1592	compute_point_triangle_distance_with_barycentrics			confirmed	gamebryo		
+0x005d3d90	28	compute_normalized_triangle_normal			confirmed	gamebryo		
+0x005d3dac	168	test_scalar_function_sign_change_recursive			confirmed	gamebryo		
+0x005d3e54	208	bracket_scalar_function_sign_change_recursive			confirmed	gamebryo		
+0x005d3f24	206	refine_scalar_function_root_bisection			confirmed	gamebryo		
+0x005d3ff2	43	copy_construct_NiBoxBV_payload			confirmed	gamebryo		
 0x005d401d	37	clear_NiBoxBV_vector_payload			confirmed	gamebryo		
 0x005d4042	0	allocate_default_NiBoxBV			confirmed		0x008e7318#6	
 0x005d4070	87	construct_NiBoxBV			confirmed	gamebryo		
-0x005d40c7	97		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
+0x005d40c7	97	construct_NiBoxBV_from_box_source			confirmed	gamebryo		
 0x005d4128	173		NetImmerse collision and bounding-volume serialization helpers		unidentified	gamebryo		io/assets
 0x005d41d5	0	copy_assign_NiBoxBV_payload			confirmed		0x008e7318#8	
 0x005d41eb	0	compare_NiBoxBV_payload			confirmed		0x008e7318#9	
@@ -11056,7 +11056,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f518b	76	construct_BFAIBiomeMap_assignment_registry_pair			confirmed	gamebryo		
 0x005f5231	76	construct_BFAIAttributeData_assignment_registry_pair			confirmed	gamebryo		
 0x005f52ec	76	construct_BFAISubjectData_assignment_registry_pair			confirmed	gamebryo		
-0x005f537f	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e7a34#1	game-entities
+0x005f537f	0	allocate_BFAITargetData			confirmed		0x008e7a34#1	
 0x005f53a7	76	construct_BFAITargetData_assignment_registry_pair			confirmed	gamebryo		
 0x005f5455	372	insert_inline_string_value_record_with_hint			confirmed	gamebryo		
 0x005f55c9	33	lower_bound_inline_string_value_tree_by_key			confirmed	gamebryo		
@@ -11075,7 +11075,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f6124	667	erase_property_value_tree_node			confirmed	gamebryo		
 0x005f63bf	69	destroy_inline_string_value_tree_subtree			confirmed	gamebryo		
 0x005f640c	0	return_receiver_plus_0x34			confirmed		0x008e77d4#12	
-0x005f6410	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e7a34#2	game-entities
+0x005f6410	0	scalar_delete_BFAICognitiveMgr_token_container			confirmed		0x008e7a34#2	
 0x005f6436	73	construct_BFAICognitiveMgr_token_container			confirmed	gamebryo		
 0x005f647f	47	get_type_BFAIFadeHoldData			confirmed	gamebryo		
 0x005f64ae	0	get_type_BFAIFadeHoldData_vtable_thunk			confirmed		0x008db0dc#1	
@@ -11112,25 +11112,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005f795a	208	populate_BFBehSetMap_from_behavior_path			confirmed	gamebryo		
 0x005f7a2a	34	import_BFBehSetMap_behavior_path_entries			confirmed	gamebryo		
 0x005f7a4c	215	find_BFBehSetMap_matching_behavior_entry			confirmed	gamebryo		
-0x005f7b23	122		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7b9d	270		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7cab	135		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7d32	192		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7df2	48		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7e22	116		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7e96	198		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7f5c	48		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f7f8c	120		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x005f7b23	122	resolve_BFBehSetMap_matching_subject_value			confirmed	gamebryo		
+0x005f7b9d	270	import_BFBehSetMap_subject_behavior_bindings			confirmed	gamebryo		
+0x005f7cab	135	assign_BFBehSetMap_entry_subject_behavior			confirmed	gamebryo		
+0x005f7d32	192	get_or_insert_BFBehSetMap_entry_value_slot			confirmed	gamebryo		
+0x005f7df2	48	destroy_BFBehSetMap_entry_value_tree			confirmed	gamebryo		
+0x005f7e22	116	count_BFBehSetMap_entry_value_tail_records			confirmed	gamebryo		
+0x005f7e96	198	get_or_insert_BFBehSetMap_subject_value_slot			confirmed	gamebryo		
+0x005f7f5c	48	destroy_BFBehSetMap_subject_lookup_tree			confirmed	gamebryo		
+0x005f7f8c	120	count_BFBehSetMap_subject_lookup_matches			confirmed	gamebryo		
 0x005f8004	0	allocate_BFBehSetMap			confirmed		0x008e7c1c#21	
-0x005f801c	144		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f80ac	372		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f8220	378		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f839a	334		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f84e8	105		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f8551	210		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f8623	175		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f86d2	393		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x005f885b	217		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x005f801c	144	get_or_insert_BFBehSetMap_subject_object_slot			confirmed	gamebryo		
+0x005f80ac	372	insert_BFBehSetMap_entry_value_record_with_hint			confirmed	gamebryo		
+0x005f8220	378	insert_BFBehSetMap_subject_value_record_with_hint			confirmed	gamebryo		
+0x005f839a	334	insert_BFBehSetMap_subject_object_record_with_hint			confirmed	gamebryo		
+0x005f84e8	105	copy_BFBehSetMap_subject_object_tree			confirmed	gamebryo		
+0x005f8551	210	find_or_insert_BFBehSetMap_entry_value_record			confirmed	gamebryo		
+0x005f8623	175	erase_BFBehSetMap_entry_value_tree_range			confirmed	gamebryo		
+0x005f86d2	393	insert_BFBehSetMap_entry_value_tree_node			confirmed	gamebryo		
+0x005f885b	217	find_or_insert_BFBehSetMap_subject_value_record			confirmed	gamebryo		
 0x005f8934	175		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x005f89e3	402		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x005f8b75	63		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
@@ -23345,17 +23345,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f4874	141	insert_graphics_propertyset_records			confirmed			
 0x007f4901	41		hardware capability parsing and unresolved diagnostics/platform 		unidentified			ui
 0x007f492a	65	construct_graphics_propertyset_record_range			confirmed			
-0x007f496b	374		hardware capability parsing and unresolved diagnostics/platform 		unidentified			ui
-0x007f4ae1	48		hardware capability parsing and unresolved diagnostics/platform 		unidentified			ui
+0x007f496b	374		hardware capability parsing and unresolved diagnostics/platform 		unidentified			economy
+0x007f4ae1	48		hardware capability parsing and unresolved diagnostics/platform 		unidentified			
 0x007f4b11	37		hardware capability parsing and unresolved diagnostics/platform 		unidentified			renderer
 0x007f4b36	462	insert_graphics_propertyset_record			confirmed			
 0x007f4d04	67	allocate_graphics_propertyset_record_array			confirmed			
 0x007f4d47	49	advance_graphics_propertyset_iterator			confirmed			
-0x007f4d78	203		hardware capability parsing and unresolved diagnostics/platform 		unidentified			
-0x007f4e43	175		hardware capability parsing and unresolved diagnostics/platform 		unidentified			ui
-0x007f4ef2	387		hardware capability parsing and unresolved diagnostics/platform 		unidentified			ui
+0x007f4d78	203	get_or_insert_graphics_propertyset_tree_node			confirmed			
+0x007f4e43	175		hardware capability parsing and unresolved diagnostics/platform 		unidentified			
+0x007f4ef2	387		hardware capability parsing and unresolved diagnostics/platform 		unidentified			
 0x007f5075	50	find_graphics_propertyset_tree_position			confirmed			
-0x007f50a7	671		hardware capability parsing and unresolved diagnostics/platform 		unidentified			
+0x007f50a7	671	erase_graphics_propertyset_tree_node			confirmed			
 0x007f5346	66		hardware capability parsing and unresolved diagnostics/platform 		unidentified			economy
 0x007f5388	61	destroy_requirements_parse_tree			confirmed			
 0x007f53c5	27	format_hwconfig_388_byte_string			confirmed			
@@ -23369,17 +23369,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f5548	0		hardware capability parsing and unresolved diagnostics/platform 		unidentified		0x0090773c#0	
 0x007f5583	47	get_type_BFScenarioMgr			confirmed			
 0x007f55b2	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#1	
-0x007f55b7	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f55b7	32	init_BFScenarioMgr_descriptor_ref			confirmed			
 0x007f55d7	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#2	
-0x007f55dc	75		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f55dc	75	get_BFScenarioMgr_handler_registry			confirmed			
 0x007f5690	47	get_type_BFScenarioAltTextData			confirmed			
 0x007f56bf	0	get_type_BFScenarioAltTextData_vtable_thunk			confirmed		0x0090773c#1	
-0x007f56c4	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f56c4	32	init_BFScenarioAltTextData_descriptor_ref			confirmed			
 0x007f56e4	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x0090773c#2	
-0x007f56e9	615		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f5950	144		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f56e9	615	populate_BFScenarioMgr_handler_registry			confirmed			
+0x007f5950	144	construct_BFScenarioMgr_members			confirmed			
 0x007f59e0	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#0	
-0x007f59fb	173		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f59fb	173	destroy_BFScenarioMgr_members			confirmed			
 0x007f5aa8	309	handle_challenge_invitation			confirmed			
 0x007f5dd1	132	apply_scenario_alt_text_value_and_refresh_script_context			confirmed			
 0x007f5ef3	251		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
@@ -23391,96 +23391,104 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f7355	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x0090773c#4	
 0x007f7431	186		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007f74eb	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907770#1	
-0x007f7506	153		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f75e6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907770#3	
-0x007f7631	255		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7730	67		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f7506	153	register_BFScenarioMgr_handler_for_unseen_type			confirmed			
+0x007f7631	255	assign_static_scenario_pointer_vector			confirmed			
+0x007f7730	67	clear_static_scenario_pointer_vector			confirmed			
 0x007f7773	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
-0x007f7813	71		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f785a	94		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f7813	71	as_BFScenarioScriptAction_from_named_value			confirmed			
+0x007f785a	94	resolve_BFScenarioAltTextData_from_value_slot			confirmed			
 0x007f78b8	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907730#0	
 0x007f78c0	47	get_type_BFScenarioRule			confirmed			
-0x007f78ef	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077cc#0	
-0x007f78f4	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7914	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077cc#1	
-0x007f7919	68		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7a1f	62		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7a78	92		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7ae0	124		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007f7b5c	61		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7b99	61		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7bd6	61		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7c13	61		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f7c50	116		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007f7d78	507	read_scenario_goal			confirmed		0x009077cc#18	
-0x007f7f73	630	read_scenario_objective			confirmed		0x009077cc#19	
+0x007f78ef	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#1	
+0x007f78f4	32	init_BFScenarioRule_descriptor_ref			confirmed			
+0x007f7914	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#2	
+0x007f7919	68	get_BFScenarioRule_handler_registry			confirmed			
+0x007f795d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907840#0	
+0x007f79c9	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907840#1	
+0x007f7a1f	62	construct_BFScenarioRule_members			confirmed			
+0x007f7a5d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#0	
+0x007f7a78	92	destroy_BFScenarioRule_members			confirmed			
+0x007f7ad4	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#21	
+0x007f7adc	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#22	
+0x007f7ae0	124		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#23	ui
+0x007f7b5c	61	find_BFScenarioRule_general_xml_child			confirmed			
+0x007f7b99	61	find_BFScenarioRule_neutral_xml_child			confirmed			
+0x007f7bd6	61	find_BFScenarioRule_success_xml_child			confirmed			
+0x007f7c13	61	find_BFScenarioRule_failure_xml_child			confirmed			
+0x007f7c50	116		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#24	ui
+0x007f7cc4	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#27	
+0x007f7d16	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#28	
+0x007f7d47	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#29	
+0x007f7d78	507	read_scenario_goal			confirmed		0x009077c8#19	
+0x007f7f73	630	read_scenario_objective			confirmed		0x009077c8#20	
 0x007f81e9	163		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f828c	163		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f832f	110		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f839d	64		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007f83dd	25		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
+0x007f83dd	25		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#25	ui
+0x007f83f6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907840#3	
 0x007f8450	71		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
 0x007f8497	47	get_type_BFScenarioGroup			confirmed			
 0x007f84c6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#1	
-0x007f84cb	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f84cb	32	init_BFScenarioGroup_descriptor_ref			confirmed			
 0x007f84eb	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#2	
-0x007f84f0	75		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f84f0	75	get_BFScenarioGroup_handler_registry			confirmed			
 0x007f853b	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907910#0	
 0x007f8551	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907910#1	
 0x007f85a4	102		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007f860a	61		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f860a	61	construct_BFScenarioGroup_members			confirmed			
 0x007f8647	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#0	
 0x007f8662	41		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
-0x007f868b	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0854#0	
-0x007f86f2	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0854#1	
-0x007f871d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#0	
-0x007f8782	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#1	
-0x007f87a1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#2	
-0x007f87be	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#3	
-0x007f87df	131		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907708#4	
+0x007f868b	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#23	
+0x007f86f2	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#24	
+0x007f871d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#30	
+0x007f8782	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#31	
+0x007f87a1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#32	
+0x007f87be	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#33	
+0x007f87df	131		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#34	
 0x007f8862	237		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007f894f	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0854#2	
-0x007f89ae	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#5	
+0x007f894f	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#25	
+0x007f89ae	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#35	
 0x007f8a37	150		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007f8acd	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0854#4	
-0x007f8ae1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#6	
-0x007f8b59	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e0870#7	
+0x007f8acd	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#27	
+0x007f8ae1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#36	
+0x007f8b59	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#37	
 0x007f8bcd	241		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#19	io/assets
 0x007f8cbe	446	read_behavior_chain_node			confirmed		0x00907878#20	
 0x007f8e7c	130		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007f8efe	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907910#3	
-0x007f8f5d	153		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f8f5d	153	register_BFScenarioGroup_handler_for_unseen_type			confirmed			
 0x007f8ff6	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
 0x007f9096	131	register_BFScenario_type_descriptor_pairs			confirmed			
 0x007f9119	47	get_type_BFScenarioAction			confirmed			
 0x007f9148	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907954#0	
-0x007f914d	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f914d	32	init_BFScenarioAction_descriptor_ref			confirmed			
 0x007f916d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907954#1	
-0x007f9172	38		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9172	38	get_BFScenarioAction_handler_registry			confirmed			
 0x007f928f	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f92af	47	get_type_BFScenarioScriptAction			confirmed			
 0x007f92de	0	get_type_BFScenarioScriptAction_vtable_thunk			confirmed		0x009079b0#1	
-0x007f92e3	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f92e3	32	init_BFScenarioScriptAction_descriptor_ref			confirmed			
 0x007f9303	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#2	
-0x007f9308	38		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9308	38	get_BFScenarioScriptAction_handler_registry			confirmed			
 0x007f940a	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#0	
 0x007f9425	40		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f944d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#21	
 0x007f94a0	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#19	
 0x007f9504	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#20	
 0x007f958e	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907a10#1	
-0x007f95b6	107		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f95b6	107	populate_BFScenarioAction_handler_registry			confirmed			
 0x007f9668	89		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f96c1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907a10#3	
-0x007f9705	87		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f97a3	153		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9705	87	populate_BFScenarioScriptAction_handler_registry			confirmed			
+0x007f97a3	153	register_BFScenarioAction_handler_for_unseen_type			confirmed			
 0x007f983c	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
-0x007f98dc	117		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f9951	153		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f98dc	117	import_BFScenarioAction_handlers_into_script_registry			confirmed			
+0x007f9951	153	register_BFScenarioScriptAction_handler_for_unseen_type			confirmed			
 0x007f99ea	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
-0x007f9a8a	63		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f9ac9	79		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f9b18	53		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9a8a	63	append_cstr_s_checked			confirmed			
+0x007f9ac9	79	format_vsnprintf_s_checked			confirmed			
+0x007f9b18	53	copy_cstr_s_checked			confirmed			
 0x007f9b4d	45		scenario manager/rules/actions and IME/platform COM spans		unidentified			
 0x007f9b7a	35		scenario manager/rules/actions and IME/platform COM spans		unidentified			
 0x007f9b9d	122		scenario manager/rules/actions and IME/platform COM spans		unidentified			
