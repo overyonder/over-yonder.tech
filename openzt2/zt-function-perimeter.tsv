@@ -18657,9 +18657,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00711155	115		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x007111c8	494		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007113b6	143	write_BFPhysObj_position_plus_scaled_local_vector			confirmed	gamebryo		
-0x00711445	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x007114f6	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x007115a7	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00711445	177	write_BFPhysObj_position_plus_scaled_slot154_vector			confirmed	gamebryo		
+0x007114f6	177	write_BFPhysObj_position_plus_scaled_slot15c_vector			confirmed	gamebryo		
+0x007115a7	177	write_BFPhysObj_position_plus_scaled_slot158_vector			confirmed	gamebryo		
 0x00711658	105		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x007116c1	522	read_actor_component			confirmed	gamebryo		
 0x007118cb	144		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
@@ -19345,23 +19345,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0073c465	0		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified		0x008fcf40#2	world/pathing
 0x0073c485	859		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
 0x0073c604	0	0x0073c5fe callsite_address			confirmed			
-0x0073c7e0	180		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073c894	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fcf40#0	ui
-0x0073c8af	91		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073c90a	34		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fcf40#24	ui
-0x0073c92c	328		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fcf40#31	ui
-0x0073ca74	34		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073ca96	17		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fcf40#20	ui
-0x0073caa7	59		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo	0x008fcf40#38	ui
-0x0073cae2	94		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cb40	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008ef2b0#5	ui
-0x0073cb6a	55		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cba1	52		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cbd5	156		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cc71	161		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cd12	203		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cddd	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073cdfe	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0073c7e0	180	construct_BF3DApp_runtime_context			confirmed	gamebryo		
+0x0073c894	0	scalar_delete_BF3DApp_runtime_context			confirmed		0x008fcf40#0	
+0x0073c8af	91	destroy_BF3DApp_runtime_context_members			confirmed	gamebryo		
+0x0073c90a	34	clear_BF3DApp_runtime_context_bindings			confirmed	gamebryo	0x008fcf40#24	
+0x0073c92c	328	bind_BF3DApp_runtime_manager_context			confirmed	gamebryo	0x008fcf40#31	
+0x0073ca74	34	set_BF3DApp_active_preview_target			confirmed	gamebryo		
+0x0073ca96	17	test_BF3DApp_context_child_available			confirmed	gamebryo	0x008fcf40#20	
+0x0073caa7	59	attach_BF3DApp_context_and_require_core_managers			confirmed	gamebryo	0x008fcf40#38	
+0x0073cae2	94	initialize_BF3DApp_camera_component_context			confirmed	gamebryo		
+0x0073cb40	0	update_ground_fit_ui_window_mapping_globals			confirmed		0x008ef2b0#5	
+0x0073cb6a	55	dispatch_BF3DApp_active_preview_target_callbacks			confirmed	gamebryo		
+0x0073cba1	52	write_rgba_png_file_or_stream			confirmed	gamebryo		
+0x0073cbd5	156	copy_rgba_pixel_line_bresenham			confirmed	gamebryo		
+0x0073cc71	161	copy_rgba_pixels_bresenham_scaled_rect			confirmed	gamebryo		
+0x0073cd12	203	write_BF3DApp_renderer_preview_png			confirmed	gamebryo		
+0x0073cddd	33	destroy_BF3DApp_BFAnimManager_safe_handle			confirmed	gamebryo		
+0x0073cdfe	33	destroy_BF3DApp_BFTraversabilityMgr_safe_handle			confirmed	gamebryo		
 0x0073ce1f	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0073ce40	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0073ce61	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
