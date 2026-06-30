@@ -6400,27 +6400,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005344a2	675	erase_ZTTransportViewable_route_assignment_tree_node			confirmed			
 0x00534745	33	destroy_ZTTransportViewable_fGS_assignment_ref			confirmed			
 0x00534766	0	scalar_delete_ZTTransportViewable_fGS_assignment_ref			confirmed		0x008d94ec#2	
-0x00534781	111		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005347f0	358		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534956	59		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534991	65		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005349d2	48		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534a02	341		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534b57	66		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534b99	48		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534bc9	111		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534c38	37		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00534781	111	insert_refcounted_pointer_vector_entry			confirmed			
+0x005347f0	358	insert_ZTTransportViewable_route_ref_tree_node_with_hint			confirmed			
+0x00534956	59	destroy_ZTTransportViewable_route_ref_tree_nodes			confirmed			
+0x00534991	65	init_ZTTransportViewable_route_tree_storage			confirmed			
+0x005349d2	48	destroy_ZTTransportViewable_route_ref_tree_storage			confirmed			
+0x00534a02	341	insert_ZTTransportViewable_route_index_tree_node_with_hint			confirmed			
+0x00534b57	66	rotate_right_route_index_tree_node			confirmed			
+0x00534b99	48	destroy_ZTTransportViewable_route_index_tree_storage			confirmed			
+0x00534bc9	111	insert_ZTTransportViewable_fGS_assignment_vector_entry			confirmed			
+0x00534c38	37	allocate_ZTTransportViewable_fGS_assignment_vector_storage			confirmed			
 0x00534c5d	26	destroy_vtable_object_8byte_vector_elements			confirmed			
-0x00534c77	59		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534cb2	357		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534e17	41		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534e40	107		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534eab	460		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535077	202		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535141	148		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005351d5	94		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535233	341		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535388	56		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00534c77	59	copy_construct_ZTTransportViewable_fGS_assignment_entries			confirmed			
+0x00534cb2	357	insert_ZTTransportViewable_route_assignment_tree_node_with_hint			confirmed			
+0x00534e17	41	compare_ZTTransportViewable_route_assignment_key_order			confirmed			
+0x00534e40	107	copy_construct_ZTTransportViewable_route_assignment_tree			confirmed			
+0x00534eab	460	insert_refcounted_pointer_vector_range			confirmed			
+0x00535077	202	insert_unique_ZTTransportViewable_route_ref_tree_node			confirmed			
+0x00535141	148	erase_ZTTransportViewable_route_ref_tree_range			confirmed			
+0x005351d5	94	copy_ZTTransportViewable_route_ref_tree_subtree			confirmed			
+0x00535233	341	insert_ZTTransportViewable_route_ref_tree_node			confirmed			
+0x00535388	56	lower_bound_ZTTransportViewable_route_ref_tree_node			confirmed			
 0x005353c0	191		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0053547f	148		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x00535513	440		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
@@ -7355,7 +7355,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00561edd	105		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00561f46	186		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00562000	48		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00562030	132		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00562030	132		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005620b4	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005620d8	105		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562141	0	allocate_ZTPuzzleMgr_instance			confirmed		0x008db578#4	
@@ -7364,8 +7364,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005622e1	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00562426	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005624ba	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x005624f5	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x0056263a	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x005624f5	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0056263a	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005626ce	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00562709	324		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x0056284d	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7373,8 +7373,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00562baf	393		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00562d38	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00562d5b	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00562e22	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x005630bd	387		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00562e22	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x005630bd	387		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00563240	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-ai
 0x00563263	160		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00563303	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7914,7 +7914,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057c9e2	477	collect_adoptable_species_by_rarity_threshold			confirmed			
 0x0057cbbf	23		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057cbd6	331		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057cd21	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x0057cd21	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0057cd8a	123		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057ce05	60		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ce41	313		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
@@ -18580,7 +18580,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007101e8	148		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0071027c	404		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x00710410	191		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007104cf	341		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007104cf	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710624	48		collision tester and fitting-surface component XML		unidentified	gamebryo		game-ai
 0x00710654	175		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00710703	41		collision tester and fitting-surface component XML		unidentified	gamebryo		
