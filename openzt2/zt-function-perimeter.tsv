@@ -7805,7 +7805,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00577cf4	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00577da6	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00577ede	0	scalar_delete_ZTScenarioMgr			confirmed		0x008e07f8#0	
-0x00577ef9	44		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00577ef9	44	destroy_ZTScenarioMgr_fields			confirmed			
 0x00577f25	25	get_ZTApp_active_ui_root			confirmed			
 0x005780ca	0	synchronize_ZTScenarioMgr_uimod_state_then_delegate			confirmed		0x008e0870#4	
 0x005780eb	287	apply_ZTScenarioMgr_uimod_value_to_ui_object			confirmed			
@@ -7913,8 +7913,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057c9a3	63	lookup_active_object_child_by_token			confirmed			
 0x0057c9e2	477	collect_adoptable_species_by_rarity_threshold			confirmed			
 0x0057cbbf	23		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057cbd6	331		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057cd21	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
+0x0057cbd6	331		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057cd21	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057cd8a	123		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057ce05	60		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ce41	313	resolve_main_mode_or_scenario_state_value			confirmed			
@@ -7966,13 +7966,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057f941	117	apply_object_icon_component_to_ui_value			confirmed			
 0x0057f9b6	199	apply_named_object_icon_component_to_ui_value			confirmed			
 0x0057fa7d	204		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x0057fb49	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fb49	48	destroy_UIHotKeys_binding_map_storage			confirmed			
 0x0057fb79	175	erase_UIHotKeys_binding_map_range			confirmed			
 0x0057fc28	102	clone_UIHotKeys_binding_map_subtree			confirmed			
 0x0057fc8e	196		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0057fd52	388	insert_UIHotKeys_binding_map_node			confirmed			
 0x0057fed6	677	erase_UIHotKeys_binding_map_node			confirmed			
-0x0058017b	75		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0058017b	75	free_UIHotKeys_binding_map_subtree			confirmed			
 0x005801c6	83	allocate_UIHotKeys_binding_map_node_copy			confirmed			
 0x00580219	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0058023d	59		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
@@ -8059,8 +8059,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00584c6d	212		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x00584d41	70		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00584d87	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00584dd8	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
-0x00584e08	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00584dd8	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
+0x00584e08	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
 0x00584e2c	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584e50	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584e74	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
@@ -9345,27 +9345,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a7360	187	lookup_BFLocaleMgr_text_ref_row			confirmed	gamebryo		
 0x005a741b	713	format_localized_inline_ui_text_ref_args			confirmed	gamebryo		
 0x005a76e4	173	load_BFLocaleMgr_source_string_tables			confirmed	gamebryo		
-0x005a7791	263		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a7898	105		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a7901	169		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a79aa	245		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a7a9f	940		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a7e4b	89		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005a7791	263	clear_BFLocaleMgr_loaded_string_tables			confirmed	gamebryo		
+0x005a7898	105	copy_BFLocaleMgr_nested_text_table_storage			confirmed	gamebryo		
+0x005a7901	169	load_BFLocaleMgr_ZT2Strings_source			confirmed	gamebryo		
+0x005a79aa	245	reload_BFLocaleMgr_configured_string_tables			confirmed	gamebryo		
+0x005a7a9f	940	parse_BFLocaleMgr_ZT2Strings_xml			confirmed	gamebryo		
+0x005a7e4b	89	format_BFLocaleMgr_currency_integer			confirmed	gamebryo		
 0x005a7e69	0	0x005a7e63 callsite_address			confirmed			
-0x005a7ea4	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a7f0c	110		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005a7ea4	104	format_BFLocaleMgr_currency_float_2dp			confirmed	gamebryo		
+0x005a7f0c	110	format_BFLocaleMgr_number_integer			confirmed	gamebryo		
 0x005a7f2b	0	0x005a7f25 callsite_address			confirmed			
-0x005a7f7a	150		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a8010	238		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005a7f7a	150	format_BFLocaleMgr_number_float			confirmed	gamebryo		
+0x005a8010	238	format_BFLocaleMgr_date_or_time_value			confirmed	gamebryo		
 0x005a8062	0	0x005a805c callsite_address			confirmed			
-0x005a80fe	178		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005a81b0	249		inline UI currency/text-ref resolution helpers		unidentified	gamebryo		ui
-0x005a82a9	188		inline UI currency/text-ref resolution helpers		unidentified	gamebryo		ui
+0x005a80fe	178	resolve_BFLocaleMgr_locale_info_string			confirmed	gamebryo		
+0x005a81b0	249	resolve_BFLocaleMgr_currency_symbol_text_ref			confirmed	gamebryo		
+0x005a82a9	188	resolve_BFLocaleMgr_config_text_ref_string			confirmed	gamebryo		
 0x005a8365	0	load_BFLocaleMgr_ui_text_rendering_config_xml			confirmed		0x008e4d58#20	
-0x005a8b6c	191		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8c2b	48		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8c5b	36		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a8c7f	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a8b6c	191	find_or_insert_BFLocaleMgr_text_category_table			confirmed	gamebryo		
+0x005a8c2b	48	destroy_BFLocaleMgr_text_category_map_storage			confirmed	gamebryo		
+0x005a8c5b	36	clear_BFLocaleMgr_text_category_map_nodes			confirmed	gamebryo		
+0x005a8c7f	115	count_BFLocaleMgr_text_category_matches			confirmed	gamebryo		
 0x005a8cf2	160		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
 0x005a8d92	115		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
 0x005a8e05	34		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
@@ -9776,7 +9776,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b256e	32		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005b258e	20		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b25a2	94		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b2600	18		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b2600	18		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b2612	49		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b2643	39	find_xml_attribute_node_by_name			confirmed	gamebryo		
 0x005b266a	61	ensure_xml_attribute_node_by_name			confirmed	gamebryo		
