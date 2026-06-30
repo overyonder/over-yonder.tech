@@ -9519,9 +9519,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ae06e	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae0bb	0	allocate_BFApp_instance			confirmed		0x008e4f60#3	
 0x005ae0d1	115		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ae144	277		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ae144	277	grow_refcounted_ui_assignment_queue_storage			confirmed	gamebryo		
 0x005ae259	111	destroy_refcounted_ui_assignment_queue_storage			confirmed	gamebryo		
-0x005ae2c8	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ae2c8	58	get_refcounted_ui_assignment_queue_slot			confirmed	gamebryo		
 0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae3b3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		economy
 0x005ae3fc	659		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -9591,23 +9591,23 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005af03f	110	destroy_refcounted_ui_value_queue_storage			confirmed	gamebryo		
 0x005af0ad	35		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005af0d0	40		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
-0x005af0f8	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005af0f8	148	assign_inline_ui_string_directory_prefix			confirmed	gamebryo		
 0x005af18c	0	scalar_delete_vtable_008e4f70_storage			confirmed		0x008e4f70#0	
 0x005af1a7	0	scalar_delete_vtable_008e4f80_storage			confirmed		0x008e4f80#0	
-0x005af1c2	27		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af1dd	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af1fe	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af21f	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af240	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af261	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af282	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af2a3	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af2c4	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af2e5	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af306	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af327	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af348	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005af369	30		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005af1c2	27	destroy_vtable_008e4f70_ring_value_queue			confirmed	gamebryo		
+0x005af1dd	33	destroy_BFSafeHandle_BFScriptContextMgr_ref			confirmed	gamebryo		
+0x005af1fe	33	destroy_BFSafeHandle_BFLoadListener_ref			confirmed	gamebryo		
+0x005af21f	33	destroy_BFSafeHandle_BFXMLSchemaMgr_ref			confirmed	gamebryo		
+0x005af240	33	destroy_BFSafeHandle_BFBinderRoot_ref			confirmed	gamebryo		
+0x005af261	33	destroy_BFSafeHandle_BFUserProfileMgr_ref			confirmed	gamebryo		
+0x005af282	33	destroy_BFSafeHandle_BFLocaleMgr_ref			confirmed	gamebryo		
+0x005af2a3	33	destroy_BFSafeHandle_BFUndoMgr_ref			confirmed	gamebryo		
+0x005af2c4	33	destroy_BFSafeHandle_BFTimeKeeper_ref			confirmed	gamebryo		
+0x005af2e5	33	destroy_BFSafeHandle_BFWindowComponent_ref			confirmed	gamebryo		
+0x005af306	33	destroy_BFSafeHandle_BFResourceMgr_ref			confirmed	gamebryo		
+0x005af327	33	destroy_BFSafeHandle_BFRegistry_ref			confirmed	gamebryo		
+0x005af348	33	destroy_BFSafeHandle_BFPerformanceMonitor_ref			confirmed	gamebryo		
+0x005af369	30	destroy_vtable_008e4f80_listener_ring_storage			confirmed	gamebryo		
 0x005af387	37		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005af3b8	43		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005af3e3	0	scalar_delete_vtable_008e50f8_child_table			confirmed		0x008e50e4#5	
@@ -9619,10 +9619,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005af823	113		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005af894	72	append_inline_ui_string_view			confirmed	gamebryo		
 0x005af8dc	78	append_cstr_to_inline_ui_string			confirmed	gamebryo		
-0x005af92a	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005af92a	77	append_counted_mbs_to_inline_ui_string			confirmed	gamebryo		
 0x005af977	100		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
-0x005af9db	85		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005afa30	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005af9db	85	trim_inline_ui_string_suffix_mbs_safe			confirmed	gamebryo		
+0x005afa30	65	pop_back_inline_ui_string_mbs_char			confirmed	gamebryo		
 0x005afa71	83		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005afac4	69		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005afb09	38		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
@@ -18260,16 +18260,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00702708	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#19	
 0x007030d2	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#20	
 0x0070348b	0		collision tester and fitting-surface component XML		unidentified		0x008fa484#21	
-0x007034e0	218		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007035ba	470		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007034e0	218		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007035ba	470		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703790	109		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007037fd	69	get_fitting_surface_cell_show_record_payload			confirmed	gamebryo		
 0x00703842	211		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703915	116		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703989	62		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007039c7	144		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007039c7	144		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703a57	34		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00703a79	92		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00703a79	92		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00703ad5	245		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703bca	48		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703c59	0		collision tester and fitting-surface component XML		unidentified		0x008fa4f8#1	
@@ -18302,10 +18302,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00704f74	93		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704fd1	83		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00705024	46		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00705052	1121		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00705052	1121		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007054b3	70		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007054f9	102		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070555f	110		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007054f9	102		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070555f	110		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007055cd	0		collision tester and fitting-surface component XML		unidentified		0x008fa4e4#0	
 0x007055d5	148		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705669	69		collision tester and fitting-surface component XML		unidentified	gamebryo		
