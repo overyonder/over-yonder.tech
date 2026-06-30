@@ -3169,27 +3169,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004a51e8	153	register_ZTOverviewComponent_action_handler			confirmed			
 0x004a52c8	187	get_or_insert_overview_icon_group_by_key			confirmed			
 0x004a5383	52	clear_overview_icon_group_tree			confirmed			
-0x004a53b7	170		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5461	48		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5491	78		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a53b7	170	get_or_insert_overview_icon_assignment_group			confirmed			
+0x004a5461	48	clear_overview_icon_assignment_group_tree			confirmed			
+0x004a5491	78	clear_8byte_vector_by_resetting_end			confirmed			
 0x004a54df	0	allocate_ZTOverviewData_record			confirmed		0x008cf7a0#3	
-0x004a550a	28		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5526	389		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a56ab	327		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a57f2	373		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5967	124		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a59e3	204		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5aaf	148		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5b43	412		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5cdf	160		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5d7f	54		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5db5	45		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5de2	199		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a5ea9	390		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a602f	177		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a60e0	213		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a61b5	175		multi-info, overview map, photo album, and UI widgets		unidentified			ui
-0x004a6264	396		multi-info, overview map, photo album, and UI widgets		unidentified			ui
+0x004a550a	28	destroy_overview_value_cache_node_payload			confirmed			
+0x004a5526	389	insert_overview_value_cache_tree_node_with_hint			confirmed			
+0x004a56ab	327	insert_overview_icon_group_node_with_hint			confirmed			
+0x004a57f2	373	insert_overview_icon_assignment_group_node_with_hint			confirmed			
+0x004a5967	124	insert_8byte_vector_range_return_iterator			confirmed			
+0x004a59e3	204	lower_bound_or_insert_overview_value_cache_node			confirmed			
+0x004a5aaf	148	erase_overview_value_cache_tree_range			confirmed			
+0x004a5b43	412	insert_overview_value_cache_tree_node			confirmed			
+0x004a5cdf	160	append_ZTOverviewComponent_action_registry_entry			confirmed			
+0x004a5d7f	54	init_overview_icon_group_tree_storage			confirmed			
+0x004a5db5	45	advance_checked_iterator_by_inserted_count			confirmed			
+0x004a5de2	199	lower_bound_or_insert_overview_icon_group_node			confirmed			
+0x004a5ea9	390	insert_overview_icon_group_tree_node			confirmed			
+0x004a602f	177	erase_overview_icon_group_tree_range			confirmed			
+0x004a60e0	213	lower_bound_or_insert_overview_icon_assignment_group_node			confirmed			
+0x004a61b5	175	erase_overview_icon_assignment_group_tree_range			confirmed			
+0x004a6264	396	insert_overview_icon_assignment_group_tree_node			confirmed			
 0x004a63f0	97		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x004a6451	35		multi-info, overview map, photo album, and UI widgets		unidentified			ui
 0x004a6474	644		multi-info, overview map, photo album, and UI widgets		unidentified			ui
@@ -4413,7 +4413,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d8fca	191		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004d9089	0	write_ZTGestureComponent_xml			confirmed		0x008d4120#19	
 0x004d90fb	0	read_ZTGestureComponent_xml			confirmed		0x008d4120#20	
-0x004d91a6	465		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d91a6	465		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d95fe	31		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			io/assets
 0x004d961d	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d967f	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4462,7 +4462,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004db52f	213		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004db604	172		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004db6b0	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004db727	100		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004db727	100		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004db78b	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004db7e1	95		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004db840	79		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
@@ -19671,9 +19671,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00752058	167		object-detail presentation resource materialization		unidentified	gamebryo		io/assets
 0x007520ff	36		object-detail presentation resource materialization		unidentified	gamebryo		io/assets
 0x00752123	174		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
-0x007521d1	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
+0x007521d1	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
 0x0075225c	48	clear_presentation_registry_tree_storage			confirmed	gamebryo		
-0x0075228c	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
+0x0075228c	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x00752527	187		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x007525e2	105		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075264b	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
@@ -19690,7 +19690,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00752ec6	210		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x00752f98	394		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		ui
 0x00753122	677		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
-0x007533c7	59		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
+0x007533c7	59		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
 0x00753402	0		map/set erase and red-black-tree helpers for presentation regist		unidentified		0x008fde20#21	
 0x00753408	47	get_type_BFPosInterpolateComponent			confirmed	gamebryo		
 0x00753437	0		map/set erase and red-black-tree helpers for presentation regist		unidentified		0x008fde20#1	
