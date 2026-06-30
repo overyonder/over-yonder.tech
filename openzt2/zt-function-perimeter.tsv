@@ -19609,27 +19609,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074b560	95	read_named_xml_matrix3_child_or_default			confirmed	gamebryo		
 0x0074b5bf	429	write_vector3_space_separated_xml_attribute			confirmed	gamebryo		
 0x0074b76c	232	read_vector2_space_separated_xml_attribute_or_default			confirmed	gamebryo		
-0x0074b854	262		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b95a	289		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ba7b	381		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074bbf8	41		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074bc21	36		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074bc45	37		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074bc6a	39		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074b854	262	read_vector3_space_separated_xml_attribute_or_default			confirmed	gamebryo		
+0x0074b95a	289	read_rgb255_color3_text_or_white_default			confirmed	gamebryo		
+0x0074ba7b	381	read_rgba255_color4_xml_attribute_or_white_default			confirmed	gamebryo		
+0x0074bbf8	41	subtract_vector3_values			confirmed	gamebryo		
+0x0074bc21	36	float_abs_less_than_threshold			confirmed	gamebryo		
+0x0074bc45	37	floats_within_tolerance			confirmed	gamebryo		
+0x0074bc6a	39	vector3_distance_within_radius			confirmed	gamebryo		
 0x0074bc91	746	intersect_segment_with_triangle			confirmed	gamebryo		
-0x0074bf7b	202		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c045	62		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c083	92		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c0df	183		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c196	179		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c249	136		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c2d1	496		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c4c1	185		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c57a	120		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c5f2	51		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c625	290		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c747	123		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074c7c2	145		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074bf7b	202	xy_rectangles_overlap_from_corners			confirmed	gamebryo		
+0x0074c045	62	point_inside_xy_axis_bounds_from_corners			confirmed	gamebryo		
+0x0074c083	92	point_inside_xyz_axis_bounds_from_corners			confirmed	gamebryo		
+0x0074c0df	183	point_inside_xy_quad_edge_halfplanes			confirmed	gamebryo		
+0x0074c196	179	resolve_placement_reference_chain_transform_point			confirmed	gamebryo		
+0x0074c249	136	compute_scene_node_world_translation			confirmed	gamebryo		
+0x0074c2d1	496	resolve_scaled_placement_reference_world_point			confirmed	gamebryo		
+0x0074c4c1	185	accumulate_scene_node_transform_to_ancestor			confirmed	gamebryo		
+0x0074c57a	120	compute_planar_heading_angle_from_y_axis			confirmed	gamebryo		
+0x0074c5f2	51	compute_heading_vector_from_z_rotation			confirmed	gamebryo		
+0x0074c625	290	create_colored_niline_segment			confirmed	gamebryo		
+0x0074c747	123	lerp_matrix3_clamped_orthonormalized			confirmed	gamebryo		
+0x0074c7c2	145	lerp_vector3_clamped			confirmed	gamebryo		
 0x0074c853	389		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0074c9d8	2100	compute_pointer_vector_element_bounds			confirmed	gamebryo		
 0x0074d20c	906		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
