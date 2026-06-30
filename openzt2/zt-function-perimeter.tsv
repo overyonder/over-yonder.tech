@@ -6656,7 +6656,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053c1a4	301	build_BFTerrainShadowComponent_vertex_grid			confirmed			
 0x0053c2d1	1062	build_BFTerrainShadowComponent_fitting_surface_vertices			confirmed			
 0x0053c6f7	318	build_BFTerrainShadowComponent_index_grid			confirmed			
-0x0053c835	516		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053c835	516	build_BFTerrainShadowComponent_fitting_surface_indices			confirmed			
 0x0053ca39	0	compute_BFTerrainShadowComponent_mesh_counts			confirmed		0x008da1a0#54	
 0x0053cb52	193	compute_BFTerrainShadowComponent_fitting_surface_mesh_counts			confirmed			
 0x0053cc13	0	build_BFTerrainShadowComponent_mesh_buffers			confirmed		0x008da1a0#52	
@@ -6667,13 +6667,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053d153	207	clear_BFTerrainShadowComponent_render_records			confirmed			
 0x0053d222	84	resolve_BFTerrainShadowComponent_elevated_path_candidate			confirmed			
 0x0053d276	52	accept_BFTerrainShadowComponent_shadow_surface_kind			confirmed			
-0x0053d2aa	30		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053d2c8	38		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053d2aa	30	checked_u16_vector_entry			confirmed			
+0x0053d2c8	38	insert_20byte_viewable_record_from_stack			confirmed			
 0x0053d2ee	0	allocate_BFTerrainShadowComponent_secondary_instance			confirmed		0x008da280#2	
-0x0053d309	142		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053d397	114		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053d409	420		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053d5ad	54		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053d309	142	resize_20byte_viewable_record_vector			confirmed			
+0x0053d397	114	erase_20byte_viewable_record_vector_range			confirmed			
+0x0053d409	420	insert_fill_20byte_viewable_record_range			confirmed			
+0x0053d5ad	54	checked_20byte_viewable_record_iterator_at			confirmed			
 0x0053d5e3	52	copy_construct_20byte_viewable_record_range			confirmed			
 0x0053d617	40	as_BFGTileFittingSurface			confirmed			
 0x0053d63f	0	noop_virtual_callback_ret8			confirmed		0x008d2328#1	
@@ -6689,7 +6689,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053d6cd	0	forward_receiver_slot_0xf8_with_zero_flag			confirmed		0x008da090#61	
 0x0053d6de	0	read_receiver_flag44_bit2			confirmed		0x008da090#58	
 0x0053d6e7	0	copy_receiver_field50_string_to_output			confirmed		0x008da090#55	
-0x0053d6fb	35		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053d6fb	35	get_single_ZTTankGateSegment_neighbor_link			confirmed			
 0x0053d71e	47	get_type_ZTTank			confirmed			
 0x0053d74d	0	get_type_ZTTank_vtable_thunk			confirmed		0x008da344#0	
 0x0053d752	32	get_type_ZTTankGateSegment			confirmed			
@@ -6698,30 +6698,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053d806	371	construct_ZTTankGateSegment			confirmed			
 0x0053d979	0	delete_ZTTankGateSegment			confirmed			
 0x0053d994	412	destroy_ZTTankGateSegment			confirmed			
-0x0053db30	398		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053db30	398	update_ZTTankGateSegment_dirty_runtime_state			confirmed			
 0x0053dcbe	272		tank gate segment, tank manager, and area relocation setup		unidentified			game-ai
 0x0053ddce	134		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0053de54	172	clear_ZTTankGateSegment_offset10_links			confirmed			
-0x0053df00	845		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053df00	845	apply_ZTTankGateSegment_area_relocation_payload			confirmed			
 0x0053e24d	14		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0053e25b	788	rebuild_ZTTankGateSegment_primary_tank_links			confirmed			
 0x0053e56f	586	detach_ZTTankGateSegment_from_primary_tank			confirmed			
-0x0053e7b9	424		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x0053e961	163		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x0053ea04	324		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053e7b9	424	update_ZTTankGateSegment_water_height			confirmed			
+0x0053e961	163	refresh_ZTTankGateSegment_min_child_height			confirmed			
+0x0053ea04	324	refresh_ZTTankGateSegment_max_child_clearance			confirmed			
 0x0053eb48	254	update_ZTTankGateSegment_clearance_height			confirmed			
 0x0053ec46	459		tank gate segment, tank manager, and area relocation setup		unidentified			world/pathing
-0x0053ee11	52		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053ee11	52	compute_ZTTankGateSegment_water_depth_ratio			confirmed			
 0x0053ee45	336	collect_ZTTankGateSegment_child_link_refs			confirmed			
-0x0053ef95	140		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053ef95	140	assign_ZTTankGateSegment_flattening_group			confirmed			
 0x0053f021	108	detach_ZTTankGateSegment_offset60_links			confirmed			
-0x0053f08d	384		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x0053f20d	134		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053f08d	384	update_ZTTankGateSegment_child_heights_in_band			confirmed			
+0x0053f20d	134	compute_ZTTankGateSegment_max_child_height			confirmed			
 0x0053f293	744	rebuild_ZTTankGateSegment_offset60_links			confirmed			
 0x0053f57b	314		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0053f6b5	0	write_ZTTankGateSegment_config_xml			confirmed		0x008da344#18	
 0x0053f8fd	0	read_ZTTankGateSegment_config_xml			confirmed		0x008da344#19	
-0x0053fbf7	182		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0053fbf7	182	dispatch_ZTTankGateSegment_child_height_values			confirmed			
 0x0053fcad	641		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0053ff2e	1579	collect_area_actor_crate_relocation_candidates			confirmed			
 0x00540559	634	area_has_nonexcluded_occupied_entity			confirmed			
@@ -6734,10 +6734,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005416f9	503	collect_matching_area_animal_refs_once			confirmed			
 0x005418f0	649		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00541b79	135		tank gate segment, tank manager, and area relocation setup		unidentified			
-0x00541c00	319		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00541c00	319	set_area_relocation_active_state			confirmed			
 0x00541d3f	45	update_area_relocation_clearance_distance			confirmed			
 0x00541d6c	300	refresh_area_relocation_clearance_from_candidates			confirmed			
-0x00541e98	57		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00541e98	57	resolve_area_relocation_cached_target_id			confirmed			
 0x00541ed1	67		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00541f14	502		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x0054210a	386	emit_bf3devent_delete_flattening_group_payload			confirmed			
@@ -6746,12 +6746,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005423d4	293	sync_ZTTankGateSegment_membership_from_primary_tank			confirmed			
 0x005424f9	168		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x005425a1	136		tank gate segment, tank manager, and area relocation setup		unidentified			
-0x00542629	361		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00542629	361		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542792	86		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x005427e8	194		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x005428aa	36	destroy_vtable_object_8byte_vector_storage			confirmed			
 0x005428ce	94	append_named_ui_assignment_ref_vector_entry			confirmed			
-0x0054292c	94		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0054292c	94		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0054298a	0	allocate_ZTTankGateSegment_instance_from_handle_table			confirmed		0x008da39c#6	
 0x005429a5	64	construct_ZTTankGateSegment_area_relocation_callback_registry			confirmed			
 0x005429e5	159	insert_area_relocation_handler_for_global_type			confirmed			
@@ -6761,7 +6761,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542cd8	127	prepare_named_ui_assignment_ref_vector_insert			confirmed			
 0x00542d57	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x00542d92	127		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00542d92	127		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542e11	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00542e4c	455	insert_named_ui_assignment_ref_vector_entry			confirmed			
 0x00543013	455		tank gate segment, tank manager, and area relocation setup		unidentified			ui
@@ -6958,12 +6958,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054b775	226		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054b857	645		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054badc	668	update_tank_segment_height_and_invalidate_links			confirmed			
-0x0054bd78	83		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054bdcb	369		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054bd78	83		tankwallglass material selector sweep and dirty refresh		unidentified			io/assets
+0x0054bdcb	369		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054bf3c	560		tankwallglass material selector sweep and dirty refresh		unidentified			gameplay systems
 0x0054c16c	113	flag_elevated_paths_for_tank_height_change			confirmed			
-0x0054c1dd	249		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054c2d6	154		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054c1dd	249		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054c2d6	154		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c370	469		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c545	43		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c570	75		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
@@ -6998,7 +6998,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054e029	2349	compute_tankwallglass_selector_geometry			confirmed			
 0x0054e956	129		tankwallglass material selector sweep and dirty refresh		unidentified			economy
 0x0054e9d7	139		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054ea62	85		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054ea62	85		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054eab7	56		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054eaef	84		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054eb43	79		tankwallglass material selector sweep and dirty refresh		unidentified			
@@ -7849,7 +7849,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00579da5	71		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00579dec	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00579e35	91		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00579e90	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00579e90	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00579ef9	317		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057a036	0	read_ZTTankCommandReader_tank_mode_from_value			confirmed		0x008e0c78#4	
 0x0057a0a5	0	read_ZTTankCommandReader_tankFloorSpeed_from_value			confirmed		0x008e0c78#5	
@@ -7947,7 +7947,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057e9bd	125	emit_showmixer_request_canceledit_payload			confirmed			
 0x0057ea3a	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057eae9	71		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057eb30	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057eb30	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ebdf	382		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057ed5d	393		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057eee6	192		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
@@ -18016,9 +18016,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f900f	0		collision tester and fitting-surface component XML		unidentified		0x008ec01c#5	
 0x006f901a	67		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f905d	188		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x006f9119	97		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x006f9119	97		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f917a	0		collision tester and fitting-surface component XML		unidentified		0x008f9930#107	
-0x006f9195	120		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x006f9195	120		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f920d	24		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f9225	0		collision tester and fitting-surface component XML		unidentified		0x008ec01c#2	
 0x006f92cb	0		collision tester and fitting-surface component XML		unidentified		0x008f9868#4	
