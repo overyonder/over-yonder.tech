@@ -1430,22 +1430,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044083f	23	destroy_BFXMLAttribute_value_fields			confirmed			
 0x00440856	28	get_ui_child_iterator_state			confirmed			
 0x00440872	28	reset_ui_child_iterator			confirmed			
-0x0044088e	62		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044088e	62	get_BFStringVector_entry_by_index_checked			confirmed	gamebryo		
 0x004408cc	23	destroy_BFStringVector			confirmed			
 0x004408e3	0	scalar_delete_BFStringVector			confirmed		0x008c4b6c#0	
 0x004408fe	0	clone_BFStringVector_value			confirmed		0x008c4b6c#5	
-0x0044091d	36		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00440941	116		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x004409b5	72		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x0044091d	36	copy_construct_BFStringVector_value			confirmed	gamebryo		
+0x00440941	116	copy_BFStringVector_inline_string_entries			confirmed	gamebryo		
+0x004409b5	72	construct_ZTFeedbackClickTarget_value			confirmed	gamebryo		
 0x004409fd	0	clone_ZTFeedbackClickTarget_value			confirmed		0x008c5020#5	
 0x00440a3c	47	get_type_ZTMode			confirmed			
-0x00440a6b	0		ZTMode base, UI child dispatch, and mode camera helpers		unidentified		0x008c4d58#1	renderer
+0x00440a6b	0	get_type_ZTMode_vtable_thunk			confirmed		0x008c4d58#1	
 0x00440a70	0	init_ZTMode_descriptor_ref			confirmed		0x008c4d58#2	
-0x00440a90	75		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00440af1	83		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00440b44	342		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00440c9a	218		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00440d74	244		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00440a90	75	get_ZTMode_value_handler_registry			confirmed	gamebryo		
+0x00440af1	83	dispatch_ZTMode_registered_value_handler			confirmed	gamebryo		
+0x00440b44	342	register_ZTMode_value_handlers			confirmed	gamebryo		
+0x00440c9a	218	construct_ZTMode_base_state			confirmed	gamebryo		
+0x00440d74	244	destroy_ZTMode_base_state			confirmed	gamebryo		
 0x00440e68	65	activate_ZTMode_base_state			confirmed		0x008c23a4#85	
 0x00440ea9	86	deactivate_ZTMode_base_state			confirmed		0x008c23a4#86	
 0x00440eff	16	assign_shared_inline_ui_typed_value_ref_and_return_output			confirmed		0x008bf8b4#99	
@@ -1456,10 +1456,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00441024	149	record_mode_pointer_state_key_from_payload			confirmed		0x008bf8b4#109	
 0x004410b9	186	record_mode_pointer_state_count_and_notify_child			confirmed		0x008bf8b4#110	
 0x00441173	243	build_string_value_from_BFKeyValObj_or_payload			confirmed		0x008bf8b4#111	
-0x00441288	528		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441498	180		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x0044154c	250		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441646	56		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441288	528	bind_ZTMode_mode_help_ui_controls	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441498	180	advance_ZTMode_mode_help_prompt_timer	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x0044154c	250	hide_ZTMode_mode_help_ui_controls	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441646	56	is_ZTMode_mode_help_layout_visible	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
 0x0044167e	68	update_ZTMode_frame_and_assign_shared_result			confirmed		0x008c0a10#14	
 0x004416c2	93	handle_activate_on_ui_button			confirmed			
 0x0044171f	227	handle_UINotifyData_value_with_mode_fallback			confirmed		0x008bf8b4#112	
@@ -1468,13 +1468,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044197b	77	detach_delete_global_ui_object_ref			confirmed		0x008bfa90#1	
 0x004419c8	154	ensure_cursor_money_container_ui_object			confirmed		0x008bfa90#2	
 0x00441a62	449	read_tool_mode_input_config			confirmed		0x008c0a10#20	
-0x00441c23	108		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441c8f	31		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441c23	108	set_ZTMode_active_child_mode	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441c8f	31	select_ZTMode_active_child_mode_from_value	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
 0x00441cae	259	build_or_delegate_active_child_mode_value			confirmed		0x008bf8b4#96	
-0x00441db1	26		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441dcb	278		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441ee1	27		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
-0x00441efc	136		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
+0x00441db1	26	resolve_ZTMode_child_mode_from_value	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441dcb	278	dispatch_ZTMode_event_list_to_active_ui_context	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441ee1	27	mode_pointer_state_tree_contains_key	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
+0x00441efc	136	load_ZTMode_camera_and_transition_camera	ZTMode base, UI child dispatch, and mode camera helpers		unidentified	gamebryo		renderer
 0x00441f84	120	refresh_mode_camera_state_for_target			confirmed			
 0x00441ffc	0	reset_active_view_focus_target			confirmed		0x008bfa90#3	
 0x0044202e	164	bind_registered_mode_ui_children_to_receiver			confirmed		0x008bf8b4#87	
@@ -1526,14 +1526,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044381d	63		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x0044385c	49		ZTMode base, UI child dispatch, and mode camera helpers		unidentified			renderer
 0x0044388d	47	get_type_ZTOverheadMode			confirmed			
-0x004438bc	0		overhead/path mode transitions and selection routing		unidentified		0x008c5200#1	world/pathing
+0x004438bc	0	get_type_ZTOverheadMode_vtable_thunk			confirmed		0x008c5200#1	
 0x004438c1	32	init_ZTOverheadMode_descriptor_ref			confirmed			
 0x004438e1	0	init_ZTOverheadMode_descriptor_ref_vtable_thunk			confirmed		0x008c5200#2	
-0x004438e6	73		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00443945	83		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00443998	736		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004438e6	73	get_ZTOverheadMode_ui_handler_registry			confirmed			
+0x00443945	83	resolve_ZTOverheadMode_registered_ui_value			confirmed			
+0x00443998	736	register_ZTOverheadMode_ui_handler_entries			confirmed			
 0x00443cdd	0	scalar_delete_ZTOverheadMode			confirmed		0x008c5200#0	
-0x00443d56	331		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00443d56	331	clear_cursor_money_container_children			confirmed			
 0x00443ea1	119	forward_overhead_child_slot_258_and_enable_receiver_capture			confirmed		0x008c52d4#97	
 0x00443f18	99	forward_overhead_slot_25c_and_disable_receiver_capture			confirmed		0x008c52d4#98	
 0x00443f7b	124	forward_overhead_slot_264_with_prompt_refresh			confirmed		0x008c52d4#100	
@@ -1545,7 +1545,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004441b0	104	broadcast_overhead_mouse_payload_slot_268			confirmed		0x008c52d4#101	
 0x00444218	127	assign_overhead_value_list_then_notify_child_and_global_ui			confirmed		0x008c523c#11	
 0x00444297	171	assign_overhead_event_result_then_notify_receivers			confirmed		0x008c523c#12	
-0x00444342	374		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00444342	374	refresh_ZTOverheadMode_ui_feedback_and_forward_payload			confirmed			
 0x004444b8	0	mark_overhead_refresh_pending_and_return_shared_value			confirmed		0x008c52d4#13	
 0x004444cf	910	setup_transportation_tool_tab			confirmed		0x008c52d4#85	
 0x0044485d	0	deactivate_ZTOverheadMode_and_clear_mode_state			confirmed		0x008c52d4#86	
@@ -1564,31 +1564,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004457e2	66	forward_ZTOverheadMode_payload_then_record_pointer_state			confirmed		0x008c52d4#110	
 0x00445824	149	resolve_ZTOverheadMode_child_or_pending_value			confirmed		0x008c54e4#7	
 0x004458b9	631	enter_first_person_training_for_trick			confirmed		0x008c54e4#8	
-0x00445b30	376		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00445b30	376	apply_camera_position_value_to_overhead_assignment			confirmed			
 0x00445ca8	126	read_ZTOverheadMode_config_and_ingame_options			confirmed		0x008c523c#5	
-0x00445d26	197		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00445deb	51		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00445d26	197	attach_overhead_camera_ui_object			confirmed			
+0x00445deb	51	detach_overhead_camera_ui_object			confirmed			
 0x00445e1e	237	dispatch_string_payload_to_active_ui_context_target			confirmed		0x008c54e4#5	
 0x00445f0b	237	dispatch_string_payload_to_active_ui_context_target_alt			confirmed		0x008c54e4#6	
-0x00446047	260		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446047	260	update_ZTOverheadMode_protected_area_display			confirmed			
 0x0044614b	0	refresh_ZTOverheadMode_camera_target_and_emit_pending_camera_position			confirmed		0x008c52d4#113	
-0x00446183	153		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00446263	160		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00446303	117		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446183	153	register_ZTOverheadMode_ui_handler			confirmed			
+0x00446263	160	append_ZTOverheadMode_ui_handler_node			confirmed			
+0x00446303	117	merge_ZTOverheadMode_ui_handler_entries			confirmed			
 0x00446378	40	as_ZTFirstPersonMode			confirmed			
 0x004463a0	40	as_ZTPlacementMode			confirmed			
-0x004463c8	88		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x00446420	69		overhead/path mode transitions and selection routing		unidentified			world/pathing
-0x004464a5	40		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004463c8	88	resolve_ZTFeedbackClickTarget_value			confirmed			
+0x00446420	69	resolve_ZTStarsDisplay_named_object			confirmed			
+0x004464a5	40	get_empty_refcounted_ui_value_cell			confirmed			
 0x004464cd	47	get_type_ZTPathMode			confirmed			
-0x004464fc	0		overhead/path mode transitions and selection routing		unidentified		0x008c55b0#1	world/pathing
-0x00446501	32		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004464fc	0	get_type_ZTPathMode_vtable_thunk			confirmed		0x008c55b0#1	
+0x00446501	32	init_ZTPathMode_descriptor_ref			confirmed			
 0x00446521	0	init_ZTPathMode_descriptor_ref_vtable_thunk			confirmed		0x008c55b0#2	
-0x00446526	73		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x00446526	73	get_ZTPathMode_ui_handler_registry			confirmed			
 0x0044656f	0	copy_ZTPathMode_ui_value_assignment_dependents			confirmed		0x008c5870#0	
 0x00446585	83	resolve_ZTPathMode_registered_ui_value			confirmed		0x008c5870#1	
 0x004465d8	537	read_path_curb_config			confirmed			
-0x004467f1	170		overhead/path mode transitions and selection routing		unidentified			world/pathing
+0x004467f1	170	load_path_curve_config_table			confirmed			
 0x0044689b	203		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x00446966	122		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x004469e0	384		overhead/path mode transitions and selection routing		unidentified			world/pathing
@@ -1653,35 +1653,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044a703	39		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x0044a72a	84		overhead/path mode transitions and selection routing		unidentified			world/pathing
 0x0044a77e	42	write_vector3_scaled_by_inverse_scalar			confirmed			
-0x0044a7a8	49		placement and save mode tail		unidentified			io/assets
-0x0044a7d9	92		placement and save mode tail		unidentified			io/assets
+0x0044a7a8	49	resolve_ZTAIShowComponent_from_refcounted_value			confirmed			
+0x0044a7d9	92	emit_placement_type_telemetry_event			confirmed			
 0x0044a835	47	get_type_ZTPlacementMode			confirmed			
-0x0044a864	0		placement and save mode tail		unidentified		0x008c5968#1	io/assets
-0x0044a869	32		placement and save mode tail		unidentified			io/assets
+0x0044a864	0	get_type_ZTPlacementMode_vtable_thunk			confirmed		0x008c5968#1	
+0x0044a869	32	init_ZTPlacementMode_descriptor_ref			confirmed			
 0x0044a889	0	init_ZTPlacementMode_descriptor_ref_vtable_thunk			confirmed		0x008c5968#2	
-0x0044a88e	75		placement and save mode tail		unidentified			io/assets
+0x0044a88e	75	get_ZTPlacementMode_ui_handler_registry			confirmed			
 0x0044a8d9	0	copy_ZTPlacementMode_ui_value_assignment_dependents			confirmed		0x008c5c7c#0	
 0x0044a8ef	83	resolve_ZTPlacementMode_registered_ui_value			confirmed		0x008c5c7c#1	
-0x0044a942	68		placement and save mode tail		unidentified			io/assets
-0x0044a986	122		placement and save mode tail		unidentified			io/assets
-0x0044aa00	128		placement and save mode tail		unidentified			io/assets
+0x0044a942	68	get_interned_animal_type_key_for_placement			confirmed			
+0x0044a986	122	register_ZTPlacementMode_ui_handlers			confirmed			
+0x0044aa00	128	construct_ZTPlacementMode			confirmed			
 0x0044aa80	0	scalar_delete_ZTPlacementMode			confirmed		0x008c5968#0	
-0x0044aa9b	87		placement and save mode tail		unidentified			io/assets
+0x0044aa9b	87	destroy_ZTPlacementMode_fields			confirmed			
 0x0044aaf2	205	activate_ZTPlacementMode_and_setup_buy_preview			confirmed		0x008c5a3c#85	
 0x0044abbf	32	deactivate_ZTPlacementMode_and_clear_buy_preview			confirmed		0x008c5a3c#86	
 0x0044abdf	762	setup_scenery_tool_buttons			confirmed			
 0x0044aed9	282	update_placement_target_escape_state_and_handle			confirmed		0x008c5c18#15	
-0x0044aff3	401		placement and save mode tail		unidentified			io/assets
+0x0044aff3	401	refresh_active_placement_target_preview_and_state			confirmed			
 0x0044b184	155	show_negative_cursor_money_for_expensive_target			confirmed		0x008c5c18#2	
 0x0044b21f	65	handle_confirm_entity_placement			confirmed			
 0x0044b260	1722	handle_placement_mode_transition			confirmed		0x008c5c18#11	
-0x0044b91a	251		placement and save mode tail		unidentified			io/assets
+0x0044b91a	251	validate_current_placement_or_emit_no_placement_feedback			confirmed			
 0x0044ba15	57	capture_placement_input_when_confirm_gate_fails			confirmed		0x008c5c18#10	
-0x0044ba4e	117		placement and save mode tail		unidentified			io/assets
+0x0044ba4e	117	placement_confirm_gate_allows_current_target			confirmed			
 0x0044bac3	0	update_placement_rotation_from_target_then_frame			confirmed		0x008c5c18#12	
 0x0044baf1	200	read_placement_mode_effect_and_wizard_config			confirmed		0x008c5968#20	
 0x0044bbb9	278	update_placement_target_preview_and_selection_context			confirmed		0x008c5c18#21	
-0x0044bccf	442		placement and save mode tail		unidentified			io/assets
+0x0044bccf	442	refresh_current_placement_object_preview_context			confirmed			
 0x0044be89	386	emit_setplacementobject_payload			confirmed			
 0x0044c00b	162	clear_placement_preview_and_refresh_selected_target_state			confirmed		0x008c5c18#20	
 0x0044c0ad	284	handle_placement_mouse_move_and_cursor_position_payload			confirmed		0x008c5a3c#101	
@@ -1693,15 +1693,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044c65e	0	set_placement_mode_flag_and_forward_boolean_payload			confirmed		0x008c5c18#23	
 0x0044c68a	131	assign_animal_placement_target_handle			confirmed		0x008c5c18#24	
 0x0044c70d	0	create_ZTPlacementMode_instance			confirmed		0x008c5c7c#3	
-0x0044c728	153		placement and save mode tail		unidentified			io/assets
-0x0044c808	160		placement and save mode tail		unidentified			io/assets
-0x0044c8a8	23		placement and save mode tail		unidentified			io/assets
-0x0044c8bf	117		placement and save mode tail		unidentified			io/assets
-0x0044c934	55		placement and save mode tail		unidentified			io/assets
+0x0044c728	153	register_unique_ZTPlacementMode_ui_handler			confirmed			
+0x0044c808	160	append_ZTPlacementMode_ui_handler_entry			confirmed			
+0x0044c8a8	23	resolve_virtual_type_result_as_ZTAIShowComponent			confirmed			
+0x0044c8bf	117	copy_ui_handler_entries_into_ZTPlacementMode_registry			confirmed			
+0x0044c934	55	resolve_BFGEntity_from_refcounted_value			confirmed			
 0x0044c96b	40	as_ZTAIShowComponent			confirmed			
-0x0044c993	53		placement and save mode tail		unidentified			io/assets
+0x0044c993	53	forward_point_flag_record_to_spatial_probe			confirmed			
 0x0044c9c8	47	get_type_ZTSaveMode			confirmed			
-0x0044c9f7	0		placement and save mode tail		unidentified		0x008c5d18#1	io/assets
+0x0044c9f7	0	get_type_ZTSaveMode_vtable_thunk			confirmed		0x008c5d18#1	
 0x0044c9fc	32		placement and save mode tail		unidentified			io/assets
 0x0044ca1c	0	init_ZTSaveMode_descriptor_ref_vtable_thunk			confirmed		0x008c5d18#2	
 0x0044ca21	73		placement and save mode tail		unidentified			io/assets
@@ -1750,30 +1750,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0044ea82	61		placement and save mode tail		unidentified			io/assets
 0x0044eabf	532		placement and save mode tail		unidentified			io/assets
 0x0044ecd3	1659	select_entity			confirmed			
-0x0044f34e	30		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
-0x0044f36c	75		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
-0x0044f3b7	160		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
-0x0044f457	150		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044f34e	30	resolve_ZTSelectionMode_from_mode_context_token			confirmed			
+0x0044f36c	75	handle_set_selected_entity_payload			confirmed		0x008c0760#25	
+0x0044f3b7	160	activate_selection_child_mode_from_string_payload			confirmed		0x008c0760#26	
+0x0044f457	150	deactivate_matching_selection_child_mode_from_string_payload			confirmed		0x008c0760#27	
 0x0044f4ed	1102	emit_crate_entity_payload			confirmed		0x008c0760#11	
 0x0044f93b	258	refresh_crate_or_selection_target_state			confirmed		0x008c0760#12	
-0x0044fa3d	754		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
-0x0044fd2f	334		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x0044fa3d	754	refresh_selection_hover_target_help_info			confirmed			
+0x0044fd2f	334	update_selection_fist_preview_transform			confirmed			
 0x0044fe7d	1191	read_entity_selection_config			confirmed		0x008c8708#20	
 0x00450324	135	resolve_child_mode_list_value_or_default_list_result			confirmed		0x008c04b0#26	
 0x004503ab	221	resolve_child_mode_event_value_or_default_event_result			confirmed		0x008c04b0#27	
 0x00450488	173	handle_selection_mouse_move_or_child_drag_value			confirmed		0x008c87dc#101	
 0x00450535	195	emit_userclicked_clickableobj_payload			confirmed			
-0x004505f8	124		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x004505f8	124	route_selection_user_dragging_payload			confirmed			
 0x00450674	583	emit_user_dragging_off_payload			confirmed			
 0x004508bb	230	emit_user_dragging_payload			confirmed			
 0x004509a1	0	handle_selection_primary_release_click_or_drag_off			confirmed		0x008c87dc#98	
 0x004509d8	434	emit_mouselook_payload			confirmed		0x008c87dc#97	
 0x00450b8a	437	emit_eventcaptured_payload			confirmed		0x008c87dc#100	
-0x00450d3f	103		entity selection click, drag, capture, and crate dispatch		unidentified			game-entities
+0x00450d3f	103	resolve_tank_platform_selection_object			confirmed			
 0x00450da6	289	emit_eventcaptured_payload			confirmed			
 0x00450ec7	313	route_selected_entity_context_string_to_object_state			confirmed		0x008c0760#20	
 0x00451000	82	handle_selected_entity_boolean_payload_and_refresh_context			confirmed		0x008c0760#22	
-0x00451052	345	emit_eventcaptured_payload			confirmed		0x008c8a28#5	
+0x00451052	345	emit_eventcaptured_payload			confirmed		0x008c89b8#33	
 0x004511ab	5678	selected entity info-panel dispatch and animal/guest/keeper panels			confirmed			
 0x004527d9	140	update_entity_info_panel_with_users_upkeep			confirmed			
 0x00452865	136	update_entity_info_panel_with_finance			confirmed			
@@ -1878,18 +1878,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00462159	260	emit_selected_entity_action_feedback			confirmed			
 0x0046225d	1858	handle_entity_selection_actions			confirmed		0x008c0760#24	
 0x0046299f	99	refresh_selected_entity_food_level_and_info_panel			confirmed		0x008c0760#23	
-0x00462a02	322	emit_crate_entity_payload			confirmed		0x008c07d0#0	
-0x00462b44	391	emit_selected_entity_placement_mode_payloads			confirmed		0x008c07d0#1	
-0x00462ccb	488	emit_move_selection_entity_payload			confirmed		0x008c07d0#2	
-0x00462eb3	200	update_selected_object_parenting_node_transform			confirmed		0x008c07d0#3	
+0x00462a02	322	emit_crate_entity_payload			confirmed		0x008c0760#28	
+0x00462b44	391	emit_selected_entity_placement_mode_payloads			confirmed		0x008c0760#29	
+0x00462ccb	488	emit_move_selection_entity_payload			confirmed		0x008c0760#30	
+0x00462eb3	200	update_selected_object_parenting_node_transform			confirmed		0x008c0760#31	
 0x00462f7b	312	populate_multi_select_lists			confirmed			
-0x004630b3	0	refresh_selected_object_multi_select_and_scene_state			confirmed		0x008c07d0#4	
-0x00463139	104	handle_selected_entity_named_action_827311			confirmed		0x008c07d0#6	
-0x004631a1	104	handle_selected_entity_named_action_8273c6			confirmed		0x008c07d0#7	
-0x00463209	0	refresh_selected_entity_mode_and_follow_context			confirmed		0x008c07d0#8	
-0x0046324f	1024	populate_vehicle_purchase_panel			confirmed		0x008c07d0#9	
-0x0046364f	1402	handle_buy_vehicle_for_selected_transport			confirmed		0x008c07d0#10	
-0x00463bc9	0		selection actions, scheduler, transport, and show-platform comma		unidentified		0x008c07d0#11	
+0x004630b3	0	refresh_selected_object_multi_select_and_scene_state			confirmed		0x008c0760#32	
+0x00463139	104	handle_selected_entity_named_action_827311			confirmed		0x008c0760#34	
+0x004631a1	104	handle_selected_entity_named_action_8273c6			confirmed		0x008c0760#35	
+0x00463209	0	refresh_selected_entity_mode_and_follow_context			confirmed		0x008c0760#36	
+0x0046324f	1024	populate_vehicle_purchase_panel			confirmed		0x008c0760#37	
+0x0046364f	1402	handle_buy_vehicle_for_selected_transport			confirmed		0x008c0760#38	
+0x00463bc9	0	emit_selected_entity_child_payload_if_context_changed			confirmed		0x008c0760#39	
 0x00463c20	94		selection actions, scheduler, transport, and show-platform comma		unidentified			renderer
 0x00463c7e	226	show_transportation_confirmation_or_execute_action			confirmed		0x008c0804#0	
 0x00463d60	244	handle_board_selected_entity			confirmed			
@@ -1900,9 +1900,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0046465d	576	handle_selectnext_diseased_animal			confirmed			
 0x0046489d	235	handle_selectnext_rampaging_animal			confirmed			
 0x00464988	74	handle_showmixer_event			confirmed			
-0x004649d2	36		selection actions, scheduler, transport, and show-platform comma		unidentified			game-entities
+0x004649d2	36	is_showmixer_panel_open_for_unavailable_source			confirmed			
 0x004649f6	344	handle_showscheduler_addshow			confirmed			
-0x00464b4e	51		selection actions, scheduler, transport, and show-platform comma		unidentified			game-entities
+0x00464b4e	51	is_showmixer_panel_viewing_different_show			confirmed			
 0x00464b81	297	handle_showscheduler_editshow			confirmed			
 0x00464caa	339	handle_showscheduler_viewshow			confirmed			
 0x00464dfd	341	handle_showscheduler_deleteshow			confirmed			
@@ -1914,8 +1914,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004655f5	271	handle_showscheduler_movedown			confirmed			
 0x00465704	114	handle_showscheduler_selectrow			confirmed			
 0x00465776	145	handle_showscheduler_toggleenable			confirmed			
-0x00465807	80		selection actions, scheduler, transport, and show-platform comma		unidentified			
-0x00465857	98		selection actions, scheduler, transport, and show-platform comma		unidentified			game-ai
+0x00465807	80	mark_show_scheduler_dirty_if_payload_matches_selected_row			confirmed			
+0x00465857	98	flag_show_selection_dirty_when_bound_entity_matches			confirmed			
 0x004658b9	197	handle_set_filter_maintenance			confirmed			
 0x0046597e	602	emit_physobjswap_on_payload			confirmed			
 0x00465bd8	59	get_selected_water_filter_schedule_toggle			confirmed			
@@ -2806,27 +2806,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048ee55	0	read_ZTUIAdoptionButton_layout_refs			confirmed		0x008ce06c#5	
 0x0048ef0c	0	get_type_ZTAdoptionSlot			confirmed		0x008ce298#1	
 0x0048ef39	0	init_ZTAdoptionSlot_descriptor_ref			confirmed		0x008ce298#2	
-0x0048ef59	68		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f05f	74		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048ef59	68	get_ZTAdoptionSlot_handler_registry			confirmed			
+0x0048f05f	74	construct_ZTAdoptionSlot_members			confirmed			
 0x0048f0a9	0	scalar_delete_ZTAdoptionSlot			confirmed		0x008ce298#0	
 0x0048f0c4	119	destroy_ZTAdoptionSlot_members			confirmed			
 0x0048f13b	144	bind_adoption_slot_button_and_refresh_ui			confirmed			
 0x0048f1cb	0	update_ZTAdoptionSlot_timers_and_ui_state			confirmed		0x008ce298#14	
 0x0048f27f	947	read_adoption_timing_config			confirmed			
-0x0048f632	33		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f632	33	reset_ZTAdoptionSlot_profile_and_timer_state			confirmed			
 0x0048f653	248	bind_adoption_decline_button_payload			confirmed			
-0x0048f74b	42		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f775	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f78b	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f7a1	61		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f7de	61		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f81b	35		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f74b	42	does_adoption_slot_match_payload_either_profile			confirmed			
+0x0048f775	22	does_adoption_slot_primary_profile_match_payload			confirmed			
+0x0048f78b	22	does_adoption_slot_secondary_profile_match_payload			confirmed			
+0x0048f7a1	61	does_adoption_slot_primary_profile_match_type_or_young_variant			confirmed			
+0x0048f7de	61	does_adoption_slot_secondary_profile_match_type_or_young_variant			confirmed			
+0x0048f81b	35	is_adoption_slot_unlocked_with_remaining_count			confirmed			
 0x0048f83e	23	is_selected_adoption_slot_count_available			confirmed			
-0x0048f855	71		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f89c	177		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x0048f855	71	append_ZTAdoptionSlot_profile_type_records			confirmed			
+0x0048f89c	177	get_adoption_slot_species_payload_key			confirmed			
 0x0048f94d	35	get_adoption_slot_profile_type_name			confirmed			
-0x0048f970	751		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048fc5f	32		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f970	751	select_weighted_adoption_profile_type			confirmed			
+0x0048fc5f	32	get_current_zoo_fame_for_adoption			confirmed			
 0x0048fc7f	554	read_adoption_profile			confirmed			
 0x0048fea9	103	create_adoption_profile_icon_layout			confirmed			
 0x0048ff10	194	resolve_female_adoption_profile_for_type			confirmed			
@@ -2859,15 +2859,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00490ec2	519	read_adoption_probabilities			confirmed		0x008cdf88#20	
 0x004910c9	0	emit_adoption_slot_mgr_load_events_from_xml			confirmed		0x008cdf88#29	
 0x0049115f	0	make_adoption_slot_mgr_payload_value			confirmed		0x008cdf88#30	
-0x00491236	116		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x00491236	116	append_adoption_slot_dismiss_cooldown_entry			confirmed			
 0x004912aa	47	get_type_ZTAdoptionSlotMgr			confirmed			
 0x004912d9	0		adoption slots, adoption manager, and slot manager		unidentified		0x008ce320#1	
 0x004912de	32	init_ZTAdoptionSlotMgr_descriptor_ref			confirmed			
 0x004912fe	0	init_ZTAdoptionSlotMgr_descriptor_ref_vtable_thunk			confirmed		0x008ce320#2	
 0x00491303	79		adoption slots, adoption manager, and slot manager		unidentified			
-0x004913bb	189		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x004913bb	189	construct_ZTAdoptionSlotMgr_state			confirmed			
 0x00491478	0	scalar_delete_ZTAdoptionSlotMgr			confirmed		0x008ce320#0	
-0x00491493	208		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x00491493	208	destroy_ZTAdoptionSlotMgr_state			confirmed			
 0x00491563	0	update_ZTAdoptionSlotMgr_slots_and_decline_ui			confirmed		0x008ce320#14	
 0x00491979	0	set_ZTAdoptionSlotMgr_gender_filter			confirmed		0x008ce320#22	
 0x004919e6	0	activate_matching_adoption_slot_primary			confirmed		0x008ce320#23	
@@ -2899,7 +2899,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00492d8d	26	destroy_adoption_fame_slot_record_range			confirmed			
 0x00492da7	383	insert_adoption_fame_slot_record			confirmed			
 0x00492f26	160	append_ZTUIAdoptionButton_handler_record			confirmed			
-0x00492fc6	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x00492fc6	160	append_ZTAdoptionMgr_handler_record			confirmed			
 0x00493066	0	get_type_vtable_008ce2f4_safe_handle_specialization			confirmed		0x008ce2f4#1	
 0x004930a6	0	get_type_vtable_008ce308_safe_handle_specialization			confirmed		0x008ce308#1	
 0x004930ab	0	assign_UIContainer_safe_handle_value			confirmed		0x008ce308#3	
@@ -2913,7 +2913,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00493337	45	move_construct_adoption_fame_slot_records_forward			confirmed			
 0x00493364	80	move_construct_adoption_fame_slot_records_backward			confirmed			
 0x004933b4	153		adoption slots, adoption manager, and slot manager		unidentified			
-0x0049344d	160		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x0049344d	160	append_ZTAdoptionSlotMgr_handler_record			confirmed			
 0x004935b5	0	scalar_delete_ZTAdoptionSlotMgr_embedded_dispatcher			confirmed		0x008ce3c0#0	
 0x004935bd	0	scalar_delete_ZTAdoptionMgr_embedded_dispatcher			confirmed		0x008ce020#0	
 0x004935cd	27		adoption slots, adoption manager, and slot manager		unidentified			io/assets
@@ -4543,14 +4543,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004de505	31		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de524	40	construct_inline_ui_string_from_range			confirmed			
 0x004de54c	90		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004de5a6	48		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-ai
+0x004de5a6	48	destroy_checked_u32_tree_storage			confirmed			
 0x004de5d6	0	allocate_ZTGestureMgr_instance			confirmed		0x008d438c#3	
 0x004de635	33	append_cstr_to_inline_ui_string			confirmed			
 0x004de656	45		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de683	69		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de6c8	164	append_inline_ui_string_substring			confirmed			
 0x004de76c	154	append_chars_to_inline_ui_string			confirmed			
-0x004de806	148		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-ai
+0x004de806	148	erase_checked_u32_tree_range			confirmed			
 0x004de89a	81		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004de8eb	134		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004de971	47	get_type_ZTGlobe			confirmed			
@@ -5631,7 +5631,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00512052	0	read_ZTTourData_xml			confirmed		0x008d8040#20	
 0x0051222a	96		tour data and tour recorder		unidentified			game-entities
 0x0051228a	160		tour data and tour recorder		unidentified			
-0x0051232a	69		tour data and tour recorder		unidentified			game-ai
+0x0051232a	69	validate_ZTTourDataAttr_iterator_range			confirmed			
 0x0051236f	47	get_type_ZTTourDataAttr			confirmed			
 0x0051239e	0	get_type_ZTTourDataAttr_vtable_thunk			confirmed		0x008d8098#1	
 0x005123a3	32	init_ZTTourDataAttr_vtable_storage			confirmed			
@@ -6699,7 +6699,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053d979	0	delete_ZTTankGateSegment			confirmed			
 0x0053d994	412	destroy_ZTTankGateSegment			confirmed			
 0x0053db30	398	update_ZTTankGateSegment_dirty_runtime_state			confirmed			
-0x0053dcbe	272		tank gate segment, tank manager, and area relocation setup		unidentified			game-ai
+0x0053dcbe	272	track_tank_gate_child_segment_height_bounds			confirmed			
 0x0053ddce	134		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0053de54	172	clear_ZTTankGateSegment_offset10_links			confirmed			
 0x0053df00	845	apply_ZTTankGateSegment_area_relocation_payload			confirmed			
@@ -6938,7 +6938,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054ab39	66	construct_ZTTankSupport_members			confirmed			
 0x0054ab7b	0	scalar_delete_ZTTankSupport			confirmed		0x008da950#0	
 0x0054ab97	145		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054ac28	138		tankwallglass material selector sweep and dirty refresh		unidentified			game-ai
+0x0054ac28	138	ensure_tankwallglass_selector_child_entry			confirmed			
 0x0054acb2	155		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ad4d	136		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054add5	172		tankwallglass material selector sweep and dirty refresh		unidentified			
@@ -7375,7 +7375,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00562d5b	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562e22	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005630bd	387		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00563240	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-ai
+0x00563240	35	lower_bound_point_assignment_tree_by_key			confirmed			
 0x00563263	160		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00563303	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00563326	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7942,7 +7942,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057e6d7	65		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057e718	130	apply_scaled_width_to_UIStatic_value			confirmed			
 0x0057e79a	433	sync_named_ui_controls_with_source_token_state			confirmed			
-0x0057e94b	41		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
+0x0057e94b	41		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057e974	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057e9bd	125	emit_showmixer_request_canceledit_payload			confirmed			
 0x0057ea3a	175	apply_scaled_dimensions_to_UIStatic_value			confirmed			
@@ -9504,7 +9504,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005adb3f	0	remove_first_BFApp_context			confirmed		0x008dc698#5	
 0x005adb88	79		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005adbd7	259	check_BFApp_binder_unique_name_version_mismatch			confirmed	gamebryo		
-0x005adcda	24		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-ai
+0x005adcda	24	probe_BFApp_binder_unique_name_version_mismatch			confirmed	gamebryo		
 0x005adcf2	63		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
 0x005add31	126		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005add56	0	0x005add50 callsite_address			confirmed			
@@ -9993,7 +9993,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b88bd	118	populate_component_container_required_binder_children			confirmed	gamebryo		
 0x005b8933	212	repopulate_BFBinder_children_by_method			confirmed	gamebryo		
 0x005b8a07	92		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b8a63	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-ai
+0x005b8a63	106	write_BFBinder_unique_name_version_xml_attrs			confirmed	gamebryo		
 0x005b8acd	264	refresh_BFBinder_unique_names_recursive			confirmed	gamebryo		
 0x005b8bd5	75		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b8c20	141		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -11608,7 +11608,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060a02b	48		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x0060a05b	56		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x0060a093	47	get_type_BFBehDockTAP			confirmed	gamebryo		
-0x0060a0c2	0		AI behavior roots, managers, components, and task thinker		unidentified		0x008e8e30#1	game-ai
+0x0060a0c2	0	get_type_BFBehDockTAP_vtable_thunk			confirmed		0x008e8e30#1	
 0x0060a0c7	32	get_BFBehDockTAP_descriptor_ref			confirmed	gamebryo		
 0x0060a0e7	0	get_BFBehDockTAP_descriptor_ref_vtable_thunk			confirmed		0x008e8e30#2	
 0x0060a0ec	115	construct_BFBehDockTAP_members			confirmed	gamebryo		
@@ -11617,28 +11617,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060a227	0	bind_BFBehDockTAP_subject_node			confirmed		0x008e8e30#23	
 0x0060a276	0	resolve_BFBehDockTAP_target_and_distance			confirmed		0x008e8e30#24	
 0x0060a2f7	0	advance_BFBehDockTAP_docking_flow			confirmed		0x008e8e30#25	
-0x0060a43a	268		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
-0x0060a546	297		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
-0x0060a66f	172		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
-0x0060a71b	318		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
+0x0060a43a	268	resolve_BFBehDockTAP_target_animation_dock_point			confirmed	gamebryo		
+0x0060a546	297	start_BFBehDockTAP_interpolation_child			confirmed	gamebryo		
+0x0060a66f	172	validate_BFBehDockTAP_current_docking_position			confirmed	gamebryo		
+0x0060a71b	318	find_clear_BFBehDockTAP_docking_position			confirmed	gamebryo		
 0x0060a859	0	write_BFBehDockTAP_xml			confirmed		0x008e8e30#19	
 0x0060a9d1	0	read_BFBehDockTAP_xml			confirmed		0x008e8e30#20	
 0x0060ab48	0	clone_BFBehDockTAP_from_pool			confirmed		0x008e8e30#21	
 0x0060ab74	0	copy_BFBehDockTAP_members			confirmed		0x008e8e30#36	
 0x0060abda	0	allocate_BFBehDockTAP_from_pool			confirmed		0x008e8e30#39	
-0x0060abeb	37		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
+0x0060abeb	37	select_BFBehDockTAP_target_TAP_string			confirmed	gamebryo		
 0x0060ac10	47	get_type_BFAITaskRoot			confirmed	gamebryo		
-0x0060ac3f	0		AI behavior roots, managers, components, and task thinker		unidentified		0x008e8f48#1	game-ai
+0x0060ac3f	0	get_type_BFAITaskRoot_vtable_thunk			confirmed		0x008e8f48#1	
 0x0060ac44	32	get_BFAITaskRoot_descriptor_ref			confirmed	gamebryo		
 0x0060ac64	0	get_BFAITaskRoot_descriptor_ref_vtable_thunk			confirmed		0x008e8f48#2	
 0x0060ac69	117	construct_BFAITaskRoot_members			confirmed	gamebryo		
 0x0060acde	0	scalar_delete_BFAITaskRoot			confirmed		0x008e8f48#0	
 0x0060acf9	69	destroy_BFAITaskRoot_members			confirmed	gamebryo		
-0x0060ad3e	137		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
-0x0060adc7	302		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
-0x0060aef5	534		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
+0x0060ad3e	137	clear_BFAITaskRoot_template_maps			confirmed	gamebryo		
+0x0060adc7	302	remove_BFAITaskRoot_task_template_entry			confirmed	gamebryo		
+0x0060aef5	534	register_BFAITaskRoot_task_template_tree			confirmed	gamebryo		
 0x0060b10b	0	read_BFAITaskRoot_xml			confirmed		0x008e8f48#20	
-0x0060b14c	142		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
+0x0060b14c	142	load_BFAITaskRoot_taskdata_path_children			confirmed	gamebryo		
 0x0060b1da	484	load_ai_task_templates_from_taskdata_directory			confirmed	gamebryo		
 0x0060b3be	158		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
 0x0060b45c	98		AI behavior roots, managers, components, and task thinker		unidentified	gamebryo		game-ai
@@ -17912,7 +17912,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eee8c	201		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006eef70	48		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006eefa0	110		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006ef00e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x006ef00e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006ef05e	221		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006ef13b	83		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x006ef18e	0	BFGCollisionTester_write_xml_node			confirmed		0x008f940c#18	
@@ -17926,7 +17926,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f0170	73		collision tester and fitting-surface component XML		unidentified	gamebryo		game-ai
 0x006f01b9	927		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0558	259		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x006f065b	432		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x006f065b	432		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x006f080b	205		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f08d8	806		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0bfe	72		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -17934,7 +17934,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f0c8e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0cde	124		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006f0d5a	25		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x006f0d73	30		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x006f0d73	30		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x006f0dcb	90	init_BFGFittingSurfaceComponent_callback_registry			confirmed	gamebryo		
 0x006f0e25	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f0f05	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
@@ -18382,7 +18382,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00707f97	374		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0070810d	122		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00708187	103		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007081ee	505		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x007081ee	505		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007083e7	187		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007084a2	116		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00708516	396		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -23519,8 +23519,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007fd430	42		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
 0x007fd45a	101		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fd4bf	123		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007fd53a	27		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007fd555	19		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
+0x007fd53a	27		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007fd555	19		scenario manager/rules/actions and IME/platform COM spans		unidentified			
 0x007fd568	606	register_zoo_event_hooks			confirmed			
 0x007fd7c6	303	load_vince_ini			confirmed			
 0x007fd8f5	109		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
