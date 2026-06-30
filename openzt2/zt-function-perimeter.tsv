@@ -19630,30 +19630,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074c625	290	create_colored_niline_segment			confirmed	gamebryo		
 0x0074c747	123	lerp_matrix3_clamped_orthonormalized			confirmed	gamebryo		
 0x0074c7c2	145	lerp_vector3_clamped			confirmed	gamebryo		
-0x0074c853	389		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074c853	389	compute_three_point_vector_bounds			confirmed	gamebryo		
 0x0074c9d8	2100	compute_pointer_vector_element_bounds			confirmed	gamebryo		
-0x0074d20c	906		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074d596	425		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074d73f	262		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074d845	293		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074d96a	215		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074da41	280		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074db59	187		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074d20c	906	compute_oriented_box_corner_points			confirmed	gamebryo		
+0x0074d596	425	test_and_solve_shape_triangle_contact			confirmed	gamebryo		
+0x0074d73f	262	project_point_to_segment_delta_if_inside			confirmed	gamebryo		
+0x0074d845	293	compute_point_to_segment_delta_clamped			confirmed	gamebryo		
+0x0074d96a	215	flush_global_animation_payload_vector			confirmed	gamebryo		
+0x0074da41	280	intersect_xy_segments_write_point			confirmed	gamebryo		
+0x0074db59	187	find_collision_data_by_bound_entity_handle			confirmed	gamebryo		
 0x0074dc14	744	segment_intersects_axis_bounds			confirmed	gamebryo		
 0x0074defc	197	compute_segment_plane_intersection			confirmed	gamebryo		
 0x0074dfc1	92	point_inside_axis_bounds			confirmed	gamebryo		
-0x0074e01d	68		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e061	68		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e0a5	200		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e16d	289		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e28e	275		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e3a1	152		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e439	139		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e4c4	176		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e574	132		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e5f8	710		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e8be	307		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074e9f1	538		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074e01d	68	is_zero_or_normal_float_value			confirmed	gamebryo		
+0x0074e061	68	classify_float_bits			confirmed	gamebryo		
+0x0074e0a5	200	matrix3_columns_near_unit_length			confirmed	gamebryo		
+0x0074e16d	289	intersect_xy_segments_with_margins			confirmed	gamebryo		
+0x0074e28e	275	intersect_xy_segments_write_xy_point			confirmed	gamebryo		
+0x0074e3a1	152	update_particle_system_controllers_in_subtree			confirmed	gamebryo		
+0x0074e439	139	count_controllers_in_scene_subtree			confirmed	gamebryo		
+0x0074e4c4	176	drive_bip01_controller_samples_and_clear_geometry			confirmed	gamebryo		
+0x0074e574	132	clear_nigeometry_payload_refs_recursive			confirmed	gamebryo		
+0x0074e5f8	710	accumulate_scene_node_xy_bounds			confirmed	gamebryo		
+0x0074e8be	307	write_scaled_rotation_translation_matrix4			confirmed	gamebryo		
+0x0074e9f1	538	decompose_matrix4_uniform_scale_rotation_translation			confirmed	gamebryo		
 0x0074ec0b	24		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0074ec23	47	get_type_BFRenderer			confirmed	gamebryo		
 0x0074ec52	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdd78#1	ui
