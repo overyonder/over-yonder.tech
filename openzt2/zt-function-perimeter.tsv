@@ -7286,12 +7286,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055cdf3	0	get_type_ZTPuzzle_vtable_thunk			confirmed		0x008db270#1	
 0x0055cdf8	32	init_ZTPuzzle_descriptor_ref			confirmed			
 0x0055ce18	0	init_ZTPuzzle_descriptor_ref_vtable_thunk			confirmed		0x008db270#2	
-0x0055ce1d	68		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055ce1d	68	init_ZTPuzzle_callback_registry			confirmed			
 0x0055ce61	0	copy_ZTPuzzle_callback_dependents			confirmed		0x008db270#21	
 0x0055cecd	0	resolve_ZTPuzzle_callback_value			confirmed		0x008db270#22	
 0x0055cf87	0	scalar_delete_ZTPuzzle			confirmed		0x008db270#0	
-0x0055cfa2	194		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055d064	270		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055cfa2	194	destroy_ZTPuzzle_members			confirmed			
+0x0055d064	270	clear_ZTPuzzle_runtime_piece_state			confirmed			
 0x0055d172	189	test_all_ZTPuzzle_piece_found_flags			confirmed			
 0x0055d22f	189	test_all_ZTPuzzle_piece_in_place_flags			confirmed			
 0x0055d2ec	189	test_all_ZTPuzzle_piece_initialized_flags			confirmed			
@@ -7301,34 +7301,34 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0055d590	0	write_ZTPuzzle_state_xml			confirmed		0x008db270#19	
 0x0055d823	0	read_ZTPuzzle_state_xml			confirmed		0x008db270#20	
 0x0055dc06	357	initialize_ZTPuzzle_piece_layout_runs			confirmed			
-0x0055dd6b	127		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055dd6b	127	randomize_ZTPuzzle_piece_active_layout_slot			confirmed			
 0x0055ddea	282	refresh_ZTPuzzle_preview_transform_and_pieces			confirmed			
-0x0055df04	178		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055df04	178	unregister_ZTPuzzle_preview_and_piece_entity_refs			confirmed			
 0x0055dfb6	71	test_ZTPuzzlePiece_ready_or_in_place			confirmed			
-0x0055dffd	38		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055dffd	38	destroy_ZTPuzzle_piece_layout_record_vector			confirmed			
 0x0055e023	95	append_ZTPuzzle_piece_layout_record			confirmed			
 0x0055e082	0	allocate_ZTPuzzlePiece_instance			confirmed		0x008db330#1	
-0x0055e09a	64		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055e0da	159		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055e09a	64	construct_ZTPuzzlePiece_callback_registry			confirmed			
+0x0055e0da	159	register_ZTPuzzlePiece_callback_for_unseen_type			confirmed			
 0x0055e1c0	0	allocate_ZTPuzzle_instance			confirmed		0x008db330#3	
 0x0055e21a	113	insert_ZTPuzzle_piece_layout_record_and_return_iterator			confirmed			
 0x0055e28b	51	construct_ZTPuzzle_piece_layout_record_range			confirmed			
-0x0055e2be	120		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055e336	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055e2be	120	erase_ZTPuzzle_piece_layout_record_vector_range			confirmed			
+0x0055e336	35	destroy_ZTPuzzle_piece_layout_record_range			confirmed			
 0x0055e359	448	insert_fill_ZTPuzzle_piece_layout_record_vector_range			confirmed			
 0x0055e519	160	append_ZTPuzzle_piece_layout_record_list_node			confirmed			
-0x0055e5b9	54		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055e5b9	54	make_ZTPuzzle_piece_layout_record_iterator_at_index			confirmed			
 0x0055e5ef	114	copy_construct_ZTPuzzlePiece_layout_record			confirmed			
 0x0055e661	47	copy_construct_ZTPuzzlePiece_layout_record_range			confirmed			
 0x0055e690	47	get_type_ZTPuzzleMgr			confirmed			
-0x0055e6bf	0		cloning/disease/fossil/puzzle components and TA filters		unidentified		0x008db518#1	
+0x0055e6bf	0	get_type_ZTPuzzleMgr_vtable_thunk			confirmed		0x008db518#1	
 0x0055e6c4	32	init_ZTPuzzleMgr_descriptor_ref			confirmed			
 0x0055e6e4	0	init_ZTPuzzleMgr_descriptor_ref_vtable_thunk			confirmed		0x008db518#2	
-0x0055e6e9	73		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055e79b	287		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055e6e9	73	init_ZTPuzzleMgr_handler_registry			confirmed			
+0x0055e79b	287	construct_ZTPuzzleMgr_members			confirmed			
 0x0055e8ba	0	scalar_delete_ZTPuzzleMgr			confirmed		0x008db518#0	
-0x0055e8d5	256		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x0055e9d5	270		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055e8d5	256	destroy_ZTPuzzleMgr_members			confirmed			
+0x0055e9d5	270	register_ZTPuzzleMgr_handlers			confirmed			
 0x0055eae3	0	write_ZTPuzzleMgr_state_xml			confirmed		0x008db518#19	
 0x0055eed0	0	read_ZTPuzzleMgr_state_xml			confirmed		0x008db518#20	
 0x0055fb47	0	update_ZTPuzzleMgr_frame			confirmed		0x008db518#14	
@@ -7344,7 +7344,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00560acf	386	select_ZTPuzzleMgr_next_fossil_puzzle_piece			confirmed			
 0x00560c51	1621	update_fossil_finding_display			confirmed			
 0x005612a6	312	select_random_non_dev_fossil_display_value			confirmed			
-0x005613de	140		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x005613de	140	test_ZTPuzzleMgr_current_level_puzzles_complete			confirmed			
 0x005617d7	137	count_ZTPuzzleMgr_piece_records_by_level			confirmed			
 0x00561860	154	count_ZTPuzzleMgr_found_piece_records_by_level			confirmed			
 0x005618fa	130	count_ZTPuzzleMgr_puzzles_by_level			confirmed			
@@ -7353,13 +7353,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00561b09	138	collect_ZTPuzzleMgr_active_marker_handles			confirmed			
 0x00561b93	441	clear_ZTPuzzleMgr_runtime_marker_state			confirmed			
 0x00561d4c	185	get_or_insert_fossil_site_point_assignment_ref			confirmed			
-0x00561e05	48		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x00561e05	48	destroy_fossil_site_point_assignment_tree_storage			confirmed			
 0x00561e35	132	erase_fossil_site_point_assignment_ref			confirmed			
 0x00561eb9	36	clear_fossil_site_point_assignment_tree_header			confirmed			
 0x00561edd	105	count_fossil_site_point_assignment_entries			confirmed			
 0x00561f46	186	get_or_insert_dig_pit_point_assignment_ref			confirmed			
-0x00562000	48		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00562030	132		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x00562000	48	destroy_dig_pit_point_assignment_tree_storage			confirmed			
+0x00562030	132	erase_dig_pit_point_assignment_ref			confirmed			
 0x005620b4	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005620d8	105	count_dig_pit_point_assignment_entries			confirmed			
 0x00562141	0	allocate_ZTPuzzleMgr_instance			confirmed		0x008db578#4	
@@ -8298,28 +8298,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0058b4e7	96	subtract_matrix3_values			confirmed	gamebryo		
 0x0058b547	269	multiply_matrix3_values			confirmed	gamebryo		
 0x0058b654	331	multiply_matrix3_values_with_scratch_output			confirmed	gamebryo		
-0x0058b79f	221		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058b87c	109		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058b8e9	109		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058b956	242		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058ba48	46		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058ba76	113		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058bae7	693		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058bd9c	587		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058bfe7	225		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c0c8	150		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c15e	306		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c290	700		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c54c	215		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c623	214		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c6f9	104		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c761	104		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c7c9	104		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c831	37		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c856	112		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c8c6	129		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c947	65		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058c988	63		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
+0x0058b79f	221	scale_matrix3_values_by_scalar	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058b87c	109	transform_vec3_by_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058b8e9	109	transform_vec3_by_transposed_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058b956	242	invert_matrix3_values	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058ba48	46	invert_matrix3_values_or_zero	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058ba76	113	transpose_matrix3_values	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058bae7	693	extract_axis_angle_from_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058bd9c	587	orthonormalize_matrix3_columns	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058bfe7	225	multiply_left_transposed_matrix3_values	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c0c8	150	eigen_solve_symmetric_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c15e	306	tridiagonalize_symmetric_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c290	700	run_symmetric_tridiagonal_ql_algorithm	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c54c	215	extract_xyz_euler_angles_from_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c623	214	extract_zxy_euler_angles_from_matrix3	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c6f9	104	compose_matrix3_from_xyz_euler_angles	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c761	104	compose_matrix3_from_yzx_euler_angles	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c7c9	104	compose_matrix3_from_zxy_euler_angles	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c831	37	load_matrix3_via_stream_channel	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c856	112	save_clamped_matrix3_via_stream_channel	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c8c6	129	format_matrix3_viewer_string	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c947	65	clamped_asin	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058c988	63	clamped_acos	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
 0x0058c9c7	61		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
 0x0058ca04	69		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
 0x0058ca49	204		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
@@ -9425,11 +9425,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aad49	24		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aad61	23		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aad78	100	append_retired_BFSafeHandledObj_pointer_hash_node			confirmed	gamebryo		
-0x005aaddc	126		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005aaddc	126		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005aae9e	49		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aaecf	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005aaecf	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005aaf37	160	get_or_insert_safehandledobjid_object_ref_for_id			confirmed	gamebryo		
-0x005ab01b	51		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005ab01b	51		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab04e	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab0b6	157		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab197	154	erase_safehandledobjid_dependents_for_id			confirmed	gamebryo		
@@ -9438,18 +9438,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ab2cc	33	destroy_BFSafeHandle_BFSafeHandledObj_ref			confirmed	gamebryo		
 0x005ab2ed	0		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified		0x008e4e00#0	
 0x005ab308	143		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab397	323		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab4da	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005ab397	323		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005ab4da	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab511	327	insert_safehandledobjid_object_map_record_with_hint			confirmed	gamebryo		
-0x005ab658	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005ab658	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab68f	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab6ca	323	insert_safehandledobjid_dependent_record_with_hint			confirmed	gamebryo		
 0x005ab80d	148	erase_safehandledobjid_dependent_map_range			confirmed	gamebryo		
 0x005ab8a1	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab8d8	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab913	340		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aba67	192		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005abb27	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005aba67	192		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005abb27	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005abbbb	398	insert_safehandledobjid_object_id_map_node			confirmed	gamebryo		
 0x005abd49	198	find_or_insert_safehandledobjid_object_map_record			confirmed	gamebryo		
 0x005abe0f	148	erase_safehandledobjid_object_map_range			confirmed	gamebryo		
@@ -10148,7 +10148,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bc5a6	224	read_BFRegistry_string_value			confirmed	gamebryo		
 0x005bc686	27	read_HKCU_BFRegistry_dword_value			confirmed	gamebryo		
 0x005bc6a1	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
-0x005bc703	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
+0x005bc703	103	write_HKCU_BFRegistry_string_value			confirmed	gamebryo		
 0x005bc76a	103	open_HKLM_BFRegistry_subkey			confirmed	gamebryo		
 0x005bc7d1	0	read_BFRegistry_app_key_xml			confirmed		0x008e60e0#20	
 0x005bc81d	0	allocate_default_BFRegistry			confirmed		0x008e60e0#22	
@@ -10168,32 +10168,32 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bcddc	416	unregister_resource_path_and_zip_mounts			confirmed	gamebryo		
 0x005bcf7c	123	resource_path_exists_in_mounts			confirmed	gamebryo		
 0x005bcff7	291	evict_resource_cache_entry_for_path			confirmed	gamebryo		
-0x005bd11a	334		zip-prefixed resource import and package resolution helpers		unidentified	gamebryo		io/assets
-0x005bd268	438		zip-prefixed resource import and package resolution helpers		unidentified	gamebryo		io/assets
+0x005bd11a	334	register_zip_archive_resource_source			confirmed	gamebryo		
+0x005bd268	438	remove_zip_archive_resource_source_by_path			confirmed	gamebryo		
 0x005bd41e	62	normalize_resource_lookup_key			confirmed	gamebryo		
-0x005bd45c	151		resource keyed lookup, open, and enumeration dispatch helpers		unidentified	gamebryo		io/assets
-0x005bd4f3	346		resource keyed lookup, open, and enumeration dispatch helpers		unidentified	gamebryo		io/assets
-0x005bd64d	450		resource keyed lookup, open, and enumeration dispatch helpers		unidentified	gamebryo		io/assets
+0x005bd45c	151	resolve_BFResourceMgr_source_label_for_key			confirmed	gamebryo		
+0x005bd4f3	346	probe_BFResourceMgr_resource_ref_by_key			confirmed	gamebryo		
+0x005bd64d	450	lookup_BFResourceMgr_resource_ref_by_key			confirmed	gamebryo		
 0x005bd80f	25	dispatch_resource_enumeration_callback			confirmed	gamebryo		
 0x005bd828	103	dispatch_resource_lookup_to_mounts			confirmed	gamebryo		
 0x005bd88f	103	open_resource_stream_from_mounts			confirmed	gamebryo		
-0x005bd8f6	121		resource keyed lookup, open, and enumeration dispatch helpers		unidentified	gamebryo		io/assets
-0x005bd96f	202		resource keyed lookup, open, and enumeration dispatch helpers		unidentified	gamebryo		io/assets
+0x005bd8f6	121	append_unique_resource_key_strings			confirmed	gamebryo		
+0x005bd96f	202	enumerate_BFResourceMgr_resource_keys			confirmed	gamebryo		
 0x005bda39	0	dispatch_BFResourceMgr_entry_predicate_by_key			confirmed		0x008e6250#21	
-0x005bdac7	171		BFResourceMgr cleanup and resource tree refresh helpers		unidentified	gamebryo		io/assets
+0x005bdac7	171	clear_BFResourceMgr_mounts_and_cache			confirmed	gamebryo		
 0x005bdb72	0	reload_BFResourceMgr_path_mounts_from_xml			confirmed		0x008e6250#20	
-0x005bdcf3	153		BFResourceMgr cleanup and resource tree refresh helpers		unidentified	gamebryo		io/assets
-0x005bdd8c	87		BFResourceMgr cleanup and resource tree refresh helpers		unidentified	gamebryo		io/assets
-0x005bdde3	49		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005bde14	659		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be0a7	36		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be0cb	95		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
+0x005bdcf3	153	detach_BFResourceMgr_cache_entries_for_source			confirmed	gamebryo		
+0x005bdd8c	87	insert_BFResourceMgr_resource_cache_entry			confirmed	gamebryo		
+0x005bdde3	49	destroy_BFResourceMgr_resource_cache_tree_storage			confirmed	gamebryo		
+0x005bde14	659	erase_BFResourceMgr_resource_cache_tree_node			confirmed	gamebryo		
+0x005be0a7	36	clear_BFResourceMgr_resource_cache_tree			confirmed	gamebryo		
+0x005be0cb	95	lower_bound_BFResourceMgr_resource_cache_by_hash			confirmed	gamebryo		
 0x005be12a	0	allocate_default_BFResourceMgr			confirmed		0x008e6250#23	
-0x005be142	49		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be173	145		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be204	379		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be37f	79		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
-0x005be3ce	284		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
+0x005be142	49	free_BFResourceMgr_resource_cache_subtree			confirmed	gamebryo		
+0x005be173	145	erase_BFResourceMgr_resource_cache_tree_range			confirmed	gamebryo		
+0x005be204	379	insert_BFResourceMgr_resource_cache_tree_at_bound			confirmed	gamebryo		
+0x005be37f	79	insert_resource_result_list_range_into_tree			confirmed	gamebryo		
+0x005be3ce	284	sort_resource_result_vector_entries			confirmed	gamebryo		
 0x005be4ea	376		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
 0x005be662	129		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
 0x005be6e3	573		red-black tree and resource-result container helpers		unidentified	gamebryo		io/assets
@@ -16147,8 +16147,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a207b	57		renderer state-list owner constructor		unidentified	gamebryo		renderer
 0x006a20b4	107		broad vector/container constructor helper		unidentified	gamebryo		renderer
 0x006a211f	107		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
-0x006a218a	109		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
-0x006a21f7	116		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
+0x006a218a	109		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
+0x006a21f7	116		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
 0x006a226b	46		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a2299	53		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a22ce	117	mark_unlocked_state_list_entries_for_cleanup			confirmed	gamebryo		
@@ -16306,20 +16306,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a7305	0		vtable 0x008f5a80 model geometry record allocator/inserter		unidentified		0x008f5a80#1	
 0x006a7345	36		vtable 0x008f5a9c extended model geometry record lifecycle		unidentified	gamebryo		
 0x006a73ec	70		vtable 0x008f5a9c extended record allocator/copy helper		unidentified	gamebryo		renderer
-0x006a76e7	275		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a77fa	144		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
+0x006a76e7	275	assign_16byte_model_geometry_record_vector			confirmed	gamebryo		
+0x006a77fa	144	resize_16byte_model_geometry_record_vector			confirmed	gamebryo		
 0x006a788a	41	allocate_16byte_vector_storage			confirmed	gamebryo		
-0x006a78b3	65		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a78f4	422		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7a9a	54		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
+0x006a78b3	65	erase_16byte_model_geometry_record_range			confirmed	gamebryo		
+0x006a78f4	422	insert_16byte_model_geometry_records			confirmed	gamebryo		
+0x006a7a9a	54	make_16byte_model_geometry_record_iterator_at			confirmed	gamebryo		
 0x006a7ad0	50	assign_refcounted_model_geometry_record			confirmed	gamebryo		
-0x006a7b02	45		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7b2f	38		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7b55	48		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7b85	148		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7c19	30		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7c37	28		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a7c53	72		image/pixel backing creation and cleanup helpers for model resou		unidentified	gamebryo		renderer
+0x006a7b02	45	copy_16byte_model_geometry_record_range			confirmed	gamebryo		
+0x006a7b2f	38	move_16byte_model_geometry_records_to_front			confirmed	gamebryo		
+0x006a7b55	48	query_model_geometry_2byte_aux_buffer			confirmed	gamebryo		
+0x006a7b85	148	copy_construct_model_backing_buffers			confirmed	gamebryo		
+0x006a7c19	30	release_model_backing_primary_buffer			confirmed	gamebryo		
+0x006a7c37	28	release_model_backing_secondary_buffer			confirmed	gamebryo		
+0x006a7c53	72		image/pixel backing creation and cleanup helpers for model resou		unidentified	gamebryo		
 0x006a7c9b	135		image/pixel backing creation and cleanup helpers for model resou		unidentified	gamebryo		renderer
 0x006a7d22	325		image/pixel backing creation and cleanup helpers for model resou		unidentified	gamebryo		renderer
 0x006a7e67	103		image/pixel backing creation and cleanup helpers for model resou		unidentified	gamebryo		renderer
@@ -16965,24 +16965,24 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006c111d	132	erase_int_key_tree_equal_range			confirmed	gamebryo		
 0x006c11a1	0	allocate_placement_side_record_value			confirmed		0x008f697c#3	
 0x006c11c7	0	allocate_BFGPlacementGrid_instance			confirmed		0x008f697c#5	
-0x006c11df	130		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1261	153		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1341	108		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c13ad	90		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1407	326		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c154d	132		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c15d1	27		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c15ec	51		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c161f	160		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c16bf	403		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1852	67		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1895	48		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c18c5	35		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c18e8	102		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c194e	88		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c19a6	57		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c19df	109		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c1a4c	47		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
+0x006c11df	130	populate_BFGPlacementGrid_callback_registry			confirmed	gamebryo		
+0x006c1261	153	register_BFGPlacementGrid_callback_for_type			confirmed	gamebryo		
+0x006c1341	108	append_placement_grid_source_record			confirmed	gamebryo		
+0x006c13ad	90	erase_placement_grid_source_record_at			confirmed	gamebryo		
+0x006c1407	326	insert_dword_key_tree_node			confirmed	gamebryo		
+0x006c154d	132	insert_placement_grid_source_record_at			confirmed	gamebryo		
+0x006c15d1	27	destroy_placement_grid_source_record_range			confirmed	gamebryo		
+0x006c15ec	51	construct_placement_grid_source_record_range			confirmed	gamebryo		
+0x006c161f	160	insert_BFGPlacementGrid_callback_registry_entry			confirmed	gamebryo		
+0x006c16bf	403	insert_placement_grid_source_record			confirmed	gamebryo		
+0x006c1852	67	allocate_placement_grid_source_record_storage			confirmed	gamebryo		
+0x006c1895	48	copy_construct_placement_grid_source_record			confirmed	gamebryo		
+0x006c18c5	35	find_dword_key_tree_lower_bound			confirmed	gamebryo		
+0x006c18e8	102	test_dword_vector_missing_value			confirmed	gamebryo		
+0x006c194e	88	resolve_child_as_BFGElevatedTileData			confirmed	gamebryo		
+0x006c19a6	57	insert_current_record_keys_into_tree			confirmed	gamebryo		
+0x006c19df	109	test_reachable_cell_key_unvisited			confirmed	gamebryo		
+0x006c1a4c	47	copy_construct_placement_grid_source_record_range			confirmed	gamebryo		
 0x006c1a7b	48		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
 0x006c1aab	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008bfbf8#13	world/pathing
 0x006c1ab0	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008bf7e0#171	world/pathing
@@ -17702,37 +17702,37 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e6b9a	143		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		world/pathing
 0x006e6c29	72		session-global payload bridge helper		unidentified	gamebryo		io/assets
 0x006e6c71	86	lower_bound_ordered_map_entry			confirmed	gamebryo		
-0x006e6cc7	181		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e6d7c	110		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e6dea	99		ordered map/list helper cluster		unidentified	gamebryo		ui
-0x006e6e4d	124		ordered map/list helper cluster		unidentified	gamebryo		
+0x006e6cc7	181	insert_ZTBehFollowTrack_open_gate_entry_if_absent			confirmed	gamebryo		
+0x006e6d7c	110	lower_bound_ZTBehFollowTrack_open_gate_entry			confirmed	gamebryo		
+0x006e6dea	99	count_ZTBehFollowTrack_open_gate_entries_before_key			confirmed	gamebryo		
+0x006e6e4d	124	erase_ZTBehFollowTrack_open_gate_list_pair_entries			confirmed	gamebryo		
 0x006e6ec9	149	insert_ordered_map_entry_if_absent			confirmed	gamebryo		
-0x006e6f5e	132		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e6fe2	132		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e7066	110		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e70d4	71		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e711b	144		ordered map/list helper cluster		unidentified	gamebryo		game-entities
+0x006e6f5e	132	erase_ZTTransportStationBase_dependency_tree_prefix			confirmed	gamebryo		
+0x006e6fe2	132	erase_u32_dependency_tree_prefix			confirmed	gamebryo		
+0x006e7066	110	erase_list_entries_matching_u32_payload			confirmed	gamebryo		
+0x006e70d4	71	construct_0x18_ordered_tree_header			confirmed	gamebryo		
+0x006e711b	144	insert_weighted_puzzle_candidate_tree_entry_if_absent			confirmed	gamebryo		
 0x006e71ab	110	lower_bound_ordered_map_iterator			confirmed	gamebryo		
-0x006e7219	105		ordered map/list helper cluster		unidentified	gamebryo		world/pathing
-0x006e7282	38		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e72a8	122		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e7322	49		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e7353	52		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e7387	33		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e73a8	92		ordered map/list helper cluster		unidentified	gamebryo		ui
-0x006e7404	122		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e747e	102		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e74e4	68		ordered map/list helper cluster		unidentified	gamebryo		ui
-0x006e7528	50		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e755a	88		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e75b2	46		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e75e0	101		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e7645	197		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e770a	116		ordered map/list helper cluster		unidentified	gamebryo		game-entities
-0x006e777e	99		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e77e1	39		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e7808	0		ordered map/list helper cluster		unidentified		0x008f8dc8#1	
-0x006e7823	64		ordered map/list helper cluster		unidentified	gamebryo		
+0x006e7219	105	count_traversability_slot_tree_prefix			confirmed	gamebryo		
+0x006e7282	38	clear_12byte_ordered_tree_record_vector			confirmed	gamebryo		
+0x006e72a8	122	erase_u32_key_tree_equal_range			confirmed	gamebryo		
+0x006e7322	49	clear_16byte_nested_vector_record_vector			confirmed	gamebryo		
+0x006e7353	52	clear_12byte_record_vector_with_range_destroy			confirmed	gamebryo		
+0x006e7387	33	construct_0x20_list_header			confirmed	gamebryo		
+0x006e73a8	92	erase_inline_value_list_node_and_return_next			confirmed	gamebryo		
+0x006e7404	122	erase_four_dword_key_tree_equal_range			confirmed	gamebryo		
+0x006e747e	102	count_four_dword_key_tree_equal_range			confirmed	gamebryo		
+0x006e74e4	68	clear_inline_value_list_nodes			confirmed	gamebryo		
+0x006e7528	50	peek_circular_pointer_queue_front			confirmed	gamebryo		
+0x006e755a	88	push_circular_24byte_record_queue_entry			confirmed	gamebryo		
+0x006e75b2	46	pop_front_circular_owned_pointer_queue			confirmed	gamebryo		
+0x006e75e0	101	clear_circular_owned_pointer_queue			confirmed	gamebryo		
+0x006e7645	197	insert_refcounted_value_tree_entry_if_absent			confirmed	gamebryo		
+0x006e770a	116	count_refcounted_value_tree_entries_before_key			confirmed	gamebryo		
+0x006e777e	99	count_u32_key_tree_entries_before_key			confirmed	gamebryo		
+0x006e77e1	39	erase_4byte_vector_element_at_iterator			confirmed	gamebryo		
+0x006e7808	0	allocate_BFGTraversabilityMgr_viewing_attributes			confirmed		0x008f8dc8#1	
+0x006e7823	64	initialize_global_traversability_handler_list			confirmed	gamebryo		
 0x006e7863	159	insert_traversability_handler_for_global_type			confirmed	gamebryo		
 0x006e7949	0		ordered map/list helper cluster		unidentified		0x008f8dc8#3	
 0x006e7966	110		ordered map/list helper cluster		unidentified	gamebryo		
