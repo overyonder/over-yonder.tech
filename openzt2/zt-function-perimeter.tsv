@@ -9977,7 +9977,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b7d99	153		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7e32	165		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b7ed7	0	dispatch_ring_value_to_listener_vector			confirmed		0x008e4f80#2	
-0x005b8063	48		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005b8063	48		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		world/pathing
 0x005b8093	127		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b8112	120		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b818a	47	get_type_BFBinder			confirmed	gamebryo		
@@ -19589,26 +19589,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074a8bb	110	lower_bound_placement_feedback_tracker_record			confirmed	gamebryo		
 0x0074a929	152	insert_placement_feedback_target_index_entry			confirmed	gamebryo		
 0x0074a9c1	48	clear_checked_tree_storage_and_free_header			confirmed	gamebryo		
-0x0074a9f1	154		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074aa8b	98		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074aaed	326		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ac33	175		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ace2	196		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074ada6	388		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074af2a	137		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074afb3	80		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b003	98		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b065	90		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b0bf	128		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b13f	186		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b1f9	342		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b34f	105		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b3b8	145		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b449	220		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b525	59		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b560	95		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b5bf	429		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074b76c	232		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074a9f1	154	erase_placement_feedback_target_index_key_range			confirmed	gamebryo		
+0x0074aa8b	98	lower_bound_placement_feedback_target_index_entry			confirmed	gamebryo		
+0x0074aaed	326	insert_or_get_placement_feedback_target_index_entry			confirmed	gamebryo		
+0x0074ac33	175	erase_placement_feedback_target_index_nodes			confirmed	gamebryo		
+0x0074ace2	196	lower_bound_or_insert_placement_feedback_target_index_key			confirmed	gamebryo		
+0x0074ada6	388	insert_placement_feedback_target_index_tree_node			confirmed	gamebryo		
+0x0074af2a	137	copy_placement_feedback_target_record_vector			confirmed	gamebryo		
+0x0074afb3	80	select_placement_variant_vector3			confirmed	gamebryo		
+0x0074b003	98	select_placement_variant_matrix3			confirmed	gamebryo		
+0x0074b065	90	select_placement_variant_reference_payload			confirmed	gamebryo		
+0x0074b0bf	128	read_xml_vector2_xy_attributes			confirmed	gamebryo		
+0x0074b13f	186	read_xml_vector3_xyz_attributes			confirmed	gamebryo		
+0x0074b1f9	342	read_xml_matrix3_row_children			confirmed	gamebryo		
+0x0074b34f	105	write_xml_vector2_xy_attributes			confirmed	gamebryo		
+0x0074b3b8	145	write_xml_vector3_xyz_attributes			confirmed	gamebryo		
+0x0074b449	220	write_xml_matrix3_row_children			confirmed	gamebryo		
+0x0074b525	59	append_named_xml_matrix3_child			confirmed	gamebryo		
+0x0074b560	95	read_named_xml_matrix3_child_or_default			confirmed	gamebryo		
+0x0074b5bf	429	write_vector3_space_separated_xml_attribute			confirmed	gamebryo		
+0x0074b76c	232	read_vector2_space_separated_xml_attribute_or_default			confirmed	gamebryo		
 0x0074b854	262		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0074b95a	289		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0074ba7b	381		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
