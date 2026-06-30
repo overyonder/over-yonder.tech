@@ -13685,28 +13685,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064a249	160	insert_UIContainer_action_registry_node_before			confirmed	gamebryo		
 0x0064a2e9	389	insert_ui_descendant_stack_vector_values			confirmed	gamebryo		
 0x0064a46e	117	import_UIContainer_action_registry_entries			confirmed	gamebryo		
-0x0064a4e3	118		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a5be	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064a4e3	118	remove_matching_ui_child_pointer_from_checked_range			confirmed	gamebryo		
+0x0064a5be	32	get_current_ui_context_component			confirmed	gamebryo		
 0x0064a5de	45	get_type_UIAspect			confirmed	gamebryo		
-0x0064a60b	0		typed UI value construction and forwarding		unidentified		0x008eec9c#1	ui
-0x0064a610	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a642	27		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a65d	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a67d	25		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a696	67		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a6d9	118		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a74f	200		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064a60b	0	get_type_UIAspect_vtable_thunk			confirmed		0x008eec9c#1	
+0x0064a610	50	destroy_UIAspect_state_resource_table			confirmed	gamebryo		
+0x0064a642	27	destroy_UIAspect_state_resource_entry			confirmed	gamebryo		
+0x0064a65d	32	select_UIAspect_state_resource_entry			confirmed	gamebryo		
+0x0064a67d	25	allocate_copy_UIAspect_state_resource_entry			confirmed	gamebryo		
+0x0064a696	67	copy_construct_UIAspect_state_resource_entry			confirmed	gamebryo		
+0x0064a6d9	118	replace_UIAspect_state_resource_entry			confirmed	gamebryo		
+0x0064a74f	200	construct_UIAspect_fields			confirmed	gamebryo		
 0x0064a817	0	scalar_delete_UIAspect			confirmed		0x008eec9c#0	
-0x0064a833	38		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a859	161		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a8fa	172		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a9a6	32		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064a9c6	82		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064aa18	120		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064aa90	20		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064aaa4	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064aad6	18		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064aae8	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064a833	38	construct_UIAspect_render_state			confirmed	gamebryo		
+0x0064a859	161	destroy_UIAspect_fields			confirmed	gamebryo		
+0x0064a8fa	172	hit_test_UIAspect_point			confirmed	gamebryo		
+0x0064a9a6	32	get_UIAspect_local_region_or_zero			confirmed	gamebryo		
+0x0064a9c6	82	apply_UIAspect_region_rect_and_refresh			confirmed	gamebryo		
+0x0064aa18	120	compute_UIAspect_accumulated_region			confirmed	gamebryo		
+0x0064aa90	20	query_UIAspect_slot88_flag_or_false			confirmed	gamebryo		
+0x0064aaa4	50	set_UIAspect_active_state_and_refresh			confirmed	gamebryo		
+0x0064aad6	18	select_UIAspect_alternate_state_table_and_refresh			confirmed	gamebryo		
+0x0064aae8	50	insert_UIAspect_child_layout_link			confirmed	gamebryo		
 0x0064ab1a	50		typed UI value construction and forwarding		unidentified	gamebryo		ui
 0x0064ab4c	62		typed UI value construction and forwarding		unidentified	gamebryo		ui
 0x0064ab8a	56		typed UI value construction and forwarding		unidentified	gamebryo		ui
