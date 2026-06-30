@@ -14524,7 +14524,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0066743c	160		vector plane construction helpers		unidentified	gamebryo		renderer
 0x006674dc	81		vector plane construction helpers		unidentified	gamebryo		renderer
 0x0066752d	222	compute_segment_plane_intersection_distance			confirmed	gamebryo		
-0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		renderer
+0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		io/assets
 0x0066763a	44	copy_two_vectors_and_normalize_second			confirmed	gamebryo		
 0x00667666	214		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
 0x0066773c	48		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
@@ -21879,27 +21879,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b1f75	0	scalar_delete_phighdecal_shader_binding			confirmed		0x009022e8#0	
 0x007b1f90	25	destroy_phighdecal_shader_binding			confirmed	gamebryo		
 0x007b1fa9	0	ensure_phighdecal_shader_key			confirmed		0x009022e8#6	
-0x007b1fbf	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#7	ui
-0x007b2013	154		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b20ad	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#10	ui
-0x007b20c1	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#9	ui
-0x007b2430	387		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b25b3	34		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b1fbf	0	prepare_phighdecal_shader_binding_children			confirmed		0x009022e8#7	
+0x007b2013	154	scale_renderer_child_type5_float4_values			confirmed	gamebryo		
+0x007b20ad	0	build_phighdecal_shader_constant_vectors			confirmed		0x009022e8#10	
+0x007b20c1	0	build_phighdecal_child_mesh_buffers			confirmed		0x009022e8#9	
+0x007b2430	387	build_effect_orthonormal_basis_vectors			confirmed	gamebryo		
+0x007b25b3	34	construct_splash_effect_config			confirmed	gamebryo		
 0x007b25f0	317	resolve_splash_effect_variant			confirmed	gamebryo		
-0x007b272d	38		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2753	23		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b276a	40		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2792	223		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2871	40		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2899	17		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b28aa	82		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b28fc	71		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2943	171		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b29ee	98		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2a50	310		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2b86	160		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2c26	105		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b2c8f	200		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b272d	38	clear_splash_effect_variant_record			confirmed	gamebryo		
+0x007b2753	23	destroy_splash_effect_variant_record			confirmed	gamebryo		
+0x007b276a	40	copy_construct_splash_effect_variant_record			confirmed	gamebryo		
+0x007b2792	223	initialize_default_splash_effect_variants			confirmed	gamebryo		
+0x007b2871	40	assign_splash_effect_variant_record			confirmed	gamebryo		
+0x007b2899	17	destroy_splash_effect_config			confirmed	gamebryo		
+0x007b28aa	82	spawn_splash_particle_if_configured			confirmed	gamebryo		
+0x007b28fc	71	splash_effect_matches_surface_slot			confirmed	gamebryo		
+0x007b2943	171	select_splash_particle_resource			confirmed	gamebryo		
+0x007b29ee	98	expand_splash_resource_token_string			confirmed	gamebryo		
+0x007b2a50	310	spawn_splash_particle_resource_at_point			confirmed	gamebryo		
+0x007b2b86	160	apply_splash_particle_depth_to_children			confirmed	gamebryo		
+0x007b2c26	105	read_spray_splash_effect_config			confirmed	gamebryo		
+0x007b2c8f	200	select_spray_level_xml_node			confirmed	gamebryo		
 0x007b2d57	534		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b2f6d	49		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b2f9e	31		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
