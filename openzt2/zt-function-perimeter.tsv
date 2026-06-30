@@ -10003,7 +10003,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b8e98	0	merge_BFBinder_instance_child_node			confirmed		0x008e5ac8#33	
 0x005b8ec9	0	merge_BFBinder_shared_child_node			confirmed		0x008e5ac8#34	
 0x005b8efa	0	merge_BFBinder_suppressed_child_node			confirmed		0x008e5ac8#35	
-0x005b9068	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b9068	103	is_BFBinder_child_suppressed_by_key			confirmed	gamebryo		
 0x005b90cf	0	merge_BFBinder_inherited_schema			confirmed		0x008e5ac8#30	
 0x005b9128	0	merge_BFBinder_child_tree_by_unique_key			confirmed		0x008e5ac8#36	
 0x005b925d	109	resolve_BFBinder_slash_path			confirmed	gamebryo		
@@ -10027,17 +10027,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b97ec	0	read_BFTypedBinder_type_schema			confirmed		0x008e5c48#20	
 0x005b989a	161	find_or_insert_BFBinder_child_tree_entry			confirmed	gamebryo		
 0x005b993b	20	get_component_vector_begin_checked			confirmed	gamebryo		
-0x005b994f	161		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005b994f	161		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b99f0	66	get_current_inline_ui_string_vector_entry			confirmed	gamebryo		
 0x005b9a32	28		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9a61	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b9acb	0		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified		0x008e5b84#1	
 0x005b9af7	0		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified		0x008e5b84#3	
 0x005b9b23	105		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005b9b8c	372		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b9d00	205		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b9b8c	372	find_or_insert_refcounted_ui_value_tree_entry			confirmed	gamebryo		
+0x005b9d00	205	lower_bound_or_insert_refcounted_ui_value_tree_entry_with_hint			confirmed	gamebryo		
 0x005b9dcd	341	insert_refcounted_ui_value_tree_node_with_hint			confirmed	gamebryo		
-0x005b9f22	210		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b9f22	210	lower_bound_or_insert_refcounted_ui_value_tree_entry			confirmed	gamebryo		
 0x005b9ff4	387	insert_refcounted_ui_value_tree_node			confirmed	gamebryo		
 0x005ba177	87		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ba1ce	76	allocate_refcounted_ui_value_tree_node			confirmed	gamebryo		
@@ -10139,12 +10139,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bc4f6	32		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005bc516	0	get_BFRegistry_profile_event_descriptor			confirmed		0x008e60e0#2	
 0x005bc51b	0	scalar_delete_BFRegistry			confirmed		0x008e60e0#0	
-0x005bc54d	89		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005bc5a6	224		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005bc686	27		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005bc54d	89	read_BFRegistry_dword_value			confirmed	gamebryo		
+0x005bc5a6	224	read_BFRegistry_string_value			confirmed	gamebryo		
+0x005bc686	27	read_HKCU_BFRegistry_dword_value			confirmed	gamebryo		
 0x005bc6a1	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		renderer
 0x005bc703	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		io/assets
-0x005bc76a	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005bc76a	103	open_HKLM_BFRegistry_subkey			confirmed	gamebryo		
 0x005bc7d1	0	read_BFRegistry_app_key_xml			confirmed		0x008e60e0#20	
 0x005bc81d	0	allocate_default_BFRegistry			confirmed		0x008e60e0#22	
 0x005bc851	18	hash_resource_lookup_byte_count			confirmed	gamebryo		
@@ -10202,7 +10202,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005beb21	0		BFBinderRoot type lifecycle and binder traversal helpers		unidentified		0x008e62c0#1	
 0x005beb26	32		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		
 0x005beb46	0	get_BFBinderRoot_xml_descriptor			confirmed		0x008e62c0#2	
-0x005beb4b	204		BFBinderRoot type lifecycle and binder traversal helpers		unidentified	gamebryo		ui
+0x005beb4b	204	construct_BFBinderRoot			confirmed	gamebryo		
 0x005bec17	0	scalar_delete_BFBinderRoot			confirmed		0x008e62c0#0	
 0x005bec32	66	destroy_BFBinderRoot_state			confirmed	gamebryo		
 0x005bec74	0	load_BFBinderRoot_children_from_xml			confirmed		0x008e62c0#20	
@@ -10212,7 +10212,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005bf0a4	184		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		io/assets
 0x005bf15c	62		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
 0x005bf19a	165		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
-0x005bf23f	181		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		ui
+0x005bf23f	181	find_or_insert_BFBinderRoot_key_tree_entry			confirmed	gamebryo		
 0x005bf2f4	48		BFBinderRoot lookup and tree-insertion support		unidentified	gamebryo		
 0x005bf324	36	clear_BFBinderRoot_key_tree			confirmed	gamebryo		
 0x005bf348	0	allocate_BFBinderRoot_key_tree_node			confirmed		0x008e62c0#22	
@@ -10312,12 +10312,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c1b6e	105		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		
 0x005c1bd7	0	allocate_default_BFTriggeredEventsComponent			confirmed		0x008e6658#24	
 0x005c1bef	374		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		io/assets
-0x005c1d65	22		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		ui
-0x005c1d7b	162		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		ui
+0x005c1d65	22	destroy_refcounted_value_list_storage			confirmed	gamebryo		
+0x005c1d7b	162	append_refcounted_value_list_entry			confirmed	gamebryo		
 0x005c1e1d	210		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		io/assets
 0x005c1eef	175		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		io/assets
 0x005c1f9e	393	insert_inline_string_payload_tree_node			confirmed	gamebryo		
-0x005c2127	130		red-black tree erase and traversal helpers for event/component m		unidentified	gamebryo		ui
+0x005c2127	130	copy_refcounted_value_list			confirmed	gamebryo		
 0x005c21a9	677	erase_inline_string_payload_tree_node			confirmed	gamebryo		
 0x005c244e	69	destroy_tree_nodes_with_inline_string_payload_recursive			confirmed	gamebryo		
 0x005c2493	81	build_extensionless_resource_name_key			confirmed	gamebryo		
@@ -10363,17 +10363,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c3e53	101	get_nonempty_xml_attribute_cstr			confirmed	gamebryo		
 0x005c3eb8	24	format_32_byte_string_vsprintf_s			confirmed	gamebryo		
 0x005c3ed0	25	write_stock_gdi_object_triplet			confirmed	gamebryo		
-0x005c3ee9	25		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005c3f02	120		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005c3f7a	75		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005c3ee9	25	destroy_BFWindowComponent_platform_window_state			confirmed	gamebryo		
+0x005c3f02	120	initialize_BFWindowComponent_icon_handles			confirmed	gamebryo		
+0x005c3f7a	75		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005c3fc5	103		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005c4013	0	0x005c400d callsite_address			confirmed			
 0x005c402c	98		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005c408e	39		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005c40b5	249		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c408e	39		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c40b5	249	draw_BFWindowComponent_text_ref			confirmed	gamebryo		
 0x005c4173	0	0x005c416d callsite_address			confirmed			
-0x005c41ae	31		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005c41cd	44		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c41ae	31		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c41cd	44	destroy_BFWindowComponent_handle			confirmed	gamebryo		
 0x005c41f9	70		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005c421b	0	0x005c4215 callsite_address			confirmed			
 0x005c4238	0	0x005c4232 callsite_address			confirmed			
@@ -10392,7 +10392,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c44a5	47	get_type_BFWindowsMessage			confirmed	gamebryo		
 0x005c44d4	0	get_type_BFWindowsMessage_vtable_thunk			confirmed		0x008e67dc#1	
 0x005c44d9	0	get_BFWindowsMessage_xml_descriptor			confirmed		0x008e67dc#2	
-0x005c44f9	134		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c44f9	134	construct_BFWindowsMessage_value			confirmed	gamebryo		
 0x005c4599	0	0x005c4593 callsite_address			confirmed			
 0x005c484b	47	get_type_BFWindowComponent			confirmed	gamebryo		
 0x005c487a	0	get_type_BFWindowComponent_vtable_thunk			confirmed		0x008e6778#1	
@@ -10476,8 +10476,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005c6457	23	close_file_resource_adapter			confirmed	gamebryo	0x008e6914#5	
 0x005c6480	106	get_inline_ui_string_intern_table			confirmed	gamebryo		
 0x005c64ea	88	insert_interned_inline_ui_string			confirmed	gamebryo		
-0x005c6542	112		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005c65b2	138		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005c6542	112	lookup_inline_ui_string_intern_entry_by_cstr			confirmed	gamebryo		
+0x005c65b2	138	remove_inline_ui_string_intern_entry_by_cstr			confirmed	gamebryo		
 0x005c663c	92	find_interned_inline_ui_string			confirmed	gamebryo		
 0x005c6698	190		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005c6756	360		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
