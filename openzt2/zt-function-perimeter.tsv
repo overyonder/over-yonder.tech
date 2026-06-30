@@ -2818,8 +2818,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0048f74b	42		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f775	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f78b	22		adoption slots, adoption manager, and slot manager		unidentified			game-entities
-0x0048f7a1	61		adoption slots, adoption manager, and slot manager		unidentified			
-0x0048f7de	61		adoption slots, adoption manager, and slot manager		unidentified			
+0x0048f7a1	61		adoption slots, adoption manager, and slot manager		unidentified			game-entities
+0x0048f7de	61		adoption slots, adoption manager, and slot manager		unidentified			game-entities
 0x0048f81b	35		adoption slots, adoption manager, and slot manager		unidentified			
 0x0048f83e	23	is_selected_adoption_slot_count_available			confirmed			
 0x0048f855	71		adoption slots, adoption manager, and slot manager		unidentified			
@@ -7813,19 +7813,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057833f	0	write_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#19	
 0x005784c8	0	read_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#20	
 0x0057876c	186	get_or_insert_ZTScenarioMgr_uimod_record			confirmed			
-0x00578826	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00578826	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x00578856	36	clear_ZTScenarioMgr_uimod_tree_nodes			confirmed			
 0x0057887a	105	find_ZTScenarioMgr_uimod_insert_hint			confirmed			
 0x005788e3	0	allocate_ZTScenarioMgr_instance			confirmed		0x008e0898#4	
 0x005788f9	153		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x005789d9	372		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
+0x005789d9	372		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00578b4d	66	lower_bound_ZTScenarioMgr_uimod_tree_by_name			confirmed			
-0x00578b8f	70		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00578b8f	70	free_ZTScenarioMgr_uimod_tree_nodes_recursive			confirmed			
 0x00578bd5	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
-0x00578ca7	148		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x00578d3b	361		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00578ca7	148	erase_ZTScenarioMgr_uimod_tree_range			confirmed			
+0x00578d3b	361	insert_ZTScenarioMgr_uimod_tree_node			confirmed			
 0x00578ea4	160		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x00578f44	678		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00578f44	678		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x005791ea	83	construct_ZTScenarioMgr_uimod_tree_node_payload			confirmed			
 0x0057923d	0	scalar_delete_ZTScenarioMgr_secondary_this_adjustor			confirmed		0x008e0898#0	
 0x00579245	47	get_type_ZTTankCommandReader			confirmed			
@@ -7926,30 +7926,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057d3d9	248	collect_selected_item_ui_objects_by_token			confirmed			
 0x0057d4d1	565	populate_iconitem_list_from_selected_item_components			confirmed			
 0x0057d706	73	read_ZTFeedbackComponent_view_string			confirmed			
-0x0057d74f	92		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057d74f	92	test_active_placement_cell_accepts_state			confirmed			
 0x0057d7ab	197		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057d870	492		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057da5c	184		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057db14	400		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x0057dca4	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057dca4	175	test_transport_refs_have_linked_circuit			confirmed			
 0x0057dd53	165		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ddf8	345		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			economy
 0x0057df51	549	handle_tank_delete_merge_confirmation			confirmed			
 0x0057e176	163		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057e219	37		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
 0x0057e23e	833	setup_entity_research_product_icon			confirmed			
-0x0057e57f	344		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057e57f	344	select_entity_research_product_icon_value			confirmed			
 0x0057e6d7	65		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057e718	130		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057e79a	433		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057e718	130	apply_scaled_width_to_UIStatic_value			confirmed			
+0x0057e79a	433	sync_named_ui_controls_with_source_token_state			confirmed			
 0x0057e94b	41		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
 0x0057e974	73		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057e9bd	125	emit_showmixer_request_canceledit_payload			confirmed			
-0x0057ea3a	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057eae9	71		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057ea3a	175	apply_scaled_dimensions_to_UIStatic_value			confirmed			
+0x0057eae9	71	resolve_inline_ui_text_ref_string_value			confirmed			
 0x0057eb30	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057ebdf	382		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057ed5d	393		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057ebdf	382	resolve_young_variant_for_adult_entity_key			confirmed			
+0x0057ed5d	393	collect_show_animal_refs_for_traversability			confirmed			
 0x0057eee6	192		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057efa6	148	emit_camera_position_payload			confirmed			
 0x0057f03a	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
@@ -7963,20 +7963,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057f71a	246		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057f810	211		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057f8e3	94		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x0057f941	117		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057f9b6	199		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057f941	117	apply_object_icon_component_to_ui_value			confirmed			
+0x0057f9b6	199	apply_named_object_icon_component_to_ui_value			confirmed			
 0x0057fa7d	204		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057fb49	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-ai
-0x0057fb79	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057fc28	102		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x0057fb79	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fc28	102		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057fc8e	196		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
-0x0057fd52	388		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057fed6	677		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fd52	388	insert_UIHotKeys_binding_map_node			confirmed			
+0x0057fed6	677	erase_UIHotKeys_binding_map_node			confirmed			
 0x0058017b	75		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x005801c6	83		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x005801c6	83	allocate_UIHotKeys_binding_map_node_copy			confirmed			
 0x00580219	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0058023d	59		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00580278	32		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00580278	32	select_UITooltip_text_slot_by_type			confirmed			
 0x00580298	187		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00580353	869		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			gameplay systems
 0x005806b8	3663		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			gameplay systems
@@ -7985,9 +7985,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005815fc	462		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			economy
 0x005817ca	465		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0058199b	0	clone_BFXMLObj_sound_event_payload			confirmed		0x008e10c4#5	
-0x005819b6	79		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x005819b6	79	construct_BFXMLObj_sound_event_payload_clone			confirmed			
 0x00581a05	0	scalar_delete_BFXMLObj_sound_event_payload			confirmed		0x008e10c4#0	
-0x00581a20	21		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00581a20	21	destroy_BFXMLObj_sound_event_payload_members			confirmed			
 0x00581a35	0	clone_BFXMLObj_0c_value			confirmed		0x008e10f8#5	
 0x00581a61	0	clone_BFXMLObj_three_vector_value			confirmed		0x008e112c#5	
 0x00581aa6	0	ui_typed_value_dtor			confirmed		0x008bfbc0#0	
