@@ -15840,7 +15840,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00698be7	55	test_compact_bounds_contains_point			confirmed	gamebryo	0x008f4798#4	
 0x00698c1e	454	merge_compact_bounds_spheres			confirmed	gamebryo		
 0x00698de4	0	merge_compact_bounds_if_source_valid			confirmed		0x008f4798#11	
-0x00698e2c	59		vector distance helper for geometry records		unidentified	gamebryo		
+0x00698e2c	59		vector distance helper for geometry records		unidentified	gamebryo		world/pathing
 0x00698e67	81	get_BFR_vertex_descriptor_position3			confirmed	gamebryo		
 0x00698eb8	81	get_BFR_vertex_descriptor_normal3			confirmed	gamebryo		
 0x00698f09	81	get_BFR_vertex_descriptor_color4			confirmed	gamebryo		
@@ -22002,27 +22002,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b9f6b	135	insert_caustic_terrain_vertex_record			confirmed	gamebryo		
 0x007b9ff2	67	allocate_caustic_terrain_vertex_record_block			confirmed	gamebryo		
 0x007ba035	102	move_caustic_terrain_vertex_record_tail			confirmed	gamebryo		
-0x007ba09b	401		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba22c	213		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba301	267		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba40c	374		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba582	633		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba7fb	160		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007ba09b	401	insert_repeated_caustic_terrain_vertex_records			confirmed	gamebryo		
+0x007ba22c	213	populate_caustic_terrain_mesh_chunk_buffers			confirmed	gamebryo		
+0x007ba301	267	construct_caustic_terrain_projection_state			confirmed	gamebryo		
+0x007ba40c	374	update_caustic_terrain_projection_fade			confirmed	gamebryo		
+0x007ba582	633	recompute_caustic_terrain_projection_basis			confirmed	gamebryo		
+0x007ba7fb	160	set_caustic_terrain_projection_matrix			confirmed	gamebryo		
 0x007ba89b	47	get_type_BFSndComponent			confirmed	gamebryo		
-0x007ba8ca	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#1	ui
-0x007ba8cf	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba8ef	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#2	ui
-0x007ba8f4	73		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007ba93d	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025a8#0	ui
-0x007ba953	0		UI dependency references, movement/view components, and animatio		unidentified		0x009025a8#1	ui
-0x007ba9a6	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#0	ui
-0x007ba9c2	211		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007baa95	150		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bab2b	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#21	ui
-0x007bac39	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#14	ui
-0x007bac49	254		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bad47	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#23	ui
-0x007bad57	187		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007ba8ca	0	get_type_BFSndComponent_vtable_thunk			confirmed		0x00902538#1	
+0x007ba8cf	32	init_BFSndComponent_descriptor_ref			confirmed	gamebryo		
+0x007ba8ef	0	init_BFSndComponent_descriptor_ref_vtable_thunk			confirmed		0x00902538#2	
+0x007ba8f4	73	get_BFSndComponent_sound_event_value_registry			confirmed	gamebryo		
+0x007ba93d	0	copy_BFSndComponent_sound_event_value_assignment_dependents			confirmed		0x009025a8#0	
+0x007ba953	0	resolve_BFSndComponent_sound_event_value			confirmed		0x009025a8#1	
+0x007ba9a6	0	scalar_delete_BFSndComponent			confirmed		0x00902538#0	
+0x007ba9c2	211	destroy_BFSndComponent			confirmed	gamebryo		
+0x007baa95	150	register_BFSndComponent_sound_event_value_handlers			confirmed	gamebryo		
+0x007bab2b	0	attach_BFSndComponent_sound_from_value			confirmed		0x00902538#21	
+0x007bac39	0	refresh_BFSndComponent_3d_sound_positions_wrapper			confirmed		0x00902538#14	
+0x007bac49	254	refresh_BFSndComponent_3d_sound_positions			confirmed	gamebryo		
+0x007bad47	0	emit_BFSndComponent_sound_update_events_wrapper			confirmed		0x00902538#23	
+0x007bad57	187	emit_BFSndComponent_sound_update_events			confirmed	gamebryo		
 0x007bae12	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#25	ui
 0x007baec4	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#26	ui
 0x007baf76	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902538#27	ui
