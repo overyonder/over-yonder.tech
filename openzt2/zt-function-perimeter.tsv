@@ -7676,15 +7676,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00572130	30	destroy_BFSafeHandle_ZTPhotoManager			confirmed			
 0x0057214e	30	destroy_BFSafeHandle_ZTEconomyMgr			confirmed			
 0x0057216c	30	destroy_BFSafeHandle_ZTFeedbackMgr			confirmed			
-0x0057218a	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005721a8	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005721c6	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005721e4	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
+0x0057218a	30	destroy_BFSafeHandle_ZTAIGuestMgr			confirmed			
+0x005721a8	30	destroy_BFSafeHandle_ZTAdoptionMgr			confirmed			
+0x005721c6	30	destroy_BFSafeHandle_ZTFavoriteAnimalMgr			confirmed			
+0x005721e4	30	destroy_BFSafeHandle_ZTGestureMgr			confirmed			
 0x00572202	0	clear_optional_output_cell			confirmed		0x008bfaec#2	
-0x0057220d	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x0057222b	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x00572249	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x00572267	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
+0x0057220d	30	destroy_BFSafeHandle_ZTTankMgr			confirmed			
+0x0057222b	30	destroy_BFSafeHandle_ZTDiseaseMgr			confirmed			
+0x00572249	30	destroy_BFSafeHandle_ZTShowTimerManager			confirmed			
+0x00572267	30	destroy_BFSafeHandle_ZTTrickButtonMgr			confirmed			
 0x00572285	0	scalar_delete_refcounted_vtable_008dc714			confirmed		0x008dc714#0	
 0x005722a0	0	scalar_delete_refcounted_object_via_008dc5b4_cleanup			confirmed		0x008dc5a0#5	
 0x005722f1	0	scalar_delete_refcounted_vtable_008dc4ec			confirmed		0x008dc4ec#0	
@@ -7722,7 +7722,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00572707	0	get_type_BFSafeHandle_ZTTrickButtonMgr_vtable_thunk			confirmed		0x008dc5cc#0	
 0x0057270c	0	assign_BFSafeHandle_ZTTrickButtonMgr_from_value			confirmed		0x008dc5cc#2	
 0x00572725	66	checked range/container copy helper			confirmed			
-0x00572767	88		typed receiver child-node lookup bridge		unidentified			ui
+0x00572767	88	find_BFWindowsMessage_child_from_typed_receiver			confirmed			
 0x005727bf	40	as_ZTLocationMgr			confirmed			
 0x0057284b	40	as_ZTAIStaffMgr			confirmed			
 0x005728d7	40	as_ZTWorldSndMgr			confirmed			
@@ -7752,13 +7752,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00573284	22	format_wide_string_vswprintf			confirmed			
 0x0057329a	0	set_receiver_flag_154			confirmed		0x008e4ea8#34	
 0x005732a7	47	get_type_ZTAwardMgr			confirmed			
-0x005732d6	0		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified		0x008dc780#1	ui
-0x005732db	32		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified			ui
+0x005732d6	0	get_type_ZTAwardMgr_vtable_thunk			confirmed		0x008dc780#1	
+0x005732db	32	init_ZTAwardMgr_descriptor_ref			confirmed			
 0x005732fb	0	init_ZTAwardMgr_descriptor_ref_vtable_thunk			confirmed		0x008dc780#2	
-0x00573300	68		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified			ui
+0x00573300	68	init_ZTAwardPanel_entry_list_storage			confirmed			
 0x00573406	0	scalar_delete_ZTAwardMgr			confirmed		0x008dc780#0	
-0x00573421	32		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified			ui
-0x00573441	76		ZTAwardMgr and ZTAwardPanel registry/layout helpers		unidentified			ui
+0x00573421	32	destroy_ZTAwardMgr_members			confirmed			
+0x00573441	76	resolve_ZTAwardMgr_award_layout_panel			confirmed			
 0x0057348d	0	refresh_ZTAwardMgr_award_layout_panels			confirmed		0x008dc780#21	
 0x00573506	0	write_ZTAwardMgr_uipanel_xml_value			confirmed		0x008dc780#19	
 0x00573546	0	read_ZTAwardMgr_uipanel_xml_value			confirmed		0x008dc780#20	
@@ -7786,9 +7786,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057632b	206		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x005763f9	204		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x005764c5	55		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
-0x005764fc	880		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057686c	286		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
-0x0057698a	424		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x005764fc	880	find_shared_noncurb_fence_for_transport_records			confirmed			
+0x0057686c	286		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x0057698a	424	collect_unique_adjacent_noncurb_fence_objects_for_heading			confirmed			
 0x00576b32	38		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00576b58	2019		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0057733b	223		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
@@ -7806,20 +7806,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00577da6	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00577ede	0	scalar_delete_ZTScenarioMgr			confirmed		0x008e07f8#0	
 0x00577ef9	44		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00577f25	25		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x00577f25	25	get_ZTApp_active_ui_root			confirmed			
 0x005780ca	0	synchronize_ZTScenarioMgr_uimod_state_then_delegate			confirmed		0x008e0870#4	
-0x005780eb	287		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057820a	309		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x005780eb	287	apply_ZTScenarioMgr_uimod_value_to_ui_object			confirmed			
+0x0057820a	309	restore_ZTScenarioMgr_uimod_states_and_clear			confirmed			
 0x0057833f	0	write_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#19	
 0x005784c8	0	read_ZTScenarioMgr_uimods_xml			confirmed		0x008e07f8#20	
-0x0057876c	186		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057876c	186	get_or_insert_ZTScenarioMgr_uimod_record			confirmed			
 0x00578826	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00578856	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057887a	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00578856	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057887a	105		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x005788e3	0	allocate_ZTScenarioMgr_instance			confirmed		0x008e0898#4	
 0x005788f9	153		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x005789d9	372		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
-0x00578b4d	66		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
+0x00578b4d	66		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x00578b8f	70		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00578bd5	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			io/assets
 0x00578ca7	148		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
