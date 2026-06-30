@@ -16279,7 +16279,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a5aae	57		BFR model parameter/container helper band		unidentified	gamebryo		
 0x006a5ae7	129	write_BFR_model_param_value_by_type			confirmed	gamebryo		
 0x006a5b68	268	parse_BFR_model_param_xml_value			confirmed	gamebryo		
-0x006a5c74	179		BFR model parameter/container helper band		unidentified	gamebryo		ui
+0x006a5c74	179	append_BFR_model_param_value_text_by_type			confirmed	gamebryo		
 0x006a5d27	404	read_bfr_model_param			confirmed	gamebryo		
 0x006a5ebb	159	remove_matching_BFR_model_usage_params			confirmed	gamebryo		
 0x006a5f5a	107	read_BFR_model_param_vector			confirmed	gamebryo		
@@ -17611,14 +17611,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006de585	125		traversability slot/index table helpers		unidentified	gamebryo		
 0x006de602	43		traversability slot/index table helpers		unidentified	gamebryo		
 0x006de62d	33	test_traversability_slot_index_record_present			confirmed	gamebryo		
-0x006de64e	300		traversability candidate and area-list support		unidentified	gamebryo		ui
+0x006de64e	300	build_traversability_area_range_records			confirmed	gamebryo		
 0x006de77a	33		traversability candidate and area-list support		unidentified	gamebryo		
-0x006de79b	305		traversability candidate and area-list support		unidentified	gamebryo		game-entities
-0x006de8cc	252		traversability candidate and area-list support		unidentified	gamebryo		ui
+0x006de79b	305		traversability candidate and area-list support		unidentified	gamebryo		
+0x006de8cc	252	remove_matching_traversability_grid_records			confirmed	gamebryo		
 0x006de9c8	118		traversability candidate and area-list support		unidentified	gamebryo		
 0x006dea3e	118		traversability candidate and area-list support		unidentified	gamebryo		
 0x006deab4	301		traversability candidate and area-list support		unidentified	gamebryo		
-0x006debe1	69		traversability candidate and area-list support		unidentified	gamebryo		ui
+0x006debe1	69	pick_random_traversability_candidate_record			confirmed	gamebryo		
 0x006dec26	210	test_traversability_candidate_area_pair			confirmed	gamebryo		
 0x006decf8	31		traversability candidate and area-list support		unidentified	gamebryo		game-entities
 0x006ded17	69		traversability candidate and area-list support		unidentified	gamebryo		
@@ -17627,9 +17627,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006df0bd	0	evaluate_traversability_placement_candidate_rect_probe			confirmed			
 0x006df18e	0	evaluate_traversability_placement_candidate_tail			confirmed			
 0x006df23a	160	BFGTraversabilityMgr_read_config_xml_node			confirmed	gamebryo		
-0x006df2da	142		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
-0x006df368	514		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
-0x006df56a	321		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
+0x006df2da	142	remove_BFGTraversabilityMgr_payload_ref_from_slot			confirmed	gamebryo		
+0x006df368	514	refresh_BFGTraversabilityMgr_payload_ref_maps			confirmed	gamebryo		
+0x006df56a	321	collect_BFGTraversabilityMgr_matching_assignment_refs			confirmed	gamebryo		
 0x006df6ab	177		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006df75c	60		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006df798	874		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
@@ -17639,14 +17639,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006dfe65	229		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006dff4a	441		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006e0103	386		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
-0x006e0285	195		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
-0x006e0348	285		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
+0x006e0285	195	refresh_traversability_vpintersect_viewing_area_refs			confirmed	gamebryo		
+0x006e0348	285	emit_exhibit_open_to_world_message			confirmed	gamebryo		
 0x006e0465	298	refresh_traversability_no_open_to_world_message			confirmed	gamebryo		
 0x006e058f	826	read_traversability_viewing_attributes			confirmed	gamebryo		
 0x006e08c9	0		BFGTraversabilityMgr runtime/container lifecycle support		unidentified		0x008f8d58#0	
 0x006e08e5	743	destroy_BFGTraversabilityMgr			confirmed	gamebryo		
 0x006e0bcc	122		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		game-entities
-0x006e0c46	56		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
+0x006e0c46	56	destroy_BFGTraversabilityMgr_embedded_value_state			confirmed	gamebryo		
 0x006e0c7e	0		BFGTraversabilityMgr changed-triangle area writer before config 		unidentified		0x008f8d58#19	
 0x006e1179	0	BFGTraversabilityMgr_read_config_xml_node			confirmed		0x008f8d58#20	
 0x006e19a2	315		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
@@ -17699,12 +17699,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e4f54	230		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e503a	329		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e5183	3931		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e60de	474		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
-0x006e62b8	160		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
+0x006e60de	474	enter_no_viewing_area_state_and_clear_records			confirmed	gamebryo		
+0x006e62b8	160	queue_viewing_area_fence_cell_record			confirmed	gamebryo		
 0x006e6358	65		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6399	84	advance_viewing_area_notification_state			confirmed	gamebryo		
 0x006e63ed	274		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
-0x006e64ff	131		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
+0x006e64ff	131	refresh_viewing_area_collision_tester_handle			confirmed	gamebryo		
 0x006e6582	23		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6599	311		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e66d0	1226		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
@@ -17815,7 +17815,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e9f10	110		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006e9f7e	275		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006ea091	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f9068#0	
-0x006ea0ac	134		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006ea0ac	134	destroy_BFGRampageMgr_members			confirmed	gamebryo		
 0x006ea132	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f9068#21	
 0x006ea1e1	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f9068#22	
 0x006ea270	261		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
@@ -17827,19 +17827,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eaffd	233	tick_BFGRampageMgr_assignment_timeouts			confirmed	gamebryo		
 0x006eb0e6	535	update_rampage_dino_recovery_crate_team			confirmed	gamebryo		
 0x006eb2fd	332		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
-0x006eb449	204		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006eb515	142		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006eb5a3	152		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006eb63b	412		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006eb449	204	update_rampage_layout_recovery_button_visibility			confirmed	gamebryo		
+0x006eb515	142	activate_rampage_global_sound_ducking			confirmed	gamebryo		
+0x006eb5a3	152	deactivate_rampage_global_sound_ducking			confirmed	gamebryo		
+0x006eb63b	412	start_rampage_sound_and_feedback			confirmed	gamebryo		
 0x006eb7d7	427		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-entities
 0x006eb982	87		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006eb9d9	53		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
-0x006eba0e	135		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006eba95	110		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006eba0e	135	resolve_rampage_sound_ref			confirmed	gamebryo		
+0x006eba95	110	clear_rampage_sound_ref			confirmed	gamebryo		
 0x006ebb03	224		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006ebbe3	36	clear_rampage_point_vector_storage			confirmed	gamebryo		
 0x006ebc07	123		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006ebc82	100		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
+0x006ebc82	100		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		audio
 0x006ebce6	50	erase_named_value_assignment_record_at_iterator			confirmed	gamebryo		
 0x006ebd18	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f90cc#4	
 0x006ebd33	153	insert_rampage_handler_for_unseen_type			confirmed	gamebryo		
