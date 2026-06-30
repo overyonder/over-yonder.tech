@@ -19516,7 +19516,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074522b	21	get_BFLegFitComponent_from_typed_object			confirmed	gamebryo		
 0x00745240	58	assign_owned_BFLegFit_shape_reference_payload			confirmed	gamebryo		
 0x0074527a	39	assign_unowned_BFLegFit_shape_reference_payload			confirmed	gamebryo		
-0x007452a1	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd940#21	
+0x007452a1	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd940#21	ui
 0x007452a7	47	get_type_BFLegFitComponent			confirmed	gamebryo		
 0x007452d6	0	get_type_BFLegFitComponent_vtable_thunk			confirmed		0x008fd940#1	
 0x007452db	32	get_BFLegFitComponent_descriptor_cell			confirmed	gamebryo		
@@ -19528,27 +19528,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007457b8	0	bind_BFLegFitComponent_foot_targets			confirmed		0x008fd940#24	
 0x007460c2	76	apply_BFLegFitComponent_leg_fit_mode			confirmed	gamebryo		
 0x0074634c	276	resolve_BFLegFitComponent_terrain_surface_grid_cell			confirmed	gamebryo		
-0x00746460	210		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00746532	154		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007465cc	97		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074662d	101		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00746692	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd940#19	ui
-0x00746db1	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd940#20	ui
-0x00747817	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#21	ui
+0x00746460	210	sample_BFLegFitComponent_surface_height_offset			confirmed	gamebryo		
+0x00746532	154	apply_BFLegFitComponent_mode0_hip_knee_raise			confirmed	gamebryo		
+0x007465cc	97	apply_BFLegFitComponent_mode1_knee_raise			confirmed	gamebryo		
+0x0074662d	101	apply_BFLegFitComponent_ankle_rotation			confirmed	gamebryo		
+0x00746692	0	write_BFLegFitComponent_xml			confirmed		0x008fd940#19	
+0x00746db1	0	read_BFLegFitComponent_xml			confirmed		0x008fd940#20	
+0x00747817	0	get_BF2LegsGroundFitComponent_type_name_string_global			confirmed		0x008fda60#21	
 0x0074781d	47	get_type_BF2LegsGroundFitComponent			confirmed	gamebryo		
-0x0074784c	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#1	ui
-0x00747851	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00747871	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#2	ui
-0x0074790d	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#0	ui
-0x00747928	117		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074799d	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#24	ui
-0x00747bc3	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdae0#4	ui
-0x00748117	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#19	ui
-0x00748231	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#20	ui
-0x00748406	245		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007484fb	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdacc#2	ui
-0x00748503	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdacc#3	ui
-0x00748512	403		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0074784c	0	get_type_BF2LegsGroundFitComponent_vtable_thunk			confirmed		0x008fda60#1	
+0x00747851	32	get_BF2LegsGroundFitComponent_descriptor_cell			confirmed	gamebryo		
+0x00747871	0	get_BF2LegsGroundFitComponent_descriptor_cell_vtable_thunk			confirmed		0x008fda60#2	
+0x0074790d	0	scalar_delete_BF2LegsGroundFitComponent			confirmed		0x008fda60#0	
+0x00747928	117	destroy_BF2LegsGroundFitComponent_members			confirmed	gamebryo		
+0x0074799d	0	bind_BF2LegsGroundFitComponent_foot_targets			confirmed		0x008fda60#24	
+0x00747bc3	0	update_BF2LegsGroundFitComponent			confirmed		0x008fdae0#4	
+0x00748117	0	write_BF2LegsGroundFitComponent_xml			confirmed		0x008fda60#19	
+0x00748231	0	read_BF2LegsGroundFitComponent_xml			confirmed		0x008fda60#20	
+0x00748406	245	resolve_BF2LegsGroundFitComponent_terrain_surface_grid_cell			confirmed	gamebryo		
+0x007484fb	0	clear_BF2LegsGroundFit_dynamic_refit_flag			confirmed		0x008fdacc#2	
+0x00748503	0	mark_BF2LegsGroundFit_dynamic_refit_flag_dirty			confirmed		0x008fdacc#3	
+0x00748512	403	apply_BF2LegsGroundFit_ankle_orientation_update			confirmed	gamebryo		
 0x007486bb	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#21	ui
 0x007486c1	47	get_type_BFManipSensorComponent			confirmed	gamebryo		
 0x007486f0	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#1	ui
