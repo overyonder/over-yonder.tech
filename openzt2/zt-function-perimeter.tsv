@@ -13827,9 +13827,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064db6d	386	insert_or_find_UIApp_template_record_node			confirmed	gamebryo		
 0x0064dcef	69	destroy_UIApp_template_record_map_subtree			confirmed	gamebryo		
 0x0064dd34	212	lower_bound_or_insert_UIApp_template_record_node			confirmed	gamebryo		
-0x0064de08	148		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064de08	148	erase_UIApp_template_record_map_range			confirmed	gamebryo		
 0x0064de9c	394	insert_UIApp_template_record_map_node			confirmed	gamebryo		
-0x0064e026	677		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064e026	677	erase_UIApp_template_record_map_node			confirmed	gamebryo		
 0x0064e2cb	0	get_type_BFSafeHandle<BFSpriteMgr>_vtable_thunk			confirmed		0x008ef2fc#1	
 0x0064e2d0	0	assign_BFSafeHandle_BFSpriteMgr_from_object			confirmed		0x008ef2fc#3	
 0x0064e2e9	0	get_type_BFSafeHandle<UIRoot>_vtable_thunk			confirmed		0x008ef310#1	
@@ -13846,7 +13846,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064e4f8	0		globe drag/preview state and display diagnostics		unidentified		0x008ef3a0#1	
 0x0064e4fd	32	init_UIRoot_descriptor_ref			confirmed	gamebryo		
 0x0064e51d	0	init_UIRoot_descriptor_ref_vtable_thunk			confirmed		0x008ef3a0#2	
-0x0064e522	73		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064e522	73	get_UIRoot_value_adapter_registry			confirmed	gamebryo		
 0x0064e5d4	142	register_UIRoot_value_adapters			confirmed	gamebryo		
 0x0064e662	416	construct_UIRoot_fields			confirmed	gamebryo		
 0x0064e802	0	scalar_delete_UIRoot			confirmed		0x008ef3a0#0	
@@ -13871,7 +13871,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064f88d	617	set_UIRoot_globe_assignment_active_state			confirmed	gamebryo		
 0x0064faf6	141	destroy_UIRoot_cursor_handle_records			confirmed	gamebryo		
 0x0064fb83	58	reset_UIRoot_cursor_handles_and_reload_preview			confirmed	gamebryo		
-0x0064fbbd	111		display-mode diagnostic prelude before EnumDisplaySettingsA		unidentified	gamebryo		ui
+0x0064fbbd	111	refresh_display_depth_diagnostic_flag			confirmed	gamebryo		
 0x0064fc2c	205	dispatch_ui_named_event_list_for_key			confirmed	gamebryo		
 0x0064fcf9	0	forward_ui_subobject_value_to_root_slot38			confirmed		0x008ef5e4#2	
 0x0064fd49	0	load_ui_root_named_event_lists_and_disable_modal			confirmed		0x008ef3a0#20	
@@ -15683,7 +15683,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0069123a	47	extract_BFR_material_parameter_record_value_and_index			confirmed	gamebryo		
 0x00691269	228	lookup_BFR_material_parameter_record_values_and_index			confirmed	gamebryo		
 0x0069134d	65	lookup_BFR_material_parameter_record_index			confirmed	gamebryo		
-0x0069138e	159		material parameter record lookup/extraction helpers		unidentified	gamebryo		ui
+0x0069138e	159	lookup_BFR_material_aux_parameter_record			confirmed	gamebryo		
 0x0069142d	760		material parameter upload/apply walker with deferred update list		unidentified	gamebryo		io/assets
 0x00691725	82	acquire_BFR_material_renderer_state_handle			confirmed	gamebryo		
 0x00691777	26	mark_BFR_material_resource_binding_dirty			confirmed	gamebryo		
@@ -15695,14 +15695,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00691a44	0	call_BFR_material_resource_vtable_0x118			confirmed		0x008f4eb8#2	
 0x00691a57	32		material secondary handle release helper		unidentified	gamebryo		
 0x00691a77	209	resolve_transform_semantic			confirmed	gamebryo		
-0x00691b48	972		material parameter table rebuild by semantic/type		unidentified	gamebryo		ui
+0x00691b48	972	rebuild_BFR_material_parameter_tables			confirmed	gamebryo		
 0x00691f14	75		AlphaSort material option reader		unidentified	gamebryo		
 0x00691f5f	117	refresh_BFR_material_parameter_validity_flags			confirmed	gamebryo		
 0x00691fd4	129		Quality material option reader		unidentified	gamebryo		
 0x00692055	159	is_material_transform_semantic			confirmed	gamebryo		
 0x006920f4	246		material quality/profile selection helper		unidentified	gamebryo		io/assets
 0x006921ea	0	compute_material_parameter_payload_span_size			confirmed		0x008f4eb8#3	
-0x0069221a	479		material parameter mapping builder		unidentified	gamebryo		ui
+0x0069221a	479	build_BFR_material_parameter_mapping_record			confirmed	gamebryo		
 0x006923f9	378		material mapping cache update/remove helpers		unidentified	gamebryo		
 0x00692573	254		material mapping cache update/remove helpers		unidentified	gamebryo		io/assets
 0x00692671	36		material mapping cache update/remove helpers		unidentified	gamebryo		io/assets
@@ -15713,18 +15713,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0069288b	36		generic list reset and chunk index helpers		unidentified	gamebryo		
 0x006928af	91		generic list reset and chunk index helpers		unidentified	gamebryo		
 0x0069290a	36		generic list reset and chunk index helpers		unidentified	gamebryo		renderer
-0x0069292e	166		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
+0x0069292e	166		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
 0x006929d4	41	allocate_12byte_record_vector_storage			confirmed	gamebryo		
-0x006929fd	165		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
+0x006929fd	165		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
 0x00692aa2	43		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		io/assets
 0x00692acd	395	insert_40byte_vector_record			confirmed	gamebryo		
 0x00692c58	374		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
 0x00692dce	66		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
-0x00692e10	118		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
+0x00692e10	118		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
 0x00692e86	41		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692f21	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
-0x00692f62	418		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
+0x00692f62	418		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
 0x00693104	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00693145	452	insert_repeated_8byte_records			confirmed	gamebryo		
 0x00693309	50		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
@@ -15734,19 +15734,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00693462	40		material-support record move/copy helpers		unidentified	gamebryo		
 0x0069348a	288	assign_material_point3_vector			confirmed	gamebryo		
 0x006935aa	287		material-support record move/copy helpers		unidentified	gamebryo		
-0x006936c9	37		material-support record move/copy helpers		unidentified	gamebryo		
+0x006936c9	37		material-support record move/copy helpers		unidentified	gamebryo		ui
 0x006936ee	37		material-support record move/copy helpers		unidentified	gamebryo		
 0x00693713	104	insert_shared_resource_path_candidate			confirmed	gamebryo		
 0x0069377b	310	expand_shared_resource_fallback_paths			confirmed	gamebryo		
 0x006938b1	74	copy_resource_path_without_extension			confirmed	gamebryo		
 0x006938fb	38		lazy static resource helper object accessor		unidentified	gamebryo		io/assets
-0x00693921	168		BFR material manager constructor		unidentified	gamebryo		ui
+0x00693921	168	construct_BFR_material_manager			confirmed	gamebryo		
 0x006939e5	200		BFR material manager destructor and load/material fallback metho		unidentified	gamebryo		io/assets
 0x00693aad	127		BFR material manager destructor and load/material fallback metho		unidentified	gamebryo		io/assets
 0x00693b2c	137		BFR material manager destructor and load/material fallback metho		unidentified	gamebryo		io/assets
 0x00693bb5	588	material_manager_load			confirmed	gamebryo		
 0x00693e01	905	load_material_xml			confirmed	gamebryo		
-0x00694319	246		material mode child parser		unidentified	gamebryo		ui
+0x00694319	246	parse_BFR_material_mode_child			confirmed	gamebryo		
 0x0069440f	57	attach_material_animate_child_binder			confirmed	gamebryo		
 0x00694448	946	parse_material_parameter			confirmed	gamebryo		
 0x006947fa	103	parse_material_vector3_parameter_value			confirmed	gamebryo		
@@ -15949,7 +15949,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0069aaf2	93		attribute component copy/convert helper cluster		unidentified	gamebryo		game-entities
 0x0069ab4f	0	scalar_delete_BFR_model_transform_record			confirmed		0x008f543c#7	
 0x0069ab6a	17	destroy_BFR_model_transform_record			confirmed	gamebryo		
-0x0069ab7b	112		attribute component copy/convert helper cluster		unidentified	gamebryo		ui
+0x0069ab7b	112	clone_BFR_model_transform_record			confirmed	gamebryo		
 0x0069abeb	7		attribute component copy/convert helper cluster		unidentified	gamebryo		
 0x0069abf2	93	refresh_BFR_model_world_and_bounds_matrices			confirmed	gamebryo		
 0x0069ac4f	119		attribute component copy/convert helper cluster		unidentified	gamebryo		
@@ -15977,22 +15977,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0069bff4	113	insert_pointer_slot_and_return_checked_iterator			confirmed	gamebryo		
 0x0069c065	74	raise_invalid_vector_subscript_exception			confirmed	gamebryo		
 0x0069c0af	36	clear_8byte_record_vector_storage			confirmed	gamebryo		
-0x0069c0d3	185		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c18c	88		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
+0x0069c0d3	185	reserve_8byte_refcounted_record_vector			confirmed	gamebryo		
+0x0069c18c	88	less_8byte_refcounted_string_record_case_insensitive			confirmed	gamebryo		
 0x0069c1e4	151		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		
-0x0069c27b	467		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c44e	117		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c4c3	36		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c4e7	90		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c541	204		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c60d	373		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c782	124		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c7fe	53		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c833	142		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
+0x0069c27b	467	insert_8byte_refcounted_record			confirmed	gamebryo		
+0x0069c44e	117	remove_matching_dword_from_checked_range			confirmed	gamebryo		
+0x0069c4c3	36	copy_construct_8byte_refcounted_record_range			confirmed	gamebryo		
+0x0069c4e7	90	copy_nonmatching_dwords_to_checked_range			confirmed	gamebryo		
+0x0069c541	204	sort_8byte_refcounted_records_introsort			confirmed	gamebryo		
+0x0069c60d	373	partition_8byte_refcounted_records_for_sort			confirmed	gamebryo		
+0x0069c782	124	insertion_sort_8byte_refcounted_records			confirmed	gamebryo		
+0x0069c7fe	53	copy_construct_8byte_refcounted_records			confirmed	gamebryo		
+0x0069c833	142		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		
 0x0069c8c1	60		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
 0x0069c8fd	81		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
 0x0069c94e	162		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
-0x0069c9f0	77		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
+0x0069c9f0	77		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		
 0x0069ca3d	232		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
 0x0069cb25	225		STL-style insert/sort/copy helpers for 8-byte records		unidentified	gamebryo		ui
 0x0069cc06	0	write_BFR_renderer_callback_arg_to_outparam			confirmed		0x008f5460#0	
