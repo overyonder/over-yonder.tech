@@ -21961,26 +21961,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b83e5	34	release_pdecal_renderer_resource			confirmed	gamebryo	0x009022e8#8	
 0x007b8407	0	set_pdecal_max_count_and_reload_wake			confirmed		0x009022e8#1	
 0x007b8458	286	prepare_pdecal_renderer_resource			confirmed	gamebryo	0x009024c8#7	
-0x007b8576	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#3	ui
-0x007b86d5	165		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b877a	83		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b87cd	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#2	ui
-0x007b8897	70		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b88dd	190		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b899b	345		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b8af4	55		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b8b2b	300		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b8c57	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024c8#9	ui
-0x007b8f7a	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#4	ui
-0x007b8fe2	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#5	ui
-0x007b8ffe	100		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b9062	116		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b90d6	38		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b90fc	167		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b91a3	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024f0#7	ui
-0x007b91c2	0		UI dependency references, movement/view components, and animatio		unidentified		0x0090162c#8	ui
-0x007b91c8	61		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b9205	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024f0#0	ui
+0x007b8576	0	advance_pdecal_live_points			confirmed		0x009022e8#3	
+0x007b86d5	165	pdecal_candidate_point_too_close			confirmed	gamebryo		
+0x007b877a	83	random_pdecal_unit_offset_vector			confirmed	gamebryo		
+0x007b87cd	0	try_emit_pdecal_point			confirmed		0x009022e8#2	
+0x007b8897	70	compute_pdecal_spawn_scale			confirmed	gamebryo		
+0x007b88dd	190	copy_offset_decal_mesh_buffer			confirmed	gamebryo		
+0x007b899b	345	emit_pdecal_mesh_instances			confirmed	gamebryo		
+0x007b8af4	55	pdecal_cell_matches_surface_slot			confirmed	gamebryo		
+0x007b8b2b	300	collect_pdecal_candidate_surface_cells			confirmed	gamebryo		
+0x007b8c57	0	build_pdecal_stitch_mesh_buffers			confirmed		0x009024c8#9	
+0x007b8f7a	0	submit_pdecal_renderer_resource			confirmed		0x009022e8#4	
+0x007b8fe2	0	set_pdecal_renderer_resource_dirty_flag			confirmed		0x009022e8#5	
+0x007b8ffe	100	append_pdecal_live_point			confirmed	gamebryo		
+0x007b9062	116	insert_pdecal_point3_record			confirmed	gamebryo		
+0x007b90d6	38	compute_vec2_length			confirmed	gamebryo		
+0x007b90fc	167	sum_pdecal_position_offsets			confirmed	gamebryo		
+0x007b91a3	0	pdecal_position_attribute_accepts_token			confirmed		0x009024f0#7	
+0x007b91c2	0	get_pdecal_position_attribute_token			confirmed		0x0090162c#8	
+0x007b91c8	61	construct_pdecal_position_attribute_modifier			confirmed	gamebryo		
+0x007b9205	0	scalar_delete_pdecal_position_attribute_modifier			confirmed		0x009024f0#0	
 0x007b923a	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024f0#1	ui
 0x007b9258	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024f0#3	ui
 0x007b9280	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024f0#4	ui
