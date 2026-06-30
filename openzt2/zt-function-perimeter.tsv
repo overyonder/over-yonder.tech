@@ -6421,25 +6421,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005351d5	94	copy_ZTTransportViewable_route_ref_tree_subtree			confirmed			
 0x00535233	341	insert_ZTTransportViewable_route_ref_tree_node			confirmed			
 0x00535388	56	lower_bound_ZTTransportViewable_route_ref_tree_node			confirmed			
-0x005353c0	191		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053547f	148		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535513	440		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005356cb	200		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535793	341		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005358e8	48		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535918	97		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535979	667		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535c14	81		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535c65	59		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535ca0	175		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535d4f	86		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535da5	93		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535e02	67		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535eae	55		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00535ee5	78		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005353c0	191	insert_unique_ZTTransportViewable_route_index_tree_node			confirmed			
+0x0053547f	148	erase_ZTTransportViewable_route_index_tree_range			confirmed			
+0x00535513	440	insert_ZTTransportViewable_fGS_assignment_vector_range			confirmed			
+0x005356cb	200	insert_unique_ZTTransportViewable_route_assignment_tree_node			confirmed			
+0x00535793	341	insert_ZTTransportViewable_route_assignment_tree_node			confirmed			
+0x005358e8	48	destroy_ZTTransportViewable_route_assignment_tree_storage			confirmed			
+0x00535918	97	decrement_ZTTransportViewable_route_tree_iterator			confirmed			
+0x00535979	667	erase_ZTTransportViewable_route_ref_tree_node			confirmed			
+0x00535c14	81	allocate_ZTTransportViewable_route_ref_tree_node			confirmed			
+0x00535c65	59	allocate_ZTTransportViewable_route_index_tree_node			confirmed			
+0x00535ca0	175	erase_ZTTransportViewable_route_assignment_tree_range			confirmed			
+0x00535d4f	86	allocate_ZTTransportViewable_route_assignment_tree_node			confirmed			
+0x00535da5	93	copy_ZTTransportViewable_route_assignment_tree_subtree			confirmed			
+0x00535e02	67	destroy_ZTTransportViewable_route_assignment_tree_nodes			confirmed			
+0x00535eae	55	copy_construct_ZTTransportViewable_fGS_assignment_range			confirmed			
+0x00535ee5	78	is_default_vehicle_view_limit_bounds			confirmed			
 0x00535f33	47	get_type_ZTVehicleBase			confirmed			
-0x00535f62	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d9738#1	ui
-0x00535f67	31		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00535f62	0	get_type_ZTVehicleBase_vtable_thunk			confirmed		0x008d9738#1	
+0x00535f67	31	resolve_ZTVehicleBase_from_type_query			confirmed			
 0x00535f86	263	construct_ZTVehicleBase			confirmed			
 0x0053608d	0	scalar_delete_ZTVehicleBase			confirmed		0x008d9738#0	
 0x005360a8	114	destroy_ZTVehicleBase			confirmed			
@@ -6452,8 +6452,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00536e1b	60	refresh_ZTVehicle_track_start_position_from_first_segment			confirmed		0x008d9738#25	
 0x00536e57	28	update_ZTVehicle_track_start_position			confirmed			
 0x00536e73	0	advance_ZTVehicle_stop_timers			confirmed		0x008d9738#14	
-0x00536e9a	80		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00536eea	135		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00536e9a	80	clear_ZTVehicleGround_current_track_link			confirmed			
+0x00536eea	135	remove_ZTVehicleBase_stop_list_record			confirmed			
 0x00536f71	232	refresh_ZTVehicleBase_stop_list_and_find_current_target			confirmed			
 0x00537059	271		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x00537168	71		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
@@ -6468,7 +6468,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053772f	231		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x00537816	212		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x005378ea	70		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00537930	97		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537930	97	erase_ZTVehicleBase_stop_list_node			confirmed			
 0x00537991	33	destroy_BFSafeHandle_ZTTransportTrack_ref			confirmed			
 0x005379b2	0	scalar_delete_BFSafeHandle_ZTTransportTrack_ref			confirmed		0x008d97bc#0	
 0x005379cd	170		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
@@ -7969,7 +7969,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057fb49	48		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-ai
 0x0057fb79	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057fc28	102		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x0057fc8e	196		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057fc8e	196		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
 0x0057fd52	388		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0057fed6	677		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
 0x0058017b	75		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
@@ -17721,7 +17721,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e7e2c	185		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e7ee5	156		ordered map/list helper cluster		unidentified	gamebryo		
 0x006e7f81	167		ordered map/list helper cluster		unidentified	gamebryo		
-0x006e8028	382		ordered map/list helper cluster		unidentified	gamebryo		ui
+0x006e8028	382		ordered map/list helper cluster		unidentified	gamebryo		world/pathing
 0x006e81a6	187	resize_16byte_nested_vector_records			confirmed	gamebryo		
 0x006e8261	24		ordered map/list helper cluster		unidentified	gamebryo		renderer
 0x006e8279	134		ordered map/list helper cluster		unidentified	gamebryo		renderer
@@ -17736,7 +17736,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e8800	454		vector/list element movement helpers		unidentified	gamebryo		game-ai
 0x006e89c6	177		vector/list element movement helpers		unidentified	gamebryo		
 0x006e8a77	277	grow_4byte_vector_with_zero_fill			confirmed	gamebryo		
-0x006e8b8c	205		vector/list element movement helpers		unidentified	gamebryo		ui
+0x006e8b8c	205		vector/list element movement helpers		unidentified	gamebryo		world/pathing
 0x006e8c59	341		vector/list element movement helpers		unidentified	gamebryo		ui
 0x006e8dae	196		static vector and ordered-container support		unidentified	gamebryo		
 0x006e8e72	160	insert_global_traversability_handler_list_node			confirmed	gamebryo		
