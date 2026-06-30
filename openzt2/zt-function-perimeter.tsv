@@ -4263,7 +4263,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d45b5	0	allocate_ZTFence_instance			confirmed		0x008d3810#3	
 0x004d45ca	153		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d4642	0	false_vtable_slot_ascii_BFM			confirmed			
-0x004d46aa	201		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d46aa	201		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			io/assets
 0x004d4773	48		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d47a3	148		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d4837	160		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
@@ -9385,67 +9385,68 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a9621	212	find_or_insert_BFLocaleMgr_text_category_record			confirmed	gamebryo		
 0x005a96f5	148	erase_BFLocaleMgr_text_category_map_range			confirmed	gamebryo		
 0x005a9789	393	insert_BFLocaleMgr_text_category_map_node			confirmed	gamebryo		
-0x005a9912	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9947	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9a16	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9a73	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9bc8	207		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9c97	148		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9d2b	93		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9d88	341		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9edd	53		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9f12	97		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005a9f73	677		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005aa218	64		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005aa258	77		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005aa2a5	667		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
-0x005aa540	83		ordered container/index helpers used by inline text config paths		unidentified	gamebryo		ui
+0x005a9912	53	lower_bound_BFLocaleMgr_text_category_record			confirmed	gamebryo		
+0x005a9947	207	find_or_insert_BFLocaleMgr_loaded_source_marker_record			confirmed	gamebryo		
+0x005a9a16	93	clone_BFLocaleMgr_loaded_source_marker_subtree			confirmed	gamebryo		
+0x005a9a73	341	insert_BFLocaleMgr_loaded_source_marker_map_node			confirmed	gamebryo		
+0x005a9bc8	207	find_or_insert_BFLocaleMgr_text_payload_map_record			confirmed	gamebryo		
+0x005a9c97	148	erase_BFLocaleMgr_text_payload_map_range			confirmed	gamebryo		
+0x005a9d2b	93	clone_BFLocaleMgr_text_payload_subtree			confirmed	gamebryo		
+0x005a9d88	341	insert_BFLocaleMgr_text_payload_map_node			confirmed	gamebryo		
+0x005a9edd	53	lower_bound_BFLocaleMgr_text_payload_map_node			confirmed	gamebryo		
+0x005a9f12	97	decrement_BFLocaleMgr_text_payload_map_iterator			confirmed	gamebryo		
+0x005a9f73	677	erase_BFLocaleMgr_text_category_map_node			confirmed	gamebryo		
+0x005aa218	64	rotate_left_BFLocaleMgr_text_category_map_node			confirmed	gamebryo		
+0x005aa258	77	construct_BFLocaleMgr_loaded_source_marker_map_node			confirmed	gamebryo		
+0x005aa2a5	667	erase_BFLocaleMgr_text_payload_map_node			confirmed	gamebryo		
+0x005aa540	83	construct_BFLocaleMgr_text_payload_map_node			confirmed	gamebryo		
 0x005aa593	27	format_256_byte_string_vsprintf_s			confirmed	gamebryo		
 0x005aa5ae	45	get_or_register_bf_safe_handle_base_type			confirmed	gamebryo		
 0x005aa5db	0		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified		0x008bfbac#1	
 0x005aa5e0	45	get_or_register_bf_safe_handled_obj_type			confirmed	gamebryo		
 0x005aa60d	0	get_type_BFSafeHandledObj_vtable_thunk			confirmed		0x008bfba4#1	
-0x005aa612	88		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005aa612	88	get_or_init_BFSafeHandledObj_pointer_key_hash			confirmed	gamebryo		
 0x005aa66a	91		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aa6c5	234		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005aa6c5	234	resolve_safehandledobjid_attribute_or_defer_ref_assignment			confirmed	gamebryo		
 0x005aa7af	138	cleanup_ui_value_assignment_base_dependents			confirmed	gamebryo		
 0x005aa839	246	update_ui_value_assignment_ref_dependents			confirmed	gamebryo		
 0x005aa92f	67	inline_ui_typed_value_base_dtor			confirmed	gamebryo		
-0x005aa972	170		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aaa1c	56		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aaa54	133		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005aaad9	276		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005aa972	170		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005aaa1c	56		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
+0x005aaa54	133	write_safehandledobjid_attribute_for_registered_object			confirmed	gamebryo		
+0x005aaad9	276	register_safehandledobjid_object_and_notify_dependents			confirmed	gamebryo		
 0x005aabed	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aac27	112		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005aad49	24		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005aad61	23		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005aac27	112	sweep_retired_BFSafeHandledObj_pointer_hash_node			confirmed	gamebryo		
+0x005aad49	24		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005aad61	23		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aad78	100		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005aaddc	126		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aae9e	49		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aaecf	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005aaf37	160		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005aaf37	160		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab01b	51		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab04e	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab0b6	157		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ab0b6	157		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab197	154		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005ab231	51		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab264	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ab264	104		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab2cc	33		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005ab308	143		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ab2ed	0		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified		0x008e4e00#0	
+0x005ab308	143		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab397	323		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab4da	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab511	327		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005ab511	327		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ab658	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab68f	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab6ca	323		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005ab80d	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005ab8a1	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ab8a1	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ab8d8	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ab913	340		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005ab913	340		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005aba67	192		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005abb27	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005abbbb	398		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
-0x005abd49	198		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
+0x005abd49	198		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005abe0f	148		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005abea3	403		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-entities
 0x005ac036	192		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
@@ -9462,7 +9463,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005acb81	61		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005acbbe	63		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005acbfd	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005acc3e	0	get_type_BFSafeHandle<BFSafeHandledObj>_vtable_thunk			confirmed		0x008e4e04#0	
+0x005acc3e	0	get_type_BFSafeHandle<BFSafeHandledObj>_vtable_thunk			confirmed		0x008e4e00#1	
 0x005acc43	0	get_type_BFSafeHandle<BFSafeHandledObj>			confirmed			
 0x005acca7	0	clone_BFUndoTransactionData			confirmed		0x008e4e58#5	
 0x005acce4	47	get_type_BFUndoTransactionData			confirmed	gamebryo		
