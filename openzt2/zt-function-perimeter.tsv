@@ -18518,7 +18518,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070c058	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#2	
 0x0070c05d	387		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x0070c247	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#0	
-0x0070c262	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070c262	56		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x0070c29a	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#31	
 0x0070c35a	70	release_active_animation_controller_object			confirmed	gamebryo		
 0x0070c3a0	35		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -19362,25 +19362,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0073cd12	203	write_BF3DApp_renderer_preview_png			confirmed	gamebryo		
 0x0073cddd	33	destroy_BF3DApp_BFAnimManager_safe_handle			confirmed	gamebryo		
 0x0073cdfe	33	destroy_BF3DApp_BFTraversabilityMgr_safe_handle			confirmed	gamebryo		
-0x0073ce1f	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073ce40	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073ce61	33		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073ce82	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd05c#6	ui
-0x0073ce98	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd00c#0	ui
-0x0073ceb3	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd020#0	ui
-0x0073cece	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd034#0	ui
-0x0073cee9	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd048#0	ui
-0x0073cf04	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd05c#0	ui
+0x0073ce1f	33	destroy_BF3DApp_BFSoundMgr_safe_handle			confirmed	gamebryo		
+0x0073ce40	33	destroy_BF3DApp_BFSoundStageMgr_safe_handle			confirmed	gamebryo		
+0x0073ce61	33	destroy_BF3DApp_BFParticleDictionary_safe_handle			confirmed	gamebryo		
+0x0073ce82	0	allocate_construct_BF3DApp_runtime_context			confirmed		0x008fd05c#6	
+0x0073ce98	0	scalar_delete_BFAnimManager_safe_handle			confirmed		0x008fd00c#0	
+0x0073ceb3	0	scalar_delete_BFTraversabilityMgr_safe_handle			confirmed		0x008fd020#0	
+0x0073cece	0	scalar_delete_BFSoundMgr_safe_handle			confirmed		0x008fd034#0	
+0x0073cee9	0	scalar_delete_BFSoundStageMgr_safe_handle			confirmed		0x008fd048#0	
+0x0073cf04	0	scalar_delete_BFParticleDictionary_safe_handle			confirmed		0x008fd05c#0	
 0x0073cf1f	0	get_type_BFSafeHandle<BFAnimManager>_vtable_thunk			confirmed		0x008fd00c#1	
-0x0073cf24	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd00c#3	ui
+0x0073cf24	0	assign_BFAnimManager_safe_handle_ref			confirmed		0x008fd00c#3	
 0x0073cf3d	0	get_type_BFSafeHandle<BFTraversabilityMgr>_vtable_thunk			confirmed		0x008fd020#1	
-0x0073cf42	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd020#3	ui
+0x0073cf42	0	assign_BFTraversabilityMgr_safe_handle_ref			confirmed		0x008fd020#3	
 0x0073cf5b	0	get_type_BFSafeHandle<BFSoundMgr>_vtable_thunk			confirmed		0x008fd034#1	
-0x0073cf60	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd034#3	ui
+0x0073cf60	0	assign_BFSoundMgr_safe_handle_ref			confirmed		0x008fd034#3	
 0x0073cf79	0	get_type_BFSafeHandle<BFSoundStageMgr>_vtable_thunk			confirmed		0x008fd048#1	
-0x0073cf7e	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd048#3	ui
+0x0073cf7e	0	assign_BFSoundStageMgr_safe_handle_ref			confirmed		0x008fd048#3	
 0x0073cf97	0	get_type_BFSafeHandle<BFParticleDictionary>_vtable_thunk			confirmed		0x008fd05c#1	
-0x0073cf9c	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd05c#3	ui
+0x0073cf9c	0	assign_BFParticleDictionary_safe_handle_ref			confirmed		0x008fd05c#3	
 0x0073cfb5	40	as_BFDX9Renderer			confirmed	gamebryo		
 0x0073cfdd	0	get_type_BFSafeHandle<BFAnimManager>			confirmed			
 0x0073d041	40	as_BFAnimManager			confirmed	gamebryo		
@@ -19392,13 +19392,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0073d1e5	40	as_BFSoundStageMgr			confirmed	gamebryo		
 0x0073d20d	0	get_type_BFSafeHandle<BFParticleDictionary>			confirmed			
 0x0073d271	40	as_BFParticleDictionary			confirmed	gamebryo		
-0x0073d299	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#21	ui
+0x0073d299	0	get_BFBoundedObjectComponent_type_name_string_global			confirmed		0x008fd0d8#21	
 0x0073d29f	47	get_type_BFBoundedObjectComponent			confirmed	gamebryo		
-0x0073d2ce	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#1	ui
-0x0073d2d3	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073d2f3	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#2	ui
-0x0073d34b	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#0	ui
-0x0073d366	18		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0073d2ce	0	get_type_BFBoundedObjectComponent_vtable_thunk			confirmed		0x008fd0d8#1	
+0x0073d2d3	32	get_BFCollisionComponent_descriptor_cell			confirmed	gamebryo		
+0x0073d2f3	0	get_BFCollisionComponent_descriptor_cell_vtable_thunk			confirmed		0x008fd0d8#2	
+0x0073d34b	0	scalar_delete_BFBoundedObjectComponent			confirmed		0x008fd0d8#0	
+0x0073d366	18	destroy_BFBoundedObjectComponent_members			confirmed	gamebryo		
 0x0073d378	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#22	ui
 0x0073d382	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#31	ui
 0x0073d44e	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#19	ui
@@ -19871,7 +19871,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075aad4	86	make_model_property_value_from_binding			confirmed	gamebryo	0x008d9f94#1	
 0x0075ab2a	36		scene/model transform and XML property bridge		unidentified	gamebryo		renderer
 0x0075ab4e	0		scene/model transform and XML property bridge		unidentified		0x008fe428#0	
-0x0075ab69	18		scene/model transform and XML property bridge		unidentified	gamebryo		ui
+0x0075ab69	18		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075ab7b	53		scene/model transform and XML property bridge		unidentified	gamebryo	0x008d9e68#19	renderer
 0x0075abb0	77	read_scene_model_update_priority_xml_attr			confirmed	gamebryo	0x008d9e68#20	
 0x0075abfd	0		scene/model transform and XML property bridge		unidentified		0x008fe428#37	
