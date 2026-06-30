@@ -18453,20 +18453,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00709739	0		collision tester and fitting-surface component XML		unidentified		0x008fa960#26	
 0x007097eb	0		collision tester and fitting-surface component XML		unidentified		0x008fa960#27	
 0x00709826	112		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
-0x00709896	537		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00709896	537	parse_quoted_animation_flags_and_bool_properties			confirmed	gamebryo		
 0x00709aaf	1618	build_biome_layer_asset_paths			confirmed	gamebryo		
 0x0070a101	0		collision tester and fitting-surface component XML		unidentified		0x008fa960#28	
 0x0070a27d	0		collision tester and fitting-surface component XML		unidentified		0x008fa9dc#3	
-0x0070a295	146		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070a295	146	lookup_BFGContainerData_entry_for_type			confirmed	gamebryo		
 0x0070a327	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070a407	100		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070a46b	152		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070a407	100	append_animation_bool_property_record			confirmed	gamebryo		
+0x0070a46b	152	insert_animation_bool_property_record_at_iterator			confirmed	gamebryo		
 0x0070a503	41		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070a52c	60		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070a52c	60	fill_construct_animation_bool_property_records			confirmed	gamebryo		
 0x0070a568	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x0070a608	25		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070a621	449		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070a7e2	52		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070a621	449	insert_animation_bool_property_record			confirmed	gamebryo		
+0x0070a7e2	52	copy_construct_animation_bool_property_record_range			confirmed	gamebryo		
 0x0070a81b	47	get_type_BFGContainerData			confirmed	gamebryo		
 0x0070a84a	0		collision tester and fitting-surface component XML		unidentified		0x008faa10#1	
 0x0070a84f	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
@@ -18525,15 +18525,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070c3c3	134	create_active_animation_controller_object			confirmed	gamebryo		
 0x0070c449	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#19	
 0x0070c7e9	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#20	
-0x0070cbcd	19		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070cbcd	19	construct_BFSecondaryAnimComponent_inline_string_field			confirmed	gamebryo		
 0x0070cbe0	36		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070cc04	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#37	
 0x0070cc17	132		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070cc9b	60		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070cc9b	60	fill_construct_secondary_anim_value_float_records			confirmed	gamebryo		
 0x0070ccd7	25		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070ccf0	428		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070ce9c	69		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070cee1	84		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070ccf0	428	insert_secondary_anim_value_float_record			confirmed	gamebryo		
+0x0070ce9c	69	copy_construct_secondary_anim_value_float_record_range			confirmed	gamebryo		
+0x0070cee1	84	relocate_secondary_anim_value_float_record_range_backward			confirmed	gamebryo		
 0x0070cf35	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#21	
 0x0070cf3b	47	get_type_BFBirdGroundFitComponent			confirmed	gamebryo		
 0x0070cf6a	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#1	
@@ -18543,10 +18543,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070cfaf	18		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070cfc1	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#24	
 0x0070cfeb	0		collision tester and fitting-surface component XML		unidentified		0x008fae90#4	
-0x0070d23d	68		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070d281	68		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070d2c5	68		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070d309	68		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070d23d	68	get_BFBirdGroundFit_ignoreElevatedPath_token			confirmed	gamebryo		
+0x0070d281	68	get_BFBirdGroundFit_minHeightOffset_token			confirmed	gamebryo		
+0x0070d2c5	68	get_BFBirdGroundFit_desiredClimbRate_token			confirmed	gamebryo		
+0x0070d309	68	get_BFBirdGroundFit_desiredDiveRate_token			confirmed	gamebryo		
 0x0070d34d	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#19	
 0x0070d3f1	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#20	
 0x0070d4f9	38		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -18592,7 +18592,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070f2de	187		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070f399	100		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070f3fd	157		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070f4de	644		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070f4de	644	erase_BFBirdGroundFit_registry_node			confirmed	gamebryo		
 0x0070f762	51		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f795	104		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f7fd	168		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -18602,7 +18602,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070fa18	98		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070fa7a	151		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070fb11	107		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070fb7c	323		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070fb7c	323	lower_bound_or_insert_BFBirdGroundFit_registry_key			confirmed	gamebryo		
 0x0070fcbf	55		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070fcf6	59		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070fd31	61		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18612,7 +18612,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070ff32	105		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070ff9b	397		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x00710128	192		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007101e8	148		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007101e8	148	erase_BFBirdGroundFit_registry_range			confirmed	gamebryo		
 0x0071027c	404		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x00710410	191		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007104cf	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18656,7 +18656,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007110da	123		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x00711155	115		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
 0x007111c8	494		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007113b6	143		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007113b6	143	write_BFPhysObj_position_plus_scaled_local_vector			confirmed	gamebryo		
 0x00711445	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007114f6	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x007115a7	177		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
