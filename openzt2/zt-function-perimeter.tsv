@@ -15722,7 +15722,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00692dce	66		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		renderer
 0x00692e10	118	append_dword_to_chunked_4slot_vector			confirmed	gamebryo		
 0x00692e86	41		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
-0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
+0x00692eaf	114	copy_construct_point3_array_storage			confirmed	gamebryo		
 0x00692f21	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692f62	418	insert_repeated_12byte_records			confirmed	gamebryo		
 0x00693104	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
@@ -20001,7 +20001,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075e3fa	52		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e42e	667		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e6c9	93		presentation controller registry and tree containers		unidentified	gamebryo		
-0x0075e726	102		presentation controller registry and tree containers		unidentified	gamebryo		ui
+0x0075e726	102	find_or_insert_presentation_controller_u32_key			confirmed	gamebryo		
 0x0075e78c	49		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e7bd	36		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e7e1	112		presentation controller registry and tree containers		unidentified	gamebryo		
@@ -21840,24 +21840,24 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b0109	140	insert_point3_array_range_and_return_iterator			confirmed	gamebryo		
 0x007b0195	145	resize_8byte_record_vector			confirmed	gamebryo		
 0x007b0226	397	insert_20byte_viewable_record			confirmed	gamebryo		
-0x007b03b3	67		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b03f6	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0487	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0518	448		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b06d8	667		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0973	41		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b099c	222		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0a7a	222		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0b58	387		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0cdb	104		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0d43	126		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0dc1	387		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0f44	104		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b0fac	126		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b102a	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b10bb	45		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b10e8	88		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b1140	145		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007b03b3	67	allocate_20byte_viewable_record_block			confirmed	gamebryo		
+0x007b03f6	145	erase_checked_tree_range_plain_nodes			confirmed	gamebryo		
+0x007b0487	145	erase_vector_payload_dependency_tree_range			confirmed	gamebryo		
+0x007b0518	448	insert_repeated_8byte_ui_record_range			confirmed	gamebryo		
+0x007b06d8	667	erase_vector_payload_dependency_tree_node			confirmed	gamebryo		
+0x007b0973	41	copy_construct_20byte_record_range			confirmed	gamebryo		
+0x007b099c	222	introsort_20byte_records_by_field4			confirmed	gamebryo		
+0x007b0a7a	222	introsort_20byte_records_by_field8			confirmed	gamebryo		
+0x007b0b58	387	partition_20byte_records_by_field4			confirmed	gamebryo		
+0x007b0cdb	104	sort_heap_20byte_records_by_field4			confirmed	gamebryo		
+0x007b0d43	126	insertion_sort_20byte_records_by_field4			confirmed	gamebryo		
+0x007b0dc1	387	partition_20byte_records_by_field8			confirmed	gamebryo		
+0x007b0f44	104	sort_heap_20byte_records_by_field8			confirmed	gamebryo		
+0x007b0fac	126	insertion_sort_20byte_records_by_field8			confirmed	gamebryo		
+0x007b102a	145	select_20byte_record_pivot_by_field4			confirmed	gamebryo		
+0x007b10bb	45	swap_20byte_records			confirmed	gamebryo		
+0x007b10e8	88	make_heap_20byte_records_by_field4			confirmed	gamebryo		
+0x007b1140	145	select_20byte_record_pivot_by_field8			confirmed	gamebryo		
 0x007b11d1	88		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b1229	69		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b126e	217		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
