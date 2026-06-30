@@ -19399,27 +19399,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0073d2f3	0	get_BFCollisionComponent_descriptor_cell_vtable_thunk			confirmed		0x008fd0d8#2	
 0x0073d34b	0	scalar_delete_BFBoundedObjectComponent			confirmed		0x008fd0d8#0	
 0x0073d366	18	destroy_BFBoundedObjectComponent_members			confirmed	gamebryo		
-0x0073d378	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#22	ui
-0x0073d382	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#31	ui
-0x0073d44e	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#19	ui
-0x0073d517	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#20	ui
-0x0073d629	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#26	ui
-0x0073d6ff	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd0d8#37	ui
-0x0073d712	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd1f4#0	ui
-0x0073d718	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd21c#26	ui
-0x0073d75a	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd21c#5	ui
+0x0073d378	0	set_BFBoundedObjectComponent_target_object			confirmed		0x008fd0d8#22	
+0x0073d382	0	clamp_BFBoundedObjectComponent_target_position			confirmed		0x008fd0d8#31	
+0x0073d44e	0	write_BFBoundedObjectComponent_bounds_xml			confirmed		0x008fd0d8#19	
+0x0073d517	0	read_BFBoundedObjectComponent_bounds_xml			confirmed		0x008fd0d8#20	
+0x0073d629	0	recompute_BFBoundedObjectComponent_world_bounds			confirmed		0x008fd0d8#26	
+0x0073d6ff	0	allocate_construct_BFBoundedObjectComponent			confirmed		0x008fd0d8#37	
+0x0073d712	0	get_BFCollisionComponent_type_name_string_global			confirmed		0x008fd1f4#0	
+0x0073d718	0	update_NiCollisionObject_bound_from_scene_object			confirmed		0x008fd21c#26	
+0x0073d75a	0	scalar_delete_NiCollisionObject			confirmed		0x008fd21c#5	
 0x0073d77b	47	get_type_BFCollisionComponent			confirmed	gamebryo		
-0x0073d7aa	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd1a0#1	ui
-0x0073d7af	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073d7cf	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd1a0#2	ui
-0x0073d7d4	180		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073d888	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd1a0#0	ui
-0x0073d8a3	164		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073d947	165		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073d9ec	357		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073db51	4721		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073edc2	131		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0073ee45	2909		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x0073d7aa	0	get_type_BFCollisionComponent_vtable_thunk			confirmed		0x008fd1a0#1	
+0x0073d7af	32	get_BFCollisionComponent_listeners_descriptor_cell			confirmed	gamebryo		
+0x0073d7cf	0	get_BFCollisionComponent_listeners_descriptor_cell_vtable_thunk			confirmed		0x008fd1a0#2	
+0x0073d7d4	180	construct_BFCollisionComponent			confirmed	gamebryo		
+0x0073d888	0	scalar_delete_BFCollisionComponent			confirmed		0x008fd1a0#0	
+0x0073d8a3	164	destroy_BFCollisionComponent_members			confirmed	gamebryo		
+0x0073d947	165	emit_BFCollisionComponent_contact_update			confirmed	gamebryo		
+0x0073d9ec	357	resolve_collision_shape_as_capsule_bounds			confirmed	gamebryo		
+0x0073db51	4721	resolve_BFCollisionComponent_swept_contact_response			confirmed	gamebryo		
+0x0073edc2	131	dispatch_BFCollisionComponent_pair_response			confirmed	gamebryo		
+0x0073ee45	2909	resolve_BFCollisionComponent_pair_capsule_contact			confirmed	gamebryo		
 0x0073f9a2	1187		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0073fe45	396		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x0073ffd1	670		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
