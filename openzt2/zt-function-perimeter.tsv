@@ -19516,7 +19516,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0074522b	21	get_BFLegFitComponent_from_typed_object			confirmed	gamebryo		
 0x00745240	58	assign_owned_BFLegFit_shape_reference_payload			confirmed	gamebryo		
 0x0074527a	39	assign_unowned_BFLegFit_shape_reference_payload			confirmed	gamebryo		
-0x007452a1	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd940#21	ui
+0x007452a1	0	get_BFLegFitComponent_type_name_string_global			confirmed		0x008fd940#21	
 0x007452a7	47	get_type_BFLegFitComponent			confirmed	gamebryo		
 0x007452d6	0	get_type_BFLegFitComponent_vtable_thunk			confirmed		0x008fd940#1	
 0x007452db	32	get_BFLegFitComponent_descriptor_cell			confirmed	gamebryo		
@@ -19549,26 +19549,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007484fb	0	clear_BF2LegsGroundFit_dynamic_refit_flag			confirmed		0x008fdacc#2	
 0x00748503	0	mark_BF2LegsGroundFit_dynamic_refit_flag_dirty			confirmed		0x008fdacc#3	
 0x00748512	403	apply_BF2LegsGroundFit_ankle_orientation_update			confirmed	gamebryo		
-0x007486bb	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#21	ui
+0x007486bb	0	get_BFManipSensorComponent_type_name_string_global			confirmed		0x008fdb78#21	
 0x007486c1	47	get_type_BFManipSensorComponent			confirmed	gamebryo		
-0x007486f0	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#1	ui
-0x007486f5	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00748715	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#2	ui
-0x0074878d	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#0	ui
-0x007487a8	48		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007487d8	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#24	ui
-0x007488c5	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#31	ui
-0x007488f0	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#36	ui
-0x00748aae	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#19	ui
-0x00748c26	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#20	ui
-0x00748e0e	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fdb78#38	ui
-0x00748e21	167		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00748ec8	147		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00748f5b	45		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00748f88	191		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00749047	827		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00749382	199		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00749449	217		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x007486f0	0	get_type_BFManipSensorComponent_vtable_thunk			confirmed		0x008fdb78#1	
+0x007486f5	32	get_BFManipSensorComponent_descriptor_cell			confirmed	gamebryo		
+0x00748715	0	get_BFManipSensorComponent_descriptor_cell_vtable_thunk			confirmed		0x008fdb78#2	
+0x0074878d	0	scalar_delete_BFManipSensorComponent			confirmed		0x008fdb78#0	
+0x007487a8	48	destroy_BFManipSensorComponent_members			confirmed	gamebryo		
+0x007487d8	0	bind_BFManipSensorComponent_target_sensor_nodes			confirmed		0x008fdb78#24	
+0x007488c5	0	update_BFManipSensorComponent_sensor_rotation			confirmed		0x008fdb78#31	
+0x007488f0	0	apply_BFManipSensorComponent_surface_driven_rotation			confirmed		0x008fdb78#36	
+0x00748aae	0	write_BFManipSensorComponent_xml			confirmed		0x008fdb78#19	
+0x00748c26	0	read_BFManipSensorComponent_xml			confirmed		0x008fdb78#20	
+0x00748e0e	0	allocate_BFManipSensorComponent_instance			confirmed		0x008fdb78#38	
+0x00748e21	167	construct_placement_feedback_tracker			confirmed	gamebryo		
+0x00748ec8	147	destroy_placement_feedback_tracker			confirmed	gamebryo		
+0x00748f5b	45	emit_placement_cloud_feedback_at_point			confirmed	gamebryo		
+0x00748f88	191	emit_placement_feedback_from_world_point			confirmed	gamebryo		
+0x00749047	827	create_placement_feedback_record			confirmed	gamebryo		
+0x00749382	199	emit_placement_feedback_from_preview_object			confirmed	gamebryo		
+0x00749449	217	compute_placement_feedback_ground_clearance			confirmed	gamebryo		
 0x00749522	499		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x00749715	432		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
 0x007498c5	56		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
@@ -19756,9 +19756,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007538bc	1044		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x00753cd0	872		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x00754038	420		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
-0x007541dc	549		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
+0x007541dc	549		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754401	79		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
-0x00754450	234		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
+0x00754450	234		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x0075453a	95		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754599	111		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754608	0		scene/view node update and child visibility propagation		unidentified		0x008fdfbc#4	
