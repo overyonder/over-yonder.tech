@@ -4243,7 +4243,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d3304	404	transform_fence_segment_info_point_to_world			confirmed			
 0x004d3498	386	refresh_fence_traversability_records			confirmed			
 0x004d361a	0	refresh_fence_preview_height_and_variant			confirmed		0x008d3760#31	
-0x004d39ba	260		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d39ba	260	test_fence_preview_swept_box_path_overlap			confirmed			
 0x004d3abe	153	get_current_placement_record_extent_or_default			confirmed			
 0x004d3b57	23	forward_fence_selected_height_value			confirmed		0x008d3760#33	
 0x004d3b6e	21	forward_fence_selected_water_flag_value			confirmed		0x008d3760#34	
@@ -11482,11 +11482,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00604473	667	erase_checked_u32_tree_node			confirmed	gamebryo		
 0x0060470e	57	destroy_checked_u32_tree_subtree			confirmed	gamebryo		
 0x00604747	107	import_BFAIMgr_inherited_handler_records			confirmed	gamebryo		
-0x006047b2	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e87e8#48	
-0x006047b8	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e87e8#47	
-0x006047c2	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e87e8#31	
-0x006047c9	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e87e8#15	
-0x006047d0	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e8760#24	
+0x006047b2	0	return_BFAI_slot48_constant_900			confirmed		0x008e87e8#48	
+0x006047b8	0	read_BFAI_argument_field24			confirmed		0x008e87e8#47	
+0x006047c2	0	return_BFAI_default_float_8bf358			confirmed		0x008e87e8#31	
+0x006047c9	0	return_BFAI_default_float_914af8			confirmed		0x008e87e8#15	
+0x006047d0	0	clear_BFAIMgr_child_component_list			confirmed		0x008e8760#24	
 0x006047dd	47	get_type_BFAIValidationData			confirmed	gamebryo		
 0x0060480c	0	get_type_BFAIValidationData_vtable_thunk			confirmed		0x008e8a2c#1	
 0x00604811	32	get_BFAIValidationData_descriptor_ref			confirmed	gamebryo		
@@ -11526,59 +11526,59 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0060609d	150	has_BFAITaskTemplate_biome_qualifier			confirmed	gamebryo		
 0x00606133	196	has_BFAITaskTemplate_traversability_cached_key_qualifier			confirmed	gamebryo		
 0x006061f7	139	resolve_BFAITaskTemplate_traversability_qualifier_value			confirmed	gamebryo		
-0x00606282	162		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606324	26		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060633e	108		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006063aa	29		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006063c7	52		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006063fb	29		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606418	43		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606443	147		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006064d6	148		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060656a	273		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060667b	233		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606764	208		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606834	26		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060684e	231		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606935	42		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060695f	124		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006069db	78		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00606282	162	resolve_BFAITaskTemplate_primary_traversability_qualifier_value			confirmed	gamebryo		
+0x00606324	26	get_BFAITaskTemplate_score_or_override			confirmed	gamebryo		
+0x0060633e	108	test_BFAITaskTemplate_vector_any_helper85b0			confirmed	gamebryo		
+0x006063aa	29	has_BFAITaskTemplate_cached_bit100_or_vector_match			confirmed	gamebryo		
+0x006063c7	52	has_BFAITaskTemplate_traversability_or_self_combo			confirmed	gamebryo		
+0x006063fb	29	has_BFAITaskTemplate_cached_bit400_or_vector_match			confirmed	gamebryo		
+0x00606418	43	has_BFAITaskTemplate_BFAIBiomeMap_ref			confirmed	gamebryo		
+0x00606443	147	has_BFAITaskTemplate_self_qualifier			confirmed	gamebryo		
+0x006064d6	148	has_BFAITaskTemplate_fromToken_qualifier			confirmed	gamebryo		
+0x0060656a	273	test_BFAITaskTemplate_runtime_subrecord_ready			confirmed	gamebryo		
+0x0060667b	233	validate_BFAISensor_candidate_self_context			confirmed	gamebryo		
+0x00606764	208	validate_BFAITaskTemplate_world_point_candidate			confirmed	gamebryo		
+0x00606834	26	destroy_BFAITargetPos_query_scratch			confirmed	gamebryo		
+0x0060684e	231	validate_BFAITaskTemplate_world_point_context			confirmed	gamebryo		
+0x00606935	42	has_BFAITaskTemplate_runtime_subrecord_ready			confirmed	gamebryo		
+0x0060695f	124	test_BFAITaskTemplate_current_target_position_pairing			confirmed	gamebryo		
+0x006069db	78	validate_BFAITaskTemplate_target_position_context			confirmed	gamebryo		
 0x00606a29	47	get_type_BFAITaskTemplateList			confirmed	gamebryo		
-0x00606a58	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e8a98#1	game-entities
+0x00606a58	0	get_type_BFAITaskTemplateList_vtable_thunk			confirmed		0x008e8a98#1	
 0x00606a5d	32	get_BFAITaskTemplateList_descriptor_ref			confirmed	gamebryo		
 0x00606a7d	0	get_BFAITaskTemplateList_descriptor_ref_vtable_thunk			confirmed		0x008e8a98#2	
 0x00606a82	0	scalar_delete_BFAITaskTemplateList			confirmed		0x008e8a98#0	
 0x00606aaa	0	find_BFAITaskTemplateList_template_by_type_key			confirmed		0x008e8a98#26	
 0x00606abf	90	construct_BFXMLObj_task_template_payload_defaults			confirmed	gamebryo		
 0x00606b19	0	scalar_delete_BFXMLObj_task_template_payload			confirmed		0x008e89a0#0	
-0x00606b34	162		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606bd6	185		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606c8f	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00606b34	162	construct_BFXMLObj_task_template_payload_defaults_for_context			confirmed	gamebryo		
+0x00606bd6	185	construct_BFXMLObj_task_template_payload_with_target_pos			confirmed	gamebryo		
+0x00606c8f	71	copy_construct_BFXMLObj_task_template_payload			confirmed	gamebryo		
 0x00606cd6	105	destroy_BFXMLObj_task_template_payload			confirmed	gamebryo		
-0x00606d3f	264		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00606e47	201		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00606d3f	264	assign_BFXMLObj_task_template_payload			confirmed	gamebryo		
+0x00606e47	201	test_BFXMLObj_task_template_payload_equivalent			confirmed	gamebryo		
 0x00606f10	0	write_BFXMLObj_task_template_payload_xml			confirmed		0x008e89a0#3	
-0x00607227	879		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00607227	879	select_matching_BFAITaskTemplate_for_payload			confirmed	gamebryo		
 0x00607596	0	read_BFXMLObj_task_template_payload_xml			confirmed		0x008e89a0#4	
-0x00607967	70		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006079ad	84		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00607967	70	get_BFXMLObj_task_template_payload_effective_score			confirmed	gamebryo		
+0x006079ad	84	test_BFXMLObj_task_template_payload_score_available			confirmed	gamebryo		
 0x00607a53	0	allocate_BFAITaskTemplate_from_descriptor			confirmed		0x008e8b18#1	
 0x00607a6b	0	allocate_BFAITaskTemplateList_from_descriptor			confirmed		0x008e8b18#3	
-0x00607a93	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00607ada	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00607b21	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00607b68	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00607baf	71		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00607bf6	34		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00607a93	71	as_BFAICreateData_from_typed_value_object			confirmed	gamebryo		
+0x00607ada	71	as_BFAIValidationData_from_typed_value_object			confirmed	gamebryo		
+0x00607b21	71	as_BFAIEvalData_from_typed_value_object			confirmed	gamebryo		
+0x00607b68	71	as_BFAICompletionData_from_typed_value_object			confirmed	gamebryo		
+0x00607baf	71	as_BFAIFailureData_from_typed_value_object			confirmed	gamebryo		
+0x00607bf6	34	get_BFAIEvalData_fixed_score_or_default			confirmed	gamebryo		
 0x00607c18	47	get_type_BFAIEvalData			confirmed	gamebryo		
-0x00607c47	0		AI entity/shared data, cognitive managers, tokens, and task data		unidentified		0x008e8c38#1	game-entities
+0x00607c47	0	get_type_BFAIEvalData_vtable_thunk			confirmed		0x008e8c38#1	
 0x00607c4c	32	get_BFAIEvalData_descriptor_ref			confirmed	gamebryo		
 0x00607c6c	0	get_BFAIEvalData_descriptor_ref_vtable_thunk			confirmed		0x008e8c38#2	
 0x00607c71	0	construct_BFAIEvalData_members			confirmed			
 0x00607cb1	0	scalar_delete_BFAIEvalData			confirmed		0x008e8c38#0	
 0x00607ccc	18	destroy_BFAIEvalData_members			confirmed	gamebryo		
 0x00607cde	0	read_BFAIEvalData_xml			confirmed		0x008e8c38#20	
-0x00607e80	24		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x00607e80	24	try_get_BFAIEvalData_fixed_score			confirmed	gamebryo		
 0x00607e98	47	get_type_BFAICompletionData			confirmed	gamebryo		
 0x00607ec7	0	get_type_BFAICompletionData_vtable_thunk			confirmed		0x008e8ca8#1	
 0x00607ecc	32	get_BFAICompletionData_descriptor_ref			confirmed	gamebryo		
@@ -11594,13 +11594,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00608276	0	scalar_delete_BFAIFailureData			confirmed		0x008e8d00#0	
 0x00608291	18	destroy_BFAIFailureData_members			confirmed	gamebryo		
 0x006082a3	0	read_BFAIFailureData_xml_vtable_thunk			confirmed		0x008e8d00#20	
-0x006082a8	226		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x0060838a	395		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x00608515	155		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006085b0	160		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x006082a8	226	is_BFAIQualifier_boolean_context_key			confirmed	gamebryo		
+0x0060838a	395	is_BFAIQualifier_environment_scalar_key			confirmed	gamebryo		
+0x00608515	155	is_BFAIQualifier_water_state_key			confirmed	gamebryo		
+0x006085b0	160	is_current_BFAIQualifier_water_state_key			confirmed	gamebryo		
 0x00608650	317	resolve_qualifier_eval_error			confirmed	gamebryo		
-0x0060878d	108		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
-0x006087f9	80		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
+0x0060878d	108	evaluate_BFAIQualifier_relation_or_family_term			confirmed	gamebryo		
+0x006087f9	80	evaluate_BFAIQualifier_filter_child_term			confirmed	gamebryo		
 0x00608849	213		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x0060891e	664		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
 0x00608bb6	52		AI entity/shared data, cognitive managers, tokens, and task data		unidentified	gamebryo		game-entities
@@ -11914,16 +11914,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006130bd	81	initialize_BFAISensor_secondary_handler_registry			confirmed	gamebryo		
 0x00613155	151	register_BFAISensor_secondary_handler_entry			confirmed	gamebryo		
 0x006131ec	160	append_BFAISensor_secondary_handler_node			confirmed	gamebryo		
-0x0061328c	119		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061330b	30		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00613329	30		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00613347	30		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00613365	66		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006133a7	66		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061328c	119	import_BFAICognitiveComponent_action_handlers_into_BFAISensor			confirmed	gamebryo		
+0x0061330b	30	read_BFAIToken_happiness_threshold_or_zero			confirmed	gamebryo		
+0x00613329	30	read_BFAIToken_needPointsBad_threshold_or_zero			confirmed	gamebryo		
+0x00613347	30	read_BFAIToken_needPointsGood_threshold_or_zero			confirmed	gamebryo		
+0x00613365	66	get_f_needPointsGoodCum_string_ref			confirmed	gamebryo		
+0x006133a7	66	get_f_needPointsBadCum_string_ref			confirmed	gamebryo		
 0x006133e9	0	mark_BFAIStateThinker_need_points_dirty			confirmed		0x008e9730#32	
-0x006133f0	44		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006133f0	44	dispatch_active_ai_runtime_need_point_refresh			confirmed	gamebryo		
 0x0061341c	47	get_type_BFAIStateThinker			confirmed	gamebryo		
-0x0061344b	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9730#1	renderer
+0x0061344b	0	get_type_BFAIStateThinker_vtable_thunk			confirmed		0x008e9730#1	
 0x00613450	32	get_BFAIStateThinker_descriptor_ref			confirmed	gamebryo		
 0x00613470	0	init_BFAIStateThinker_descriptor_ref_vtable_thunk			confirmed		0x008e9730#2	
 0x00613475	40	get_BFAIStateThinker_action_registry			confirmed	gamebryo		
@@ -11935,70 +11935,70 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00613772	420	register_need_point_attributes			confirmed	gamebryo		
 0x00613916	0	update_BFAIStateThinker_need_point_state			confirmed		0x008e9730#21	
 0x0061397a	0	update_ZTAIStateThinker_state_vars			confirmed		0x008e9730#50	
-0x006139fa	201		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006139fa	201	register_BFAIStateThinker_default_action_handlers			confirmed	gamebryo		
 0x00613bdc	251	dispatch_BFAIStateThinker_need_point_slot44_action			confirmed	gamebryo	0x008e9730#44	
 0x00613cd7	0	dispatch_BFAIStateThinker_need_point_reset_action			confirmed		0x008e9730#45	
 0x00613cfc	245	dispatch_BFAIStateThinker_need_point_slot46_action			confirmed	gamebryo	0x008e9730#46	
-0x00613df1	87		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00613fdf	271		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00613df1	87	append_BFAIStateThinker_token_ref_if_needed			confirmed	gamebryo		
+0x00613fdf	271	erase_matching_BFAIStateThinker_token_refs			confirmed	gamebryo		
 0x006140ee	0	write_BFAIStateThinker_xml			confirmed		0x008e9730#19	
 0x00614321	0	read_BFAIStateThinker_xml			confirmed		0x008e9730#20	
-0x006145d5	26		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006145ef	67		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614632	67		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614675	67		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006146b8	67		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006146fb	38		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614721	38		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614747	36		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061476b	36		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061478f	429		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061493c	243		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006145d5	26	query_active_ai_runtime_service_slot_e4			confirmed	gamebryo		
+0x006145ef	67	resolve_BFAIStateThinker_needPointsGood			confirmed	gamebryo		
+0x00614632	67	resolve_BFAIStateThinker_needPointsBad			confirmed	gamebryo		
+0x00614675	67	resolve_BFAIStateThinker_needPointsGoodCum			confirmed	gamebryo		
+0x006146b8	67	resolve_BFAIStateThinker_needPointsBadCum			confirmed	gamebryo		
+0x006146fb	38	set_BFAIStateThinker_needPointsGood			confirmed	gamebryo		
+0x00614721	38	set_BFAIStateThinker_needPointsBad			confirmed	gamebryo		
+0x00614747	36	set_BFAIStateThinker_needPointsGoodCum			confirmed	gamebryo		
+0x0061476b	36	set_BFAIStateThinker_needPointsBadCum			confirmed	gamebryo		
+0x0061478f	429	update_BFAIStateThinker_need_point_branch_values			confirmed	gamebryo		
+0x0061493c	243	run_BFAIStateThinker_need_point_update			confirmed	gamebryo		
 0x00614a2f	404	update_BFAIStateThinker_need_point_cooldown			confirmed	gamebryo	0x008e9730#49	
 0x00614bc3	120	dispatch_BFAIStateThinker_guest_need_action			confirmed	gamebryo	0x008e9730#47	
-0x00614c3b	321		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614d93	532		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00614fa7	129		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615028	171		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006150d3	110		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615141	183		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006151f8	110		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615266	129		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00614c3b	321	age_BFAIStateThinker_token_timers			confirmed	gamebryo		
+0x00614d93	532	erase_BFAIStateThinker_tokens_matching_active_need_branch			confirmed	gamebryo		
+0x00614fa7	129	dispatch_BFAIStateThinker_token_list_requests			confirmed	gamebryo		
+0x00615028	171	find_BFAIStateThinker_token_ref_by_key			confirmed	gamebryo		
+0x006150d3	110	read_BFAIStateVar_value_by_key			confirmed	gamebryo		
+0x00615141	183	set_BFAIStateVar_value_by_key			confirmed	gamebryo		
+0x006151f8	110	read_BFAIStateVar_field1c_by_key			confirmed	gamebryo		
+0x00615266	129	test_BFAIStateVar_field28_less_than_value_by_key			confirmed	gamebryo		
 0x006152e7	47	get_type_BFAIStateVar			confirmed	gamebryo		
-0x00615316	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9808#1	renderer
+0x00615316	0	get_type_BFAIStateVar_vtable_thunk			confirmed		0x008e9808#1	
 0x0061531b	32	get_BFAIStateVar_descriptor_ref			confirmed	gamebryo		
 0x0061533b	0	init_BFAIStateVar_descriptor_ref_vtable_thunk			confirmed		0x008e9808#2	
 0x00615340	93	construct_BFAIStateVar_members			confirmed	gamebryo		
 0x0061539d	0	scalar_delete_BFAIStateVar			confirmed		0x008e9808#0	
 0x006153cf	0	write_BFAIStateVar_xml			confirmed		0x008e9808#19	
-0x006156ba	54		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006156f0	71		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006156ba	54	clamp_and_set_BFAIStateVar_value			confirmed	gamebryo		
+0x006156f0	71	randomize_BFAIStateVar_value			confirmed	gamebryo		
 0x00615737	0	read_BFAIStateVar_xml			confirmed		0x008e9808#20	
-0x00615ba4	286		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615cc2	364		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615e2e	108		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00615e9a	48		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00615ba4	286	apply_BFAIStateThinker_attribute_float_map_deltas			confirmed	gamebryo		
+0x00615cc2	364	apply_BFAIStateThinker_need_point_deltas			confirmed	gamebryo		
+0x00615e2e	108	dispatch_BFAIStateThinker_need_point_side_effects			confirmed	gamebryo		
+0x00615e9a	48	destroy_BFAIStateThinker_action_registry_storage			confirmed	gamebryo		
 0x00615eca	0	allocate_BFAIStateThinker_from_descriptor			confirmed		0x008e985c#1	
-0x00615ee0	81		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00615ee0	81	initialize_BFAIStateThinker_action_registry			confirmed	gamebryo		
 0x00615f78	0	allocate_BFAIStateVar_from_descriptor			confirmed		0x008e985c#3	
-0x00615f90	153		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616029	175		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006160d8	160		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00615f90	153	register_BFAIStateThinker_action_handler_entry			confirmed	gamebryo		
+0x00616029	175	erase_BFAIStateThinker_action_registry_range			confirmed	gamebryo		
+0x006160d8	160	append_BFAIStateThinker_action_handler_node	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x00616178	40	as_BFAIStateVar			confirmed	gamebryo		
-0x006161a0	107		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061620b	88		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616263	88		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006161a0	107	import_BFAICognitiveComponent_action_handlers_into_BFAIStateThinker	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061620b	88	resolve_BFGFloatAttribute_payload_from_action_value	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616263	88	resolve_BFAIRemoveTokenInfo_payload_from_action_value	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x006162c3	47	get_type_BFAICogShared			confirmed	gamebryo		
-0x006162f2	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9890#1	renderer
+0x006162f2	0	get_type_BFAICogShared_vtable_thunk	AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9890#1	renderer
 0x006162f7	32	get_BFAICogShared_descriptor_ref			confirmed	gamebryo		
 0x00616317	0	init_BFAICogShared_descriptor_ref_vtable_thunk			confirmed		0x008e9890#2	
 0x0061631c	0	scalar_delete_BFAICogShared			confirmed		0x008e9890#0	
 0x00616337	34	destroy_BFAICogShared_members			confirmed	gamebryo		
 0x00616359	0	read_BFAICogShared_no_perceive_xml			confirmed		0x008e9890#20	
-0x006163c9	115		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006163c9	115	test_BFAICogShared_no_perceive_type_filter_contains	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x0061643c	0	allocate_BFAICogShared_from_descriptor			confirmed		0x008e9890#22	
 0x0061646d	47	get_type_BFAIComponentList			confirmed	gamebryo		
-0x0061649c	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9900#1	renderer
+0x0061649c	0	get_type_BFAIComponentList_vtable_thunk	AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9900#1	renderer
 0x006164a1	0	get_BFAIComponentList_descriptor_ref			confirmed		0x008e9900#2	
 0x006164c1	40	get_BFAIComponentList_action_registry			confirmed	gamebryo		
 0x006164e9	0	register_BFAIComponentList_action_value			confirmed		0x008e997c#0	
@@ -12010,12 +12010,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006165d3	0	dispatch_BFAIComponentList_positive_child_payload			confirmed		0x008e8760#30	
 0x0061662b	0	read_component_list_children_xml_vtable_thunk			confirmed		0x008e8190#20	
 0x00616630	0	allocate_BFAIComponentList_from_descriptor			confirmed		0x008e997c#3	
-0x00616643	64		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616683	159		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616769	160		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616809	70		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616643	64	initialize_BFAIComponentList_action_registry	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616683	159	register_BFAIComponentList_action_handler_entry	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616769	160	append_BFAIComponentList_action_handler_node	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616809	70	copy_BFAIEntityComponent_active_need_branch_ref	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x0061684f	47	get_type_BFAICognitiveComponent			confirmed	gamebryo		
-0x0061687e	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e99a8#1	renderer
+0x0061687e	0	get_type_BFAICognitiveComponent_vtable_thunk	AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e99a8#1	renderer
 0x00616883	32	get_BFAICognitiveComponent_descriptor_ref			confirmed	gamebryo		
 0x006168a3	0	init_BFAICognitiveComponent_descriptor_ref_vtable_thunk			confirmed		0x008e99a8#2	
 0x006168a8	40	get_BFAICognitiveComponent_action_registry			confirmed	gamebryo		
@@ -12031,15 +12031,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00616ac9	0	get_first_sensor_candidate_from_vector_storage			confirmed		0x008e93f8#42	
 0x00616b09	0	get_sensor_candidate_count			confirmed		0x008e9520#39	
 0x00616b2f	0	write_BFAICognitiveComponent_activated_xml_vtable_thunk			confirmed		0x008e93f8#19	
-0x00616b34	49		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616b65	12		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616b34	49		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
+0x00616b65	12		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
 0x00616b71	0	allocate_BFAICognitiveComponent_from_descriptor			confirmed		0x008e9a64#3	
-0x00616b89	90		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616c2a	134		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616cb0	153		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00616d49	160		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616b89	90		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
+0x00616c2a	134		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
+0x00616cb0	153		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
+0x00616d49	160		AI sensors, state/cognitive components, texture, locomotion, and	confirmed	unidentified	gamebryo		renderer
 0x00616de9	47	get_type_BFAISensorSelf			confirmed	gamebryo		
-0x00616e18	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9a88#1	renderer
+0x00616e18	0	get_type_BFAISensorSelf_vtable_thunk	AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9a88#1	renderer
 0x00616e1d	32	get_BFAISensorSelf_descriptor_ref			confirmed	gamebryo		
 0x00616e3d	0	init_BFAISensorSelf_descriptor_ref_vtable_thunk			confirmed		0x008e9a88#2	
 0x00616e42	38	get_BFAISensorSelf_action_registry			confirmed	gamebryo		
@@ -12050,7 +12050,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00616f71	0	BFAISensorSelf_write_sensorTag_xml_vtable_thunk			confirmed		0x008e9a88#19	
 0x00616f76	0	test_BFAISensorSelf_component_candidate_list_nonempty			confirmed		0x008e9a88#47	
 0x00616f8c	0	refresh_BFAISensorSelf_candidate_scan			confirmed		0x008e9a88#48	
-0x00616ffe	437		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00616ffe	437	scan_BFAISensorSelf_task_template_candidates	AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x006171b3	907		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x0061753e	0	allocate_BFAISensorSelf_from_descriptor			confirmed		0x008e9b5c#3	
 0x00617566	88		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
@@ -16252,14 +16252,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a4c77	0	visit_BFR_model_resource_material_ref_and_children_slot40			confirmed		0x008f58b0#2	
 0x006a4cb3	0	dispatch_BFR_model_resource_children_slot44_with_material_refs			confirmed		0x008f58b0#3	
 0x006a4d05	0	accumulate_BFR_model_resource_geometry_counts			confirmed		0x008f58b0#9	
-0x006a4d5e	66		BFR model resource transform/material method band		unidentified	gamebryo		io/assets
-0x006a4da0	0		BFR model resource transform/material method band		unidentified		0x008f59e8#0	io/assets
-0x006a4dbb	41		BFR model nested record/cache lifecycle helpers		unidentified	gamebryo		io/assets
+0x006a4d5e	66	construct_BFR_model_material_parameter_cache_record			confirmed	gamebryo		
+0x006a4da0	0	scalar_delete_BFR_model_material_parameter_cache_record			confirmed		0x008f59e8#0	
+0x006a4dbb	41	destroy_BFR_model_material_parameter_cache_record			confirmed	gamebryo		
 0x006a4de4	0	apply_BFR_model_nested_record_binding_payloads			confirmed		0x008f59e8#1	
 0x006a4ebb	200	populate_BFR_model_material_parameter_cache			confirmed	gamebryo		
 0x006a4f83	72	get_bfr_model_field54_record_by_index			confirmed	gamebryo		
 0x006a4fcb	98		BFR model nested record/cache lifecycle helpers		unidentified	gamebryo		renderer
-0x006a502d	85		BFR model nested record/cache lifecycle helpers		unidentified	gamebryo		io/assets
+0x006a502d	85	initialize_BFR_static_resource_lookup_helper_object			confirmed	gamebryo		
 0x006a5082	0	scalar_delete_BFR_model_nested_cache_record			confirmed		0x008f59e8#2	
 0x006a509d	44		BFR model nested record/cache lifecycle helpers		unidentified	gamebryo		
 0x006a50c9	154	resolve_BFR_model_cache_record_index_by_name			confirmed	gamebryo		
@@ -17715,7 +17715,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e6599	311	refresh_traversability_no_open_to_world_state			confirmed	gamebryo		
 0x006e66d0	1226		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6b9a	143	queue_viewing_area_collision_record			confirmed	gamebryo		
-0x006e6c29	72		session-global payload bridge helper		unidentified	gamebryo		io/assets
+0x006e6c29	72	test_viewing_area_record_connected_to_active_placement_side			confirmed	gamebryo		
 0x006e6c71	86	lower_bound_ordered_map_entry			confirmed	gamebryo		
 0x006e6cc7	181	insert_ZTBehFollowTrack_open_gate_entry_if_absent			confirmed	gamebryo		
 0x006e6d7c	110	lower_bound_ZTBehFollowTrack_open_gate_entry			confirmed	gamebryo		
@@ -17859,10 +17859,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ec203	0	scalar_delete_BFGRampageMgr_adjusted_this			confirmed		0x008f90cc#0	
 0x006ec20b	0	get_empty_refcounted_ui_value_cell_thunk			confirmed		0x008f9218#13	
 0x006ec210	0	scalar_delete_BFGEntityContainerSlot			confirmed		0x008f9218#0	
-0x006ec22b	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f92a8#14	
-0x006ec22f	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f92a8#15	
-0x006ec233	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f92a8#16	
-0x006ec237	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f47c8#3	
+0x006ec22b	0	get_BFGEntityContainerSlotHeavy_field20			confirmed		0x008f92a8#14	
+0x006ec22f	0	get_BFGEntityContainerSlotHeavy_field24			confirmed		0x008f92a8#15	
+0x006ec233	0	get_BFGEntityContainerSlotHeavy_field28			confirmed		0x008f92a8#16	
+0x006ec237	0	get_BFGEntityContainerSlotHeavy_field2c			confirmed		0x008f47c8#3	
 0x006ec23b	47	get_type_BFGEntityContainer			confirmed	gamebryo		
 0x006ec26a	0	get_type_BFGEntityContainer_vtable_thunk			confirmed		0x008f91b8#1	
 0x006ec26f	32	get_BFGEntityContainer_secondary_pointer_table_cache			confirmed	gamebryo		
@@ -17922,9 +17922,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ee76d	0	allocate_BFGEntityContainer			confirmed		0x008f92f0#1	
 0x006ee7a7	130	init_BFGEntityContainer_handler_registry			confirmed	gamebryo		
 0x006ee829	153	insert_collision_test_handler_for_unseen_type			confirmed	gamebryo		
-0x006ee909	0		collision-test callback/type support tail		unidentified		0x008f92f0#3	
-0x006ee921	0		collision-test callback/type support tail		unidentified		0x008f9300#1	
-0x006ee942	0		collision-test callback/type support tail		unidentified		0x008f9300#3	
+0x006ee909	0	allocate_BFGEntityContainerSlot			confirmed		0x008f92f0#3	
+0x006ee921	0	allocate_BFGEntityContainerSlotLight			confirmed		0x008f9300#1	
+0x006ee942	0	allocate_BFGEntityContainerSlotHeavy			confirmed		0x008f9300#3	
 0x006ee955	160	insert_BFGCollisionTest_handler_list_node			confirmed	gamebryo		
 0x006ee9f5	40	as_BFGEntityContainerSlot			confirmed	gamebryo		
 0x006eea1d	40		collision-test callback/type support tail		unidentified	gamebryo		
@@ -17933,22 +17933,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eeb51	47	get_type_BFGCollisionTest			confirmed	gamebryo		
 0x006eeb80	0	get_type_BFGCollisionTest_vtable_thunk			confirmed		0x008f9464#1	
 0x006eeb85	32	get_BFGCollisionTest_descriptor_ref			confirmed	gamebryo		
-0x006eeba5	0		collision-test callback/type support tail		unidentified		0x008f9464#2	
-0x006eebaa	0		collision-test callback/type support tail		unidentified		0x008f9464#0	
+0x006eeba5	0	get_BFGCollisionTest_descriptor_ref_thunk			confirmed		0x008f9464#2	
+0x006eebaa	0	scalar_delete_BFGCollisionTest_to_freelist			confirmed		0x008f9464#0	
 0x006eebd1	31	destroy_BFGCollisionTest_members			confirmed	gamebryo		
-0x006eebf0	0		collision-test callback/type support tail		unidentified		0x008f9464#3	
-0x006eec14	0		collision-test callback/type support tail		unidentified		0x008f9464#4	
+0x006eebf0	0	write_BFGCollisionTest_targetEntity_xml			confirmed		0x008f9464#3	
+0x006eec14	0	read_BFGCollisionTest_targetEntity_xml			confirmed		0x008f9464#4	
 0x006eec2b	47	get_type_BFGCollisionTester			confirmed	gamebryo		
-0x006eec5a	0		collision tester and fitting-surface component XML		unidentified		0x008f940c#0	
-0x006eec5f	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x006eec7f	0		collision tester and fitting-surface component XML		unidentified		0x008f940c#1	
+0x006eec5a	0	get_type_BFGCollisionTester_vtable_thunk			confirmed		0x008f940c#0	
+0x006eec5f	32	get_BFGCollisionTester_descriptor_ref			confirmed	gamebryo		
+0x006eec7f	0	get_BFGCollisionTester_descriptor_ref_thunk			confirmed		0x008f940c#1	
 0x006eec84	38	get_BFGFittingSurfaceComponent_callback_registry			confirmed	gamebryo		
 0x006eee8c	201		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006eef70	48		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x006eefa0	110		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x006eefa0	110	find_BFGFittingSurface_callback_entry_for_target			confirmed	gamebryo		
 0x006ef00e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006ef05e	221		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006ef13b	83		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x006ef13b	83	clear_BFGFittingSurface_callback_registry_entries			confirmed	gamebryo		
 0x006ef18e	0	BFGCollisionTester_write_xml_node			confirmed		0x008f940c#18	
 0x006ef2be	0	BFGCollisionTester_read_xml_node			confirmed		0x008f940c#19	
 0x006ef44b	782	BFGCollisionTester_read_attribute_fields			confirmed	gamebryo		
@@ -17969,7 +17969,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f0cde	124		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006f0d5a	25	test_BFGCollisionTester_external_surface_flag			confirmed	gamebryo		
 0x006f0d73	30	test_active_placement_grid_connected_side_between_points			confirmed	gamebryo		
-0x006f0d91	0		collision tester and fitting-surface component XML		unidentified		0x008f9498#1	
+0x006f0d91	0	allocate_BFGCollisionTest			confirmed		0x008f9498#1	
 0x006f0db3	0		collision tester and fitting-surface component XML		unidentified		0x008f9498#3	
 0x006f0dcb	90	init_BFGFittingSurfaceComponent_callback_registry			confirmed	gamebryo		
 0x006f0e25	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18130,7 +18130,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006fae25	0		collision tester and fitting-surface component XML		unidentified		0x008f9c94#1	
 0x006fae78	390		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006faffe	0		collision tester and fitting-surface component XML		unidentified		0x008f9c40#0	
-0x006fb019	32		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x006fb019	32	construct_BFXMLNodeComp_from_node_pointer			confirmed	gamebryo		
 0x006fb039	32		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006fbd9d	0		collision tester and fitting-surface component XML		unidentified		0x008f9c94#3	
 0x006fbdc8	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18148,7 +18148,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006fc099	130		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006fc11b	142		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006fc1a9	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#0	
-0x006fc1c4	242		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x006fc1c4	242		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006fc2b6	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#14	
 0x006fc3f4	0		collision tester and fitting-surface component XML		unidentified		0x008f9d10#13	
 0x006fc40b	56	init_object_animation_listener_registry_once			confirmed	gamebryo		
@@ -18270,11 +18270,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00700b2d	0		collision tester and fitting-surface component XML		unidentified		0x008fa1e0#22	
 0x00700b45	182	insert_BFGCollisionData_record_list_node			confirmed	gamebryo		
 0x00700bfb	173		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00700ca8	149		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00700ca8	149	normalize_BFGCollisionData_weighted_entry_list			confirmed	gamebryo		
 0x00700d3d	1262		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070122b	85	copy_construct_BFGCollisionData_record			confirmed	gamebryo		
 0x00701280	992		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00701660	43		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00701660	43	lookup_fitting_surface_show_record_payload_if_present			confirmed	gamebryo		
 0x0070168b	143	clear_fitting_surface_show_cell_map			confirmed	gamebryo		
 0x0070171a	87		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00701771	47	get_type_BFGInfluenceComponent			confirmed	gamebryo		
@@ -18310,37 +18310,37 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007039c7	144	copy_fitting_surface_show_queue_snapshot			confirmed	gamebryo		
 0x00703a57	34		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703a79	92	append_fitting_surface_show_point_record			confirmed	gamebryo		
-0x00703ad5	245		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00703ad5	245	get_or_insert_BFGInfluenceMgr_entry_payload			confirmed	gamebryo		
 0x00703bca	48		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703c59	0		collision tester and fitting-surface component XML		unidentified		0x008fa4f8#1	
 0x00703c74	90		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703cce	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00703dae	31		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00703dcd	382		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00703dcd	382	insert_fitting_surface_show_record_tree_entry_with_hint			confirmed	gamebryo		
 0x00703f4b	172	insert_BFGInfluenceMgr_entry_list_node			confirmed	gamebryo		
 0x00703ff7	147		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070408a	127		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00704109	371		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00704109	371	insert_BFGInfluenceMgr_payload_tree_entry_with_hint			confirmed	gamebryo		
 0x0070427c	90	copy_construct_BFGInfluenceMgr_show_payload			confirmed	gamebryo		
-0x007042d6	205		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x007042d6	205	lower_bound_or_insert_fitting_surface_show_record_tree_entry			confirmed	gamebryo		
 0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x007044f8	50		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x007044f8	50	lower_bound_fitting_surface_show_record_tree_entry			confirmed	gamebryo		
 0x0070452a	443		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007046e5	213		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x007046e5	213	lower_bound_or_insert_BFGInfluenceMgr_payload_tree_entry			confirmed	gamebryo		
 0x007047ba	175		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704869	395	insert_BFGInfluenceMgr_payload_tree_node			confirmed	gamebryo		
 0x007049f4	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x00704a94	97		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
+0x00704a94	97		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x00704af5	44		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704b21	81	allocate_BFGInfluenceMgr_entry_node			confirmed	gamebryo		
 0x00704b72	50		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704ba4	677		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00704e49	64		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
-0x00704e89	66		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00704e49	64	rotate_left_BFGInfluenceMgr_payload_tree_node			confirmed	gamebryo		
+0x00704e89	66	rotate_right_BFGInfluenceMgr_payload_tree_node			confirmed	gamebryo		
 0x00704ecb	100		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704f2f	69		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704f74	93		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00704fd1	83		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00704fd1	83	copy_weighted_ui_value_entries_into_list			confirmed	gamebryo		
 0x00705024	46		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705052	1121	rebuild_fitting_surface_show_point_queue_range			confirmed	gamebryo		
 0x007054b3	70		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18348,15 +18348,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070555f	110	copy_fitting_surface_show_point_record_range			confirmed	gamebryo		
 0x007055cd	0		collision tester and fitting-surface component XML		unidentified		0x008fa4e4#0	
 0x007055d5	148	erase_fitting_surface_show_cell_map_range			confirmed	gamebryo		
-0x00705669	69		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00705669	69		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x007056ae	48		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007056de	0		collision tester and fitting-surface component XML		unidentified		0x008fa4f8#3	
 0x007056f9	0		collision tester and fitting-surface component XML		unidentified		0x008fa4f8#2	
 0x00705714	27		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070574a	26		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070574a	26		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x00705764	36	clear_fitting_surface_show_cell_tree			confirmed	gamebryo		
-0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x00705a2d	26		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
+0x00705788	677		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00705a2d	26	destroy_BFGInfluenceMgr_show_payload			confirmed	gamebryo		
 0x00705a47	44	construct_default_BFGInfluenceMgr_show_payload			confirmed	gamebryo		
 0x00705a73	1133	register_entity_component_type_pairs			confirmed	gamebryo		
 0x00705ee0	47	get_type_BFGEntityTriggerMgr			confirmed	gamebryo		
@@ -18755,46 +18755,46 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00714f7a	111	insertion_sort_pointer_range_by_record_field0c			confirmed	gamebryo		
 0x00714fe9	141	order_pointer_range_partition_samples_by_field0c			confirmed	gamebryo		
 0x00715076	59	order_pointer_triple_by_record_field0c			confirmed	gamebryo		
-0x007150b1	73		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007150fa	198		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007151db	180		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071528f	175		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071533e	321		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071547f	505		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00715678	2219		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00715f23	33		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00715f44	142		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00715fd2	189		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071608f	69		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007160d4	95		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716133	95		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716192	797		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007164af	126		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071652d	119		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007165a4	126		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716622	119		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716699	83		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007166ec	78		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071673a	76		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716786	145		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716817	54		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071684d	202		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716917	299		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716a42	484		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716c26	97		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716c87	542		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00716ea5	582		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007170eb	163		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071718e	254		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x0071728c	29		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007172a9	29		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007172c6	29		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007172e3	29		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00717300	69		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00717345	113		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007173b6	96		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x00717436	133		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
-0x007174bb	435		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
+0x007150b1	73	initialize_ten_step_object_float_profile			confirmed	gamebryo		
+0x007150fa	198	construct_terrain_slope_tile_record			confirmed	gamebryo		
+0x007151db	180	bind_terrain_slope_tile_record_grid_refs			confirmed	gamebryo		
+0x0071528f	175	notify_terrain_slope_tile_high_link_entries			confirmed	gamebryo		
+0x0071533e	321	adjust_terrain_cell_surface_height_for_slope_delta			confirmed	gamebryo		
+0x0071547f	505	recompute_terrain_slope_tile_angles			confirmed	gamebryo		
+0x00715678	2219	refresh_terrain_slope_tile_record			confirmed	gamebryo		
+0x00715f23	33	get_or_insert_terrain_slope_listener_entry			confirmed	gamebryo		
+0x00715f44	142	erase_terrain_slope_listener_entry			confirmed	gamebryo		
+0x00715fd2	189	dispatch_terrain_tile_slope_changed_listeners			confirmed	gamebryo		
+0x0071608f	69	select_terrain_cell_render_triangle_count			confirmed	gamebryo		
+0x007160d4	95	select_terrain_cell_render_index_end			confirmed	gamebryo		
+0x00716133	95	select_terrain_cell_render_index_begin			confirmed	gamebryo		
+0x00716192	797	resolve_terrain_slope_tile_orientation			confirmed	gamebryo		
+0x007164af	126	apply_BFBirdGroundFit_max_height_to_side_bucket			confirmed	gamebryo		
+0x0071652d	119	clear_BFBirdGroundFit_max_height_from_side_bucket			confirmed	gamebryo		
+0x007165a4	126	apply_BFBirdGroundFit_min_height_to_side_bucket			confirmed	gamebryo		
+0x00716622	119	clear_BFBirdGroundFit_min_height_from_side_bucket			confirmed	gamebryo		
+0x00716699	83	apply_BFBirdGroundFit_max_height_to_region_cells			confirmed	gamebryo		
+0x007166ec	78	apply_BFBirdGroundFit_min_height_to_region_cells			confirmed	gamebryo		
+0x0071673a	76	clear_BFBirdGroundFit_max_height_from_region_cells			confirmed	gamebryo		
+0x00716786	145	set_placement_side_bucket_cell_flag20			confirmed	gamebryo		
+0x00716817	54	update_terrain_slope_tile_side_refcount			confirmed	gamebryo		
+0x0071684d	202	refresh_groundtrack_projection_side_bucket_cells			confirmed	gamebryo		
+0x00716917	299	get_terrain_slope_tile_side_max_height			confirmed	gamebryo		
+0x00716a42	484	resolve_terrain_cell_triangle_indices_for_point			confirmed	gamebryo		
+0x00716c26	97	collect_oriented_placement_side_bucket_pair			confirmed	gamebryo		
+0x00716c87	542	collect_placement_region_side_bucket_cells			confirmed	gamebryo		
+0x00716ea5	582	insert_placement_side_area_membership_cells			confirmed	gamebryo		
+0x007170eb	163	classify_point_cardinal_side_from_slope_tile_center			confirmed	gamebryo		
+0x0071718e	254	classify_terrain_slope_tile_cell_side_flags			confirmed	gamebryo		
+0x0071728c	29	get_slope_tile_field24_yplus2_cell			confirmed	gamebryo		
+0x007172a9	29	get_slope_tile_field20_yplus2_cell			confirmed	gamebryo		
+0x007172c6	29	get_slope_tile_field20_xplus2_cell			confirmed	gamebryo		
+0x007172e3	29	get_slope_tile_field28_xplus2_cell			confirmed	gamebryo		
+0x00717300	69	get_slope_tile_center_adjacent_cell			confirmed	gamebryo		
+0x00717345	113	get_grid_cell_octant_neighbor_by_direction			confirmed	gamebryo		
+0x007173b6	96	copy_grid_cell_probe_edge_vertices_by_direction			confirmed	gamebryo		
+0x00717436	133	classify_point_quadrant_around_slope_tile_center			confirmed	gamebryo		
+0x007174bb	435	test_shape_contact_against_terrain_cell_triangles			confirmed	gamebryo		
 0x0071766e	162		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
 0x00717710	55		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
 0x00717747	61		globe dot, terrain/selector, environment, biome, and ground-fit 		unidentified	gamebryo		world/pathing
@@ -22225,35 +22225,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007bfdbf	0	write_BFPhysicsComponent_xml			confirmed		0x00903288#19	
 0x007bfe79	0	read_BFPhysicsComponent_xml			confirmed		0x00903288#20	
 0x007bff83	147	ensure_BFPhysicsComponent_initialized			confirmed	gamebryo		
-0x007c0016	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903288#37	ui
-0x007c0029	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#21	ui
+0x007c0016	0	allocate_BFPhysicsComponent_from_descriptor			confirmed		0x00903288#37	
+0x007c0029	0	get_BFTimeTriggersComponent_type_name_string_global			confirmed		0x00903360#21	
 0x007c002f	47	get_type_BFTimeKeyInfo			confirmed	gamebryo		
 0x007c005e	0	get_type_BFTimeKeyInfo_vtable_thunk			confirmed		0x009033f8#1	
-0x007c0063	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0083	0		UI dependency references, movement/view components, and animatio		unidentified		0x009033f8#2	ui
-0x007c0088	0		UI dependency references, movement/view components, and animatio		unidentified		0x009033f8#0	ui
-0x007c00ba	0		UI dependency references, movement/view components, and animatio		unidentified		0x009033f8#20	ui
-0x007c0166	0		UI dependency references, movement/view components, and animatio		unidentified		0x009033f8#19	ui
-0x007c01d2	93		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007c0063	32	init_BFTimeKeyInfo_descriptor_ref			confirmed	gamebryo		
+0x007c0083	0	init_BFTimeKeyInfo_descriptor_ref_vtable_thunk			confirmed		0x009033f8#2	
+0x007c0088	0	scalar_delete_BFTimeKeyInfo			confirmed		0x009033f8#0	
+0x007c00ba	0	read_BFTimeKeyInfo_xml			confirmed		0x009033f8#20	
+0x007c0166	0	write_BFTimeKeyInfo_xml			confirmed		0x009033f8#19	
+0x007c01d2	93	dispatch_BFTimeKeyInfo_sound_if_reached			confirmed	gamebryo		
 0x007c022f	47	get_type_BFTimeTriggersComponent			confirmed	gamebryo		
-0x007c025e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#1	ui
-0x007c0263	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0283	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#2	ui
-0x007c0288	38		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0317	76		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0363	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#0	ui
-0x007c037f	357		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c061a	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#31	ui
-0x007c0726	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#26	ui
-0x007c0768	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#27	ui
-0x007c076f	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#19	ui
-0x007c0876	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903360#20	ui
-0x007c0a06	0		UI dependency references, movement/view components, and animatio		unidentified		0x0090344c#1	ui
-0x007c0a3a	0		UI dependency references, movement/view components, and animatio		unidentified		0x0090344c#3	ui
-0x007c0a52	64		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0a92	159		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0b78	151		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c0c0f	160		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007c025e	0	get_type_BFTimeTriggersComponent_vtable_thunk			confirmed		0x00903360#1	
+0x007c0263	32	init_BFTimeTriggersComponent_descriptor_ref			confirmed	gamebryo		
+0x007c0283	0	init_BFTimeTriggersComponent_descriptor_ref_vtable_thunk			confirmed		0x00903360#2	
+0x007c0288	38	get_BFTimeTriggersComponent_sound_key_handler_registry			confirmed	gamebryo		
+0x007c0317	76	construct_BFTimeTriggersComponent			confirmed	gamebryo		
+0x007c0363	0	scalar_delete_BFTimeTriggersComponent			confirmed		0x00903360#0	
+0x007c037f	357	destroy_BFTimeTriggersComponent			confirmed	gamebryo		
+0x007c061a	0	update_BFTimeTriggersComponent_time_keys			confirmed		0x00903360#31	
+0x007c0726	0	start_BFTimeTriggersComponent_timer			confirmed		0x00903360#26	
+0x007c0768	0	stop_BFTimeTriggersComponent_timer			confirmed		0x00903360#27	
+0x007c076f	0	write_BFTimeTriggersComponent_xml			confirmed		0x00903360#19	
+0x007c0876	0	read_BFTimeTriggersComponent_xml			confirmed		0x00903360#20	
+0x007c0a06	0	allocate_BFTimeKeyInfo_from_descriptor			confirmed		0x0090344c#1	
+0x007c0a3a	0	allocate_BFTimeTriggersComponent_from_descriptor			confirmed		0x0090344c#3	
+0x007c0a52	64	init_BFTimeTriggersComponent_sound_key_handler_registry			confirmed	gamebryo		
+0x007c0a92	159	register_BFTimeTriggersComponent_sound_key_handler			confirmed	gamebryo		
+0x007c0b78	151	insert_BFTimeTriggersComponent_key_ref			confirmed	gamebryo		
+0x007c0c0f	160	append_BFTimeTriggersComponent_sound_key_handler_node			confirmed	gamebryo		
 0x007c0caf	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903570#27	ui
 0x007c0cb6	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#22	ui
 0x007c0cc2	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#33	ui
