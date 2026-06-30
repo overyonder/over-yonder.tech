@@ -3392,8 +3392,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b05c2	32	init_ZTUIContextList_descriptor_ref			confirmed			
 0x004b05e2	0	init_ZTUIContextList_descriptor_ref_vtable_thunk			confirmed		0x008d0bd0#2	
 0x004b05e7	73	get_ZTUIContextList_action_registry			confirmed			
-0x004b0630	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#0	ui
-0x004b0646	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#1	ui
+0x004b0630	0	register_ZTUIContextList_action_value			confirmed		0x008d0e58#0	
+0x004b0646	0	resolve_ZTUIContextList_action_value			confirmed		0x008d0e58#1	
 0x004b0699	190	init_ZTUIContextList_action_registry_entries			confirmed			
 0x004b0757	148	construct_ZTUIContextList_members			confirmed			
 0x004b07eb	0	scalar_delete_ZTUIContextList			confirmed		0x008d0bd0#0	
@@ -3445,10 +3445,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b330a	75	sort_three_16byte_filter_string_entries			confirmed			
 0x004b3355	142	sift_down_16byte_filter_string_heap_entry			confirmed			
 0x004b33e3	118	push_heap_16byte_filter_string_entry			confirmed			
-0x004b3479	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#2	ui
+0x004b3479	0	scalar_delete_ZTUIContextList_action_subobject_thunk			confirmed		0x008d0e58#2	
 0x004b3484	46	copy_construct_filter_assignment_record			confirmed			
-0x004b34b2	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#0	ui
-0x004b34cd	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#5	ui
+0x004b34b2	0	scalar_delete_filter_assignment_record			confirmed		0x008d0e7c#0	
+0x004b34cd	0	allocate_filter_assignment_record_instance			confirmed		0x008d0e7c#5	
 0x004b34ea	32	destroy_inline_ui_typed_value			confirmed			
 0x004b350a	47	get_type_ZTZoopediaComponent			confirmed			
 0x004b3539	0	get_type_ZTZoopediaComponent_vtable_thunk			confirmed		0x008d11e0#1	
@@ -3483,19 +3483,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b4789	834	bind_ZTZoopediaTOC_help_expander_branch			confirmed			
 0x004b4acb	0	write_ZTZoopediaTOC_group_entry_xml			confirmed		0x008d0fcc#4	
 0x004b4b62	0	read_ZTZoopediaTOC_group_entry_xml			confirmed		0x008d0fcc#5	
-0x004b4bab	147		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b4bab	147	erase_ZTZoopediaComponent_history_string_range			confirmed			
 0x004b4c3e	0	allocate_ZTZoopediaComponent_instance			confirmed		0x008d1424#1	
-0x004b4c59	153		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b4c59	153	register_ZTZoopediaComponent_action_handler			confirmed			
 0x004b4d39	0	allocate_ZTZoopediaTOC_instance			confirmed		0x008d1424#3	
-0x004b4d72	102		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4dd8	153		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4eb8	156		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4f54	86		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4faa	160		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b504a	160		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b50ea	117		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b4d72	102	init_ZTZoopediaTOC_action_registry_entries			confirmed			
+0x004b4dd8	153	register_ZTZoopediaTOC_action_handler			confirmed			
+0x004b4eb8	156	insert_ZTZoopediaComponent_history_string_node			confirmed			
+0x004b4f54	86	erase_ZTZoopediaComponent_history_string_node			confirmed			
+0x004b4faa	160	append_ZTZoopediaComponent_action_registry_entry			confirmed			
+0x004b504a	160	append_ZTZoopediaTOC_action_registry_entry			confirmed			
+0x004b50ea	117	register_ZTZoopediaComponent_action_registry_range			confirmed			
 0x004b515f	40	as_BFHelpComponent			confirmed			
-0x004b5187	117		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b5187	117	register_ZTZoopediaTOC_action_registry_range			confirmed			
 0x004b5204	27	construct_inline_ui_typed_value			confirmed			
 0x004b521f	47	get_type_ZTZooStatusComponent			confirmed			
 0x004b524e	0		zoo status, survey, CD/dev checks, and economy component setup		unidentified		0x008d1920#1	economy
@@ -4169,7 +4169,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ced6d	54		economy manager config, transactions, and late entity components		unidentified			economy
 0x004ceda3	84		economy manager config, transactions, and late entity components		unidentified			economy
 0x004cedf7	42		economy manager config, transactions, and late entity components		unidentified			economy
-0x004cee21	0	check_fence_aux_handle_enabled			confirmed		0x008d37c8#2	
+0x004cee21	0	check_fence_aux_handle_enabled			confirmed		0x008d3760#28	
 0x004cee3a	0	copy_fence_aux_ref_field			confirmed		0x008d37ec#8	
 0x004cee52	47	get_type_ZTFence			confirmed			
 0x004cee81	0		economy manager config, transactions, and late entity components		unidentified		0x008d3760#1	economy
@@ -4194,27 +4194,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004cf5a4	42		economy manager config, transactions, and late entity components		unidentified			economy
 0x004cf5ce	57		economy manager config, transactions, and late entity components		unidentified			economy
 0x004cf607	168	transform_tankwallglass_selector_point			confirmed			
-0x004cf6af	50		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004cf6af	50		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cf6e1	88		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cf739	77		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004cf786	77		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004cf7d3	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cf829	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cf87f	180		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004cf933	748		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004cf933	748	emit_fence_gate_animation_projection_points			confirmed			
 0x004cfc1f	278		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cfd35	113		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cfda6	128		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004cfe26	113		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004cfe97	116		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
+0x004cfe97	116		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d3760#21	world/pathing
 0x004cff0b	50		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004cff3d	766		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004cff3d	766	refresh_tankwallglass_fence_start_post_preview			confirmed		0x008d3760#22	
 0x004d023b	266		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d0345	217		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d041e	27		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			economy
 0x004d0439	27		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			economy
 0x004d0454	121		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d04cd	15		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d04cd	15		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d3760#25	
 0x004d04dc	236		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d05c8	426	read_fence_post_config			confirmed		0x008d3760#20	
 0x004d0772	350	write_fence_post_config			confirmed		0x008d3760#19	
@@ -4225,27 +4225,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d0cfc	0	handle_fence_release_value			confirmed		0x008d37ec#6	
 0x004d0d53	0	trigger_fence_gate_animation_projection			confirmed		0x008d37ec#7	
 0x004d0dfa	831		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d1139	171	bind_fence_segment_info_for_selection			confirmed		0x008d37c8#6	
+0x004d1139	171	bind_fence_segment_info_for_selection			confirmed		0x008d3760#32	
 0x004d11e4	297		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d130d	120	update_fence_selected_segment_offset			confirmed		0x008d37c8#3	
+0x004d130d	120	update_fence_selected_segment_offset			confirmed		0x008d3760#29	
 0x004d1385	2408		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d1ced	0	update_fence_post_endpoint_links			confirmed		0x008d37c8#0	
-0x004d2298	858	select_fence_segment_and_variant			confirmed		0x008d37c8#1	
-0x004d25f2	232		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d1ced	0	update_fence_post_endpoint_links			confirmed		0x008d3760#26	
+0x004d2298	858	select_fence_segment_and_variant			confirmed		0x008d3760#27	
+0x004d25f2	232	update_fence_end_post_preview_transform			confirmed			
 0x004d26da	284		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d27f6	215		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d28cd	323		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d2a10	796		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d2a10	796	collect_fence_placement_tile_keys			confirmed			
 0x004d2d2c	316		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d2e68	455		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d302f	187		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004d30ea	0	emit_fence_fitting_surface_segments			confirmed		0x008d37c8#4	
+0x004d30ea	0	emit_fence_fitting_surface_segments			confirmed		0x008d3760#30	
 0x004d3304	404		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d3498	386		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004d361a	0	refresh_fence_preview_height_and_variant			confirmed		0x008d37c8#5	
+0x004d361a	0	refresh_fence_preview_height_and_variant			confirmed		0x008d3760#31	
 0x004d39ba	260		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			economy
-0x004d3abe	153		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004d3b57	23	forward_fence_selected_height_value			confirmed		0x008d37c8#7	
+0x004d3abe	153	get_current_placement_record_extent_or_default			confirmed			
+0x004d3b57	23	forward_fence_selected_height_value			confirmed		0x008d3760#33	
 0x004d3b6e	21		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d3b83	21	forward_fence_selected_aux_value			confirmed		0x008d37ec#0	
 0x004d3b98	21	forward_fence_selected_ref_value			confirmed		0x008d37ec#1	
@@ -6801,7 +6801,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00544512	160	insert_ZTTankGateSegment_child_ref_callback_list_record			confirmed			
 0x005445b2	107	replay_ZTTankGateSegment_child_ref_callbacks			confirmed			
 0x0054461d	40	resolve_ZTTankSupport_from_type_chain			confirmed			
-0x00544660	130		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00544660	130		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x005446e2	55		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00544719	47	get_type_ZTTankMgr			confirmed			
 0x00544748	0		tank gate segment, tank manager, and area relocation setup		unidentified		0x008da568#1	
@@ -6877,11 +6877,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00547cc2	1254	rebuild_tankwallglass_segment_topology_update			confirmed		0x008da8e4#3	
 0x005481a8	113	refresh_tankwallglass_selector_bounds_for_segment			confirmed			
 0x00548219	89	update_tankwallglass_material_selector_for_segment			confirmed			
-0x005484b5	813		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x005487e2	258		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x005484b5	813		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
+0x005487e2	258		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x005488e4	287	resolve_tankwallglass_selector_edge_water_ids			confirmed			
-0x00548a03	158		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x00548aa1	382		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x00548a03	158		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
+0x00548aa1	382		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x00548c1f	0	clear_tankwallglass_endpoint_links_and_forward			confirmed		0x008da470#0	
 0x00548c31	363		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x00548fc3	0	0x00548fbd callsite_address			confirmed			
@@ -6898,8 +6898,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054994f	0	clear_tankwallglass_curve_variant_and_forward			confirmed		0x008da470#3	
 0x00549968	226	apply_tankwallglass_selector_value_to_edge_links			confirmed		0x008da8e4#4	
 0x00549a4a	61	test_interned_material_selector_key			confirmed			
-0x00549a87	54		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x00549abd	156		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x00549a87	54		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
+0x00549abd	156		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x00549b59	83	mark_tankwallglass_and_elevated_paths_dirty			confirmed			
 0x00549bac	0	emit_fence_fitting_surface_segments_tankwallglass_thunk			confirmed		0x008da470#4	
 0x00549bb1	53	set_tankwallglass_selector_flag4_dirty			confirmed			
@@ -6912,7 +6912,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00549ed8	596	flag_elevated_paths_in_tank_height_range			confirmed			
 0x0054a12c	422	sync_tankwallglass_selector_edge_water_links			confirmed			
 0x0054a2d2	87		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054a329	410		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054a329	410		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054a4c3	0	clear_tank_segment_variant_refs_matching_pointer			confirmed		0x008da4d0#0	
 0x0054a4dc	0	allocate_tank_segment_variant_instance			confirmed		0x008da91c#6	
 0x0054a4f7	153	insert_material_selector_handler_for_unseen_type			confirmed			
@@ -6953,8 +6953,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054b3ca	306	construct_area_membership_candidate_members			confirmed			
 0x0054b4fc	0	scalar_delete_ZTTankSupport_instance			confirmed		0x008da9b4#0	
 0x0054b518	505		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054b711	100		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054b775	226		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054b711	100		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054b775	226		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054b857	645		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054badc	668	update_tank_segment_height_and_invalidate_links			confirmed			
 0x0054bd78	83		tankwallglass material selector sweep and dirty refresh		unidentified			ui
@@ -6964,22 +6964,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054c1dd	249		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054c2d6	154		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054c370	469		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054c545	43		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054c570	75		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054c545	43		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054c570	75		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054c5bb	59	get_material_selector_linked_support_type			confirmed			
 0x0054c5f6	53		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054c62b	53		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054c660	189		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054c660	189		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c71d	447		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c8dc	87		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c933	106		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c99d	116		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ca11	1208		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054cec9	1021		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054cec9	1021		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054d2c6	100		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054d32a	40		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054d352	224		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054d432	104		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054d352	224		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
+0x0054d432	104		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054d49a	59	flush_tankwallglass_pending_link_dirty_flags			confirmed			
 0x0054d4d5	229		tankwallglass material selector sweep and dirty refresh		unidentified			renderer
 0x0054d5ba	176	update_tankwallglass_material_selectors			confirmed			
@@ -7005,7 +7005,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054ec62	105		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054eccb	91		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054ed26	32	advance_checked_8byte_iterator_in_place			confirmed			
-0x0054ed46	34		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054ed46	34		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ed68	104	compact_12byte_point_vector_after_erase			confirmed			
 0x0054edd0	115		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054ee43	59		tankwallglass material selector sweep and dirty refresh		unidentified			ui
@@ -7018,12 +7018,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054f1b7	56		area membership and tank selector data structures		unidentified			ui
 0x0054f1ef	660		area membership and tank selector data structures		unidentified			world/pathing
 0x0054f483	143		area membership and tank selector data structures		unidentified			ui
-0x0054f512	1263		area membership and tank selector data structures		unidentified			ui
-0x0054fa01	892		area membership and tank selector data structures		unidentified			ui
-0x0054fd7d	184		area membership and tank selector data structures		unidentified			ui
+0x0054f512	1263		area membership and tank selector data structures		unidentified			
+0x0054fa01	892		area membership and tank selector data structures		unidentified			
+0x0054fd7d	184		area membership and tank selector data structures		unidentified			
 0x0054fe35	152	is_tankwallglass_selector_compatible_with_support			confirmed			
 0x0054fecd	110	construct_and_apply_area_membership_candidate			confirmed			
-0x0054ff3b	284		area membership and tank selector data structures		unidentified			ui
+0x0054ff3b	284		area membership and tank selector data structures		unidentified			
 0x00550057	318		area membership and tank selector data structures		unidentified			ui
 0x00550195	334	refresh_tank_selector_entry_after_area_update			confirmed			
 0x005502e3	79		area membership and tank selector data structures		unidentified			
