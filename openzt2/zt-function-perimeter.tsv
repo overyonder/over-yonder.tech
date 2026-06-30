@@ -6079,14 +6079,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00524bd0	0	allocate_ZTTransportGroundTrackShared_instance			confirmed		0x008d8adc#3	
 0x00524c05	160	insert_runtime_callback_list_node_948a0c			confirmed			
 0x00524ca5	114	test_transport_dependency_registry_contains_id			confirmed			
-0x00524d17	58		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00524d51	74		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00524d17	58	square_transport_distance_value			confirmed			
+0x00524d51	74	get_ZTTransportSkyCircuit_track_at_index			confirmed			
 0x00524d9b	0	get_ZTTransportSkyCircuit_track_at_index_vtable_thunk			confirmed		0x008d8b28#27	
 0x00524da2	0	scalar_delete_ZTTransportSkyCircuit			confirmed		0x008d8b28#0	
 0x00524dca	47	get_type_ZTTransportSkyCircuit			confirmed			
-0x00524df9	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d8b28#1	ui
+0x00524df9	0	get_type_ZTTransportSkyCircuit_vtable_thunk			confirmed		0x008d8b28#1	
 0x00524dfe	0	init_ZTTransportSkyCircuit_descriptor_ref			confirmed		0x008d8b28#2	
-0x00524e1e	79		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00524e1e	79	init_ZTTransportSkyCircuit_action_registry			confirmed			
 0x00524e6d	0	copy_ZTTransportSkyCircuit_ui_value_assignment_dependents			confirmed		0x008d8bd0#0	
 0x00524e83	0	resolve_ZTTransportSkyCircuit_registered_ui_value			confirmed		0x008d8bd0#1	
 0x00524ed6	0	get_ZTTransportSkyCircuit_started_message_key			confirmed		0x008d8b28#22	
@@ -6097,34 +6097,34 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00525408	0	collect_ZTTransportSkyCircuit_station_refs			confirmed		0x008d8bb0#7	
 0x00525507	0	reset_ZTTransportSkyCircuit_track_indices			confirmed		0x008d8b28#31	
 0x0052553d	0	refresh_ZTTransportSkyCircuit_track_state			confirmed		0x008d8b28#28	
-0x0052554e	304		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052567e	199		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052554e	304	run_ZTTransportSkyCircuit_track_refresh_passes			confirmed			
+0x0052567e	199	run_ZTTransportSkyCircuit_track_geometry_passes			confirmed			
 0x0052579e	0	sample_ZTTransportSkyCircuit_track_heading			confirmed		0x008d8bb0#0	
-0x00525830	21		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00525845	120		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005258bd	48		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00525830	21	as_ZTTransportSkyCircuit_track_at_index			confirmed			
+0x00525845	120	find_ZTTransportSkyCircuit_track_index			confirmed			
+0x005258bd	48	test_ZTTransportSkyCircuit_endpoint_has_circuit			confirmed			
 0x005258ed	0	sum_ZTTransportSkyCircuit_segment_distances			confirmed		0x008d8bb0#2	
-0x005258f7	400		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005258f7	400	try_attach_ZTTransportSkyCircuit_endpoint_connection_refs			confirmed			
 0x00525a87	0	reverse_ZTTransportSkyCircuit_path_records			confirmed		0x008d8bb0#6	
 0x00525cbb	0	allocate_ZTTransportSkyCircuit_instance			confirmed		0x008d8bd0#3	
-0x00525d2e	117		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00525da3	23		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00525dba	153		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00525d2e	117	copy_callbacks_into_ZTTransportSkyCircuit_action_registry			confirmed			
+0x00525da3	23	resolve_ZTTransportSkyTrack_from_endpoint_ref			confirmed			
+0x00525dba	153	register_sky_circuit_runtime_callback_if_absent			confirmed			
 0x00525e53	160	insert_runtime_callback_list_node_948a00			confirmed			
-0x00525ef3	56		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00525ef3	56	get_TravelPoint_None_string_key			confirmed			
 0x00525f2b	47	get_type_ZTTransportSkyTrack			confirmed			
-0x00525f5a	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d8de0#1	ui
-0x00525f5f	32		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00525f5a	0	get_type_ZTTransportSkyTrack_vtable_thunk			confirmed		0x008d8de0#1	
+0x00525f5f	32	init_ZTTransportSkyTrack_descriptor_ref			confirmed			
 0x00525f7f	0	init_ZTTransportSkyTrack_descriptor_ref_vtable_thunk			confirmed		0x008d8de0#2	
-0x00525f84	73		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00525f84	73	init_ZTTransportSkyTrack_action_registry			confirmed			
 0x00525fcd	0	copy_ZTTransportSkyTrack_ui_value_assignment_dependents			confirmed		0x008d8e88#0	
 0x00525fe3	0	resolve_ZTTransportSkyTrack_registered_ui_value			confirmed		0x008d8e88#1	
-0x00526036	210		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00526036	210	construct_ZTTransportSkyTrack_members			confirmed			
 0x00526108	0	scalar_delete_ZTTransportSkyTrack			confirmed		0x008d8de0#0	
-0x0052617d	230		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052617d	230	populate_ZTTransportSkyTrack_action_registry			confirmed			
 0x00526263	0	write_ZTTransportSkyTrack_xml			confirmed		0x008d8de0#19	
 0x005268f9	0	refresh_ZTTransportSkyTrack_connection_state			confirmed		0x008d8de0#14	
-0x00526b4a	215		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00526b4a	215	test_ZTTransportSkyTrack_adjacent_piece_connection			confirmed			
 0x00526c21	0	resolve_ZTTransportSkyTrack_sky_tower_payload			confirmed		0x008d8e34#1	
 0x00526d4d	0	refresh_ZTTransportSkyTrack_main_object_position			confirmed		0x008d8e34#2	
 0x00526dcb	0	refresh_ZTTransportSkyTrack_after_layout_change			confirmed		0x008d8e34#3	
