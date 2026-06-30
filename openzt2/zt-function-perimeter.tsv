@@ -22067,28 +22067,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007bbedd	0	allocate_BFForwardMovingComponent_from_descriptor			confirmed		0x00902798#37	
 0x007bbf02	0	get_BFRotYawMovingComponent_type_name_string_global			confirmed		0x00902848#21	
 0x007bbf08	47	get_type_BFRotYawMovingComponent			confirmed	gamebryo		
-0x007bbf37	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902848#1	ui
-0x007bbf3c	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bbf5c	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902848#2	ui
-0x007bbf61	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902848#0	ui
-0x007bbf7c	18		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bbf8e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902848#37	ui
-0x007bbfb6	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#21	ui
+0x007bbf37	0	get_type_BFRotYawMovingComponent_vtable_thunk			confirmed		0x00902848#1	
+0x007bbf3c	32	init_BFRotYawMovingComponent_descriptor_ref			confirmed	gamebryo		
+0x007bbf5c	0	init_BFRotYawMovingComponent_descriptor_ref_vtable_thunk			confirmed		0x00902848#2	
+0x007bbf61	0	scalar_delete_BFRotYawMovingComponent			confirmed		0x00902848#0	
+0x007bbf7c	18	destroy_BFRotYawMovingComponent			confirmed	gamebryo		
+0x007bbf8e	0	allocate_BFRotYawMovingComponent_from_descriptor			confirmed		0x00902848#37	
+0x007bbfb6	0	get_BFDockingComponent_type_name_string_global			confirmed		0x009028f8#21	
 0x007bbfbc	47	get_type_BFDockingComponent			confirmed	gamebryo		
-0x007bbfeb	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#1	ui
-0x007bbff0	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bc010	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#2	ui
-0x007bc015	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#22	ui
-0x007bc01f	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#24	ui
-0x007bc03e	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#31	ui
-0x007bc13b	233		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bc224	287		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007bc3a8	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#0	ui
-0x007bc3d0	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#20	ui
-0x007bc3e1	0		UI dependency references, movement/view components, and animatio		unidentified		0x009028f8#37	ui
-0x007bc3f4	43		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007bbfeb	0	get_type_BFDockingComponent_vtable_thunk			confirmed		0x009028f8#1	
+0x007bbff0	32	init_BFDockingComponent_descriptor_ref			confirmed	gamebryo		
+0x007bc010	0	init_BFDockingComponent_descriptor_ref_vtable_thunk			confirmed		0x009028f8#2	
+0x007bc015	0	set_BFDockingComponent_dock_target_component			confirmed		0x009028f8#22	
+0x007bc01f	0	refresh_BFDockingComponent_dock_animation_controller			confirmed		0x009028f8#24	
+0x007bc03e	0	update_BFDockingComponent_docking_motion			confirmed		0x009028f8#31	
+0x007bc13b	233	step_BFDockingComponent_position_toward_target			confirmed	gamebryo		
+0x007bc224	287	step_BFDockingComponent_yaw_toward_target			confirmed	gamebryo		
+0x007bc3a8	0	scalar_delete_BFDockingComponent			confirmed		0x009028f8#0	
+0x007bc3d0	0	read_BFDockingComponent_xml			confirmed		0x009028f8#20	
+0x007bc3e1	0	allocate_BFDockingComponent_from_descriptor			confirmed		0x009028f8#37	
+0x007bc3f4	43	clamp_float_in_place			confirmed	gamebryo		
 0x007bc41f	47	get_type_BFOverheadCameraUDVComponent			confirmed	gamebryo		
-0x007bc44e	0		UI dependency references, movement/view components, and animatio		unidentified		0x009029d8#1	ui
+0x007bc44e	0	get_type_BFOverheadCameraUDVComponent_vtable_thunk			confirmed		0x009029d8#1	
 0x007bc453	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007bc473	0		UI dependency references, movement/view components, and animatio		unidentified		0x009029d8#2	ui
 0x007bc478	140		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
