@@ -19483,28 +19483,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00742a93	151	resolve_shape_reference_world_bound			confirmed	gamebryo		
 0x00742b2a	40	measure_shape_reference_extent_radius			confirmed	gamebryo		
 0x00742b52	41	assign_refcounted_shape_reference_payload			confirmed	gamebryo		
-0x00742b7b	181		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00742c36	140		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
+0x00742b7b	181	resolve_shape_reference_named_attachment			confirmed	gamebryo		
+0x00742c36	140	resolve_animation_controller_shape_reference			confirmed	gamebryo		
 0x00742cc2	47	get_type_BF4LegsGroundFitComponent			confirmed	gamebryo		
-0x00742cf1	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd584#0	ui
-0x00742cf6	32		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00742d16	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd584#1	ui
+0x00742cf1	0	get_type_BF4LegsGroundFitComponent_vtable_thunk			confirmed		0x008fd584#0	
+0x00742cf6	32	get_BF4LegsGroundFitComponent_descriptor_cell			confirmed	gamebryo		
+0x00742d16	0	get_BF4LegsGroundFitComponent_descriptor_cell_vtable_thunk			confirmed		0x008fd584#1	
 0x00742d1b	680	resolve_foot_bone_nodes			confirmed	gamebryo		
-0x00742fc3	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd600#4	ui
-0x007432e3	181		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00743398	272		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007434a8	567		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007436df	181		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00743794	315		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007438cf	249		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007439c8	576		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00743c08	596		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00743e5c	342		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00743fb2	463		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x00744181	347		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007442dc	881		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x0074474f	97		window/client geometry, foot fitting, display settings, and prev		unidentified	gamebryo		ui
-0x007447b0	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd584#18	ui
+0x00742fc3	0	update_BF4LegsGroundFitComponent			confirmed		0x008fd600#4	
+0x007432e3	181	advance_BF4LegsGroundFit_height_offset_countdown			confirmed	gamebryo		
+0x00743398	272	compute_BF4LegsGroundFit_support_points			confirmed	gamebryo		
+0x007434a8	567	apply_BF4LegsGroundFit_pitch_correction			confirmed	gamebryo		
+0x007436df	181	apply_BF4LegsGroundFit_roll_correction			confirmed	gamebryo		
+0x00743794	315	sample_BF4LegsGroundFit_ground_points			confirmed	gamebryo		
+0x007438cf	249	sample_BF4LegsGroundFit_terrain_surface_heights			confirmed	gamebryo		
+0x007439c8	576	compute_BF4LegsGroundFit_bicycle_attachment_points			confirmed	gamebryo		
+0x00743c08	596	update_BF4LegsGroundFit_error_offsets			confirmed	gamebryo		
+0x00743e5c	342	apply_BF4LegsGroundFit_tilt_correction			confirmed	gamebryo		
+0x00743fb2	463	apply_BF4LegsGroundFit_height_adjustment			confirmed	gamebryo		
+0x00744181	347	relax_BF4LegsGroundFit_height_offset_from_allowed_roll			confirmed	gamebryo		
+0x007442dc	881	solve_BF4LegsGroundFit_foot_contact_update			confirmed	gamebryo		
+0x0074474f	97	destroy_BF4LegsGroundFitComponent_members			confirmed	gamebryo		
+0x007447b0	0	write_BF4LegsGroundFitComponent_xml			confirmed		0x008fd584#18	
 0x00744a6d	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd584#19	ui
 0x00744de0	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd5ec#2	ui
 0x00744de8	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fd5ec#3	ui
