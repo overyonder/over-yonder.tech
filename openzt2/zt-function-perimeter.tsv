@@ -13818,18 +13818,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064d9bc	33	destroy_BFSafeHandle_UIRoot			confirmed	gamebryo		
 0x0064d9dd	33	destroy_BFSafeHandle_UISoundMgr			confirmed	gamebryo		
 0x0064d9fe	180	find_or_insert_UIApp_template_record_by_name			confirmed	gamebryo		
-0x0064dab2	48		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064dae2	36		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064dab2	48	destroy_UIApp_template_name_map			confirmed	gamebryo		
+0x0064dae2	36	clear_UIApp_template_name_map			confirmed	gamebryo		
 0x0064db06	0		globe drag/preview state and display diagnostics		unidentified		0x008ef324#6	
 0x0064db1c	0		globe drag/preview state and display diagnostics		unidentified		0x008ef2fc#0	
 0x0064db37	0		globe drag/preview state and display diagnostics		unidentified		0x008ef310#0	
 0x0064db52	0		globe drag/preview state and display diagnostics		unidentified		0x008ef324#0	
-0x0064db6d	386		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064dcef	69		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064dd34	212		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064de08	148		globe drag/preview state and display diagnostics		unidentified	gamebryo		io/assets
-0x0064de9c	394		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064e026	677		globe drag/preview state and display diagnostics		unidentified	gamebryo		
+0x0064db6d	386	insert_or_find_UIApp_template_record_node			confirmed	gamebryo		
+0x0064dcef	69	destroy_UIApp_template_record_map_subtree			confirmed	gamebryo		
+0x0064dd34	212	lower_bound_or_insert_UIApp_template_record_node			confirmed	gamebryo		
+0x0064de08	148		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064de9c	394	insert_UIApp_template_record_map_node			confirmed	gamebryo		
+0x0064e026	677		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064e2cb	0	get_type_BFSafeHandle<BFSpriteMgr>_vtable_thunk			confirmed		0x008ef2fc#1	
 0x0064e2d0	0	assign_BFSafeHandle_BFSpriteMgr_from_object			confirmed		0x008ef2fc#3	
 0x0064e2e9	0	get_type_BFSafeHandle<UIRoot>_vtable_thunk			confirmed		0x008ef310#1	
@@ -13846,11 +13846,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064e4f8	0		globe drag/preview state and display diagnostics		unidentified		0x008ef3a0#1	
 0x0064e4fd	32	init_UIRoot_descriptor_ref			confirmed	gamebryo		
 0x0064e51d	0	init_UIRoot_descriptor_ref_vtable_thunk			confirmed		0x008ef3a0#2	
-0x0064e522	73		globe drag/preview state and display diagnostics		unidentified	gamebryo		
-0x0064e5d4	142		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064e662	416		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064e522	73		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064e5d4	142	register_UIRoot_value_adapters			confirmed	gamebryo		
+0x0064e662	416	construct_UIRoot_fields			confirmed	gamebryo		
 0x0064e802	0	scalar_delete_UIRoot			confirmed		0x008ef3a0#0	
-0x0064e81d	202		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064e81d	202	destroy_UIRoot_fields			confirmed	gamebryo		
 0x0064e8e7	0	process_UIRoot_mouse_input_payload_and_resolve_target			confirmed		0x008ef3a0#138	
 0x0064ebc7	0	resolve_UIRoot_event_target_or_fallback_child			confirmed		0x008ef3a0#29	
 0x0064ed97	0	route_UIRoot_globe_assignment_payload_and_refresh			confirmed		0x008ef3a0#25	
@@ -13859,19 +13859,19 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064f11e	380	update_globe_drag_state_assignment_list			confirmed	gamebryo		
 0x0064f29a	222	begin_or_poll_globe_drag_state_assignment			confirmed	gamebryo		
 0x0064f378	75	finish_globe_drag_state_assignment			confirmed	gamebryo		
-0x0064f3c3	39		globe assignment list sync wrapper		unidentified	gamebryo		ui
-0x0064f3ea	126		UI callback pointer vector add-or-reuse helper		unidentified	gamebryo		ui
-0x0064f468	111		UI callback pointer vector remove helper		unidentified	gamebryo		ui
+0x0064f3c3	39	sync_UIRoot_assignment_list_inactive_state			confirmed	gamebryo		
+0x0064f3ea	126	register_UI_callback_pointer			confirmed	gamebryo		
+0x0064f468	111	unregister_UI_callback_pointer			confirmed	gamebryo		
 0x0064f4d7	625	refresh_selected_globe_entry_preview_asset			confirmed	gamebryo		
 0x0064f6fd	0	0x0064f6f7 callsite_address			confirmed			
 0x0064f736	0	selected globe preview cursor-update cleanup tail			confirmed			
-0x0064f748	41		globe preview assignment list target helper		unidentified	gamebryo		ui
+0x0064f748	41	assign_UIRoot_preview_cursor_from_list_or_default			confirmed	gamebryo		
 0x0064f771	147	selected globe preview render/value refresh bridge			confirmed	gamebryo		
-0x0064f804	137		globe drag assignment state refresh helper		unidentified	gamebryo		ui
-0x0064f88d	617		globe assignment active-state toggle and UI notification path		unidentified	gamebryo		ui
-0x0064faf6	141		globe preview cursor-handle list cleanup		unidentified	gamebryo		ui
-0x0064fb83	58		globe preview cursor-list reset and reload wrapper		unidentified	gamebryo		ui
-0x0064fbbd	111		display-mode diagnostic prelude before EnumDisplaySettingsA		unidentified	gamebryo		
+0x0064f804	137	refresh_UIRoot_globe_drag_assignment_state			confirmed	gamebryo		
+0x0064f88d	617	set_UIRoot_globe_assignment_active_state			confirmed	gamebryo		
+0x0064faf6	141	destroy_UIRoot_cursor_handle_records			confirmed	gamebryo		
+0x0064fb83	58	reset_UIRoot_cursor_handles_and_reload_preview			confirmed	gamebryo		
+0x0064fbbd	111		display-mode diagnostic prelude before EnumDisplaySettingsA		unidentified	gamebryo		ui
 0x0064fc2c	205	dispatch_ui_named_event_list_for_key			confirmed	gamebryo		
 0x0064fcf9	0	forward_ui_subobject_value_to_root_slot38			confirmed		0x008ef5e4#2	
 0x0064fd49	0	load_ui_root_named_event_lists_and_disable_modal			confirmed		0x008ef3a0#20	
@@ -14523,7 +14523,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00667426	22	init_unit_first_zero_quad_defaults			confirmed	gamebryo		
 0x0066743c	160		vector plane construction helpers		unidentified	gamebryo		renderer
 0x006674dc	81		vector plane construction helpers		unidentified	gamebryo		renderer
-0x0066752d	222		vector plane construction helpers		unidentified	gamebryo		ui
+0x0066752d	222	compute_segment_plane_intersection_distance			confirmed	gamebryo		
 0x0066760b	47		vector plane construction helpers		unidentified	gamebryo		renderer
 0x0066763a	44	copy_two_vectors_and_normalize_second			confirmed	gamebryo		
 0x00667666	214		geometry segment plane and triangle intersection helpers		unidentified	gamebryo		
@@ -15681,8 +15681,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006910e7	295	apply_BFR_material_NoRender_quality_selection			confirmed	gamebryo		
 0x0069120e	44		material parameter record lookup/extraction helpers		unidentified	gamebryo		
 0x0069123a	47	extract_BFR_material_parameter_record_value_and_index			confirmed	gamebryo		
-0x00691269	228		material parameter record lookup/extraction helpers		unidentified	gamebryo		ui
-0x0069134d	65		material parameter record lookup/extraction helpers		unidentified	gamebryo		ui
+0x00691269	228	lookup_BFR_material_parameter_record_values_and_index			confirmed	gamebryo		
+0x0069134d	65	lookup_BFR_material_parameter_record_index			confirmed	gamebryo		
 0x0069138e	159		material parameter record lookup/extraction helpers		unidentified	gamebryo		ui
 0x0069142d	760		material parameter upload/apply walker with deferred update list		unidentified	gamebryo		io/assets
 0x00691725	82	acquire_BFR_material_renderer_state_handle			confirmed	gamebryo		
