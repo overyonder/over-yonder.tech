@@ -6718,7 +6718,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053f08d	384	update_ZTTankGateSegment_child_heights_in_band			confirmed			
 0x0053f20d	134	compute_ZTTankGateSegment_max_child_height			confirmed			
 0x0053f293	744	rebuild_ZTTankGateSegment_offset60_links			confirmed			
-0x0053f57b	314		tank gate segment, tank manager, and area relocation setup		unidentified			
+0x0053f57b	314		tank gate segment, tank manager, and area relocation setup		unidentified			world/pathing
 0x0053f6b5	0	write_ZTTankGateSegment_config_xml			confirmed		0x008da344#18	
 0x0053f8fd	0	read_ZTTankGateSegment_config_xml			confirmed		0x008da344#19	
 0x0053fbf7	182	dispatch_ZTTankGateSegment_child_height_values			confirmed			
@@ -6738,37 +6738,37 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00541d3f	45	update_area_relocation_clearance_distance			confirmed			
 0x00541d6c	300	refresh_area_relocation_clearance_from_candidates			confirmed			
 0x00541e98	57	resolve_area_relocation_cached_target_id			confirmed			
-0x00541ed1	67		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x00541f14	502		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00541ed1	67	deactivate_area_relocation_if_target_live			confirmed			
+0x00541f14	502	reconcile_ZTTankGateSegment_area_child_sets			confirmed			
 0x0054210a	386	emit_bf3devent_delete_flattening_group_payload			confirmed			
 0x0054228c	222		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0054236a	106		tank gate segment, tank manager, and area relocation setup		unidentified			world/pathing
 0x005423d4	293	sync_ZTTankGateSegment_membership_from_primary_tank			confirmed			
-0x005424f9	168		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x005424f9	168	propagate_ZTTankGateSegment_primary_height_to_children			confirmed			
 0x005425a1	136		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542629	361		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542792	86		tank gate segment, tank manager, and area relocation setup		unidentified			
-0x005427e8	194		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x005427e8	194	get_or_insert_tank_segment_height_map_entry			confirmed			
 0x005428aa	36	destroy_vtable_object_8byte_vector_storage			confirmed			
 0x005428ce	94	append_named_ui_assignment_ref_vector_entry			confirmed			
 0x0054292c	94		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x0054298a	0	allocate_ZTTankGateSegment_instance_from_handle_table			confirmed		0x008da39c#6	
 0x005429a5	64	construct_ZTTankGateSegment_area_relocation_callback_registry			confirmed			
 0x005429e5	159	insert_area_relocation_handler_for_global_type			confirmed			
-0x00542acb	33		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00542acb	33	destroy_ZTTankGateSegment_safe_handle_value			confirmed			
 0x00542aec	0	scalar_delete_ZTTankGateSegment_safe_handle_value			confirmed		0x008da39c#0	
 0x00542b07	139	resize_pointer_vector_to_count			confirmed			
 0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542cd8	127	prepare_named_ui_assignment_ref_vector_insert			confirmed			
-0x00542d57	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00542d57	59	construct_BFGTraversableArea_safe_handle_range			confirmed			
 0x00542d92	127		tank gate segment, tank manager, and area relocation setup		unidentified			
-0x00542e11	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00542e11	59	construct_ZTTankGateSegment_safe_handle_range			confirmed			
 0x00542e4c	455	insert_named_ui_assignment_ref_vector_entry			confirmed			
-0x00543013	455		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x00543013	455	insert_fill_ZTTankGateSegment_safe_handle_vector_range			confirmed			
 0x005431da	160	insert_area_relocation_handler_list_record			confirmed			
 0x0054327a	0	get_type_ZTTankGateSegment_safe_handle_specialization			confirmed		0x008da39c#1	
-0x0054327f	57		tank gate segment, tank manager, and area relocation setup		unidentified			ui
-0x005432b8	57		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x0054327f	57	copy_construct_BFGTraversableArea_safe_handle_range			confirmed			
+0x005432b8	57	copy_construct_ZTTankGateSegment_safe_handle_range			confirmed			
 0x00543355	30	set_area_relocation_flag0_to_inverse_flag1			confirmed			
 0x00543373	0	test_ZTTankGateSegment_relocation_ready			confirmed		0x008da470#2	
 0x00543395	0	set_ZTTankGateSegment_fully_enclosed_flag			confirmed		0x008da49c#9	
@@ -6803,7 +6803,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005445b2	107	replay_ZTTankGateSegment_child_ref_callbacks			confirmed			
 0x0054461d	40	resolve_ZTTankSupport_from_type_chain			confirmed			
 0x00544660	130		tank gate segment, tank manager, and area relocation setup		unidentified			
-0x005446e2	55		tank gate segment, tank manager, and area relocation setup		unidentified			ui
+0x005446e2	55	destroy_ZTTankMgr_entry_wrapper			confirmed			
 0x00544719	47	get_type_ZTTankMgr			confirmed			
 0x00544748	0		tank gate segment, tank manager, and area relocation setup		unidentified		0x008da568#1	
 0x0054474d	32	init_ZTTankPortal_descriptor_ref			confirmed			
@@ -6817,9 +6817,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054561c	0	load_tankmgr_config_values			confirmed		0x008da568#20	
 0x0054580a	112		tank manager config, portal, segment support, and topology updat		unidentified			
 0x0054587a	1184	refresh_tankmgr_entries_from_support_record			confirmed			
-0x00545d1a	383		tank manager config, portal, segment support, and topology updat		unidentified			ui
+0x00545d1a	383	test_tankmgr_entries_overlap_bounds			confirmed			
 0x00545e99	128	remove_tankmgr_tank_entry			confirmed			
-0x00545f19	131		tank manager config, portal, segment support, and topology updat		unidentified			ui
+0x00545f19	131	find_tankmgr_entry_by_target			confirmed			
 0x00545f9c	137		tank manager config, portal, segment support, and topology updat		unidentified			
 0x00546025	29	test_tankmgr_pointer_vector_empty			confirmed			
 0x00546042	100	append_tankmgr_tank_entry			confirmed			
@@ -6864,17 +6864,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00547290	32	init_ZTTankSupport_descriptor_ref			confirmed			
 0x005472b0	0	init_ZTTankSupport_descriptor_ref_vtable_thunk			confirmed		0x008da850#2	
 0x005472b5	75	init_ZTTankSegment_support_callback_registry			confirmed			
-0x00547316	98		tank manager config, portal, segment support, and topology updat		unidentified			ui
+0x00547316	98	resolve_ZTTankSegment_support_callback_value			confirmed			
 0x00547378	141	register_ZTTankSegment_support_callbacks			confirmed			
 0x00547405	747	build_tank_fence_segment_variants			confirmed			
 0x005476f0	0	scalar_delete_ZTTankSegment			confirmed		0x008da850#0	
-0x0054770c	289		tank manager config, portal, segment support, and topology updat		unidentified			ui
+0x0054770c	289	destroy_ZTTankSegment			confirmed			
 0x0054782d	31	resolve_ZTTankSegment_from_type_provider			confirmed			
 0x0054784c	93	assign_tankwallglass_segment_support_target			confirmed		0x008da8e4#7	
 0x005478a9	484	read_wall_support_config			confirmed		0x008da850#20	
 0x00547a8d	0	write_wall_support_config_thunk			confirmed		0x008da850#19	
 0x00547a92	517	commit_tankwallglass_segment_topology_update			confirmed		0x008da8e4#2	
-0x00547c97	43		tank manager config, portal, segment support, and topology updat		unidentified			ui
+0x00547c97	43	mark_ZTTankSegment_linked_gate_clearance_dirty			confirmed			
 0x00547cc2	1254	rebuild_tankwallglass_segment_topology_update			confirmed		0x008da8e4#3	
 0x005481a8	113	refresh_tankwallglass_selector_bounds_for_segment			confirmed			
 0x00548219	89	update_tankwallglass_material_selector_for_segment			confirmed			
@@ -6884,13 +6884,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00548a03	158		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x00548aa1	382		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x00548c1f	0	clear_tankwallglass_endpoint_links_and_forward			confirmed		0x008da470#0	
-0x00548c31	363		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x00548c31	363	refresh_tankwallglass_segment_walkable_state			confirmed			
 0x00548fc3	0	0x00548fbd callsite_address			confirmed			
-0x0054924c	26		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054924c	26	get_tankwallglass_segment_cached_height			confirmed			
 0x00549266	0	compute_tankwallglass_segment_effective_height			confirmed		0x008da49c#1	
 0x005492c5	208		tankwallglass material selector sweep and dirty refresh		unidentified			economy
 0x00549395	274		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x005494a7	68		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x005494a7	68	clear_tankwallglass_selector_links_and_mark_rebuild			confirmed			
 0x005494eb	0	assign_tankwallglass_selector_ref_and_refresh			confirmed		0x008da49c#10	
 0x00549531	36		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x00549555	241	collect_tankwallglass_selector_hits			confirmed			
@@ -6904,8 +6904,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00549b59	83	mark_tankwallglass_and_elevated_paths_dirty			confirmed			
 0x00549bac	0	emit_fence_fitting_surface_segments_tankwallglass_thunk			confirmed		0x008da470#4	
 0x00549bb1	53	set_tankwallglass_selector_flag4_dirty			confirmed			
-0x00549be6	93		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x00549c43	117		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x00549be6	93	refresh_tankwallglass_selector_sound_event_ref			confirmed			
+0x00549c43	117	clear_tankwallglass_selector_sound_event_ref			confirmed			
 0x00549cb8	81		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x00549d18	153		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x00549db1	233		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
