@@ -7662,14 +7662,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00571a0d	171	emit_exit_after_save_payload			confirmed			
 0x00571ab8	0	forward_world_pick_query_without_flags			confirmed		0x008dc6fc#0	
 0x00571ad8	0	forward_world_pick_query_with_temp_adapter			confirmed		0x008dc6fc#1	
-0x00571b33	0	load_location_entry_xml_resources			confirmed		0x008dc6b8#3	
+0x00571b33	0	load_location_entry_xml_resources			confirmed		0x008dc6b4#4	
 0x00571d11	479	read_resource_path_registry			confirmed			
-0x00571ef0	0	lookup_installed_content_manifest_flag			confirmed		0x008dc6b8#2	
+0x00571ef0	0	lookup_installed_content_manifest_flag			confirmed		0x008dc6b4#3	
 0x00571f74	0	adapt_world_picking_result_to_outarg			confirmed		0x008dc6d0#2	
 0x00571f9b	0	apply_entity_land_environment_and_clear_placement_preview			confirmed		0x008dc6d0#0	
 0x00571fed	0	forward_icon_name_resource_lookup_adapter			confirmed		0x008dc6fc#2	
 0x00572008	12	extract_nested_typed_object_from_arg			confirmed		0x008dc6fc#3	
-0x00572014	0	read_lazy_session_typed_object_flag			confirmed		0x008dc6b8#0	
+0x00572014	0	read_lazy_session_typed_object_flag			confirmed		0x008dc6b4#1	
 0x00572061	33	destroy_BFSafeHandle_ZTAIStaffMgr			confirmed			
 0x00572082	0	allocate_ZTApp_instance			confirmed		0x008dc5f0#6	
 0x0057209a	30	destroy_BFSafeHandle_ZTWorldSndMgr			confirmed			
@@ -7751,8 +7751,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005731e2	0	return_first_child_from_field_2b0			confirmed		0x008f8040#5	
 0x005731f0	54	find_ZTViewableObjectMgr_child_from_field_2a8			confirmed		0x008dc6d0#4	
 0x00573226	0	return_first_child_from_field_2a8			confirmed		0x008f8040#4	
-0x0057324d	0	insert_environment_collection_value_from_field_270			confirmed		0x008dc6b8#4	
-0x0057327d	0	return_manifest_list_field_36c			confirmed		0x008dc6b8#1	
+0x0057324d	0	insert_environment_collection_value_from_field_270			confirmed		0x008dc6b4#5	
+0x0057327d	0	return_manifest_list_field_36c			confirmed		0x008dc6b4#2	
 0x00573284	22	format_wide_string_vswprintf			confirmed			
 0x0057329a	0	set_receiver_flag_154			confirmed		0x008e4ea8#34	
 0x005732a7	47	get_type_ZTAwardMgr			confirmed			
@@ -13761,18 +13761,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064c4bf	0	allocate_UIToggleSet_descriptor_instance			confirmed			
 0x0064c4da	151	register_UIToggleSet_value_adapter_unique			confirmed	gamebryo		
 0x0064c5b8	160	insert_UIToggleSet_handler_node_before			confirmed	gamebryo		
-0x0064c658	117		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064c658	117	import_UIListBox_value_adapters_into_UIToggleSet			confirmed	gamebryo		
 0x0064c6e5	47	get_type_UIButton			confirmed	gamebryo		
-0x0064c714	0		typed UI value construction and forwarding		unidentified		0x008eef28#1	ui
+0x0064c714	0	get_type_UIButton_vtable_thunk			confirmed		0x008eef28#1	
 0x0064c719	32	init_UIButton_descriptor_ref			confirmed	gamebryo		
 0x0064c739	0	init_UIButton_descriptor_ref_vtable_thunk			confirmed		0x008eef28#2	
-0x0064c73e	75		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064c73e	75	init_global_UIButton_handler_list			confirmed	gamebryo		
 0x0064c789	0	register_UIButton_descriptor_child_callback			confirmed			
 0x0064c79f	0	resolve_UIButton_descriptor_child_value			confirmed			
-0x0064c7f2	202		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064c8bc	49		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064c7f2	202	register_UIButton_value_adapters_from_global_list			confirmed	gamebryo		
+0x0064c8bc	49	construct_UIButton_fields			confirmed	gamebryo		
 0x0064c8ed	0	scalar_delete_UIButton			confirmed		0x008eef28#0	
-0x0064c908	88		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064c908	88	destroy_UIButton_fields			confirmed	gamebryo		
 0x0064c960	124	dispatch_UIButton_input_value_by_payload_flag			confirmed	gamebryo	0x008d01e8#2	
 0x0064c9dc	0	dispatch_UIButton_field_140_value_and_refresh			confirmed		0x008d01e8#3	
 0x0064c9fa	0	dispatch_UIButton_field_144_value_and_refresh			confirmed		0x008d01e8#4	
@@ -13796,41 +13796,46 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064cf93	98	write_UIButton_xml_payload_fields			confirmed	gamebryo	0x008eef28#19	
 0x0064cff5	112	read_UIButton_xml_payload_fields			confirmed	gamebryo	0x008eef28#20	
 0x0064d065	0	allocate_UIButton_descriptor_instance			confirmed			
-0x0064d080	151		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064d15e	160		typed UI value construction and forwarding		unidentified	gamebryo		ui
-0x0064d1fe	117		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064d080	151	register_UIButton_value_adapter_unique			confirmed	gamebryo		
+0x0064d15e	160	insert_UIButton_handler_node_before			confirmed	gamebryo		
+0x0064d1fe	117	import_UIText_value_adapters_into_UIButton			confirmed	gamebryo		
 0x0064d27b	45	get_type_UIApp			confirmed	gamebryo		
-0x0064d2a8	0		typed UI value construction and forwarding		unidentified		0x008ef230#1	ui
+0x0064d2a8	0	get_type_UIApp_vtable_thunk			confirmed		0x008ef230#1	
 0x0064d2ad	0	init_UIApp_descriptor_ref			confirmed		0x008ef230#2	
-0x0064d2cd	181		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064d2cd	181	construct_UIApp_fields			confirmed	gamebryo		
 0x0064d382	0	scalar_delete_UIApp			confirmed		0x008ef230#0	
-0x0064d39d	85		typed UI value construction and forwarding		unidentified	gamebryo		ui
+0x0064d39d	85	destroy_UIApp_fields			confirmed	gamebryo		
 0x0064d3f2	54	collect_BFGApp_context_message_types			confirmed	gamebryo		
 0x0064d428	138	forward_typed_ui_value_to_nested_receiver_or_assign			confirmed	gamebryo		
 0x0064d4b2	126		globe drag/preview state and display diagnostics		unidentified	gamebryo		
-0x0064d58a	178		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d63c	92		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d698	236		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064d58a	178	lookup_UIApp_template_payload_by_name			confirmed	gamebryo		
+0x0064d63c	92	reload_UIApp_template_name_maps			confirmed	gamebryo		
+0x0064d698	236	load_UIApp_template_records_from_resource_path			confirmed	gamebryo		
 0x0064d784	240		globe drag/preview state and display diagnostics		unidentified	gamebryo		
-0x0064d874	27		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d99b	33		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d9bc	33		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d9dd	33		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064d9fe	180		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064dab2	48		globe drag/preview state and display diagnostics		unidentified	gamebryo		
-0x0064dae2	36		globe drag/preview state and display diagnostics		unidentified	gamebryo		
+0x0064d874	27	load_UIApp_base_resources_then_reload_templates			confirmed	gamebryo	0x008ef230#20	
+0x0064d88f	0		globe drag/preview state and display diagnostics		unidentified		0x008dc6b4#0	
+0x0064d99b	33	destroy_BFSafeHandle_BFSpriteMgr			confirmed	gamebryo		
+0x0064d9bc	33	destroy_BFSafeHandle_UIRoot			confirmed	gamebryo		
+0x0064d9dd	33	destroy_BFSafeHandle_UISoundMgr			confirmed	gamebryo		
+0x0064d9fe	180	find_or_insert_UIApp_template_record_by_name			confirmed	gamebryo		
+0x0064dab2	48		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064dae2	36		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
+0x0064db06	0		globe drag/preview state and display diagnostics		unidentified		0x008ef324#6	
+0x0064db1c	0		globe drag/preview state and display diagnostics		unidentified		0x008ef2fc#0	
+0x0064db37	0		globe drag/preview state and display diagnostics		unidentified		0x008ef310#0	
+0x0064db52	0		globe drag/preview state and display diagnostics		unidentified		0x008ef324#0	
 0x0064db6d	386		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
-0x0064dcef	69		globe drag/preview state and display diagnostics		unidentified	gamebryo		game-entities
+0x0064dcef	69		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064dd34	212		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064de08	148		globe drag/preview state and display diagnostics		unidentified	gamebryo		io/assets
 0x0064de9c	394		globe drag/preview state and display diagnostics		unidentified	gamebryo		ui
 0x0064e026	677		globe drag/preview state and display diagnostics		unidentified	gamebryo		
-0x0064e2cb	0	get_type_BFSafeHandle<BFSpriteMgr>_vtable_thunk			confirmed		0x008ef300#0	
-0x0064e2d0	0	assign_BFSafeHandle_BFSpriteMgr_from_object			confirmed		0x008ef300#2	
-0x0064e2e9	0	get_type_BFSafeHandle<UIRoot>_vtable_thunk			confirmed		0x008ef314#0	
-0x0064e2ee	0	assign_BFSafeHandle_UIRoot_from_object			confirmed		0x008ef314#2	
-0x0064e307	0	get_type_BFSafeHandle<UISoundMgr>_vtable_thunk			confirmed		0x008ef328#0	
-0x0064e30c	0	assign_BFSafeHandle_UISoundMgr_from_object			confirmed		0x008ef328#2	
+0x0064e2cb	0	get_type_BFSafeHandle<BFSpriteMgr>_vtable_thunk			confirmed		0x008ef2fc#1	
+0x0064e2d0	0	assign_BFSafeHandle_BFSpriteMgr_from_object			confirmed		0x008ef2fc#3	
+0x0064e2e9	0	get_type_BFSafeHandle<UIRoot>_vtable_thunk			confirmed		0x008ef310#1	
+0x0064e2ee	0	assign_BFSafeHandle_UIRoot_from_object			confirmed		0x008ef310#3	
+0x0064e307	0	get_type_BFSafeHandle<UISoundMgr>_vtable_thunk			confirmed		0x008ef324#1	
+0x0064e30c	0	assign_BFSafeHandle_UISoundMgr_from_object			confirmed		0x008ef324#3	
 0x0064e325	0	get_type_BFSafeHandle<BFSpriteMgr>			confirmed			
 0x0064e389	40	as_BFSpriteMgr			confirmed	gamebryo		
 0x0064e3b1	0	get_type_BFSafeHandle<UIRoot>			confirmed			
@@ -17344,8 +17349,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ceabf	255		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
 0x006cebbe	0		entity economy, transaction, and component/type registry support		unidentified		0x008f7f80#0	economy
 0x006cebd9	157		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
-0x006cec76	0		entity economy, transaction, and component/type registry support		unidentified		0x008ef284#3	economy
-0x006cec7e	398		entity economy, transaction, and component/type registry support		unidentified	gamebryo	0x008f7fd4#10	economy
+0x006cec76	0		entity economy, transaction, and component/type registry support		unidentified		0x008ef230#24	economy
+0x006cec7e	398		entity economy, transaction, and component/type registry support		unidentified	gamebryo	0x008f7f80#31	economy
 0x006cee0c	0		entity economy, transaction, and component/type registry support		unidentified		0x008dc6d0#3	economy
 0x006cee80	188		entity economy, transaction, and component/type registry support		unidentified	gamebryo	0x008f8040#10	economy
 0x006cef3c	0		entity economy, transaction, and component/type registry support		unidentified		0x008dc6d0#1	economy
