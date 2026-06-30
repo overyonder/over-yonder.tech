@@ -6455,31 +6455,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00536e9a	80	clear_ZTVehicleGround_current_track_link			confirmed			
 0x00536eea	135	remove_ZTVehicleBase_stop_list_record			confirmed			
 0x00536f71	232	refresh_ZTVehicleBase_stop_list_and_find_current_target			confirmed			
-0x00537059	271		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00537168	71		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537059	271	test_ZTVehicleBase_passenger_cabin_wait_condition			confirmed			
+0x00537168	71	get_ZTVehicleBase_passenger_cabin_container			confirmed			
 0x005371af	114	activate_first_entity_container_slot_ref			confirmed			
-0x00537221	46		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537221	46	read_ZTVehicleData_backfacing_flag_for_index			confirmed			
 0x0053724f	155	compare_ZTVehicleBase_stop_order_on_circuit			confirmed			
 0x005372ea	109	read_ZTVehicleBase_passenger_load_timers			confirmed			
-0x00537357	87		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537357	87	resolve_ZTVehicleData_emote_set_range			confirmed			
 0x005373ae	276	test_ZTVehicleData_track_constraint			confirmed			
 0x005374c2	320	select_ZTVehicleData_track_constraint_band			confirmed			
 0x00537602	301	compute_vehicle_track_relative_metrics			confirmed			
-0x0053772f	231		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00537816	212		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005378ea	70		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053772f	231	collect_ZTVehicleBase_passenger_cabin_entity_refs			confirmed			
+0x00537816	212	dispatch_ZTVehicleBase_passenger_cabin_entity_refs			confirmed			
+0x005378ea	70	destroy_ZTVehicleBase_stop_list_storage			confirmed			
 0x00537930	97	erase_ZTVehicleBase_stop_list_node			confirmed			
 0x00537991	33	destroy_BFSafeHandle_ZTTransportTrack_ref			confirmed			
 0x005379b2	0	scalar_delete_BFSafeHandle_ZTTransportTrack_ref			confirmed		0x008d97bc#0	
-0x005379cd	170		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00537a77	18		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005379cd	170	insert_ZTVehicleBase_stop_list_record			confirmed			
+0x00537a77	18	write_BFXMLNode_id_attribute_ui_wrapper			confirmed			
 0x00537a89	0	get_type_BFSafeHandle_ZTTransportTrack_vtable_thunk			confirmed		0x008d97bc#1	
 0x00537a8e	0	assign_BFSafeHandle_ZTTransportTrack_from_value			confirmed		0x008d97bc#3	
-0x00537ac9	55		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537ac9	55	resolve_ZTAIVehicleData_component			confirmed			
 0x00537b00	0	get_type_BFSafeHandle_ZTTransportTrack			confirmed			
 0x00537b64	0	resolve_ZTVehicleGround_track_value_or_zero			confirmed		0x008d99f0#32	
-0x00537b7e	40		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00537ba6	38		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00537b7e	40	allocate_or_reuse_ZTVehicleGround_behavior_target_record			confirmed			
+0x00537ba6	38	resolve_active_animation_controller_secondary_resource			confirmed			
 0x00537bcc	47	get_type_ZTVehicleGround			confirmed			
 0x00537bfb	0	get_type_ZTVehicleGround_vtable_thunk			confirmed		0x008d99f0#1	
 0x00537c00	32	init_ZTVehicleGround_descriptor_ref			confirmed			
@@ -6496,16 +6496,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005386be	0	handle_ZTVehicleGround_collision_response			confirmed		0x008d99f0#33	
 0x005389ab	0	update_ZTVehicleGround_behavior_manager_target			confirmed		0x008d99f0#27	
 0x005389e2	0	assign_ZTVehicleGround_current_ground_circuit_handle			confirmed		0x008d99f0#30	
-0x005389ff	160		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00538a9f	96		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005389ff	160	update_ZTVehicleGround_wheel_spin_nodes			confirmed			
+0x00538a9f	96	update_ZTVehicleGround_front_wheel_turn_nodes			confirmed			
 0x00538aff	0	toggle_ZTVehicleGround_driver_globe_dot_or_route_visibility			confirmed		0x008d99f0#31	
 0x00538b67	0	write_ZTVehicleGround_xml			confirmed		0x008d99f0#19	
 0x00538bac	0	read_ZTVehicleGround_xml			confirmed		0x008d99f0#20	
 0x00538bf7	30	destroy_ZTVehicleGround_ground_circuit_handle_value			confirmed			
 0x00538c15	0	allocate_ZTVehicleGround_instance			confirmed		0x008d9a7c#3	
-0x00538c2b	153		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00538c2b	153	insert_ZTVehicleGround_ui_handler_record_if_absent			confirmed			
 0x00538d0b	0	scalar_delete_ZTVehicleGround_ground_circuit_handle_value			confirmed		0x008d99dc#0	
-0x00538d26	160		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00538d26	160	insert_ZTVehicleGround_ui_handler_list_node			confirmed			
 0x00538dc6	0	get_type_BFSafeHandle_ZTTransportGroundCircuit_vtable_thunk			confirmed		0x008d99dc#1	
 0x00538dcb	0	assign_ZTVehicleGround_ground_circuit_handle_from_value			confirmed		0x008d99dc#3	
 0x00538de4	40	as_ZTVehicleGround			confirmed			
@@ -6592,8 +6592,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053a6da	196	remove_ZTViewableSubMgr_entry			confirmed		0x008d9424#21	
 0x0053a79e	35	clear_ZTViewableSubMgr_state			confirmed		0x008d9424#22	
 0x0053a7c1	317	refresh_ZTViewableSubMgr_visible_items_from_world			confirmed			
-0x0053a8fe	73		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053a947	56		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053a8fe	73	erase_ZTViewableSubMgr_visible_ref_range			confirmed			
+0x0053a947	56	move_refcounted_pointer_vector_range			confirmed			
 0x0053a97f	0	get_type_ZTViewableSubMgrStation			confirmed		0x008d9d20#1	
 0x0053a9ac	0	init_ZTViewableSubMgrStation_descriptor_ref			confirmed		0x008d9d20#2	
 0x0053a9cc	68	get_ZTViewableSubMgrStation_ui_handler_registry			confirmed			
@@ -6611,7 +6611,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053ada9	0	get_BFShadowComponent_static_registry_root			confirmed		0x008d9e68#21	
 0x0053adaf	0	scalar_delete_BFShadowComponent			confirmed		0x008d9e68#0	
 0x0053add7	47	get_type_BFMovingBlobShadowComponent			confirmed			
-0x0053ae06	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d9f00#1	ui
+0x0053ae06	0	get_type_BFMovingBlobShadowComponent_vtable_thunk			confirmed		0x008d9f00#1	
 0x0053ae0b	32	init_BFMovingBlobShadowComponent_descriptor_ref			confirmed			
 0x0053ae2b	0	init_BFMovingBlobShadowComponent_descriptor_ref_vtable_thunk			confirmed		0x008d9f00#2	
 0x0053ae30	0	construct_BFMovingBlobShadowComponent			confirmed			
@@ -6623,7 +6623,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0053b246	0	read_BFMovingBlobShadowComponent_xml			confirmed		0x008d9f00#20	
 0x0053b565	0	allocate_BFMovingBlobShadowComponent_instance			confirmed		0x008d9f94#3	
 0x0053b578	47	get_type_BFStaticBlobShadowComponent			confirmed			
-0x0053b5a7	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d9fd0#1	ui
+0x0053b5a7	0	get_type_BFStaticBlobShadowComponent_vtable_thunk			confirmed		0x008d9fd0#1	
 0x0053b5ac	32	init_BFStaticBlobShadowComponent_descriptor_ref			confirmed			
 0x0053b5cc	0	init_BFStaticBlobShadowComponent_descriptor_ref_vtable_thunk			confirmed		0x008d9fd0#2	
 0x0053b5d1	158	construct_BFStaticBlobShadowComponent			confirmed			
