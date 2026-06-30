@@ -6185,30 +6185,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0052bce6	52	get_ZTTransportSkyTrack_object_height_offset			confirmed			
 0x0052bd1a	39	get_current_object_position_with_height_offset			confirmed			
 0x0052bd41	86	append_dword_to_checked_vector			confirmed			
-0x0052bd97	66		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052bdd9	158		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052bd97	66	get_last_checked_pointer_vector_entry			confirmed			
+0x0052bdd9	158	find_or_insert_dword_tree_value_slot			confirmed			
 0x0052be77	0	allocate_ZTTransportSkyTrack_instance			confirmed		0x008d8e88#3	
-0x0052be92	153		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052bf72	104		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052bfda	24		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052bff2	23		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c009	100		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c06d	99		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c0d0	135		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052be92	153	insert_ZTTransportSkyTrack_action_registry_record			confirmed			
+0x0052bf72	104	clear_dword_vector_9489e8			confirmed			
+0x0052bfda	24	count_dword_vector_9489e8			confirmed			
+0x0052bff2	23	get_checked_dword_vector_9489e8_at			confirmed			
+0x0052c009	100	append_dword_to_vector_9489e8			confirmed			
+0x0052c06d	99	insert_single_dword_checked_vector_and_return_iterator			confirmed			
+0x0052c0d0	135	insert_dword_into_vector_9489e8_and_return_iterator			confirmed			
 0x0052c157	160	insert_runtime_callback_list_node_9489e4			confirmed			
-0x0052c1f7	94		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c255	410		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c3ef	74		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c439	57		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052c1f7	94	erase_dword_range_from_vector_9489e8			confirmed			
+0x0052c255	410	insert_repeated_dword_range_into_vector_9489e8			confirmed			
+0x0052c3ef	74	throw_vector_too_long_error			confirmed			
+0x0052c439	57	encode_grid_cell_key_if_in_bounds			confirmed			
 0x0052c472	47	get_type_ZTTransportStationBase			confirmed			
-0x0052c4a1	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d9058#1	ui
+0x0052c4a1	0	get_type_ZTTransportStationBase_vtable_thunk			confirmed		0x008d9058#1	
 0x0052c4a6	0	init_ZTTransportStationBase_descriptor_ref_vtable_thunk			confirmed		0x008d9058#2	
-0x0052c4c6	73		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c578	130		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c5fa	29		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c617	23		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c62e	150		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c6c4	288		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052c4c6	73	get_ZTTransportStationBase_ui_handler_registry			confirmed			
+0x0052c578	130	resolve_ZTTransportStationBase_for_track_endpoint			confirmed			
+0x0052c5fa	29	resolve_ZTTransportStationBase_by_endpoint_key			confirmed			
+0x0052c617	23	resolve_ZTTransportStationBase_component_from_receiver			confirmed			
+0x0052c62e	150	register_ZTTransportStationBase_ui_handlers			confirmed			
+0x0052c6c4	288	construct_ZTTransportStationBase			confirmed			
 0x0052c7e4	0	scalar_delete_ZTTransportStationBase			confirmed		0x008d9058#0	
 0x0052c800	180		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0052c8b4	0	get_ZTTransportStationBase_effective_type_chain			confirmed		0x008d9058#13	
@@ -7144,7 +7144,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00555c3a	130		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555cbc	153		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555d9c	112		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00555e0c	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00555e0c	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555e31	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555e55	128		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555ed5	50		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
@@ -7153,7 +7153,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00555fbc	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00555fdf	450		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005561a1	429		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
-0x0055634e	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			
+0x0055634e	67		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00556391	160		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00556431	37		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00556456	60		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -15694,7 +15694,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0069288b	36		generic list reset and chunk index helpers		unidentified	gamebryo		
 0x006928af	91		generic list reset and chunk index helpers		unidentified	gamebryo		
 0x0069290a	36		generic list reset and chunk index helpers		unidentified	gamebryo		renderer
-0x0069292e	166		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
+0x0069292e	166		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x006929d4	41	allocate_12byte_record_vector_storage			confirmed	gamebryo		
 0x006929fd	165		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692aa2	43		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		io/assets
@@ -15705,7 +15705,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00692e86	41		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692eaf	114		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00692f21	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
-0x00692f62	418		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
+0x00692f62	418		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00693104	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00693145	452	insert_repeated_8byte_records			confirmed	gamebryo		
 0x00693309	50		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
@@ -15715,7 +15715,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00693462	40		material-support record move/copy helpers		unidentified	gamebryo		
 0x0069348a	288	assign_material_point3_vector			confirmed	gamebryo		
 0x006935aa	287		material-support record move/copy helpers		unidentified	gamebryo		
-0x006936c9	37		material-support record move/copy helpers		unidentified	gamebryo		ui
+0x006936c9	37		material-support record move/copy helpers		unidentified	gamebryo		
 0x006936ee	37		material-support record move/copy helpers		unidentified	gamebryo		
 0x00693713	104	insert_shared_resource_path_candidate			confirmed	gamebryo		
 0x0069377b	310	expand_shared_resource_fallback_paths			confirmed	gamebryo		
@@ -16297,14 +16297,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a7345	36		vtable 0x008f5a9c extended model geometry record lifecycle		unidentified	gamebryo		
 0x006a73ec	70		vtable 0x008f5a9c extended record allocator/copy helper		unidentified	gamebryo		renderer
 0x006a76e7	275		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
-0x006a77fa	144		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		
-0x006a788a	41		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		ui
-0x006a78b3	65		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		
-0x006a78f4	422		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		ui
+0x006a77fa	144		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
+0x006a788a	41		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		
+0x006a78b3	65		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
+0x006a78f4	422		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
 0x006a7a9a	54		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
 0x006a7ad0	50	assign_refcounted_model_geometry_record			confirmed	gamebryo		
-0x006a7b02	45		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		
-0x006a7b2f	38		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		
+0x006a7b02	45		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
+0x006a7b2f	38		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
 0x006a7b55	48		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
 0x006a7b85	148		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
 0x006a7c19	30		16-byte vector assignment/copy helpers for model geometry record		unidentified	gamebryo		renderer
@@ -17733,7 +17733,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e85a6	25		vector/list element movement helpers		unidentified	gamebryo		game-ai
 0x006e85bf	443		vector/list element movement helpers		unidentified	gamebryo		game-ai
 0x006e877a	134	erase_16byte_vector_range			confirmed	gamebryo		
-0x006e8800	454		vector/list element movement helpers		unidentified	gamebryo		
+0x006e8800	454		vector/list element movement helpers		unidentified	gamebryo		game-ai
 0x006e89c6	177		vector/list element movement helpers		unidentified	gamebryo		
 0x006e8a77	277	grow_4byte_vector_with_zero_fill			confirmed	gamebryo		
 0x006e8b8c	205		vector/list element movement helpers		unidentified	gamebryo		ui
@@ -17813,10 +17813,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ebe13	117		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-ai
 0x006ebe88	58	copy_construct_named_value_assignment_records			confirmed	gamebryo		
 0x006ebec2	74		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-ai
-0x006ebf0c	479		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006ebf0c	479		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-ai
 0x006ec0eb	160	insert_BFGRampage_handler_list_node			confirmed	gamebryo		
 0x006ec18b	68		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
-0x006ec1cf	52		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		ui
+0x006ec1cf	52		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006ec203	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f90cc#0	
 0x006ec20b	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f9218#13	
 0x006ec210	0		BFGRampageMgr schema and rampage event cluster		unidentified		0x008f9218#0	
@@ -18284,7 +18284,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007042d6	205		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x007043a3	341		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x007044f8	50		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070452a	443		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070452a	443		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007046e5	213		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007047ba	175		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704869	395		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
@@ -18554,7 +18554,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070f1b3	122		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f22d	136		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f2b5	41		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070f2de	187		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x0070f2de	187		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070f399	100		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070f3fd	157		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f4de	644		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
@@ -19750,8 +19750,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00756cd4	166		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x00756d7a	94		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x00756dd8	382		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
-0x00756f56	127		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
-0x00756fd5	472		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
+0x00756f56	127		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
+0x00756fd5	472		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x007571ad	31	get_active_indexed_presentation_child			confirmed	gamebryo		
 0x007571cc	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe140#41	
 0x007571e2	47	get_type_BFRopeComponent			confirmed	gamebryo		
