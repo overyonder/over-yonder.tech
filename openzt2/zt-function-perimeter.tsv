@@ -5701,30 +5701,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005145cf	0	read_ZTTransportationMgr_message_timeout_xml			confirmed		0x008d8310#20	
 0x00514616	220	find_ZTTransportationMgr_circuit_accepting_endpoint			confirmed			
 0x005146f2	143	refresh_ZTTransportationMgr_sky_circuits			confirmed			
-0x00514781	1419		transportation manager and circuit bases		unidentified			ui
-0x00514d0c	229		transportation manager and circuit bases		unidentified			ui
-0x00514df1	170		transportation manager and circuit bases		unidentified			ui
-0x00514e9b	138		transportation manager and circuit bases		unidentified			ui
-0x00514f25	73		transportation manager and circuit bases		unidentified			ui
-0x00514f6e	189		transportation manager and circuit bases		unidentified			ui
-0x0051502b	82		transportation manager and circuit bases		unidentified			ui
-0x0051507d	78		transportation manager and circuit bases		unidentified			ui
+0x00514781	1419	rebuild_ZTTransportationMgr_transport_links			confirmed			
+0x00514d0c	229	remove_ZTTransportationMgr_marked_circuits			confirmed			
+0x00514df1	170	upsert_ZTTransportationMgr_dword_pair_list_entry			confirmed			
+0x00514e9b	138	erase_ZTTransportationMgr_dword_pair_list_entry			confirmed			
+0x00514f25	73	allocate_ZTTransportationMgr_circuit_for_mode			confirmed			
+0x00514f6e	189	allocate_ZTTransportationMgr_unique_circuit_id			confirmed			
+0x0051502b	82	find_ZTTransportationMgr_endpoint_metadata_iterator_by_id			confirmed			
+0x0051507d	78	resolve_ZTTransportationMgr_endpoint_metadata_by_id			confirmed			
 0x005150cb	0	make_ZTTransportationMgr_max_sky_circuit_value			confirmed		0x008d8310#22	
-0x00515367	121		transportation manager and circuit bases		unidentified			ui
-0x005153e0	132		transportation manager and circuit bases		unidentified			ui
-0x00515464	100		transportation manager and circuit bases		unidentified			ui
-0x005154e3	153		transportation manager and circuit bases		unidentified			ui
-0x005155c3	149		transportation manager and circuit bases		unidentified			ui
-0x00515658	117		transportation manager and circuit bases		unidentified			ui
-0x005156cd	58		transportation manager and circuit bases		unidentified			ui
-0x00515707	46		transportation manager and circuit bases		unidentified			ui
+0x00515367	121	resolve_ZTTransportationMgr_station_label_value			confirmed			
+0x005153e0	132	erase_ZTTransportationMgr_dword_pair_tree_key			confirmed			
+0x00515464	100	append_ZTTransportationMgr_connection_record			confirmed			
+0x005154e3	153	register_ZTTransportationMgr_action_handler			confirmed			
+0x005155c3	149	resize_ZTTransportationMgr_pointer_vector			confirmed			
+0x00515658	117	insert_ZTTransportationMgr_connection_record_before_iterator			confirmed			
+0x005156cd	58	advance_ZTTransportationMgr_connection_record_iterator			confirmed			
+0x00515707	46	advance_checked_ZTTransportationMgr_connection_record_iterator			confirmed			
 0x00515735	160	insert_runtime_callback_list_node_948a3c			confirmed			
 0x005157d5	23	dispatch_view_dependency_refresh			confirmed			
-0x005157ec	36		transportation manager and circuit bases		unidentified			ui
+0x005157ec	36	construct_ZTTransportationMgr_connection_record_refs			confirmed			
 0x00515810	40	as_ZTTourData			confirmed			
-0x00515838	54		transportation manager and circuit bases		unidentified			ui
-0x0051586e	417		transportation manager and circuit bases		unidentified			ui
-0x00515a0f	25		transportation manager and circuit bases		unidentified			ui
+0x00515838	54	make_ZTTransportationMgr_connection_record_iterator_at			confirmed			
+0x0051586e	417	insert_ZTTransportationMgr_connection_record_range			confirmed			
+0x00515a0f	25	destroy_ZTTransportationMgr_connection_record_range			confirmed			
 0x00515a28	46		transportation manager and circuit bases		unidentified			ui
 0x00515a56	68		transportation manager and circuit bases		unidentified			ui
 0x00515a9a	65		transportation manager and circuit bases		unidentified			ui
@@ -7370,7 +7370,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0056284d	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562914	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x00562baf	393		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
-0x00562d38	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00562d38	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00562d5b	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562e22	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
 0x005630bd	387		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
