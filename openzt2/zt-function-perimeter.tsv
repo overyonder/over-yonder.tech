@@ -6906,8 +6906,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00549bb1	53	set_tankwallglass_selector_flag4_dirty			confirmed			
 0x00549be6	93	refresh_tankwallglass_selector_sound_event_ref			confirmed			
 0x00549c43	117	clear_tankwallglass_selector_sound_event_ref			confirmed			
-0x00549cb8	81		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x00549d18	153		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x00549cb8	81	clear_tankwallglass_selector_tree_entries			confirmed			
+0x00549d18	153	refresh_tankwallglass_selector_linked_records			confirmed			
 0x00549db1	233		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x00549ebf	25	mark_tankwallglass_segment_dirty			confirmed			
 0x00549ed8	596	flag_elevated_paths_in_tank_height_range			confirmed			
@@ -6917,7 +6917,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054a4c3	0	clear_tank_segment_variant_refs_matching_pointer			confirmed		0x008da4d0#0	
 0x0054a4dc	0	allocate_tank_segment_variant_instance			confirmed		0x008da91c#6	
 0x0054a4f7	153	insert_material_selector_handler_for_unseen_type			confirmed			
-0x0054a5d7	33		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054a5d7	33	destroy_tank_segment_variant_safe_handle_value			confirmed			
 0x0054a5f8	0	scalar_delete_tank_segment_variant_safe_handle			confirmed		0x008da91c#0	
 0x0054a613	22	count_tankwallglass_selector_vertices			confirmed			
 0x0054a629	160	insert_material_selector_handler_list_record			confirmed			
@@ -6943,8 +6943,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054ad4d	136		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054add5	172		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ae81	204	check_tank_support_selector_matches_active_material			confirmed			
-0x0054af4d	122		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054afc7	176		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054af4d	122	test_tank_support_selector_has_endpoint_match			confirmed			
+0x0054afc7	176	select_tank_support_selector_type_for_endpoint			confirmed			
 0x0054b077	54	clear_ZTTankSupport_pointer_vector_range			confirmed			
 0x0054b0ad	0	allocate_ZTTankSupport_instance			confirmed			
 0x0054b10f	117	replay_ZTTankSupport_callback_list			confirmed			
@@ -6956,7 +6956,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054b518	505		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054b711	100		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054b775	226		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054b857	645		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054b857	645	detach_tank_segment_area_membership_entry			confirmed			
 0x0054badc	668	update_tank_segment_height_and_invalidate_links			confirmed			
 0x0054bd78	83		tankwallglass material selector sweep and dirty refresh		unidentified			io/assets
 0x0054bdcb	369		tankwallglass material selector sweep and dirty refresh		unidentified			
@@ -6968,17 +6968,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054c545	43		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c570	75		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054c5bb	59	get_material_selector_linked_support_type			confirmed			
-0x0054c5f6	53		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054c62b	53		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054c5f6	53	get_material_selector_entry_primary_type			confirmed			
+0x0054c62b	53	get_material_selector_entry_secondary_type			confirmed			
 0x0054c660	189		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c71d	447		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c8dc	87		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c933	106		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054c99d	116		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ca11	1208		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054cec9	1021		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054cec9	1021	recompute_tankwallglass_selector_link_geometry			confirmed			
 0x0054d2c6	100		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054d32a	40		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054d32a	40	test_tankwallglass_selector_endpoint_pair_match			confirmed			
 0x0054d352	224		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054d432	104		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054d49a	59	flush_tankwallglass_pending_link_dirty_flags			confirmed			
@@ -6987,8 +6987,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054d66a	508	rebuild_tankwallglass_material_selectors			confirmed			
 0x0054d866	234	refresh_dirty_tankwallglass_material_selectors			confirmed			
 0x0054d950	310		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054da86	105		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054daef	214		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054da86	105		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054daef	214	test_tankwallglass_selector_points_equivalent			confirmed			
 0x0054dbc5	108		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054dc31	99		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054dc94	370		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
@@ -7000,35 +7000,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054e9d7	139		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ea62	85		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054eab7	56		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054eaef	84		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054eaef	84	apply_material_selector_key_to_tree_entries			confirmed			
 0x0054eb43	79		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054eb92	208		tankwallglass material selector sweep and dirty refresh		unidentified			
-0x0054ec62	105		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054eccb	91		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054ec62	105	clear_tank_segment_variant_safe_handle_vector			confirmed			
+0x0054eccb	91	append_tank_segment_variant_safe_handle_vector_entry			confirmed			
 0x0054ed26	32	advance_checked_8byte_iterator_in_place			confirmed			
 0x0054ed46	34		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054ed68	104	compact_12byte_point_vector_after_erase			confirmed			
-0x0054edd0	115		tankwallglass material selector sweep and dirty refresh		unidentified			ui
-0x0054ee43	59		tankwallglass material selector sweep and dirty refresh		unidentified			ui
+0x0054edd0	115	prepare_tank_segment_variant_safe_handle_vector_insert			confirmed			
+0x0054ee43	59	construct_tank_segment_variant_safe_handle_range			confirmed			
 0x0054ee7e	66	rotate_tree_node_right			confirmed			
-0x0054eec0	436		area membership and tank selector data structures		unidentified			ui
-0x0054f074	83		area membership and tank selector data structures		unidentified			
+0x0054eec0	436	insert_fill_tank_segment_variant_safe_handle_vector_range			confirmed			
+0x0054f074	83	find_tank_selector_tree_entry_by_value			confirmed			
 0x0054f0c7	51	assign_named_ui_value_assignment_list_ref			confirmed			
-0x0054f0fa	57		area membership and tank selector data structures		unidentified			ui
+0x0054f0fa	57	copy_construct_tank_segment_variant_safe_handle_range			confirmed			
 0x0054f133	132	construct_named_ui_value_assignment_storage			confirmed			
-0x0054f1b7	56		area membership and tank selector data structures		unidentified			ui
+0x0054f1b7	56	destroy_named_ui_value_assignment_storage			confirmed			
 0x0054f1ef	660		area membership and tank selector data structures		unidentified			world/pathing
-0x0054f483	143		area membership and tank selector data structures		unidentified			ui
+0x0054f483	143	clear_area_membership_selector_storage			confirmed			
 0x0054f512	1263		area membership and tank selector data structures		unidentified			
 0x0054fa01	892		area membership and tank selector data structures		unidentified			
 0x0054fd7d	184		area membership and tank selector data structures		unidentified			
 0x0054fe35	152	is_tankwallglass_selector_compatible_with_support			confirmed			
 0x0054fecd	110	construct_and_apply_area_membership_candidate			confirmed			
 0x0054ff3b	284		area membership and tank selector data structures		unidentified			
-0x00550057	318		area membership and tank selector data structures		unidentified			ui
+0x00550057	318	upsert_tank_support_selector_entry_for_point			confirmed			
 0x00550195	334	refresh_tank_selector_entry_after_area_update			confirmed			
 0x005502e3	79		area membership and tank selector data structures		unidentified			
-0x00550332	138		area membership and tank selector data structures		unidentified			ui
+0x00550332	138		area membership and tank selector data structures		unidentified			
 0x005503bc	230	insert_tank_support_selector_entry			confirmed			
 0x005504a2	62	resolve_tank_support_from_entity_handle			confirmed			
 0x005504e0	174		area membership and tank selector data structures		unidentified			
@@ -7039,7 +7039,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00550795	116		area membership and tank selector data structures		unidentified			ui
 0x00550809	18	clear_area_membership_candidate_vector			confirmed			
 0x0055081b	250		area membership and tank selector data structures		unidentified			world/pathing
-0x00550915	252		area membership and tank selector data structures		unidentified			ui
+0x00550915	252		area membership and tank selector data structures		unidentified			
 0x00550a11	245		area membership and tank selector data structures		unidentified			ui
 0x00550b06	167	update_min_named_ui_assignment_entry_float			confirmed			
 0x00550bad	217		area membership and tank selector data structures		unidentified			
@@ -7047,7 +7047,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00551349	261		area membership and tank selector data structures		unidentified			ui
 0x0055144e	130		area membership and tank selector data structures		unidentified			
 0x005514d0	659	erase_tank_selector_tree_node_and_return_next			confirmed			
-0x00551763	104		area membership and tank selector data structures		unidentified			ui
+0x00551763	104		area membership and tank selector data structures		unidentified			
 0x005517cb	52	clear_area_membership_pointer_vector_storage			confirmed			
 0x005517ff	152		area membership and tank selector data structures		unidentified			ui
 0x00551897	48	destroy_named_ui_assignment_tree_storage			confirmed			
