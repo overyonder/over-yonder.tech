@@ -6360,13 +6360,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00532ae3	153	insert_ZTTransportVehicleGate_ui_handler_record			confirmed			
 0x00532bc3	163	insert_12byte_global_list_node_936b8c			confirmed			
 0x00532c66	160	insert_runtime_callback_list_node_9489a8			confirmed			
-0x00532d06	117		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00532d06	117	copy_ZTTransportVehicleGate_base_ui_handlers			confirmed			
 0x00532d7b	0	clone_ZTTransportViewable_value			confirmed		0x008d9488#5	
 0x00532d9c	309	copy_construct_ZTTransportViewable			confirmed			
 0x00532ed1	0	scalar_delete_ZTTransportViewable			confirmed		0x008d9488#0	
 0x00532eec	114	copy_construct_ZTViewableSubMgr_base_fields			confirmed			
 0x00532f79	47	get_type_ZTTransportViewable			confirmed			
-0x00532fa8	0		transport ground/sky track, dependency cleanup, and UI storage t		unidentified		0x008d9488#1	ui
+0x00532fa8	0	get_type_ZTTransportViewable_vtable_thunk			confirmed		0x008d9488#1	
 0x00532fad	32	init_ZTTransportViewable_descriptor_ref			confirmed			
 0x00532fcd	0	init_ZTTransportViewable_descriptor_ref_vtable_thunk			confirmed		0x008d9488#2	
 0x00532fd2	68	get_ZTTransportViewable_ui_handler_registry			confirmed			
@@ -6376,28 +6376,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00533129	69	destroy_ZTTransportViewable			confirmed			
 0x0053316e	0	add_ZTTransportViewable_entry_when_route_refs_exist			confirmed		0x008d9488#21	
 0x0053318c	0	remove_ZTTransportViewable_entry_and_route_index			confirmed		0x008d9488#22	
-0x005332e8	130		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0053336a	88		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005332e8	130	append_ZTTransportViewable_fGS_assignment_ref			confirmed			
+0x0053336a	88	lookup_ZTTransportViewable_route_tree_payload			confirmed			
 0x005333c2	0	clear_ZTTransportViewable_route_state			confirmed		0x008d9488#23	
 0x005333f7	0	refresh_ZTTransportViewable_targets_and_render_state			confirmed		0x008d9488#24	
-0x00533482	769		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00533482	769	process_ZTTransportViewable_target_route_candidate			confirmed			
 0x00533783	476	test_viewable_route_candidate_clearance			confirmed			
-0x0053395f	119		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005339d6	496		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533bc6	119		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533c3d	101		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533ca2	54		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533cd8	190		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533d96	36		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533dba	116		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533e2e	132		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00533eb2	659		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00534145	127		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005341c4	302		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005342f2	99		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0053395f	119	collect_active_transport_viewable_route_keys			confirmed			
+0x005339d6	496	refresh_ZTTransportViewable_visible_route_targets			confirmed			
+0x00533bc6	119	copy_construct_refcounted_pointer_vector			confirmed			
+0x00533c3d	101	append_refcounted_pointer_vector_entry			confirmed			
+0x00533ca2	54	build_transport_named_ref_list_copy			confirmed			
+0x00533cd8	190	find_or_insert_ZTTransportViewable_route_ref_slot			confirmed			
+0x00533d96	36	clear_ZTTransportViewable_route_tree			confirmed			
+0x00533dba	116	lower_bound_ZTTransportViewable_route_ref_key			confirmed			
+0x00533e2e	132	find_or_insert_ZTTransportViewable_route_index_slot			confirmed			
+0x00533eb2	659	erase_ZTTransportViewable_route_index_tree_node			confirmed			
+0x00534145	127	copy_construct_ZTTransportViewable_fGS_assignment_vector			confirmed			
+0x005341c4	302	assign_ZTTransportViewable_fGS_assignment_vector			confirmed			
+0x005342f2	99	clear_ZTTransportViewable_fGS_assignment_vector			confirmed			
 0x00534355	0	allocate_ZTTransportViewable_instance			confirmed		0x008d94fc#4	
-0x005343b7	235		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005344a2	675		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005343b7	235	find_or_insert_ZTTransportViewable_route_assignment_slot			confirmed			
+0x005344a2	675	erase_ZTTransportViewable_route_assignment_tree_node			confirmed			
 0x00534745	33	destroy_ZTTransportViewable_fGS_assignment_ref			confirmed			
 0x00534766	0	scalar_delete_ZTTransportViewable_fGS_assignment_ref			confirmed		0x008d94ec#2	
 0x00534781	111		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
@@ -6990,7 +6990,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0054da86	105		tankwallglass material selector sweep and dirty refresh		unidentified			
 0x0054daef	214		tankwallglass material selector sweep and dirty refresh		unidentified			ui
 0x0054dbc5	108		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
-0x0054dc31	99		tankwallglass material selector sweep and dirty refresh		unidentified			
+0x0054dc31	99		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054dc94	370		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054de06	110		tankwallglass material selector sweep and dirty refresh		unidentified			world/pathing
 0x0054de74	115		tankwallglass material selector sweep and dirty refresh		unidentified			
@@ -15709,7 +15709,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00693104	65		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x00693145	452	insert_repeated_8byte_records			confirmed	gamebryo		
 0x00693309	50		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
-0x0069333b	64		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		ui
+0x0069333b	64		vector growth/copy helpers for 12-byte, 8-byte, and 40-byte reco		unidentified	gamebryo		
 0x0069337b	70		material-support record move/copy helpers		unidentified	gamebryo		io/assets
 0x00693436	44		material-support record move/copy helpers		unidentified	gamebryo		
 0x00693462	40		material-support record move/copy helpers		unidentified	gamebryo		
@@ -18514,7 +18514,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070d309	68		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0070d34d	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#19	
 0x0070d3f1	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#20	
-0x0070d4f9	38		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070d4f9	38		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070d51f	120		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070d597	409		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070d730	223		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -18547,10 +18547,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070ed28	39		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070ed4f	38		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070ed75	211		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070ee48	210		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070ef1a	198		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070ee48	210		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
+0x0070ef1a	198		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070efe0	205		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070f0ad	262		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070f0ad	262		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f1b3	122		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f22d	136		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f2b5	41		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -18559,21 +18559,21 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070f3fd	157		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f4de	644		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0070f762	51		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070f795	104		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070f795	104		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f7fd	168		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f8a5	121		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f91e	98		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070f980	152		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
-0x0070fa18	98		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070fa18	98		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070fa7a	151		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x0070fb11	107		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070fb7c	323		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x0070fcbf	55		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070fcbf	55		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070fcf6	59		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070fd31	61		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070fd6e	63		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070fdad	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070ff02	48		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x0070ff02	48		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x0070ff32	105		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070ff9b	397		collision tester and fitting-surface component XML		unidentified	gamebryo		io/assets
 0x00710128	192		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18582,7 +18582,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00710410	191		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007104cf	341		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00710624	48		collision tester and fitting-surface component XML		unidentified	gamebryo		game-ai
-0x00710654	175		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00710654	175		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00710703	41		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0071072c	39		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710753	49		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
