@@ -4256,7 +4256,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d4071	760		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d4369	0	get_fence_surface_height_value			confirmed		0x008d37ec#2	
 0x004d438f	0	get_fence_surface_config_height			confirmed		0x008d37ec#3	
-0x004d440b	122		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d440b	122	erase_fence_placement_tile_key_matches			confirmed			
 0x004d4485	58		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d4503	120		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d457b	58		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
@@ -4267,7 +4267,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d4773	48		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d47a3	148		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d4837	160		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004d48d7	660		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d48d7	660	erase_ZTFenceMode_target_assignment_tree_node			confirmed			
 0x004d4b6b	40	as_ZTPathBase			confirmed			
 0x004d4b93	39		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d4bc2	37		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
@@ -4362,16 +4362,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d7b4c	159		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d7c32	132		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d7cb6	127		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d7d35	51		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d7d35	51	copy_construct_BFXMLObj_clone_node_count			confirmed			
 0x004d7d68	26		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d7d82	418		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d7d82	418	insert_BFXMLObj_clone_node_vector_record			confirmed			
 0x004d7f24	67		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d7f67	160		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004d8007	47		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004d8036	79		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d8007	47	copy_construct_BFXMLObj_clone_node_range			confirmed			
+0x004d8036	79	assign_BFXMLObj_clone_node_record			confirmed			
 0x004d8085	0	adjusted_delete_ZTFPSUDVComponent_secondary			confirmed		0x008d3c20#52	
-0x004d808d	24		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004d80a5	91		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d808d	24	destroy_BFXMLObj_clone_node_record			confirmed			
+0x004d80a5	91	copy_construct_BFXMLObj_clone_node_record			confirmed			
 0x004d8100	0	scalar_delete_BFXMLObj_clone_node			confirmed		0x008d3d00#0	
 0x004d811b	0	clone_BFXMLObj_value_node			confirmed		0x008d3d00#5	
 0x004d8136	0	get_gate_open_state_byte			confirmed		0x008d3da8#21	
@@ -4379,7 +4379,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d8169	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d3da8#1	
 0x004d816e	32	init_ZTGate_descriptor_ref			confirmed			
 0x004d818e	0	init_ZTGate_descriptor_ref_vtable_thunk			confirmed		0x008d3da8#2	
-0x004d8193	40		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d8193	40	get_ZTGate_action_registry			confirmed			
 0x004d81bb	0	register_ZTGate_action_value			confirmed		0x008d3e04#0	
 0x004d81d1	0	resolve_ZTGate_action_value			confirmed		0x008d3e04#1	
 0x004d8224	112		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4390,7 +4390,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d8349	253	read_open_close_door_config			confirmed		0x008d3da8#19	
 0x004d8446	298	write_open_close_door_config			confirmed		0x008d3da8#20	
 0x004d8570	135		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004d85f7	126		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d85f7	126	ensure_ZTGate_pending_close_entry			confirmed			
 0x004d8675	128		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d86f5	424	tick_ZTGate_auto_close_state			confirmed		0x008d3da8#14	
 0x004d889d	155		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
@@ -4401,7 +4401,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d8b0d	160		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d8bad	60		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d8be9	156		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004d8c85	87		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d8c85	87	erase_ZTGate_pending_close_ref_list_node			confirmed			
 0x004d8cdc	22		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d8cf2	52		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d8d26	90		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
@@ -4415,7 +4415,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d8e8b	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d8ef9	182		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d8faf	0	scalar_delete_ZTGestureComponent			confirmed		0x008d4120#0	
-0x004d8fca	191		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d8fca	191	destroy_ZTGestureComponent_members			confirmed			
 0x004d9089	0	write_ZTGestureComponent_xml			confirmed		0x008d4120#19	
 0x004d90fb	0	read_ZTGestureComponent_xml			confirmed		0x008d4120#20	
 0x004d91a6	465		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -4427,35 +4427,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d98bc	95		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d991b	393		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d9aa4	242		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004d9b96	84		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d9b96	84	clear_ZTGestureComponent_active_target_ref			confirmed			
 0x004d9bea	214		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004d9cc0	98		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004d9d22	304		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
-0x004d9e52	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004d9ec0	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
-0x004d9f2e	110		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004d9e52	110	unregister_ZTGestureComponent_debug_vector_80			confirmed			
+0x004d9ec0	110	unregister_ZTGestureComponent_debug_vector_90			confirmed			
+0x004d9f2e	110	unregister_ZTGestureComponent_debug_vector_a0			confirmed			
 0x004d9f9c	203		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004da067	54		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004da09d	277		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
+0x004da09d	277		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004da1b2	184		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004da26a	56		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004da2a2	130		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004da324	44		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004da350	188		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
+0x004da350	188		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
 0x004da40c	111		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004da47b	154		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004da47b	154	refresh_ZTGestureComponent_event_marker_widgets			confirmed			
 0x004da515	187		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004da5d0	142		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004da65e	657		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004da8ef	368		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004daa5f	452		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004dac23	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004dacaf	150		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004dac23	140		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
+0x004dacaf	150	apply_ZTGestureComponent_event_marker_icon_texture			confirmed			
 0x004dad45	126		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004dadc3	100		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004dae27	95		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004dae86	95		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004daee5	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004daee5	86	apply_ZTGestureComponent_tracer_icon_target			confirmed			
 0x004daf3b	112		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004dafab	112		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004db01b	276		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
@@ -4465,12 +4465,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004db434	104		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004db49c	147		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			game-entities
 0x004db52f	213		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
-0x004db604	172		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004db604	172	rebuild_ZTGestureComponent_trick_step_marker_names			confirmed			
 0x004db6b0	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004db727	100		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004db78b	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004db7e1	95		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
-0x004db840	79		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			ui
+0x004db840	79		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
 0x004db88f	86		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
 0x004db8e5	0	allocate_ZTGestureComponent_instance			confirmed		0x008d4174#3	
 0x004db8fd	153		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
@@ -18192,7 +18192,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006ffa8e	0		collision tester and fitting-surface component XML		unidentified		0x008fa044#3	
 0x006ffaa6	110		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006ffb14	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006ffbf4	157		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x006ffbf4	157		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006ffc91	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006ffd31	40	as_BFGridCollisionComponent			confirmed	gamebryo		
 0x006ffd59	0		collision tester and fitting-surface component XML		unidentified		0x008fa044#0	
