@@ -4520,10 +4520,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004dd8df	97	make_gesture_trace_distance_sample_heap			confirmed			
 0x004dd940	244	insertion_sort_gesture_trace_distance_samples			confirmed			
 0x004dda34	241	order_gesture_trace_distance_sample_triple			confirmed			
-0x004ddb25	270		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004ddc33	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004ddcaa	172		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004ddd56	129		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004ddb25	270		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
+0x004ddc33	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
+0x004ddcaa	172		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
+0x004ddd56	129		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
 0x004dddd7	31	construct_BFXMLAttribute_from_value			confirmed			
 0x004dddf6	47	get_type_ZTGestureMgr			confirmed			
 0x004dde25	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d4338#1	
@@ -7957,7 +7957,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057f03a	210		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057f10c	566		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057f342	109		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
-0x0057f3af	77		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
+0x0057f3af	77	test_camera_below_active_water_surface	media shell, telemetry, transport geometry, scenarios, tank comm		unidentified	gamebryo		renderer
 0x0057f3fc	161		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057f49d	193		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057f55e	275		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
@@ -8014,13 +8014,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0058242c	135		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x005824b3	30		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x005824d1	1711		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
-0x00582b80	150		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
+0x00582b80	150	append_BFSoundMgr_delayed_sound_ref_record	media shell, telemetry, transport geometry, scenarios, tank comm		unidentified	gamebryo		renderer
 0x00582c16	170		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00582cc0	614	release_BFSoundMgr_active_sound_lists			confirmed			
 0x00582f26	192	shutdown_BFSoundMgr_runtime_state			confirmed			
 0x00582fe6	238	apply_BFSoundMgr_3d_sound_volume_update			confirmed			
 0x005830d4	109	compute_BFSoundMgr_3d_sound_effective_volume			confirmed			
-0x00583141	98		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
+0x00583141	98	mute_BFSoundMgr_masked_3d_sound_entries	media shell, telemetry, transport geometry, scenarios, tank comm		unidentified	gamebryo		renderer
 0x005831a3	324	refresh_BFSoundMgr_3d_sound_volumes			confirmed			
 0x005832e7	129	apply_BFSoundMgr_masked_sound_volume_update			confirmed			
 0x00583368	107	remove_BFSoundMgr_2d_sound_from_active_list			confirmed			
@@ -8055,7 +8055,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005848d6	0	set_BFSoundMgr_3d_volume_from_value			confirmed		0x008e1338#5	
 0x005849ba	156		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584a56	82		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
-0x00584aa8	23		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
+0x00584aa8	23	set_active_status_ui_assignment_target	media shell, telemetry, transport geometry, scenarios, tank comm		unidentified	gamebryo		renderer
 0x00584abf	222	upsert_BFSoundMgr_named_volume_modifier			confirmed			
 0x00584b9d	208	remove_BFSoundMgr_named_volume_modifier			confirmed			
 0x00584c6d	212		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			world/pathing
@@ -8065,27 +8065,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00584e08	36	clear_inline_string_tree_header			confirmed			
 0x00584e2c	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
 0x00584e50	36		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			audio
-0x00584e74	81		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			renderer
+0x00584e74	81	erase_refcounted_text_ref_vector_entry	media shell, telemetry, transport geometry, scenarios, tank comm		unidentified	gamebryo		renderer
 0x00584ee0	153		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x00584fc0	139		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0058504b	36	advance_list_iterator_in_place			confirmed			
-0x0058506f	132		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x005850f3	25		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058510c	61		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x00585149	151		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x005851e0	24		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x005851f8	71		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058523f	148		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x005852d3	457		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058549c	473		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x00585675	160		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x00585715	88		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058576d	71		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
+0x0058506f	132	insert_BFSoundMgr_named_volume_modifier_record_at_iterator	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x005850f3	25	destroy_inline_string_24byte_record_range	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058510c	61	copy_construct_inline_string_24byte_records	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x00585149	151	insert_refcounted_text_ref_record_at_iterator	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x005851e0	24	destroy_refcounted_text_ref_record_range	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x005851f8	71	fill_refcounted_text_ref_records	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058523f	148	erase_inline_string_tree_range	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x005852d3	457	insert_inline_string_24byte_record	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058549c	473	insert_refcounted_text_ref_record	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x00585675	160	append_BFSoundMgr_sound_config_handler_record	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x00585715	88	unwrap_BFXMLNode_payload	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058576d	71	resolve_BFSoundtag_named_object_payload	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
 0x005857b4	40	as_BFSnd			confirmed			
 0x005857dc	40	as_BFAmbient3DSndGenerator			confirmed			
-0x00585804	61		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x00585841	73		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
-0x0058588a	60		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
+0x00585804	61	relocate_inline_string_24byte_records_forward	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x00585841	73	move_inline_string_24byte_records_backward	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
+0x0058588a	60	relocate_refcounted_text_ref_records_forward	sound runtime, NiObject texture/node/camera, and property serial		unidentified	gamebryo		renderer
 0x005858c6	27		sound runtime, NiObject texture/node/camera, and property serial		unidentified			renderer
 0x005858e1	0	scalar_delete_BFSoundMgr_secondary_this_adjustor			confirmed		0x008e1358#0	
 0x005858fb	0	scalar_delete_BFXMLObj_sound_config_value			confirmed		0x008e136c#0	
@@ -8972,27 +8972,27 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059dd80	0	compare_NiBillboardNode_state			confirmed		0x008e3ac8#7	
 0x0059dda5	0	emit_NiBillboardNode_viewer_strings			confirmed		0x008e3ac8#8	
 0x0059de17	109	format_NiBillboardNode_mode_string			confirmed	gamebryo		
-0x0059de84	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3b50#1	io/assets
+0x0059de84	0	get_NiBltSource_rtti			confirmed		0x008e3b50#1	
 0x0059de8a	0	get_NiBltSource_width			confirmed		0x008e3b50#13	
 0x0059dea8	0	get_NiBltSource_height			confirmed		0x008e3b50#14	
 0x0059df17	0	scalar_delete_NiBltSource			confirmed		0x008e3b50#0	
-0x0059df32	128		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059dfb2	31		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059df32	128	destroy_NiBltSource_members			confirmed	gamebryo		
+0x0059dfb2	31	query_renderer_manager_source_availability			confirmed	gamebryo		
 0x0059dfe4	0	load_NiBltSource_reference_or_path			confirmed		0x008e3b50#3	
 0x0059e0b2	0	link_NiBltSource_stream_object			confirmed		0x008e3b50#4	
 0x0059e0d6	0	register_NiBltSource_streamables			confirmed		0x008e3b50#5	
 0x0059e100	0	save_NiBltSource_reference_or_path			confirmed		0x008e3b50#6	
 0x0059e176	0	emit_NiBltSource_viewer_strings			confirmed		0x008e3b50#8	
-0x0059e1b6	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3b98#1	io/assets
+0x0059e1b6	0	get_NiBooleanExtraData_rtti			confirmed		0x008e3b98#1	
 0x0059e1bc	0	scalar_delete_NiBooleanExtraData			confirmed		0x008e3b98#0	
 0x0059e1dd	0	clone_NiBooleanExtraData			confirmed		0x008e3b98#2	
 0x0059e231	0	load_NiBooleanExtraData_value			confirmed		0x008e3b98#3	
 0x0059e25c	0	save_NiBooleanExtraData_value			confirmed		0x008e3b98#6	
 0x0059e283	0	compare_NiBooleanExtraData_value			confirmed		0x008e3b98#7	
 0x0059e29b	0	emit_NiBooleanExtraData_viewer_strings			confirmed		0x008e3b98#8	
-0x0059e310	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3bf0#1	io/assets
-0x0059e316	63		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059e355	104		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059e310	0	get_NiBSPNode_rtti			confirmed		0x008e3bf0#1	
+0x0059e316	63	construct_NiBSPNode_members			confirmed	gamebryo		
+0x0059e355	104	recompute_NiBSPNode_world_plane_from_transform			confirmed	gamebryo		
 0x0059e3bd	0	refresh_NiBSPNode_world_plane			confirmed		0x008e3bf0#28	
 0x0059e3cd	0	traverse_NiBSPNode_partitioned_children			confirmed		0x008e3bf0#15	
 0x0059e55f	0	propagate_NiBSPNode_visibility_by_plane_side			confirmed		0x008e3bf0#23	
@@ -9002,18 +9002,18 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059e644	0	save_NiBSPNode_planes			confirmed		0x008e3bf0#6	
 0x0059e663	0	compare_NiBSPNode_planes			confirmed		0x008e3bf0#7	
 0x0059e690	0	emit_NiBSPNode_viewer_strings			confirmed		0x008e3bf0#8	
-0x0059e752	35		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
-0x0059e775	72		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059e752	35	compare_vec3_scalar_plane_records			confirmed	gamebryo		
+0x0059e775	72	classify_point_against_vec3_scalar_plane			confirmed	gamebryo		
 0x0059e7bd	0	clone_NiColorExtraData			confirmed		0x008e3c90#2	
 0x0059e802	0	load_NiColorExtraData_value			confirmed		0x008e3c90#3	
 0x0059e867	0	save_NiColorExtraData_value			confirmed		0x008e3c90#6	
 0x0059e882	0	compare_NiColorExtraData_value			confirmed		0x008e3c90#7	
 0x0059e8a3	0	emit_NiColorExtraData_viewer_strings			confirmed		0x008e3c90#8	
-0x0059e943	45		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059e943	45	construct_NiColorExtraData_members			confirmed	gamebryo		
 0x0059e970	0	scalar_delete_NiColorExtraData			confirmed		0x008e3c90#0	
-0x0059e991	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3c90#1	io/assets
-0x0059e997	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3cc8#1	io/assets
-0x0059e99d	71		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059e991	0	get_NiColorExtraData_rtti			confirmed		0x008e3c90#1	
+0x0059e997	0	get_NiDirectionalLight_rtti			confirmed		0x008e3cc8#1	
+0x0059e99d	71	construct_NiDirectionalLight_members			confirmed	gamebryo		
 0x0059e9e4	0	refresh_NiDirectionalLight_world_direction			confirmed		0x008e3cc8#28	
 0x0059ea0d	0	clone_NiDirectionalLight			confirmed		0x008e3cc8#2	
 0x0059ea60	0	tailcall_save_NiLight_state			confirmed		0x008e38c8#6	
@@ -9024,22 +9024,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059eb26	0	compare_NiFloatExtraData_value			confirmed		0x008e3d4c#7	
 0x0059eb46	0	emit_NiFloatExtraData_viewer_strings			confirmed		0x008e3d4c#8	
 0x0059ebbd	0	scalar_delete_NiFloatExtraData			confirmed		0x008e3d4c#0	
-0x0059ebde	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3d4c#1	io/assets
+0x0059ebde	0	get_NiFloatExtraData_rtti			confirmed		0x008e3d4c#1	
 0x0059ebe4	0	clone_NiFloatsExtraData			confirmed		0x008e3d90#2	
 0x0059ec88	0	load_NiFloatsExtraData_values			confirmed		0x008e3d90#3	
 0x0059ecd8	0	save_NiFloatsExtraData_values			confirmed		0x008e3d90#6	
 0x0059ed06	0	compare_NiFloatsExtraData_values			confirmed		0x008e3d90#7	
 0x0059ed61	0	emit_NiFloatsExtraData_viewer_strings			confirmed		0x008e3d90#8	
 0x0059ee8a	0	scalar_delete_NiFloatsExtraData			confirmed		0x008e3d90#0	
-0x0059eeb9	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3d90#1	io/assets
-0x0059eebf	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3dd0#1	io/assets
+0x0059eeb9	0	get_NiFloatsExtraData_rtti			confirmed		0x008e3d90#1	
+0x0059eebf	0	get_NiIntegerExtraData_rtti			confirmed		0x008e3dd0#1	
 0x0059eec5	0	scalar_delete_NiIntegerExtraData			confirmed		0x008e3dd0#0	
 0x0059eee6	0	clone_NiIntegerExtraData			confirmed		0x008e3dd0#2	
 0x0059ef37	0	load_NiScalarExtraData_value			confirmed		0x008e3d4c#3	
 0x0059ef55	0	tailcall_register_NiExtraData_streamables			confirmed		0x008e27f4#5	
 0x0059ef5a	0	compare_NiIntegerExtraData_value			confirmed		0x008e3dd0#7	
 0x0059ef72	0	emit_NiIntegerExtraData_viewer_strings			confirmed		0x008e3dd0#8	
-0x0059efe5	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3e14#1	io/assets
+0x0059efe5	0	get_NiIntegersExtraData_rtti			confirmed		0x008e3e14#1	
 0x0059efeb	0	scalar_delete_NiIntegersExtraData			confirmed		0x008e3e14#0	
 0x0059f01a	0	clone_NiIntegersExtraData			confirmed		0x008e3e14#2	
 0x0059f0be	0	load_NiIntegersExtraData_values			confirmed		0x008e3e14#3	
@@ -9047,8 +9047,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0059f11a	0	save_NiIntegersExtraData_values			confirmed		0x008e3e14#6	
 0x0059f14f	0	compare_NiIntegersExtraData_values			confirmed		0x008e3e14#7	
 0x0059f1a3	0	emit_NiIntegersExtraData_viewer_strings			confirmed		0x008e3e14#8	
-0x0059f2c8	0		NetImmerse Gamebryo class factory and property serialization ban		unidentified		0x008e3e80#1	io/assets
-0x0059f2ce	120		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
+0x0059f2c8	0	get_NiLODNode_rtti			confirmed		0x008e3e80#1	
+0x0059f2ce	120	construct_NiLODNode_members			confirmed	gamebryo		
 0x0059f346	0	scalar_delete_NiLODNode			confirmed		0x008e3e80#0	
 0x0059f361	27		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
 0x0059f37c	27		NetImmerse Gamebryo class factory and property serialization ban		unidentified	gamebryo		io/assets
@@ -9525,7 +9525,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ae259	111	destroy_refcounted_ui_assignment_queue_storage			confirmed	gamebryo		
 0x005ae2c8	58	get_refcounted_ui_assignment_queue_slot			confirmed	gamebryo		
 0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
-0x005ae3b3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		economy
+0x005ae3b3	73		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		audio
 0x005ae3fc	659		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae68f	45		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005ae6bc	0	get_type_BFSafeHandle<BFPerformanceMonitor>			confirmed			
@@ -16263,7 +16263,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a598d	0	remove_matching_BFR_model_usage_params_from_descriptor			confirmed		0x008f5178#9	
 0x006a59cd	0	read_BFR_model_params_from_descriptor_list			confirmed		0x008f5178#8	
 0x006a5a0c	0	collect_missing_BFR_model_attribute_indices			confirmed		0x008f5178#5	
-0x006a5a4c	98		BFR model parameter/container helper band		unidentified	gamebryo		game-ai
+0x006a5a4c	98		BFR model parameter/container helper band		unidentified	gamebryo		
 0x006a5aae	57		BFR model parameter/container helper band		unidentified	gamebryo		
 0x006a5ae7	129		BFR model parameter/container helper band		unidentified	gamebryo		ui
 0x006a5b68	268		BFR model parameter/container helper band		unidentified	gamebryo		ui
@@ -17928,7 +17928,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f0170	73		collision tester and fitting-surface component XML		unidentified	gamebryo		game-ai
 0x006f01b9	927		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0558	259		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
-0x006f065b	432		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x006f065b	432		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f080b	205		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f08d8	806		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0bfe	72		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
@@ -18384,7 +18384,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00707f97	374		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x0070810d	122		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00708187	103		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007081ee	505		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x007081ee	505		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007083e7	187		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007084a2	116		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00708516	396		collision tester and fitting-surface component XML		unidentified	gamebryo		
