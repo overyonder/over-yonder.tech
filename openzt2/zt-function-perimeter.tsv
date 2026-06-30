@@ -16155,13 +16155,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006a2046	53		generic vector-like owner constructor helper		unidentified	gamebryo		renderer
 0x006a207b	57		renderer state-list owner constructor		unidentified	gamebryo		renderer
 0x006a20b4	107		broad vector/container constructor helper		unidentified	gamebryo		renderer
-0x006a211f	107		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
+0x006a211f	107		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a218a	109		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
 0x006a21f7	116		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
 0x006a226b	46		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a2299	53		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a22ce	117	mark_unlocked_state_list_entries_for_cleanup			confirmed	gamebryo		
-0x006a2343	113		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		
+0x006a2343	113		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a23b4	43	clear_state_list_pointer_vector_storage			confirmed	gamebryo		
 0x006a23df	222		state-list/vector lifecycle and element cleanup helpers		unidentified	gamebryo		renderer
 0x006a24bd	0		state-list/vector lifecycle and element cleanup helpers		unidentified		0x008f55b0#1	
@@ -21941,26 +21941,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007b60b8	689	append_phighdecal_patch_code0f_or_16_quad_after_corner			confirmed	gamebryo		
 0x007b6369	141	append_phighdecal_patch_code18_or_11_triangle			confirmed	gamebryo		
 0x007b63f6	933	append_phighdecal_patch_code10_or_17_corner_fan			confirmed	gamebryo		
-0x007b679b	1703		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b6e42	704		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b7102	738		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b73e4	581		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b7629	584		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b7871	835		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b7bb4	587		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b7dff	540		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b801b	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902490#0	ui
-0x007b8036	22		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b804c	289		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b816d	99		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b81d0	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024c8#0	ui
-0x007b81eb	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b820b	79		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b825a	0		UI dependency references, movement/view components, and animatio		unidentified		0x009024c8#6	ui
-0x007b8290	341		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007b83e5	34		UI dependency references, movement/view components, and animatio		unidentified	gamebryo	0x009022e8#8	ui
-0x007b8407	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#1	ui
-0x007b8458	286		UI dependency references, movement/view components, and animatio		unidentified	gamebryo	0x009024c8#7	ui
+0x007b679b	1703	deform_phighdecal_patch_grid_code1			confirmed	gamebryo		
+0x007b6e42	704	deform_phighdecal_patch_grid_code5_or_6			confirmed	gamebryo		
+0x007b7102	738	deform_phighdecal_patch_grid_code0b_or_12			confirmed	gamebryo		
+0x007b73e4	581	deform_phighdecal_patch_grid_code0d_or_14			confirmed	gamebryo		
+0x007b7629	584	deform_phighdecal_patch_grid_code3_or_4			confirmed	gamebryo		
+0x007b7871	835	deform_phighdecal_patch_grid_code9_or_10			confirmed	gamebryo		
+0x007b7bb4	587	deform_phighdecal_patch_grid_code0f_or_16			confirmed	gamebryo		
+0x007b7dff	540	deform_phighdecal_patch_grid_code10_or_17			confirmed	gamebryo		
+0x007b801b	0	scalar_delete_decal_mesh_buffer_record			confirmed		0x00902490#0	
+0x007b8036	22	destroy_decal_mesh_buffer_record			confirmed	gamebryo		
+0x007b804c	289	populate_decal_mesh_buffer_resources			confirmed	gamebryo		
+0x007b816d	99	construct_pdecal_shader_binding			confirmed	gamebryo		
+0x007b81d0	0	scalar_delete_pdecal_shader_binding			confirmed		0x009024c8#0	
+0x007b81eb	32	destroy_pdecal_shader_binding			confirmed	gamebryo		
+0x007b820b	79	read_pdecal_wake_config			confirmed	gamebryo		
+0x007b825a	0	ensure_pdecal_shader_key_and_count_limit			confirmed		0x009024c8#6	
+0x007b8290	341	read_pdecal_shader_binding_config			confirmed	gamebryo		
+0x007b83e5	34	release_pdecal_renderer_resource			confirmed	gamebryo	0x009022e8#8	
+0x007b8407	0	set_pdecal_max_count_and_reload_wake			confirmed		0x009022e8#1	
+0x007b8458	286	prepare_pdecal_renderer_resource			confirmed	gamebryo	0x009024c8#7	
 0x007b8576	0		UI dependency references, movement/view components, and animatio		unidentified		0x009022e8#3	ui
 0x007b86d5	165		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007b877a	83		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
