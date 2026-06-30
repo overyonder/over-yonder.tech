@@ -5725,31 +5725,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00515838	54	make_ZTTransportationMgr_connection_record_iterator_at			confirmed			
 0x0051586e	417	insert_ZTTransportationMgr_connection_record_range			confirmed			
 0x00515a0f	25	destroy_ZTTransportationMgr_connection_record_range			confirmed			
-0x00515a28	46		transportation manager and circuit bases		unidentified			ui
-0x00515a56	68		transportation manager and circuit bases		unidentified			ui
-0x00515a9a	65		transportation manager and circuit bases		unidentified			ui
-0x00515adb	50		transportation manager and circuit bases		unidentified			ui
-0x00515b0d	175		transportation manager and circuit bases		unidentified			ui
-0x00515bbc	48		transportation manager and circuit bases		unidentified			ui
-0x00515bec	133		transportation manager and circuit bases		unidentified			ui
-0x00515c71	75		transportation manager and circuit bases		unidentified			ui
-0x00515cbc	70		transportation manager and circuit bases		unidentified			ui
-0x00515d02	44		transportation manager and circuit bases		unidentified			ui
-0x00515d2e	26		transportation manager and circuit bases		unidentified			ui
-0x00515d48	103		transportation manager and circuit bases		unidentified			ui
-0x00515daf	74		transportation manager and circuit bases		unidentified			ui
-0x00515df9	38		transportation manager and circuit bases		unidentified			ui
+0x00515a28	46	copy_construct_ZTTransportationMgr_connection_record_range			confirmed			
+0x00515a56	68	shift_construct_ZTTransportationMgr_connection_records_backward			confirmed			
+0x00515a9a	65	init_ZTTransportationMgr_dword_pair_tree_storage			confirmed			
+0x00515adb	50	copy_construct_ZTTransportationMgr_connection_record_count			confirmed			
+0x00515b0d	175	erase_ZTTransportationMgr_dword_pair_tree_range			confirmed			
+0x00515bbc	48	destroy_ZTTransportationMgr_dword_pair_tree_storage			confirmed			
+0x00515bec	133	clear_ZTTransportationMgr_connection_record_vector			confirmed			
+0x00515c71	75	erase_ZTTransportationMgr_connection_record_range			confirmed			
+0x00515cbc	70	move_ZTTransportationMgr_connection_record_tail_down			confirmed			
+0x00515d02	44	copy_construct_ZTTransportationMgr_connection_record_refs			confirmed			
+0x00515d2e	26	destroy_ZTTransportationMgr_connection_record_refs			confirmed			
+0x00515d48	103	clear_ZTTransportationMgr_endpoint_ref_vector			confirmed			
+0x00515daf	74	erase_ZTTransportationMgr_endpoint_ref_range			confirmed			
+0x00515df9	38	destroy_ZTTransportationMgr_connection_record_vector_storage			confirmed			
 0x00515e1f	0	scalar_delete_ZTTransportationMgr			confirmed		0x008d8310#0	
 0x00515e3b	0	clone_ZTTransportationMgr			confirmed		0x008d8310#5	
-0x00515e59	334		transportation manager and circuit bases		unidentified			ui
+0x00515e59	334	copy_construct_ZTTransportationMgr_members			confirmed			
 0x00515fa7	0	scalar_delete_BFGTransportationMgr			confirmed		0x008d82b0#0	
-0x00515fc2	125		transportation manager and circuit bases		unidentified			ui
-0x0051603f	92		transportation manager and circuit bases		unidentified			ui
-0x0051609b	113		transportation manager and circuit bases		unidentified			ui
-0x0051610c	70		transportation manager and circuit bases		unidentified			ui
+0x00515fc2	125	copy_construct_ZTTransportationMgr_circuit_list			confirmed			
+0x0051603f	92	copy_ZTTransportationMgr_dword_pair_tree_nodes			confirmed			
+0x0051609b	113	copy_construct_ZTTransportationMgr_connection_record_vector			confirmed			
+0x0051610c	70	get_ZTTransportCircuitBase_link_by_index			confirmed			
 0x00516152	0	clear_transport_circuit_connection_args_return_false			confirmed		0x008d83c0#25	
 0x00516169	47	get_type_ZTTransportCircuitBase			confirmed			
-0x00516198	0		transportation manager and circuit bases		unidentified		0x008d83c0#1	ui
+0x00516198	0	get_type_ZTTransportCircuitBase_vtable_thunk			confirmed		0x008d83c0#1	
 0x0051619d	38		transportation manager and circuit bases		unidentified			ui
 0x0051622c	47	get_type_ZTTransportCircuitPrivateBase			confirmed			
 0x0051625b	0	get_type_ZTTransportCircuitPrivateBase_vtable_thunk			confirmed		0x008d8490#1	
