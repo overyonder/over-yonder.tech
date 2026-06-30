@@ -6160,31 +6160,31 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005293dc	0	clear_ZTTransportSkyTrack_attachment_objects_active			confirmed		0x008d8e50#7	
 0x0052955e	0	refresh_ZTTransportSkyTrack_construction_marker_visibility			confirmed		0x008d8e50#8	
 0x005297a4	27	resolve_ZTTransportSkyTrack_first_trip_neighbor			confirmed			
-0x005297bf	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005297da	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005297bf	27	resolve_ZTTransportSkyTrack_return_trip_neighbor_from_endpoint			confirmed			
+0x005297da	27	resolve_ZTTransportSkyTrack_first_station_ref_from_endpoint			confirmed			
 0x005297f5	100	resolve_ZTTransportSkyTrack_return_trip_neighbor			confirmed			
-0x00529859	138		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005298e3	363		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00529a4e	123		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00529ac9	827		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00529e04	40		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00529e2c	474		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052a006	441		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052a1bf	169		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052a268	151		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00529859	138	clear_ZTTransportSkyTrack_return_trip_station_link			confirmed			
+0x005298e3	363	attach_ZTTransportSkyTrack_first_station_from_endpoint			confirmed			
+0x00529a4e	123	emit_ZTTransportSkyTrack_first_station_disconnect_payload			confirmed			
+0x00529ac9	827	connect_ZTTransportSkyTrack_return_trip_endpoint			confirmed			
+0x00529e04	40	clear_ZTTransportSkyTrack_return_trip_top_object_state			confirmed			
+0x00529e2c	474	trace_ZTTransportSkyTrack_elevated_grid_path			confirmed			
+0x0052a006	441	collect_ZTTransportSkyTrack_neighbor_path_cells			confirmed			
+0x0052a1bf	169	clear_ZTTransportSkyTrack_rope_object_and_tower_links			confirmed			
+0x0052a268	151	map_ZTTransportSkyTrack_top_object_key_to_kind			confirmed			
 0x0052a2ff	0	update_ZTTransportSkyTrack_construction_node_visibility			confirmed		0x008d8e50#12	
-0x0052a583	361		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052a6ec	86		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052a583	361	rebuild_ZTTransportSkyTrack_connection_chain			confirmed			
+0x0052a6ec	86	apply_ZTTransportSkyTrack_cached_top_object_state			confirmed			
 0x0052a742	0	refresh_ZTTransportSkyTrack_rope_path_visuals			confirmed		0x008d8e50#10	
 0x0052ad36	0	release_ZTTransportSkyTrack_rope_path_visuals			confirmed		0x008d8e50#11	
-0x0052aeb0	1389		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052b41d	298		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052b547	21		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052b55c	536		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052b774	1394		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052bce6	52		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052aeb0	1389	rebuild_ZTTransportSkyTrack_elevated_path_cells			confirmed			
+0x0052b41d	298	clear_ZTTransportSkyTrack_elevated_path_cells			confirmed			
+0x0052b547	21	refresh_ZTTransportSkyTrack_endpoint_path_cells			confirmed			
+0x0052b55c	536	test_ZTTransportSkyTrack_top_object_clearance			confirmed			
+0x0052b774	1394	test_ZTTransportSkyTrack_segment_clearance			confirmed			
+0x0052bce6	52	get_ZTTransportSkyTrack_object_height_offset			confirmed			
 0x0052bd1a	39	get_current_object_position_with_height_offset			confirmed			
-0x0052bd41	86		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052bd41	86	append_dword_to_checked_vector			confirmed			
 0x0052bd97	66		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0052bdd9	158		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x0052be77	0	allocate_ZTTransportSkyTrack_instance			confirmed		0x008d8e88#3	
@@ -9991,7 +9991,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005b8669	596	read_schema_binder_attributes_shared			confirmed	gamebryo	0x008e5ac8#20	
 0x005b88bd	118		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b8933	212		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
-0x005b8a07	92		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
+0x005b8a07	92		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
 0x005b8a63	106		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		game-ai
 0x005b8acd	264		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		ui
 0x005b8bd5	75		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		
@@ -17922,11 +17922,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f01b9	927		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0558	259		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x006f065b	432		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006f080b	205		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006f08d8	806		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006f0bfe	72		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006f0c46	72		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x006f0c8e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x006f080b	205		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
+0x006f08d8	806		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
+0x006f0bfe	72		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
+0x006f0c46	72		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
+0x006f0c8e	80		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0cde	124		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x006f0d5a	25		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x006f0d73	30		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18645,7 +18645,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00712994	111		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00712a03	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a4a	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00712a91	23		collision tester and fitting-surface component XML		unidentified	gamebryo		renderer
+0x00712a91	23		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712aa8	24		collision tester and fitting-surface component XML		unidentified	gamebryo		world/pathing
 0x00712ac0	52		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712af4	54		collision tester and fitting-surface component XML		unidentified	gamebryo		
