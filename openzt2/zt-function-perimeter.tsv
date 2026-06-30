@@ -6210,40 +6210,40 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0052c62e	150	register_ZTTransportStationBase_ui_handlers			confirmed			
 0x0052c6c4	288	construct_ZTTransportStationBase			confirmed			
 0x0052c7e4	0	scalar_delete_ZTTransportStationBase			confirmed		0x008d9058#0	
-0x0052c800	180		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052c800	180	destroy_ZTTransportStationBase			confirmed			
 0x0052c8b4	0	get_ZTTransportStationBase_effective_type_chain			confirmed		0x008d9058#13	
-0x0052c8cb	143		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052c95a	445		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052cb17	459		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052c8cb	143	resolve_ZTTransportStationBase_attached_track			confirmed			
+0x0052c95a	445	compute_ZTTransportStationBase_track_schedule_range			confirmed			
+0x0052cb17	459	refresh_ZTTransportStationBase_sign_controller_state			confirmed			
 0x0052cce2	763	update_left_right_phys_anim_state			confirmed			
 0x0052cfdd	708	update_open_close_phys_anim_state			confirmed			
 0x0052d2a1	0	update_ZTTransportStationBase_vehicle_and_arm_state			confirmed		0x008d9058#14	
 0x0052dc56	79	get_optional_current_object_position			confirmed			
-0x0052dca5	205		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052dd72	124		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052ddee	78		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052de3c	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052de57	31		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052dca5	205	collect_ZTTransportStationBase_neighbor_dependency_keys			confirmed			
+0x0052dd72	124	get_ZTTransportStationBase_sensor_radius			confirmed			
+0x0052ddee	78	erase_ZTTransportStationBase_dependency_tree_entry			confirmed			
+0x0052de3c	27	release_ZTTransportStationBase_docked_payload_ref			confirmed			
+0x0052de57	31	resolve_ZTTransportStationBase_parent_circuit			confirmed			
 0x0052de76	78	create_ZTTransportStationBase_docked_payload			confirmed		0x008d9058#21	
 0x0052dec4	0	clear_ZTTransportStationBase_docked_payload			confirmed		0x008d9058#22	
 0x0052dede	48	clear_station_docked_payload_and_deactivate_track_ref			confirmed			
-0x0052df0e	383		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052e08d	355		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052df0e	383	find_ZTTransportStationBase_nearest_valid_child_position			confirmed			
+0x0052e08d	355	find_ZTTransportStationBase_nearest_entity_container_child			confirmed			
 0x0052e1f0	122	has_nonempty_entity_container_child			confirmed			
-0x0052e26a	237		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052e357	356		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052e4bb	1283		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052e26a	237	update_ZTTransportStationBase_station_distance_map			confirmed			
+0x0052e357	356	queue_ZTTransportStationBase_route_range_candidate			confirmed			
+0x0052e4bb	1283	rebuild_ZTTransportStationBase_schedule_range_tree			confirmed			
 0x0052e9be	179	lookup_ZTTransportStationBase_schedule_range			confirmed			
 0x0052ea71	24	cleanup_and_attach_entity_container_refs			confirmed			
-0x0052ea89	123		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052eb04	495		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052ecf3	281		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x0052ee0c	189		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052ea89	123	attach_entity_to_ZTTransportStationBase_container			confirmed			
+0x0052eb04	495	collect_ZTTransportStationBase_container_occupant_refs			confirmed			
+0x0052ecf3	281	sum_ZTTransportStationBase_dependency_upkeep			confirmed			
+0x0052ee0c	189	sum_ZTTransportStationBase_link_upkeep			confirmed			
 0x0052eec9	0	write_ZTTransportStationBase_xml			confirmed		0x008d9058#19	
 0x0052ef49	508	read_transport_station_config			confirmed			
-0x0052f145	26		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052f145	26	destroy_transport_station_config_key_strings			confirmed			
 0x0052f15f	0	read_ZTTransportStationBase_xml			confirmed		0x008d9058#20	
-0x0052f308	145		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x0052f308	145	emit_ZTTransportStationBase_tour_donation_payload			confirmed			
 0x0052f399	90	clear_entity_container_ref_vector			confirmed			
 0x0052f3f3	67	has_flagged_entity_container_child			confirmed			
 0x0052f436	67	get_last_entity_container_ref_vector_entry			confirmed			
