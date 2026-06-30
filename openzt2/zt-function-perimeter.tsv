@@ -3380,40 +3380,42 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004add17	0	scalar_delete_ZTUITypeList			confirmed		0x008d0940#0	
 0x004add32	139	destroy_ZTUITypeList_members			confirmed			
 0x004addbd	46	get_selected_biome_filter_value			confirmed			
-0x004addeb	44		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004addeb	44	get_selected_object_BFAIEntityDataShared_value			confirmed			
 0x004ade17	147	item_matches_buy_panel_biome_filter			confirmed			
 0x004adeaa	471	apply_deferred_buy_panel_filter_selection			confirmed			
 0x004ae020	0	LAB_apply_deferred_buy_panel_filter_row_selection			confirmed			
 0x004ae081	3006	populate_buy_panel_filter_list			confirmed			
 0x004ae47c	0	LAB_skip_existing_buy_panel_filter_child			confirmed			
-0x004b0515	121		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b0515	121	try_assign_type_list_filter_value_if_allowed			confirmed			
 0x004b058e	47	get_type_ZTUIContextList			confirmed			
 0x004b05bd	0	get_type_ZTUIContextList_vtable_thunk			confirmed		0x008d0bd0#1	
 0x004b05c2	32	init_ZTUIContextList_descriptor_ref			confirmed			
 0x004b05e2	0	init_ZTUIContextList_descriptor_ref_vtable_thunk			confirmed		0x008d0bd0#2	
-0x004b05e7	73		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b0699	190		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b0757	148		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b05e7	73	get_ZTUIContextList_action_registry			confirmed			
+0x004b0699	190	init_ZTUIContextList_action_registry_entries			confirmed			
+0x004b0757	148	construct_ZTUIContextList_members			confirmed			
 0x004b07eb	0	scalar_delete_ZTUIContextList			confirmed		0x008d0bd0#0	
-0x004b0806	75		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b0806	75	destroy_ZTUIContextList_members			confirmed			
 0x004b0aee	0	sync_buy_panel_biome_filter_selection			confirmed			
-0x004b0c3a	209		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b0d0b	163		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b0dae	113		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b0e1f	424		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b1484	277		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b1c59	110		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b1cc7	90		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b1d37	153		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b0c3a	209	item_matches_selected_biome_filter_tree			confirmed			
+0x004b0d0b	163	context_list_has_active_matching_item			confirmed			
+0x004b0dae	113	item_type_is_fence_for_buy_filter			confirmed			
+0x004b0e1f	424	item_matches_selected_fence_strength_filter			confirmed			
+0x004b1484	277	parse_animal_variant_age_suffix			confirmed			
+0x004b1c59	110	append_filter_assignment_vector_record			confirmed			
+0x004b1cc7	90	erase_filter_assignment_vector_record			confirmed			
+0x004b1d21	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e6c#1	
+0x004b1d37	153	register_ZTUITypeList_action_handler			confirmed			
 0x004b1e17	45	dereference_filter_assignment_reverse_iterator			confirmed			
 0x004b1e44	184	get_or_insert_filter_assignment_value			confirmed			
 0x004b1efc	48	clear_filter_assignment_tree			confirmed			
-0x004b1f2c	36		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b1f6b	153		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b204b	27		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b2066	152		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b20fe	26		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b2118	52		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b1f2c	36	reset_filter_assignment_tree_sentinel			confirmed			
+0x004b1f50	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e6c#3	
+0x004b1f6b	153	register_ZTUIContextList_action_handler			confirmed			
+0x004b204b	27	get_filter_assignment_vector_count			confirmed			
+0x004b2066	152	insert_filter_assignment_vector_record_and_return_iterator			confirmed			
+0x004b20fe	26	destroy_filter_assignment_record_range			confirmed			
+0x004b2118	52	copy_construct_filter_assignment_record_count			confirmed			
 0x004b214c	32		buy-panel filters, context list, and Zoopedia		unidentified			ui
 0x004b216c	384		buy-panel filters, context list, and Zoopedia		unidentified			ui
 0x004b22ec	69	lower_bound_filter_assignment_by_key			confirmed			
