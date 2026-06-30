@@ -7211,7 +7211,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00559abe	408	insert_fill_named_ui_assignment_ref_vector_range			confirmed			
 0x00559c56	160		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00559cf6	45	copy_construct_named_ui_assignment_ref_range			confirmed			
-0x00559d23	44		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00559d23	44	find_named_ui_assignment_ref_by_referent			confirmed			
 0x00559d4f	0	scalar_delete_ZTDiseaseMgr_secondary_this_adjustor			confirmed		0x008daf94#0	
 0x00559d72	299		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
 0x00559e9d	113		cloning/disease/fossil/puzzle components and TA filters		unidentified			world/pathing
@@ -7352,8 +7352,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00561e05	48		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00561e35	132	erase_fossil_site_point_assignment_ref			confirmed			
 0x00561eb9	36	clear_fossil_site_point_assignment_tree_header			confirmed			
-0x00561edd	105		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00561f46	186		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00561edd	105	count_fossil_site_point_assignment_entries			confirmed			
+0x00561f46	186	get_or_insert_dig_pit_point_assignment_ref			confirmed			
 0x00562000	48		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562030	132		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x005620b4	36		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7361,15 +7361,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00562141	0	allocate_ZTPuzzleMgr_instance			confirmed		0x008db578#4	
 0x00562159	153		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x00562239	168		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
-0x005622e1	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x00562426	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
-0x005624ba	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x005622e1	325	insert_fossil_site_point_assignment_tree_node_with_hint			confirmed			
+0x00562426	148	erase_fossil_site_point_assignment_tree_range			confirmed			
+0x005624ba	59	clear_fossil_site_point_assignment_tree_nodes_recursive			confirmed			
 0x005624f5	325		cloning/disease/fossil/puzzle components and TA filters		unidentified			
 0x0056263a	148		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x005626ce	59		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x005626ce	59	clear_dig_pit_point_assignment_tree_nodes_recursive			confirmed			
 0x00562709	324		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x0056284d	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
-0x00562914	667		cloning/disease/fossil/puzzle components and TA filters		unidentified			ui
+0x00562914	667	erase_fossil_site_point_assignment_tree_node			confirmed			
 0x00562baf	393		cloning/disease/fossil/puzzle components and TA filters		unidentified			game-entities
 0x00562d38	35		cloning/disease/fossil/puzzle components and TA filters		unidentified			io/assets
 0x00562d5b	199		cloning/disease/fossil/puzzle components and TA filters		unidentified			
@@ -7638,9 +7638,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057014a	560	play_startup_movie_sequence			confirmed			
 0x0057037a	0	local_jump_to_ground_fit_ui_window_mapping			confirmed		0x008dc698#3	
 0x0057037f	86	set_named_catalog_visibility			confirmed			
-0x005703d5	87		UI button state probe by name		unidentified			ui
-0x0057042c	198		catalog button state to hide-category bridge		unidentified			ui
-0x005704f2	137		catalog button state to show-category bridge		unidentified			ui
+0x005703d5	87	probe_named_UIToggleButton_checked_state			confirmed			
+0x0057042c	198	hide_catalog_categories_from_toggle_state			confirmed			
+0x005704f2	137	restore_catalog_categories_from_toggle_state			confirmed			
 0x0057057b	1163	save-package writer with UI alerts			confirmed			
 0x00570a06	380	saved-world map load resolver			confirmed			
 0x00570b82	1339	saved-world scenario initialization and load-status update			confirmed			
@@ -7666,16 +7666,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00571fed	0	forward_icon_name_resource_lookup_adapter			confirmed		0x008dc6fc#2	
 0x00572008	12	extract_nested_typed_object_from_arg			confirmed		0x008dc6fc#3	
 0x00572014	0	read_lazy_session_typed_object_flag			confirmed		0x008dc6b8#0	
-0x00572061	33		refcounted vtable destructor/deleting-destructor band		unidentified			ui
+0x00572061	33	destroy_BFSafeHandle_ZTAIStaffMgr			confirmed			
 0x00572082	0	allocate_ZTApp_instance			confirmed		0x008dc5f0#6	
-0x0057209a	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005720b8	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005720d6	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x005720f4	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x00572112	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x00572130	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x0057214e	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
-0x0057216c	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
+0x0057209a	30	destroy_BFSafeHandle_ZTWorldSndMgr			confirmed			
+0x005720b8	30	destroy_BFSafeHandle_ZTShowMixerManager			confirmed			
+0x005720d6	30	destroy_BFSafeHandle_ZTWorldMgr			confirmed			
+0x005720f4	30	destroy_BFSafeHandle_ZTMode			confirmed			
+0x00572112	30	destroy_BFSafeHandle_ZTStatus			confirmed			
+0x00572130	30	destroy_BFSafeHandle_ZTPhotoManager			confirmed			
+0x0057214e	30	destroy_BFSafeHandle_ZTEconomyMgr			confirmed			
+0x0057216c	30	destroy_BFSafeHandle_ZTFeedbackMgr			confirmed			
 0x0057218a	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
 0x005721a8	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
 0x005721c6	30		refcounted vtable destructor/deleting-destructor band		unidentified			ui
