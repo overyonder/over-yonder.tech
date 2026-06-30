@@ -17602,17 +17602,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006dd8ea	67	test_BFGTraversableArea_packed_cell_blocked			confirmed	gamebryo		
 0x006dd92d	80	test_BFGTraversableArea_optional_packed_cell_blocked			confirmed	gamebryo		
 0x006dd97d	89	test_BFGTraversableArea_any_map_blocks_cell			confirmed	gamebryo		
-0x006dd9d6	113		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006dda47	30		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006dda65	166		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006ddb0b	1849		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de244	153		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de2dd	166		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de383	95		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de3e2	45		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de40f	56		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de447	89		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006de4a0	150		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
+0x006dd9d6	113	test_BFGTraversableArea_world_point_blocked			confirmed	gamebryo		
+0x006dda47	30	test_BFGTraversableArea_point_record_blocked			confirmed	gamebryo		
+0x006dda65	166	test_BFGTraversableArea_span_range_overlaps_key			confirmed	gamebryo		
+0x006ddb0b	1849	collect_BFGTraversableArea_viewing_marker_cells			confirmed	gamebryo		
+0x006de244	153	attach_BFGTraversableArea_to_mgr			confirmed	gamebryo		
+0x006de2dd	166	detach_BFGTraversableArea_from_mgr			confirmed	gamebryo		
+0x006de383	95	contains_BFGTraversabilityMgr_area_ref			confirmed	gamebryo		
+0x006de3e2	45	attach_BFGTraversableArea_dependent_record			confirmed	gamebryo		
+0x006de40f	56	detach_BFGTraversableArea_dependent_record			confirmed	gamebryo		
+0x006de447	89	contains_BFGTraversableArea_dependent_record			confirmed	gamebryo		
+0x006de4a0	150	compute_BFGTraversableArea_viewing_box			confirmed	gamebryo		
 0x006de536	79	release_traversability_slot_if_unmatched			confirmed	gamebryo		
 0x006de585	125		traversability slot/index table helpers		unidentified	gamebryo		
 0x006de602	43		traversability slot/index table helpers		unidentified	gamebryo		
@@ -17626,7 +17626,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006deab4	301		traversability candidate and area-list support		unidentified	gamebryo		
 0x006debe1	69	pick_random_traversability_candidate_record			confirmed	gamebryo		
 0x006dec26	210	test_traversability_candidate_area_pair			confirmed	gamebryo		
-0x006decf8	31		traversability candidate and area-list support		unidentified	gamebryo		game-entities
+0x006decf8	31	add_BFGTraversableArea_vpintersect_refs_for_candidate			confirmed	gamebryo		
 0x006ded17	69		traversability candidate and area-list support		unidentified	gamebryo		
 0x006ded5c	597		traversability candidate and area-list support		unidentified	gamebryo		
 0x006defb1	649	evaluate_traversability_placement_candidate			confirmed	gamebryo		
@@ -17637,8 +17637,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006df368	514	refresh_BFGTraversabilityMgr_payload_ref_maps			confirmed	gamebryo		
 0x006df56a	321	collect_BFGTraversabilityMgr_matching_assignment_refs			confirmed	gamebryo		
 0x006df6ab	177	test_BFGTraversabilityMgr_payload_ref_maps_contain_grid_key			confirmed	gamebryo		
-0x006df75c	60		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
-0x006df798	874		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
+0x006df75c	60	record_BFGTraversabilityMgr_viewing_area_dependency_key			confirmed	gamebryo		
+0x006df798	874		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		world/pathing
 0x006dfb02	120	lookup_BFGTraversabilityMgr_slot_payload_for_tile_key			confirmed	gamebryo		
 0x006dfb7a	124		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006dfbf6	623		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
@@ -17651,23 +17651,25 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e058f	826	read_traversability_viewing_attributes			confirmed	gamebryo		
 0x006e08c9	0	scalar_delete_BFGTraversabilityMgr			confirmed		0x008f8d58#0	
 0x006e08e5	743	destroy_BFGTraversabilityMgr			confirmed	gamebryo		
-0x006e0bcc	122		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		game-entities
+0x006e0bcc	122	destroy_BFGTraversabilityMgr_query_state			confirmed	gamebryo		
 0x006e0c46	56	destroy_BFGTraversabilityMgr_embedded_value_state			confirmed	gamebryo		
 0x006e0c7e	0	write_BFGTraversabilityMgr_changed_triangle_xml			confirmed		0x008f8d58#19	
 0x006e1179	0	BFGTraversabilityMgr_read_config_xml_node			confirmed		0x008f8d58#20	
-0x006e19a2	315		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1add	62		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1b1b	130		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1b9d	71		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1be4	130		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1c66	62		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
-0x006e1ca4	451		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
+0x006e19a2	315	rebuild_BFGTraversabilityMgr_lookup_indexes			confirmed	gamebryo		
+0x006e1add	62	lookup_BFGTraversabilityMgr_primary_index			confirmed	gamebryo		
+0x006e1b1b	130	resolve_BFGTraversabilityMgr_primary_key_by_index			confirmed	gamebryo		
+0x006e1b9d	71	lookup_BFGTraversabilityMgr_secondary_index			confirmed	gamebryo		
+0x006e1be4	130	resolve_BFGTraversabilityMgr_secondary_key_by_index			confirmed	gamebryo		
+0x006e1c66	62	lookup_BFGTraversabilityMgr_tertiary_index			confirmed	gamebryo		
+0x006e1ca4	451	update_BFGTraversabilityMgr_vpintersect_refs			confirmed	gamebryo		
+0x006e1e67	0		remove-entity, traversability, viewing-area, and container helpe		unidentified		0x008f8d58#22	
 0x006e1f9e	564		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e21d2	147		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e2265	364		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e23d1	394		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e255b	131		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e25de	142		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
+0x006e266c	0		remove-entity, traversability, viewing-area, and container helpe		unidentified		0x008f8d58#21	
 0x006e274c	239		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e283b	681		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
 0x006e2ae4	35		remove-entity, traversability, viewing-area, and container helpe		unidentified	gamebryo		game-entities
@@ -17709,7 +17711,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e62b8	160	queue_viewing_area_fence_cell_record			confirmed	gamebryo		
 0x006e6358	65		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6399	84	advance_viewing_area_notification_state			confirmed	gamebryo		
-0x006e63ed	274		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		ui
+0x006e63ed	274	merge_viewing_area_queue_and_finish_notification_state			confirmed	gamebryo		
 0x006e64ff	131	refresh_viewing_area_collision_tester_handle			confirmed	gamebryo		
 0x006e6582	23		viewing-area state and no-viewing-area notification helpers		unidentified	gamebryo		
 0x006e6599	311	refresh_traversability_no_open_to_world_state			confirmed	gamebryo		
@@ -17812,7 +17814,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006e9d8e	32		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		
 0x006e9dae	0	scalar_delete_BFTraversabilityMgr			confirmed		0x008f8dd8#0	
 0x006e9dc9	0	scalar_delete_BFTraversabilityMgr_adjusted_this			confirmed		0x008f8e30#0	
-0x006e9dd1	52		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		game-entities
+0x006e9dd1	52		BFGRampageMgr schema and rampage event cluster		unidentified	gamebryo		world/pathing
 0x006e9e05	47	get_type_BFGRampageMgr			confirmed	gamebryo		
 0x006e9e34	0	get_type_BFGRampageMgr_vtable_thunk			confirmed		0x008f9068#1	
 0x006e9e39	32	get_BFGRampageMgr_descriptor_ref			confirmed	gamebryo		
@@ -22299,24 +22301,24 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c2e9e	0	clear_BFNIActorComponent_animation_controller			confirmed		0x009036a0#31	
 0x007c2ec3	95	snapshot_BFNIActorComponent_active_animation_state			confirmed	gamebryo		
 0x007c2f22	0	activate_BFNIActorComponent_animation_sequence			confirmed		0x009036a0#30	
-0x007c31d8	198		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c329e	426		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c3448	101		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c34ad	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903460#52	ui
-0x007c357e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903460#29	ui
-0x007c35a3	400		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c3733	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903570#32	ui
-0x007c3b2e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903460#22	ui
-0x007c3b43	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903570#43	ui
-0x007c3b77	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#40	ui
-0x007c3be6	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#16	ui
-0x007c3c0f	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#34	ui
-0x007c3cd5	52		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c3d09	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#43	ui
-0x007c3d21	143		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c3df7	177		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c3ea8	387		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c402b	110		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007c31d8	198	reset_BFNIActorComponent_actor_node_pose_transform			confirmed	gamebryo		
+0x007c329e	426	construct_BFNIActorComponent			confirmed	gamebryo		
+0x007c3448	101	collect_BFNIActorComponent_NiNode_tree_refs			confirmed	gamebryo		
+0x007c34ad	0	update_BFNIActorComponent_actor_particle_pose_sample			confirmed		0x00903460#52	
+0x007c357e	0	reset_BFNIActorComponent_motion_sample_history			confirmed		0x00903460#29	
+0x007c35a3	400	sample_BFNIActorComponent_actor_motion_derivatives			confirmed	gamebryo		
+0x007c3733	0	test_BFNIActorComponent_foot_capsule_overlap			confirmed		0x00903570#32	
+0x007c3b2e	0	set_BFNIActorComponent_scene_node_pointer			confirmed		0x00903460#22	
+0x007c3b43	0	set_BFNIActorComponent_update_when_not_visible_value			confirmed		0x00903570#43	
+0x007c3b77	0	clear_BFNIActorComponent_model_actor_selection			confirmed		0x009036a0#40	
+0x007c3be6	0	get_BFNIActorComponent_animation_remaining_time			confirmed		0x009036a0#16	
+0x007c3c0f	0	dispatch_BFNIActorComponent_animation_timed_events			confirmed		0x009036a0#34	
+0x007c3cd5	52	clear_BFNIActorComponent_actor_binding_tree			confirmed	gamebryo		
+0x007c3d09	0	allocate_BFNIActorComponent_from_descriptor			confirmed		0x009036a0#43	
+0x007c3d21	143	register_BFNIActorComponent_animation_command_handler			confirmed	gamebryo		
+0x007c3df7	177	erase_BFNIActorComponent_actor_binding_tree_range			confirmed	gamebryo		
+0x007c3ea8	387	insert_inline_string_keyed_tree_node_rebalance			confirmed	gamebryo		
+0x007c402b	110	import_BFNIActorComponent_animation_command_handlers			confirmed	gamebryo		
 0x007c40a4	0		UI dependency references, movement/view components, and animatio		unidentified		0x009036a0#41	ui
 0x007c40af	364	read_spawn_effect_config			confirmed	gamebryo		
 0x007c421b	0		UI dependency references, movement/view components, and animatio		unidentified		0x0090379c#4	ui
