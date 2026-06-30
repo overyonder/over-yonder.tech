@@ -4790,9 +4790,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ea368	319	ZTResearchItem_refresh_button_progress			confirmed			
 0x004ea4a7	0	tick_ZTResearchItem_research_progress			confirmed		0x008d52c0#14	
 0x004ea573	779	ZTResearchItem_start_with_cost_check			confirmed			
-0x004ea87e	121		research item and research manager handlers		unidentified			ui
+0x004ea87e	121	lookup_or_insert_ZTResearchItem_button_binding_node			confirmed			
 0x004ea8f7	0	allocate_ZTResearchItem_instance			confirmed		0x008d5314#3	
-0x004ea956	48		research item and research manager handlers		unidentified			renderer
+0x004ea956	48		research item and research manager handlers		unidentified			
 0x004ea986	50		research item and research manager handlers		unidentified			economy
 0x004ea9b8	47	get_type_ZTResearchMgr			confirmed			
 0x004ea9e7	0		research item and research manager handlers		unidentified		0x008d5378#1	
@@ -4803,7 +4803,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004eab96	0	scalar_delete_ZTResearchMgr			confirmed		0x008d5378#0	
 0x004eabb1	84	destroy_ZTResearchMgr_members			confirmed			
 0x004eac05	124		research item and research manager handlers		unidentified			
-0x004eac81	146		research item and research manager handlers		unidentified			ui
+0x004eac81	146	ensure_ZTResearchMgr_item_for_entity_data			confirmed			
 0x004ead13	773	ZTResearchItem_complete_research			confirmed			
 0x004eb018	92	contains_ZTResearchMgr_unlocked_item_key			confirmed			
 0x004eb074	553	emit_autopopulate_list_payload			confirmed		0x008d5378#14	
@@ -5678,29 +5678,29 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00513875	74	get_ZTTransportCircuit_track_by_index			confirmed			
 0x005138bf	47	get_type_ZTTransportationMgr			confirmed			
 0x005138ee	0	get_type_ZTTransportationMgr_vtable_thunk			confirmed		0x008d8310#1	
-0x005138f3	32		transportation manager and circuit bases		unidentified			ui
+0x005138f3	32	init_ZTTransportationMgr_descriptor_ref			confirmed			
 0x00513913	0	init_ZTTransportationMgr_descriptor_ref_vtable_thunk			confirmed		0x008d8310#2	
-0x00513918	73		transportation manager and circuit bases		unidentified			ui
+0x00513918	73	init_ZTTransportationMgr_action_registry			confirmed			
 0x00513961	0	copy_ZTTransportationMgr_ui_value_assignment_dependents			confirmed		0x008d8310#23	
-0x005139ca	142		transportation manager and circuit bases		unidentified			ui
-0x00513a58	250		transportation manager and circuit bases		unidentified			ui
-0x00513b52	170		transportation manager and circuit bases		unidentified			ui
+0x005139ca	142	construct_ZTTransportationMgr_members			confirmed			
+0x00513a58	250	destroy_ZTTransportationMgr_members			confirmed			
+0x00513b52	170	register_ZTTransportationMgr_action_handlers			confirmed			
 0x00513bfc	0	refresh_ZTTransportationMgr_transport_circuits			confirmed		0x008d8310#21	
-0x00513cc9	103		transportation manager and circuit bases		unidentified			ui
-0x00513f2d	103		transportation manager and circuit bases		unidentified			ui
-0x00513f94	275		transportation manager and circuit bases		unidentified			ui
-0x005140a7	98		transportation manager and circuit bases		unidentified			ui
-0x00514109	375		transportation manager and circuit bases		unidentified			ui
-0x00514280	140		transportation manager and circuit bases		unidentified			ui
-0x0051430c	124		transportation manager and circuit bases		unidentified			ui
-0x00514388	151		transportation manager and circuit bases		unidentified			ui
-0x0051441f	160		transportation manager and circuit bases		unidentified			ui
+0x00513cc9	103	clear_ZTTransportationMgr_endpoint_metadata_refs			confirmed			
+0x00513f2d	103	append_ZTTransportationMgr_endpoint_ref_pair			confirmed			
+0x00513f94	275	contains_ZTTransportationMgr_track_pair			confirmed			
+0x005140a7	98	queue_ZTTransportationMgr_connection_record			confirmed			
+0x00514109	375	ensure_ZTTransportationMgr_circuit_for_object			confirmed			
+0x00514280	140	apply_ZTTransportationMgr_endpoint_assignment			confirmed			
+0x0051430c	124	clear_ZTTransportationMgr_endpoint_assignment			confirmed			
+0x00514388	151	connect_ZTTransportationMgr_matching_endpoint_pair			confirmed			
+0x0051441f	160	create_ZTTransportationMgr_circuit_for_track_range			confirmed			
 0x005144bf	14	resolve_transport_endpoint_metadata_by_object_key			confirmed			
-0x005144cd	133		transportation manager and circuit bases		unidentified			ui
-0x00514552	125		transportation manager and circuit bases		unidentified			ui
+0x005144cd	133	append_ZTTransportationMgr_circuit_list_entries			confirmed			
+0x00514552	125	refresh_ZTTransportationMgr_circuit_viewable_state			confirmed			
 0x005145cf	0	read_ZTTransportationMgr_message_timeout_xml			confirmed		0x008d8310#20	
-0x00514616	220		transportation manager and circuit bases		unidentified			ui
-0x005146f2	143		transportation manager and circuit bases		unidentified			ui
+0x00514616	220	find_ZTTransportationMgr_circuit_accepting_endpoint			confirmed			
+0x005146f2	143	refresh_ZTTransportationMgr_sky_circuits			confirmed			
 0x00514781	1419		transportation manager and circuit bases		unidentified			ui
 0x00514d0c	229		transportation manager and circuit bases		unidentified			ui
 0x00514df1	170		transportation manager and circuit bases		unidentified			ui
@@ -6757,7 +6757,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00542acb	33		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00542aec	0	scalar_delete_ZTTankGateSegment_safe_handle_value			confirmed		0x008da39c#0	
 0x00542b07	139	resize_pointer_vector_to_count			confirmed			
-0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			game-entities
+0x00542b92	326		tank gate segment, tank manager, and area relocation setup		unidentified			
 0x00542cd8	127	prepare_named_ui_assignment_ref_vector_insert			confirmed			
 0x00542d57	59		tank gate segment, tank manager, and area relocation setup		unidentified			ui
 0x00542d92	127		tank gate segment, tank manager, and area relocation setup		unidentified			ui
