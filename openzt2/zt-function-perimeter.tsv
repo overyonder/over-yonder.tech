@@ -4786,11 +4786,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e9f78	107	unregister_ZTResearchItem_button_binding			confirmed			
 0x004e9fe3	0	write_ZTResearchItem_xml			confirmed		0x008d52c0#19	
 0x004ea128	0	read_ZTResearchItem_xml			confirmed		0x008d52c0#20	
-0x004ea2c2	166		research item and research manager handlers		unidentified			ui
+0x004ea2c2	166	ensure_ZTResearchItem_button_binding_for_key			confirmed			
 0x004ea368	319	ZTResearchItem_refresh_button_progress			confirmed			
 0x004ea4a7	0	tick_ZTResearchItem_research_progress			confirmed		0x008d52c0#14	
 0x004ea573	779	ZTResearchItem_start_with_cost_check			confirmed			
-0x004ea87e	121		research item and research manager handlers		unidentified			renderer
+0x004ea87e	121		research item and research manager handlers		unidentified			ui
 0x004ea8f7	0	allocate_ZTResearchItem_instance			confirmed		0x008d5314#3	
 0x004ea956	48		research item and research manager handlers		unidentified			renderer
 0x004ea986	50		research item and research manager handlers		unidentified			economy
@@ -4799,13 +4799,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004ea9ec	32	init_ZTResearchMgr_aux_descriptor_ref			confirmed			
 0x004eaa0c	0	init_ZTResearchMgr_aux_descriptor_ref_vtable_thunk			confirmed		0x008d5378#2	
 0x004eaa11	38	init_ZTResearchMgr_callback_registry			confirmed			
-0x004eab13	131		research item and research manager handlers		unidentified			ui
+0x004eab13	131	construct_ZTResearchMgr_members			confirmed			
 0x004eab96	0	scalar_delete_ZTResearchMgr			confirmed		0x008d5378#0	
-0x004eabb1	84		research item and research manager handlers		unidentified			ui
+0x004eabb1	84	destroy_ZTResearchMgr_members			confirmed			
 0x004eac05	124		research item and research manager handlers		unidentified			
-0x004eac81	146		research item and research manager handlers		unidentified			
+0x004eac81	146		research item and research manager handlers		unidentified			ui
 0x004ead13	773	ZTResearchItem_complete_research			confirmed			
-0x004eb018	92		research item and research manager handlers		unidentified			ui
+0x004eb018	92	contains_ZTResearchMgr_unlocked_item_key			confirmed			
 0x004eb074	553	emit_autopopulate_list_payload			confirmed		0x008d5378#14	
 0x004eb29d	28	passes_research_item_autopopulate_filter			confirmed			
 0x004eb2b9	0	forward_ZTResearchMgr_aux_object_to_primary_slot38			confirmed		0x008d53e0#2	
@@ -4930,7 +4930,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004efcd3	0	forward_ZTFameData_secondary_type_query_to_primary			confirmed		0x008d5bdc#2	
 0x004efcf1	0	ZTFameData_write_status_xml_node			confirmed		0x008d5b14#18	
 0x004f06f8	0	ZTFameData_read_status_xml_node			confirmed		0x008d5b14#19	
-0x004f1813	30		fame values, status XML, donation, and game-mode predicates		unidentified			ui
+0x004f1813	30	compute_ZTFameData_zoo_month_index			confirmed			
 0x004f1831	49	init_ZTFameData_default_zoo_time_fields			confirmed			
 0x004f1862	346	tick_ZTFameData_time_and_periodic_events			confirmed			
 0x004f19bc	89	emit_endofday_payload			confirmed			
@@ -4965,7 +4965,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f35fb	0	ZTFameData_make_num_dinos_tranquilized_value			confirmed		0x008d5b98#4	
 0x004f364f	0	ZTFameData_accept_adoption_enabled_value			confirmed			
 0x004f3691	136		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			io/assets
-0x004f3719	174		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f3719	174	lookup_or_insert_ZTFameData_handler_tree_entry			confirmed			
 0x004f37c7	48	destroy_ZTFameData_handler_tree_storage			confirmed			
 0x004f37f7	36	clear_ZTFameData_handler_tree			confirmed			
 0x004f381b	170		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
@@ -4973,17 +4973,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f39c0	0	allocate_ZTAdmissionData_value_record			confirmed		0x008d5c64#1	
 0x004f39dd	0	allocate_ZTFameData_value_record			confirmed		0x008d5c64#3	
 0x004f3a03	237	assign_pointer_vector_storage			confirmed			
-0x004f3af0	384		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f3af0	384	insert_ZTFameData_handler_tree_with_hint			confirmed			
 0x004f3c70	372		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
 0x004f3de4	98	clone_and_relink_24byte_tree_header			confirmed			
-0x004f3e46	212		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f3e46	212	insert_ZTFameData_handler_tree_unique			confirmed			
 0x004f3f1a	148	erase_ZTFameData_handler_tree_range			confirmed			
-0x004f3fae	394		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f3fae	394	link_ZTFameData_handler_tree_node			confirmed			
 0x004f4138	204		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
 0x004f4204	93	clone_24byte_tree_nodes_recursive			confirmed			
 0x004f4261	160	insert_ZTFameData_handler_list_record			confirmed			
 0x004f4301	97		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			economy
-0x004f4362	677		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f4362	677	erase_ZTFameData_handler_tree_node			confirmed			
 0x004f4607	94	unwrap_ZTAdmissionData_payload			confirmed			
 0x004f4665	88	resolve_ZTFameData_from_receiver			confirmed			
 0x004f46d4	0	adjusted_scalar_delete_ZTFameData_secondary			confirmed		0x008d5bdc#0	
@@ -4991,17 +4991,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f47e7	86		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
 0x004f483d	109		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
 0x004f48aa	59	build_checked_iterator_pair_from_container_bounds			confirmed			
-0x004f48e5	43		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
-0x004f4910	48		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
-0x004f4940	57		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
-0x004f4979	43		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f48e5	43	write_unsigned_value_xml_field8			confirmed			
+0x004f4910	48	write_float_value_xml_field8			confirmed			
+0x004f4940	57	write_bool_value_xml_field8			confirmed			
+0x004f4979	43	construct_BFStringTokenEvent_with_value			confirmed			
 0x004f49a4	0	assign_inline_value_field10_to_receiver			confirmed		0x008d5d60#2	
 0x004f49b6	0	expose_inline_value_field10_pointer			confirmed		0x008bfcb8#8	
 0x004f49c4	0	write_unsigned_fame_handler_value			confirmed		0x008d5cd8#3	
 0x004f49d5	24	construct_unsigned_fame_handler_value			confirmed			
 0x004f49ed	0	read_unsigned_fame_handler_double			confirmed		0x008d5cd8#4	
 0x004f4a0a	0	read_unsigned_fame_handler_float			confirmed		0x008d5cd8#5	
-0x004f4a39	39		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f4a39	39	copy_construct_BFStringFloatObj			confirmed			
 0x004f4a60	0	clone_BFStringFloatObj			confirmed		0x008d5d84#5	
 0x004f4a7d	198	lookup_ZTFameData_value_key_counter			confirmed			
 0x004f4b43	80	increment_ZTFameData_value_key_counter			confirmed			
@@ -5018,7 +5018,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f5376	0	read_ZTSunLayer_xml			confirmed		0x008d5e58#20	
 0x004f590f	589	select_wrapped_point3_keyframe_pair			confirmed			
 0x004f5b5c	1000	apply_ZTToolMgr_point3_keyframe_transform			confirmed			
-0x004f5f44	140		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f5f44	140	construct_ZTToolMgr_material_binding_entry			confirmed			
 0x004f5fd0	36	clear_ZTToolMgr_ref_vector			confirmed			
 0x004f5ff4	72	get_ZTToolMgr_ref_vector_entry_by_index			confirmed			
 0x004f603c	95	append_ZTToolMgr_ref_vector_entry			confirmed			
@@ -5045,7 +5045,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f64f6	130	register_showmixer_trick_list_handlers			confirmed			
 0x004f6578	138	construct_ZTToolMgr_members			confirmed			
 0x004f6602	0	scalar_delete_ZTToolMgr			confirmed		0x008d62d0#0	
-0x004f661d	52		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			ui
+0x004f661d	52	destroy_ZTToolMgr_members			confirmed			
 0x004f68ec	0	dispatch_entity_file_binder_command			confirmed			
 0x004f775a	387	resolve_toolmgr_download_items_payload_for_key			confirmed			
 0x004f78dd	65	clear_toolmgr_cached_download_item_for_key			confirmed			
@@ -5666,16 +5666,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00513166	34		tour data and tour recorder		unidentified			
 0x00513188	0	write_ZTTourRecorder_rating_history_xml			confirmed		0x008d8218#19	
 0x00513264	0	read_ZTTourRecorder_rating_history_xml			confirmed		0x008d8218#20	
-0x005132f7	229		tour data and tour recorder		unidentified			ui
+0x005132f7	229	compute_ZTTourRecorder_average_rating			confirmed			
 0x005133dc	126		tour data and tour recorder		unidentified			
 0x0051345a	413		tour data and tour recorder		unidentified			
-0x005135f7	46		tour data and tour recorder		unidentified			ui
+0x005135f7	46	normalize_ZTTourRecorder_average_rating			confirmed			
 0x00513674	0	allocate_ZTTourRecorder_instance			confirmed		0x008d8270#3	
 0x00513687	64		tour data and tour recorder		unidentified			
 0x005136c7	159		tour data and tour recorder		unidentified			
 0x005137ad	160	insert_runtime_callback_list_node_948a48			confirmed			
 0x0051384d	40	as_ZTTourDataAttr			confirmed			
-0x00513875	74		tour data and tour recorder		unidentified			ui
+0x00513875	74	get_ZTTransportCircuit_track_by_index			confirmed			
 0x005138bf	47	get_type_ZTTransportationMgr			confirmed			
 0x005138ee	0	get_type_ZTTransportationMgr_vtable_thunk			confirmed		0x008d8310#1	
 0x005138f3	32		transportation manager and circuit bases		unidentified			ui
