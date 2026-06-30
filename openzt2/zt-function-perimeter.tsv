@@ -4269,7 +4269,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d4837	160	insert_ZTFence_action_registry_record			confirmed			
 0x004d48d7	660	erase_ZTFenceMode_target_assignment_tree_node			confirmed			
 0x004d4b6b	40	as_ZTPathBase			confirmed			
-0x004d4b93	39	try_get_BFPhysObj_value			confirmed			
+0x004d4b93	39	try_get_BFPhysObj_from_value_provider			confirmed			
 0x004d4bc2	37		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d4be7	58		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d4c21	40	as_BFSkewComponent			confirmed			
@@ -4295,34 +4295,35 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d5be6	40	as_ZTTankGateSegment			confirmed			
 0x004d5c0e	153	register_unique_ZTFenceEntity_action_handler			confirmed			
 0x004d5ca7	160	insert_ZTFenceEntity_action_registry_record			confirmed			
-0x004d5d47	35		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d5d47	35	sum_ZTFenceEntity_extent_slot_values			confirmed		0x008f6da0#1	
+0x004d5d6a	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008f6da0#0	
 0x004d5d75	47	get_type_ZTFenceSegmentInfo			confirmed			
-0x004d5da4	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d39d8#1	
+0x004d5da4	0	get_type_ZTFenceSegmentInfo_vtable_thunk			confirmed		0x008d39d8#1	
 0x004d5da9	32	init_ZTFenceSegmentInfo_descriptor_ref			confirmed			
 0x004d5dc9	0	init_ZTFenceSegmentInfo_descriptor_ref_vtable_thunk			confirmed		0x008d39d8#2	
 0x004d5dce	0	scalar_delete_ZTFenceSegmentInfo			confirmed		0x008d39d8#0	
 0x004d5e0a	0	read_ZTFenceSegmentInfo_xml			confirmed		0x008d39d8#20	
-0x004d5f20	59		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d5f20	59	erase_all_point3_vector_elements			confirmed			
 0x004d5f5b	0	allocate_ZTFenceSegmentInfo_instance			confirmed		0x008d39d8#22	
 0x004d5f95	52	copy_point3_array_records_forward			confirmed	gamebryo		
 0x004d5fc9	0	return_groundfit_static_registry			confirmed		0x008d3b30#21	
 0x004d5fcf	47	get_type_ZTFPSCameraGroundFitComponent			confirmed			
-0x004d5ffe	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d3b30#1	
+0x004d5ffe	0	get_type_ZTFPSCameraGroundFitComponent_vtable_thunk			confirmed		0x008d3b30#1	
 0x004d6003	32	init_ZTFPSCameraGroundFitComponent_descriptor_ref			confirmed			
 0x004d6023	0	init_ZTFPSCameraGroundFitComponent_descriptor_ref_vtable_thunk			confirmed		0x008d3b30#2	
 0x004d6099	0	scalar_delete_ZTFPSCameraGroundFitComponent			confirmed		0x008d3b30#0	
-0x004d62d5	73		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004d631e	119		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
+0x004d62d5	73	select_ZTFPSCameraGroundFit_movement_tuning			confirmed			
+0x004d631e	119	test_ZTFPSCameraGroundFit_underwater_surface_clearance			confirmed			
 0x004d6395	0	read_ZTFPSCameraGroundFitComponent_xml			confirmed		0x008d3b30#20	
 0x004d65ae	254		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d66c2	40	as_BFAboveGroundFitComponent			confirmed			
 0x004d66ea	0	return_udv_static_registry			confirmed		0x008d3c20#21	
-0x004d66f0	63		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d66f0	63	max_abs_vec2_component			confirmed			
 0x004d672f	47	get_type_ZTFPSUDVComponent			confirmed			
-0x004d675e	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d3c20#1	
+0x004d675e	0	get_type_ZTFPSUDVComponent_vtable_thunk			confirmed		0x008d3c20#1	
 0x004d6763	32	init_ZTFPSUDVComponent_descriptor_ref			confirmed			
 0x004d6783	0	init_ZTFPSUDVComponent_descriptor_ref_vtable_thunk			confirmed		0x008d3c20#2	
-0x004d6788	38		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d6788	38	get_ZTFPSUDVComponent_action_registry			confirmed			
 0x004d67ae	0	register_ZTFPSUDVComponent_action_value			confirmed		0x008d3c20#50	
 0x004d67c4	0	resolve_ZTFPSUDVComponent_action_value			confirmed		0x008d3c20#51	
 0x004d68a3	0	scalar_delete_ZTFPSUDVComponent			confirmed		0x008d3c20#0	
@@ -4335,7 +4336,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004d6f49	45		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			world/pathing
 0x004d6f76	55	reset_ZTFPSUDVComponent_runtime_camera_state			confirmed	gamebryo		
 0x004d6fad	169	detach_ZTFPSUDVComponent_avatar_target_and_set_state			confirmed	gamebryo		
-0x004d7056	645		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
+0x004d7056	645	initialize_ZTFPSUDVComponent_avatar_target			confirmed			
 0x004d72db	0	increase_ZTFPSUDVComponent_camera_zoom			confirmed		0x008d3c20#47	
 0x004d7341	0	decrease_ZTFPSUDVComponent_camera_zoom			confirmed		0x008d3c20#49	
 0x004d73a7	0	set_ZTFPSUDVComponent_min_camera_zoom			confirmed		0x008d3c20#46	
@@ -4508,7 +4509,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004dce26	23	init_gesture_trace_distance_end_iterator			confirmed			
 0x004dce3d	68	clear_gesture_trace_distance_samples			confirmed			
 0x004dce81	181	resize_gesture_trace_distance_samples			confirmed	gamebryo		
-0x004dcf36	420		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
+0x004dcf36	420	insert_gesture_trace_distance_sample_records			confirmed	gamebryo		
 0x004dd0da	311	erase_gesture_trace_distance_sample_range			confirmed			
 0x004dd211	57		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
 0x004dd24a	365		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			audio
@@ -4552,7 +4553,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004de76c	154	append_chars_to_inline_ui_string			confirmed			
 0x004de806	148	erase_checked_u32_tree_range			confirmed			
 0x004de89a	81		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			
-0x004de8eb	134		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified			renderer
+0x004de8eb	134	construct_ZTGlobe_location_dot_record			confirmed	gamebryo		
 0x004de971	47	get_type_ZTGlobe			confirmed			
 0x004de9a0	0		tankwallglass selector, fence/gate, FPS component, and gesture s		unidentified		0x008d4494#0	
 0x004de9a5	32	init_ZTGlobe_descriptor_ref			confirmed			
@@ -4569,9 +4570,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004df223	0	handle_set_secondary_globe_ui_value			confirmed			
 0x004df295	0	handle_clear_globe_ui_value			confirmed			
 0x004df34e	0	handle_show_globe_dot_ui_value			confirmed			
-0x004dfb13	630		globe pointer, selection, dot display, and handler registry		unidentified			renderer
-0x004dfd89	596		globe pointer, selection, dot display, and handler registry		unidentified			renderer
-0x004dffdd	412		globe pointer, selection, dot display, and handler registry		unidentified			renderer
+0x004dfb13	630	ensure_ZTGlobe_location_dot_objects			confirmed	gamebryo		
+0x004dfd89	596	clear_ZTGlobe_location_dot_objects			confirmed	gamebryo		
+0x004dffdd	412	refresh_ZTGlobe_dot_transforms			confirmed	gamebryo		
 0x004e0179	429	hit_test_globe_entry_index			confirmed			
 0x004e0326	193	set_selected_globe_entry_index			confirmed			
 0x004e03e7	293	set_secondary_globe_location_from_ui_string			confirmed			
@@ -4734,26 +4735,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e7421	0	allocate_ZTPlacementData_instance			confirmed		0x008d4f18#22	
 0x004e744d	174	wrap_point3_components_near_reference			confirmed			
 0x004e74fb	47	get_type_ZTRailCam			confirmed			
-0x004e752a	0		trail camera and research handler prelude		unidentified		0x008d5008#1	renderer
+0x004e752a	0	get_type_ZTRailCam_vtable_thunk			confirmed	gamebryo	0x008d5008#1	
 0x004e752f	32	init_ZTResearchItem_descriptor_ref			confirmed			
 0x004e754f	0	init_ZTResearchItem_descriptor_ref_vtable_thunk			confirmed		0x008d5008#2	
 0x004e7554	73	init_ZTResearchItem_callback_registry			confirmed			
 0x004e759d	0	register_ZTResearchItem_action_value			confirmed		0x008d51ac#0	
 0x004e75b3	0	resolve_ZTResearchItem_action_value			confirmed		0x008d51ac#1	
 0x004e7606	122	register_ZTResearchItem_value_handlers			confirmed			
-0x004e7680	230		trail camera and research handler prelude		unidentified			renderer
+0x004e7680	230	construct_ZTRailCam_members			confirmed	gamebryo		
 0x004e7766	0	scalar_delete_ZTRailCam			confirmed		0x008d5008#0	
 0x004e7783	138	destroy_ZTRailCam_members			confirmed			
 0x004e780d	292	clear_ZTRailCam_rail_entry_state			confirmed			
 0x004e7931	0	read_ZTRailCam_xml			confirmed		0x008d5044#5	
 0x004e866a	781	handle_rail_record_playback			confirmed			
-0x004e8977	97		trail camera and research handler prelude		unidentified			renderer
+0x004e8977	97	erase_ZTRailCam_rail_key_from_payload			confirmed	gamebryo		
 0x004e8b23	851	read_physobj_node_attachment			confirmed			
 0x004e8e76	216	refresh_rail_record_transform_entries			confirmed			
 0x004e8f4e	73	release_ZTRailCam_sprite_object			confirmed			
-0x004e8f97	185		trail camera and research handler prelude		unidentified			renderer
-0x004e9050	122		trail camera and research handler prelude		unidentified			renderer
-0x004e90ca	102		trail camera and research handler prelude		unidentified			renderer
+0x004e8f97	185	insert_ZTRailCam_string_keyed_tree_entry			confirmed	gamebryo		
+0x004e9050	122	erase_ZTRailCam_string_keyed_tree_entries_for_key			confirmed	gamebryo		
+0x004e90ca	102	count_ZTRailCam_string_keyed_tree_entries_for_key			confirmed	gamebryo		
 0x004e9130	95	append_rail_transform_record			confirmed			
 0x004e918f	112	compact_24byte_research_callback_vector_after_erase			confirmed			
 0x004e91ff	0	allocate_ZTRailCam_instance			confirmed		0x008d51ac#3	
@@ -4761,15 +4762,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e92f7	177	erase_string_keyed_tree_checked_range			confirmed			
 0x004e93a8	341	insert_string_keyed_tree_node_rebalance			confirmed			
 0x004e94fd	52	destroy_string_keyed_tree_storage			confirmed			
-0x004e9531	52		trail camera and research handler prelude		unidentified			renderer
-0x004e9565	50		trail camera and research handler prelude		unidentified			renderer
+0x004e9531	52	fill_rail_transform_records			confirmed	gamebryo		
+0x004e9565	50	find_checked_u32_tree_range_end			confirmed	gamebryo		
 0x004e9597	667	erase_string_keyed_tree_node			confirmed			
 0x004e9832	63	allocate_string_keyed_tree_node			confirmed			
 0x004e9871	67	allocate_24byte_record_array_checked			confirmed			
 0x004e98b4	160	insert_research_item_handler_list_record			confirmed			
-0x004e9954	57		trail camera and research handler prelude		unidentified			renderer
-0x004e998d	53		trail camera and research handler prelude		unidentified			renderer
-0x004e99c2	50		trail camera and research handler prelude		unidentified			renderer
+0x004e9954	57	destroy_string_keyed_tree_nodes_recursive			confirmed	gamebryo		
+0x004e998d	53	find_string_keyed_tree_range_end			confirmed	gamebryo		
+0x004e99c2	50	find_string_keyed_tree_range_start			confirmed	gamebryo		
 0x004e99f4	117	replay_ZTResearchItem_callback_list			confirmed			
 0x004e9a69	42	scale_point3_in_place_by_inverse			confirmed			
 0x004e9a93	47	get_type_ZTResearchItem			confirmed			
@@ -4782,7 +4783,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004e9bf2	67	construct_ZTResearchItem_members			confirmed			
 0x004e9c35	0	scalar_delete_ZTResearchItem			confirmed		0x008d52c0#0	
 0x004e9c50	312	ZTResearchItem_init_from_entity_shared_data			confirmed			
-0x004e9d88	118		research item and research manager handlers		unidentified			renderer
+0x004e9d88	118	destroy_ZTResearchItem_members			confirmed	gamebryo		
 0x004e9dfe	378	ZTResearchItem_build_research_button			confirmed			
 0x004e9f78	107	unregister_ZTResearchItem_button_binding			confirmed			
 0x004e9fe3	0	write_ZTResearchItem_xml			confirmed		0x008d52c0#19	
@@ -4969,13 +4970,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004f3719	174	lookup_or_insert_ZTFameData_handler_tree_entry			confirmed			
 0x004f37c7	48	destroy_ZTFameData_handler_tree_storage			confirmed			
 0x004f37f7	36	clear_ZTFameData_handler_tree			confirmed			
-0x004f381b	170		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
+0x004f381b	170	lookup_or_insert_ZTFameData_handler_value_slot			confirmed	gamebryo		
 0x004f38e0	153	register_ZTFameData_handler_for_token			confirmed			
 0x004f39c0	0	allocate_ZTAdmissionData_value_record			confirmed		0x008d5c64#1	
 0x004f39dd	0	allocate_ZTFameData_value_record			confirmed		0x008d5c64#3	
 0x004f3a03	237	assign_pointer_vector_storage			confirmed			
 0x004f3af0	384	insert_ZTFameData_handler_tree_with_hint			confirmed			
-0x004f3c70	372		adoption flag, fame handlers, sun layer, and tool-manager tail		unidentified			renderer
+0x004f3c70	372	insert_ZTFameData_value_tree_with_hint			confirmed	gamebryo		
 0x004f3de4	98	clone_and_relink_24byte_tree_header			confirmed			
 0x004f3e46	212	insert_ZTFameData_handler_tree_unique			confirmed			
 0x004f3f1a	148	erase_ZTFameData_handler_tree_range			confirmed			
@@ -17003,8 +17004,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006c1fcf	47	get_type_BFGPoint3Attribute			confirmed	gamebryo		
 0x006c1ffe	1030		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		
 0x006c246d	55		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
-0x006c24a4	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008f6da8#2	world/pathing
-0x006c24ba	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008f6da8#4	world/pathing
+0x006c24a4	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008f6da0#4	world/pathing
+0x006c24ba	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008f6da0#6	world/pathing
 0x006c25fc	142		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
 0x006c268a	0		placement grid, BFGEntity, attributes, and instance XML		unidentified		0x008f6d28#0	world/pathing
 0x006c26a5	262		placement grid, BFGEntity, attributes, and instance XML		unidentified	gamebryo		world/pathing
@@ -17115,10 +17116,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006c8615	0		entity economy, transaction, and component/type registry support		unidentified		0x008d3954#0	economy
 0x006c86d5	0		entity economy, transaction, and component/type registry support		unidentified		0x008d3954#1	economy
 0x006c86f8	141		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
-0x006c8785	0		entity economy, transaction, and component/type registry support		unidentified		0x008f6da8#0	economy
+0x006c8785	0		entity economy, transaction, and component/type registry support		unidentified		0x008f6da0#2	economy
 0x006c88b3	0		entity economy, transaction, and component/type registry support		unidentified		0x008f6dc4#5	economy
 0x006c896c	82		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
-0x006c89be	0		entity economy, transaction, and component/type registry support		unidentified		0x008f6da8#1	economy
+0x006c89be	0		entity economy, transaction, and component/type registry support		unidentified		0x008f6da0#3	economy
 0x006c89c4	87		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
 0x006c8a1b	68		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
 0x006c8a5f	207		entity economy, transaction, and component/type registry support		unidentified	gamebryo		economy
