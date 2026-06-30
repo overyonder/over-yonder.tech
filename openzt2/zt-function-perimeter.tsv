@@ -3392,8 +3392,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b05c2	32	init_ZTUIContextList_descriptor_ref			confirmed			
 0x004b05e2	0	init_ZTUIContextList_descriptor_ref_vtable_thunk			confirmed		0x008d0bd0#2	
 0x004b05e7	73	get_ZTUIContextList_action_registry			confirmed			
-0x004b0630	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#0	
-0x004b0646	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#1	
+0x004b0630	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#0	ui
+0x004b0646	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#1	ui
 0x004b0699	190	init_ZTUIContextList_action_registry_entries			confirmed			
 0x004b0757	148	construct_ZTUIContextList_members			confirmed			
 0x004b07eb	0	scalar_delete_ZTUIContextList			confirmed		0x008d0bd0#0	
@@ -3436,51 +3436,51 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004b2dec	270	introsort_pointer_range_with_comparator			confirmed			
 0x004b2efa	34	assign_filter_assignment_record			confirmed			
 0x004b2f1c	366	partition_16byte_filter_string_entry_range			confirmed			
-0x004b308a	98	insertion_sort_16byte_filter_string_entries			confirmed			
+0x004b308a	98	sort_heap_16byte_filter_string_entries			confirmed			
 0x004b30ec	129	insertion_sort_pointer_range_with_comparator			confirmed			
 0x004b316d	119	sort_16byte_filter_string_partition_samples			confirmed			
-0x004b31e4	61		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b3221	71		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b3268	162		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b330a	75		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b3355	142		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b33e3	118		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b3479	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#2	
-0x004b3484	46		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b34b2	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#0	
-0x004b34cd	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#5	
+0x004b31e4	61	swap_16byte_filter_string_entries			confirmed			
+0x004b3221	71	make_heap_16byte_filter_string_entries			confirmed			
+0x004b3268	162	final_insertion_sort_16byte_filter_string_entries			confirmed			
+0x004b330a	75	sort_three_16byte_filter_string_entries			confirmed			
+0x004b3355	142	sift_down_16byte_filter_string_heap_entry			confirmed			
+0x004b33e3	118	push_heap_16byte_filter_string_entry			confirmed			
+0x004b3479	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e58#2	ui
+0x004b3484	46	copy_construct_filter_assignment_record			confirmed			
+0x004b34b2	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#0	ui
+0x004b34cd	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0e7c#5	ui
 0x004b34ea	32	destroy_inline_ui_typed_value			confirmed			
 0x004b350a	47	get_type_ZTZoopediaComponent			confirmed			
 0x004b3539	0	get_type_ZTZoopediaComponent_vtable_thunk			confirmed		0x008d11e0#1	
-0x004b353e	32		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b353e	32	get_ZTZoopediaComponent_descriptor_ref			confirmed			
 0x004b355e	0	init_ZTZoopediaComponent_descriptor_ref_vtable_thunk			confirmed		0x008d11e0#2	
-0x004b3563	73		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b3615	122		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b368f	178		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b3563	73	get_ZTZoopediaComponent_action_registry			confirmed			
+0x004b3615	122	init_ZTZoopediaComponent_action_registry_entries			confirmed			
+0x004b368f	178	construct_ZTZoopediaComponent_members			confirmed			
 0x004b3741	0	scalar_delete_ZTZoopediaComponent			confirmed		0x008d11e0#0	
 0x004b375c	553	populate_zoopedia_entry_page			confirmed			
-0x004b3985	68		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b3985	68	destroy_ZTZoopediaComponent_members			confirmed			
 0x004b39c9	0	open_zoopedia_page_from_string_value			confirmed		0x008d12b4#85	
 0x004b3c51	0	open_zoopedia_stored_entry_name_a			confirmed		0x008d12b4#86	
 0x004b3c9d	0	open_zoopedia_stored_entry_name_b			confirmed		0x008d12b4#87	
 0x004b3ce9	0	open_zoopedia_previous_toc_entry			confirmed		0x008d12b4#88	
 0x004b3d5f	0	open_zoopedia_next_toc_entry			confirmed		0x008d12b4#89	
 0x004b3dd3	1537	populate_zoopedia_help_content			confirmed			
-0x004b43d4	191		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4493	267		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b43d4	191	record_ZTZoopediaComponent_history_entry			confirmed			
+0x004b4493	267	refresh_ZTZoopediaComponent_history_buttons			confirmed			
 0x004b459e	47	get_type_ZTZoopediaTOC			confirmed			
-0x004b45cd	0		buy-panel filters, context list, and Zoopedia		unidentified		0x008d0f90#1	ui
-0x004b45d2	32		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b45cd	0	get_type_ZTZoopediaTOC_vtable_thunk			confirmed		0x008d0f90#1	
+0x004b45d2	32	get_ZTZoopediaTOC_descriptor_ref			confirmed			
 0x004b45f2	0	init_ZTZoopediaTOC_descriptor_ref_vtable_thunk			confirmed		0x008d0f90#2	
-0x004b45f7	38		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b45f7	38	get_ZTZoopediaTOC_action_registry			confirmed			
 0x004b461d	0	register_ZTZoopediaTOC_action_value			confirmed			
 0x004b4633	0	resolve_ZTZoopediaTOC_action_value			confirmed			
 0x004b4686	0	refresh_ZTZoopediaTOC_if_help_component_active_then_delegate			confirmed		0x008d1064#12	
 0x004b46c3	0	scalar_delete_ZTZoopediaTOC			confirmed		0x008d0f90#0	
-0x004b46de	56		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b46de	56	destroy_ZTZoopediaTOC_members			confirmed			
 0x004b4716	0	refresh_ZTZoopediaTOC_help_expander_state			confirmed		0x008d1064#92	
-0x004b472d	92		buy-panel filters, context list, and Zoopedia		unidentified			ui
-0x004b4789	834		buy-panel filters, context list, and Zoopedia		unidentified			ui
+0x004b472d	92	refresh_ZTZoopediaTOC_help_expander_tree			confirmed			
+0x004b4789	834	bind_ZTZoopediaTOC_help_expander_branch			confirmed			
 0x004b4acb	0	write_ZTZoopediaTOC_group_entry_xml			confirmed		0x008d0fcc#4	
 0x004b4b62	0	read_ZTZoopediaTOC_group_entry_xml			confirmed		0x008d0fcc#5	
 0x004b4bab	147		buy-panel filters, context list, and Zoopedia		unidentified			ui
