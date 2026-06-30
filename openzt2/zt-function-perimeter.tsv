@@ -6130,36 +6130,36 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00526dcb	0	refresh_ZTTransportSkyTrack_after_layout_change			confirmed		0x008d8e34#3	
 0x00526e62	0	ensure_ZTTransportSkyTrack_aux_payload_and_clear_output			confirmed		0x008d8e50#13	
 0x00526ff1	0	emit_sky_track_placement_mode_payload			confirmed		0x008d8e34#4	
-0x00527210	194		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005272d2	633		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00527210	194	apply_ZTTransportSkyTrack_tower_height_delta			confirmed			
+0x005272d2	633	set_ZTTransportSkyTrack_tower_top_height			confirmed			
 0x0052754b	0	refresh_ZTTransportSkyTrack_render_state			confirmed		0x008d8e34#5	
 0x0052755b	96	get_ZTTransportSkyTrack_max_tower_height			confirmed			
 0x005275bb	314	compute_ZTTransportSkyTrack_tower_clearance_height			confirmed			
-0x005276f5	29		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005276f5	29	resolve_ZTTransportSkyTrack_from_trip_endpoint			confirmed			
 0x00527712	0	get_ZTTransportSkyTrack_effective_type_chain			confirmed		0x008d8de0#13	
 0x0052772f	0	test_ZTTransportSkyTrack_station_ref_present			confirmed		0x008d8e50#5	
 0x005277cd	0	release_ZTTransportSkyTrack_ref_94_and_mark_dirty			confirmed		0x008d8e50#0	
-0x005277fd	106		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527867	575		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527aa6	50		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527ad8	201		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527ba1	578		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527de3	429		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00527f90	128		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005277fd	106	refresh_ZTTransportSkyTrack_L_top_object_state			confirmed			
+0x00527867	575	collect_ZTTransportSkyTrack_travel_point_refs			confirmed			
+0x00527aa6	50	resolve_ZTTransportSkyTrack_top_object_selector_key			confirmed			
+0x00527ad8	201	refresh_ZTTransportSkyTrack_top_object_heading			confirmed			
+0x00527ba1	578	apply_ZTTransportSkyTrack_top_object_heading			confirmed			
+0x00527de3	429	refresh_ZTTransportSkyTrack_UTurn_top_object_state			confirmed			
+0x00527f90	128	test_ZTTransportSkyTrack_endpoint_angle_limit			confirmed			
 0x00528010	1800	emit_remove_track_connection_payload			confirmed			
-0x00528718	227		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005287fb	874		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00528b65	446		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00528d23	341		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00528e78	83		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00528ecb	182		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00528f81	512		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x00529181	55		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
-0x005291b8	196		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x00528718	227	test_ZTTransportSkyTrack_rope_path_intersection			confirmed			
+0x005287fb	874	refresh_ZTTransportSkyTrack_endpoint_travel_points			confirmed			
+0x00528b65	446	apply_ZTTransportSkyTrack_endpoint_travel_points			confirmed			
+0x00528d23	341	resolve_ZTTransportSkyTrack_pending_endpoint_connections			confirmed			
+0x00528e78	83	set_ZTTransportSkyTrack_top_object_kind			confirmed			
+0x00528ecb	182	get_ZTTransportSkyTrack_top_object_kind_key			confirmed			
+0x00528f81	512	refresh_ZTTransportSkyTrack_rope_object			confirmed			
+0x00529181	55	classify_ZTTransportSkyTrack_top_object_kind			confirmed			
+0x005291b8	196	test_ZTTransportSkyTrack_rope_path_sample			confirmed			
 0x0052927c	0	mark_ZTTransportSkyTrack_attachment_objects_active			confirmed		0x008d8e50#6	
 0x005293dc	0	clear_ZTTransportSkyTrack_attachment_objects_active			confirmed		0x008d8e50#7	
 0x0052955e	0	refresh_ZTTransportSkyTrack_construction_marker_visibility			confirmed		0x008d8e50#8	
-0x005297a4	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
+0x005297a4	27	resolve_ZTTransportSkyTrack_first_trip_neighbor			confirmed			
 0x005297bf	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x005297da	27		transport ground/sky track, dependency cleanup, and UI storage t		unidentified			ui
 0x005297f5	100	resolve_ZTTransportSkyTrack_return_trip_neighbor			confirmed			
@@ -7932,7 +7932,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0057da5c	184		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057db14	400		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
 0x0057dca4	175		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
-0x0057dd53	165		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			ui
+0x0057dd53	165		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			
 0x0057ddf8	345		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			economy
 0x0057df51	549	handle_tank_delete_merge_confirmation			confirmed			
 0x0057e176	163		media shell, telemetry, transport geometry, scenarios, tank comm		unidentified			game-entities
@@ -19761,12 +19761,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075723b	246		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00757331	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#0	
 0x0075738e	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#31	
-0x0075746b	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
-0x007574af	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
+0x0075746b	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
+0x007574af	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
 0x007574f3	125		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		io/assets
-0x00757570	67		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
+0x00757570	67		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
 0x007575b3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		ui
-0x007575f3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
+0x007575f3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		world/pathing
 0x00757633	536		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x0075784b	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#19	
 0x007578e4	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#20	
