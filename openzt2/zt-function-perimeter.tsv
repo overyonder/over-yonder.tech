@@ -23317,17 +23317,17 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f7b99	61	find_BFScenarioRule_neutral_xml_child			confirmed			
 0x007f7bd6	61	find_BFScenarioRule_success_xml_child			confirmed			
 0x007f7c13	61	find_BFScenarioRule_failure_xml_child			confirmed			
-0x007f7c50	116		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#24	
+0x007f7c50	116	update_BFScenarioRule_state_and_dispatch_result_text			confirmed		0x009077c8#24	
 0x007f7cc4	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#27	
 0x007f7d16	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#28	
 0x007f7d47	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#29	
 0x007f7d78	507	read_scenario_goal			confirmed		0x009077c8#19	
 0x007f7f73	630	read_scenario_objective			confirmed		0x009077c8#20	
-0x007f81e9	163		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f828c	163		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f832f	110		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f839d	64		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007f83dd	25		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#25	
+0x007f81e9	163	write_BFScenarioRule_child_altText_attribute			confirmed			
+0x007f828c	163	write_BFScenarioRule_child_altOverviewText_attribute			confirmed			
+0x007f832f	110	set_BFScenarioRule_state_from_status_string			confirmed			
+0x007f839d	64	emit_BFScenarioRule_status_string			confirmed			
+0x007f83dd	25	reset_BFScenarioRule_status_to_neutral			confirmed		0x009077c8#25	
 0x007f83f6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907840#3	
 0x007f8450	71	as_BFScenarioAction_from_named_value			confirmed			
 0x007f8497	47	get_type_BFScenarioGroup			confirmed			
@@ -23348,10 +23348,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f87a1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#32	
 0x007f87be	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#33	
 0x007f87df	131		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#34	io/assets
-0x007f8862	237		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f8862	237	find_matching_BFScenarioGroup_child_recursive			confirmed			
 0x007f894f	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#25	
 0x007f89ae	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#35	
-0x007f8a37	150		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f8a37	150	collect_BFScenarioGroup_child_names			confirmed			
 0x007f8acd	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#27	
 0x007f8ae1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#36	
 0x007f8b59	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#37	
@@ -23368,20 +23368,20 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f916d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907950#2	
 0x007f9172	38	get_BFScenarioAction_handler_registry			confirmed			
 0x007f9274	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907950#0	
-0x007f928f	32		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f928f	32	destroy_BFScenarioAction_members			confirmed			
 0x007f92af	47	get_type_BFScenarioScriptAction			confirmed			
 0x007f92de	0	get_type_BFScenarioScriptAction_vtable_thunk			confirmed		0x009079b0#1	
 0x007f92e3	32	init_BFScenarioScriptAction_descriptor_ref			confirmed			
 0x007f9303	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#2	
 0x007f9308	38	get_BFScenarioScriptAction_handler_registry			confirmed			
 0x007f940a	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#0	
-0x007f9425	40		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9425	40	destroy_BFScenarioScriptAction_members			confirmed			
 0x007f944d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#21	
 0x007f94a0	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#19	
 0x007f9504	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009079b0#20	
 0x007f958e	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907a10#1	
 0x007f95b6	107	populate_BFScenarioAction_handler_registry			confirmed			
-0x007f9668	89		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007f9668	89	clear_BFScenarioAction_payload_list			confirmed			
 0x007f96c1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907a10#3	
 0x007f9705	87	populate_BFScenarioScriptAction_handler_registry			confirmed			
 0x007f97a3	153	register_BFScenarioAction_handler_for_unseen_type			confirmed			
@@ -23406,15 +23406,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007fabdd	1824		scenario manager/rules/actions and IME/platform COM spans		unidentified			renderer
 0x007fb2fd	40	clear_ime_candidate_lines_if_unloaded			confirmed			
 0x007fb325	1887		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007fba84	72		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007fbacc	79		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007fba84	72	cache_ime_composition_window_geometry			confirmed			
+0x007fbacc	79	set_ime_enabled_and_refresh_open_state			confirmed			
 0x007fbb1b	679	load_imm32_ime_functions			confirmed			
 0x007fbdc2	580	detect_cjk_ime_modules			confirmed			
 0x007fc006	947	refresh_ime_candidate_list_from_context			confirmed			
 0x007fc3b9	222	match_ime_virtual_key_filter			confirmed			
 0x007fc497	96		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fc558	44		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007fc584	174		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007fc584	174	apply_ime_candidate_window_color_settings			confirmed			
 0x007fc5d1	211		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fc6a4	288	probe_traditional_chinese_ime_keyboard_mapping			confirmed			
 0x007fc7c4	329	toggle_ime_reading_window_state			confirmed			
@@ -23447,12 +23447,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007fd274	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907b84#0	
 0x007fd27e	53		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fd2b3	65		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007fd2f4	105		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007fd35d	69		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007fd2f4	105	set_game_mode_profile_path_cache			confirmed			
+0x007fd35d	69	clear_game_mode_profile_path_segment_lookup			confirmed			
 0x007fd3a2	49		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
-0x007fd3d3	49		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007fd404	26		scenario manager/rules/actions and IME/platform COM spans		unidentified			
-0x007fd41e	18		scenario manager/rules/actions and IME/platform COM spans		unidentified			
+0x007fd3d3	49	get_elapsed_session_minutes_rounded			confirmed			
+0x007fd404	26	pause_elapsed_session_timer			confirmed			
+0x007fd41e	18	is_elapsed_session_timer_running			confirmed			
 0x007fd430	42	register_ime_auxiliary_string_table_entry			confirmed			
 0x007fd45a	101		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fd4bf	123	match_dot_delimited_token_segment			confirmed			
