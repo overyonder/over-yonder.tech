@@ -17982,7 +17982,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006f1004	0		collision tester and fitting-surface component XML		unidentified		0x008f94f8#0	
 0x006f101f	18		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x006f1031	76	resolve_BFGFittingSurfaceComponent_for_entity			confirmed	gamebryo		
-0x006f107d	63		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x006f107d	63	get_entity_fitting_surface_height_offset			confirmed	gamebryo		
 0x006f10bc	0		collision tester and fitting-surface component XML		unidentified		0x008f94f8#29	
 0x006f1139	0		collision tester and fitting-surface component XML		unidentified		0x008f94f8#30	
 0x006f116d	0		collision tester and fitting-surface component XML		unidentified		0x008f94f8#26	
@@ -18334,7 +18334,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007046e5	213	lower_bound_or_insert_BFGInfluenceMgr_payload_tree_entry			confirmed	gamebryo		
 0x007047ba	175		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704869	395	insert_BFGInfluenceMgr_payload_tree_node			confirmed	gamebryo		
-0x007049f4	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x007049f4	160	insert_948270_type_handler_registry_node			confirmed	gamebryo		
 0x00704a94	97	retreat_BFGInfluenceMgr_payload_tree_iterator			confirmed	gamebryo		
 0x00704af5	44		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00704b21	81	allocate_BFGInfluenceMgr_entry_node			confirmed	gamebryo		
@@ -18366,7 +18366,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00705a73	1133	register_entity_component_type_pairs			confirmed	gamebryo		
 0x00705ee0	47	get_type_BFGEntityTriggerMgr			confirmed	gamebryo		
 0x00705f0f	0		collision tester and fitting-surface component XML		unidentified		0x008fa568#1	
-0x00705f14	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00705f14	32	get_BFGEntityTriggerMgr_descriptor_ref			confirmed	gamebryo		
 0x00705f34	0		collision tester and fitting-surface component XML		unidentified		0x008fa568#2	
 0x00705f39	68		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00705f7d	0		collision tester and fitting-surface component XML		unidentified		0x008fa5bc#0	
@@ -18394,14 +18394,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00706dcd	77	copy_assign_show_effect_record			confirmed	gamebryo		
 0x00706e1a	47	get_type_BFGEnvironmentComponent			confirmed	gamebryo		
 0x00706e49	0		collision tester and fitting-surface component XML		unidentified		0x008fa8a0#1	
-0x00706e4e	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00706e4e	32	get_BFGEnvironmentComponent_descriptor_ref			confirmed	gamebryo		
 0x00706e6e	0		collision tester and fitting-surface component XML		unidentified		0x008fa8a0#2	
 0x00706e73	38		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00706f02	188		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00706fbe	0		collision tester and fitting-surface component XML		unidentified		0x008fa8a0#0	
 0x00706fd9	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707011	164		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x007070b5	206		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x007070b5	206	refresh_BFGEnvironmentComponent_required_tank_metrics			confirmed	gamebryo		
 0x00707183	499	register_message_attributes			confirmed	gamebryo		
 0x007073b5	0		collision tester and fitting-surface component XML		unidentified		0x008fa8a0#19	
 0x007074b1	0		collision tester and fitting-surface component XML		unidentified		0x008fa8a0#14	
@@ -18409,13 +18409,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00707557	256	emit_entity_localized_message_payload			confirmed	gamebryo		
 0x00707657	684		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707903	67		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00707946	67		collision tester and fitting-surface component XML		unidentified	gamebryo		
+0x00707946	67		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
 0x00707989	325	accumulate_environment_surface_weighted_value			confirmed	gamebryo		
 0x00707ace	273		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707bdf	0		collision tester and fitting-surface component XML		unidentified		0x008fa900#1	
 0x00707bf7	64		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707c37	159		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00707d1d	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00707d1d	160	insert_948258_type_handler_registry_node			confirmed	gamebryo		
 0x00707dbd	77		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707e0a	250		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707f04	0		collision tester and fitting-surface component XML		unidentified		0x008fa900#2	
@@ -18441,7 +18441,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00708b97	63	sift_up_BFGPathFinderMgr_open_route_record_heap			confirmed	gamebryo		
 0x00708bd6	47	get_type_BFGEntitySndComponent			confirmed	gamebryo		
 0x00708c05	0		collision tester and fitting-surface component XML		unidentified		0x008fa960#1	
-0x00708c0a	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00708c0a	32	get_BFGEntitySndComponent_descriptor_ref			confirmed	gamebryo		
 0x00708c2a	0		collision tester and fitting-surface component XML		unidentified		0x008fa960#2	
 0x00708c2f	73		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00708c78	0		collision tester and fitting-surface component XML		unidentified		0x008fa9dc#0	
@@ -18474,13 +18474,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070a46b	152	insert_animation_bool_property_record_at_iterator			confirmed	gamebryo		
 0x0070a503	41		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070a52c	60	fill_construct_animation_bool_property_records			confirmed	gamebryo		
-0x0070a568	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070a568	160	insert_94824c_type_handler_registry_node			confirmed	gamebryo		
 0x0070a608	25		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070a621	449	insert_animation_bool_property_record			confirmed	gamebryo		
 0x0070a7e2	52	copy_construct_animation_bool_property_record_range			confirmed	gamebryo		
 0x0070a81b	47	get_type_BFGContainerData			confirmed	gamebryo		
 0x0070a84a	0		collision tester and fitting-surface component XML		unidentified		0x008faa10#1	
-0x0070a84f	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070a84f	32	get_BFGContainerData_descriptor_ref			confirmed	gamebryo		
 0x0070a86f	0		collision tester and fitting-surface component XML		unidentified		0x008faa10#2	
 0x0070a874	0		collision tester and fitting-surface component XML		unidentified		0x008faa10#0	
 0x0070a88f	18		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18489,7 +18489,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070a90f	0		collision tester and fitting-surface component XML		unidentified		0x008faac8#21	
 0x0070a915	47	get_type_BFFakePhysicsComponent			confirmed	gamebryo		
 0x0070a944	0		collision tester and fitting-surface component XML		unidentified		0x008faac8#1	
-0x0070a949	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070a949	32	get_BFFakePhysicsComponent_descriptor_ref			confirmed	gamebryo		
 0x0070a969	0		collision tester and fitting-surface component XML		unidentified		0x008faac8#2	
 0x0070a96e	38		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070a994	0		collision tester and fitting-surface component XML		unidentified		0x008faac8#36	
@@ -18504,10 +18504,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070b2b3	0		collision tester and fitting-surface component XML		unidentified		0x008faac8#39	
 0x0070b2c6	90		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070b320	153		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x0070b400	160		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070b400	160	insert_948240_type_handler_registry_node			confirmed	gamebryo		
 0x0070b4a0	47	get_type_BFGInfluenceController			confirmed	gamebryo		
 0x0070b4cf	0		collision tester and fitting-surface component XML		unidentified		0x008fab80#1	
-0x0070b4d4	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070b4d4	32	get_BFGInfluenceController_descriptor_ref			confirmed	gamebryo		
 0x0070b4f4	0		collision tester and fitting-surface component XML		unidentified		0x008fab80#2	
 0x0070b4f9	68		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070b53d	0		collision tester and fitting-surface component XML		unidentified		0x008fab80#27	
@@ -18517,7 +18517,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070b6a0	0		collision tester and fitting-surface component XML		unidentified		0x008fab80#30	
 0x0070b708	47	get_type_BFGElevatedTileSerializer			confirmed	gamebryo		
 0x0070b737	0		collision tester and fitting-surface component XML		unidentified		0x008fac38#1	
-0x0070b73c	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070b73c	32	get_BFGElevatedTileSerializer_descriptor_ref			confirmed	gamebryo		
 0x0070b75c	0		collision tester and fitting-surface component XML		unidentified		0x008fac38#2	
 0x0070b761	0		collision tester and fitting-surface component XML		unidentified		0x008fac38#20	
 0x0070ba98	0		collision tester and fitting-surface component XML		unidentified		0x008fac38#19	
@@ -18525,9 +18525,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070bffe	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#21	
 0x0070c004	47	get_type_BFSecondaryAnimComponent			confirmed	gamebryo		
 0x0070c033	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#1	
-0x0070c038	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070c038	32	get_BFSecondaryAnimComponent_descriptor_ref			confirmed	gamebryo		
 0x0070c058	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#2	
-0x0070c05d	387		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070c05d	387	test_BFSecondaryAnimComponent_conditions_satisfied			confirmed	gamebryo		
 0x0070c247	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#0	
 0x0070c262	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x0070c29a	0		collision tester and fitting-surface component XML		unidentified		0x008fad10#31	
@@ -18548,7 +18548,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070cf35	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#21	
 0x0070cf3b	47	get_type_BFBirdGroundFitComponent			confirmed	gamebryo		
 0x0070cf6a	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#1	
-0x0070cf6f	32		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0070cf6f	32	get_BFBirdGroundFitComponent_descriptor_ref			confirmed	gamebryo		
 0x0070cf8f	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#2	
 0x0070cf94	0		collision tester and fitting-surface component XML		unidentified		0x008fae10#0	
 0x0070cfaf	18		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18624,7 +18624,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0070ff9b	397	insert_BFBirdGroundFit_30byte_records			confirmed	gamebryo		
 0x00710128	192		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007101e8	148	erase_BFBirdGroundFit_registry_range			confirmed	gamebryo		
-0x0071027c	404		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x0071027c	404	insert_BFBirdGroundFit_registry_tree_node			confirmed	gamebryo		
 0x00710410	191		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007104cf	341		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710624	48	clear_vec3_key_tree_storage			confirmed	gamebryo		
@@ -18645,7 +18645,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007108b6	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#1	
 0x007108bb	32		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007108db	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#2	
-0x007108e0	38		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x007108e0	38	get_BFRActor_BFRSceneGraph_component_adapter_registry			confirmed	gamebryo		
 0x0071096f	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007109a7	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x007109df	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18655,7 +18655,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00710abf	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710af7	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710b2f	56		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00710b67	56		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00710b67	56	get_BFRSceneGraphComponent_token_ref			confirmed	gamebryo		
 0x00710b9f	298		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00710cc9	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#0	
 0x00710ce4	390	destroy_BFPhysObj_members			confirmed	gamebryo		
@@ -18671,7 +18671,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00711445	177	write_BFPhysObj_position_plus_scaled_slot154_vector			confirmed	gamebryo		
 0x007114f6	177	write_BFPhysObj_position_plus_scaled_slot15c_vector			confirmed	gamebryo		
 0x007115a7	177	write_BFPhysObj_position_plus_scaled_slot158_vector			confirmed	gamebryo		
-0x00711658	105		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00711658	105	find_BFR_scene_graph_component_ref_for_key			confirmed	gamebryo		
 0x007116c1	522	read_actor_component			confirmed	gamebryo		
 0x007118cb	144		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
 0x0071195b	170		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
@@ -22420,26 +22420,26 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c7711	262	construct_BFNIActorComponent_animation_subobject			confirmed	gamebryo		
 0x007c7832	85	destroy_BFNIActorComponent_animation_subobject			confirmed	gamebryo		
 0x007c7887	0	get_active_tool_context_animation_payload			confirmed		0x00902158#2	
-0x007c78df	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#0	ui
-0x007c791c	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#1	ui
-0x007c7966	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#6	ui
-0x007c79db	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#7	ui
-0x007c79fc	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#1	ui
-0x007c7aac	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#2	ui
-0x007c7acc	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#3	ui
-0x007c7b7f	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#4	ui
-0x007c7b99	293		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c7cbe	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#5	ui
-0x007c7d95	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#15	ui
-0x007c7df2	74		UI dependency references, movement/view components, and animatio		unidentified	gamebryo	0x009021b0#14	ui
-0x007c7e3c	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#11	ui
-0x007c7e4e	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#10	ui
-0x007c7ed1	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#6	ui
-0x007c7f2e	0		UI dependency references, movement/view components, and animatio		unidentified	None	0x009021b0#7	ui
-0x007c7fdc	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#9	ui
-0x007c8035	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#8	ui
-0x007c808b	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#12	ui
-0x007c80b6	0		UI dependency references, movement/view components, and animatio		unidentified		0x009021b0#13	ui
+0x007c78df	0	resolve_BFNIActorComponent_animation_record_payload			confirmed		0x00902170#0	
+0x007c791c	0	find_BFNIActorComponent_animation_record_by_key			confirmed		0x00902170#1	
+0x007c7966	0	merge_BFNIActorComponent_deferred_animation_text_tail			confirmed		0x00902170#6	
+0x007c79db	0	clear_BFNIActorComponent_deferred_animation_text_tail			confirmed		0x00902170#7	
+0x007c79fc	0	test_BFNIActorComponent_animation_request_allowed			confirmed		0x009021b0#1	
+0x007c7aac	0	copy_BFNIActorComponent_animation_result_after_ack			confirmed		0x009021b0#2	
+0x007c7acc	0	apply_BFNIActorComponent_animation_request_flags			confirmed		0x009021b0#3	
+0x007c7b7f	0	mark_BFNIActorComponent_animation_request_pending			confirmed		0x009021b0#4	
+0x007c7b99	293	parse_BFNIActorComponent_blend_animation_command			confirmed	gamebryo		
+0x007c7cbe	0	handle_BFNIActorComponent_blend_animation_command			confirmed		0x009021b0#5	
+0x007c7d95	0	flush_BFNIActorComponent_deferred_animation_request			confirmed		0x009021b0#15	
+0x007c7df2	74	reset_BFNIActorComponent_animation_runtime_state			confirmed	gamebryo	0x009021b0#14	
+0x007c7e3c	0	forward_BFNIActorComponent_animation_value_to_slot80			confirmed		0x009021b0#11	
+0x007c7e4e	0	lookup_BFNIActorComponent_button_binding_payload			confirmed		0x009021b0#10	
+0x007c7ed1	0	insert_BFNIActorComponent_button_binding_record			confirmed		0x009021b0#6	
+0x007c7f2e	0	remove_BFNIActorComponent_button_binding_record			confirmed	None	0x009021b0#7	
+0x007c7fdc	0	apply_BFNIActorComponent_binding_transforms_to_targets			confirmed		0x009021b0#9	
+0x007c8035	0	refresh_BFNIActorComponent_binding_transforms_from_placement			confirmed		0x009021b0#8	
+0x007c808b	0	update_BFNIActorComponent_active_animation_blend_time			confirmed		0x009021b0#12	
+0x007c80b6	0	test_BFNIActorComponent_animation_value_key_changed			confirmed		0x009021b0#13	
 0x007c8194	88		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007c81ec	190		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
 0x007c82c5	33		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
