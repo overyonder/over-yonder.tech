@@ -22396,30 +22396,30 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c6b91	174	sample_BFNodeLinearEulerRotAnimController_rotation			confirmed	gamebryo		
 0x007c6c3f	0	apply_BFNodeLinearEulerRotAnimController_to_node			confirmed		0x00903a04#7	
 0x007c6ca4	0	reset_BFNodeLinearEulerRotAnimController_node_rotation			confirmed		0x00903a04#5	
-0x007c6cd9	29		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c6cf6	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903a04#0	ui
-0x007c6d17	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903a04#11	ui
+0x007c6cd9	29	construct_BFNodeLinearEulerRotAnimController			confirmed	gamebryo		
+0x007c6cf6	0	scalar_delete_BFNodeLinearEulerRotAnimController			confirmed		0x00903a04#0	
+0x007c6d17	0	prepare_BFNodeLinearEulerRotAnimController_axis_update			confirmed		0x00903a04#11	
 0x007c6d39	47	get_type_BFNodeLinearScaleAnimController			confirmed	gamebryo		
 0x007c6d68	0	get_type_BFNodeLinearScaleAnimController_vtable_thunk			confirmed		0x00903a54#1	
-0x007c6d6d	43		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c6d98	65		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c6dd9	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903a54#7	ui
-0x007c6e17	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903a54#0	ui
+0x007c6d6d	43	get_BFNodeLinearScaleAnimController_current_scale_key			confirmed	gamebryo		
+0x007c6d98	65	sample_BFNodeLinearScaleAnimController_scale			confirmed	gamebryo		
+0x007c6dd9	0	apply_BFNodeLinearScaleAnimController_to_node			confirmed		0x00903a54#7	
+0x007c6e17	0	scalar_delete_BFNodeLinearScaleAnimController			confirmed		0x00903a54#0	
 0x007c6e38	47	get_type_BFNodeBezierEulerRotAnimController			confirmed	gamebryo		
 0x007c6e67	0	get_type_BFNodeBezierEulerRotAnimController_vtable_thunk			confirmed		0x00903aa8#0	
-0x007c6e6c	354		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c6fce	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903aa8#6	ui
-0x007c7033	29		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c7077	18		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c70aa	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903af8#0	ui
-0x007c70ce	32		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c70ee	549		UI dependency references, movement/view components, and animatio		unidentified	gamebryo	0x00903af8#12	ui
-0x007c7313	915		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c76a6	17		UI dependency references, movement/view components, and animatio		unidentified	gamebryo	0x00903af8#5	ui
-0x007c76b7	90		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c7711	262		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c7832	85		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c7887	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902158#2	ui
+0x007c6e6c	354	sample_BFNodeBezierEulerRotAnimController_rotation			confirmed	gamebryo		
+0x007c6fce	0	apply_BFNodeBezierEulerRotAnimController_to_node			confirmed		0x00903aa8#6	
+0x007c7033	29	construct_BFNodeBezierEulerRotAnimController			confirmed	gamebryo		
+0x007c7077	18	construct_NiTextureAccumulator_node			confirmed	gamebryo		
+0x007c70aa	0	clone_NiTextureAccumulator_node			confirmed		0x00903af8#0	
+0x007c70ce	32	copy_NiTextureAccumulator_node_flags			confirmed	gamebryo		
+0x007c70ee	549	flush_NiTextureAccumulator_bucket_queue			confirmed	gamebryo	0x00903af8#12	
+0x007c7313	915	compare_NiTextureAccumulator_bucket_render_state			confirmed	gamebryo		
+0x007c76a6	17	test_NiTextureAccumulator_viewer_string_state			confirmed	gamebryo	0x00903af8#5	
+0x007c76b7	90	construct_BFNIActorComponent_animation_state_record			confirmed	gamebryo		
+0x007c7711	262	construct_BFNIActorComponent_animation_subobject			confirmed	gamebryo		
+0x007c7832	85	destroy_BFNIActorComponent_animation_subobject			confirmed	gamebryo		
+0x007c7887	0	get_active_tool_context_animation_payload			confirmed		0x00902158#2	
 0x007c78df	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#0	ui
 0x007c791c	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#1	ui
 0x007c7966	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902170#6	ui
