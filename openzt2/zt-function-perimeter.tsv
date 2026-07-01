@@ -17641,7 +17641,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006df798	874		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		world/pathing
 0x006dfb02	120	lookup_BFGTraversabilityMgr_slot_payload_for_tile_key			confirmed	gamebryo		
 0x006dfb7a	124		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
-0x006dfbf6	623		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		ui
+0x006dfbf6	623	refresh_BFGTraversabilityMgr_environment_component_scores			confirmed	gamebryo		
 0x006dfe65	229		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006dff4a	441		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
 0x006e0103	386		BFGTraversabilityMgr runtime/container lifecycle support		unidentified	gamebryo		
@@ -22340,32 +22340,32 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c4d08	0	get_type_BFNodeTCBPosAnimController_vtable_thunk			confirmed		0x00903800#1	
 0x007c4d0d	553	compute_BFNodeTCBPosAnimController_segment_coefficients			confirmed	gamebryo		
 0x007c4f36	1537	build_BFNodeTCBPosAnimController_spline_cache			confirmed	gamebryo		
-0x007c5537	16		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5547	327		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c568e	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903800#7	ui
-0x007c56df	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903800#0	ui
-0x007c574f	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903800#2	ui
+0x007c5537	16	get_BFNodeTCBPosAnimController_current_pos_key			confirmed	gamebryo		
+0x007c5547	327	sample_BFNodeTCBPosAnimController_position			confirmed	gamebryo		
+0x007c568e	0	apply_BFNodeTCBPosAnimController_to_node			confirmed		0x00903800#7	
+0x007c56df	0	scalar_delete_BFNodeTCBPosAnimController			confirmed		0x00903800#0	
+0x007c574f	0	prepare_BFNodeTCBPosAnimController_spline_cache			confirmed		0x00903800#2	
 0x007c5781	0	return_false_virtual_default			confirmed		0x008bf7e0#15	
 0x007c5784	47	get_type_BFNodeTCBRotAnimController			confirmed	gamebryo		
 0x007c57b3	0	get_type_BFNodeTCBRotAnimController_vtable_thunk			confirmed		0x00903848#1	
-0x007c57b8	887		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5b2f	279		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5c46	173		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5cf3	15		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5d02	221		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5ddf	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903848#7	ui
-0x007c5e32	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903848#0	ui
-0x007c5e4d	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903848#2	ui
-0x007c5e7d	22		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5e93	54		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007c57b8	887	compute_BFNodeTCBRotAnimController_segment_coefficients			confirmed	gamebryo		
+0x007c5b2f	279	build_BFNodeTCBRotAnimController_spline_cache			confirmed	gamebryo		
+0x007c5c46	173	interpolate_BFNodeTCBRotAnimController_quaternion_segment			confirmed	gamebryo		
+0x007c5cf3	15	get_BFNodeTCBRotAnimController_current_rot_key			confirmed	gamebryo		
+0x007c5d02	221	sample_BFNodeTCBRotAnimController_rotation			confirmed	gamebryo		
+0x007c5ddf	0	apply_BFNodeTCBRotAnimController_to_node			confirmed		0x00903848#7	
+0x007c5e32	0	scalar_delete_BFNodeTCBRotAnimController			confirmed		0x00903848#0	
+0x007c5e4d	0	prepare_BFNodeTCBRotAnimController_spline_cache			confirmed		0x00903848#2	
+0x007c5e7d	22	destroy_BFNodeTCBRotAnimController			confirmed	gamebryo		
+0x007c5e93	54	clear_BFNodeTCBRotAnimController_spline_cache			confirmed	gamebryo		
 0x007c5ec9	47	get_type_BFNodeBezierScaleAnimController			confirmed	gamebryo		
 0x007c5ef8	0	get_type_BFNodeBezierScaleAnimController_vtable_thunk			confirmed		0x00903898#0	
-0x007c5efd	231		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c5fe4	0		UI dependency references, movement/view components, and animatio		unidentified		0x00903898#6	ui
+0x007c5efd	231	sample_BFNodeBezierScaleAnimController_scale			confirmed	gamebryo		
+0x007c5fe4	0	apply_BFNodeBezierScaleAnimController_to_node			confirmed		0x00903898#6	
 0x007c6045	47	get_type_BFNodeBezierPosAnimController			confirmed	gamebryo		
 0x007c6074	0	get_type_BFNodeBezierPosAnimController_vtable_thunk			confirmed		0x009038e0#1	
-0x007c6079	755		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c636c	0		UI dependency references, movement/view components, and animatio		unidentified		0x009038e0#7	ui
+0x007c6079	755	sample_BFNodeBezierPosAnimController_position			confirmed	gamebryo		
+0x007c636c	0	apply_BFNodeBezierPosAnimController_to_node			confirmed		0x009038e0#7	
 0x007c63b9	0		UI dependency references, movement/view components, and animatio		unidentified		0x009038e0#0	ui
 0x007c63da	47	get_type_BFNodeBezierRotAnimController			confirmed	gamebryo		
 0x007c6409	0	get_type_BFNodeBezierRotAnimController_vtable_thunk			confirmed		0x0090392c#1	
