@@ -18409,7 +18409,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00707557	256	emit_entity_localized_message_payload			confirmed	gamebryo		
 0x00707657	684		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707903	67		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00707946	67		collision tester and fitting-surface component XML		unidentified	gamebryo		ui
+0x00707946	67	compute_BFGEnvironmentComponent_required_tank_space_average			confirmed	gamebryo		
 0x00707989	325	accumulate_environment_surface_weighted_value			confirmed	gamebryo		
 0x00707ace	273		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00707bdf	0		collision tester and fitting-surface component XML		unidentified		0x008fa900#1	
@@ -18673,8 +18673,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007115a7	177	write_BFPhysObj_position_plus_scaled_slot158_vector			confirmed	gamebryo		
 0x00711658	105	find_BFR_scene_graph_component_ref_for_key			confirmed	gamebryo		
 0x007116c1	522	read_actor_component			confirmed	gamebryo		
-0x007118cb	144		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
-0x0071195b	170		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x007118cb	144	test_scene_graph_component_token_allowed			confirmed	gamebryo		
+0x0071195b	170	read_BFR_actor_or_scene_graph_component_if_needed			confirmed	gamebryo		
 0x00711a05	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#19	
 0x00711c30	0		collision tester and fitting-surface component XML		unidentified		0x008fb068#20	
 0x0071244b	191		collision tester and fitting-surface component XML		unidentified	gamebryo		
@@ -18691,10 +18691,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00712994	111	notify_BFPhysObj_removed_from_world			confirmed	gamebryo		
 0x00712a03	71		collision tester and fitting-surface component XML		unidentified	gamebryo		
 0x00712a4a	71	refresh_BFPhysObj_shadow_dependents			confirmed	gamebryo		
-0x00712a91	23		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00712a91	23	set_selected_child_transform_angle_and_refresh			confirmed	gamebryo		
 0x00712aa8	24	get_BFPhysObj_attached_target_heading_degrees			confirmed	gamebryo		
 0x00712ac0	52		collision tester and fitting-surface component XML		unidentified	gamebryo		
-0x00712af4	54		collision tester and fitting-surface component XML		unidentified	gamebryo		game-entities
+0x00712af4	54	set_selected_water_flag_and_refresh_shadow_state			confirmed	gamebryo		
 0x00712b2a	18	tankwallglass_selector_has_active_water_object			confirmed	gamebryo		
 0x00712b3c	130	set_globe_dot_visible_recursive			confirmed	gamebryo		
 0x00712bbe	12	get_globe_dot_visible_state			confirmed	gamebryo		
@@ -19733,11 +19733,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00752123	174		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x007521d1	139		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075225c	48	clear_presentation_registry_tree_storage			confirmed	gamebryo		
-0x0075228c	667		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		game-entities
+0x0075228c	667	erase_presentation_registry_tree_node			confirmed	gamebryo		
 0x00752527	187		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x007525e2	105		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
 0x0075264b	139	find_or_insert_presentation_registry_value			confirmed	gamebryo		
-0x007526d6	341		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		game-entities
+0x007526d6	341	insert_presentation_registry_value_tree_node_with_hint			confirmed	gamebryo		
 0x0075282b	49		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		renderer
 0x0075285c	145		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		io/assets
 0x007528ed	374		map/set erase and red-black-tree helpers for presentation regist		unidentified	gamebryo		
@@ -19793,8 +19793,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007558b2	371		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00755a25	323		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00755b68	135		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
-0x00755bef	445		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
-0x00755dac	445		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
+0x00755bef	445	find_active_presentation_primary_child_ref			confirmed	gamebryo		
+0x00755dac	445	find_active_presentation_secondary_child_ref			confirmed	gamebryo		
 0x00755f69	191		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00756028	881		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00756399	230		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
@@ -19815,10 +19815,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075723b	246		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
 0x00757331	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#0	
 0x0075738e	0		pixel rectangle copy and MMX blend helpers		unidentified		0x008fe030#31	
-0x0075746b	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
-0x007574af	68		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
+0x0075746b	68	assign_primary_child_handle_and_cache_slot90_result			confirmed	gamebryo		
+0x007574af	68	assign_secondary_child_handle_and_cache_slot90_result			confirmed	gamebryo		
 0x007574f3	125		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		io/assets
-0x00757570	67		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		game-entities
+0x00757570	67	select_BFRopeComponent_indexed_float_or_default			confirmed	gamebryo		
 0x007575b3	64	copy_preview_transform_vector_if_source_present			confirmed	gamebryo		
 0x007575f3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		world/pathing
 0x00757633	536		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
@@ -19942,7 +19942,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075bb75	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#2	
 0x0075bb7a	86		scene/model transform and XML property bridge		unidentified	gamebryo		
 0x0075bbd0	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#0	
-0x0075bbec	217		scene/model transform and XML property bridge		unidentified	gamebryo		game-entities
+0x0075bbec	217	destroy_BFColorInterpolateSkyLayer_members			confirmed	gamebryo		
 0x0075bcc5	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#21	
 0x0075bd2a	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#22	
 0x0075bddb	0		scene/model transform and XML property bridge		unidentified		0x008fe7b8#23	
@@ -20003,7 +20003,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075dd33	119		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075ddaa	72		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075ddf2	399		presentation controller registry and tree containers		unidentified	gamebryo		renderer
-0x0075df81	99		presentation controller registry and tree containers		unidentified	gamebryo		game-entities
+0x0075df81	99	destroy_presentation_controller_registry_entry			confirmed	gamebryo		
 0x0075dfe4	70		presentation controller registry and tree containers		unidentified	gamebryo		renderer
 0x0075e02a	127		presentation controller registry and tree containers		unidentified	gamebryo		
 0x0075e0a9	341	build_presentation_controller_dependency_index			confirmed	gamebryo		
@@ -22440,11 +22440,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007c8035	0	refresh_BFNIActorComponent_binding_transforms_from_placement			confirmed		0x009021b0#8	
 0x007c808b	0	update_BFNIActorComponent_active_animation_blend_time			confirmed		0x009021b0#12	
 0x007c80b6	0	test_BFNIActorComponent_animation_value_key_changed			confirmed		0x009021b0#13	
-0x007c8194	88		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c81ec	190		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c82c5	33		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c82e6	33		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
-0x007c8307	182		UI dependency references, movement/view components, and animatio		unidentified	gamebryo		ui
+0x007c8194	88	resolve_BFAnimRequestData_payload_from_value			confirmed	gamebryo		
+0x007c81ec	190	construct_water_material_runtime_state			confirmed	gamebryo		
+0x007c82c5	33	release_water_material_runtime_owned_ref			confirmed	gamebryo		
+0x007c82e6	33	destroy_water_material_runtime_state			confirmed	gamebryo		
+0x007c8307	182	load_watershore_material_runtime_state			confirmed	gamebryo		
 0x007c83bd	1231	read_water_layout_material			confirmed	gamebryo		
 0x007c888c	135		water material/layout, photo/download/MOTD, and manifest handler		unidentified	gamebryo		io/assets
 0x007c8913	328		water material/layout, photo/download/MOTD, and manifest handler		unidentified	gamebryo		io/assets
@@ -23277,21 +23277,21 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ef7fa	197	flush_threadsafe_log_callbacks			confirmed			
 0x007ef8bf	1336	populate_motd_list_ui			confirmed			
 0x007efdf7	49		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007efe28	177		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007efed9	349		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0036	26		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0050	26		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
+0x007efe28	177	write_online_connection_consent_settings			confirmed			
+0x007efed9	349	read_online_connection_consent_settings			confirmed			
+0x007f0036	26	write_online_connection_consent_from_root			confirmed			
+0x007f0050	26	read_online_connection_consent_from_root			confirmed			
 0x007f006a	1252	scan_enabled_download_packages			confirmed			
-0x007f054e	133		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f05d3	165		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0678	24		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0690	92		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f06ec	24		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0704	143		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0793	130		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0815	25		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f082e	43		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
-0x007f0859	393		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
+0x007f054e	133	lookup_or_insert_motd_seen_log_entry			confirmed			
+0x007f05d3	165	reserve_threadsafe_log_callback_vector_capacity10			confirmed			
+0x007f0678	24	get_threadsafe_log_callback_vector_size			confirmed			
+0x007f0690	92	append_threadsafe_log_callback			confirmed			
+0x007f06ec	24	get_threadsafe_log_callback_vector_capacity			confirmed			
+0x007f0704	143	insert_threadsafe_log_callback_at_iterator			confirmed			
+0x007f0793	130	erase_threadsafe_log_callback_range			confirmed			
+0x007f0815	25	release_threadsafe_log_callback_range			confirmed			
+0x007f082e	43	copy_construct_threadsafe_log_callback_range			confirmed			
+0x007f0859	393	insert_threadsafe_log_callback_with_growth			confirmed			
 0x007f09e2	39		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
 0x007f0a09	75		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
 0x007f0a54	128		Win32 dialog, registry, DxDiag, and hardware capability diagnost		unidentified			ui
@@ -23419,7 +23419,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f7506	153	register_BFScenarioMgr_handler_for_unseen_type			confirmed			
 0x007f7631	255	assign_static_scenario_pointer_vector			confirmed			
 0x007f7730	67	clear_static_scenario_pointer_vector			confirmed			
-0x007f7773	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007f7773	160	append_BFScenarioMgr_handler_record			confirmed			
 0x007f7813	71	as_BFScenarioScriptAction_from_named_value			confirmed			
 0x007f785a	94	resolve_BFScenarioAltTextData_from_value_slot			confirmed			
 0x007f78b8	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907730#0	
@@ -23452,7 +23452,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f839d	64		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f83dd	25		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x009077c8#25	ui
 0x007f83f6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907840#3	
-0x007f8450	71		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007f8450	71	as_BFScenarioAction_from_named_value			confirmed			
 0x007f8497	47	get_type_BFScenarioGroup			confirmed			
 0x007f84c6	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#1	
 0x007f84cb	32	init_BFScenarioGroup_descriptor_ref			confirmed			
@@ -23463,14 +23463,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f85a4	102		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007f860a	61	construct_BFScenarioGroup_members			confirmed			
 0x007f8647	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907878#0	
-0x007f8662	41		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007f8662	41	destroy_BFScenarioGroup_members			confirmed			
 0x007f868b	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#23	
 0x007f86f2	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#24	
 0x007f871d	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#30	
 0x007f8782	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#31	
 0x007f87a1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#32	
 0x007f87be	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#33	
-0x007f87df	131		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#34	
+0x007f87df	131		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907690#34	io/assets
 0x007f8862	237		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007f894f	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#25	
 0x007f89ae	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x008e07f8#35	
@@ -23483,7 +23483,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f8e7c	130		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007f8efe	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907910#3	
 0x007f8f5d	153	register_BFScenarioGroup_handler_for_unseen_type			confirmed			
-0x007f8ff6	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007f8ff6	160	append_BFScenarioGroup_handler_record			confirmed			
 0x007f9096	131	register_BFScenario_type_descriptor_pairs			confirmed			
 0x007f9119	47	get_type_BFScenarioAction			confirmed			
 0x007f9148	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907950#1	
@@ -23508,7 +23508,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007f96c1	0		scenario manager/rules/actions and IME/platform COM spans		unidentified		0x00907a10#3	
 0x007f9705	87	populate_BFScenarioScriptAction_handler_registry			confirmed			
 0x007f97a3	153	register_BFScenarioAction_handler_for_unseen_type			confirmed			
-0x007f983c	160		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007f983c	160	append_BFScenarioAction_handler_record			confirmed			
 0x007f98dc	117	import_BFScenarioAction_handlers_into_script_registry			confirmed			
 0x007f9951	153	register_BFScenarioScriptAction_handler_for_unseen_type			confirmed			
 0x007f99ea	160	append_BFScenarioScriptAction_handler_record			confirmed			
@@ -23576,38 +23576,38 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007fd3d3	49		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007fd404	26		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
 0x007fd41e	18		scenario manager/rules/actions and IME/platform COM spans		unidentified			ui
-0x007fd430	42		scenario manager/rules/actions and IME/platform COM spans		unidentified			game-entities
+0x007fd430	42	register_ime_auxiliary_string_table_entry			confirmed			
 0x007fd45a	101		scenario manager/rules/actions and IME/platform COM spans		unidentified			io/assets
 0x007fd4bf	123	match_dot_delimited_token_segment			confirmed			
 0x007fd53a	27	dispatch_enabled_string_table_entry			confirmed			
 0x007fd555	19	dispatch_string_payload_with_type_token			confirmed			
 0x007fd568	606	register_zoo_event_hooks			confirmed			
 0x007fd7c6	303	load_vince_ini			confirmed			
-0x007fd8f5	109		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
+0x007fd8f5	109	populate_cpu_vendor_version_record			confirmed			
 0x007fd962	1179	identify_amd_cpu_model			confirmed			
 0x007fde82	739	read_vince_logging_config			confirmed			
 0x007fe165	441	open_vince_log			confirmed			
-0x007fe31e	114		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe390	194		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe452	140		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe4de	155		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe579	110		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe5e7	160		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe687	123		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe702	62		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe740	117		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe7b5	133		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe83a	59		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe875	138		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe8ff	29		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe91c	141		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe9a9	50		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fe9db	97		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
+0x007fe31e	114	close_VinceLog_session_and_update_upload_queue			confirmed			
+0x007fe390	194	write_VinceLog_LogStart_event			confirmed			
+0x007fe452	140	append_VinceLog_string_parameter			confirmed			
+0x007fe4de	155	append_VinceLog_int_parameter			confirmed			
+0x007fe579	110	append_VinceLog_dword_parameter			confirmed			
+0x007fe5e7	160	append_VinceLog_float_parameter			confirmed			
+0x007fe687	123	begin_VinceLog_event_xml			confirmed			
+0x007fe702	62	end_VinceLog_event_xml			confirmed			
+0x007fe740	117	write_VinceLog_error_xml			confirmed			
+0x007fe7b5	133	append_and_free_left_cstr			confirmed			
+0x007fe83a	59	append_formatted_dword_to_cstr			confirmed			
+0x007fe875	138	buffer_or_flush_VinceLog_xml_text			confirmed			
+0x007fe8ff	29	flush_pending_VinceLog_buffer			confirmed			
+0x007fe91c	141	write_VinceLog_chunk_with_compression_encryption			confirmed			
+0x007fe9a9	50	append_bytes_to_VinceLog_file			confirmed			
+0x007fe9db	97	compress_VinceLog_chunk_with_length_header			confirmed			
 0x007fea3c	224	initialize_Vince_ini_log_path			confirmed			
-0x007feb1c	133		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007feba1	93		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007febfe	25		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
-0x007fec17	254		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
+0x007feb1c	133	build_executable_adjacent_Vince_folder_path			confirmed			
+0x007feba1	93	build_appdata_Microsoft_Games_Vince_folder_path			confirmed			
+0x007febfe	25	replace_VinceLog_override_folder_path			confirmed			
+0x007fec17	254	resolve_VinceLog_path_against_configured_folder			confirmed			
 0x007fed15	94		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
 0x007fed73	66		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
 0x007fedb5	80		zoo event hooks, Vince logging, and crypto setup		unidentified			game-entities
