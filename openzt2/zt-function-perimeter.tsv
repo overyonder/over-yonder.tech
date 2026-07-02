@@ -9230,8 +9230,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005a6f70	426	construct_BFLocaleMgr_defaults			confirmed	gamebryo		middleware/gamebryo
 0x005a711a	0	scalar_delete_BFLocaleMgr			confirmed		0x008e4d58#0	runtime/support
 0x005a7135	86	destroy_BFLocaleMgr			confirmed	gamebryo		middleware/gamebryo
-0x005a718b	221		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005a7268	201		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005a718b	221	populate_BFLocaleMgr_currency_format_fields			confirmed	gamebryo		middleware/gamebryo
+0x005a7268	201	populate_BFLocaleMgr_number_format_fields			confirmed	gamebryo		middleware/gamebryo
 0x005a7331	47	resolve_localized_inline_ui_text_string			confirmed	gamebryo		middleware/gamebryo
 0x005a7360	187	lookup_BFLocaleMgr_text_ref_row			confirmed	gamebryo		middleware/gamebryo
 0x005a741b	713	format_localized_inline_ui_text_ref_args			confirmed	gamebryo		middleware/gamebryo
@@ -9297,7 +9297,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aa5e0	45	get_or_register_bf_safe_handled_obj_type			confirmed	gamebryo		middleware/gamebryo
 0x005aa60d	0	get_type_BFSafeHandledObj_vtable_thunk			confirmed		0x008bfba4#1	runtime/support
 0x005aa612	88	get_or_init_BFSafeHandledObj_pointer_key_hash			confirmed	gamebryo		middleware/gamebryo
-0x005aa66a	91		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005aa66a	91	append_BFXMLNode_int_attribute_from_slot10			confirmed	gamebryo		middleware/gamebryo
 0x005aa6c5	234	resolve_safehandledobjid_attribute_or_defer_ref_assignment			confirmed	gamebryo		middleware/gamebryo
 0x005aa7af	138	cleanup_ui_value_assignment_base_dependents			confirmed	gamebryo		middleware/gamebryo
 0x005aa839	246	update_ui_value_assignment_ref_dependents			confirmed	gamebryo		middleware/gamebryo
@@ -9306,10 +9306,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aaa1c	56	get_safehandledobjid_attribute_key			confirmed	gamebryo		middleware/gamebryo
 0x005aaa54	133	write_safehandledobjid_attribute_for_registered_object			confirmed	gamebryo		middleware/gamebryo
 0x005aaad9	276	register_safehandledobjid_object_and_notify_dependents			confirmed	gamebryo		middleware/gamebryo
-0x005aabed	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005aabed	58	bind_BFSafeHandle_ref_to_BFSafeHandledObj			confirmed	gamebryo		middleware/gamebryo
 0x005aac27	112	sweep_retired_BFSafeHandledObj_pointer_hash_node			confirmed	gamebryo		middleware/gamebryo
-0x005aad49	24		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005aad61	23		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005aad49	24	count_retired_BFSafeHandledObj_pointer_hash_nodes			confirmed	gamebryo		middleware/gamebryo
+0x005aad61	23	checked_retired_BFSafeHandledObj_pointer_hash_node_slot			confirmed	gamebryo		middleware/gamebryo
 0x005aad78	100	append_retired_BFSafeHandledObj_pointer_hash_node			confirmed	gamebryo		middleware/gamebryo
 0x005aaddc	126	get_or_insert_safehandledobjid_object_id_slot			confirmed	gamebryo		middleware/gamebryo
 0x005aae9e	49	clear_safehandledobjid_object_id_map			confirmed	gamebryo		middleware/gamebryo
@@ -9317,13 +9317,13 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005aaf37	160	get_or_insert_safehandledobjid_object_ref_for_id			confirmed	gamebryo		middleware/gamebryo
 0x005ab01b	51	clear_safehandledobjid_object_map			confirmed	gamebryo		middleware/gamebryo
 0x005ab04e	104	find_safehandledobjid_object_map_iterator			confirmed	gamebryo		middleware/gamebryo
-0x005ab0b6	157		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ab0b6	157	get_or_create_safehandledobjid_dependent_payload			confirmed	gamebryo		middleware/gamebryo
 0x005ab197	154	erase_safehandledobjid_dependents_for_id			confirmed	gamebryo		middleware/gamebryo
-0x005ab231	51		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ab231	51	clear_safehandledobjid_dependent_map			confirmed	gamebryo		middleware/gamebryo
 0x005ab264	104	find_safehandledobjid_dependent_map_insert_hint			confirmed	gamebryo		middleware/gamebryo
 0x005ab2cc	33	destroy_BFSafeHandle_BFSafeHandledObj_ref			confirmed	gamebryo		middleware/gamebryo
 0x005ab2ed	0	scalar_delete_BFSafeHandle_BFSafeHandledObj_ref			confirmed		0x008e4e00#0	runtime/support
-0x005ab308	143		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ab308	143	insert_retired_BFSafeHandledObj_pointer_hash_node			confirmed	gamebryo		middleware/gamebryo
 0x005ab397	323	insert_safehandledobjid_object_id_record_with_hint			confirmed	gamebryo		middleware/gamebryo
 0x005ab4da	55	lower_bound_safehandledobjid_object_id_map_by_object			confirmed	gamebryo		middleware/gamebryo
 0x005ab511	327	insert_safehandledobjid_object_map_record_with_hint			confirmed	gamebryo		middleware/gamebryo
@@ -9331,9 +9331,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ab68f	59	destroy_safehandledobjid_object_map_subtree			confirmed	gamebryo		middleware/gamebryo
 0x005ab6ca	323	insert_safehandledobjid_dependent_record_with_hint			confirmed	gamebryo		middleware/gamebryo
 0x005ab80d	148	erase_safehandledobjid_dependent_map_range			confirmed	gamebryo		middleware/gamebryo
-0x005ab8a1	55		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005ab8d8	59		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005ab913	340		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ab8a1	55	lower_bound_safehandledobjid_dependent_map_by_id			confirmed	gamebryo		middleware/gamebryo
+0x005ab8d8	59	free_safehandledobjid_dependent_map_subtree			confirmed	gamebryo		middleware/gamebryo
+0x005ab913	340	insert_retired_BFSafeHandledObj_pointer_hash_node_storage			confirmed	gamebryo		middleware/gamebryo
 0x005aba67	192	find_or_insert_safehandledobjid_object_id_record			confirmed	gamebryo		middleware/gamebryo
 0x005abb27	148	erase_safehandledobjid_object_id_map_range			confirmed	gamebryo		middleware/gamebryo
 0x005abbbb	398	insert_safehandledobjid_object_id_map_node			confirmed	gamebryo		middleware/gamebryo
@@ -9343,7 +9343,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ac036	192	find_or_insert_safehandledobjid_dependent_record			confirmed	gamebryo		middleware/gamebryo
 0x005ac0f6	644	erase_safehandledobjid_dependent_map_node			confirmed	gamebryo		middleware/gamebryo
 0x005ac37a	404	insert_safehandledobjid_dependent_map_node			confirmed	gamebryo		middleware/gamebryo
-0x005ac50e	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ac50e	77	advance_checked_tree_iterator_in_place			confirmed	gamebryo		middleware/gamebryo
 0x005ac55b	46	copy_construct_BFSafeHandle_BFSafeHandledObj_ref			confirmed	gamebryo		middleware/gamebryo
 0x005ac589	636	erase_safehandledobjid_object_id_map_node			confirmed	gamebryo		middleware/gamebryo
 0x005ac805	61	rotate_left_safehandledobjid_object_id_map_node			confirmed	gamebryo		middleware/gamebryo
@@ -9353,14 +9353,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005acb42	63	rotate_right_safehandledobjid_object_map_node			confirmed	gamebryo		middleware/gamebryo
 0x005acb81	61	rotate_left_safehandledobjid_dependent_map_node			confirmed	gamebryo		middleware/gamebryo
 0x005acbbe	63	rotate_right_safehandledobjid_dependent_map_node			confirmed	gamebryo		middleware/gamebryo
-0x005acbfd	65		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005acbfd	65	initialize_checked_tree_storage_with_header_links			confirmed	gamebryo		middleware/gamebryo
 0x005acc3e	0	get_type_BFSafeHandle<BFSafeHandledObj>_vtable_thunk			confirmed		0x008e4e00#1	runtime/support
 0x005acc43	0	get_type_BFSafeHandle<BFSafeHandledObj>			confirmed			runtime/support
 0x005acca7	0	clone_BFUndoTransactionData			confirmed		0x008e4e58#5	economy
 0x005acce4	47	get_type_BFUndoTransactionData			confirmed	gamebryo		middleware/gamebryo
 0x005acd13	0	get_type_BFUndoTransactionData_vtable_thunk			confirmed		0x008e4e58#1	economy
 0x005acd18	0	get_BFUndoTransactionData_msgtype_descriptor			confirmed		0x008e4e58#2	economy
-0x005acd38	44		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005acd38	44	copy_construct_refcounted_inline_ui_payload			confirmed	gamebryo		middleware/gamebryo
 0x005acd64	0	write_BFUndoTransactionData_name_cost_xml			confirmed		0x008e4e58#3	economy
 0x005acdcf	0	read_BFUndoTransactionData_name_cost_xml			confirmed		0x008e4e58#4	economy
 0x005ace54	0	create_empty_BFUndoTransactionData			confirmed		0x008e4e58#14	economy
@@ -9373,8 +9373,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ad151	260	destroy_BFApp_runtime_state			confirmed	gamebryo		middleware/gamebryo
 0x005ad255	0	get_system_time_virtual_thunk			confirmed		0x008e4ea8#28	platform/runtime
 0x005ad25b	0	compute_app_system_time_fraction			confirmed		0x008e4ea8#29	platform/runtime
-0x005ad2d6	247		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005ad3cd	191		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ad2d6	247	register_type_descriptor_pair_if_absent			confirmed	gamebryo		middleware/gamebryo
+0x005ad3cd	191	resolve_type_registry_entry_by_key			confirmed	gamebryo		middleware/gamebryo
 0x005ad48c	45	resolve_typed_value_named_object			confirmed	gamebryo		middleware/gamebryo
 0x005ad4b9	128	collect_BFApp_context_message_types			confirmed	gamebryo	0x008e4f60#0	middleware/gamebryo
 0x005ad539	114	find_BFApp_context_component_by_type			confirmed	gamebryo	0x008e4f60#1	middleware/gamebryo
@@ -9390,33 +9390,33 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005ad9c4	165	load_BFApp_context_initData_xml			confirmed	gamebryo	0x008e4ea8#20	middleware/gamebryo
 0x005ada69	42	resolve_BFApp_localized_inline_text_or_empty			confirmed	gamebryo		middleware/gamebryo
 0x005ada93	25	get_first_BFApp_context_queue_entry			confirmed	gamebryo		middleware/gamebryo
-0x005adaac	25		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005adaac	25	get_last_BFApp_context_queue_entry			confirmed	gamebryo		middleware/gamebryo
 0x005adac5	122	attach_BFApp_context_from_child_xml			confirmed	gamebryo	0x008e4ea8#38	middleware/gamebryo
 0x005adb3f	0	remove_first_BFApp_context			confirmed		0x008dc698#5	runtime/support
 0x005adb88	79	resolve_and_populate_BFApp_component_container_child			confirmed	gamebryo		middleware/gamebryo
 0x005adbd7	259	check_BFApp_binder_unique_name_version_mismatch			confirmed	gamebryo		middleware/gamebryo
 0x005adcda	24	probe_BFApp_binder_unique_name_version_mismatch			confirmed	gamebryo		middleware/gamebryo
 0x005adcf2	63	resolve_BFApp_schema_node_from_safe_handle			confirmed	gamebryo		middleware/gamebryo
-0x005add31	126		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005add31	126	copy_inline_string_to_windows_clipboard			confirmed	gamebryo		middleware/gamebryo
 0x005add56	0	0x005add50 callsite_address			confirmed			runtime/support
 0x005add96	0	0x005add90 callsite_address			confirmed			runtime/support
 0x005adda5	0	0x005add9f callsite_address			confirmed			runtime/support
 0x005addaf	0	write_BFApp_component_child_xml_node			confirmed		0x008e4ea8#40	game-entities
-0x005addbb	58		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005addbb	58	trigger_BFApp_ready_callback_once			confirmed	gamebryo		middleware/gamebryo
 0x005addf5	363	enqueue_BFApp_status_ui_assignment			confirmed	gamebryo		middleware/gamebryo
 0x005adf60	141	pop_BFApp_status_ui_assignment			confirmed	gamebryo		middleware/gamebryo
 0x005adfed	52	destroy_checked_tree_storage_with_header_links			confirmed	gamebryo		middleware/gamebryo
-0x005ae021	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005ae06e	77		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ae021	77	get_checked_deque_first_4byte_slot			confirmed	gamebryo		middleware/gamebryo
+0x005ae06e	77	get_checked_deque_last_4byte_slot			confirmed	gamebryo		middleware/gamebryo
 0x005ae0bb	0	allocate_BFApp_instance			confirmed		0x008e4f60#3	runtime/support
-0x005ae0d1	115		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ae0d1	115	push_back_checked_deque_4byte_value			confirmed	gamebryo		middleware/gamebryo
 0x005ae144	277	grow_refcounted_ui_assignment_queue_storage			confirmed	gamebryo		middleware/gamebryo
 0x005ae259	111	destroy_refcounted_ui_assignment_queue_storage			confirmed	gamebryo		middleware/gamebryo
 0x005ae2c8	58	get_refcounted_ui_assignment_queue_slot			confirmed	gamebryo		middleware/gamebryo
-0x005ae302	177		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ae302	177	erase_checked_tree_range			confirmed	gamebryo		middleware/gamebryo
 0x005ae3b3	73	checked_deque_4byte_iterator_current			confirmed	gamebryo		middleware/gamebryo
-0x005ae3fc	659		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
-0x005ae68f	45		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005ae3fc	659	erase_checked_tree_node_and_rebalance			confirmed	gamebryo		middleware/gamebryo
+0x005ae68f	45	decrement_checked_deque_iterator			confirmed	gamebryo		middleware/gamebryo
 0x005ae6bc	0	get_type_BFSafeHandle<BFPerformanceMonitor>			confirmed			runtime/support
 0x005ae720	40	as_BFPerformanceMonitor			confirmed	gamebryo		middleware/gamebryo
 0x005ae748	0	get_type_BFSafeHandle<BFRegistry>			confirmed			runtime/support
@@ -9515,12 +9515,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x005af9db	85	trim_inline_ui_string_suffix_mbs_safe			confirmed	gamebryo		middleware/gamebryo
 0x005afa30	65	pop_back_inline_ui_string_mbs_char			confirmed	gamebryo		middleware/gamebryo
 0x005afa71	83	truncate_inline_ui_string_to_mbs_prefix			confirmed	gamebryo		middleware/gamebryo
-0x005afac4	69		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005afac4	69	copy_inline_ui_string_suffix_from_offset			confirmed	gamebryo		middleware/gamebryo
 0x005afb09	38	find_inline_ui_string_char_from_offset			confirmed	gamebryo		middleware/gamebryo
 0x005afb2f	27	find_last_inline_ui_string_char			confirmed	gamebryo		middleware/gamebryo
 0x005afb4a	230	split_inline_ui_string_on_token_boundaries			confirmed	gamebryo		middleware/gamebryo
 0x005afc30	291	split_inline_ui_string_by_delimiter			confirmed	gamebryo		middleware/gamebryo
-0x005afd53	141		Gamebryo geometry/properties, typed values, XML registry, and al		unidentified	gamebryo		middleware/gamebryo
+0x005afd53	141	split_inline_ui_string_by_byte_delimiter			confirmed	gamebryo		middleware/gamebryo
 0x005afde0	51	lowercase_inline_ui_string_in_place			confirmed	gamebryo		middleware/gamebryo
 0x005afe13	51	uppercase_inline_ui_string_in_place			confirmed	gamebryo		middleware/gamebryo
 0x005afe46	37	parse_inline_ui_string_float_default_zero			confirmed	gamebryo		middleware/gamebryo
@@ -21672,7 +21672,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ab103	0	forward_BFRActorComponent_secondary_value_resolver			confirmed		0x00902244#4	game-entities
 0x007ab10e	0	scalar_delete_BFRActorComponent_secondary_animation_payload_subobject			confirmed		0x00902158#0	animation
 0x007ab11e	47	get_type_BFAnimTable			confirmed	gamebryo		middleware/gamebryo
-0x007ab14d	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#1	renderer
+0x007ab14d	0	get_type_BFAnimTable_vtable_thunk			confirmed		0x00902270#1	animation
 0x007ab152	32		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		middleware/gamebryo
 0x007ab172	0	init_BFAnimTable_descriptor_ref_vtable_thunk			confirmed		0x00902270#2	animation
 0x007ab177	37		BFUIRenderer and renderer/presentation support span		unidentified	gamebryo		middleware/gamebryo
@@ -23566,57 +23566,57 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ff692	315	export_VinceLog_CryptAPI_key_blob			confirmed			runtime/support
 0x007ff7cd	371	import_VinceLog_embedded_RSA_public_key			confirmed			runtime/support
 0x007ff940	47	get_type_BFNISpriteMgr			confirmed			renderer
-0x007ff96f	0		BFNISpriteMgr/BFSprite renderer resource support		unidentified		0x00908ac0#1	renderer
-0x007ff974	32		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x007ff96f	0	get_type_BFNISpriteMgr_vtable_thunk			confirmed		0x00908ac0#1	renderer
+0x007ff974	32	init_BFNISpriteMgr_descriptor_ref			confirmed			renderer
 0x007ff994	0	init_BFNISpriteMgr_descriptor_ref_vtable_thunk			confirmed		0x00908ac0#2	renderer
 0x007ff999	0	scalar_delete_BFNISpriteMgr			confirmed		0x00908ac0#0	renderer
-0x007ff9b4	121		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x007ffa2d	749		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x007ffd1a	205		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x007ff9b4	121	destroy_BFNISpriteMgr			confirmed			renderer
+0x007ffa2d	749	build_BFNISpriteMgr_sprite_quad_draw_buffers			confirmed			renderer
+0x007ffd1a	205	draw_BFNISpriteMgr_sprite_quad_batch			confirmed			renderer
 0x007ffde7	0	sync_BFNISpriteMgr_renderer_resource_list			confirmed		0x00908ac0#21	renderer
-0x00800045	722		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00800045	722	render_BFNISpriteMgr_sprite_scene			confirmed			renderer
 0x00800317	0	ensure_BFNISpriteMgr_camera_sprite_resource			confirmed		0x00908ac0#20	renderer
-0x00800385	177		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800436	165		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008004db	36		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008004ff	95		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800595	104		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008005fd	24		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800615	38		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x0080063b	100		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x0080069f	132		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800723	27		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x0080073e	135		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008007c5	431		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800974	94		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008009d2	410		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800b6c	52		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800ba0	266		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800caa	332		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800df6	86		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800e4c	146		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800ede	74		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800f28	87		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800f7f	68		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00800fc3	268		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008010cf	134		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00801155	250		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00800385	177	ensure_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x00800436	165	erase_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x008004db	36	clear_BFNISpriteMgr_assignment_resource_vector			confirmed			renderer
+0x008004ff	95	append_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x00800595	104	clear_BFScenarioScriptAction_pending_record_vector			confirmed			gameplay systems
+0x008005fd	24	count_BFScenarioScriptAction_pending_records			confirmed			gameplay systems
+0x00800615	38	get_BFScenarioScriptAction_pending_record_begin			confirmed			gameplay systems
+0x0080063b	100	append_BFScenarioScriptAction_pending_record			confirmed			gameplay systems
+0x0080069f	132	insert_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x00800723	27	destroy_BFNISpriteMgr_assignment_resource_record_range			confirmed			renderer
+0x0080073e	135	insert_BFScenarioScriptAction_pending_record_at_iterator			confirmed			gameplay systems
+0x008007c5	431	grow_insert_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x00800974	94	erase_BFScenarioScriptAction_pending_record_range			confirmed			gameplay systems
+0x008009d2	410	grow_insert_BFScenarioScriptAction_pending_record_run			confirmed			gameplay systems
+0x00800b6c	52	copy_construct_BFNISpriteMgr_assignment_resource_record_range			confirmed			renderer
+0x00800ba0	266	sort_BFNISpriteMgr_assignment_resource_records_by_key			confirmed			renderer
+0x00800caa	332	partition_BFNISpriteMgr_assignment_resource_records_by_key			confirmed			renderer
+0x00800df6	86	insertion_sort_BFNISpriteMgr_assignment_resource_records_by_key			confirmed			renderer
+0x00800e4c	146	choose_BFNISpriteMgr_assignment_resource_sort_pivot			confirmed			renderer
+0x00800ede	74	swap_BFNISpriteMgr_assignment_resource_records			confirmed			renderer
+0x00800f28	87	make_heap_BFNISpriteMgr_assignment_resource_records_by_key			confirmed			renderer
+0x00800f7f	68	sort3_BFNISpriteMgr_assignment_resource_records_by_key			confirmed			renderer
+0x00800fc3	268	sift_down_BFNISpriteMgr_assignment_resource_heap			confirmed			renderer
+0x008010cf	134	pop_heap_BFNISpriteMgr_assignment_resource_record			confirmed			renderer
+0x00801155	250	rotate_BFNISpriteMgr_assignment_resource_record_range			confirmed			renderer
 0x0080124f	0	set_sprite_render_resource_flag3d			confirmed		0x00908b20#20	renderer
 0x00801259	0	get_sprite_render_resource_flag3d			confirmed		0x00908b20#21	renderer
 0x0080125d	0	get_sprite_render_resource_flag3e			confirmed		0x00908b20#23	renderer
 0x00801261	0	allocate_base_sprite_render_resource			confirmed		0x00908b20#44	renderer
 0x00801279	0	allocate_sprite_render_resource_vtable_00909540			confirmed		0x00908b20#51	renderer
 0x008012a6	0	set_sprite_render_resource_flag3e_and_refresh			confirmed		0x00908b20#22	renderer
-0x008012b5	522		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x008012b5	522	construct_sprite_render_resource_defaults			confirmed			renderer
 0x008014bf	0	scalar_delete_sprite_render_resource			confirmed		0x00908b20#0	renderer
-0x008014da	149		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x008014da	149	destroy_sprite_render_resource			confirmed			renderer
 0x0080156f	0	resize_sprite_render_resource_viewport			confirmed		0x00908b20#16	renderer
-0x008015df	85		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x008015df	85	bind_sprite_render_resource_camera_source			confirmed			renderer
 0x00801634	0	set_sprite_render_resource_rgb_color			confirmed		0x00908b20#54	renderer
 0x008016a5	0	release_sprite_render_resource_value_arg			confirmed		0x00908b20#33	renderer
 0x008016b1	0	flush_sprite_render_resource_dirty_refresh			confirmed		0x00908b20#27	renderer
 0x008016c5	0	refresh_sprite_render_resource_child_controllers			confirmed		0x00908b20#13	renderer
-0x00801724	111		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801724	111	compute_sprite_render_resource_uv_rect			confirmed			renderer
 0x00801793	0	mark_sprite_render_resource_dirty_refresh			confirmed		0x00908b20#28	renderer
 0x00801798	0	insert_sprite_render_resource_ordered			confirmed		0x00908b20#2	renderer
 0x008017a6	0	allocate_sprite_render_resource_vtable_00908fc0			confirmed		0x00908b20#45	renderer
@@ -23628,10 +23628,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008018d9	0	allocate_sprite_render_resource_vtable_00909470			confirmed		0x00908b20#52	renderer
 0x0080191e	0	scalar_delete_BFTypedObj_sprite_resource_base			confirmed		0x00908bfc#0	renderer
 0x00801926	47	get_type_BFSpriteMgr			confirmed			renderer
-0x00801955	0		BFNISpriteMgr/BFSprite renderer resource support		unidentified		0x00908c10#1	renderer
+0x00801955	0	get_type_BFSpriteMgr_vtable_thunk			confirmed		0x00908c10#1	renderer
 0x0080195a	0	init_BFSpriteMgr_descriptor_ref			confirmed		0x00908c10#2	renderer
 0x0080197a	0	scalar_delete_BFSpriteMgr			confirmed		0x00908c10#0	renderer
-0x00801995	54		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801995	54	destroy_BFSpriteMgr			confirmed			renderer
 0x008019cb	0	has_BFSpriteMgr_retained_resource			confirmed		0x00908c10#20	renderer
 0x008019d6	0	allocate_BFSpriteMgr_instance			confirmed		0x00908c10#23	renderer
 0x00801a01	0	return_receiver_field_0x34			confirmed		0x008e93f8#39	runtime/support
@@ -23640,10 +23640,10 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00801a28	0	set_renderer_resource_flag50			confirmed		0x00908c70#43	renderer
 0x00801a32	0	get_renderer_resource_flag50			confirmed		0x00908c70#44	renderer
 0x00801a36	0	scalar_delete_base_renderer_resource			confirmed		0x00908c70#0	renderer
-0x00801a6c	25		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801a6c	25	destroy_renderer_resource_typed_list_base			confirmed			renderer
 0x00801a85	0	refresh_sprite_render_resource_and_return_true			confirmed		0x00908b20#14	renderer
 0x00801a8d	0	set_sprite_render_resource_size_globals			confirmed		0x00908b20#15	renderer
-0x00801aa9	31		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801aa9	31	set_sprite_render_resource_source_rect			confirmed			renderer
 0x00801ac8	0	mark_sprite_render_resource_flag3d_true_ret16			confirmed		0x00908b20#17	renderer
 0x00801ad1	0	set_shared_field24_value			confirmed		0x008fe870#22	runtime/support
 0x00801adb	0	get_ai_field24			confirmed		0x008e93f8#43	runtime/support
@@ -23657,33 +23657,33 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00801bc2	0	release_sprite_render_resource_value_return_false			confirmed		0x00908b20#29	renderer
 0x00801bd0	0	layout_sprite_render_resource_wrapped_text			confirmed		0x00908b20#53	renderer
 0x00801dac	0	scalar_delete_BFTypedObj_renderer_resource_base			confirmed		0x00908d30#0	renderer
-0x00801db4	25		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801db4	25	destroy_renderer_link_object			confirmed			renderer
 0x00801dcd	0	scalar_delete_renderer_link_object			confirmed		0x00908d38#2	renderer
 0x00801de8	0	scalar_delete_sprite_render_resource_vtable_00908d48			confirmed		0x00908d48#0	renderer
-0x00801e03	60		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801e03	60	destroy_sprite_render_resource_vtable_00908d48			confirmed			renderer
 0x00801e3f	0	detach_sprite_resource_camera_reference_thunk			confirmed		0x00908e28#1	renderer
-0x00801e44	60		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00801e80	180		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00801e44	60	detach_sprite_resource_screen_polygon_camera_reference			confirmed			renderer
+0x00801e80	180	refresh_sprite_resource_child_mapping_extents			confirmed			renderer
 0x00801f34	0	update_sprite_resource_screen_polygon_projection			confirmed		0x00908d48#30	renderer
-0x0080242f	480		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x0080260f	1356		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x0080242f	480	compute_sprite_resource_clipped_uv_region			confirmed			renderer
+0x0080260f	1356	compute_sprite_resource_projected_uv_region			confirmed			renderer
 0x00802b5b	0	dispatch_sprite_resource_empty_payload_to_slot_c8			confirmed		0x00908d48#51	renderer
 0x00802bab	0	set_sprite_resource_text_child_and_layout			confirmed		0x00908d48#50	renderer
 0x00802c82	0	set_sprite_resource_child_mapping_and_refresh			confirmed		0x00908d48#48	renderer
 0x00802cb9	0	clear_sprite_resource_rgba_output			confirmed		0x00908d48#54	renderer
 0x00802ccd	0	forward_sprite_resource_hit_to_attached_child			confirmed		0x00908d48#18	renderer
 0x00802d2d	0	refresh_attached_child_resource_when_bound			confirmed		0x00908d48#29	io/assets
-0x00802d42	146		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00802d42	146	copy_sprite_resource_child_or_source_rect			confirmed			renderer
 0x00802dd4	0	scalar_delete_sprite_resource_secondary_link_base			confirmed		0x00908e28#2	renderer
-0x00802ddc	46		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00802ddc	46	construct_screen_polygon_style_record_defaults			confirmed			renderer
 0x00802e0a	47	reset_screen_polygon_resource_fields			confirmed		0x00908e38#46	io/assets
-0x00802e39	54		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00802e39	54	construct_screen_polygon_resource			confirmed			renderer
 0x00802e6f	0	scalar_delete_screen_polygon_resource			confirmed		0x00908e38#0	io/assets
-0x00802e8a	35		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00802e8a	35	destroy_screen_polygon_resource			confirmed			renderer
 0x00802ead	0	set_screen_polygon_primary_value_and_update_projection			confirmed		0x00908e38#50	runtime/support
 0x00802edf	0	copy_screen_polygon_primary_value_to_output			confirmed		0x00908e38#51	runtime/support
 0x00802ef3	0	set_screen_polygon_style_record_and_update_projection			confirmed		0x00908e38#52	runtime/support
-0x00802f30	61		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00802f30	61	copy_screen_polygon_style_record_fields			confirmed			renderer
 0x00802f6d	0	copy_screen_polygon_style_record_to_output			confirmed		0x00908e38#53	runtime/support
 0x00802f82	0	set_screen_polygon_value_and_style_record			confirmed		0x00908e38#54	runtime/support
 0x00802fd4	0	set_screen_polygon_style_string_and_reapply			confirmed		0x00908e38#55	runtime/support
@@ -23711,22 +23711,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00803225	40	restore_screen_polygon_rect_from_cached_rect			confirmed		0x00908e38#71	runtime/support
 0x0080324d	0	set_screen_polygon_secondary_value_and_update_projection			confirmed		0x00908e38#72	runtime/support
 0x0080327f	0	copy_screen_polygon_secondary_value_to_output			confirmed		0x00908e38#73	runtime/support
-0x00803293	179		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x00803293	179	compare_sprite_font_metric_key_less			confirmed			renderer
 0x00803346	0	copy_renderer_link_value_to_output			confirmed		0x00908f60#3	renderer
 0x0080335a	0	set_renderer_link_value			confirmed		0x00908f60#4	renderer
 0x00803372	0	scalar_delete_renderer_link_value_object			confirmed		0x00908f60#0	renderer
-0x0080338d	110		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x0080338d	110	construct_sprite_font_gdi_cache			confirmed			renderer
 0x008033fb	192	clear_sprite_font_gdi_objects			confirmed			renderer
-0x008034bb	1066		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x008038e5	99		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00803948	191		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00803a07	219		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
-0x00803ae2	275		BFNISpriteMgr/BFSprite renderer resource support		unidentified			renderer
+0x008034bb	1066	layout_sprite_text_run_resources			confirmed			renderer
+0x008038e5	99	copy_sprite_font_reference_glyph_rect			confirmed			renderer
+0x00803948	191	get_or_create_sprite_font_metric_record			confirmed			renderer
+0x00803a07	219	get_or_create_sprite_font_glyph_record			confirmed			renderer
+0x00803ae2	275	allocate_sprite_font_atlas_glyph_slot			confirmed			renderer
 0x00803bf5	654	build_sprite_font_gdi_metrics			confirmed			renderer
 0x00803e83	983	rasterize_text_run_into_sprite_atlas			confirmed			renderer
-0x0080425a	323		sprite manager, font/GDI atlas, renderer UI resource, and contai		unidentified			renderer
+0x0080425a	323	initialize_sprite_font_atlas_page			confirmed			renderer
 0x0080439d	1251	rasterize_inline_text_to_sprite_resource			confirmed			renderer
-0x00804880	712		renderer/UI resource and container support after GDI bridge		unidentified			renderer
+0x00804880	712	copy_object_detail_texture_with_alpha_mask			confirmed			renderer
 0x00804b48	177		renderer/UI resource and container support after GDI bridge		unidentified			renderer
 0x00804bf9	256		renderer/UI resource and container support after GDI bridge		unidentified			renderer
 0x00804cf9	48		renderer/UI resource and container support after GDI bridge		unidentified			renderer
