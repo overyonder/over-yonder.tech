@@ -27,14 +27,14 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
 <nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a class="active" href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
 <main>
  <h1>Binary Perimeter</h1>
- <p class="sub">Gate-2 evidence pivots for the stripped Zoo Tycoon 2 binary: function entries, globals/statics, type identities, vtables, and byte-map coverage. Data files: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
+ <p class="sub">Gate-2 evidence pivots for the stripped Zoo Tycoon 2 binary: function entries, variables/data, type identities, vtables, and byte-map coverage. Data files: <code>zt-function-perimeter.tsv</code>, <code>zt-global-perimeter.tsv</code>, <code>zt-type-coverage-reconciliation.tsv</code>, <code>zt-vtable-methods-full.tsv</code>, and <code>zt-byte-range-map.tsv</code>.</p>
 
  <section class="narrative">
   <section class="pipeline" aria-label="Reconstruction pipeline">
    <h2>Pipeline</h2>
    <ol>
     <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
-    <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
+    <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, variables/data, type identities, vtables, and broad evidence families.</li>
     <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
     <li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
    </ol>
@@ -55,7 +55,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{border:1px soli
   </tbody></table>
 
   <h3>Reading The Work Queue</h3>
-  <p><strong>Function perimeter</strong> places accepted native function identities, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. The unidentified function entries are split by suspected structural domain from the call-graph/import propagation table. Those suspected domains are triage labels. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. Every distinct vtable method address is already represented in the function perimeter, so the vtable bar uses the slot-row denominator. <strong>Variables/data and type identities</strong> combines referenced variables/data with the template-only type rows needed to complete the known type surface.</p>
+  <p><strong>Function perimeter</strong> places accepted function identities, middleware provenance, neutralized wrapper callsite/import rows, and still-unidentified function entries on the same frontier. Accepted and unidentified function entries are split by inferred domain or middleware provenance. Those domains are triage labels. The <code>vtable</code> column records a verified projection from a function entry to an enumerated vtable slot. Every distinct vtable method address is already represented in the function perimeter, so the vtable bar uses the slot-row denominator. <strong>Variables/data and type identities</strong> combines referenced variables/data with the template-only type rows needed to complete the known type surface.</p>
 
   <h3>Variables / Data</h3>
   <p>The variables/data table is generated from absolute references in <code>.text</code>. Type-cache and identified variable/data names come from byte-map rows; unidentified entries remain raw referenced addresses until a byte-map fact names them. Template-only type identities are the zero-slot rows that have no corresponding type-cache variable. The family column is explanatory grouping only; the name and status still come from the byte map.</p>
@@ -171,20 +171,29 @@ function pivotWeights(typeRows){
  for(const r of typeRows)c[r.pivot_segment]=(c[r.pivot_segment]||0)+Number(r.bar_weight||0);
  return c;
 }
-function domainFamily(domain){
- const d=String(domain||"").trim();
- return d?d.replace(/\([^)]*\)$/,""):"uncharacterized";
+function frontierFamily(row){
+ const d=String(row.domain||"").trim();
+ if(d)return d.replace(/\([^)]*\)$/,"");
+ const p=String(row.provenance||"").trim();
+ return p?`middleware/${p}`:"uncharacterized";
 }
-function suspectedDomainSegments(rows){
+function familyDisplay(family){
+ if(family.startsWith("middleware/")){
+  const name=family.slice("middleware/".length);
+  const pretty={gamebryo:"Gamebryo",lua:"Lua",d3d9:"D3D9",zlib:"zlib",libjpeg:"libjpeg",crt:"CRT"}[name]||`${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+  return `${pretty} middleware`;
+ }
+ return family;
+}
+function familySegments(rows,prefix,classes){
  const counts={};
  for(const r of rows){
-  const family=domainFamily(r.domain);
+  const family=frontierFamily(r);
   counts[family]=(counts[family]||0)+1;
  }
- const classes=["seg-domain-a","seg-domain-b","seg-domain-c","seg-domain-d","seg-domain-e","seg-domain-f","seg-domain-g","seg-domain-h"];
  return Object.entries(counts)
-  .sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))
-  .map(([label,value],i)=>({label:`Unidentified: ${label}`,value,cls:classes[i%classes.length]}));
+ .sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))
+  .map(([label,value],i)=>({label:`${prefix}: ${familyDisplay(label)}`,value,cls:classes[i%classes.length]}));
 }
 function identifiedGlobalSegments(gp){
  const identified=gp.filter(r=>r.status==="identified").length;
@@ -235,11 +244,11 @@ function enrichFunctionRowsWithVtableStats(fp,vtStats){
  });
 }
 function coverageSummary(fp,gp,vt,mapRows,typeRows){
- const nativeFunctions=fp.filter(r=>!supportFunctionStatuses.has(r.status));
+ const functionEntries=fp.filter(r=>!supportFunctionStatuses.has(r.status));
  const mappedData=fp.filter(r=>r.status==="mapped-data").length;
  const confirmedVtableSlots=vt.filter(r=>r.status==="confirmed");
- const functionAccepted=nativeFunctions.filter(r=>r.status==="confirmed").length;
- const functionOpenRows=nativeFunctions.filter(r=>r.status==="unidentified");
+ const functionAcceptedRows=functionEntries.filter(r=>r.status==="confirmed");
+ const functionOpenRows=functionEntries.filter(r=>r.status==="unidentified");
  const staticType=staticTypeSegments(gp,typeRows);
  const staticTypeTotal=staticType.reduce((n,s)=>n+s.value,0);
  const typePivot=counts(typeRows,"pivot_segment");
@@ -252,13 +261,15 @@ function coverageSummary(fp,gp,vt,mapRows,typeRows){
  const indirectedRows=mapRows.filter(r=>r.space==="runtime-parent"&&r.status==="indirected");
  const indirectedImportRows=indirectedRows.filter(r=>/materialized import cells|\.idata/i.test(`${r.name||""} ${r.details||""}`)).length;
  const indirectedEditRows=indirectedRows.length-indirectedImportRows;
+ const acceptedClasses=["seg-accepted","seg-context","seg-type","seg-other","seg-support","seg-nameonly","seg-domain-d","seg-domain-f","seg-domain-g","seg-domain-h"];
+ const openClasses=["seg-frontier","seg-domain-a","seg-domain-b","seg-domain-c","seg-domain-d","seg-domain-e","seg-domain-f","seg-domain-g","seg-domain-h"];
  const functionRecoverySegments=[
-  {label:"Accepted native identity/name",value:functionAccepted,cls:"seg-accepted"},
+  ...familySegments(functionAcceptedRows,"Accepted",acceptedClasses),
   {label:"Wrapper-neutralized callsite/import rows",value:indirectedRows.length,cls:"seg-known"},
-  ...suspectedDomainSegments(functionOpenRows)
+  ...familySegments(functionOpenRows,"Unidentified",openClasses)
  ];
  const domains=[
-  {name:"Native function identity frontier",openEnded:true,den:`${fmt(nativeFunctions.length)} known original .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted native function identities and neutralized wrapper indirection sit beside the remaining known function-entry work.",uncertainty:`The unidentified function slices are suspected structural domains from zt-function-perimeter.tsv; accepted identities remain open for them. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(mappedData)} non-text data rows are excluded from original function-entry identity coverage.`},
+  {name:"Function identity frontier",openEnded:true,den:`${fmt(functionEntries.length)} known .text function entries plus ${fmt(indirectedRows.length)} neutralized wrapper byte-map rows`,segments:functionRecoverySegments,answer:"How accepted and unidentified function identities split by domain or middleware provenance beside neutralized wrapper indirection.",uncertainty:`Accepted and unidentified function rows are grouped by inferred domain when present and by middleware/library provenance otherwise. Gamebryo, Lua, D3D, zlib, libjpeg, and CRT provenance-backed rows therefore sit outside the native game-domain groups. Rows with neither domain nor provenance are shown as uncharacterized. The wrapper segment is byte-map callsite/import coverage: ${fmt(indirectedEditRows)} depepper edit rows and ${fmt(indirectedImportRows)} rebuilt import-table rows. ${fmt(mappedData)} non-text data rows are excluded from function-entry identity coverage.`},
   {name:"Variables/data and type identities",openEnded:true,den:`${fmt(staticTypeTotal)} entries (${fmt(gp.length)} variables/data entries + ${fmt(typePivot["Template-only: zero virtual slots"]||0)} template-only type identities)`,segments:staticType,answer:"How the known variables/data and type perimeter splits into unidentified entries, identified non-type variables/data, template-only types, and type-cache identities by name, getter and parent/root linkage, and virtual-slot evidence.",uncertainty:`Driven by zt-type-coverage-reconciliation.tsv and zt-global-perimeter.tsv. ${fmt(addressOnlySignalRows)} address-only vtable signal rows, ${fmt(foreignGetterUseRows)} foreign getter-use rows, and ${fmt(baseVirtualSignalRows)} base virtual-member rows are included in the named getter-and-parent/root linked segment with some virtual-slot identity. Identified non-type variables/data keep their byte-map names and explanatory families in the table; those families sit outside the completion axes. Unidentified variables/data still need byte-map facts from initializer writes, consumers, or exact data shape.`},
   {name:"Virtual method slots",openEnded:true,den:`${fmt(vt.length)} virtual method slot rows`,segments:[{label:"Slot method identified",value:vslotDone,cls:"seg-accepted"},{label:"Slot method unidentified",value:vt.length-vslotDone,cls:"seg-open"}],answer:"How many individual virtual slot rows have a confirmed method identity.",uncertainty:"This is slot-level recovery; repeated function bodies, inherited helpers, and shared stubs are intentionally counted once per slot row."},
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
