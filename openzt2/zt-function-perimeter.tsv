@@ -3822,15 +3822,15 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004c5ca6	40	destroy_ZTEmoticonInfo_members			confirmed			runtime/support
 0x004c5cce	115	construct_ZTFeedbackString_defaults			confirmed			runtime/support
 0x004c5d41	0	scalar_delete_feedback_text_info			confirmed		0x008d33b0#0	runtime/support
-0x004c5d5c	63	destroy_feedback_text_info_members			confirmed			economy
-0x004c5d9b	40	construct_ZTMessageInfo_defaults			confirmed			economy
+0x004c5d5c	63	destroy_feedback_text_info_members			confirmed			runtime/support
+0x004c5d9b	40	construct_ZTMessageInfo_defaults			confirmed			runtime/support
 0x004c5dc3	0	scalar_delete_ZTMessageInfo			confirmed		0x008d344c#0	runtime/support
-0x004c5de6	96	construct_ZTFeedbackData_defaults			confirmed			economy
-0x004c5e46	19	resolve_ZTFeedbackData_selected_child_message_info			confirmed			economy
+0x004c5de6	96	construct_ZTFeedbackData_defaults			confirmed			runtime/support
+0x004c5e46	19	resolve_ZTFeedbackData_selected_child_message_info			confirmed			runtime/support
 0x004c5e73	0	scalar_delete_ZTFeedbackData			confirmed		0x008d3348#0	runtime/support
-0x004c5e8e	100	construct_ZTFeedbackDataSet_defaults			confirmed			economy
-0x004c5ef2	85	destroy_ZTFeedbackDataSet_members			confirmed			economy
-0x004c5f47	63	destroy_ZTFeedbackData_members			confirmed			economy
+0x004c5e8e	100	construct_ZTFeedbackDataSet_defaults			confirmed			runtime/support
+0x004c5ef2	85	destroy_ZTFeedbackDataSet_members			confirmed			runtime/support
+0x004c5f47	63	destroy_ZTFeedbackData_members			confirmed			runtime/support
 0x004c5f86	0	scalar_delete_ZTFeedbackDataSet			confirmed		0x008d3480#0	runtime/support
 0x004c5fa2	45	get_type_ZTFeedbackClickTarget			confirmed			runtime/support
 0x004c5fcf	0	get_type_ZTFeedbackClickTarget_vtable_thunk			confirmed		0x008c5020#1	runtime/support
@@ -3843,7 +3843,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004c615e	45	get_type_ZTFeedbackString			confirmed			runtime/support
 0x004c618b	0	get_type_ZTFeedbackString_vtable_thunk			confirmed		0x008d33b0#1	runtime/support
 0x004c6190	0	init_ZTFeedbackString_descriptor_ref_vtable_thunk			confirmed		0x008d33b0#2	scripting
-0x004c61b0	290	matches_ZTFeedbackString_conditions			confirmed			economy
+0x004c61b0	290	matches_ZTFeedbackString_conditions			confirmed			runtime/support
 0x004c62d2	596	write_feedback_string_or_action_info_xml			confirmed		0x008d33b0#3	runtime/support
 0x004c6526	621	read_ZTFeedbackString_xml			confirmed		0x008d33b0#4	runtime/support
 0x004c6793	2567	resolve_entity_display_name_or_unnamed			confirmed			game-entities
@@ -3858,66 +3858,66 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x004c7317	0	init_ZTMessageInfo_descriptor_ref_vtable_thunk			confirmed		0x008d344c#2	scripting
 0x004c7337	0	write_ZTMessageInfo_xml			confirmed		0x008d344c#3	runtime/support
 0x004c7383	374	read_ZTMessageInfo_xml			confirmed		0x008d344c#4	runtime/support
-0x004c74f9	164	resolve_ZTFeedbackData_selected_entity_name			confirmed			economy
+0x004c74f9	164	resolve_ZTFeedbackData_selected_entity_name			confirmed			game-entities
 0x004c759d	47	get_type_ZTFeedbackDataSet			confirmed			runtime/support
 0x004c75cc	0	get_type_ZTFeedbackDataSet_vtable_thunk			confirmed		0x008d3480#1	runtime/support
-0x004c75d1	32	init_ZTFeedbackDataSet_descriptor_ref			confirmed			economy
+0x004c75d1	32	init_ZTFeedbackDataSet_descriptor_ref			confirmed			scripting
 0x004c75f1	0	init_ZTFeedbackDataSet_descriptor_ref_vtable_thunk			confirmed		0x008d3480#2	scripting
 0x004c75f6	0	write_ZTFeedbackDataSet_xml			confirmed		0x008d3480#3	runtime/support
 0x004c769a	205	read_ZTFeedbackDataSet_xml			confirmed		0x008d3480#4	runtime/support
 0x004c7767	47	get_type_ZTFeedbackData			confirmed			runtime/support
 0x004c7796	0	get_type_ZTFeedbackData_vtable_thunk			confirmed		0x008d3348#1	runtime/support
-0x004c779b	32	init_ZTFeedbackData_descriptor_ref			confirmed			economy
+0x004c779b	32	init_ZTFeedbackData_descriptor_ref			confirmed			scripting
 0x004c77bb	0	init_ZTFeedbackData_descriptor_ref_vtable_thunk			confirmed		0x008d3348#2	scripting
-0x004c77c0	94	copy_construct_ZTFeedbackData			confirmed			economy
-0x004c781e	105	copy_ZTFeedbackData_fields			confirmed			economy
-0x004c7887	25	set_ZTFeedbackData_selected_child_index			confirmed			economy
-0x004c78a0	123	refresh_ZTFeedbackData_display_name			confirmed			economy
+0x004c77c0	94	copy_construct_ZTFeedbackData			confirmed			runtime/support
+0x004c781e	105	copy_ZTFeedbackData_fields			confirmed			runtime/support
+0x004c7887	25	set_ZTFeedbackData_selected_child_index			confirmed			runtime/support
+0x004c78a0	123	refresh_ZTFeedbackData_display_name			confirmed			runtime/support
 0x004c791b	0	write_ZTFeedbackData_xml			confirmed		0x008d3348#3	runtime/support
 0x004c7a4b	0	read_ZTFeedbackData_xml			confirmed		0x008d3348#4	runtime/support
-0x004c7c37	54	relink_ZTFeedbackData_child_owner_refs			confirmed			economy
+0x004c7c37	54	relink_ZTFeedbackData_child_owner_refs			confirmed			runtime/support
 0x004c7c6d	47	get_type_ZTSharedFeedbackData			confirmed			runtime/support
-0x004c7c9c	0	get_type_ZTSharedFeedbackData_vtable_thunk			confirmed		0x008d34b8#1	economy
-0x004c7ca1	32	init_ZTSharedFeedbackData_descriptor_ref			confirmed			economy
+0x004c7c9c	0	get_type_ZTSharedFeedbackData_vtable_thunk			confirmed		0x008d34b8#1	runtime/support
+0x004c7ca1	32	init_ZTSharedFeedbackData_descriptor_ref			confirmed			scripting
 0x004c7cc1	0	init_ZTSharedFeedbackData_descriptor_ref_vtable_thunk			confirmed		0x008d34b8#2	scripting
-0x004c7cc6	154	destroy_ZTSharedFeedbackData_members			confirmed			economy
+0x004c7cc6	154	destroy_ZTSharedFeedbackData_members			confirmed			runtime/support
 0x004c7d60	0	scalar_delete_ZTSharedFeedbackData			confirmed		0x008d34b8#0	runtime/support
-0x004c7d7b	50	get_ZTSharedFeedbackData_entry_payload			confirmed			economy
+0x004c7d7b	50	get_ZTSharedFeedbackData_entry_payload			confirmed			io/assets
 0x004c7dad	0	read_ZTSharedFeedbackData_xml			confirmed		0x008d34b8#20	runtime/support
 0x004c7e36	47	get_type_ZTFeedbackComponent			confirmed			game-entities
-0x004c7e65	0		economy manager config, transactions, and late entity components		unidentified		0x008d3510#1	economy
-0x004c7e6a	32		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c7e65	0	get_type_ZTFeedbackComponent_vtable_thunk			confirmed		0x008d3510#1	economy
+0x004c7e6a	32	init_ZTFeedbackComponent_descriptor_ref			confirmed			economy
 0x004c7e8a	0	init_ZTFeedbackComponent_descriptor_ref_vtable_thunk			confirmed		0x008d3510#2	scripting
-0x004c7e8f	38		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c7e8f	38	get_ZTFeedbackComponent_action_registry			confirmed			economy
 0x004c7eb5	0	register_ZTFeedbackComponent_action_value			confirmed		0x008d3564#0	game-entities
 0x004c7ecb	0	resolve_ZTFeedbackComponent_action_value			confirmed		0x008d3564#1	game-entities
-0x004c7f1e	58		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c7f1e	58	construct_ZTFeedbackComponent_defaults			confirmed			economy
 0x004c7f58	0	scalar_delete_ZTFeedbackComponent			confirmed		0x008d3510#0	game-entities
-0x004c7f73	32		economy manager config, transactions, and late entity components		unidentified			economy
-0x004c7f93	99		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c7f73	32	get_active_placement_feedback_tracker			confirmed			economy
+0x004c7f93	99	destroy_ZTFeedbackComponent_members			confirmed			economy
 0x004c7ff6	0	tick_ZTFeedbackComponent_timeout			confirmed		0x008d3510#14	game-entities
 0x004c804a	0	read_ZTFeedbackComponent_xml			confirmed		0x008d3510#20	game-entities
 0x004c8147	0	write_ZTFeedbackComponent_xml			confirmed		0x008d3510#19	game-entities
-0x004c85b5	158		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c85b5	158	insert_ZTFeedbackComponent_thought_history_entry			confirmed			economy
 0x004c8653	47	get_type_ZTFeedbackMgr			confirmed			runtime/support
-0x004c8682	0		economy manager config, transactions, and late entity components		unidentified		0x008d32e0#1	economy
-0x004c8687	32		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c8682	0	get_type_ZTFeedbackMgr_vtable_thunk			confirmed		0x008d32e0#1	economy
+0x004c8687	32	init_ZTFeedbackMgr_descriptor_ref			confirmed			economy
 0x004c86a7	0	init_ZTFeedbackMgr_descriptor_ref_vtable_thunk			confirmed		0x008d32e0#2	scripting
-0x004c86ac	38		economy manager config, transactions, and late entity components		unidentified			economy
-0x004c873b	581		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c86ac	38	get_ZTFeedbackMgr_action_registry			confirmed			economy
+0x004c873b	581	construct_ZTFeedbackMgr_defaults			confirmed			economy
 0x004c8980	0	scalar_delete_ZTFeedbackMgr			confirmed		0x008d32e0#0	runtime/support
-0x004c899b	211		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c899b	211	destroy_ZTFeedbackMgr_members			confirmed			economy
 0x004c8a6e	0	read_ZTFeedbackMgr_xml			confirmed		0x008d32e0#20	runtime/support
 0x004c8f7c	0	write_ZTFeedbackMgr_xml			confirmed		0x008d32e0#19	runtime/support
-0x004c943d	38		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c943d	38	advance_feedback_alert_timer_cursor			confirmed			economy
 0x004c979e	1825	build_clickable_message_alert_entry			confirmed			ui
-0x004c9ebf	70		economy manager config, transactions, and late entity components		unidentified			economy
-0x004c9f05	158		economy manager config, transactions, and late entity components		unidentified			economy
-0x004c9fa3	195		economy manager config, transactions, and late entity components		unidentified			economy
-0x004ca066	535		economy manager config, transactions, and late entity components		unidentified			economy
-0x004ca27d	78		economy manager config, transactions, and late entity components		unidentified			economy
-0x004ca2cb	115		economy manager config, transactions, and late entity components		unidentified			economy
-0x004ca33e	167		economy manager config, transactions, and late entity components		unidentified			economy
+0x004c9ebf	70	copy_ZTMessageInfo_fields			confirmed			economy
+0x004c9f05	158	copy_ZTFeedbackString_fields			confirmed			economy
+0x004c9fa3	195	tick_ZTFeedbackMgr_alert_timers			confirmed			economy
+0x004ca066	535	process_ZTFeedbackMgr_message_alert			confirmed			economy
+0x004ca27d	78	release_ZTFeedbackMgr_alert_target_ref			confirmed			economy
+0x004ca2cb	115	erase_ZTFeedbackMgr_alert_entry_by_id			confirmed			economy
+0x004ca33e	167	test_ZTFeedbackMgr_alert_priority_gate			confirmed			economy
 0x004ca3e5	91		economy manager config, transactions, and late entity components		unidentified			economy
 0x004ca440	268		economy manager config, transactions, and late entity components		unidentified			economy
 0x004ca54c	100		economy manager config, transactions, and late entity components		unidentified			economy
@@ -16496,51 +16496,51 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b03ca	0	remove_BFR_model_geometry_child_pointer			confirmed		0x008f6368#15	runtime/support
 0x006b03d2	30	accepts_BFR_tiled_surface_code_1_or_model_geometry_code			confirmed	gamebryo	0x008f6448#5	middleware/gamebryo
 0x006b03f0	0	return_true_stub			confirmed		0x008d22c0#8	runtime/support
-0x006b03f4	0	get_or_load_BFR_tiled_surface_material_resource			confirmed		0x008f6448#11	renderer
-0x006b0401	0	get_BFR_tiled_surface_sort_by_distance_flag			confirmed		0x008f6448#13	renderer
+0x006b03f4	0	get_or_load_BFR_tiled_surface_material_resource			confirmed		0x008f6448#11	io/assets
+0x006b0401	0	get_BFR_tiled_surface_sort_by_distance_flag			confirmed		0x008f6448#13	world/pathing
 0x006b0405	278	invert_BFR_affine_transform_matrix			confirmed	gamebryo		middleware/gamebryo
 0x006b051b	130	construct_BFR_tiled_surface_geometry_record			confirmed	gamebryo		middleware/gamebryo
-0x006b059d	0	scalar_delete_BFR_tiled_surface_geometry_record			confirmed	gamebryo	0x008f6448#0	renderer
+0x006b059d	0	scalar_delete_BFR_tiled_surface_geometry_record			confirmed	gamebryo	0x008f6448#0	middleware/gamebryo
 0x006b05b8	69	destroy_BFR_tiled_surface_geometry_record			confirmed	gamebryo		middleware/gamebryo
 0x006b05fd	180	bind_BFR_tiled_surface_position_color_tile_sources			confirmed	gamebryo	0x008f6448#1	middleware/gamebryo
 0x006b06b1	341	read_tiled_surface_config			confirmed	gamebryo	0x008f6448#6	middleware/gamebryo
-0x006b0806	0	refresh_BFR_tiled_surface_material_and_tile_scales			confirmed		0x008f6448#9	renderer
-0x006b0848	0	emit_BFR_tiled_surface_geometry_batches			confirmed		0x008f6448#3	renderer
+0x006b0806	0	refresh_BFR_tiled_surface_material_and_tile_scales			confirmed		0x008f6448#9	world/pathing
+0x006b0848	0	emit_BFR_tiled_surface_geometry_batches			confirmed		0x008f6448#3	world/pathing
 0x006b08df	319	construct_BFR_tiled_surface_bounds_for_range			confirmed	gamebryo		middleware/gamebryo
 0x006b0a1e	336	emit_BFR_tiled_surface_geometry_batch_chunk			confirmed	gamebryo		middleware/gamebryo
 0x006b0b6e	94	prepare_BFR_tiled_surface_sort_anchor			confirmed	gamebryo		middleware/gamebryo
 0x006b0bcc	111	copy_BFR_renderer_cached_basis_vectors			confirmed	gamebryo		middleware/gamebryo
-0x006b0c3b	0	write_BFR_tiled_surface_quad_vertices			confirmed		0x008f6448#17	renderer
-0x006b0f3a	0	write_BFR_tiled_surface_quad_indices			confirmed		0x008f6448#18	renderer
+0x006b0c3b	0	write_BFR_tiled_surface_quad_vertices			confirmed		0x008f6448#17	world/pathing
+0x006b0f3a	0	write_BFR_tiled_surface_quad_indices			confirmed		0x008f6448#18	world/pathing
 0x006b0f80	47	ensure_BFR_tiled_surface_material_resource_loaded			confirmed	gamebryo		middleware/gamebryo
 0x006b0faf	80	load_BFR_tiled_surface_material_resource			confirmed	gamebryo		middleware/gamebryo
 0x006b0fff	50	clear_BFR_tiled_surface_geometry_batch_list			confirmed	gamebryo		middleware/gamebryo
 0x006b1031	156	append_BFR_tiled_surface_geometry_batch_record			confirmed	gamebryo		middleware/gamebryo
 0x006b10cd	193	find_or_create_BFR_byte_attribute_source			confirmed	gamebryo		middleware/gamebryo
-0x006b118e	0	accepts_BFR_velocity_tiled_surface_code_4_or_tiled_surface_code			confirmed		0x008f64b8#5	renderer
-0x006b11ac	0	init_velocity_particle_inline_string			confirmed		0x008f64b8#16	renderer
-0x006b11c1	0	scalar_delete_BFR_velocity_tiled_surface_geometry_record			confirmed		0x008f64b8#0	renderer
-0x006b11e2	0	write_BFR_velocity_tiled_surface_quad_vertices			confirmed		0x008f64b8#17	renderer
-0x006b1606	0	bind_BFR_velocity_tiled_surface_lengthscale_descriptor_param			confirmed		0x008f64b8#6	renderer
-0x006b165a	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#5	renderer
-0x006b1678	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#0	renderer
-0x006b1699	0	bind_BFR_velocity_tiled_surface_velocity_and_size_sources			confirmed		0x008f64b8#1	renderer
-0x006b1714	0	set_BFR_velocity_tiled_surface_length_scale			confirmed		0x008f64b8#2	renderer
-0x006b1723	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#17	renderer
-0x006b1b76	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#6	renderer
-0x006b1bc7	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#25	renderer
-0x006b1be5	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#20	renderer
-0x006b1c06	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#21	renderer
+0x006b118e	0	accepts_BFR_velocity_tiled_surface_code_4_or_tiled_surface_code			confirmed		0x008f64b8#5	world/pathing
+0x006b11ac	0	init_velocity_particle_inline_string			confirmed		0x008f64b8#16	runtime/support
+0x006b11c1	0	scalar_delete_BFR_velocity_tiled_surface_geometry_record			confirmed		0x008f64b8#0	world/pathing
+0x006b11e2	0	write_BFR_velocity_tiled_surface_quad_vertices			confirmed		0x008f64b8#17	world/pathing
+0x006b1606	0	bind_BFR_velocity_tiled_surface_lengthscale_descriptor_param			confirmed		0x008f64b8#6	world/pathing
+0x006b165a	0	accepts_BFR_velocity_minheight_tiled_surface_code_3_or_tiled_surface_code			confirmed		0x008f6518#5	world/pathing
+0x006b1678	0	scalar_delete_BFR_velocity_minheight_tiled_surface_geometry_record			confirmed		0x008f6518#0	renderer
+0x006b1699	0	bind_BFR_velocity_tiled_surface_velocity_and_size_sources			confirmed		0x008f64b8#1	world/pathing
+0x006b1714	0	set_BFR_velocity_tiled_surface_length_scale			confirmed		0x008f64b8#2	world/pathing
+0x006b1723	0	write_BFR_velocity_minheight_tiled_surface_quad_vertices			confirmed		0x008f6518#17	renderer
+0x006b1b76	0	bind_BFR_velocity_minheight_tiled_surface_minheight_descriptor_param			confirmed		0x008f6518#6	renderer
+0x006b1bc7	0	accepts_BFR_angle_tiled_surface_code_2_or_tiled_surface_code			confirmed		0x008f6518#25	renderer
+0x006b1be5	0	scalar_delete_BFR_angle_tiled_surface_geometry_record			confirmed		0x008f6518#20	renderer
+0x006b1c06	0	bind_BFR_angle_tiled_surface_angle_and_size_sources			confirmed		0x008f6518#21	renderer
 0x006b1c6e	0	get_BFR_tiled_surface_vertex_format_position_color_uv0			confirmed		0x008f6448#19	renderer
-0x006b1c73	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f6518#37	renderer
-0x006b2233	38		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
-0x006b2259	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#0	renderer
-0x006b2292	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#1	renderer
-0x006b22bd	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#2	renderer
-0x006b2306	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#3	renderer
-0x006b2346	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#19	renderer
-0x006b2395	0		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified		0x008f65b8#11	renderer
-0x006b23c0	108		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
+0x006b1c73	0	write_BFR_angle_tiled_surface_quad_vertices			confirmed		0x008f6518#37	renderer
+0x006b2233	38	construct_BFR_attribute_component_shared_renderer_resource			confirmed	gamebryo		middleware/gamebryo
+0x006b2259	0	scalar_delete_BFR_attribute_component_shared_renderer_resource			confirmed		0x008f65b8#0	renderer
+0x006b2292	0	clear_BFR_attribute_component_shared_renderer_resource_refs			confirmed		0x008f65b8#1	renderer
+0x006b22bd	0	allocate_BFR_attribute_component_shared_renderer_resource_clone			confirmed		0x008f65b8#2	renderer
+0x006b2306	0	dispatch_BFR_attribute_component_shared_renderer_payload_and_select_component			confirmed		0x008f65b8#3	renderer
+0x006b2346	0	propagate_BFR_attribute_component_shared_renderer_visibility_or_draw_flags			confirmed		0x008f65b8#19	renderer
+0x006b2395	0	get_BFR_attribute_component_shared_renderer_local_bounds			confirmed		0x008f65b8#11	renderer
+0x006b23c0	108	assign_BFR_attribute_component_shared_renderer_component_key			confirmed	gamebryo		middleware/gamebryo
 0x006b242c	37	construct_BFR_geometry_batch_record_with_default_transform			confirmed	gamebryo		middleware/gamebryo
 0x006b2471	0	write_BFR_geometry_child_indices_with_base_offset			confirmed		0x008f5ed8#0	runtime/support
 0x006b2505	0	get_BFR_geometry_child_index_count			confirmed		0x008f5ed8#1	runtime/support
@@ -16549,11 +16549,11 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006b2520	0	get_BFR_geometry_child_backing_field_0x0c			confirmed		0x008f5ed8#4	runtime/support
 0x006b2534	0	forward_BFR_geometry_batch_vertex_writer_to_child			confirmed		0x008f63ac#7	renderer
 0x006b255f	0	forward_BFR_geometry_batch_index_writer_to_child			confirmed		0x008f63ac#8	runtime/support
-0x006b25cc	29		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
-0x006b25e9	157		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
-0x006b2686	374		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
-0x006b27fc	121		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
-0x006b2875	24		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
+0x006b25cc	29	compare_BFR_distance_sort_records_by_distance			confirmed	gamebryo		middleware/gamebryo
+0x006b25e9	157	build_BFR_distance_sort_records_from_positions			confirmed	gamebryo		middleware/gamebryo
+0x006b2686	374	apply_BFR_distance_sort_permutation_to_attribute_data			confirmed	gamebryo		middleware/gamebryo
+0x006b27fc	121	sort_BFR_attribute_samples_by_distance			confirmed	gamebryo		middleware/gamebryo
+0x006b2875	24	get_BFR_distance_sort_record_count			confirmed	gamebryo		middleware/gamebryo
 0x006b288d	23		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
 0x006b28a4	181		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo
 0x006b2959	106		renderer/platform stub tail, panel paint, and D3D surface sizing		unidentified	gamebryo		middleware/gamebryo

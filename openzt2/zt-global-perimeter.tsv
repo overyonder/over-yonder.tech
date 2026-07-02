@@ -309,14 +309,14 @@ address	section	name	status	family
 0x00920ccc	.data	config4 minimum video memory requirement megabytes global	identified	Renderer/platform/runtime variables/data
 0x00922cd8	.data	UI GDI text measurement height cache global	identified	UI/content/profile variables/data
 0x00922cdc	.data	UI GDI text measurement width cache global	identified	UI/content/profile variables/data
-0x00922ce0	.data		unidentified	
-0x00922ce4	.data		unidentified	
-0x00922ce8	.data		unidentified	
-0x00922cec	.data		unidentified	
-0x00922cf0	.data		unidentified	
-0x00922cf4	.data		unidentified	
-0x00922cf8	.data		unidentified	
-0x00922cfc	.data		unidentified	
+0x00922ce0	.data	UI GDI clipped bounds left global	identified	UI/content/profile variables/data
+0x00922ce4	.data	UI GDI clipped bounds top global	identified	UI/content/profile variables/data
+0x00922ce8	.data	UI GDI clipped bounds right global	identified	UI/content/profile variables/data
+0x00922cec	.data	UI GDI clipped bounds bottom global	identified	UI/content/profile variables/data
+0x00922cf0	.data	UI GDI accumulated minimum-left bound global	identified	UI/content/profile variables/data
+0x00922cf4	.data	UI GDI accumulated minimum-top bound global	identified	UI/content/profile variables/data
+0x00922cf8	.data	UI GDI accumulated maximum-right bound global	identified	UI/content/profile variables/data
+0x00922cfc	.data	UI GDI accumulated maximum-bottom bound global	identified	UI/content/profile variables/data
 0x00922d14	.data	bounding-volume dispatch function table	identified	Renderer/platform/runtime variables/data
 0x00922d18	.data	BOX_BV factory dispatch pointer	identified	Renderer/platform/runtime variables/data
 0x00922d1c	.data	CAPSULE_BV factory dispatch pointer	identified	Renderer/platform/runtime variables/data
@@ -324,18 +324,18 @@ address	section	name	status	family
 0x00922d24	.data	UNION_BV factory dispatch pointer	identified	Renderer/platform/runtime variables/data
 0x00922d28	.data	HALFSPACE_BV factory dispatch pointer	identified	Renderer/platform/runtime variables/data
 0x00922d40	.data	Direct3D device capability and adapter query globals	identified	Renderer/platform/runtime variables/data
-0x00922d44	.data		unidentified	
-0x00922d4c	.data		unidentified	
-0x00922d50	.data		unidentified	
-0x00922d58	.data		unidentified	
-0x00922d5c	.data		unidentified	
-0x00922d60	.data		unidentified	
-0x00922d64	.data		unidentified	
-0x00922d68	.data		unidentified	
-0x00922d6c	.data		unidentified	
-0x00922d70	.data		unidentified	
-0x00922d74	.data		unidentified	
-0x00922d78	.data		unidentified	
+0x00922d44	.data	renderer triple-state table entry 0 state-slot 5 value	identified	Renderer/platform/runtime variables/data
+0x00922d4c	.data	renderer triple-state table entry 1 state-slot 4 value	identified	Renderer/platform/runtime variables/data
+0x00922d50	.data	renderer triple-state table entry 1 state-slot 5 value	identified	Renderer/platform/runtime variables/data
+0x00922d58	.data	renderer triple-state table entry 2 state-slot 4 value	identified	Renderer/platform/runtime variables/data
+0x00922d5c	.data	renderer triple-state table entry 2 state-slot 5 value	identified	Renderer/platform/runtime variables/data
+0x00922d60	.data	renderer triple-state table entry 2 state-slot 6 value	identified	Renderer/platform/runtime variables/data
+0x00922d64	.data	renderer triple-state table entry 3 state-slot 4 value	identified	Renderer/platform/runtime variables/data
+0x00922d68	.data	renderer triple-state table entry 3 state-slot 5 value	identified	Renderer/platform/runtime variables/data
+0x00922d6c	.data	renderer triple-state table entry 3 state-slot 6 value	identified	Renderer/platform/runtime variables/data
+0x00922d70	.data	renderer triple-state table entry 4 state-slot 4 value	identified	Renderer/platform/runtime variables/data
+0x00922d74	.data	renderer triple-state table entry 4 state-slot 5 value	identified	Renderer/platform/runtime variables/data
+0x00922d78	.data	renderer triple-state table entry 4 state-slot 6 value	identified	Renderer/platform/runtime variables/data
 0x00922d7c	.data		unidentified	
 0x00922d80	.data		unidentified	
 0x00922d84	.data		unidentified	
