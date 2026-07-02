@@ -11973,22 +11973,22 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00618f29	398	read_BFAITextureController_entry_xml			confirmed	gamebryo		
 0x006190b7	85	write_BFAITextureController_range_rule_xml			confirmed	gamebryo		
 0x0061910c	68	read_BFAITextureController_range_rule_xml			confirmed	gamebryo		
-0x00619150	118		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006191c6	124		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00619242	104		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006192aa	91		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00619150	118	write_BFAITextureController_variant_rule_xml			confirmed	gamebryo		
+0x006191c6	124	read_BFAITextureController_variant_rule_xml			confirmed	gamebryo		
+0x00619242	104	find_BFAITextureController_state_tree_entry			confirmed	gamebryo		
+0x006192aa	91	append_BFAITextureController_variant_weight_entry			confirmed	gamebryo		
 0x00619305	0	allocate_BFAITextureController_from_descriptor			confirmed		0x008e9cf0#3	
-0x0061931d	55		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00619354	125		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006193d1	25		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x006193ea	417		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061931d	55	find_BFAITextureController_state_tree_lower_bound			confirmed	gamebryo		
+0x00619354	125	grow_insert_BFAITextureController_variant_weight_entry			confirmed	gamebryo		
+0x006193d1	25	destroy_BFAITextureController_variant_weight_range			confirmed	gamebryo		
+0x006193ea	417	insert_BFAITextureController_variant_weight_entry			confirmed	gamebryo		
 0x0061958b	40	as_BFAITextureController			confirmed	gamebryo		
-0x006195b3	55		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x006195b3	55	copy_BFAITextureController_variant_weight_range			confirmed	gamebryo		
 0x006195ea	0	set_BFLocomotionMgr_loco_type			confirmed		0x008e9d80#32	
 0x00619601	0	set_BFLocomotionMgr_loco_modifier			confirmed		0x008e9d80#33	
 0x0061962b	0	clear_BFLocomotionMgr_loco_modifier			confirmed		0x008e9d80#34	
 0x00619659	47	get_type_BFLocomotionMgr			confirmed	gamebryo		
-0x00619688	0		AI sensors, state/cognitive components, texture, locomotion, and		unidentified		0x008e9d80#1	renderer
+0x00619688	0	get_type_BFLocomotionMgr_vtable_thunk			confirmed		0x008e9d80#1	
 0x0061968d	32	get_BFLocomotionMgr_descriptor_ref			confirmed	gamebryo		
 0x006196ad	0	init_BFLocomotionMgr_descriptor_ref_vtable_thunk			confirmed		0x008e9d80#2	
 0x006196b2	73	get_BFLocomotionMgr_action_registry			confirmed	gamebryo		
@@ -12011,14 +12011,14 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00619d7e	109	refresh_BFLocomotionMgr_active_child_if_dirty			confirmed	gamebryo		
 0x00619deb	67	advance_BFLocomotionMgr_active_child			confirmed	gamebryo		
 0x00619e2e	0	bind_BFLocomotionMgr_payload_to_children			confirmed		0x008e9d80#38	
-0x00619ecd	276		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x00619fe1	538		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061a1fb	127		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x00619ecd	276	reparent_BFR_shared_renderer_children_into_new_resource			confirmed	gamebryo		
+0x00619fe1	538	wrap_NiNode_children_in_new_node			confirmed	gamebryo		
+0x0061a1fb	127	resolve_BFLocomotionMgr_renderer_resource			confirmed	gamebryo		
 0x0061a27a	0	reselect_BFLocomotionMgr_active_child_from_candidates			confirmed		0x008e9d80#39	
 0x0061a403	0	reset_BFLocomotionMgr_target_roll_destination			confirmed		0x008e9d80#45	
 0x0061a431	0	apply_BFLocomotionMgr_roll_delta_payload			confirmed		0x008e9d80#14	
-0x0061a44f	352		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061a5af	68		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061a44f	352	advance_BFLocomotionMgr_current_roll_toward_target			confirmed	gamebryo		
+0x0061a5af	68	set_BFLocomotionMgr_current_roll			confirmed	gamebryo		
 0x0061a5f3	0	query_BFLocomotionMgr_active_child_slot74			confirmed		0x008e9d80#36	
 0x0061a606	0	build_BFLocomotionMgr_slot74_vector_value			confirmed		0x008e9d80#40	
 0x0061a670	0	forward_BFLocomotionMgr_resolve_collision_field			confirmed		0x008e9d80#41	
@@ -12030,12 +12030,12 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0061aaa0	0	lookup_BFLocomotionMgr_child_from_payload_key			confirmed		0x008e9d80#37	
 0x0061ab25	74	refresh_BFLocomotionMgr_active_child			confirmed	gamebryo		
 0x0061ab6f	0	get_BFLocomotionMgr_active_loco_type_or_default			confirmed		0x008e9d80#35	
-0x0061abcb	50		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061abfd	86		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061ac53	95		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
-0x0061acb2	152		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061abcb	50	query_BFLocomotionMgr_active_child_slot70_or_zero_vector			confirmed	gamebryo		
+0x0061abfd	86	get_BFR_shared_renderer_child_handle_at_index			confirmed	gamebryo		
+0x0061ac53	95	append_BFR_shared_renderer_child_handle			confirmed	gamebryo		
+0x0061acb2	152	find_or_insert_u32_keyed_refcounted_value_tree_entry			confirmed	gamebryo		
 0x0061ad4a	0	allocate_BFLocomotionMgr_from_descriptor			confirmed		0x008e9e38#3	
-0x0061ad5f	153		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
+0x0061ad5f	153	register_BFLocomotionMgr_action_handler_entry			confirmed	gamebryo		
 0x0061ae3f	110		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x0061aead	372		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
 0x0061b021	368		AI sensors, state/cognitive components, texture, locomotion, and		unidentified	gamebryo		renderer
@@ -19457,7 +19457,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007484fb	0	clear_BF2LegsGroundFit_dynamic_refit_flag			confirmed		0x008fda60#29	
 0x00748503	0	mark_BF2LegsGroundFit_dynamic_refit_flag_dirty			confirmed		0x008fda60#30	
 0x00748512	403	apply_BF2LegsGroundFit_ankle_orientation_update			confirmed	gamebryo		
-0x007486a5	0		window/client geometry, foot fitting, display settings, and prev		unidentified		0x008fda60#42	ui
+0x007486a5	0	allocate_BF2LegsGroundFitComponent			confirmed		0x008fda60#42	
 0x007486bb	0	get_BFManipSensorComponent_type_name_string_global			confirmed		0x008fdb78#21	
 0x007486c1	47	get_type_BFManipSensorComponent			confirmed	gamebryo		
 0x007486f0	0	get_type_BFManipSensorComponent_vtable_thunk			confirmed		0x008fdb78#1	
@@ -19666,7 +19666,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x00753cd0	872		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x00754038	420		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
 0x007541dc	549		scene/view node update and child visibility propagation		unidentified	gamebryo		renderer
-0x00754401	79		scene/view node update and child visibility propagation		unidentified	gamebryo		
+0x00754401	79	visit_BFTerrain_surface_patch_visible_children			confirmed	gamebryo		
 0x00754450	234		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x0075453a	95		scene/view node update and child visibility propagation		unidentified	gamebryo		
 0x00754599	111		scene/view node update and child visibility propagation		unidentified	gamebryo		
@@ -19717,7 +19717,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007574f3	125	append_resource_ref_record_for_safe_handle			confirmed	gamebryo		
 0x00757570	67	select_BFRopeComponent_indexed_float_or_default			confirmed	gamebryo		
 0x007575b3	64	copy_preview_transform_vector_if_source_present			confirmed	gamebryo		
-0x007575f3	64		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		
+0x007575f3	64	copy_secondary_preview_transform_vector_if_source_present			confirmed	gamebryo		
 0x00757633	536		pixel rectangle copy and MMX blend helpers		unidentified	gamebryo		renderer
 0x0075784b	0	write_BFRopeComponent_droop_xml			confirmed		0x008fe030#19	
 0x007578e4	0	read_BFRopeComponent_droop_xml			confirmed		0x008fe030#20	
@@ -19777,9 +19777,9 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075a847	18	destroy_BFAboveGroundFitComponent_members			confirmed	gamebryo		
 0x0075a859	208	update_above_ground_fit_lag_distance			confirmed	gamebryo	0x008fe3cc#6	
 0x0075a929	73	read_can_go_underwater_xml_property			confirmed	gamebryo	0x008fe350#20	
-0x0075a972	0		scene/model transform and XML property bridge		unidentified		0x008d3bac#8	
-0x0075a98c	41		scene/model transform and XML property bridge		unidentified	gamebryo	0x008fe3cc#10	
-0x0075a9b5	0		scene/model transform and XML property bridge		unidentified		0x008fe3f8#3	
+0x0075a972	0	test_BFAboveGroundFit_underwater_float_request			confirmed		0x008d3bac#8	
+0x0075a98c	41	set_BFAboveGroundFit_underwater_state			confirmed	gamebryo	0x008fe3cc#10	
+0x0075a9b5	0	allocate_BFAboveGroundFitComponent			confirmed		0x008fe3f8#3	
 0x0075a9cb	47	get_type_BFPhysComponent			confirmed	gamebryo		
 0x0075a9fa	0	get_type_BFPhysComponent_vtable_thunk			confirmed		0x008fe428#1	
 0x0075a9ff	32	get_BFPhysComponent_descriptor_ref			confirmed	gamebryo		
@@ -22040,7 +22040,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007bd681	250	apply_BFHoverGroundFitComponent_ground_contact			confirmed	gamebryo		
 0x007bd77b	0	write_scene_model_update_priority_xml_attr_vtable_thunk			confirmed		0x008fde20#19	
 0x007bd780	0	read_BFHoverGroundFitComponent_xml			confirmed		0x00902cc0#20	
-0x007bd87b	0		UI dependency references, movement/view components, and animatio		unidentified		0x00902d3c#11	ui
+0x007bd87b	0	allocate_BFHoverGroundFitComponent			confirmed		0x00902d3c#11	
 0x007bd891	0	get_BFDebugComponent_type_name_string_global			confirmed		0x00902d80#21	
 0x007bd897	47	get_type_BFDebugComponent			confirmed	gamebryo		
 0x007bd8c6	0	get_type_BFDebugComponent_vtable_thunk			confirmed		0x00902d80#1	
@@ -22896,28 +22896,28 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007dcd51	75	set_NiControllerSequence_accum_root_name			confirmed			
 0x007dcd9c	309	construct_NiControllerSequence_state			confirmed			
 0x007dced1	0	scalar_delete_NiControllerSequence_state			confirmed		0x00904ee4#0	
-0x007dceec	322		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
+0x007dceec	322	construct_NiControllerSequence_named_state			confirmed			
 0x007dd02e	119	destroy_NiControllerSequence_state			confirmed			
-0x007dd0a5	134		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd12b	494		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd319	179		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd3cc	182		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd482	61		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd4bf	93		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd51c	39		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd543	346		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
+0x007dd0a5	134	append_NiControllerSequence_controlled_block			confirmed			
+0x007dd12b	494	bind_NiControllerSequence_target_objects			confirmed			
+0x007dd319	179	activate_NiControllerSequence_controllers			confirmed			
+0x007dd3cc	182	deactivate_NiControllerSequence_controllers			confirmed			
+0x007dd482	61	finish_NiControllerSequence_ease_state			confirmed			
+0x007dd4bf	93	finish_NiControllerSequence_crossfade_pair			confirmed			
+0x007dd51c	39	refresh_NiControllerSequence_controlled_block_paths			confirmed			
+0x007dd543	346	collect_NiControllerSequence_controlled_block_paths			confirmed			
 0x007dd69d	70	clear_NiControllerSequence_controlled_block_bindings			confirmed			
-0x007dd6e3	578		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd925	136		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dd9ad	163		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dda50	396		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007ddbdc	330		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007ddd26	231		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007dde0d	380		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007ddf89	398		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007de117	521		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
-0x007de320	0		water material/layout, photo/download/MOTD, and manifest handler		unidentified		0x00904ee4#2	io/assets
-0x007de355	214		water material/layout, photo/download/MOTD, and manifest handler		unidentified			io/assets
+0x007dd6e3	578	compute_NiControllerSequence_accum_root_offsets			confirmed			
+0x007dd925	136	activate_NiControllerSequence_controlled_controllers			confirmed			
+0x007dd9ad	163	update_NiControllerSequence_animating_state			confirmed			
+0x007dda50	396	update_NiControllerSequence_ease_in_state			confirmed			
+0x007ddbdc	330	update_NiControllerSequence_crossfade_source_state			confirmed			
+0x007ddd26	231	update_NiControllerSequence_crossfade_destination_state			confirmed			
+0x007dde0d	380	update_NiControllerSequence_accum_root_transform			confirmed			
+0x007ddf89	398	blend_NiControllerSequence_controller_pairs			confirmed			
+0x007de117	521	compute_NiControllerSequence_morph_remap_time			confirmed			
+0x007de320	0	clone_NiControllerSequence_state			confirmed		0x00904ee4#2	
+0x007de355	214	copy_NiControllerSequence_clone_state			confirmed			
 0x007de42b	0		water material/layout, photo/download/MOTD, and manifest handler		unidentified		0x00904ee4#10	io/assets
 0x007de4ff	0		water material/layout, photo/download/MOTD, and manifest handler		unidentified		0x00904ee4#5	io/assets
 0x007de545	0		water material/layout, photo/download/MOTD, and manifest handler		unidentified		0x00904ee4#6	io/assets
