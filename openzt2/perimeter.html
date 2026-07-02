@@ -210,7 +210,7 @@ function identifiedGlobalSegments(gp){
  }
  return Object.entries(counts)
   .sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))
-  .map(([label,value])=>({label:`Identified non-type data: ${label}`,value,cls:"seg-accepted"}));
+  .map(([label,value])=>({label:`Identified variables/data: ${label}`,value,cls:"seg-accepted"}));
 }
 function typeSegmentClass(label){
  if(label.includes("zero virtual slots")||label.includes("all virtual slots identified"))return "seg-all";
