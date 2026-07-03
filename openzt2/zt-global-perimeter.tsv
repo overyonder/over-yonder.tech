@@ -189,8 +189,8 @@ address	section	name	status	family
 0x0091d934	.data	NiTriBasedGeomData RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091d93c	.data	NiGeometryData RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091d94c	.data	NiLight RTTI/reflection record	identified	Engine/platform/runtime variables/data
-0x0091db3c	.data		unidentified	
-0x0091db94	.data		unidentified	
+0x0091db3c	.data	IME UI appearance GDI font handle global	identified	UI/content/profile variables/data
+0x0091db94	.data	IME UI textEdit GDI font handle global	identified	UI/content/profile variables/data
 0x0091dc2c	.data	NiCollisionData RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091dde8	.data	Direct3D renderer shutdown resource-list globals	identified	Engine/platform/runtime variables/data
 0x0091ddec	.data	Direct3D renderer global attribute descriptor list head pointer	identified	Engine/platform/runtime variables/data
@@ -224,7 +224,7 @@ address	section	name	status	family
 0x0091e584	.data	NiFloatController RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091e58c	.data	NiExtraDataController RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091e69c	.data	profile online connection consent byte globals	identified	UI/content/profile variables/data
-0x0091e730	.data		unidentified	
+0x0091e730	.data	Gamebryo startup no-op callback object vtable pointer global	identified	Engine/platform/runtime variables/data
 0x0091e934	.data	NiCollisionObject RTTI/reflection record	identified	Engine/platform/runtime variables/data
 0x0091ea48	.data	Direct3D renderer render-state default table	identified	Engine/platform/runtime variables/data
 0x0091eadc	.data	Direct3D renderer D3DRS_FOGSTART default value cell	identified	Engine/platform/runtime variables/data
@@ -295,8 +295,8 @@ address	section	name	status	family
 0x009207ec	.data	renderer config4 DisableBuffering flag global	identified	Engine/platform/runtime variables/data
 0x009207f0	.data	renderer config4 MinMaxBlendOpIsBroken flag global	identified	Engine/platform/runtime variables/data
 0x009207f4	.data	renderer config4 LimitBlendStages override global	identified	Engine/platform/runtime variables/data
-0x00920888	.data	renderer adapter capability summary globals	identified	Engine/platform/runtime variables/data
-0x0092088c	.data		unidentified	
+0x00920888	.data	selected D3D adapter device id global	identified	Engine/platform/runtime variables/data
+0x0092088c	.data	selected D3D adapter vendor id global	identified	Engine/platform/runtime variables/data
 0x00920890	.data	HWConfig video driver version-low global	identified	UI/content/profile variables/data
 0x00920894	.data	HWConfig video driver version-high global	identified	UI/content/profile variables/data
 0x00920898	.data	detected system memory megabytes global	identified	Engine/platform/runtime variables/data
@@ -456,8 +456,8 @@ address	section	name	status	family
 0x00935244	.data	pending show-schedule show selection pointer global	identified	UI/content/profile variables/data
 0x00935248	.data	selected show-donation summary show pointer global	identified	UI/content/profile variables/data
 0x00935258	.data	ZTWorldSndMgr huge-crowd high-trigger clamp source global	identified	Engine/platform/runtime variables/data
-0x00935268	.data	ShowMixer animal droplist UI component pointer global	identified	UI/content/profile variables/data
-0x0093526c	.data	ShowMixer trick droplist UI component pointer global	identified	UI/content/profile variables/data
+0x00935268	.data	ShowMixer UI mixer-row layout component pointer global	identified	UI/content/profile variables/data
+0x0093526c	.data	ShowMixer animal-droplist-entry layout component pointer global	identified	UI/content/profile variables/data
 0x00935270	.data	ShowMixer droplistZAdjustment config global	identified	UI/content/profile variables/data
 0x00935274	.data	ShowMixer trickDropdownXAdjustment config global	identified	UI/content/profile variables/data
 0x0093527c	.data	ShowMixer secondary droplist target pointer global	identified	UI/content/profile variables/data
@@ -761,29 +761,29 @@ address	section	name	status	family
 0x00936bac	.data	stopRequestList ZTVehicleBase XML child string ref global	identified	UI/content/profile variables/data
 0x00936bb0	.data	stopRequest ZTVehicleBase XML child string ref global	identified	UI/content/profile variables/data
 0x00936bb4	.data	passenger ZTVehicleBase XML child string ref global	identified	UI/content/profile variables/data
-0x00936bf8	.data		unidentified	
-0x00936bfc	.data		unidentified	
-0x00936c30	.data		unidentified	
-0x00936c34	.data		unidentified	
-0x00936c40	.data		unidentified	
-0x00936c44	.data		unidentified	
-0x00936c84	.data		unidentified	
-0x00936cf0	.data		unidentified	
-0x00936d50	.data		unidentified	
-0x00936da0	.data		unidentified	
-0x00936dd8	.data		unidentified	
-0x00936de8	.data		unidentified	
-0x00936e34	.data		unidentified	
-0x00936e4c	.data		unidentified	
-0x00936e50	.data		unidentified	
-0x00936e5c	.data		unidentified	
-0x00936e60	.data		unidentified	
-0x00936e6c	.data		unidentified	
-0x00936e70	.data		unidentified	
-0x00936e7c	.data		unidentified	
-0x00936e80	.data		unidentified	
-0x00936e8c	.data		unidentified	
-0x00936ed0	.data		unidentified	
+0x00936bf8	.data	tank fence segment variant name vector begin pointer global	identified	Gameplay/entity variables/data
+0x00936bfc	.data	tank fence segment variant name vector current pointer global	identified	Gameplay/entity variables/data
+0x00936c30	.data	primary refcounted UI value scratch vector begin pointer global	identified	UI/content/profile variables/data
+0x00936c34	.data	primary refcounted UI value scratch vector current pointer global	identified	UI/content/profile variables/data
+0x00936c40	.data	secondary refcounted UI value scratch vector begin pointer global	identified	UI/content/profile variables/data
+0x00936c44	.data	secondary refcounted UI value scratch vector current pointer global	identified	UI/content/profile variables/data
+0x00936c84	.data	entities/objects/puzzles ZTPuzzlePiece path prefix string ref global	identified	Gameplay/entity variables/data
+0x00936cf0	.data	mixerrow.xml ShowMixer UI layout path buffer pointer global	identified	UI/content/profile variables/data
+0x00936d50	.data	animaldroplistentry.xml ShowMixer UI layout path buffer pointer global	identified	UI/content/profile variables/data
+0x00936da0	.data	mixer layout ShowMixer UI child string ref global	identified	UI/content/profile variables/data
+0x00936dd8	.data	Trick ShowMixer UI child string ref global	identified	UI/content/profile variables/data
+0x00936de8	.data	opener ShowMixer UI child string ref global	identified	UI/content/profile variables/data
+0x00936e34	.data	ShowMixer UI edit-mode confirmation locid string ref global	identified	UI/content/profile variables/data
+0x00936e4c	.data	ShowMixer UI stage label name vector begin pointer global	identified	UI/content/profile variables/data
+0x00936e50	.data	ShowMixer UI stage label name vector current pointer global	identified	UI/content/profile variables/data
+0x00936e5c	.data	ShowMixer UI alternate stage label name vector begin pointer global	identified	UI/content/profile variables/data
+0x00936e60	.data	ShowMixer UI alternate stage label name vector current pointer global	identified	UI/content/profile variables/data
+0x00936e6c	.data	ShowMixer UI resolved stage label control vector begin pointer global	identified	UI/content/profile variables/data
+0x00936e70	.data	ShowMixer UI resolved stage label control vector current pointer globa	identified	UI/content/profile variables/data
+0x00936e7c	.data	ShowMixer UI resolved alternate stage label control vector begin point	identified	UI/content/profile variables/data
+0x00936e80	.data	ShowMixer UI resolved alternate stage label control vector current poi	identified	UI/content/profile variables/data
+0x00936e8c	.data	Wait ShowMixer UI icon value global	identified	UI/content/profile variables/data
+0x00936ed0	.data	ZTApp save-package resource path buffer pointer global	identified	Engine/platform/runtime variables/data
 0x00936ed8	.data	g_type_ZTDEV_EVENT	type-cache	
 0x00936edc	.data	g_type_ZTDEV_EXIT	type-cache	
 0x00936ee0	.data	g_type_ZTDEV_GET	type-cache	
@@ -1368,21 +1368,21 @@ address	section	name	status	family
 0x009377ec	.data	g_type_ZT_NO_PLACEMENT_IN_TANK_WITH_ANIMALS	type-cache	
 0x009377f0	.data	g_type_ZT_ENABLE_ADOPTION	type-cache	
 0x009377f4	.data	startup logging/config object global	identified	Engine/platform/runtime variables/data
-0x00937800	.data		unidentified	
-0x00937808	.data		unidentified	
-0x0093780c	.data		unidentified	
-0x00937810	.data		unidentified	
-0x00937814	.data		unidentified	
-0x00937818	.data		unidentified	
-0x0093781c	.data		unidentified	
-0x00937828	.data		unidentified	
-0x0093782c	.data		unidentified	
-0x00937830	.data		unidentified	
-0x0093783c	.data		unidentified	
-0x00937840	.data		unidentified	
-0x0093784c	.data		unidentified	
-0x00937850	.data		unidentified	
-0x00937854	.data		unidentified	
+0x00937800	.data	Gamebryo height/sample dispatch variant 947b9a initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937808	.data	Gamebryo height/sample dispatch variant 947b8f initializer result glob	identified	Engine/platform/runtime variables/data
+0x0093780c	.data	Gamebryo height/sample dispatch variant 947b91 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937810	.data	Gamebryo height/sample dispatch variant 947b8d initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937814	.data	Gamebryo height/sample dispatch variant 947b93 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937818	.data	Gamebryo height/sample dispatch variant 947b8e initializer result glob	identified	Engine/platform/runtime variables/data
+0x0093781c	.data	Gamebryo height/sample dispatch variant 947b98 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937828	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x0093782c	.data	Gamebryo height/sample dispatch variant 947b90 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937830	.data	Gamebryo height/sample dispatch variant 947b94 initializer result glob	identified	Engine/platform/runtime variables/data
+0x0093783c	.data	Gamebryo height/sample dispatch variant 947b96 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937840	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x0093784c	.data	Gamebryo height/sample dispatch variant 947b92 initializer result glob	identified	Engine/platform/runtime variables/data
+0x00937850	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00937854	.data	Gamebryo height/sample dispatch variant 947b99 initializer result glob	identified	Engine/platform/runtime variables/data
 0x00937864	.data	g_type_BFSND_MASTER_VOLUME	type-cache	
 0x00937868	.data	g_type_BFSND_GET_VOLUME	type-cache	
 0x0093786c	.data	g_type_BFSND_MODIFY_VOLUME	type-cache	
@@ -1414,37 +1414,37 @@ address	section	name	status	family
 0x009378d4	.data	g_type_BFSND_FULLPAUSE	type-cache	
 0x009378d8	.data	g_type_BFSND_PLAY	type-cache	
 0x009378dc	.data	g_type_BFSND_MODIFY_PAN	type-cache	
-0x00937934	.data		unidentified	
-0x00937938	.data		unidentified	
-0x0093793c	.data		unidentified	
-0x009379a4	.data		unidentified	
-0x009379c4	.data		unidentified	
-0x009379e0	.data		unidentified	
-0x009379e4	.data		unidentified	
-0x00937a04	.data		unidentified	
-0x00937a60	.data		unidentified	
-0x00937a64	.data		unidentified	
-0x00937a84	.data		unidentified	
+0x00937934	.data	global sound handle registry begin pointer global	identified	Engine/platform/runtime variables/data
+0x00937938	.data	global sound handle registry current pointer global	identified	Engine/platform/runtime variables/data
+0x0093793c	.data	global sound handle registry capacity pointer global	identified	Engine/platform/runtime variables/data
+0x009379a4	.data	renderer pixel-format record 0x00937988 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
+0x009379c4	.data	renderer pixel-format record 0x009379a8 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
+0x009379e0	.data	renderer pixel-format record 0x009379c8 encoded format-key low dword g	identified	Engine/platform/runtime variables/data
+0x009379e4	.data	renderer pixel-format record 0x009379c8 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
+0x00937a04	.data	renderer pixel-format record 0x009379e8 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
+0x00937a60	.data	renderer pixel-format record 0x00937a48 encoded format-key low dword g	identified	Engine/platform/runtime variables/data
+0x00937a64	.data	renderer pixel-format record 0x00937a48 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
+0x00937a84	.data	renderer pixel-format record 0x00937a68 encoded format-key high dword 	identified	Engine/platform/runtime variables/data
 0x00937b7c	.data		unidentified	
-0x00937b80	.data		unidentified	
-0x00937b84	.data		unidentified	
-0x00937b88	.data		unidentified	
-0x00937b8c	.data		unidentified	
-0x00937b90	.data		unidentified	
-0x00937b94	.data		unidentified	
-0x00937b98	.data		unidentified	
-0x00937b9c	.data		unidentified	
-0x00937ba0	.data		unidentified	
-0x00937ba4	.data		unidentified	
-0x00937bac	.data		unidentified	
-0x00937bb0	.data		unidentified	
-0x00937bb4	.data		unidentified	
-0x00937bb8	.data		unidentified	
-0x00937bbc	.data		unidentified	
-0x00937bcc	.data		unidentified	
-0x00937bd0	.data		unidentified	
-0x00937bd4	.data		unidentified	
-0x00937bd8	.data		unidentified	
+0x00937b80	.data	second Gamebryo height/sample dispatch variant 947b9a initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b84	.data	second Gamebryo height/sample dispatch variant 947b8f initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b88	.data	second Gamebryo height/sample dispatch variant 947b91 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b8c	.data	second Gamebryo height/sample dispatch variant 947b8d initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b90	.data	second Gamebryo height/sample dispatch variant 947b93 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b94	.data	second Gamebryo height/sample dispatch variant 947b8e initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b98	.data	second Gamebryo height/sample dispatch variant 947b98 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937b9c	.data	second Gamebryo height/sample dispatch extended-table initializer resu	identified	Engine/platform/runtime variables/data
+0x00937ba0	.data	second Gamebryo height/sample dispatch variant 947b90 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937ba4	.data	second Gamebryo height/sample dispatch variant 947b94 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937bac	.data	second Gamebryo height/sample dispatch variant 947b96 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937bb0	.data	second Gamebryo height/sample dispatch defaults initializer result glo	identified	Engine/platform/runtime variables/data
+0x00937bb4	.data	second Gamebryo height/sample dispatch variant 947b92 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937bb8	.data	second Gamebryo height/sample dispatch variant-table initializer resul	identified	Engine/platform/runtime variables/data
+0x00937bbc	.data	second Gamebryo height/sample dispatch variant 947b99 initializer resu	identified	Engine/platform/runtime variables/data
+0x00937bcc	.data	minimum supported NIF version packed dword global	identified	Engine/platform/runtime variables/data
+0x00937bd0	.data	maximum supported NIF version packed dword global	identified	Engine/platform/runtime variables/data
+0x00937bd4	.data	NiAVObject slot58 shared resource-default temp pointer global	identified	Engine/platform/runtime variables/data
+0x00937bd8	.data	renderer resource/default service pointer global	identified	Engine/platform/runtime variables/data
 0x00937cc8	.data		unidentified	
 0x00937cd4	.data		unidentified	
 0x00937cdc	.data		unidentified	
@@ -1453,13 +1453,13 @@ address	section	name	status	family
 0x00937d30	.data		unidentified	
 0x00937d34	.data		unidentified	
 0x00937d5c	.data		unidentified	
-0x00937d7c	.data		unidentified	
-0x00937d80	.data		unidentified	
-0x00937d84	.data		unidentified	
-0x00937d90	.data		unidentified	
-0x00937d94	.data		unidentified	
-0x00937d9c	.data		unidentified	
-0x00937da0	.data		unidentified	
+0x00937d7c	.data	retired BFSafeHandledObj pointer hash-node vector begin pointer global	identified	Engine/platform/runtime variables/data
+0x00937d80	.data	retired BFSafeHandledObj pointer hash-node vector current pointer glob	identified	Engine/platform/runtime variables/data
+0x00937d84	.data	retired BFSafeHandledObj pointer hash-node vector capacity pointer glo	identified	Engine/platform/runtime variables/data
+0x00937d90	.data	safehandledobjid object-to-id map sentinel pointer global	identified	Engine/platform/runtime variables/data
+0x00937d94	.data	safehandledobjid object-to-id map count global	identified	Engine/platform/runtime variables/data
+0x00937d9c	.data	safehandledobjid id-to-object map sentinel pointer global	identified	Engine/platform/runtime variables/data
+0x00937da0	.data	safehandledobjid id-to-object map count global	identified	Engine/platform/runtime variables/data
 0x00937da8	.data	UI value-assignment dependency registry sentinel pointer	identified	UI/content/profile variables/data
 0x00937dac	.data	UI value-assignment dependency registry count	identified	UI/content/profile variables/data
 0x00937db0	.data	g_type_BFUNDO_EVENT	type-cache	
@@ -1468,13 +1468,13 @@ address	section	name	status	family
 0x00937de0	.data		unidentified	
 0x00937df0	.data		unidentified	
 0x00937df8	.data	g_type_BF_GET_HEARTBEAT	type-cache	
-0x00937e00	.data		unidentified	
-0x00937e04	.data		unidentified	
+0x00937e00	.data	pending BFBinder tree sentinel pointer global	identified	Engine/platform/runtime variables/data
+0x00937e04	.data	pending BFBinder tree count global	identified	Engine/platform/runtime variables/data
 0x00937e08	.data	g_type_BFTIME_EVENT	type-cache	
 0x00937e0c	.data	g_type_BFTIME_HEARTBEAT	type-cache	
 0x00937e10	.data	g_type_BFTIME_SIMTICK	type-cache	
 0x00937e14	.data	g_type_BFTIME_SLOWTICK	type-cache	
-0x00937e1c	.data		unidentified	
+0x00937e1c	.data	renderer display-mode list sentinel pointer global	identified	Engine/platform/runtime variables/data
 0x00937e24	.data	g_type_BFUSERPROFILE_EVENT	type-cache	
 0x00937e28	.data	g_type_BFUSERPROFILE_ADD_PROFILE	type-cache	
 0x00937e2c	.data	g_type_BFUSERPROFILE_REMOVE_PROFILE	type-cache	
@@ -1482,38 +1482,38 @@ address	section	name	status	family
 0x00937e34	.data	g_type_BFUSERPROFILE_OPTIONS_CHANGED	type-cache	
 0x00937e38	.data	g_type_BFUSERPROFILE_ACTION_SUCCEEDED	type-cache	
 0x00937e3c	.data	g_type_BFUSERPROFILE_ACTION_FAILED	type-cache	
-0x00937e48	.data		unidentified	
-0x00937e54	.data		unidentified	
-0x00937e58	.data		unidentified	
-0x00937e60	.data		unidentified	
-0x00937e64	.data		unidentified	
+0x00937e48	.data	resource loader-removed fallback string storage pointer global	identified	Engine/platform/runtime variables/data
+0x00937e54	.data	resource cache red-black tree sentinel pointer global	identified	Engine/platform/runtime variables/data
+0x00937e58	.data	resource cache red-black tree node count global	identified	Engine/platform/runtime variables/data
+0x00937e60	.data	resource `.bin` lookup BFString text length global	identified	Engine/platform/runtime variables/data
+0x00937e64	.data	resource `.bin` lookup BFString storage pointer global	identified	Engine/platform/runtime variables/data
 0x00937e6c	.data	XML/text output buffer pointer	identified	UI/content/profile variables/data
-0x00937e74	.data		unidentified	
-0x00937e78	.data		unidentified	
-0x00937e7c	.data		unidentified	
-0x00937e80	.data		unidentified	
-0x00937e88	.data		unidentified	
-0x00937e8c	.data		unidentified	
-0x00937eac	.data		unidentified	
+0x00937e74	.data	resource inflate input scratch buffer pointer global	identified	Engine/platform/runtime variables/data
+0x00937e78	.data	resource inflate input scratch buffer capacity global	identified	Engine/platform/runtime variables/data
+0x00937e7c	.data	resource inflate z_stream next_in pointer global	identified	Engine/platform/runtime variables/data
+0x00937e80	.data	resource inflate z_stream avail_in count global	identified	Engine/platform/runtime variables/data
+0x00937e88	.data	resource inflate z_stream next_out pointer global	identified	Engine/platform/runtime variables/data
+0x00937e8c	.data	resource inflate z_stream avail_out count global	identified	Engine/platform/runtime variables/data
+0x00937eac	.data	resource inflate z_stream adler checksum global	identified	Engine/platform/runtime variables/data
 0x00937ec8	.data	g_type_BF_PERF_INCREASE	type-cache	
 0x00937ecc	.data	g_type_BF_PERF_DECREASE	type-cache	
 0x00937ed0	.data	g_type_BF_GRAPHICS_PERF_INCREASE	type-cache	
 0x00937ed4	.data	g_type_BF_GRAPHICS_PERF_DECREASE	type-cache	
-0x009380b8	.data		unidentified	
-0x009380bc	.data		unidentified	
-0x009380c0	.data		unidentified	
-0x009380c4	.data		unidentified	
-0x009380c8	.data		unidentified	
-0x009380cc	.data		unidentified	
-0x009380d0	.data		unidentified	
-0x009380d4	.data		unidentified	
-0x009380d8	.data		unidentified	
-0x009380dc	.data		unidentified	
-0x009380e0	.data		unidentified	
-0x009380e4	.data		unidentified	
-0x009380e8	.data		unidentified	
-0x009380ec	.data		unidentified	
-0x009380f0	.data		unidentified	
+0x009380b8	.data	third Gamebryo height/sample dispatch variant 947b9a initializer resul	identified	Engine/platform/runtime variables/data
+0x009380bc	.data	third Gamebryo height/sample dispatch variant 947b8f initializer resul	identified	Engine/platform/runtime variables/data
+0x009380c0	.data	third Gamebryo height/sample dispatch variant 947b91 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380c4	.data	third Gamebryo height/sample dispatch variant 947b8d initializer resul	identified	Engine/platform/runtime variables/data
+0x009380c8	.data	third Gamebryo height/sample dispatch variant 947b93 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380cc	.data	third Gamebryo height/sample dispatch variant 947b8e initializer resul	identified	Engine/platform/runtime variables/data
+0x009380d0	.data	third Gamebryo height/sample dispatch variant 947b98 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380d4	.data	third Gamebryo height/sample dispatch extended-table initializer resul	identified	Engine/platform/runtime variables/data
+0x009380d8	.data	third Gamebryo height/sample dispatch variant 947b90 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380dc	.data	third Gamebryo height/sample dispatch variant 947b94 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380e0	.data	third Gamebryo height/sample dispatch variant 947b96 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380e4	.data	third Gamebryo height/sample dispatch defaults initializer result glob	identified	Engine/platform/runtime variables/data
+0x009380e8	.data	third Gamebryo height/sample dispatch variant 947b92 initializer resul	identified	Engine/platform/runtime variables/data
+0x009380ec	.data	third Gamebryo height/sample dispatch variant-table initializer result	identified	Engine/platform/runtime variables/data
+0x009380f0	.data	third Gamebryo height/sample dispatch variant 947b99 initializer resul	identified	Engine/platform/runtime variables/data
 0x009380f8	.data	g_type_BEH_EVENT_ROOT	type-cache	
 0x009380fc	.data	g_type_BEH_APPEND	type-cache	
 0x00938100	.data	g_type_BEH_END	type-cache	
@@ -1525,7 +1525,7 @@ address	section	name	status	family
 0x00938118	.data	g_type_BEH_ERROR	type-cache	
 0x0093811c	.data	g_type_BEH_COMPLETE	type-cache	
 0x00938120	.data	g_type_BEH_FAILURE	type-cache	
-0x0093812c	.data		unidentified	
+0x0093812c	.data	BFAITokenTargetPosition vector-attribute key global	identified	Gameplay/entity variables/data
 0x00938130	.data	g_type_BFAI_EVENT	type-cache	
 0x00938134	.data	g_type_BFAI_CREATE_ENTITY	type-cache	
 0x00938138	.data	g_type_BFAI_DESTROY_ENTITY	type-cache	
@@ -1562,43 +1562,43 @@ address	section	name	status	family
 0x009381b4	.data	g_type_BFAI_IS_ENTITY_ON_BIOME	type-cache	
 0x009381b8	.data	g_type_BFAI_GET_ARRIVAL	type-cache	
 0x009381bc	.data	g_type_BFAI_SET_ARRIVAL	type-cache	
-0x009381cc	.data		unidentified	
-0x009381e4	.data		unidentified	
-0x009381e8	.data		unidentified	
-0x00938214	.data		unidentified	
-0x00938218	.data		unidentified	
-0x0093821c	.data		unidentified	
+0x009381cc	.data	BFAI entity-target type list sentinel pointer global	identified	Gameplay/entity variables/data
+0x009381e4	.data	BFAI entity-target type cache vector begin pointer global	identified	Gameplay/entity variables/data
+0x009381e8	.data	BFAI entity-target type cache vector current pointer global	identified	Gameplay/entity variables/data
+0x00938214	.data	BFAI task floatAttribute config key global	identified	Gameplay/entity variables/data
+0x00938218	.data	BFAI task booleanAttribute config key global	identified	Gameplay/entity variables/data
+0x0093821c	.data	BFAI task needAttribute config key global	identified	Gameplay/entity variables/data
 0x009382c4	.data	BFBehDockTAP object freelist head	identified	Gameplay/entity variables/data
-0x009382ec	.data		unidentified	
-0x00938300	.data		unidentified	
-0x0093830c	.data		unidentified	
-0x00938318	.data		unidentified	
-0x0093832c	.data		unidentified	
-0x00938330	.data		unidentified	
+0x009382ec	.data	BFBehAnimateTAP object freelist head	identified	Gameplay/entity variables/data
+0x00938300	.data	fourth Gamebryo height/sample dispatch extended-table initializer resu	identified	Engine/platform/runtime variables/data
+0x0093830c	.data	fourth Gamebryo height/sample dispatch defaults initializer result glo	identified	Engine/platform/runtime variables/data
+0x00938318	.data	fourth Gamebryo height/sample dispatch variant-table initializer resul	identified	Engine/platform/runtime variables/data
+0x0093832c	.data	BFAISensor candidate-ref vector begin pointer global	identified	Gameplay/entity variables/data
+0x00938330	.data	BFAISensor candidate-ref vector current pointer global	identified	Gameplay/entity variables/data
 0x0093833c	.data	g_type_BFAIStateVarBaseType	type-cache	
-0x00938360	.data		unidentified	
-0x00938364	.data		unidentified	
-0x0093836c	.data		unidentified	
-0x00938370	.data		unidentified	
-0x00938378	.data		unidentified	
-0x0093837c	.data		unidentified	
-0x0093838c	.data		unidentified	
-0x00938390	.data		unidentified	
-0x00938394	.data		unidentified	
-0x00938398	.data		unidentified	
-0x0093839c	.data		unidentified	
+0x00938360	.data	material replacement stateList schema key global	identified	Engine/platform/runtime variables/data
+0x00938364	.data	material replacement weights schema key global	identified	Engine/platform/runtime variables/data
+0x0093836c	.data	material replacement base schema key global	identified	Engine/platform/runtime variables/data
+0x00938370	.data	material replacement variant schema key global	identified	Engine/platform/runtime variables/data
+0x00938378	.data	material replacement attribData schema key global	identified	Engine/platform/runtime variables/data
+0x0093837c	.data	material replacement textureData schema key global	identified	Engine/platform/runtime variables/data
+0x0093838c	.data	BFAITextureController roll-state suffix `_1` key global	identified	Gameplay/entity variables/data
+0x00938390	.data	BFAITextureController roll-state suffix `_2` key global	identified	Gameplay/entity variables/data
+0x00938394	.data	BFAITextureController roll-state suffix `_3` key global	identified	Gameplay/entity variables/data
+0x00938398	.data	BFAITextureController roll-state suffix `_4` key global	identified	Gameplay/entity variables/data
+0x0093839c	.data	BFAITextureController roll-state suffix `_5` key global	identified	Gameplay/entity variables/data
 0x009383a0	.data	terrain/render layer string object globals	identified	Gameplay/entity variables/data
 0x009383a8	.data		unidentified	
 0x009383d0	.data	terrain/material replacement cleanup list head	identified	Gameplay/entity variables/data
-0x009383dc	.data		unidentified	
-0x00938414	.data		unidentified	
-0x00938418	.data		unidentified	
+0x009383dc	.data	BFAI behavior targetEntity schema key global	identified	Gameplay/entity variables/data
+0x00938414	.data	BFAI TaskTarget schema key global	identified	Gameplay/entity variables/data
+0x00938418	.data	BFAIUnhideComponent PhysObj field key global	identified	Gameplay/entity variables/data
 0x00938420	.data	BFBehavior object freelist head	identified	Gameplay/entity variables/data
 0x00938424	.data	BFBehDockTAP large object freelist head	identified	Gameplay/entity variables/data
 0x00938428	.data	BFBehAnimate object freelist head	identified	Gameplay/entity variables/data
-0x00938444	.data		unidentified	
-0x00938460	.data		unidentified	
-0x00938464	.data		unidentified	
+0x00938444	.data	BFAI animation animQueue schema key global	identified	Gameplay/entity variables/data
+0x00938460	.data	BFBehPlaySet object freelist head	identified	Gameplay/entity variables/data
+0x00938464	.data	BFBehRandomSet object freelist head	identified	Gameplay/entity variables/data
 0x00938468	.data	g_type_LOCO_EVENT_ROOT	type-cache	
 0x0093846c	.data	g_type_REQUEST_VELOCITY	type-cache	
 0x00938470	.data	g_type_RETURN_VELOCITY	type-cache	
@@ -1609,44 +1609,44 @@ address	section	name	status	family
 0x00938488	.data	BFBehSyncSet object freelist head	identified	Gameplay/entity variables/data
 0x00938490	.data	BFBehHide object freelist head	identified	Gameplay/entity variables/data
 0x00938494	.data	BFBehFade object freelist head	identified	Gameplay/entity variables/data
-0x00938498	.data		unidentified	
-0x0093849c	.data		unidentified	
-0x009384a0	.data		unidentified	
-0x009384a4	.data		unidentified	
-0x009384a8	.data		unidentified	
+0x00938498	.data	BFBehMove object freelist head	identified	Gameplay/entity variables/data
+0x0093849c	.data	BFBehFaceTarget object freelist head	identified	Gameplay/entity variables/data
+0x009384a0	.data	BFBehSendToken object freelist head	identified	Gameplay/entity variables/data
+0x009384a4	.data	BFBehSetAttribute object freelist head	identified	Gameplay/entity variables/data
+0x009384a8	.data	BFBehDetachObject object freelist head	identified	Gameplay/entity variables/data
 0x009384b4	.data	BFAI attachment/action field-key globals	identified	Gameplay/entity variables/data
-0x009384cc	.data		unidentified	
-0x009384d0	.data		unidentified	
-0x009384d4	.data		unidentified	
-0x009384dc	.data		unidentified	
-0x009384e0	.data		unidentified	
-0x009384e8	.data		unidentified	
-0x009384ec	.data		unidentified	
-0x009384f0	.data		unidentified	
-0x009384f4	.data		unidentified	
-0x009384f8	.data		unidentified	
-0x009384fc	.data		unidentified	
-0x00938504	.data		unidentified	
-0x00938508	.data		unidentified	
-0x0093850c	.data		unidentified	
-0x00938510	.data		unidentified	
-0x00938514	.data		unidentified	
-0x00938518	.data		unidentified	
-0x0093851c	.data		unidentified	
-0x00938524	.data		unidentified	
-0x00938528	.data		unidentified	
-0x00938530	.data		unidentified	
-0x00938538	.data		unidentified	
-0x0093853c	.data		unidentified	
+0x009384cc	.data	BFBehSpawn object freelist head	identified	Gameplay/entity variables/data
+0x009384d0	.data	BFBehGotoPos object freelist head	identified	Gameplay/entity variables/data
+0x009384d4	.data	BFBehAnimSwitchSet object freelist head	identified	Gameplay/entity variables/data
+0x009384dc	.data	BFBehPursuit object freelist head	identified	Gameplay/entity variables/data
+0x009384e0	.data	BFBehLocoSwitchSet object freelist head	identified	Gameplay/entity variables/data
+0x009384e8	.data	BFBehFollowEntity object freelist head	identified	Gameplay/entity variables/data
+0x009384ec	.data	BFBehHeadLook object freelist head	identified	Gameplay/entity variables/data
+0x009384f0	.data	BFBehDirectPursuit object freelist head	identified	Gameplay/entity variables/data
+0x009384f4	.data	BFBehWaitQueue object freelist head	identified	Gameplay/entity variables/data
+0x009384f8	.data	BFBehEvasion object freelist head	identified	Gameplay/entity variables/data
+0x009384fc	.data	BFBehDockQueue object freelist head	identified	Gameplay/entity variables/data
+0x00938504	.data	BFBehSendTrigger object freelist head	identified	Gameplay/entity variables/data
+0x00938508	.data	BFBehAnimateRandom object freelist head	identified	Gameplay/entity variables/data
+0x0093850c	.data	BFBehScript object freelist head	identified	Gameplay/entity variables/data
+0x00938510	.data	BFBehAnimateSwitch object freelist head	identified	Gameplay/entity variables/data
+0x00938514	.data	BFBehWhap object freelist head	identified	Gameplay/entity variables/data
+0x00938518	.data	BFBehDock object freelist head	identified	Gameplay/entity variables/data
+0x0093851c	.data	BFBehFollowLine object freelist head	identified	Gameplay/entity variables/data
+0x00938524	.data	BFBehEnter object freelist head	identified	Gameplay/entity variables/data
+0x00938528	.data	BFBehFollowSpline object freelist head	identified	Gameplay/entity variables/data
+0x00938530	.data	BFBehExecTask/BFBehExit shared behavior free-list head global	identified	Gameplay/entity variables/data
+0x00938538	.data	BFBehFall object freelist head	identified	Gameplay/entity variables/data
+0x0093853c	.data	BFBehDockNow object freelist head	identified	Gameplay/entity variables/data
 0x00938540	.data	BFAI target/node action field key globals	identified	Gameplay/entity variables/data
 0x00938560	.data	BFBehSendEvent object freelist head	identified	Gameplay/entity variables/data
-0x00938568	.data		unidentified	
-0x0093856c	.data		unidentified	
-0x00938570	.data		unidentified	
-0x00938574	.data		unidentified	
-0x0093857c	.data		unidentified	
-0x00938580	.data		unidentified	
-0x00938584	.data		unidentified	
+0x00938568	.data	BFBehDockRadial object freelist head	identified	Gameplay/entity variables/data
+0x0093856c	.data	BFBehDockSpline object freelist head	identified	Gameplay/entity variables/data
+0x00938570	.data	BFBehFacePos object freelist head	identified	Gameplay/entity variables/data
+0x00938574	.data	BFBehWander object freelist head	identified	Gameplay/entity variables/data
+0x0093857c	.data	BFBehExecPath object freelist head	identified	Gameplay/entity variables/data
+0x00938580	.data	BFBehExit/BFBehEscapeObstacle shared behavior free-list head global	identified	Gameplay/entity variables/data
+0x00938584	.data	BFBehKill object freelist head	identified	Gameplay/entity variables/data
 0x00938590	.data	g_type_STEER_EVENT_ROOT	type-cache	
 0x00938594	.data	g_type_STEER_ADD	type-cache	
 0x00938598	.data	g_type_STEER_ADDED	type-cache	
@@ -1655,16 +1655,16 @@ address	section	name	status	family
 0x009385a4	.data	g_type_STEER_DESTROY	type-cache	
 0x009385a8	.data	g_type_STEER_DESTROYED	type-cache	
 0x009385ac	.data	g_type_STEER_DESTROY_ALL	type-cache	
-0x009385b0	.data	BFSteerSeek freelist head	identified	Engine/platform/runtime variables/data
-0x009385b4	.data		unidentified	
-0x009385b8	.data		unidentified	
-0x009385bc	.data		unidentified	
-0x009385c0	.data		unidentified	
-0x009385c4	.data		unidentified	
-0x009385c8	.data		unidentified	
-0x009385cc	.data		unidentified	
-0x009385d0	.data		unidentified	
-0x009385d4	.data		unidentified	
+0x009385b0	.data	BFSteerSeek freelist head	identified	Gameplay/entity variables/data
+0x009385b4	.data	BFSteerPursuit helper freelist head	identified	Gameplay/entity variables/data
+0x009385b8	.data	BFSteerEvasion helper freelist head	identified	Gameplay/entity variables/data
+0x009385bc	.data	BFSteerAvoidObstacle helper freelist head	identified	Gameplay/entity variables/data
+0x009385c0	.data	BFSteerAvoidVehicle helper freelist head	identified	Gameplay/entity variables/data
+0x009385c4	.data	BFSteerWander helper freelist head	identified	Gameplay/entity variables/data
+0x009385c8	.data	BFSteerVector helper freelist head	identified	Gameplay/entity variables/data
+0x009385cc	.data	BFSteerAvoidEntity helper freelist head	identified	Gameplay/entity variables/data
+0x009385d0	.data	BFSteerDepth helper freelist head	identified	Gameplay/entity variables/data
+0x009385d4	.data	BFSteerAvoidObstacleAhead helper freelist head	identified	Gameplay/entity variables/data
 0x009385d8	.data	BFBehFollowEntity follow-motion payload freelist head	identified	Gameplay/entity variables/data
 0x00938648	.data	g_type_UI_EVENT	type-cache	
 0x0093864c	.data	g_type_UI_EVENTLIST	type-cache	
@@ -1849,79 +1849,79 @@ address	section	name	status	family
 0x00938918	.data	g_type_UI_SYSKEYUP	type-cache	
 0x0093891c	.data	g_type_UI_CHAR	type-cache	
 0x00938920	.data	g_type_UI_SYSCHAR	type-cache	
-0x00938928	.data		unidentified	
-0x0093892c	.data		unidentified	
-0x00938970	.data	height/sample dispatch initializer result globals	identified	Gameplay/entity variables/data
-0x00938974	.data		unidentified	
-0x00938978	.data		unidentified	
-0x0093897c	.data		unidentified	
-0x00938980	.data		unidentified	
-0x00938984	.data		unidentified	
-0x00938988	.data		unidentified	
-0x0093898c	.data		unidentified	
-0x00938990	.data		unidentified	
-0x00938994	.data		unidentified	
-0x00938998	.data		unidentified	
-0x0093899c	.data		unidentified	
-0x009389a0	.data		unidentified	
-0x009389a4	.data		unidentified	
-0x009389a8	.data		unidentified	
+0x00938928	.data	UI callback pointer vector begin pointer global	identified	UI/content/profile variables/data
+0x0093892c	.data	UI callback pointer vector current pointer global	identified	UI/content/profile variables/data
+0x00938970	.data	fifth Gamebryo height/sample dispatch variant 947b9a initializer resul	identified	Engine/platform/runtime variables/data
+0x00938974	.data	fifth Gamebryo height/sample dispatch variant 947b8f initializer resul	identified	Engine/platform/runtime variables/data
+0x00938978	.data	fifth Gamebryo height/sample dispatch variant 947b91 initializer resul	identified	Engine/platform/runtime variables/data
+0x0093897c	.data	fifth Gamebryo height/sample dispatch variant 947b8d initializer resul	identified	Engine/platform/runtime variables/data
+0x00938980	.data	fifth Gamebryo height/sample dispatch variant 947b93 initializer resul	identified	Engine/platform/runtime variables/data
+0x00938984	.data	fifth Gamebryo height/sample dispatch variant 947b8e initializer resul	identified	Engine/platform/runtime variables/data
+0x00938988	.data	fifth Gamebryo height/sample dispatch variant 947b98 initializer resul	identified	Engine/platform/runtime variables/data
+0x0093898c	.data	fifth Gamebryo height/sample dispatch extended-table initializer resul	identified	Engine/platform/runtime variables/data
+0x00938990	.data	fifth Gamebryo height/sample dispatch variant 947b90 initializer resul	identified	Engine/platform/runtime variables/data
+0x00938994	.data	fifth Gamebryo height/sample dispatch variant 947b94 initializer resul	identified	Engine/platform/runtime variables/data
+0x00938998	.data	fifth Gamebryo height/sample dispatch variant 947b96 initializer resul	identified	Engine/platform/runtime variables/data
+0x0093899c	.data	fifth Gamebryo height/sample dispatch defaults initializer result glob	identified	Engine/platform/runtime variables/data
+0x009389a0	.data	fifth Gamebryo height/sample dispatch variant 947b92 initializer resul	identified	Engine/platform/runtime variables/data
+0x009389a4	.data	fifth Gamebryo height/sample dispatch variant-table initializer result	identified	Engine/platform/runtime variables/data
+0x009389a8	.data	fifth Gamebryo height/sample dispatch variant 947b99 initializer resul	identified	Engine/platform/runtime variables/data
 0x00944584	.data		unidentified	
 0x009445e0	.data		unidentified	
 0x009445e4	.data		unidentified	
 0x009446e4	.data		unidentified	
-0x009447b0	.data		unidentified	
-0x009447b4	.data		unidentified	
-0x009447b8	.data		unidentified	
-0x009447c0	.data		unidentified	
-0x009447c4	.data		unidentified	
-0x009447ec	.data		unidentified	
-0x009447f0	.data		unidentified	
-0x009447f8	.data		unidentified	
-0x009447fc	.data		unidentified	
-0x00944800	.data		unidentified	
-0x00944818	.data		unidentified	
-0x0094481c	.data		unidentified	
-0x00944820	.data		unidentified	
-0x00944828	.data		unidentified	
-0x0094482c	.data		unidentified	
-0x00944830	.data		unidentified	
-0x00944860	.data		unidentified	
-0x00944864	.data		unidentified	
-0x00944868	.data		unidentified	
-0x0094486c	.data		unidentified	
-0x00944878	.data		unidentified	
-0x0094487c	.data		unidentified	
-0x00944880	.data		unidentified	
-0x0094488c	.data		unidentified	
-0x00944890	.data		unidentified	
-0x00944894	.data		unidentified	
-0x009448a0	.data		unidentified	
-0x009448a4	.data		unidentified	
-0x009448a8	.data		unidentified	
-0x009448c8	.data		unidentified	
-0x009448cc	.data		unidentified	
-0x009448d0	.data		unidentified	
-0x009448d4	.data		unidentified	
-0x009448e0	.data		unidentified	
-0x009448e4	.data		unidentified	
-0x009448e8	.data		unidentified	
-0x009448f4	.data		unidentified	
-0x009448f8	.data		unidentified	
-0x009448fc	.data		unidentified	
-0x00944908	.data		unidentified	
-0x0094490c	.data		unidentified	
-0x00944910	.data		unidentified	
-0x00944930	.data		unidentified	
-0x00944934	.data		unidentified	
-0x00944938	.data		unidentified	
-0x0094493c	.data		unidentified	
-0x00944948	.data		unidentified	
-0x0094494c	.data		unidentified	
-0x00944950	.data		unidentified	
-0x0094495c	.data		unidentified	
-0x00944960	.data		unidentified	
-0x00944964	.data		unidentified	
+0x009447b0	.data	Gamebryo BFR distance-sort record vector begin pointer global	identified	Engine/platform/runtime variables/data
+0x009447b4	.data	Gamebryo BFR distance-sort record vector current pointer global	identified	Engine/platform/runtime variables/data
+0x009447b8	.data	Gamebryo BFR distance-sort record vector capacity pointer global	identified	Engine/platform/runtime variables/data
+0x009447c0	.data	Gamebryo BFR distance-sort permutation vector begin pointer global	identified	Engine/platform/runtime variables/data
+0x009447c4	.data	Gamebryo BFR distance-sort permutation vector current pointer global	identified	Engine/platform/runtime variables/data
+0x009447ec	.data	BFGBiome terrain autoplacement graphics-level weight factor vector beg	identified	Gameplay/entity variables/data
+0x009447f0	.data	BFGBiome terrain autoplacement graphics-level weight factor vector cur	identified	Gameplay/entity variables/data
+0x009447f8	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x009447fc	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944800	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944818	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x0094481c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944820	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944828	.data	BFType registry entity category static lookup handle for building glob	identified	Gameplay/entity variables/data
+0x0094482c	.data	BFType registry entity category static lookup handle for animal global	identified	Gameplay/entity variables/data
+0x00944830	.data	BFType registry entity category static lookup handle for donationbox g	identified	Gameplay/entity variables/data
+0x00944860	.data	ZTTransaction economy type table removeUser enum value global	identified	Gameplay/entity variables/data
+0x00944864	.data	ZTTransaction economy type table addUser string object dword 0 global	identified	Gameplay/entity variables/data
+0x00944868	.data	ZTTransaction economy type table addUser string object dword 1 global	identified	Gameplay/entity variables/data
+0x0094486c	.data	ZTTransaction economy type table addUser string object dword 2 global	identified	Gameplay/entity variables/data
+0x00944878	.data	ZTTransaction economy type table setCash string object dword 0 global	identified	Gameplay/entity variables/data
+0x0094487c	.data	ZTTransaction economy type table setCash string object dword 1 global	identified	Gameplay/entity variables/data
+0x00944880	.data	ZTTransaction economy type table setCash string object dword 2 global	identified	Gameplay/entity variables/data
+0x0094488c	.data	ZTTransaction economy type table credit string object dword 0 global	identified	Gameplay/entity variables/data
+0x00944890	.data	ZTTransaction economy type table credit string object dword 1 global	identified	Gameplay/entity variables/data
+0x00944894	.data	ZTTransaction economy type table credit string object dword 2 global	identified	Gameplay/entity variables/data
+0x009448a0	.data	ZTTransaction economy type table debit string object dword 0 global	identified	Gameplay/entity variables/data
+0x009448a4	.data	ZTTransaction economy type table debit string object dword 1 global	identified	Gameplay/entity variables/data
+0x009448a8	.data	ZTTransaction economy type table debit string object dword 2 global	identified	Gameplay/entity variables/data
+0x009448c8	.data	ZTTransaction economy period table daily enum value global	identified	Gameplay/entity variables/data
+0x009448cc	.data	ZTTransaction economy period table monthly string object dword 0 globa	identified	Gameplay/entity variables/data
+0x009448d0	.data	ZTTransaction economy period table monthly string object dword 1 globa	identified	Gameplay/entity variables/data
+0x009448d4	.data	ZTTransaction economy period table monthly string object dword 2 globa	identified	Gameplay/entity variables/data
+0x009448e0	.data	ZTTransaction economy period table yearly string object dword 0 global	identified	Gameplay/entity variables/data
+0x009448e4	.data	ZTTransaction economy period table yearly string object dword 1 global	identified	Gameplay/entity variables/data
+0x009448e8	.data	ZTTransaction economy period table yearly string object dword 2 global	identified	Gameplay/entity variables/data
+0x009448f4	.data	ZTTransaction economy period table demand string object dword 0 global	identified	Gameplay/entity variables/data
+0x009448f8	.data	ZTTransaction economy period table demand string object dword 1 global	identified	Gameplay/entity variables/data
+0x009448fc	.data	ZTTransaction economy period table demand string object dword 2 global	identified	Gameplay/entity variables/data
+0x00944908	.data	ZTTransaction economy period table once string object dword 0 global	identified	Gameplay/entity variables/data
+0x0094490c	.data	ZTTransaction economy period table once string object dword 1 global	identified	Gameplay/entity variables/data
+0x00944910	.data	ZTTransaction economy period table once string object dword 2 global	identified	Gameplay/entity variables/data
+0x00944930	.data	ZTTransaction economy cost-type table set enum value global	identified	Gameplay/entity variables/data
+0x00944934	.data	ZTTransaction economy cost-type table parent string object dword 0 glo	identified	Gameplay/entity variables/data
+0x00944938	.data	ZTTransaction economy cost-type table parent string object dword 1 glo	identified	Gameplay/entity variables/data
+0x0094493c	.data	ZTTransaction economy cost-type table parent string object dword 2 glo	identified	Gameplay/entity variables/data
+0x00944948	.data	ZTTransaction economy cost-type table percent-parent string object dwo	identified	Gameplay/entity variables/data
+0x0094494c	.data	ZTTransaction economy cost-type table percent-parent string object dwo	identified	Gameplay/entity variables/data
+0x00944950	.data	ZTTransaction economy cost-type table percent-parent string object dwo	identified	Gameplay/entity variables/data
+0x0094495c	.data	ZTTransaction economy cost-type table random string object dword 0 glo	identified	Gameplay/entity variables/data
+0x00944960	.data	ZTTransaction economy cost-type table random string object dword 1 glo	identified	Gameplay/entity variables/data
+0x00944964	.data	ZTTransaction economy cost-type table random string object dword 2 glo	identified	Gameplay/entity variables/data
 0x00944970	.data	g_type_BFG_EVENT	type-cache	
 0x00944974	.data	g_type_BFG_ATTACH_ENTITY	type-cache	
 0x00944978	.data	g_type_BFG_SET_ENTITY_COLOR	type-cache	
@@ -2038,95 +2038,95 @@ address	section	name	status	family
 0x00944b34	.data	g_type_BFG_SET_ALLOW_FP_TRANQ	type-cache	
 0x00944b38	.data	g_type_BFG_SUPPRESS_RAMPAGE_TIMEOUT	type-cache	
 0x00944b3c	.data	BFG component, rampage, and physics metadata initializer globals	identified	Gameplay/entity variables/data
-0x00944b40	.data		unidentified	
-0x00944b44	.data		unidentified	
-0x00944b58	.data		unidentified	
-0x00944b5c	.data		unidentified	
-0x00944b60	.data		unidentified	
-0x00944b68	.data		unidentified	
-0x00944b6c	.data		unidentified	
-0x00944b70	.data		unidentified	
-0x00944b80	.data		unidentified	
-0x00944b84	.data		unidentified	
-0x00944b88	.data		unidentified	
-0x00944b8c	.data		unidentified	
-0x00944b94	.data		unidentified	
-0x00944b98	.data		unidentified	
-0x00944bec	.data		unidentified	
-0x00944bf0	.data		unidentified	
-0x00944bf4	.data		unidentified	
-0x00944bfc	.data		unidentified	
-0x00944c00	.data		unidentified	
-0x00944c04	.data		unidentified	
-0x00944c08	.data		unidentified	
-0x00944c0c	.data		unidentified	
-0x00944c10	.data		unidentified	
-0x00944c14	.data		unidentified	
-0x00944c18	.data		unidentified	
-0x00944c48	.data		unidentified	
-0x00944c4c	.data		unidentified	
-0x00944c50	.data		unidentified	
+0x00944b40	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944b44	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944b58	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944b5c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944b60	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944b68	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944b6c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944b70	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944b80	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944b84	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944b88	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944b8c	.data	BFGTraversableArea waterBoundary string key global	identified	Gameplay/entity variables/data
+0x00944b94	.data	BFGTraversableArea viewing-area node vector begin pointer global	identified	Gameplay/entity variables/data
+0x00944b98	.data	BFGTraversableArea viewing-area node vector current pointer global	identified	Gameplay/entity variables/data
+0x00944bec	.data	BFGRampageMgr rampagingAnimals child-list key global	identified	Gameplay/entity variables/data
+0x00944bf0	.data	BFGRampageMgr recentRampagingAnimals child-list key global	identified	Gameplay/entity variables/data
+0x00944bf4	.data	BFGRampageMgr animal entry key global	identified	Gameplay/entity variables/data
+0x00944bfc	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944c00	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944c04	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944c08	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944c0c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944c10	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944c14	.data	BFGCollisionTester candidate scratch list head global	identified	Gameplay/entity variables/data
+0x00944c18	.data	BFGCollisionTest freelist head global	identified	Gameplay/entity variables/data
+0x00944c48	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944c4c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944c50	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
 0x00944c80	.data	g_type_BFGECONOMY_EVENT	type-cache	
 0x00944c84	.data	g_type_BFGECONOMY_DO_TRANSACTION	type-cache	
-0x00944c88	.data	post-BFGECONOMY height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944c8c	.data		unidentified	
-0x00944c90	.data		unidentified	
-0x00944c98	.data		unidentified	
-0x00944c9c	.data		unidentified	
-0x00944ca0	.data		unidentified	
-0x00944cb8	.data		unidentified	
-0x00944cbc	.data		unidentified	
-0x00944cc0	.data		unidentified	
-0x00944ce0	.data		unidentified	
-0x00944ce4	.data		unidentified	
-0x00944ce8	.data		unidentified	
-0x00944cf0	.data		unidentified	
+0x00944c88	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944c8c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944c90	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944c98	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944c9c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944ca0	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944cb8	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944cbc	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944cc0	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944ce0	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944ce4	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944ce8	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944cf0	.data	collision dropoff support container sentinel pointer global	identified	Gameplay/entity variables/data
 0x00944cf8	.data	collision/fitting dropoff mode record table	identified	Gameplay/entity variables/data
-0x00944d00	.data		unidentified	
-0x00944d08	.data		unidentified	
-0x00944d0c	.data		unidentified	
-0x00944d10	.data		unidentified	
-0x00944d14	.data		unidentified	
-0x00944d20	.data		unidentified	
-0x00944d24	.data		unidentified	
-0x00944d28	.data		unidentified	
-0x00944d34	.data		unidentified	
-0x00944d38	.data		unidentified	
-0x00944d3c	.data		unidentified	
-0x00944d44	.data		unidentified	
-0x00944d48	.data		unidentified	
-0x00944d4c	.data		unidentified	
-0x00944d50	.data		unidentified	
-0x00944d58	.data		unidentified	
-0x00944d5c	.data	collision dropoff height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944d60	.data		unidentified	
-0x00944d64	.data		unidentified	
-0x00944d88	.data	trigger height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944d8c	.data		unidentified	
-0x00944d90	.data		unidentified	
-0x00944dc8	.data	suitability height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944dcc	.data		unidentified	
-0x00944dd0	.data		unidentified	
-0x00944dd4	.data		unidentified	
-0x00944dd8	.data		unidentified	
-0x00944ddc	.data		unidentified	
-0x00944e10	.data	terrain animation height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944e14	.data		unidentified	
-0x00944e18	.data		unidentified	
-0x00944e2c	.data	fake-physics height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944e30	.data		unidentified	
-0x00944e34	.data		unidentified	
-0x00944e48	.data	secondary-animation height/sample initializer result cells	identified	Gameplay/entity variables/data
-0x00944e4c	.data		unidentified	
-0x00944e50	.data		unidentified	
-0x00944e68	.data		unidentified	
-0x00944e6c	.data		unidentified	
-0x00944e80	.data		unidentified	
-0x00944e84	.data		unidentified	
-0x00944e94	.data		unidentified	
-0x00944e98	.data		unidentified	
-0x00944ec8	.data		unidentified	
-0x00944ecc	.data		unidentified	
+0x00944d00	.data	collision dropoff linear-mode string buffer pointer global	identified	Gameplay/entity variables/data
+0x00944d08	.data	collision dropoff linear-mode id field global	identified	Gameplay/entity variables/data
+0x00944d0c	.data	collision dropoff log-mode string length word global	identified	Gameplay/entity variables/data
+0x00944d10	.data	collision dropoff log-mode string metadata word global	identified	Gameplay/entity variables/data
+0x00944d14	.data	collision dropoff log-mode string buffer pointer global	identified	Gameplay/entity variables/data
+0x00944d20	.data	collision dropoff geometric-mode string length word global	identified	Gameplay/entity variables/data
+0x00944d24	.data	collision dropoff geometric-mode string metadata word global	identified	Gameplay/entity variables/data
+0x00944d28	.data	collision dropoff geometric-mode string buffer pointer global	identified	Gameplay/entity variables/data
+0x00944d34	.data	collision dropoff none-mode string length word global	identified	Gameplay/entity variables/data
+0x00944d38	.data	collision dropoff none-mode string metadata word global	identified	Gameplay/entity variables/data
+0x00944d3c	.data	collision dropoff none-mode string buffer pointer global	identified	Gameplay/entity variables/data
+0x00944d44	.data	collision dropoff none-mode id field global	identified	Gameplay/entity variables/data
+0x00944d48	.data	collision dropoff default-empty record string length word global	identified	Gameplay/entity variables/data
+0x00944d4c	.data	collision dropoff default-empty record string metadata word global	identified	Gameplay/entity variables/data
+0x00944d50	.data	collision dropoff default-empty record string buffer pointer global	identified	Gameplay/entity variables/data
+0x00944d58	.data	collision dropoff default-empty record id field global	identified	Gameplay/entity variables/data
+0x00944d5c	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944d60	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944d64	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944d88	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944d8c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944d90	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944dc8	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944dcc	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944dd0	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944dd4	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944dd8	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944ddc	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944e10	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944e14	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944e18	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944e2c	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944e30	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944e34	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944e48	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00944e4c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00944e50	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00944e68	.data	BFBirdGroundFitComponent ordered registry sentinel pointer global	identified	Gameplay/entity variables/data
+0x00944e6c	.data	BFBirdGroundFitComponent ordered registry count global	identified	Gameplay/entity variables/data
+0x00944e80	.data	BFGEntity global u32-key lookup tree sentinel pointer global	identified	Gameplay/entity variables/data
+0x00944e84	.data	BFGEntity global u32-key lookup tree count global	identified	Gameplay/entity variables/data
+0x00944e94	.data	BFTerrain undo capture flat-cell bitset buffer pointer global	identified	Gameplay/entity variables/data
+0x00944e98	.data	BFTerrain undo capture flat-cell bitset byte-capacity global	identified	Gameplay/entity variables/data
+0x00944ec8	.data	terrain render connected-region scratch bitset buffer pointer global	identified	Gameplay/entity variables/data
+0x00944ecc	.data	terrain render connected-region scratch bitset byte-capacity global	identified	Gameplay/entity variables/data
 0x00944ed0	.data	g_type_BFTERRAIN_EVENT	type-cache	
 0x00944ed4	.data	g_type_BFTERRAIN_START_UNDO_DATA	type-cache	
 0x00944ed8	.data	g_type_BFTERRAIN_END_UNDO_DATA	type-cache	
@@ -2161,11 +2161,11 @@ address	section	name	status	family
 0x00944f4c	.data	g_type_BF3DEVENT_OBJECT_ANIMATION_ERROR	type-cache	
 0x00944f50	.data	g_type_BF3DEVENT_DELETE_FLATTENING_GROUP	type-cache	
 0x00944f54	.data	g_type_BF3DEVENT_RECREATE_FLATTENING_GROUP	type-cache	
-0x00945090	.data		unidentified	
-0x00945094	.data		unidentified	
-0x009450ac	.data		unidentified	
-0x009450b0	.data		unidentified	
-0x009450b4	.data		unidentified	
+0x00945090	.data	UI preview animation payload vector begin pointer global	identified	UI/content/profile variables/data
+0x00945094	.data	UI preview animation payload vector current pointer global	identified	UI/content/profile variables/data
+0x009450ac	.data	object-detail 20-byte record vector begin pointer global	identified	UI/content/profile variables/data
+0x009450b0	.data	object-detail 20-byte record vector current pointer global	identified	UI/content/profile variables/data
+0x009450b4	.data	object-detail 20-byte record vector capacity pointer global	identified	UI/content/profile variables/data
 0x009450d4	.data	g_type_ACTOR_EVENT_ROOT	type-cache	
 0x009450d8	.data	g_type_ANIM_END	type-cache	
 0x009450dc	.data	g_type_ANIM_ADJUST	type-cache	
@@ -2179,9 +2179,9 @@ address	section	name	status	family
 0x00945158	.data	g_type_COLL_EVENT_ROOT	type-cache	
 0x0094515c	.data	g_type_COLL_GRID	type-cache	
 0x00945160	.data	g_type_COLL_TERRAIN	type-cache	
-0x00945190	.data		unidentified	
-0x00945194	.data		unidentified	
-0x00945198	.data		unidentified	
+0x00945190	.data	presentation-controller destroy-vector begin pointer global	identified	UI/content/profile variables/data
+0x00945194	.data	presentation-controller destroy-vector current pointer global	identified	UI/content/profile variables/data
+0x00945198	.data	presentation-controller destroy-vector capacity pointer global	identified	UI/content/profile variables/data
 0x0094525c	.data	g_type_TAP_EVENT_ROOT	type-cache	
 0x00945260	.data	g_type_TAP_SUCCESS	type-cache	
 0x00945264	.data	g_type_TAP_EXIT	type-cache	
@@ -2208,23 +2208,23 @@ address	section	name	status	family
 0x009452b8	.data	g_type_SGC_SPLASH_TEXT	type-cache	
 0x009452bc	.data	g_type_SGC_KICK_TEXT	type-cache	
 0x009452c0	.data	g_type_SGC_REMOVEPROPS_TEXT	type-cache	
-0x00945350	.data		unidentified	
-0x00945358	.data		unidentified	
-0x0094535c	.data		unidentified	
-0x00945360	.data		unidentified	
-0x00945364	.data		unidentified	
-0x00945368	.data		unidentified	
-0x0094536c	.data		unidentified	
-0x00945374	.data		unidentified	
-0x00945378	.data		unidentified	
-0x0094537c	.data		unidentified	
-0x00945388	.data		unidentified	
-0x0094538c	.data		unidentified	
-0x00945398	.data		unidentified	
-0x0094539c	.data		unidentified	
-0x009453a0	.data		unidentified	
-0x009453b4	.data		unidentified	
-0x009453b8	.data		unidentified	
+0x00945350	.data	Gamebryo height/sample dispatch 947b9a initializer result global	identified	Engine/platform/runtime variables/data
+0x00945358	.data	Gamebryo height/sample dispatch 947b8f initializer result global	identified	Engine/platform/runtime variables/data
+0x0094535c	.data	Gamebryo height/sample dispatch 947b91 initializer result global	identified	Engine/platform/runtime variables/data
+0x00945360	.data	Gamebryo height/sample dispatch 947b8d initializer result global	identified	Engine/platform/runtime variables/data
+0x00945364	.data	Gamebryo height/sample dispatch 947b93 initializer result global	identified	Engine/platform/runtime variables/data
+0x00945368	.data	Gamebryo height/sample dispatch 947b8e initializer result global	identified	Engine/platform/runtime variables/data
+0x0094536c	.data	Gamebryo height/sample dispatch 947b98 initializer result global	identified	Engine/platform/runtime variables/data
+0x00945374	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00945378	.data	Gamebryo height/sample dispatch 947b90 initializer result global	identified	Engine/platform/runtime variables/data
+0x0094537c	.data	Gamebryo height/sample dispatch 947b94 initializer result global	identified	Engine/platform/runtime variables/data
+0x00945388	.data	Gamebryo height/sample dispatch 947b96 initializer result global	identified	Engine/platform/runtime variables/data
+0x0094538c	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00945398	.data	Gamebryo height/sample dispatch 947b92 initializer result global	identified	Engine/platform/runtime variables/data
+0x0094539c	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x009453a0	.data	Gamebryo height/sample dispatch 947b99 initializer result global	identified	Engine/platform/runtime variables/data
+0x009453b4	.data	model animation config registry tree root global	identified	Engine/platform/runtime variables/data
+0x009453b8	.data	model animation config registry tree count global	identified	Engine/platform/runtime variables/data
 0x00945434	.data		unidentified	
 0x00945438	.data		unidentified	
 0x00945714	.data		unidentified	
@@ -2244,21 +2244,21 @@ address	section	name	status	family
 0x009457ac	.data		unidentified	
 0x009457b0	.data		unidentified	
 0x009457b8	.data		unidentified	
-0x009459c0	.data		unidentified	
-0x009459c4	.data		unidentified	
-0x009459c8	.data		unidentified	
-0x009459cc	.data		unidentified	
-0x009459d0	.data		unidentified	
-0x009459d4	.data		unidentified	
-0x009459d8	.data		unidentified	
-0x009459dc	.data		unidentified	
-0x009459e0	.data		unidentified	
-0x009459e4	.data		unidentified	
-0x009459ec	.data		unidentified	
-0x009459f0	.data		unidentified	
-0x009459f4	.data		unidentified	
-0x009459f8	.data		unidentified	
-0x009459fc	.data		unidentified	
+0x009459c0	.data	Gamebryo height/sample dispatch 947b9a initializer result global	identified	Engine/platform/runtime variables/data
+0x009459c4	.data	Gamebryo height/sample dispatch 947b8f initializer result global	identified	Engine/platform/runtime variables/data
+0x009459c8	.data	Gamebryo height/sample dispatch 947b91 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459cc	.data	Gamebryo height/sample dispatch 947b8d initializer result global	identified	Engine/platform/runtime variables/data
+0x009459d0	.data	Gamebryo height/sample dispatch 947b93 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459d4	.data	Gamebryo height/sample dispatch 947b8e initializer result global	identified	Engine/platform/runtime variables/data
+0x009459d8	.data	Gamebryo height/sample dispatch 947b98 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459dc	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x009459e0	.data	Gamebryo height/sample dispatch 947b90 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459e4	.data	Gamebryo height/sample dispatch 947b94 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459ec	.data	Gamebryo height/sample dispatch 947b96 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459f0	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x009459f4	.data	Gamebryo height/sample dispatch 947b92 initializer result global	identified	Engine/platform/runtime variables/data
+0x009459f8	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x009459fc	.data	Gamebryo height/sample dispatch 947b99 initializer result global	identified	Engine/platform/runtime variables/data
 0x00945a00	.data	g_type_ZTWEB_GETFILE_FOR_MOTD_DONE	type-cache	
 0x00945a04	.data	g_type_ZTWEB_FILE_GET	type-cache	
 0x00945a08	.data	g_type_ZTWEB_GETINDEX_DONE	type-cache	
@@ -2275,9 +2275,9 @@ address	section	name	status	family
 0x00945a34	.data	g_type_ZTWEB_EVENT	type-cache	
 0x00945a38	.data	g_type_ZTWEB_CMD	type-cache	
 0x00945a80	.data		unidentified	
-0x00945a90	.data		unidentified	
-0x00945a94	.data		unidentified	
-0x00945a98	.data		unidentified	
+0x00945a90	.data	UI threadsafe log-callback vector begin pointer global	identified	UI/content/profile variables/data
+0x00945a94	.data	UI threadsafe log-callback vector current pointer global	identified	UI/content/profile variables/data
+0x00945a98	.data	UI threadsafe log-callback vector capacity pointer global	identified	UI/content/profile variables/data
 0x00945ab0	.data	g_type_BFS_SET_CHALLENGE_DELAY	type-cache	
 0x00945ab4	.data	g_type_BFS_HIDERULE	type-cache	
 0x00945ab8	.data	g_type_BFS_SETGLOBALVAR	type-cache	
@@ -2309,33 +2309,33 @@ address	section	name	status	family
 0x00945b20	.data	MSVCRT locale/codepage cache pointer	identified	Engine/platform/runtime variables/data
 0x00945b24	.data	COM apartment/object helper globals	identified	Engine/platform/runtime variables/data
 0x00945b2c	.data	cached SendMessageA callable cell	identified	UI/content/profile variables/data
-0x00945b38	.data		unidentified	
-0x00945b48	.data		unidentified	
+0x00945b38	.data	profile path cache mutable string pointer global	identified	UI/content/profile variables/data
+0x00945b48	.data	profile path segment lookup string pointer global	identified	UI/content/profile variables/data
 0x00945b50	.data	static UI color/value globals	identified	UI/content/profile variables/data
-0x00945b54	.data		unidentified	
-0x00945b64	.data		unidentified	
-0x00945b9c	.data		unidentified	
-0x00945ba0	.data		unidentified	
-0x00945ba4	.data		unidentified	
-0x00945ba8	.data		unidentified	
-0x00945bac	.data		unidentified	
-0x00945bb0	.data		unidentified	
-0x00945bb4	.data		unidentified	
-0x00945bb8	.data		unidentified	
-0x00945bbc	.data		unidentified	
-0x00945bc0	.data		unidentified	
-0x00945bc8	.data		unidentified	
-0x00945bcc	.data		unidentified	
-0x00945bd0	.data		unidentified	
-0x00945bd4	.data		unidentified	
-0x00945bd8	.data		unidentified	
-0x00945c08	.data		unidentified	
-0x00945c14	.data		unidentified	
-0x00945c20	.data		unidentified	
-0x00945c2c	.data		unidentified	
-0x00945c38	.data		unidentified	
-0x00945c44	.data		unidentified	
-0x00945c50	.data		unidentified	
+0x00945b54	.data	sprite renderer resource default UI value global	identified	UI/content/profile variables/data
+0x00945b64	.data	UI sprite default mapping value global	identified	UI/content/profile variables/data
+0x00945b9c	.data	height/sample dispatch 947b9a initializer result cell	identified	Gameplay/entity variables/data
+0x00945ba0	.data	height/sample dispatch 947b8f initializer result cell	identified	Gameplay/entity variables/data
+0x00945ba4	.data	height/sample dispatch 947b91 initializer result cell	identified	Gameplay/entity variables/data
+0x00945ba8	.data	height/sample dispatch 947b8d initializer result cell	identified	Gameplay/entity variables/data
+0x00945bac	.data	height/sample dispatch 947b93 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bb0	.data	height/sample dispatch 947b8e initializer result cell	identified	Gameplay/entity variables/data
+0x00945bb4	.data	height/sample dispatch 947b98 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bb8	.data	height/sample dispatch extended initializer result cell	identified	Gameplay/entity variables/data
+0x00945bbc	.data	height/sample dispatch 947b90 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bc0	.data	height/sample dispatch 947b94 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bc8	.data	height/sample dispatch 947b96 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bcc	.data	height/sample dispatch defaults initializer result cell	identified	Gameplay/entity variables/data
+0x00945bd0	.data	height/sample dispatch 947b92 initializer result cell	identified	Gameplay/entity variables/data
+0x00945bd4	.data	height/sample dispatch variant-table initializer result cell	identified	Gameplay/entity variables/data
+0x00945bd8	.data	height/sample dispatch 947b99 initializer result cell	identified	Gameplay/entity variables/data
+0x00945c08	.data	NetImmerse NiProfile support log slot index global A	identified	Engine/platform/runtime variables/data
+0x00945c14	.data	NetImmerse NiProfile support log slot index global B	identified	Engine/platform/runtime variables/data
+0x00945c20	.data	NetImmerse NiProfile support log slot index global C	identified	Engine/platform/runtime variables/data
+0x00945c2c	.data	NiMemory renderer support log slot index global A	identified	Engine/platform/runtime variables/data
+0x00945c38	.data	NiMemory renderer support log slot index global B	identified	Engine/platform/runtime variables/data
+0x00945c44	.data	NiMemory renderer support log slot index global C	identified	Engine/platform/runtime variables/data
+0x00945c50	.data	NiMemory renderer support log slot index global D	identified	Engine/platform/runtime variables/data
 0x00945ea4	.data		unidentified	
 0x00945ea8	.data		unidentified	
 0x00945eac	.data		unidentified	
@@ -2350,27 +2350,27 @@ address	section	name	status	family
 0x00946020	.data		unidentified	
 0x00946024	.data		unidentified	
 0x00946028	.data		unidentified	
-0x00946030	.data		unidentified	
-0x0094604c	.data		unidentified	
-0x00946050	.data		unidentified	
-0x00946058	.data		unidentified	
-0x00946064	.data		unidentified	
-0x00946068	.data		unidentified	
-0x00946078	.data		unidentified	
-0x0094607c	.data		unidentified	
-0x0094608c	.data		unidentified	
-0x009460f4	.data		unidentified	
-0x00946108	.data		unidentified	
-0x0094610c	.data		unidentified	
-0x00946114	.data		unidentified	
-0x00946118	.data		unidentified	
-0x0094615c	.data		unidentified	
-0x00946160	.data		unidentified	
-0x00946164	.data		unidentified	
-0x0094616c	.data		unidentified	
-0x00946174	.data		unidentified	
-0x00946184	.data		unidentified	
-0x00946188	.data		unidentified	
+0x00946030	.data	ZTAI show script Shows key global	identified	Gameplay/entity variables/data
+0x0094604c	.data	ZTAI show script AnimalData key global	identified	Gameplay/entity variables/data
+0x00946050	.data	ZTAI show script ReturnPortal key global	identified	Gameplay/entity variables/data
+0x00946058	.data	ZTAI show script MC key global	identified	Gameplay/entity variables/data
+0x00946064	.data	ZTAI show script Events key global	identified	Gameplay/entity variables/data
+0x00946068	.data	ZTAI show script EventCounts key global	identified	Gameplay/entity variables/data
+0x00946078	.data	ZTAI show script ExpectedTrickScores key global	identified	Gameplay/entity variables/data
+0x0094607c	.data	ZTAI show script ActualTrickScores key global	identified	Gameplay/entity variables/data
+0x0094608c	.data	ZTAI show script Score key global	identified	Gameplay/entity variables/data
+0x009460f4	.data	ZTAI show script Schedule key global	identified	Gameplay/entity variables/data
+0x00946108	.data	ZTAI show script TimeSlot key global	identified	Gameplay/entity variables/data
+0x0094610c	.data	ZTAI show script ShowEvent key global	identified	Gameplay/entity variables/data
+0x00946114	.data	ZTAI show script Animal key global	identified	Gameplay/entity variables/data
+0x00946118	.data	ZTAI show script Target key global	identified	Gameplay/entity variables/data
+0x0094615c	.data	ZTAI show script propTypeCounts key global	identified	Gameplay/entity variables/data
+0x00946160	.data	ZTAI show script propIds key global	identified	Gameplay/entity variables/data
+0x00946164	.data	ZTAI show script propPair key global	identified	Gameplay/entity variables/data
+0x0094616c	.data	ZTAI show script UndoInfo key global	identified	Gameplay/entity variables/data
+0x00946174	.data	ZTAI show script TrickInfo key global	identified	Gameplay/entity variables/data
+0x00946184	.data	ZTAI show script PropPos key global	identified	Gameplay/entity variables/data
+0x00946188	.data	ZTAI show script PropRot key global	identified	Gameplay/entity variables/data
 0x0094618c	.data	g_type_ZTAI_EVENT	type-cache	
 0x00946190	.data	g_type_ZTAI_LEAVE_ZOO	type-cache	
 0x00946194	.data	g_type_ZTAI_ADJUST_SURVEYDATA	type-cache	
@@ -2417,77 +2417,77 @@ address	section	name	status	family
 0x00946238	.data	g_type_ZTAI_SHOW_ADD_DONATION	type-cache	
 0x0094623c	.data	g_type_ZTAI_SHOW_NUM_DONORS	type-cache	
 0x00946240	.data	targetPos static token object cell	identified	Gameplay/entity variables/data
-0x00946264	.data		unidentified	
-0x00946268	.data		unidentified	
-0x0094626c	.data		unidentified	
-0x00946270	.data		unidentified	
-0x0094628c	.data		unidentified	
-0x00946290	.data		unidentified	
-0x0094629c	.data		unidentified	
-0x009462b4	.data		unidentified	
-0x00946314	.data		unidentified	
-0x00946328	.data		unidentified	
-0x0094632c	.data		unidentified	
-0x0094633c	.data		unidentified	
-0x00946348	.data		unidentified	
-0x00946354	.data		unidentified	
-0x00946380	.data		unidentified	
-0x00946384	.data		unidentified	
-0x0094638c	.data		unidentified	
-0x00946390	.data		unidentified	
-0x009463d0	.data		unidentified	
-0x009463dc	.data		unidentified	
-0x009463e4	.data		unidentified	
-0x009463ec	.data		unidentified	
-0x009463f0	.data		unidentified	
-0x009463f4	.data		unidentified	
-0x0094644c	.data		unidentified	
-0x00946454	.data		unidentified	
-0x00946458	.data		unidentified	
-0x0094645c	.data		unidentified	
-0x00946490	.data		unidentified	
-0x00946494	.data		unidentified	
-0x009464a8	.data		unidentified	
-0x009464b0	.data		unidentified	
-0x009464c8	.data		unidentified	
-0x009464cc	.data		unidentified	
-0x009464d0	.data		unidentified	
-0x009464d4	.data		unidentified	
-0x009464e0	.data		unidentified	
-0x009464e4	.data		unidentified	
-0x009464f0	.data		unidentified	
-0x009464f4	.data		unidentified	
-0x009464f8	.data		unidentified	
-0x009464fc	.data		unidentified	
-0x00946500	.data		unidentified	
-0x00946504	.data		unidentified	
-0x00946508	.data		unidentified	
-0x0094650c	.data		unidentified	
-0x00946510	.data		unidentified	
-0x00946514	.data		unidentified	
-0x00946518	.data		unidentified	
-0x0094651c	.data		unidentified	
-0x00946540	.data		unidentified	
-0x00946548	.data		unidentified	
-0x0094654c	.data		unidentified	
-0x00946550	.data		unidentified	
-0x00946554	.data		unidentified	
-0x0094656c	.data		unidentified	
-0x0094657c	.data		unidentified	
-0x00946580	.data		unidentified	
-0x00946584	.data		unidentified	
-0x0094658c	.data		unidentified	
-0x00946590	.data		unidentified	
-0x009465c8	.data		unidentified	
-0x009465d0	.data		unidentified	
-0x009465d4	.data		unidentified	
-0x009465dc	.data		unidentified	
-0x009465e4	.data		unidentified	
-0x009465fc	.data		unidentified	
-0x00946624	.data		unidentified	
-0x00946628	.data		unidentified	
-0x00946630	.data		unidentified	
-0x00946634	.data		unidentified	
+0x00946264	.data	ZTAI request script RequestingEntity key global	identified	Gameplay/entity variables/data
+0x00946268	.data	ZTAI request script OriginalPos key global	identified	Gameplay/entity variables/data
+0x0094626c	.data	ZTAI request script OriginalRot key global	identified	Gameplay/entity variables/data
+0x00946270	.data	ZTAI training task t_TrainAnimal key global	identified	Gameplay/entity variables/data
+0x0094628c	.data	ZTAI training script Subnode key global	identified	Gameplay/entity variables/data
+0x00946290	.data	ZTAI training script Animal key global	identified	Gameplay/entity variables/data
+0x0094629c	.data	ZTAI training script Knowledge key global	identified	Gameplay/entity variables/data
+0x009462b4	.data	ZTAI training/show script Show key global	identified	Gameplay/entity variables/data
+0x00946314	.data	ZTAI trick popularity Popularity key global	identified	Gameplay/entity variables/data
+0x00946328	.data	ZTVehicleGround behavior-target free-list head global	identified	Gameplay/entity variables/data
+0x0094632c	.data	ZTVehicleSky behavior-target free-list head global	identified	Gameplay/entity variables/data
+0x0094633c	.data	Gamebryo height/sample dispatch extended-table initializer result glob	identified	Engine/platform/runtime variables/data
+0x00946348	.data	Gamebryo height/sample dispatch defaults initializer result global	identified	Engine/platform/runtime variables/data
+0x00946354	.data	Gamebryo height/sample dispatch variant-table initializer result globa	identified	Engine/platform/runtime variables/data
+0x00946380	.data	ZTAI task script Task key global	identified	Gameplay/entity variables/data
+0x00946384	.data	ZTAI task script Animal key global	identified	Gameplay/entity variables/data
+0x0094638c	.data	ZTAI task sphere Sphere key global	identified	Gameplay/entity variables/data
+0x00946390	.data	ZTAI task sphere pos key global	identified	Gameplay/entity variables/data
+0x009463d0	.data	ZTBehDockTankWall behavior free-list head global	identified	Gameplay/entity variables/data
+0x009463dc	.data	ZTBehDockPortal behavior free-list head global	identified	Gameplay/entity variables/data
+0x009463e4	.data	ZTBehUsePortal behavior free-list head global	identified	Gameplay/entity variables/data
+0x009463ec	.data	ZTAI platform task Animal key global	identified	Gameplay/entity variables/data
+0x009463f0	.data	ZTAI platform task Prop key global	identified	Gameplay/entity variables/data
+0x009463f4	.data	ZTAI platform task Platform key global	identified	Gameplay/entity variables/data
+0x0094644c	.data	ZTBehSplashGuest behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946454	.data	ZTBehSplashGuest behavior effect-slot vector begin pointer global	identified	Gameplay/entity variables/data
+0x00946458	.data	ZTBehSplashGuest behavior effect-slot vector current pointer global	identified	Gameplay/entity variables/data
+0x0094645c	.data	ZTBehSplashGuest behavior effect-slot vector capacity pointer global	identified	Gameplay/entity variables/data
+0x00946490	.data	ZTBehSplashGuest behavior showPlatform key global	identified	Gameplay/entity variables/data
+0x00946494	.data	ZTBehSplashGuest behavior splashVector key global	identified	Gameplay/entity variables/data
+0x009464a8	.data	ZTBehDirtyWater behavior dirtyWater key global	identified	Gameplay/entity variables/data
+0x009464b0	.data	ZTBehDirtyWater behavior ORNode key global	identified	Gameplay/entity variables/data
+0x009464c8	.data	ZTBehFollowTrack behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464cc	.data	ZTBehFollowCable/ZTBehVehicleSky shared behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464d0	.data	ZTBehKickOffRider behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464d4	.data	ZTBehExitTankGate behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464e0	.data	ZTBehCureDisease behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464e4	.data	ZTBehTransportRoute behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464f0	.data	ZTBehUseTransport behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464f4	.data	ZTBehRideVehicle behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464f8	.data	ZTBehAddSubjectAsDiseaseTarget behavior free-list head global	identified	Gameplay/entity variables/data
+0x009464fc	.data	ZTBehFindArtifact behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946500	.data	ZTBehAnimateForViewFromTransport behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946504	.data	ZTBehDigArtifact behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946508	.data	ZTBehEconomy behavior free-list head global	identified	Gameplay/entity variables/data
+0x0094650c	.data	ZTBehViewAnimals behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946510	.data	ZTBehViewEvent behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946514	.data	ZTBehFeedback behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946518	.data	ZTBehPlaceTarget behavior free-list head global	identified	Gameplay/entity variables/data
+0x0094651c	.data	ZTBehDockWater behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946540	.data	ZTBehDockFence behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946548	.data	ZTBehMorph behavior free-list head global	identified	Gameplay/entity variables/data
+0x0094654c	.data	ZTBehPathRoute behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946550	.data	ZTBehTestTargetPos behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946554	.data	ZTBehUseGate behavior free-list head global	identified	Gameplay/entity variables/data
+0x0094656c	.data	ZTAI trick token self key global	identified	Gameplay/entity variables/data
+0x0094657c	.data	ZTBehClimbLadder behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946580	.data	ZTBehReplaceTrickObject behavior Object assignment key global	identified	Gameplay/entity variables/data
+0x00946584	.data	ZTBehReplaceTrickObject behavior Animal assignment key global	identified	Gameplay/entity variables/data
+0x0094658c	.data	ZTBehUseTankGate behavior free-list head global	identified	Gameplay/entity variables/data
+0x00946590	.data	ZTAI show event scoring EventScoring key global	identified	Gameplay/entity variables/data
+0x009465c8	.data	ZTBehWatchShow behavior Reaction key global	identified	Gameplay/entity variables/data
+0x009465d0	.data	ZTBehWatchShow behavior ShowComponent key global	identified	Gameplay/entity variables/data
+0x009465d4	.data	ZTBehWatchShow behavior Show key global	identified	Gameplay/entity variables/data
+0x009465dc	.data	ZTBehWatchShow behavior Task key global	identified	Gameplay/entity variables/data
+0x009465e4	.data	ZTBehTargetFence behavior free-list head global	identified	Gameplay/entity variables/data
+0x009465fc	.data	photo analysis entity proxy-name map sentinel pointer global	identified	Gameplay/entity variables/data
+0x00946624	.data	photo analysis entity-id map sentinel pointer global	identified	Gameplay/entity variables/data
+0x00946628	.data	photo analysis entity-id map count global	identified	Gameplay/entity variables/data
+0x00946630	.data	photo analysis entity value-id map sentinel pointer global	identified	Gameplay/entity variables/data
+0x00946634	.data	photo analysis entity value-id map count global	identified	Gameplay/entity variables/data
 0x00946638	.data	g_type_ZT_PHOTOEVENT	type-cache	
 0x0094663c	.data	g_type_ZT_PHOTOEVENT_TYPE	type-cache	
 0x00946640	.data	g_type_ZT_PHOTOEVENT_TAKE_PHOTO	type-cache	
