@@ -17832,8 +17832,8 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x006eec7f	0	get_BFGCollisionTester_descriptor_ref_thunk			confirmed		0x008f9408#2	scripting
 0x006eec84	38	get_BFGFittingSurfaceComponent_callback_registry			confirmed	gamebryo		middleware/gamebryo
 0x006eee8c	201	construct_BFGCollisionTester			confirmed	gamebryo		middleware/gamebryo
-0x006eef55	0		collision tester and fitting-surface component XML		unidentified		0x008f9408#0	game-entities
-0x006eef70	48	destroy_BFGFittingSurface_callback_registry			confirmed	gamebryo		middleware/gamebryo
+0x006eef55	0	scalar_delete_BFGCollisionTester			confirmed		0x008f9408#0	runtime/support
+0x006eef70	48	destroy_BFGCollisionTester_members			confirmed	gamebryo		middleware/gamebryo
 0x006eefa0	110	find_BFGFittingSurface_callback_entry_for_target			confirmed	gamebryo		middleware/gamebryo
 0x006ef00e	80	append_BFGCollisionTest_to_handler_list			confirmed	gamebryo		middleware/gamebryo
 0x006ef05e	221	remove_BFGCollisionTester_callback_entries_for_target			confirmed	gamebryo		middleware/gamebryo
@@ -20496,7 +20496,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007794ed	498	merge_compatible_placement_source_links			confirmed	gamebryo		middleware/gamebryo
 0x007796df	218	read_placement_source_link_map_from_file			confirmed	gamebryo		middleware/gamebryo
 0x007797b9	214	read_placement_source_link_map_from_resource			confirmed	gamebryo		middleware/gamebryo
-0x0077988f	0		tree iterator predecessor and renderer/component config band		unidentified		0x008ffc00#21	
+0x0077988f	0		tree iterator predecessor and renderer/component config band		unidentified		0x008ffc00#21	renderer
 0x00779895	47	get_type_BFDecorativeDetailObjectComponent			confirmed	gamebryo		middleware/gamebryo
 0x007798c4	0	get_type_BFDecorativeDetailObjectComponent_vtable_thunk			confirmed		0x008ffc00#1	game-entities
 0x007798c9	32	init_BFDecorativeDetailObjectComponent_descriptor_ref			confirmed	gamebryo		middleware/gamebryo
@@ -21685,7 +21685,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ab1d7	108	contains_BFAnimTable_key			confirmed	gamebryo		middleware/gamebryo
 0x007ab243	0	write_BFAnimTable_xml			confirmed		0x00902270#19	animation
 0x007ab2c3	0	read_BFAnimTable_xml			confirmed		0x00902270#20	animation
-0x007ab311	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#22	
+0x007ab311	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#22	renderer
 0x007ab329	213	construct_BFRResource_geometry_cache_state			confirmed	gamebryo		middleware/gamebryo
 0x007ab3fe	176	destroy_BFRResource_geometry_cache_state			confirmed	gamebryo		middleware/gamebryo
 0x007ab4ae	1355	rebuild_BFRResource_geometry_cache_mesh			confirmed	gamebryo		middleware/gamebryo
