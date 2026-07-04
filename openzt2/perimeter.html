@@ -155,16 +155,25 @@ function sectionCoverageText(mapRows){
  }).join("; ");
 }
 function summarySegments(segments,total){
- return segments.map(s=>seg(s.cls,s.value,total,`${s.label}: ${fmt(s.value)}`)).join("");
+ return visibleSegments(segments).map(s=>seg(s.cls,s.value,total,`${s.label}: ${fmt(s.value)}`)).join("");
 }
 function summaryLegend(segments,total){
- return segments.map(s=>legend(s.cls,`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`)).join("");
+ return visibleSegments(segments).map(s=>legend(s.cls,`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`)).join("");
 }
 function summarySplit(segments,total){
- return segments.map(s=>`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`).join("; ");
+ return visibleSegments(segments).map(s=>`${s.label}: ${fmt(s.value)} (${pct(s.value,total)})`).join("; ");
+}
+function visibleSegments(segments){
+ return segments.filter(s=>Number(s.value||0)>0);
+}
+function hasOpenSegment(segments){
+ return visibleSegments(segments).some(s=>["seg-open","seg-unnamed","seg-none","seg-unknown","seg-partial","seg-some"].includes(s.cls));
+}
+function isOpenEndedCard(d){
+ return d.openEnded&&hasOpenSegment(d.segments);
 }
 function denominatorLabel(d){
- return `${d.openEnded?"Known perimeter":"Closed denominator"}: ${d.den}`;
+ return `${isOpenEndedCard(d)?"Known perimeter":"Closed denominator"}: ${d.den}`;
 }
 function pivotWeights(typeRows){
  const c={};
@@ -213,8 +222,8 @@ function identifiedGlobalSegments(gp){
   .map(([label,value])=>({label:`Identified variables/data: ${label}`,value,cls:"seg-accepted"}));
 }
 function typeSegmentClass(label){
- if(label.includes("zero virtual slots")||label.includes("all virtual slots identified"))return "seg-all";
- if(label.includes("some virtual slots identified")||label.includes("base virtual-member signals")||label.includes("no virtual slots identified"))return "seg-partial";
+ if(label.includes("zero virtual slots")||label.includes("all virtual slots identified")||label.includes("base virtual-member signals"))return "seg-all";
+ if(label.includes("some virtual slots identified")||label.includes("no virtual slots identified"))return "seg-partial";
  return "seg-nameonly";
 }
 function typeSegmentRank(label){
@@ -287,7 +296,7 @@ function coverageSummary(fp,gp,vt,mapRows,typeRows){
   {name:"Runtime executable byte coverage",openEnded:false,den:`${fmt(bmap.bytesDone+bmap.bytesNotDone)} bytes (${byteSize(bmap.bytesDone+bmap.bytesNotDone)}) in ${runtimeExecutable.label}`,segments:[{label:"Known-like bytes",value:bmap.bytesDone,cls:"seg-known"},{label:"Open/unknown bytes",value:bmap.bytesNotDone,cls:"seg-open"}],answer:"How much of the mapped original executable image has known-like byte-map coverage.",uncertainty:`Section split: ${bmapSectionSplit}. This denominator excludes disk wrapper images, Z2F archive spaces, and the broad runtime memory parent row.`}
  ];
  document.getElementById("coverage-summary").innerHTML=domains.map(d=>{const total=d.segments.reduce((n,s)=>n+s.value,0);return `
-  <div class="coverage-card ${d.openEnded?"open-ended":"closed"}">
+  <div class="coverage-card ${isOpenEndedCard(d)?"open-ended":"closed"}">
    <h3>${esc(d.name)}</h3>
    <div class="stacked-bar" role="img" aria-label="${esc(d.name)} ${esc(summarySplit(d.segments,total))}">
     ${summarySegments(d.segments,total)}
