@@ -55,7 +55,7 @@ th{background:var(--soft)}
  window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);const nav=document.querySelector(".tabs");if(nav)nav.append(b);for(const frame of document.querySelectorAll("iframe.legal-frame"))frame.addEventListener("load",()=>syncFrames(root.dataset.theme||initial));apply(root.dataset.theme||initial)});
 })();
 </script>
-<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart active" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart " href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart active" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart " href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a></nav>
 <div class="doc-source">Rendered from <code>docs/ORIGINAL-GAME-FUNCTIONAL-SPECIFICATION.md</code></div>
 <main>
 <h1>OpenZT2 Original Game Functional Specification</h1>
@@ -69,7 +69,7 @@ families.</li>
 <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes
 recovered evidence and records which original systems own state/data and
 what behavior is understood or still missing.</li>
-<li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified
+<li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified
 ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or
 still needs to build.</li>
 </ol>
@@ -3514,7 +3514,7 @@ appendix for names used by ownership and behavior descriptions.</p>
 <h3>Specification Coverage</h3>
 <p>These rows track specification coverage for original systems carried forward
 from the evidence gates. <code>specified</code> means the ownership or behavior is
-described well enough for the implementation plan to consume. <code>recover</code> means
+described well enough for the Rust/Bevy plan to consume. <code>recover</code> means
 the original thing is known and has a spec section, while ownership or behavior
 still needs to be described here.</p>
 <table>

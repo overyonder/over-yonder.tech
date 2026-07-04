@@ -33,7 +33,7 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 @media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px;width:min(calc(100vw - 24px),1380px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
 </style>
 <body>
-<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
  <p class="sub">A map of the reconstruction pipeline: evidence, ownership/behavior, and implementation.</p>
@@ -44,7 +44,7 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
    <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
    <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
    <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
-   <li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+   <li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
   </ol>
  </section>
 
@@ -65,7 +65,7 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
    <p>Records original-game ownership and behavior: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and remaining behavior gaps.</p>
   </div>
   <div class="doc-card">
-   <h3><a href="reimplementation-plan.html">Reimplementation Plan</a></h3>
+   <h3><a href="rust-bevy-plan.html">Rust/Bevy Plan</a></h3>
    <p>Tracks Rust/Bevy implementation progress for the specified ownership and behavior: what is planned, recorded, loaded, running, or adapted.</p>
   </div>
  </div>
@@ -89,11 +89,11 @@ function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
 function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${pct(n,total)}</div>`:""}
 function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
 (()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
-text(["reimplementation-plan.html","../docs/REIMPLEMENTATION-PLAN.md"]).then(planText=>{
+text(["rust-bevy-plan.html","../docs/RUST-BEVY-PLAN.md"]).then(planText=>{
  const plan=planProgress(planText);
  document.getElementById("progress-bars").innerHTML=[
    `<div class="progress-card primary">
-    <h3><a href="reimplementation-plan.html">Reconstruction Work Board</a></h3>
+    <h3><a href="rust-bevy-plan.html">Reconstruction Work Board</a></h3>
     <div class="stacked-bar" role="img" aria-label="${esc(plan.aria)}">
      ${plan.segments}
     </div>

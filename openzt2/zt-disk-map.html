@@ -65,7 +65,7 @@ pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important
  window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);const nav=document.querySelector(".tabs");if(nav)nav.append(b);else document.body.prepend(b);for(const frame of document.querySelectorAll("iframe.legal-frame"))frame.addEventListener("load",()=>syncFrames(root.dataset.theme||initial));apply(root.dataset.theme||initial)});
 })();
 </script><body>
-<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="active gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="reimplementation-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Reimplementation Plan</span></a></nav>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="active gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a></nav>
 <main class="map-content">
 <section class="pipeline" aria-label="Reconstruction pipeline">
  <h1>Byte Range Map</h1>
@@ -75,7 +75,7 @@ pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important
   <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
   <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
   <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
-  <li><strong>Reimplementation plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+  <li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
  </ol>
 </section>
 <div class="top-legend">
@@ -86,7 +86,7 @@ pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important
 </main>
 <script>
 let payload;
-const MAP_URLS=["zt-byte-range-map.tsv?v=7f9f48777837","../docs/analysis/zt-byte-range-map.tsv?v=7f9f48777837"];
+const MAP_URLS=["zt-byte-range-map.tsv?v=82df4c071e5f","../docs/analysis/zt-byte-range-map.tsv?v=82df4c071e5f"];
 async function fetchMap(urls){
  let lastError="";
  for(const url of urls){

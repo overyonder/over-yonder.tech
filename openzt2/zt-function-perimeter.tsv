@@ -13697,7 +13697,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0064d3f2	54	collect_BFGApp_context_message_types			confirmed	gamebryo		middleware/gamebryo
 0x0064d428	138	forward_typed_ui_value_to_nested_receiver_or_assign			confirmed	gamebryo		middleware/gamebryo
 0x0064d4b2	126	bind_UIApp_runtime_manager_handles			confirmed	gamebryo	0x008ef230#31	middleware/gamebryo
-0x0064d530	0		globe drag/preview state and display diagnostics		unidentified		0x008ef230#38	platform/runtime
+0x0064d530	0	check_UIApp_runtime_handles_ready			confirmed		0x008ef230#38	ui
 0x0064d58a	178	lookup_UIApp_template_payload_by_name			confirmed	gamebryo		middleware/gamebryo
 0x0064d63c	92	reload_UIApp_template_name_maps			confirmed	gamebryo		middleware/gamebryo
 0x0064d698	236	load_UIApp_template_records_from_resource_path			confirmed	gamebryo		middleware/gamebryo
@@ -19930,7 +19930,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075ea34	23	checked_pointer_vector_at			confirmed	gamebryo		middleware/gamebryo
 0x0075ea4b	152	get_or_insert_refcounted_ui_value_tree_payload			confirmed	gamebryo		middleware/gamebryo
 0x0075eae3	117	lower_bound_refcounted_ui_value_tree			confirmed	gamebryo		middleware/gamebryo
-0x0075eb58	0		pointer-vector, point3 arrays, renderer components, and animatio		unidentified		0x008fe988#4	renderer
+0x0075eb58	0	allocate_BFAnimManager_descriptor_instance			confirmed		0x008fe988#4	animation
 0x0075eb70	64	initialize_BFAnimManager_presentation_registry			confirmed	gamebryo		middleware/gamebryo
 0x0075ebb0	159	register_BFAnimManager_presentation_handler_if_unseen			confirmed	gamebryo		middleware/gamebryo
 0x0075ec96	78	last_presentation_controller_deferred_destroy_slot			confirmed	gamebryo		middleware/gamebryo
@@ -19956,7 +19956,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0075faaf	375	grow_insert_presentation_controller_deferred_destroy_vector_slot			confirmed	gamebryo		middleware/gamebryo
 0x0075fc26	677	erase_sentinel19_string_pair_tree_node			confirmed	gamebryo		middleware/gamebryo
 0x0075fecb	677	erase_checked_32byte_tree_node			confirmed	gamebryo		middleware/gamebryo
-0x00760170	0		pointer-vector, point3 arrays, renderer components, and animatio		unidentified		0x008fe988#0	renderer
+0x00760170	0	adjust_this_scalar_delete_BFAnimManager_secondary			confirmed		0x008fe988#0	animation
 0x00760178	47	get_type_BFSharedRandomTextureInfo			confirmed	gamebryo		middleware/gamebryo
 0x007601a7	0	get_type_BFSharedRandomTextureInfo_vtable_thunk			confirmed		0x008fe9c0#1	renderer
 0x007601ac	32	get_BFSharedRandomTextureInfo_descriptor_ref			confirmed	gamebryo		middleware/gamebryo
@@ -20496,7 +20496,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007794ed	498	merge_compatible_placement_source_links			confirmed	gamebryo		middleware/gamebryo
 0x007796df	218	read_placement_source_link_map_from_file			confirmed	gamebryo		middleware/gamebryo
 0x007797b9	214	read_placement_source_link_map_from_resource			confirmed	gamebryo		middleware/gamebryo
-0x0077988f	0		tree iterator predecessor and renderer/component config band		unidentified		0x008ffc00#21	renderer
+0x0077988f	0	return_BFDecorativeDetailObjectComponent_static_registry			confirmed		0x008ffc00#21	game-entities
 0x00779895	47	get_type_BFDecorativeDetailObjectComponent			confirmed	gamebryo		middleware/gamebryo
 0x007798c4	0	get_type_BFDecorativeDetailObjectComponent_vtable_thunk			confirmed		0x008ffc00#1	game-entities
 0x007798c9	32	init_BFDecorativeDetailObjectComponent_descriptor_ref			confirmed	gamebryo		middleware/gamebryo
@@ -21685,7 +21685,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x007ab1d7	108	contains_BFAnimTable_key			confirmed	gamebryo		middleware/gamebryo
 0x007ab243	0	write_BFAnimTable_xml			confirmed		0x00902270#19	animation
 0x007ab2c3	0	read_BFAnimTable_xml			confirmed		0x00902270#20	animation
-0x007ab311	0		BFUIRenderer and renderer/presentation support span		unidentified		0x00902270#22	renderer
+0x007ab311	0	allocate_BFAnimTable_descriptor_instance			confirmed		0x00902270#22	animation
 0x007ab329	213	construct_BFRResource_geometry_cache_state			confirmed	gamebryo		middleware/gamebryo
 0x007ab3fe	176	destroy_BFRResource_geometry_cache_state			confirmed	gamebryo		middleware/gamebryo
 0x007ab4ae	1355	rebuild_BFRResource_geometry_cache_mesh			confirmed	gamebryo		middleware/gamebryo
@@ -27393,7 +27393,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x0089317a	6	import_thunk_MSVCR80_mbscmp			confirmed			runtime/support
 0x00893180	0	import_thunk_MSVCR80_purecall			confirmed		0x008bc594#3	runtime/support
 0x00893186	6	import_thunk_MSVCR80_memcpy_s			confirmed			runtime/support
-0x008931d5	156		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x008931d5	156	register_encoded_crt_onexit_callback			confirmed			runtime/support
 0x00893271	9	unlock_crt_onexit_table			confirmed			runtime/support
 0x0089327a	18	register_onexit_callback			confirmed			runtime/support
 0x0089328c	6	import_thunk_MSVCR80_memmove_s			confirmed			runtime/support
@@ -27499,7 +27499,7 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008937fa	6	import_thunk_MSVCR80_realloc			confirmed			runtime/support
 0x00893800	6	import_thunk_MSVCR80_type_info_name			confirmed			runtime/support
 0x00893806	50	call_vector_destructors_reverse			confirmed			runtime/support
-0x00893864	75		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x00893864	75	call_vector_destructors_reverse_with_unwind			confirmed			runtime/support
 0x008938af	24	unwind_remaining_vector_destructors			confirmed			runtime/support
 0x008938c8	6	import_thunk_MSVCR80_unlock			confirmed			runtime/support
 0x008938ce	6	import_thunk_MSVCR80_dllonexit			confirmed			runtime/support
@@ -27507,16 +27507,16 @@ address	size	name	region	rust_method	status	provenance	vtable	domain
 0x008938dc	69	install_local_seh_frame			confirmed			runtime/support
 0x00893921	20	restore_local_seh_frame			confirmed			runtime/support
 0x008939a4	6	import_thunk_MSVCR80_amsg_exit			confirmed			runtime/support
-0x008939aa	36		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x008939aa	36	run_empty_crt_callback_table_915678			confirmed			runtime/support
 0x008939f2	6	import_thunk_MSVCR80_XcptFilter			confirmed			runtime/support
-0x00893a00	41		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
-0x00893a30	66		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
-0x00893a80	164		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x00893a00	41	validate_pe32_image_header			confirmed			runtime/support
+0x00893a30	66	find_pe_section_for_rva			confirmed			runtime/support
+0x00893a80	164	check_current_image_section_is_nonwritable			confirmed			runtime/support
 0x00893b3c	6	import_thunk_MSVCR80_initterm			confirmed			runtime/support
 0x00893b42	6	import_thunk_MSVCR80_initterm_e			confirmed			runtime/support
-0x00893b48	41		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x00893b48	41	initialize_msvc_floating_point_control_word			confirmed			runtime/support
 0x00893b71	3	return_zero_user_matherr_handler			confirmed			runtime/support
-0x00893b74	148		MSVCR/D3DX/IMM import thunks, CRT handlers, and security helpers		unidentified			renderer
+0x00893b74	148	initialize_msvc_security_cookie			confirmed			runtime/support
 0x00893c08	6	import_thunk_MSVCR80_terminate			confirmed			runtime/support
 0x00893c0e	6	import_thunk_MSVCR80_type_info_type_info_dtor_internal_method			confirmed			runtime/support
 0x00893c14	15	check_security_cookie			confirmed			runtime/support
