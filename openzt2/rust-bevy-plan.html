@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="a6869b3ad1633930">
+<meta name="openzt2-site-version" content="b8dc13c9fef99fee">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Rust/Bevy Plan</title>
 <style>
@@ -267,34 +267,34 @@ path and its acceptance command resolves in the current workspace.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 24, loaded 21, recorded 45, planned 22, adapter 5">
-    <div class="plan-seg plan-seg-runs" style="width:20.512821%" title="Runs: 24">20.5%</div>
-    <div class="plan-seg plan-seg-loaded" style="width:17.948718%" title="Loaded: 21">17.9%</div>
-    <div class="plan-seg plan-seg-recorded" style="width:38.461538%" title="Recorded: 45">38.5%</div>
-    <div class="plan-seg plan-seg-planned" style="width:18.803419%" title="Planned: 22">18.8%</div>
-    <div class="plan-seg plan-seg-adapter" style="width:4.273504%" title="Adapter: 5">4.3%</div>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 24, loaded 21, recorded 45, planned 21, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:20.689655%" title="Runs: 24">20.7%</div>
+    <div class="plan-seg plan-seg-loaded" style="width:18.103448%" title="Loaded: 21">18.1%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:38.793103%" title="Recorded: 45">38.8%</div>
+    <div class="plan-seg plan-seg-planned" style="width:18.103448%" title="Planned: 21">18.1%</div>
+    <div class="plan-seg plan-seg-adapter" style="width:4.310345%" title="Adapter: 5">4.3%</div>
   </div>
   <div class="plan-legend">
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 24</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 21</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 45</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 22</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 21</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
-  <p class="plan-progress-note">117 work-board rows across 67 top-level domains.</p>
+  <p class="plan-progress-note">116 work-board rows across 67 top-level domains.</p>
  </div>
  <div class="plan-progress-card">
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
    <dt>Live / loaded / recorded</dt><dd>90</dd>
-   <dt>Planned / mapping</dt><dd>22</dd>
+   <dt>Planned / mapping</dt><dd>21</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
  </div>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>24</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>45</dd><dt>Planned</dt><dd>22</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>24</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>45</dd><dt>Planned</dt><dd>21</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -466,8 +466,8 @@ surface before advancing a playable slice.</p>
   <td>Source formats</td>
   <td>NetImmerse models: <code>.nif</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>NIF parses into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata.</td>
-  <td>Specification gap: controllers, skinning, material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
+  <td>NIF parses into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata. Both <code>NiTriStrips</code> and <code>NiTriShape</code> geometry project into Bevy meshes; this makes the inherited ibex actor model visible in its source rest pose.</td>
+  <td>Recover footer root references, local hierarchy transforms, skinning and controllers, per-part material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
 </tr>
 <tr>
   <td>Model assets</td>
@@ -666,7 +666,7 @@ surface before advancing a playable slice.</p>
   <td>Menu flow</td>
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime acceptance reaches splash close, main-menu Freeform hover/click, manifest-filtered Alpine Big selection, and Play Map leaving load mode in <code>mode_main/mode_game/mode_overhead</code> with a loaded world, source shell, terrain, and 3D camera. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
+  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime acceptance reaches splash close, main-menu Freeform hover/click, manifest-filtered Alpine Big selection, and Play Map leaving load mode in <code>mode_main/mode_game/mode_overhead</code> with a loaded world, source shell, terrain, and 3D camera. The freeform starting-cash slider reads its authored child value field, sends the source <code>UI_SEND_TEXT</code> cash-grant event, and preserves that grant through new-map template hydration. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
   <td>Specification gap: original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
 </tr>
 <tr>
@@ -730,16 +730,16 @@ surface before advancing a playable slice.</p>
   <td>Entity model</td>
   <td>Entity/component catalog</td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Entity definitions, shared/instance nodes, component refs, authored events, and binder subtrees hydrate from source.</td>
-  <td>Specification gap: component readers by binder family.</td>
+  <td>Entity definitions, shared/instance nodes, component refs, authored events, and binder subtrees hydrate from source. Parent-to-leaf definition materialization follows the open source type chain so inherited component properties, economy transactions, and actor references have one effective-definition query shared by UI and runtime consumers.</td>
+  <td>Add component readers by binder family and preserve any component-specific replacement rules that differ from the general parent-to-leaf merge.</td>
 </tr>
 <tr>
   <td>Entity</td>
   <td>Entity model</td>
   <td>Loaded-world ECS bootstrap</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the specified surfaces.</td>
-  <td>Complete one <code>BFGEntity</code> instance path through source load, ECS components, runtime mutation, AI, selection, and render projection.</td>
+  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the specified surfaces. The accepted ibex slice creates a live ECS entity from source catalog selection, mutates source-backed cash, resolves its inherited actor graph, and projects its static model.</td>
+  <td>Continue that <code>BFGEntity</code> path through selection, AI, needs, locomotion, animation, sound, and lifecycle mutation.</td>
 </tr>
 <tr>
   <td>Entity</td>
@@ -770,8 +770,8 @@ surface before advancing a playable slice.</p>
   <td>Animal model</td>
   <td>Animal type definitions</td>
   <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state are represented; Bevy keeps the live animal type catalog and startup validates adoption/favorite source managers without storing unused manager mirrors.</td>
-  <td>Hydrate one species family from binder plus AI/entity data.</td>
+  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state are represented; Bevy keeps the live animal type catalog and startup validates adoption/favorite source managers without storing unused manager mirrors. The ibex family now hydrates through its source inheritance chain into a male adoption row, inherited build transaction, actor graph, and visible static world entity.</td>
+  <td>Extend the ibex family through AI/entity data, needs, locomotion, animation, sound, selection, and lifecycle.</td>
 </tr>
 <tr>
   <td>Animal</td>
@@ -801,9 +801,9 @@ surface before advancing a playable slice.</p>
   <td>Animal</td>
   <td>Behavior slice</td>
   <td>Species behavior slice</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>One species must connect through source definition, AI task/behavior, locomotion, animation, sound, and needs.</td>
-  <td>Implement a vertical behavior pack from one representative species family.</td>
+  <td><code>in progress</code></td>
+  <td>The first ibex slice connects source definition, gender-filtered catalog row, inherited price, placement, ECS ownership, BFM actor graph, referenced NIF, and static rendering. AI task/behavior, locomotion, skeleton binding, animation, sound, and needs remain outside this checkpoint.</td>
+  <td>Complete the ibex vertical behavior pack, beginning with NIF hierarchy/skinning and BF clip binding, then source task/behavior execution, locomotion, needs, and sound.</td>
 </tr>
 <tr>
   <td>Entity info</td>
@@ -826,8 +826,8 @@ surface before advancing a playable slice.</p>
   <td>Catalog/UI</td>
   <td>Type lists, multi-lists, buy info, filters, and purchase rows</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source-authored type-list activation populates the construction catalog from the entity registry, applies source root-kind inclusions/exclusions, projects each entity's authored button template and icon, preserves research availability, and dispatches the selected row's original <code>ZT_SETPLACEMENT*</code> event into placement mode. Multi-list, buy-info, selected values, and sort/filter tokens remain represented in Bevy UI runtime state.</td>
-  <td>Complete clipped grid/scroll presentation, source filtering and paging behavior, buy-info refresh, and the remaining animal/fence/path catalog handoffs.</td>
+  <td>Source-authored type-list activation populates construction and animal catalogs from the entity registry, applies source root-kind inclusions/exclusions and shipped <code>b_Male</code>/<code>b_Female</code> filters, projects each entity's authored button template and icon, preserves research availability, and dispatches selected rows into their original placement messages. Buy-info and placement pricing read the same effective inherited entity definition.</td>
+  <td>Complete clipped grid/scroll presentation, source sorting and paging behavior, richer buy-info refresh, and the remaining fence/path catalog handoffs.</td>
 </tr>
 <tr>
   <td>Zoopedia</td>
@@ -850,15 +850,15 @@ surface before advancing a playable slice.</p>
   <td>Terrain projection</td>
   <td>Bevy terrain projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded relative <code>.dat</code> heights, authored <code>nodeMinHeight</code>, and source world extents produce the Bevy terrain mesh. Used <code>BFGBiome</code> definitions select ground, cover, and five source cliff textures; the current renderer compacts <code>(biome, surface)</code> buckets into 12 material chunks while preserving all 294,912 Alpine Big triangles. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid. Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
-  <td>Replace hard cell transitions with the recovered CPU patch compositor and ground/cover brush masks; emit patch-local clamped UV0 plus globally anchored detail UV1; apply the original <code>MODULATE2X</code> detail stage; implement water plus authored sky/skirt and lighting; then make runtime terrain edits feed the composed-height sampler used by decals and fitted components. <code>mixMask</code> belongs to mix-paint flag generation rather than loaded-map shading.</td>
+  <td>Loaded relative <code>.dat</code> heights, authored <code>nodeMinHeight</code>, and source world extents produce the Bevy terrain mesh. Alpine Big projects as 576 native 16-cell patches while preserving all 294,912 triangles. The recovered CPU compositor applies the fixed four-cell sampling halo, deterministic biome draw order, ground/cover brush masks, linked-height facts, patch-local UV0, global detail UV1, the original <code>MODULATE2X</code> detail stage, and box-filtered mip levels. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid.</td>
+  <td>Implement water plus authored sky/skirt and lighting; then make runtime terrain edits refresh composed patch images and feed the composed-height sampler used by decals and fitted components.</td>
 </tr>
 <tr>
   <td>Placement</td>
   <td>Placement</td>
   <td>Validation, preview, commit, transactions, undo</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source construction activation populates an authored building catalog; selecting an available row dispatches its original <code>ZT_SETPLACEMENTOBJECT</code>, <code>ZT_PLACEOBJECT</code> validates research and affordability, and an accepted commit spawns through <code>BFGWorldRuntime</code>, charges the source economy component, and records a placement undo transaction. Automated acceptance places an affordable source building and replays Undo to restore cash and world state.</td>
+  <td>Source construction activation populates authored building and animal catalogs; selecting an available row dispatches its original placement message, and accepted commits spawn through <code>BFGWorldRuntime</code>, charge the inherited source economy component, and record a placement undo transaction. Automated acceptance places and undoes an affordable source building, then purchases and visibly spawns the inherited <code>Ibex_Adult_M</code> actor for $3,000.</td>
   <td>Connect physical world-pointer placement and preview, footprint/slope/headroom/traversability checks, failure feedback, repeated placement policy, and fence/path specializations.</td>
 </tr>
 <tr>
@@ -1026,8 +1026,8 @@ surface before advancing a playable slice.</p>
   <td>Economy</td>
   <td>Cash and admission price</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge costs, and source entity build transactions run from specified records. The accepted build slice reads the selected entity's <code>ZTEconomyComponent</code>, checks current cash, charges its <code>build</code> transaction, and exposes the inverse amount to placement undo.</td>
-  <td>Specification gap: remaining live transaction callers, countdown timing, aggregate/parent-cost paths, and UI feedback.</td>
+  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge costs, and source entity build transactions run from specified records. New freeform maps preserve the source UI cash grant through template hydration. Building and ibex placement read inherited <code>ZTEconomyComponent</code> data, check current cash, debit the authored <code>build</code> transaction, and expose the inverse amount to placement undo.</td>
+  <td>Specification gap: remaining live transaction callers, countdown timing, non-build aggregate/parent-cost paths, and UI feedback.</td>
 </tr>
 <tr>
   <td>Economy</td>
@@ -1194,16 +1194,16 @@ surface before advancing a playable slice.</p>
   <td>Renderer bridge</td>
   <td>Bevy render bridge</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently; pending model and material handles remain alive across frames; BFB logical parts bake hierarchy transforms, group by exact material, and share prepared geometry; terrain decals use terrain-conforming meshes. Alpine Big acceptance observes 879 authored visual requests, 12 parsed model documents, 21 ready model presentations, 22 retained material documents, and all 879 requested visuals spawned alongside the terrain.</td>
-  <td>Add distance-based BFB LOD selection and billboard orientation; finish material render-state fidelity; then implement the missing environment, water, lighting, animation, and effect surfaces.</td>
+  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently; pending model and material handles remain alive across frames; BFB logical parts bake hierarchy transforms, group by exact material, and share prepared geometry; BFM actor graphs resolve their referenced NIF models; NIF <code>NiTriShape</code> and <code>NiTriStrips</code> parts render; terrain decals use terrain-conforming meshes. Alpine Big Living Animal acceptance observes 880 authored visual requests and 880 loaded visuals, 13 parsed model documents, 22 ready model presentations, and zero rejected presentations.</td>
+  <td>Recover NIF root hierarchy/skinning and per-part materials, then bind BF animation clips; add distance-based BFB LOD selection and billboard orientation; finish environment, water, lighting, and effect surfaces.</td>
 </tr>
 <tr>
   <td>Scene graph</td>
   <td>Scene graph</td>
   <td>Actor, camera, decal, LOD, resource caches</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded <code>BFSceneGraphComponent</code> and <code>BFNISceneGraphComponent</code> records project authored model paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. BFB projection uses source logical mesh slices and hierarchy transforms rather than concatenating raw shared buffers, eliminating the exploded front-gate geometry. Parent binder components contribute source ground-fit and BFSkew shear behavior to curb segment transforms, including terrain elevation and endpoint slope.</td>
-  <td>Recover curve-segment binder selection, elevated fitting surfaces, runtime LOD/billboard behavior, animation, and actor behavior.</td>
+  <td>Loaded <code>BFSceneGraphComponent</code>, <code>BFNISceneGraphComponent</code>, and inherited <code>BFActorComponent</code> records project authored model or actor-graph paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. BFB projection uses source logical mesh slices and hierarchy transforms rather than concatenating raw shared buffers, eliminating the exploded front-gate geometry. Parent binder components contribute source ground-fit and BFSkew shear behavior to curb segment transforms, including terrain elevation and endpoint slope. The ibex actor currently renders as a static, flat/local-transform NIF presentation.</td>
+  <td>Recover NIF footer roots, hierarchy transforms, skinning, per-part materials, and animation; then recover curve-segment binder selection, elevated fitting surfaces, runtime LOD/billboard behavior, and actor behavior.</td>
 </tr>
 <tr>
   <td>Materials</td>
@@ -1337,7 +1337,7 @@ gaps when implementation is blocked.</p>
 
 <script id="openzt2-live-reload">
 (()=>{
- const current="a6869b3ad1633930";
+ const current="b8dc13c9fef99fee";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
