@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="78ab239a1f92d82c">
+<meta name="openzt2-site-version" content="43199644ecd5317b">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Original Game Functional Specification</title>
 <style>
@@ -41,6 +41,9 @@ th{background:var(--soft)}
 .source-seg-done{background:#79740e}.source-seg-generic{background:#b57614}.source-seg-open{background:#9d0006}.source-seg-evidence{background:#076678}
 .source-progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 .source-metric-list{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:12.5px}.source-metric-list dt{color:var(--muted)}.source-metric-list dd{margin:0;font-weight:700}
+.source-progress-grid.inactive .source-stacked-bar{filter:grayscale(1);opacity:.48}
+.source-resume-card{margin:14px 0 10px;padding:10px 12px;border:1px solid color-mix(in srgb,#689d6a 55%,var(--line));border-radius:5px;background:color-mix(in srgb,#689d6a 14%,var(--panel));color:var(--fg)}
+.source-resume-card p{margin:0;font-weight:600}
 @media(max-width:880px){.source-progress-grid{grid-template-columns:1fr}.source-seg{font-size:10px}}
 .spec-diagram{display:block;width:100%;height:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg)}
 .mermaid{margin:14px 0 22px;text-align:center;background:transparent}.mermaid svg{max-width:100%;height:auto}
@@ -70,7 +73,10 @@ th{background:var(--soft)}
 <main>
 <h1>OpenZT2 Original Game Functional Specification</h1>
 
-<section class="source-progress-grid" aria-label="Source-shaped C++ recovery frontier">
+<aside class="source-resume-card" aria-label="Functional recovery checkpoint">
+ <p>enough functional recovery has been completed to resume work on the Bevy re-implementation!</p>
+</aside>
+<section class="source-progress-grid inactive" aria-label="Source-shaped C++ recovery frontier">
  <div class="source-progress-card primary">
   <h3>Source-Shaped C++ Recovery Frontier</h3>
   <p class="source-progress-note">These bars track the manual native C++ reconstruction surface consumed by the functional specification. They measure recovered facts represented as authored-source concepts, not generated export coverage or compile success.</p>
@@ -96,20 +102,20 @@ th{background:var(--soft)}
  </div>
  <div class="source-progress-card">
   <h3>Fields</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Fields: source-shaped fields 2,103, generic class fields 1,416, unassigned field facts 3,963"><div class="source-seg source-seg-done" style="width:28.107458%" title="Source-shaped fields: 2,103">28.1%</div><div class="source-seg source-seg-generic" style="width:18.925421%" title="Generic class fields: 1,416">18.9%</div><div class="source-seg source-seg-open" style="width:52.967121%" title="Unassigned field facts: 3,963">53.0%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Fields: source-shaped fields 2,101, generic class fields 1,418, unassigned field facts 3,963"><div class="source-seg source-seg-done" style="width:28.080727%" title="Source-shaped fields: 2,101">28.1%</div><div class="source-seg source-seg-generic" style="width:18.952152%" title="Generic class fields: 1,418">19.0%</div><div class="source-seg source-seg-open" style="width:52.967121%" title="Unassigned field facts: 3,963">53.0%</div></div>
   <dl class="source-metric-list">
-   <dt>Source-shaped fields</dt><dd>2,103</dd>
-   <dt>Generic class fields</dt><dd>1,416</dd>
+   <dt>Source-shaped fields</dt><dd>2,101</dd>
+   <dt>Generic class fields</dt><dd>1,418</dd>
    <dt>Unassigned field facts</dt><dd>3,963</dd>
   </dl>
   <p class="source-progress-note">Recovered field facts split by source quality: named C++ members, generic field_* class placeholders, and facts not yet assigned to a class declaration.</p>
  </div>
  <div class="source-progress-card">
   <h3>Function ABI Facts</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Function ABI Facts: complete abi rows 12,104, partial abi rows 15,917, untyped abi rows 0"><div class="source-seg source-seg-done" style="width:43.196174%" title="Complete ABI rows: 12,104">43.2%</div><div class="source-seg source-seg-evidence" style="width:56.803826%" title="Partial ABI rows: 15,917">56.8%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Function ABI Facts: complete abi rows 12,105, partial abi rows 15,916, untyped abi rows 0"><div class="source-seg source-seg-done" style="width:43.199743%" title="Complete ABI rows: 12,105">43.2%</div><div class="source-seg source-seg-evidence" style="width:56.800257%" title="Partial ABI rows: 15,916">56.8%</div></div>
   <dl class="source-metric-list">
-   <dt>Complete ABI rows</dt><dd>12,104</dd>
-   <dt>Partial ABI rows</dt><dd>15,917</dd>
+   <dt>Complete ABI rows</dt><dd>12,105</dd>
+   <dt>Partial ABI rows</dt><dd>15,916</dd>
    <dt>Untyped ABI rows</dt><dd>0</dd>
   </dl>
   <p class="source-progress-note">Function rows split by complete signature plus calling convention, partial ABI evidence, and rows with no ABI surface yet.</p>
@@ -135,11 +141,11 @@ th{background:var(--soft)}
  </div>
  <div class="source-progress-card">
   <h3>Inheritance / Vtable Collapse</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Inheritance / Vtable Collapse: inherited collapsed slots 16,817, class-owned complete slots 22,591, class-owned partial slots 2,343"><div class="source-seg source-seg-done" style="width:40.279275%" title="Inherited collapsed slots: 16,817">40.3%</div><div class="source-seg source-seg-evidence" style="width:54.108884%" title="Class-owned complete slots: 22,591">54.1%</div><div class="source-seg source-seg-generic" style="width:5.611842%" title="Class-owned partial slots: 2,343"></div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Inheritance / Vtable Collapse: inherited collapsed slots 16,779, class-owned complete slots 22,621, class-owned partial slots 2,351"><div class="source-seg source-seg-done" style="width:40.188259%" title="Inherited collapsed slots: 16,779">40.2%</div><div class="source-seg source-seg-evidence" style="width:54.180738%" title="Class-owned complete slots: 22,621">54.2%</div><div class="source-seg source-seg-generic" style="width:5.631003%" title="Class-owned partial slots: 2,351"></div></div>
   <dl class="source-metric-list">
-   <dt>Inherited collapsed slots</dt><dd>16,817</dd>
-   <dt>Class-owned complete slots</dt><dd>22,591</dd>
-   <dt>Class-owned partial slots</dt><dd>2,343</dd>
+   <dt>Inherited collapsed slots</dt><dd>16,779</dd>
+   <dt>Class-owned complete slots</dt><dd>22,621</dd>
+   <dt>Class-owned partial slots</dt><dd>2,351</dd>
   </dl>
   <p class="source-progress-note">Vtable slots split into inherited same-target collapses, class-owned slots with complete ABI, and class-owned slots with partial ABI.</p>
  </div>
@@ -3693,7 +3699,7 @@ original class or manager in this specification.</p>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
 <script id="openzt2-live-reload">
 (()=>{
- const current="78ab239a1f92d82c";
+ const current="43199644ecd5317b";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
