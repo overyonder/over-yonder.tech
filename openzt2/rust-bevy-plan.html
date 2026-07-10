@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="43199644ecd5317b">
+<meta name="openzt2-site-version" content="023689350d448490">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Rust/Bevy Plan</title>
 <style>
@@ -267,18 +267,18 @@ path and its acceptance command resolves in the current workspace.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 18, loaded 21, recorded 49, planned 24, adapter 5">
-    <div class="plan-seg plan-seg-runs" style="width:15.384615%" title="Runs: 18">15.4%</div>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 24, loaded 21, recorded 45, planned 22, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:20.512821%" title="Runs: 24">20.5%</div>
     <div class="plan-seg plan-seg-loaded" style="width:17.948718%" title="Loaded: 21">17.9%</div>
-    <div class="plan-seg plan-seg-recorded" style="width:41.880342%" title="Recorded: 49">41.9%</div>
-    <div class="plan-seg plan-seg-planned" style="width:20.512821%" title="Planned: 24">20.5%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:38.461538%" title="Recorded: 45">38.5%</div>
+    <div class="plan-seg plan-seg-planned" style="width:18.803419%" title="Planned: 22">18.8%</div>
     <div class="plan-seg plan-seg-adapter" style="width:4.273504%" title="Adapter: 5">4.3%</div>
   </div>
   <div class="plan-legend">
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 18</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 24</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 21</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 49</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 24</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 45</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 22</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
   <p class="plan-progress-note">117 work-board rows across 67 top-level domains.</p>
@@ -286,15 +286,15 @@ path and its acceptance command resolves in the current workspace.</p>
  <div class="plan-progress-card">
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
-   <dt>Live / loaded / recorded</dt><dd>88</dd>
-   <dt>Planned / mapping</dt><dd>24</dd>
+   <dt>Live / loaded / recorded</dt><dd>90</dd>
+   <dt>Planned / mapping</dt><dd>22</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
  </div>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>18</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>49</dd><dt>Planned</dt><dd>24</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>24</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>45</dd><dt>Planned</dt><dd>22</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -307,6 +307,12 @@ remain in the functional specification. Rows with unspecified ownership or
 behavior use specification coverage as their upstream dependency; the work board
 tracks the next implementation action for behavior the specification has already
 made visible.</p>
+<p>Implementation follows the first failing player-visible contract along one
+vertical acceptance path: launcher, source UI, loaded world, camera and terrain,
+then build, economy, and undo. The remaining rows are a dependency registry for
+that path and the later living-animal, operating-zoo, persistence, progression,
+and expansion checkpoints; they are not a requirement to finish every recorded
+surface before advancing a playable slice.</p>
 <table>
 <thead>
 <tr>
@@ -340,8 +346,8 @@ made visible.</p>
   <td>Bevy asset system</td>
   <td>Asset sources, handles, loaders, loading states</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets. Runtime UI visual and localized text-format refresh now requires the mounted Z2F manifest before resolving authored texture handles, so source UI refresh cannot silently fall back to host-relative texture paths.</td>
-  <td>Convert remaining extraction/temp reads into archive-backed asset loads.</td>
+  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets. Runtime UI visual and localized text-format refresh requires the mounted Z2F manifest before resolving authored texture handles. Model-document assets parse independently from preview-scene material dependencies, extensionless scene-graph stems resolve through the manifest to shipped BFB or NIF files, and the renderer retains strong handles until asynchronous document loads complete.</td>
+  <td>Convert remaining extraction/temp reads into archive-backed asset loads and finish model-reference failure/fallback handling.</td>
 </tr>
 <tr>
   <td>Asset graph</td>
@@ -636,8 +642,8 @@ made visible.</p>
   <td>UI projection</td>
   <td>Authored UI tree projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source UI documents remain source/hydration inputs, <code>PresentationSync</code> projects requested or active <code>UiAsset</code> paths into path-bearing <code>UiRoot</code> entity trees, generated row templates live with the UI binding runtime that consumes them, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, image refs, pointer policy, and Bevy observer-backed hover state.</td>
-  <td>Implement widget families one at a time and drive visibility from source-authored UI events plus ECS-visible active layout facts.</td>
+  <td>Source UI documents remain source/hydration inputs, <code>PresentationSync</code> projects requested or active <code>UiAsset</code> paths into path-bearing <code>UiRoot</code> entity trees, generated row templates live with the UI binding runtime that consumes them, and Bevy UI entities/components spawn from original UI documents, skins, nodes, widgets, loc ids, image refs, pointer policy, and Bevy observer-backed hover state. Native checkbox, radio-group, list selection, source show/hide animation, exclusive-child visibility, and source-mode UI reset paths run against the retained Bevy tree; show/hide <code>-1</code> dimension sentinels preserve the authored panel size.</td>
+  <td>Finish momentary button press/release, <code>UI_REPRESS</code> retained selection, clipping/scroll layout, and physical-pointer acceptance across the remaining widget families.</td>
 </tr>
 <tr>
   <td>UI</td>
@@ -651,16 +657,16 @@ made visible.</p>
   <td>UI</td>
   <td>UI behavior</td>
   <td>Widget behavior and help surfaces</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Native hit-test, focus, edit validation, hover-help/<code>BFHelpComponent</code> routing, sound binding, text metrics, and show/hide animation remain specification gaps.</td>
-  <td>Specification gap: <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, <code>UISoundMgr</code>, <code>BFHelpComponent</code>, and font/text call sites.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Native hit-testing and pointer observers, focus policy, toggle/radio/list value changes, hover-help routing, authored UI sound tokens, visual states, and show/hide animation run on projected source nodes. <code>ZTGameMode</code> entry replays its parsed cleanup block before its normal on-events, closing source-default panels at session start without widget-name hardcoding.</td>
+  <td>Specification gap: <code>UI_HIT_TEST</code>, <code>UI_MODIFY</code>, <code>UI_QUERY</code>, remaining <code>UISoundMgr</code>/<code>BFHelpComponent</code> behavior, exact font/text layout, and retained UI state across projection-only remounts.</td>
 </tr>
 <tr>
   <td>Menu</td>
   <td>Menu flow</td>
   <td>Title, splash, main menu, profile/campaign selection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime smoke reaches splash close, main-menu Freeform hover/click, manifest-filtered map selection, and Play Map leaving load mode into <code>mode_main/mode_game/mode_overhead/mode_camera</code> through projected source nodes. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
+  <td>Source layouts, UI events, native app messages, profile/campaign records, and shell-mode transitions drive splash and main-menu behavior. The live flow is the original shell mode/resource paradigm: <code>ActiveMode</code>, <code>ActiveLayoutPaths</code>, <code>ActiveKeymap</code>, <code>CurrentCursor</code>, UI entities, and Bevy messages. Source-authored splash show/hide events, panel layout requests, profile/campaign/load/save commands, <code>ZT_SPLASH_CLOSED</code>, <code>ZT_LOADGAME</code>, native menu transition tokens, and exit-to-main-menu effects mutate ECS-owned facts and entities through Bevy systems. Runtime acceptance reaches splash close, main-menu Freeform hover/click, manifest-filtered Alpine Big selection, and Play Map leaving load mode in <code>mode_main/mode_game/mode_overhead</code> with a loaded world, source shell, terrain, and 3D camera. <code>MenuRuntime</code> keeps source map records while deriving playable map rows from manifest-resolved map packages, so unavailable source/test rows stay out of active menu projections.</td>
   <td>Specification gap: original menu event ordering, remaining panel row refresh details, exact file/profile host side effects, and data-authored splash backdrop selection.</td>
 </tr>
 <tr>
@@ -819,9 +825,9 @@ made visible.</p>
   <td>Catalog</td>
   <td>Catalog/UI</td>
   <td>Type lists, multi-lists, buy info, filters, and purchase rows</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Source-authored type lists, multi-lists, buy info, filters, purchase rows, selected list values, and multi-list sort tokens populate from specified records and Bevy UI runtime state.</td>
-  <td>Specification gap: catalog paging, filtering, purchase row selection, and placement handoff semantics.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Source-authored type-list activation populates the construction catalog from the entity registry, applies source root-kind inclusions/exclusions, projects each entity's authored button template and icon, preserves research availability, and dispatches the selected row's original <code>ZT_SETPLACEMENT*</code> event into placement mode. Multi-list, buy-info, selected values, and sort/filter tokens remain represented in Bevy UI runtime state.</td>
+  <td>Complete clipped grid/scroll presentation, source filtering and paging behavior, buy-info refresh, and the remaining animal/fence/path catalog handoffs.</td>
 </tr>
 <tr>
   <td>Zoopedia</td>
@@ -844,16 +850,16 @@ made visible.</p>
   <td>Terrain projection</td>
   <td>Bevy terrain projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
-  <td>Feed specified terrain/world data into mesh/material/entity projection.</td>
+  <td>Loaded <code>.dat</code> heights and source world extents produce the Bevy terrain mesh; biome ground texture and repeat sampling drive its current material. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid instead of floating as one flat plane. Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
+  <td>Implement biome cover/mix-mask/cliff layers, water, authored sky/skirt and lighting, then make runtime terrain edits feed the composed-height sampler used by decals.</td>
 </tr>
 <tr>
   <td>Placement</td>
   <td>Placement</td>
   <td>Validation, preview, commit, transactions, undo</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Footprints, affordability, research, slope, headroom, traversability, cursor preview, special placement rules, and accepted commit effects are Bevy runtime state; accepted entity commits spawn through <code>BFGWorldRuntime</code> without duplicate placement command records.</td>
-  <td>Trace <code>ZT_SETPLACEMENT*</code>, <code>ZT_PLACEOBJECT</code>, <code>BFG_PLACE_ENTITY</code>, and result tokens.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Source construction activation populates an authored building catalog; selecting an available row dispatches its original <code>ZT_SETPLACEMENTOBJECT</code>, <code>ZT_PLACEOBJECT</code> validates research and affordability, and an accepted commit spawns through <code>BFGWorldRuntime</code>, charges the source economy component, and records a placement undo transaction. Automated acceptance places an affordable source building and replays Undo to restore cash and world state.</td>
+  <td>Connect physical world-pointer placement and preview, footprint/slope/headroom/traversability checks, failure feedback, repeated placement policy, and fence/path specializations.</td>
 </tr>
 <tr>
   <td>Path</td>
@@ -1020,8 +1026,8 @@ made visible.</p>
   <td>Economy</td>
   <td>Cash and admission price</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge cost transactions, and selected immediate transaction commits run from specified records.</td>
-  <td>Specification gap: live transaction callers, countdown timing, aggregate/parent-cost paths.</td>
+  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge costs, and source entity build transactions run from specified records. The accepted build slice reads the selected entity's <code>ZTEconomyComponent</code>, checks current cash, charges its <code>build</code> transaction, and exposes the inverse amount to placement undo.</td>
+  <td>Specification gap: remaining live transaction callers, countdown timing, aggregate/parent-cost paths, and UI feedback.</td>
 </tr>
 <tr>
   <td>Economy</td>
@@ -1171,9 +1177,9 @@ made visible.</p>
   <td>Undo</td>
   <td>Undo system</td>
   <td>Undo managers, transactions, actions, and stations</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records; Bevy <code>UndoRuntime</code> publishes and consumes <code>ZT_UNDOACTION</code> command messages with specified event/saveable context, classifying them as ready for specified replay or missing their event root, and retains terrain undo transactions from the <code>BFTERRAIN_*</code> command flow.</td>
-  <td>Specification gap: transaction replay, action payload schemas, reversal ordering, station returns, and integration with placement/show/delete commands.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records; Bevy <code>UndoRuntime</code> publishes and consumes <code>ZT_UNDOACTION</code>, retains terrain transactions, and now records/replays placed-entity transactions by removing the spawned world entity and refunding the committed source build cost.</td>
+  <td>Complete delete/show/path/fence/terrain action payloads, reversal ordering, multi-action stations, and saveable-context restoration.</td>
 </tr>
 <tr>
   <td>Renderer</td>
@@ -1188,16 +1194,16 @@ made visible.</p>
   <td>Renderer bridge</td>
   <td>Bevy render bridge</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation; <code>RendererRuntime</code> no longer keeps unused model/material handle caches beside Bevy assets.</td>
-  <td>Consume Bevy model/material/image handles from extension loaders.</td>
+  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently, pending source-document handles remain alive across frames, BFB instances share prepared geometry, and terrain decals use terrain-conforming meshes. Alpine Big acceptance now observes 879 authored visual requests, 12 parsed model documents, 14 ready model presentations, and 165 spawned object meshes alongside the terrain.</td>
+  <td>Resolve the remaining model requests, correct model scale/ground fitting and materials, consume loader-emitted handles throughout, and implement the missing environment, water, lighting, animation, and effect surfaces.</td>
 </tr>
 <tr>
   <td>Scene graph</td>
   <td>Scene graph</td>
   <td>Actor, camera, decal, LOD, resource caches</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Original scene graph and actor component inputs are recorded, and selected model/document paths project into Bevy resources.</td>
-  <td>Implement one visible entity projection from <code>BFSceneGraphComponent</code>.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Loaded <code>BFSceneGraphComponent</code> and <code>BFNISceneGraphComponent</code> records project authored model paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. The vertical acceptance path proves visible gate, rock, curb, and flag instances from the loaded Alpine Big world.</td>
+  <td>Finish all requested entity types, terrain-ground fence/path segments, original scale/orientation, LOD selection, multi-mesh materials, animation, and actor behavior.</td>
 </tr>
 <tr>
   <td>Materials</td>
@@ -1219,9 +1225,9 @@ made visible.</p>
   <td>Camera</td>
   <td>Camera</td>
   <td>Camera commands and projection</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Overhead, first-person, follow, rail, guest-view, frustum, output states, command-reader state/effects, first-person mouse-look transition handling, selected <code>ZT_CAMERA_*</code> command surfaces, and <code>ZT_CAMERA_MOVED</code> BF message publication are recorded in Bevy.</td>
-  <td>Specification gap: curves, timing, coupling, and projection math.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Loaded source camera state projects to a live Bevy 3D overhead camera over the original world extent. W/A/S/D pan, wheel zoom, source UI zoom/rotate commands, overhead bounds, first-person/follow/rail/guest-view state, command-reader effects, mouse-look transitions, and <code>ZT_CAMERA_MOVED</code> publication are represented or live in Bevy owners.</td>
+  <td>Recover exact overhead command-reader key activation, momentary UI control release, projection/curve/timing semantics, and remaining mode coupling against original runtime behavior.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1331,7 +1337,7 @@ gaps when implementation is blocked.</p>
 
 <script id="openzt2-live-reload">
 (()=>{
- const current="43199644ecd5317b";
+ const current="023689350d448490";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
