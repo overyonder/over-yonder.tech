@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="8e2696182ce20166">
+<meta name="openzt2-site-version" content="7d607807e715f336">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Rust/Bevy Plan</title>
 <style>
@@ -267,34 +267,34 @@ path and its acceptance command resolves in the current workspace.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 30, loaded 16, recorded 44, planned 19, adapter 5">
-    <div class="plan-seg plan-seg-runs" style="width:26.315789%" title="Runs: 30">26.3%</div>
-    <div class="plan-seg plan-seg-loaded" style="width:14.035088%" title="Loaded: 16">14.0%</div>
-    <div class="plan-seg plan-seg-recorded" style="width:38.596491%" title="Recorded: 44">38.6%</div>
-    <div class="plan-seg plan-seg-planned" style="width:16.666667%" title="Planned: 19">16.7%</div>
-    <div class="plan-seg plan-seg-adapter" style="width:4.385965%" title="Adapter: 5">4.4%</div>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 35, loaded 17, recorded 40, planned 16, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:30.973451%" title="Runs: 35">31.0%</div>
+    <div class="plan-seg plan-seg-loaded" style="width:15.044248%" title="Loaded: 17">15.0%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:35.398230%" title="Recorded: 40">35.4%</div>
+    <div class="plan-seg plan-seg-planned" style="width:14.159292%" title="Planned: 16">14.2%</div>
+    <div class="plan-seg plan-seg-adapter" style="width:4.424779%" title="Adapter: 5">4.4%</div>
   </div>
   <div class="plan-legend">
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 30</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 16</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 44</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 19</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 35</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 17</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 40</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 16</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
-  <p class="plan-progress-note">114 work-board rows across 65 top-level domains.</p>
+  <p class="plan-progress-note">113 work-board rows across 65 top-level domains.</p>
  </div>
  <div class="plan-progress-card">
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
-   <dt>Live / loaded / recorded</dt><dd>90</dd>
-   <dt>Planned / mapping</dt><dd>19</dd>
+   <dt>Live / loaded / recorded</dt><dd>92</dd>
+   <dt>Planned / mapping</dt><dd>16</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
  </div>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>30</dd><dt>Loaded</dt><dd>16</dd><dt>Recorded</dt><dd>44</dd><dt>Planned</dt><dd>19</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>35</dd><dt>Loaded</dt><dd>17</dd><dt>Recorded</dt><dd>40</dd><dt>Planned</dt><dd>16</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -402,8 +402,8 @@ surface before advancing a playable slice.</p>
   <td>Archive and paths</td>
   <td>Z2F archive mount and asset paths</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>Z2fAssetReaderState</code> and <code>Z2fAssetManifest</code> serve mounted archives through <code>zt2://</code>, preserve path lookup data, list directories, count extensionless entries, and normalize legacy DDS bytes before asset decoding.</td>
-  <td>Finish manifest-owned precedence, host-file fallback decisions, and removal of direct document reads.</td>
+  <td>Default launch discovers every direct install-directory <code>.z2f</code> with deterministic case-insensitive filename ordering; explicit archive order remains authoritative and later archives win. Mounted host archives retain a shared file-backed central-directory index, stream only selected compressed ranges, keep one winning normalized-path owner, rebuild filename fallbacks from winners, and answer prefix queries through ordered ranges. A synthetic 4,096-archive overlay has no reconstruction-imposed mount cap.</td>
+  <td>Add Zip64/multidisk support if shipped or mod evidence requires it; decide whether mod discovery should extend beyond the install directory; finish remaining direct document reads.</td>
 </tr>
 <tr>
   <td>Source documents</td>
@@ -802,16 +802,16 @@ surface before advancing a playable slice.</p>
   <td>Behavior slice</td>
   <td>Species behavior slice</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Living Animal acceptance connects source definition, gender-filtered catalog row, inherited $3,000 price, placement, ECS ownership, live needs, self-task scoring/completion, terrain-fitted locomotion, rooted and skinned NIF scene, and BF/BFM playback. The verified source sequence advances <code>Groom</code> → <code>KickBack</code> → <code>MediumWander</code>, switches to <code>Walk</code>, and moves the visibly rendered ibex.</td>
-  <td>Add sound, entity selection/info panels, spatial food/water/social target acquisition, steering/avoidance, reservations, and lifecycle behavior.</td>
+  <td>Living Animal acceptance connects source definition, gender-filtered catalog row, inherited $3,000 price, placement, ECS ownership, live needs, self-task scoring/completion, terrain-fitted locomotion, rooted and skinned NIF scene, and BF/BFM playback. The verified source sequence advances <code>Groom</code> → <code>KickBack</code> → <code>MediumWander</code>, switches to <code>Walk</code>, and moves the visibly rendered ibex. Spatial task execution now selects a compatible live care object, reserves it, travels to docking range, applies numeric or boolean subject/target completion mutations, records the source task delay, and releases it; the Operating Zoo acceptance path uses the authored Ibex <code>Eat</code>/<code>FoodDish_Hay</code> contract.</td>
+  <td>Sequence all Enter/Use/Exit events using animation completion, implement named multi-slot docking, failure/follow-up/token timing, habitat/water qualifiers, sound, steering/avoidance, social targets, and lifecycle behavior.</td>
 </tr>
 <tr>
   <td>Entity info</td>
   <td>Selection/UI</td>
   <td>Entity selection and info panels</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Selected entity state, action controls, needs/training/inventory/family/donation rows, source panel bindings, guest need values, and donation panel snapshots live in <code>EntityInfoRuntime</code>.</td>
-  <td>Add animal value bindings and action side effects.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Pointer selection resolves a rendered descendant to its source entity, dispatches the original selection message, and projects the source <code>entityinfo.xml</code> panel. Live animal identity, active task, biome, location, conservation, gender, and basic/advanced need rows come from the selected ECS animal and source row templates; closing clears selection and survives UI reprojection. Guest need values and donation panel snapshots remain in <code>EntityInfoRuntime</code>.</td>
+  <td>Recover exact individual-name generation, icon fill/color rules, and action side effects.</td>
 </tr>
 <tr>
   <td>Donation</td>
@@ -826,8 +826,8 @@ surface before advancing a playable slice.</p>
   <td>Catalog/UI</td>
   <td>Type lists, multi-lists, buy info, filters, and purchase rows</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source-authored type-list activation populates construction and animal catalogs from the entity registry, applies source root-kind inclusions/exclusions and shipped <code>b_Male</code>/<code>b_Female</code> filters, projects each entity's authored button template and icon, preserves research availability, and dispatches selected rows into their original placement messages. Buy-info and placement pricing read the same effective inherited entity definition.</td>
-  <td>Complete clipped grid/scroll presentation, source sorting and paging behavior, richer buy-info refresh, and the remaining fence/path catalog handoffs.</td>
+  <td>Source-authored type-list activation populates construction and animal catalogs from the entity registry, applies source root-kind inclusions/exclusions and shipped <code>b_Male</code>/<code>b_Female</code> filters, projects each entity's authored button template and icon, preserves research availability, and dispatches selected rows into their original placement messages. Signed source list layout is preserved: fixed columns flow row-major, fixed rows flow column-major, and unspecified axes fall back vertically. Help metadata remains tooltip data instead of visible button text. Buy-info discovers its authored group targets from source structure and shows biome/conservation/gender/items-sold/upkeep according to selected effective-definition properties/components; placement pricing reads the same definition.</td>
+  <td>Recover source sorting/paging/scroll behavior, richer value refresh inside visible buy-info groups, and the remaining fence/path catalog handoffs.</td>
 </tr>
 <tr>
   <td>Zoopedia</td>
@@ -850,24 +850,24 @@ surface before advancing a playable slice.</p>
   <td>Terrain projection</td>
   <td>Bevy terrain projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded relative <code>.dat</code> heights, authored <code>nodeMinHeight</code>, and source world extents produce the Bevy terrain mesh. Alpine Big projects as 576 native 16-cell patches while preserving all 294,912 triangles. The recovered CPU compositor applies the fixed four-cell sampling halo, deterministic biome draw order, ground/cover brush masks, linked-height facts, patch-local UV0, global detail UV1, the original <code>MODULATE2X</code> detail stage, and box-filtered mip levels. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid.</td>
-  <td>Implement water plus authored sky/skirt and lighting; then make runtime terrain edits refresh composed patch images and feed the composed-height sampler used by decals and fitted components.</td>
+  <td>Loaded relative <code>.dat</code> heights, authored <code>nodeMinHeight</code>, and source world extents produce the Bevy terrain mesh. Alpine Big projects as 576 native 16-cell patches while preserving all 294,912 triangles. The recovered CPU compositor applies the fixed four-cell sampling halo, deterministic biome draw order, ground/cover brush masks, linked-height facts, patch-local UV0, global detail UV1, the original <code>MODULATE2X</code> detail stage, and box-filtered mip levels. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid. DAT water types now project independent transparent chunk meshes at the active biome's authored shallow/deep depth, color, texture, and texture-grid scale; Alpine Big supplies 35,912 shallow-water vertices. The selected world environment loads its linked source light, fog, and sky documents, presents the authored terrain light rig and fog clear color, and retains the exact authored sky-layer and skirt-model references for projection.</td>
+  <td>Bind environment sampling to the recovered live time-of-day owner, project the retained sky layers and skirt models, then make runtime terrain edits refresh composed terrain/water images and feed the composed-height sampler used by decals and fitted components.</td>
 </tr>
 <tr>
   <td>Placement</td>
   <td>Placement</td>
   <td>Validation, preview, commit, transactions, undo</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source construction activation populates authored building and animal catalogs; selecting an available row dispatches its original placement message, and accepted commits spawn through <code>BFGWorldRuntime</code>, charge the inherited source economy component, and record a placement undo transaction. Automated acceptance places and undoes a source building, then purchases the inherited <code>Ibex_Adult_M</code> for $3,000 at a terrain-valid, camera-visible point and observes its live movement.</td>
-  <td>Connect physical world-pointer placement and preview, footprint/slope/headroom/traversability checks, failure feedback, repeated placement policy, and fence/path specializations.</td>
+  <td>Source construction activation populates authored building and animal catalogs; selecting an available row dispatches its original placement message, and accepted commits spawn through <code>BFGWorldRuntime</code>, charge the inherited source economy component, and record the exact spawn/economy transaction. Undo removes and refunds it; redo replays the retained source spawn with the same entity ID, rechecks affordability, recharges the source transaction, and restores the undo branch. A new placement clears redo history. Automated acceptance also purchases the inherited <code>Ibex_Adult_M</code> for $3,000 at a terrain-valid, camera-visible point and observes its live movement.</td>
+  <td>Bind the typed redo request to an evidenced source token or explicit host input; connect physical world-pointer preview, footprint/slope/headroom/traversability checks, failure feedback, repeated placement policy, and fence/path specializations.</td>
 </tr>
 <tr>
   <td>Path</td>
   <td>Paths</td>
   <td>Paths and elevated supports</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Startup validates the source path-finder config; <code>PathRuntime</code> owns active placement/type/height state while staff candidate path request/result records publish as Bevy messages; obsolete placement-side elevated-height request state and duplicate path command records have been removed.</td>
-  <td>Specification gap: path placement modes, live graph/ECS connectivity, and <code>BFGElevatedSupportTracker</code>.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Effective source definitions preserve ground/elevated <code>ZTPath</code> type, texture, curb, source path, and selected height level. The recovered <code>place_path</code> action places path-component world entities through the normal ECS projection; loaded and newly placed path components aggregate onto the source 3-unit placement tiles and hydrate a Bevy-owned cardinal, same-level graph. Deletion/undo removes graph membership, and staff candidate queries enter only path-bearing endpoint tiles before traversing connected tiles.</td>
+  <td>Recover paint/small-path drag batching, slope/headroom and affordability feedback, the exact elevated world-height mapping, ramp transitions between levels, route weighting/steering integration, and <code>BFGElevatedSupportTracker</code>.</td>
 </tr>
 <tr>
   <td>Fence</td>
@@ -906,16 +906,16 @@ surface before advancing a playable slice.</p>
   <td>AI source</td>
   <td>Task templates and behavior documents</td>
   <td><code>in progress</code></td>
-  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution/completion records, behavior sets, and source requests hydrate into <code>BFAIMgr</code>. The live ibex evaluates self-target source tasks against its need state, advances authored play durations, applies completion mutations, and exposes behavior/locomotion animation tokens.</td>
-  <td>Connect spatial target acquisition, task-root reservation/failure semantics, thinker cadence/tie-breaks, and the remaining behavior families.</td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution/completion records, behavior sets, and source requests hydrate into <code>BFAIMgr</code>; the current merged catalogue covers 486 task and 218 behavior documents. The live ibex evaluates self and spatial source tasks against subject/target state, honors type/qualifier matching, reserves targets, advances execution, applies numeric and boolean subject/target mutations, enforces <code>TaskDelayMin</code>/<code>TaskDelayMax</code> before reselection, and exposes behavior/locomotion animation tokens.</td>
+  <td>Recover exact thinker cadence/tie-breaks, object/from-token selectors, complete failure/follow-up/delayed-token semantics, behavior-event sequencing, and the remaining behavior families.</td>
 </tr>
 <tr>
   <td>AI</td>
   <td>AI runtime</td>
   <td>Scoring, thinker scheduler, tokens</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Task scoring, tie-breaks, <code>ThinkerInterval</code>, token reservation, conflicts, and completion/failure effects remain specification gaps.</td>
-  <td>Specification gap: <code>BFAITaskThinker</code>, <code>BFAIEvalData</code>, and <code>BFAICompletionData</code>.</td>
+  <td><code>in progress</code></td>
+  <td>Live task scoring and selection honor source priorities, qualifiers, reservation conflicts, and per-entity source task cooldowns; completion applies the recovered mutation surface and releases reservations. <code>BFAIEvalData</code> now gates candidates by its authored <code>needPointsGood</code>, <code>needPointsBad</code>, and <code>happiness</code> thresholds before attribute scoring. The Bevy-owned animal state thinker advances good/bad need points from the source update interval, deltas, factor, maximum, and critical state, resetting the opposite branch as the native thinker does. A source-shaped regression selects <code>AttackGuest</code> then <code>Explore</code> and finally hunger-driven <code>Eat</code>, while critical hunger suppresses otherwise higher recurring <code>Kicking</code>/<code>Groom</code> self work.</td>
+  <td>Recover exact critical-transition hysteresis, factor-delta behavior, <code>BFAITaskThinker</code> cadence/tie-breaks, delayed-token scheduling, and <code>BFAICompletionData</code> failure/follow-up behavior.</td>
 </tr>
 <tr>
   <td>AI</td>
@@ -938,8 +938,8 @@ surface before advancing a playable slice.</p>
   <td>Movement</td>
   <td>Steering and locomotion</td>
   <td><code>in progress</code></td>
-  <td>Authored wander speed tokens drive deterministic Bevy ECS heading and displacement, terrain height is resampled during movement, and <code>BFLocoAnimate</code>-shaped speed categories select <code>Walk</code>, <code>Run</code>, or <code>Charge</code> clips.</td>
-  <td>Recover <code>BFSteeringMgr</code> arbitration, target/path following, obstacle/entity/water avoidance, bounds response, turn rates, and exact speed constants.</td>
+  <td>Authored wander speed tokens drive deterministic Bevy ECS heading and displacement, terrain height is resampled during movement, and <code>BFLocoAnimate</code>-shaped speed categories select <code>Walk</code>, <code>Run</code>, or <code>Charge</code> clips. Spatial animal tasks now travel toward the selected live target and stop at docking range; admitted guests update existing ECS transforms along loaded path geometry without respawn/rehydration events.</td>
+  <td>Recover native path graph/steering arbitration, obstacle/entity/water avoidance, bounds response, turn rates, and exact speed constants.</td>
 </tr>
 <tr>
   <td>Influence</td>
@@ -953,9 +953,9 @@ surface before advancing a playable slice.</p>
   <td>Guest</td>
   <td>Guests</td>
   <td>Needs, satisfaction, movement, lifecycle</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Live guest need/path/spending/group state belongs in Bevy components/resources.</td>
-  <td>Specification gap: <code>ZTAIGuestMgr</code> handlers and <code>BFAIStateVar</code>/<code>BFAINeedAdjusts</code> scheduling.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td><code>ZTAIGuestMgr</code> source config drives enabled state, capacity, spawn cadence, and rotated entrance/leave displacements. Effective guest definitions drive adult/child identity, state-variable needs, <code>BFAINeedAdjusts</code>, initial cash, motion class, and departure factors. The hydrated <code>StateThinkerInterval</code> advances clamped needs and happiness/cash departure points; the proven <code>leaveZoo</code> evaluator enters <code>Leaving</code> when points reach zero, follows authored path geometry toward the exact entrance target, executes <code>remove_user</code>, removes through <code>BFGWorldRuntime</code>, and cleans group/runtime state. Admission executes adult/child plus <code>add_user</code>; movement mutates the existing ECS transform without respawn events.</td>
+  <td>Recover native pathfinding, multi-member group construction, admission probability/fame pricing, service/view/donation tasks, and richer guest actor animation selection.</td>
 </tr>
 <tr>
   <td>Guest</td>
@@ -985,9 +985,9 @@ surface before advancing a playable slice.</p>
   <td>Staff</td>
   <td>Keeper care</td>
   <td>Keeper role, keeper-panel tasks, and animal care links</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td><code>StaffRole::Keeper</code>, <code>UseForKeeperPanel</code> task flags, animal <code>s_KeeperEatType</code>/<code>s_KeeperDrinkType</code> fields, keeper recommendations, and staff request/assignment records are represented.</td>
-  <td>Specification gap: keeper task selection, feeding/drinking object resolution, panel recommendations, job completion, and animal status effects.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Live source request controllers open food-container work at <code>f_FoodLevel &lt;= 25</code>, match compatible animals and containers through inherited <code>s_KeeperEatType</code>/<code>s_KeeperDrinkType</code>, target <code>s_contents</code>, and <code>b_Water</code>, select the nearest available hired keeper, reserve <code>Eat</code>, and travel to docking range. Completion executes the dish-owned source <code>refill</code> transaction against the distinct keeper target, spends the authored zoo cost, refills to 100, and releases the job/reservation. The authored recovery cancellation threshold is honored.</td>
+  <td>Add keeper animation/task sequencing, panel recommendations, drink-specific coverage, and animal-status effects.</td>
 </tr>
 <tr>
   <td>Show</td>
@@ -1026,8 +1026,8 @@ surface before advancing a playable slice.</p>
   <td>Economy</td>
   <td>Cash and admission price</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Cash deltas, admission price/index values, transaction polarity, grant/remove grant, terrain final-charge costs, and source entity build transactions run from specified records. New freeform maps preserve the source UI cash grant through template hydration. Building and ibex placement read inherited <code>ZTEconomyComponent</code> data, check current cash, debit the authored <code>build</code> transaction, and expose the inverse amount to placement undo.</td>
-  <td>Specification gap: remaining live transaction callers, countdown timing, non-build aggregate/parent-cost paths, and UI feedback.</td>
+  <td>Cash deltas, admission price/index values, owner-aware transaction polarity, grant/remove grant, terrain final-charge costs, source entity build transactions, keeper refill, adult/child admission, <code>add_user</code>, and departing-guest <code>remove_user</code> run from specified records. Distinct-target Credit with <code>trackOnParent</code> credits the target component and records zoo expense on the owner, while same-owner Credit remains income. New freeform maps preserve the source UI cash grant through template hydration. Placement and redo check cash, debit authored build cost, and retain its inverse for undo.</td>
+  <td>Recover guest admission probability/fame pricing; implement remaining transaction callers, countdown timing, aggregate/parent-cost paths, and UI feedback.</td>
 </tr>
 <tr>
   <td>Economy</td>
@@ -1113,9 +1113,9 @@ surface before advancing a playable slice.</p>
   <td>Scenario</td>
   <td>Scenario</td>
   <td>Rule tree, campaign, tutorial, challenges</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Scenario groups, rules, tests, fired-action state, Bevy action/command/result messages, objectives, challenge state, campaign progression, and map selection launch effects are represented.</td>
-  <td>Specification gap: <code>BFScenarioMgr</code> and <code>ZTScenarioMgr</code> rule evaluation.</td>
+  <td><span class="plan-status plan-status-loaded">loaded</span></td>
+  <td>Campaign indexes and documents now discover every winning mounted <code>scenario/goals/*.xml</code> source, covering 179 shipped campaign, tutorial, freeform, and challenge goal paths. <code>ZTScenarioMgr</code> hydration preserves manager interval/chain/all-success/sticky/optional policy, rule visibility/sticky/optional policy, and distinct evaluate/success/failure script actions. Bevy scopes rule names, reset commands, and fired actions to the selected campaign scenario or directly added goal document instead of mixing unrelated campaigns. Map selection, scenario commands, challenge state, and campaign state remain live runtime owners.</td>
+  <td>Execute Lua 5.0 compiled scenario actions through the script adapter, then implement rule cadence/result transitions, chained/all-success completion, goal-panel projection, challenge offer/accept/decline, and durable campaign unlock progression.</td>
 </tr>
 <tr>
   <td>Scripting</td>
@@ -1153,9 +1153,9 @@ surface before advancing a playable slice.</p>
   <td>Save</td>
   <td>Persistence</td>
   <td>Save/load package format</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>The component/entity tree serializes and loads through original save/load modes and <code>.z2s</code> package structure; the Bevy hydration adapter owns pending asset-load tasks from load command messages, and the host persistence adapter consumes save/delete/load-after-save commands into explicit unspecified-contract result messages when writer, confirmation, path, or save-root semantics are missing.</td>
-  <td>Specification gap: <code>.z2s</code> container structure, host write/delete execution, and per-component <code>write_xml_node</code> scope.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>The playable checkpoint writes a source-shaped <code>BFContext</code> XML tree with <code>ZTWorldMgr</code> world/map identity, <code>ZTEconomyMgr</code> cash, and <code>BFGManager/entityList</code> placed buildings, animals, and care objects. Source save/load mode commands drive atomic writes, unconfirmed overwrite rejection plus the authored overwrite modal, confirmed replacement, world-event removal/respawn, ECS rehydration, and return from <code>ZTLoadMode</code> to overhead gameplay. App acceptance restores Alpine Big identity, cash, three placed entity transforms, animal needs, and care-object <code>f_FoodLevel</code>; source AI replans because Bevy target handles are non-persistent. Activity metadata is retained diagnostically.</td>
+  <td>Recover the original <code>.z2s</code> package/container structure and full per-component <code>write_xml_node</code> coverage; add the remaining world/scenario/profile state and live full-shell screenshot acceptance.</td>
 </tr>
 <tr>
   <td>Photo</td>
@@ -1176,10 +1176,10 @@ surface before advancing a playable slice.</p>
 <tr>
   <td>Undo</td>
   <td>Undo system</td>
-  <td>Undo managers, transactions, actions, and stations</td>
+  <td>Undo, redo, transactions, actions, and stations</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records; Bevy <code>UndoRuntime</code> publishes and consumes <code>ZT_UNDOACTION</code>, retains terrain transactions, and now records/replays placed-entity transactions by removing the spawned world entity and refunding the committed source build cost.</td>
-  <td>Complete delete/show/path/fence/terrain action payloads, reversal ordering, multi-action stations, and saveable-context restoration.</td>
+  <td><code>BFUndoMgr</code>, <code>BFGUndoMgr</code>, <code>BF3DUndoMgr</code>, <code>ZTUndoMgr</code>, undo context config, and event roots are source-domain records. Bevy <code>UndoRuntime</code> consumes <code>ZT_UNDOACTION</code>, retains terrain transactions, and moves exact placement transactions between LIFO undo/redo branches. Redo preserves entity IDs, respawns through <code>BFGWorldRuntime</code>, checks/reapplies source economy cost, returns successful work to undo, and new commits clear the redo branch.</td>
+  <td>Bind redo to evidenced source or explicit host input, then complete delete/show/path/fence/terrain payloads, reversal ordering, multi-action stations, and saveable-context restoration.</td>
 </tr>
 <tr>
   <td>Renderer</td>
@@ -1218,7 +1218,7 @@ surface before advancing a playable slice.</p>
   <td>Animation</td>
   <td>Animation controllers, graphs, requests</td>
   <td><code>in progress</code></td>
-  <td>Named BF transform curves play through live Bevy animation players on BFM-associated NIF skeletons, and source behavior/locomotion tokens select concrete clips for the ibex. Original blend/transition rules, controller requests, and text keys remain represented as source/runtime records.</td>
+  <td>Named BF transform curves play through live Bevy animation players on BFM-associated NIF skeletons, and source behavior/locomotion tokens select concrete clips for animals and guests. The parser honors BF v1's 128-byte file and 84-byte node headers as well as v2's 12/44-byte layout; all three shipped v1 clips parse their full node/track/time-marker sets. Original blend/transition rules, controller requests, and text keys remain represented as source/runtime records.</td>
   <td>Recover <code>BFAnimController</code>/<code>BFAnimGraph</code> blending, interruption, transition, <code>ANIM_*</code>, and text-key event semantics.</td>
 </tr>
 <tr>
@@ -1226,8 +1226,8 @@ surface before advancing a playable slice.</p>
   <td>Camera</td>
   <td>Camera commands and projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded source camera state projects to a live Bevy 3D overhead camera over the original world extent. The pose composes the original root, vertical offset, look-at distance, pitch-rotation, zoom, and saved roll hierarchy rather than orbiting one inferred eye-target vector. W/A/S/D pan uses the source forward direction and half-pi sine acceleration; wheel zoom, source UI zoom/rotate commands, overhead bounds, first-person/follow/rail/guest-view state, command-reader effects, mouse-look transitions, and <code>ZT_CAMERA_MOVED</code> publication are represented or live in Bevy owners.</td>
-  <td>Recover terrain/collision-backed camera fitting, parenting-node follow transitions, sub-minimum zoom residual, profile-tier maximum zoom, exact momentary UI control release, and remaining mode coupling.</td>
+  <td>Loaded source camera state projects to a live Bevy 3D overhead camera over the original world extent. The pose composes the original root, vertical offset, look-at distance, pitch-rotation, zoom, and saved roll hierarchy rather than orbiting one inferred eye-target vector. W/A/S/D and controller left-stick pan use the source forward direction; wheel/source UI/controller right-stick zoom and rotate feed the recovered camera command tokens. Overhead bounds, first-person/follow/rail/guest-view state, command-reader effects, mouse-look transitions, and <code>ZT_CAMERA_MOVED</code> publication are represented or live in Bevy owners.</td>
+  <td>Recover terrain/collision-backed camera fitting, parenting-node follow transitions, sub-minimum zoom residual, profile-tier maximum zoom, exact momentary UI control release, analog magnitude semantics, and remaining mode coupling.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1240,10 +1240,10 @@ surface before advancing a playable slice.</p>
 <tr>
   <td>UI rendering</td>
   <td>UI rendering</td>
-  <td>Sprite/text rendering</td>
+  <td>Sprite/text rendering and controller navigation</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source UI renders through Bevy with recorded sprite manager, font, text buffer, rich text, hitmask, and visual-state contracts; Bevy stores live text-render options and presentation entities rather than a parked sprite-manager bootstrap mirror.</td>
-  <td>Specification gap: <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior as ECS/asset-backed behavior.</td>
+  <td>Source UI renders through Bevy with recorded sprite manager, font, text buffer, rich text, hitmask, and visual-state contracts; Bevy stores live text-render options and presentation entities rather than a parked sprite-manager bootstrap mirror. Controller D-pad focus uses live visible/enabled node geometry on the top source root; South activates focused widgets through authored handlers or performs a centered primary viewport action through the existing placement/picking pipeline. Start dispatches recovered <code>ZT_PAUSE_KEY</code>, and East routes through authored Escape hotkeys for back/cancel.</td>
+  <td>Recover remaining <code>BFSpriteMgr</code>, <code>BFUIRenderer</code>, and <code>BFUIText*</code> behavior; add controller prompts, analog focus-repeat, rebinding, and broader gameplay-action coverage.</td>
 </tr>
 <tr>
   <td>Audio</td>
@@ -1337,7 +1337,7 @@ gaps when implementation is blocked.</p>
 
 <script id="openzt2-live-reload">
 (()=>{
- const current="8e2696182ce20166";
+ const current="7d607807e715f336";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
