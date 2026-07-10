@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="023689350d448490">
+<meta name="openzt2-site-version" content="a6869b3ad1633930">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Rust/Bevy Plan</title>
 <style>
@@ -346,7 +346,7 @@ surface before advancing a playable slice.</p>
   <td>Bevy asset system</td>
   <td>Asset sources, handles, loaders, loading states</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets. Runtime UI visual and localized text-format refresh requires the mounted Z2F manifest before resolving authored texture handles. Model-document assets parse independently from preview-scene material dependencies, extensionless scene-graph stems resolve through the manifest to shipped BFB or NIF files, and the renderer retains strong handles until asynchronous document loads complete.</td>
+  <td>Original archives mount through Bevy asset readers and source formats load into runtime assets. Runtime UI visual and localized text-format refresh requires the mounted Z2F manifest before resolving authored texture handles. Model-document assets parse independently from preview-scene material dependencies, extensionless scene-graph stems resolve through the manifest to shipped BFB or NIF files, exact extensionless texture paths take precedence over legacy stem variants, and the renderer retains both model and BFMat handles until asynchronous dependencies complete.</td>
   <td>Convert remaining extraction/temp reads into archive-backed asset loads and finish model-reference failure/fallback handling.</td>
 </tr>
 <tr>
@@ -474,8 +474,8 @@ surface before advancing a playable slice.</p>
   <td>Source formats</td>
   <td>Blue Fang models: <code>.bfb</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>BFB parses into <code>Zt2Model</code>, Bevy scene output, per-source mesh subassets, and material or BFMat handles.</td>
-  <td>Specification gap: axis/orientation, material completeness, skinning, animation linkage, and remaining source semantics.</td>
+  <td>BFB parsing preserves type-6 shared geometry buffers, type-5/type-8 logical slices, linked hierarchy parentage and transforms, LOD ancestry, billboard links, and exact per-link BFMat names. Render-part selection exposes validated vertex/index slices without treating every shared buffer as one authored object.</td>
+  <td>Recover skinned type-8 bone/weight payloads, runtime distance-based LOD selection, billboard camera behavior, animation linkage, and remaining block kinds.</td>
 </tr>
 <tr>
   <td>Material assets</td>
@@ -498,8 +498,8 @@ surface before advancing a playable slice.</p>
   <td>Source formats</td>
   <td>Terrain source: <code>.dat</code></td>
   <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Terrain data parses into <code>BFTerrainDataSource</code>, terrain mesh output, and specified bounds.</td>
-  <td>Specification gap: terrain materials, splat/biome layers, water interaction, chunking, and runtime terrain systems.</td>
+  <td>Versioned terrain records parse into <code>BFTerrainDataSource</code> with relative height, height offset, biome index, cover, water-type, and linked-height/cliff facts. Mesh generation applies <code>world/terrain.xml</code>'s authored <code>nodeMinHeight</code> and world extents.</td>
+  <td>Recover appended water/render groups and the remaining version layouts.</td>
 </tr>
 <tr>
   <td>Animation assets</td>
@@ -850,8 +850,8 @@ surface before advancing a playable slice.</p>
   <td>Terrain projection</td>
   <td>Bevy terrain projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded <code>.dat</code> heights and source world extents produce the Bevy terrain mesh; biome ground texture and repeat sampling drive its current material. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid instead of floating as one flat plane. Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
-  <td>Implement biome cover/mix-mask/cliff layers, water, authored sky/skirt and lighting, then make runtime terrain edits feed the composed-height sampler used by decals.</td>
+  <td>Loaded relative <code>.dat</code> heights, authored <code>nodeMinHeight</code>, and source world extents produce the Bevy terrain mesh. Used <code>BFGBiome</code> definitions select ground, cover, and five source cliff textures; the current renderer compacts <code>(biome, surface)</code> buckets into 12 material chunks while preserving all 294,912 Alpine Big triangles. Saved path decals retain their authored footprint, yaw, texture, and bias while their vertices and UVs are rebuilt against the terrain grid. Terrain chunks, dirty queues, camera source, mesh tasks, and material projection update through Bevy assets.</td>
+  <td>Replace hard cell transitions with the recovered CPU patch compositor and ground/cover brush masks; emit patch-local clamped UV0 plus globally anchored detail UV1; apply the original <code>MODULATE2X</code> detail stage; implement water plus authored sky/skirt and lighting; then make runtime terrain edits feed the composed-height sampler used by decals and fitted components. <code>mixMask</code> belongs to mix-paint flag generation rather than loaded-map shading.</td>
 </tr>
 <tr>
   <td>Placement</td>
@@ -898,8 +898,8 @@ surface before advancing a playable slice.</p>
   <td>Traversability/pathfinding</td>
   <td>Collision, traversability, pathfinding, ground-fit</td>
   <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Startup validates traversability/world/entity-trigger contracts; <code>BFGWorldRuntime</code> keeps active world/session state, default-world-size context, traversability invalidation generation, traversability visibility toggles, loaded entity source data through <code>active_world</code>, placement/autoplacement entity creation, and source <code>BFGEventRecord</code> publication as Bevy world events. Active-world replacement now publishes the specified detach-world fact before loading and attaching the new world. <code>BFG_MOVE_ENTITY</code> is represented as a native/source token, with payload and handler semantics still unspecified.</td>
-  <td>Specification gap: <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, ground-fit call sites, and the <code>BFG_MOVE_ENTITY</code> payload/handler path.</td>
+  <td>Startup validates traversability/world/entity-trigger contracts; <code>BFGWorldRuntime</code> keeps active world/session state, default-world-size context, traversability invalidation generation, traversability visibility toggles, loaded entity source data through <code>active_world</code>, placement/autoplacement entity creation, and source <code>BFGEventRecord</code> publication as Bevy world events. Active-world replacement publishes the specified detach-world fact before loading and attaching the new world. Inherited <code>BFGroundFitComponent</code> and <code>BFSkewComponent</code> data now terrain-fit and slope authored curb segments. <code>BFG_MOVE_ENTITY</code> is represented as a native/source token, with payload and handler semantics still unspecified.</td>
+  <td>Recover the general component update/collision contract beyond curb segments, <code>BFGTraversabilityMgr</code>, <code>BFGPathFinderMgr</code>, and the <code>BFG_MOVE_ENTITY</code> payload/handler path.</td>
 </tr>
 <tr>
   <td>AI</td>
@@ -1194,16 +1194,16 @@ surface before advancing a playable slice.</p>
   <td>Renderer bridge</td>
   <td>Bevy render bridge</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently, pending source-document handles remain alive across frames, BFB instances share prepared geometry, and terrain decals use terrain-conforming meshes. Alpine Big acceptance now observes 879 authored visual requests, 12 parsed model documents, 14 ready model presentations, and 165 spawned object meshes alongside the terrain.</td>
-  <td>Resolve the remaining model requests, correct model scale/ground fitting and materials, consume loader-emitted handles throughout, and implement the missing environment, water, lighting, animation, and effect surfaces.</td>
+  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently; pending model and material handles remain alive across frames; BFB logical parts bake hierarchy transforms, group by exact material, and share prepared geometry; terrain decals use terrain-conforming meshes. Alpine Big acceptance observes 879 authored visual requests, 12 parsed model documents, 21 ready model presentations, 22 retained material documents, and all 879 requested visuals spawned alongside the terrain.</td>
+  <td>Add distance-based BFB LOD selection and billboard orientation; finish material render-state fidelity; then implement the missing environment, water, lighting, animation, and effect surfaces.</td>
 </tr>
 <tr>
   <td>Scene graph</td>
   <td>Scene graph</td>
   <td>Actor, camera, decal, LOD, resource caches</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded <code>BFSceneGraphComponent</code> and <code>BFNISceneGraphComponent</code> records project authored model paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. The vertical acceptance path proves visible gate, rock, curb, and flag instances from the loaded Alpine Big world.</td>
-  <td>Finish all requested entity types, terrain-ground fence/path segments, original scale/orientation, LOD selection, multi-mesh materials, animation, and actor behavior.</td>
+  <td>Loaded <code>BFSceneGraphComponent</code> and <code>BFNISceneGraphComponent</code> records project authored model paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. BFB projection uses source logical mesh slices and hierarchy transforms rather than concatenating raw shared buffers, eliminating the exploded front-gate geometry. Parent binder components contribute source ground-fit and BFSkew shear behavior to curb segment transforms, including terrain elevation and endpoint slope.</td>
+  <td>Recover curve-segment binder selection, elevated fitting surfaces, runtime LOD/billboard behavior, animation, and actor behavior.</td>
 </tr>
 <tr>
   <td>Materials</td>
@@ -1226,8 +1226,8 @@ surface before advancing a playable slice.</p>
   <td>Camera</td>
   <td>Camera commands and projection</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded source camera state projects to a live Bevy 3D overhead camera over the original world extent. W/A/S/D pan, wheel zoom, source UI zoom/rotate commands, overhead bounds, first-person/follow/rail/guest-view state, command-reader effects, mouse-look transitions, and <code>ZT_CAMERA_MOVED</code> publication are represented or live in Bevy owners.</td>
-  <td>Recover exact overhead command-reader key activation, momentary UI control release, projection/curve/timing semantics, and remaining mode coupling against original runtime behavior.</td>
+  <td>Loaded source camera state projects to a live Bevy 3D overhead camera over the original world extent. The pose composes the original root, vertical offset, look-at distance, pitch-rotation, zoom, and saved roll hierarchy rather than orbiting one inferred eye-target vector. W/A/S/D pan uses the source forward direction and half-pi sine acceleration; wheel zoom, source UI zoom/rotate commands, overhead bounds, first-person/follow/rail/guest-view state, command-reader effects, mouse-look transitions, and <code>ZT_CAMERA_MOVED</code> publication are represented or live in Bevy owners.</td>
+  <td>Recover terrain/collision-backed camera fitting, parenting-node follow transitions, sub-minimum zoom residual, profile-tier maximum zoom, exact momentary UI control release, and remaining mode coupling.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1337,7 +1337,7 @@ gaps when implementation is blocked.</p>
 
 <script id="openzt2-live-reload">
 (()=>{
- const current="023689350d448490";
+ const current="a6869b3ad1633930";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
