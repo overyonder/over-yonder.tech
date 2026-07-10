@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="ad4f8d765e4b44ea">
+<meta name="openzt2-site-version" content="f79c425f815965f4">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Original Game Functional Specification</title>
 <style>
@@ -73,44 +73,35 @@ th{background:var(--soft)}
 <section class="source-progress-grid" aria-label="Source-shaped C++ recovery frontier">
  <div class="source-progress-card primary">
   <h3>Source-Shaped C++ Recovery Frontier</h3>
-  <p class="source-progress-note">These bars track the native C++ reconstruction surface consumed by the functional specification. They measure recovered facts represented as authored-source concepts, not compile success.</p>
+  <p class="source-progress-note">These bars track the manual native C++ reconstruction surface consumed by the functional specification. They measure recovered facts represented as authored-source concepts, not generated export coverage or compile success.</p>
  </div>
  
  <div class="source-progress-card">
   <h3>Classes</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Classes: emitted c++ classes 730, recovered class rows not source-shaped 972"><div class="source-seg source-seg-done" style="width:42.890717%" title="Emitted C++ classes: 730">42.9%</div><div class="source-seg source-seg-open" style="width:57.109283%" title="Recovered class rows not source-shaped: 972">57.1%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Classes: promoted source classes 838, recovered class rows not promoted 864"><div class="source-seg source-seg-done" style="width:49.236193%" title="Promoted source classes: 838">49.2%</div><div class="source-seg source-seg-open" style="width:50.763807%" title="Recovered class rows not promoted: 864">50.8%</div></div>
   <dl class="source-metric-list">
-   <dt>Emitted C++ classes</dt><dd>730</dd>
-   <dt>Recovered class rows not source-shaped</dt><dd>972</dd>
+   <dt>Promoted source classes</dt><dd>838</dd>
+   <dt>Recovered class rows not promoted</dt><dd>864</dd>
   </dl>
-  <p class="source-progress-note">Class declarations emitted from recovered class facts over all recovered class rows.</p>
+  <p class="source-progress-note">Manual class declarations backed by source-promotion facts over all recovered class rows.</p>
  </div>
  <div class="source-progress-card">
   <h3>Virtual / Method Surface</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Virtual / Method Surface: emitted virtual methods 9,088, vtable slot rows not source-shaped 32,663"><div class="source-seg source-seg-done" style="width:21.767143%" title="Emitted virtual methods: 9,088">21.8%</div><div class="source-seg source-seg-open" style="width:78.232857%" title="Vtable slot rows not source-shaped: 32,663">78.2%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Virtual / Method Surface: promoted method declarations 5,913, unpromoted vtable slot rows 35,838"><div class="source-seg source-seg-done" style="width:14.162535%" title="Promoted method declarations: 5,913">14.2%</div><div class="source-seg source-seg-open" style="width:85.837465%" title="Unpromoted vtable slot rows: 35,838">85.8%</div></div>
   <dl class="source-metric-list">
-   <dt>Emitted virtual methods</dt><dd>9,088</dd>
-   <dt>Vtable slot rows not source-shaped</dt><dd>32,663</dd>
+   <dt>Promoted method declarations</dt><dd>5,913</dd>
+   <dt>Unpromoted vtable slot rows</dt><dd>35,838</dd>
   </dl>
-  <p class="source-progress-note">Class-owned virtual declarations emitted over the recovered vtable-slot perimeter.</p>
+  <p class="source-progress-note">Manual class-owned method declarations over the recovered vtable-slot perimeter.</p>
  </div>
  <div class="source-progress-card">
   <h3>Fields</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Fields: emitted class fields 4,366, field facts not source-shaped 3,118"><div class="source-seg source-seg-done" style="width:58.337787%" title="Emitted class fields: 4,366">58.3%</div><div class="source-seg source-seg-open" style="width:41.662213%" title="Field facts not source-shaped: 3,118">41.7%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Fields: promoted fields 3,492, field facts not in class declarations 3,992"><div class="source-seg source-seg-done" style="width:46.659540%" title="Promoted fields: 3,492">46.7%</div><div class="source-seg source-seg-open" style="width:53.340460%" title="Field facts not in class declarations: 3,992">53.3%</div></div>
   <dl class="source-metric-list">
-   <dt>Emitted class fields</dt><dd>4,366</dd>
-   <dt>Field facts not source-shaped</dt><dd>3,118</dd>
+   <dt>Promoted fields</dt><dd>3,492</dd>
+   <dt>Field facts not in class declarations</dt><dd>3,992</dd>
   </dl>
-  <p class="source-progress-note">Recovered layout facts that are now represented as C++ class members.</p>
- </div>
- <div class="source-progress-card">
-  <h3>Source Function Export</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Source Function Export: source-emitted functions 16,327, externalized or pending functions 11,518"><div class="source-seg source-seg-done" style="width:58.635303%" title="Source-emitted functions: 16,327">58.6%</div><div class="source-seg source-seg-open" style="width:41.364697%" title="Externalized or pending functions: 11,518">41.4%</div></div>
-  <dl class="source-metric-list">
-   <dt>Source-emitted functions</dt><dd>16,327</dd>
-   <dt>Externalized or pending functions</dt><dd>11,518</dd>
-  </dl>
-  <p class="source-progress-note">Importable oracle functions currently represented in the generated source tree.</p>
+  <p class="source-progress-note">Manual layout facts represented as C++ class members.</p>
  </div>
  <div class="source-progress-card">
   <h3>Function ABI Facts</h3>
@@ -141,10 +132,10 @@ th{background:var(--soft)}
  </div>
  <div class="source-progress-card">
   <h3>Inheritance / Vtable Collapse</h3>
-  <div class="source-stacked-bar" role="img" aria-label="Inheritance / Vtable Collapse: inherited slot facts 16,734, slots still emitted or unresolved 25,017"><div class="source-seg source-seg-done" style="width:40.080477%" title="Inherited slot facts: 16,734">40.1%</div><div class="source-seg source-seg-open" style="width:59.919523%" title="Slots still emitted or unresolved: 25,017">59.9%</div></div>
+  <div class="source-stacked-bar" role="img" aria-label="Inheritance / Vtable Collapse: inherited slot facts 16,774, slots still emitted or unresolved 24,977"><div class="source-seg source-seg-done" style="width:40.176283%" title="Inherited slot facts: 16,774">40.2%</div><div class="source-seg source-seg-open" style="width:59.823717%" title="Slots still emitted or unresolved: 24,977">59.8%</div></div>
   <dl class="source-metric-list">
-   <dt>Inherited slot facts</dt><dd>16,734</dd>
-   <dt>Slots still emitted or unresolved</dt><dd>25,017</dd>
+   <dt>Inherited slot facts</dt><dd>16,774</dd>
+   <dt>Slots still emitted or unresolved</dt><dd>24,977</dd>
   </dl>
   <p class="source-progress-note">Vtable slots already classified as inherited same-target behavior.</p>
  </div>
@@ -3698,7 +3689,7 @@ original class or manager in this specification.</p>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';const t=()=>document.documentElement.dataset.theme==='dark'?'dark':'neutral';mermaid.initialize({startOnLoad:true,theme:t(),securityLevel:'loose'});</script>
 <script id="openzt2-live-reload">
 (()=>{
- const current="ad4f8d765e4b44ea";
+ const current="f79c425f815965f4";
  const endpoint="site-version.json";
  const check=async()=>{
   try{

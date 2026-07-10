@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="ad4f8d765e4b44ea">
+<meta name="openzt2-site-version" content="f79c425f815965f4">
 <title>Byte Range Map</title>
 <link rel="prefetch" href="index.html">
 <style>
@@ -87,7 +87,7 @@ pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important
 </main>
 <script>
 let payload;
-const MAP_URLS=["zt-byte-range-map.tsv?v=cbbbe5a02cba","../docs/analysis/zt-byte-range-map.tsv?v=cbbbe5a02cba"];
+const MAP_URLS=["zt-byte-range-map.tsv?v=bd0ba0d61da1","../docs/analysis/zt-byte-range-map.tsv?v=bd0ba0d61da1"];
 async function fetchMap(urls){
  let lastError="";
  for(const url of urls){
@@ -788,7 +788,7 @@ initCommonControls();
 loadPayload().then(()=>{for(const [space,tree] of Object.entries(payload))makeExplorer(space,tree)}).catch(error=>{document.getElementById("spaces").innerHTML=`<p style="color:#e05252">Failed to load byte range map: ${error.message}</p>`});
 </script></body><script id="openzt2-live-reload">
 (()=>{
- const current="ad4f8d765e4b44ea";
+ const current="f79c425f815965f4";
  const endpoint="site-version.json";
  const check=async()=>{
   try{
