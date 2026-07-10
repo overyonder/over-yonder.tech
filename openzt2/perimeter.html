@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
+<meta name="openzt2-site-version" content="144c1079c0f1d14d">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenZT2 — Binary Perimeter</title>
 <style>
@@ -336,5 +337,21 @@ Promise.all([
  table(enrichFunctionRowsWithVtableStats(fp,vtableMethodStats(vt)),"frows",["address","size","name","region","status","provenance","vtable_slot_rows","vtable_slot_example","domain"],"fsearch","fstatus","fshown","fcount");
  table(gp,"grows",["address","section","name","status","family"],"gsearch","gstatus","gshown","gcount");
 }).catch(e=>{document.querySelector("main").insertAdjacentHTML("beforeend",`<p class="sub">Failed to load perimeter data: ${esc(e.message)}</p>`)});
+</script>
+<script id="openzt2-live-reload">
+(()=>{
+ const current="144c1079c0f1d14d";
+ const endpoint="site-version.json";
+ const check=async()=>{
+  try{
+   const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
+   if(!response.ok)return;
+   const latest=(await response.json()).version;
+   if(latest&&latest!==current)location.reload();
+  }catch(_){
+  }
+ };
+ setInterval(check,60000);
+})();
 </script>
 </html>

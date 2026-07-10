@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
+<meta name="openzt2-site-version" content="144c1079c0f1d14d">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenZT2 — Reconstruction Dashboard</title>
 <style>
@@ -136,5 +137,21 @@ function planProgress(source){
   note:domains?`${total.toLocaleString()} work-board rows across ${domains.toLocaleString()} top-level domains.`:`${total.toLocaleString()} work-board rows.`
  };
 }
+</script>
+<script id="openzt2-live-reload">
+(()=>{
+ const current="144c1079c0f1d14d";
+ const endpoint="site-version.json";
+ const check=async()=>{
+  try{
+   const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
+   if(!response.ok)return;
+   const latest=(await response.json()).version;
+   if(latest&&latest!==current)location.reload();
+  }catch(_){
+  }
+ };
+ setInterval(check,60000);
+})();
 </script>
 </html>
