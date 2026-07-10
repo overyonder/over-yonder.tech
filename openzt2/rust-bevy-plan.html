@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="b8dc13c9fef99fee">
+<meta name="openzt2-site-version" content="8e2696182ce20166">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoo Tycoon 2 Reconstruction - Rust/Bevy Plan</title>
 <style>
@@ -267,34 +267,34 @@ path and its acceptance command resolves in the current workspace.</p>
 <section class="plan-progress-grid" aria-label="Implementation work-board status summary">
  <div class="plan-progress-card primary">
   <h3>Implementation Work Board Progress</h3>
-  <div class="plan-stacked-bar" role="img" aria-label="runs 24, loaded 21, recorded 45, planned 21, adapter 5">
-    <div class="plan-seg plan-seg-runs" style="width:20.689655%" title="Runs: 24">20.7%</div>
-    <div class="plan-seg plan-seg-loaded" style="width:18.103448%" title="Loaded: 21">18.1%</div>
-    <div class="plan-seg plan-seg-recorded" style="width:38.793103%" title="Recorded: 45">38.8%</div>
-    <div class="plan-seg plan-seg-planned" style="width:18.103448%" title="Planned: 21">18.1%</div>
-    <div class="plan-seg plan-seg-adapter" style="width:4.310345%" title="Adapter: 5">4.3%</div>
+  <div class="plan-stacked-bar" role="img" aria-label="runs 30, loaded 16, recorded 44, planned 19, adapter 5">
+    <div class="plan-seg plan-seg-runs" style="width:26.315789%" title="Runs: 30">26.3%</div>
+    <div class="plan-seg plan-seg-loaded" style="width:14.035088%" title="Loaded: 16">14.0%</div>
+    <div class="plan-seg plan-seg-recorded" style="width:38.596491%" title="Recorded: 44">38.6%</div>
+    <div class="plan-seg plan-seg-planned" style="width:16.666667%" title="Planned: 19">16.7%</div>
+    <div class="plan-seg plan-seg-adapter" style="width:4.385965%" title="Adapter: 5">4.4%</div>
   </div>
   <div class="plan-legend">
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 24</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 21</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 45</div>
-    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 21</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-runs"></span>Runs: 30</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-loaded"></span>Loaded: 16</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-recorded"></span>Recorded: 44</div>
+    <div class="plan-legend-row"><span class="plan-swatch plan-seg-planned"></span>Planned: 19</div>
     <div class="plan-legend-row"><span class="plan-swatch plan-seg-adapter"></span>Adapter: 5</div>
   </div>
-  <p class="plan-progress-note">116 work-board rows across 67 top-level domains.</p>
+  <p class="plan-progress-note">114 work-board rows across 65 top-level domains.</p>
  </div>
  <div class="plan-progress-card">
   <h3>Delivery Shape</h3>
   <dl class="plan-metric-list">
    <dt>Live / loaded / recorded</dt><dd>90</dd>
-   <dt>Planned / mapping</dt><dd>21</dd>
+   <dt>Planned / mapping</dt><dd>19</dd>
    <dt>Adapter-backed</dt><dd>5</dd>
   </dl>
  </div>
  <div class="plan-progress-card">
   <h3>Rows By Status</h3>
   <dl class="plan-metric-list">
-   <dt>Runs</dt><dd>24</dd><dt>Loaded</dt><dd>21</dd><dt>Recorded</dt><dd>45</dd><dt>Planned</dt><dd>21</dd><dt>Adapter</dt><dd>5</dd>
+   <dt>Runs</dt><dd>30</dd><dt>Loaded</dt><dd>16</dd><dt>Recorded</dt><dd>44</dd><dt>Planned</dt><dd>19</dd><dt>Adapter</dt><dd>5</dd>
   </dl>
  </div>
 </section>
@@ -465,9 +465,9 @@ surface before advancing a playable slice.</p>
   <td>Model assets</td>
   <td>Source formats</td>
   <td>NetImmerse models: <code>.nif</code></td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>NIF parses into <code>Zt2Model</code> and Bevy scene/model outputs: meshes, materials, texture handles, lights, billboard hints, shader-binding hints, and particle metadata. Both <code>NiTriStrips</code> and <code>NiTriShape</code> geometry project into Bevy meshes; this makes the inherited ibex actor model visible in its source rest pose.</td>
-  <td>Recover footer root references, local hierarchy transforms, skinning and controllers, per-part material specialization, particle simulation, animation binding, and uncommon block semantics.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>NIF footer roots, local hierarchy transforms, named bones, bind transforms, explicit and partition vertex weights, per-part materials, and <code>NiTriShape</code> skin bindings project into Bevy scenes. The ibex body and ponytail render through two <code>SkinnedMesh</code> entities against their source skeleton. Lights, billboards, shader hints, particles, and <code>NiTriStrips</code> remain represented.</td>
+  <td>Recover controller and uncommon-block semantics, particle simulation, runtime LOD/billboard behavior, and the remaining skinned model variants.</td>
 </tr>
 <tr>
   <td>Model assets</td>
@@ -505,17 +505,17 @@ surface before advancing a playable slice.</p>
   <td>Animation assets</td>
   <td>Source formats</td>
   <td>Animation clips: <code>.bf</code></td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Blue Fang animation clips parse and emit Bevy <code>AnimationClip</code> handles with specified duration.</td>
-  <td>Translate curves/channels and bind clips to model skeletons.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Blue Fang clips preserve time markers and emit Bevy translation, quaternion-rotation, and scale curves keyed to named skeleton targets. The shipped ibex graph resolves all 124 referenced clips; rare quadratic Euler/scale controls remain preserved without guessed projection.</td>
+  <td>Recover quadratic interpolation/control semantics, animation events, and remaining channel kinds.</td>
 </tr>
 <tr>
   <td>Animation assets</td>
   <td>Source formats</td>
   <td>Animation graphs: <code>.bfm</code></td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Animation graphs parse and emit Bevy animation graph output with referenced clip handles.</td>
-  <td>Specification gap: original graph semantics, model/skeleton association, and playback integration.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>BFM assets preserve named clips, source references, graph/state memberships, exact Bevy animation node indices, and model association. Actor scenes bind named NIF descendants to their live <code>AnimationPlayer</code>; source task/locomotion tokens switch clips without rebuilding the actor on every movement tick.</td>
+  <td>Recover original blend, transition, interruption, and graph-state arbitration semantics.</td>
 </tr>
 <tr>
   <td>Animation assets</td>
@@ -561,9 +561,9 @@ surface before advancing a playable slice.</p>
   <td>AI</td>
   <td>Source formats</td>
   <td>AI task and behavior documents: <code>.tsk</code>, <code>.beh</code></td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td>Task/behavior source documents parse and hydrate current task-catalog records where specified.</td>
-  <td>Execute task and behavior data through Bevy AI/runtime systems.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Task/behavior documents hydrate the task catalog; self-target selectors, subject qualifiers, live-need evaluation, behavior/play-set choice, authored duration ranges, locomotion speed, and completion mutations execute for the ibex slice.</td>
+  <td>Extend execution through spatial target sensing, reservations, failures/follow-ups, tokens, and non-self behavior families.</td>
 </tr>
 <tr>
   <td>Locale</td>
@@ -738,8 +738,8 @@ surface before advancing a playable slice.</p>
   <td>Entity model</td>
   <td>Loaded-world ECS bootstrap</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded-world source entities, terrain chunks, camera state, AI source records, and selected UI panel data have Bevy bootstrap/projection paths for the specified surfaces. The accepted ibex slice creates a live ECS entity from source catalog selection, mutates source-backed cash, resolves its inherited actor graph, and projects its static model.</td>
-  <td>Continue that <code>BFGEntity</code> path through selection, AI, needs, locomotion, animation, sound, and lifecycle mutation.</td>
+  <td>Loaded-world source entities, terrain chunks, camera state, AI records, and selected UI panel data have Bevy bootstrap/projection paths. The accepted ibex purchase creates one live ECS entity, mutates source-backed cash, owns inherited need/task state, moves its <code>Transform</code>, samples terrain height, and projects the same actor through its BFM/NIF skeleton.</td>
+  <td>Continue the <code>BFGEntity</code> path through selection, sound, persistence, spatial interaction, and lifecycle mutation.</td>
 </tr>
 <tr>
   <td>Entity</td>
@@ -769,9 +769,9 @@ surface before advancing a playable slice.</p>
   <td>Animal</td>
   <td>Animal model</td>
   <td>Animal type definitions</td>
-  <td><span class="plan-status plan-status-recorded">recorded</span></td>
-  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state are represented; Bevy keeps the live animal type catalog and startup validates adoption/favorite source managers without storing unused manager mirrors. The ibex family now hydrates through its source inheritance chain into a male adoption row, inherited build transaction, actor graph, and visible static world entity.</td>
-  <td>Extend the ibex family through AI/entity data, needs, locomotion, animation, sound, selection, and lifecycle.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Species, family, biome, endangerment, lifecycle, variant, habitat, disease, training, crate, adoption, and release state are represented; effective source inheritance supplies the live ibex with 17 state variables, authored need adjustments and cadence, its male adoption row, price, actor graph, and model.</td>
+  <td>Extend the live family through sound, selection/info bindings, reproduction, aging, death, release, and persistence.</td>
 </tr>
 <tr>
   <td>Animal</td>
@@ -801,9 +801,9 @@ surface before advancing a playable slice.</p>
   <td>Animal</td>
   <td>Behavior slice</td>
   <td>Species behavior slice</td>
-  <td><code>in progress</code></td>
-  <td>The first ibex slice connects source definition, gender-filtered catalog row, inherited price, placement, ECS ownership, BFM actor graph, referenced NIF, and static rendering. AI task/behavior, locomotion, skeleton binding, animation, sound, and needs remain outside this checkpoint.</td>
-  <td>Complete the ibex vertical behavior pack, beginning with NIF hierarchy/skinning and BF clip binding, then source task/behavior execution, locomotion, needs, and sound.</td>
+  <td><span class="plan-status plan-status-runs">runs</span></td>
+  <td>Living Animal acceptance connects source definition, gender-filtered catalog row, inherited $3,000 price, placement, ECS ownership, live needs, self-task scoring/completion, terrain-fitted locomotion, rooted and skinned NIF scene, and BF/BFM playback. The verified source sequence advances <code>Groom</code> → <code>KickBack</code> → <code>MediumWander</code>, switches to <code>Walk</code>, and moves the visibly rendered ibex.</td>
+  <td>Add sound, entity selection/info panels, spatial food/water/social target acquisition, steering/avoidance, reservations, and lifecycle behavior.</td>
 </tr>
 <tr>
   <td>Entity info</td>
@@ -858,7 +858,7 @@ surface before advancing a playable slice.</p>
   <td>Placement</td>
   <td>Validation, preview, commit, transactions, undo</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Source construction activation populates authored building and animal catalogs; selecting an available row dispatches its original placement message, and accepted commits spawn through <code>BFGWorldRuntime</code>, charge the inherited source economy component, and record a placement undo transaction. Automated acceptance places and undoes an affordable source building, then purchases and visibly spawns the inherited <code>Ibex_Adult_M</code> actor for $3,000.</td>
+  <td>Source construction activation populates authored building and animal catalogs; selecting an available row dispatches its original placement message, and accepted commits spawn through <code>BFGWorldRuntime</code>, charge the inherited source economy component, and record a placement undo transaction. Automated acceptance places and undoes a source building, then purchases the inherited <code>Ibex_Adult_M</code> for $3,000 at a terrain-valid, camera-visible point and observes its live movement.</td>
   <td>Connect physical world-pointer placement and preview, footprint/slope/headroom/traversability checks, failure feedback, repeated placement policy, and fence/path specializations.</td>
 </tr>
 <tr>
@@ -905,9 +905,9 @@ surface before advancing a playable slice.</p>
   <td>AI</td>
   <td>AI source</td>
   <td>Task templates and behavior documents</td>
-  <td><span class="plan-status plan-status-loaded">loaded</span></td>
-  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution data, completion/failure records, behavior sets, and per-tick behavior/source, animation-graph, locomotion, and steering requests hydrate or publish from source-backed runtime effects; <code>BFAIMgr</code> records those source-request statuses while specified execution runtimes are incomplete. Startup validates influence/guest manager contracts while <code>BFAIMgr</code> stores task, behavior, source managers, and active task roots currently consumed by runtime execution.</td>
-  <td>Hydrate one task document end to end, instantiate <code>BFAITaskRoot</code>, and advance it through <code>BFAIMgr</code>.</td>
+  <td><code>in progress</code></td>
+  <td><code>.tsk</code>/<code>.beh</code> templates, selectors, eval data, execution/completion records, behavior sets, and source requests hydrate into <code>BFAIMgr</code>. The live ibex evaluates self-target source tasks against its need state, advances authored play durations, applies completion mutations, and exposes behavior/locomotion animation tokens.</td>
+  <td>Connect spatial target acquisition, task-root reservation/failure semantics, thinker cadence/tie-breaks, and the remaining behavior families.</td>
 </tr>
 <tr>
   <td>AI</td>
@@ -937,9 +937,9 @@ surface before advancing a playable slice.</p>
   <td>Movement</td>
   <td>Movement</td>
   <td>Steering and locomotion</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Steering components, locomotion source requests, movement arbitration, obstacle/entity avoidance, and animation realization remain specification gaps; <code>BFAIMgr</code> records locomotion and steering source-request statuses until the specified runtimes can execute them.</td>
-  <td>Specification gap: <code>BFSteeringMgr</code>, <code>BFLocomotionMgr</code>, and <code>BFLocoAnimate</code>.</td>
+  <td><code>in progress</code></td>
+  <td>Authored wander speed tokens drive deterministic Bevy ECS heading and displacement, terrain height is resampled during movement, and <code>BFLocoAnimate</code>-shaped speed categories select <code>Walk</code>, <code>Run</code>, or <code>Charge</code> clips.</td>
+  <td>Recover <code>BFSteeringMgr</code> arbitration, target/path following, obstacle/entity/water avoidance, bounds response, turn rates, and exact speed constants.</td>
 </tr>
 <tr>
   <td>Influence</td>
@@ -1194,16 +1194,16 @@ surface before advancing a playable slice.</p>
   <td>Renderer bridge</td>
   <td>Bevy render bridge</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. Loaded-world models start independently; pending model and material handles remain alive across frames; BFB logical parts bake hierarchy transforms, group by exact material, and share prepared geometry; BFM actor graphs resolve their referenced NIF models; NIF <code>NiTriShape</code> and <code>NiTriStrips</code> parts render; terrain decals use terrain-conforming meshes. Alpine Big Living Animal acceptance observes 880 authored visual requests and 880 loaded visuals, 13 parsed model documents, 22 ready model presentations, and zero rejected presentations.</td>
-  <td>Recover NIF root hierarchy/skinning and per-part materials, then bind BF animation clips; add distance-based BFB LOD selection and billboard orientation; finish environment, water, lighting, and effect surfaces.</td>
+  <td>ECS transforms, terrain/world data, asset-loader model/material records, and presentation caches feed Bevy render/UI/audio presentation. BFB logical parts preserve hierarchy/material boundaries; BFM actors now load rooted NIF scenes, attach skin bindings, bind named animation targets, and retain their scene/player while ECS movement updates the root transform. Alpine Big Living Animal acceptance observes 880 authored and loaded visuals, two ibex skinned meshes, 56 bound animation targets, 21 ready cached model presentations plus the actor scene, and zero rejected presentations.</td>
+  <td>Add distance-based BFB LOD selection and billboard orientation; finish environment, water, lighting, effects, and the remaining model/controller surfaces.</td>
 </tr>
 <tr>
   <td>Scene graph</td>
   <td>Scene graph</td>
   <td>Actor, camera, decal, LOD, resource caches</td>
   <td><span class="plan-status plan-status-runs">runs</span></td>
-  <td>Loaded <code>BFSceneGraphComponent</code>, <code>BFNISceneGraphComponent</code>, and inherited <code>BFActorComponent</code> records project authored model or actor-graph paths, transforms, scale, yaw, shared meshes, and resolved textures into Bevy entities. BFB projection uses source logical mesh slices and hierarchy transforms rather than concatenating raw shared buffers, eliminating the exploded front-gate geometry. Parent binder components contribute source ground-fit and BFSkew shear behavior to curb segment transforms, including terrain elevation and endpoint slope. The ibex actor currently renders as a static, flat/local-transform NIF presentation.</td>
-  <td>Recover NIF footer roots, hierarchy transforms, skinning, per-part materials, and animation; then recover curve-segment binder selection, elevated fitting surfaces, runtime LOD/billboard behavior, and actor behavior.</td>
+  <td>Loaded scene-graph and actor components project authored paths, transforms, scale, yaw, materials, skeleton hierarchy, and resolved textures into Bevy entities. NIF footer roots and local parentage are preserved, skinned mesh entity references remap with scene instances, and actor animation changes no longer force per-tick respawn. Parent binders retain ground-fit and BFSkew behavior for terrain-conforming curb segments.</td>
+  <td>Recover curve-segment binder selection, elevated fitting surfaces, runtime LOD/billboard behavior, controller blocks, and broader actor families.</td>
 </tr>
 <tr>
   <td>Materials</td>
@@ -1217,9 +1217,9 @@ surface before advancing a playable slice.</p>
   <td>Animation</td>
   <td>Animation</td>
   <td>Animation controllers, graphs, requests</td>
-  <td><span class="plan-status plan-status-planned">planned</span></td>
-  <td>Original animation graph/controller requests, blend/transition rules, text keys, and locomotion coupling are represented as source/runtime records; <code>BFAIMgr</code> records animation graph evaluation statuses pending the specified graph runtime.</td>
-  <td>Specification gap: <code>BFAnimController</code>, <code>BFAnimGraph</code>, <code>ANIM_*</code>, and text-key call sites.</td>
+  <td><code>in progress</code></td>
+  <td>Named BF transform curves play through live Bevy animation players on BFM-associated NIF skeletons, and source behavior/locomotion tokens select concrete clips for the ibex. Original blend/transition rules, controller requests, and text keys remain represented as source/runtime records.</td>
+  <td>Recover <code>BFAnimController</code>/<code>BFAnimGraph</code> blending, interruption, transition, <code>ANIM_*</code>, and text-key event semantics.</td>
 </tr>
 <tr>
   <td>Camera</td>
@@ -1337,7 +1337,7 @@ gaps when implementation is blocked.</p>
 
 <script id="openzt2-live-reload">
 (()=>{
- const current="b8dc13c9fef99fee";
+ const current="8e2696182ce20166";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
