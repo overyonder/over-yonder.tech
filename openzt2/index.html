@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="7d607807e715f336">
+<meta name="openzt2-site-version" content="3871049a3cdd89c9">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenZT2 — Reconstruction Dashboard</title>
 <style>
@@ -9,7 +9,7 @@
 :root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--frontier:#b16286;--bad:#cc241d}
 *{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
 button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
-.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1236px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1436px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
 .tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
 .nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
 main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
@@ -31,10 +31,10 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 .modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
 .modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
 .modal-box iframe{flex:1;border:0;width:100%}
-@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(260px,1.8fr) minmax(152px,1.2fr) 34px;width:min(calc(100vw - 24px),1380px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
+@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.7fr) minmax(110px,.9fr) minmax(96px,.8fr) minmax(260px,1.7fr) minmax(150px,1.1fr) minmax(124px,1fr) 34px;width:min(calc(100vw - 24px),1500px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(7,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
 </style>
 <body>
-<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a></nav>
+<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a><a href="asset-coverage.html"><span class="nav-icon" aria-hidden="true">⬡</span><span class="nav-label">Asset Coverage</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
  <p class="sub">A map of the reconstruction pipeline: evidence, ownership/behavior, and implementation.</p>
@@ -68,6 +68,10 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
   <div class="doc-card">
    <h3><a href="rust-bevy-plan.html">Rust/Bevy Plan</a></h3>
    <p>Tracks Rust/Bevy implementation progress for the specified ownership and behavior: what is planned, recorded, loaded, running, or adapted.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="asset-coverage.html">Native Asset Coverage</a></h3>
+   <p>Maps every original source family into the canonical engine-native asset type it should become, and distinguishes accepted zero-copy layouts from partial, prototype, passthrough, and missing contracts.</p>
   </div>
  </div>
 
@@ -140,7 +144,7 @@ function planProgress(source){
 </script>
 <script id="openzt2-live-reload">
 (()=>{
- const current="7d607807e715f336";
+ const current="3871049a3cdd89c9";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
