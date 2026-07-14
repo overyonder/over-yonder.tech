@@ -70,6 +70,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .hero h1 em { color: var(--signal-ink); font-weight: 400; }
 
 .performance-figure {
+  position: relative;
   width: min(100%, 920px);
   margin: 0 auto;
   padding: 20px 22px;
@@ -100,6 +101,19 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   animation: point-in .3s calc(.65s + var(--step) * .22s) ease-out forwards;
 }
 .stage-labels .intervention-before { text-anchor: end; }
+.mobile-connectors, .scroll-cue { display: none; }
+.mobile-connectors path {
+  fill: none;
+  stroke: var(--signal-hot);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 2 5;
+  marker-end: url(#mobile-arrowhead);
+  opacity: 0;
+  vector-effect: non-scaling-stroke;
+  animation: point-in .3s calc(.65s + var(--step) * .22s) ease-out forwards;
+}
+.mobile-arrowhead { fill: var(--signal-hot); }
 .discarded-work { fill: none; stroke: var(--signal-hot); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 5 5; opacity: .24; vector-effect: non-scaling-stroke; }
 .discarded-work path { animation: discarded 3s .45s ease-out both; }
 .progress-halo { fill: none; stroke: var(--signal-hot); stroke-width: 15; stroke-opacity: .12; vector-effect: non-scaling-stroke; }
@@ -284,6 +298,24 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   .performance-figure { min-width: 0; max-width: 100%; padding: 12px; }
   .plot-scroll { width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; scrollbar-color: var(--signal-hot) var(--dark-rule); scrollbar-width: thin; }
   .performance-figure svg { min-width: 850px; }
+  .mobile-connectors { display: inline; }
+  .scroll-cue {
+    position: absolute;
+    z-index: 3;
+    top: 43%;
+    right: 12px;
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid var(--signal-hot);
+    border-radius: 50%;
+    background: var(--forest);
+    color: var(--signal-hot);
+    box-shadow: 0 0 0 7px rgba(38,61,49,.78);
+    font: 18px/1 "SFMono-Regular", Consolas, monospace;
+    pointer-events: none;
+  }
   .performance-figure figcaption { margin-inline: 4px; font-size: 20px; }
   .premise, .range { grid-template-columns: 1fr; gap: 55px; padding: 88px 20px; }
   .premise { gap: 38px; padding-top: 64px; padding-bottom: 68px; }
@@ -326,6 +358,6 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
   .progress-line { stroke-dashoffset: 0; }
-  .plot-points g, .breach-fragments g, .stage-labels .intervention { opacity: 1; }
+  .plot-points g, .breach-fragments g, .stage-labels .intervention, .mobile-connectors path { opacity: 1; }
   .discarded-work path { opacity: .24; }
 }
