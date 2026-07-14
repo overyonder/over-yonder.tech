@@ -121,7 +121,7 @@
     <section class="evidence" id="evidence">
       <div class="section-heading light">
         <p>02 / Measured work</p>
-        <h2>Results, end to end.</h2>
+        <h2>How we remove performance limits.</h2>
       </div>
       <article class="result-case rstat-case">
         <div class="case-copy">
@@ -153,6 +153,7 @@
           <h3>222,242 entries, live in 420 milliseconds.</h3>
           <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
           <p>We designed one snapshot around its Rust producer and browser-based consumer. Parent indices replace repeated paths, while aligned columnar arrays replace per-entry objects. The Rust backend compresses that snapshot for transmission, and the browser reconstructs paths while viewing numeric columns in place.</p>
+          <a class="case-link" href="https://archivist.over-yonder.tech/">Visit Archivist <span>↗</span></a>
         </div>
         <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
           <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB isolated codec fixture</span></div>
@@ -251,7 +252,7 @@
 
     <section class="contact" id="contact">
       <p>Have a performance problem that has survived the usual fixes?</p>
-      <a href="mailto:overyonderstudios@gmail.com">Let’s find the real limit. <span>↗</span></a>
+      <a href="mailto:hello@over-yonder.tech">Let’s find the real limit. <span>↗</span></a>
       <small>Sydney, Australia · Working worldwide</small>
     </section>
   </main>
