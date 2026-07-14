@@ -114,7 +114,7 @@
       </div>
       <div class="premise-copy">
         <p class="premise-lead">Wheels spin. Loading bars creep. We all agree that computers are slow.</p>
-        <p><strong>But usually,</strong> the delay belongs to the software. Modern hardware can perform billions of operations a second, then sit idle behind a disk seek, network round trip, unnecessary copy or expensive abstraction. We measure the complete operation, find the mechanism imposing the delay, and remove it. An operation that took seconds can fall to milliseconds when the limiting mechanism disappears.</p>
+        <p><strong>But usually,</strong> software creates the delay. Hardware that can perform billions of operations a second sits idle through a disk seek, network round trip, unnecessary copy or expensive abstraction. We measure the complete operation, find exactly where the time goes and remove the cause. That's how seconds become milliseconds.</p>
       </div>
     </section>
 
@@ -127,11 +127,11 @@
         <div class="case-copy">
           <p class="case-index">01 / rstat</p>
           <h3>From roughly 800 milliseconds to 0.16 milliseconds.</h3>
-          <p class="case-summary">rstat began as a Linux status-bar monitor whose shell path took roughly 800 milliseconds per update.</p>
-          <p>Replacing the blocking power-profile service call with a direct sysfs read and optimizing procfs cut that to 15 milliseconds. Moving recurring process accounting into an extended Berkeley Packet Filter (eBPF) program cut the userspace refresh to 0.16 milliseconds on average.</p>
+          <p class="case-summary">rstat is a Linux monitor that supplies CPU, memory and per-process data to a desktop status bar. It replaced a shell module that took roughly 800 milliseconds to produce one update.</p>
+          <p>A long-running Rust collector retained state between updates. Replacing the blocking power-profile service call with a direct Linux sysfs read and collapsing three Linux process-filesystem (procfs) walks into one brought each update down to 15 milliseconds. An extended Berkeley Packet Filter (eBPF) program then moved recurring process accounting into the kernel, leaving 0.16 milliseconds of userspace work on average.</p>
           <a class="case-link" href="work/rstat.html">Read the case study <span>↗</span></a>
         </div>
-        <figure class="case-graphic bar-chart" aria-label="rstat improved from roughly 800 milliseconds for the original shell path, to 15 milliseconds after removing the power-profile service call and optimizing procfs, to a 0.16-millisecond average eBPF userspace refresh">
+        <figure class="case-graphic bar-chart" aria-label="The rstat Linux monitor improved from roughly 800 milliseconds for one shell-module update, to 15 milliseconds after replacing the power-profile service call and consolidating process-filesystem reads, to 0.16 milliseconds on average for an eBPF-backed userspace refresh">
           <div class="bar-row">
             <span>Shell + service call</span>
             <i style="--bar: 97.58%"></i>
@@ -148,7 +148,7 @@
             <strong>0.16 ms avg</strong>
           </div>
           <div class="bar-axis"><span>0.1 ms</span><span>1 ms</span><span>10 ms</span><span>100 ms</span><span>1 s</span></div>
-          <figcaption>Three working stages on a logarithmic scale. The complete path became 5,000 times faster.</figcaption>
+          <figcaption>The refresh fell from roughly 800 to 0.16 milliseconds: a 5,000-fold reduction.</figcaption>
         </figure>
       </article>
 
@@ -157,11 +157,11 @@
           <p class="case-index">02 / Archivist</p>
           <h3>222,242 entries, live in 420 milliseconds.</h3>
           <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
-          <p>We designed one snapshot around its Rust producer and browser-based consumer. Parent indices replace repeated paths, while aligned columnar arrays replace per-entry objects. The Rust backend compresses that snapshot for transmission, and the browser reconstructs paths while viewing numeric columns in place.</p>
+          <p>Archivist's Rust backend builds one compact snapshot for the browser-based interface. Parent indices replace repeated path strings, and aligned columnar arrays replace one object per entry. The backend compresses the snapshot for transmission. The browser reconstructs paths and reads numeric columns in place.</p>
           <a class="case-link" href="https://archivist.over-yonder.tech/">Visit Archivist <span>↗</span></a>
         </div>
         <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
-          <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB isolated codec fixture</span></div>
+          <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB benchmark snapshot</span></div>
           <div class="packet">
             <span class="packet-head"><b>Header metadata</b><small>small irregular MessagePack record</small></span>
             <span class="packet-parent"><b>Parent indices</b><small>replaces repeated paths</small></span>
@@ -175,21 +175,21 @@
             <div><b>2</b><span><strong>Typed-array views</strong><small>numeric columns are viewed in place</small></span></div>
             <div><b>3</b><span><strong>One UTF-8 decode</strong><small>basenames are reconstructed through parent indices</small></span></div>
           </div>
-          <figcaption>The browser applies all 222,242 entries 420 milliseconds after requesting the snapshot. A parallel Rust decoder produces the backend's resident copy in 174 milliseconds.</figcaption>
+          <figcaption>The browser applies all 222,242 entries 420 milliseconds after requesting the snapshot. In parallel, the backend decodes its own resident copy in 174 milliseconds.</figcaption>
         </figure>
       </article>
 
       <article class="result-case openzt2-case">
         <div class="case-copy">
           <p class="case-index">03 / OpenZT2</p>
-          <h3>Game data that's already in memory.</h3>
+          <h3>An entire game, mapped into memory.</h3>
           <p class="case-summary">OpenZT2 is a clean-room, native reconstruction of Zoo Tycoon 2. Its engine needs an entire game's converted assets without copying them through a conventional runtime cache.</p>
-          <p>A launcher converts source assets into immutable, versioned records whose archived Rust layout can be read directly. The game maps that native content pack into its virtual address space, validates typed references into the mapped bytes, and asks Linux to load selected page groups within an available-memory budget.</p>
+          <p>A launcher converts source assets into an immutable, versioned content pack laid out in the same binary form the Rust engine reads. The game maps the pack into its virtual address space, validates typed references into those mapped bytes and asks Linux to preload selected page groups within an available-memory budget.</p>
           <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
         </div>
-        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 maps a versioned rkyv pack read-only, selectively faults requested pages into the Linux page cache, and accesses those mapped bytes through typed archived references">
+        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 maps a versioned native content pack read-only, selectively faults requested pages into the Linux page cache, and accesses those mapped bytes through typed Rust references">
           <div class="memory-chain">
-            <div><strong>Native content pack</strong><small>versioned archived Rust records and aligned payload ranges</small></div>
+            <div><strong>Native content pack</strong><small>versioned records in the engine's Rust layout, with aligned payload ranges</small></div>
             <i><span>read-only memory map</span></i>
             <div><strong>Process address range</strong><small>the virtual addresses exist before any payload page is read</small></div>
           </div>
@@ -197,9 +197,9 @@
             <span class="page hot">4 KiB</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page">cold</span>
           </div>
           <div class="memory-operations">
-            <div><b>1 / Select resident pages</b><p>The preload routine walks the requested asset groups and stops at the available-memory budget.</p></div>
+            <div><b>1 / Choose pages to preload</b><p>The preload routine walks the requested asset groups and stops at the available-memory budget.</p></div>
             <div><b>2 / Fault selected pages</b><p>Touching selected payload pages asks Linux to populate those 4-KiB pages in the kernel page cache.</p></div>
-            <div><b>3 / Borrow typed data</b><p>Archive validation returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
+            <div><b>3 / Read typed records in place</b><p>Validating the mapped archive returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
           </div>
           <figcaption>After the selected pages are resident, asset hydration performs no file-open or read system calls. Untouched pages remain available through Linux's normal demand paging.</figcaption>
         </figure>
@@ -210,7 +210,7 @@
           <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>A vector-first language for CPUs.</h3>
           <p class="case-summary">Rake is a research programming language for expressing single-instruction, multiple-data (SIMD) work directly. It makes a CPU vector, called a rack, the primitive unit of computation.</p>
-          <p>Rake's compiler type-checks rack operations without first reducing them to scalar code. It carries that vector structure into the Multi-Level Intermediate Representation (MLIR), giving later compiler stages enough information to target the CPU's vector instructions.</p>
+          <p>Rake's compiler preserves rack operations as vectors through type checking and into the Multi-Level Intermediate Representation (MLIR). The MLIR retains the program's parallel structure in a form that can be lowered to CPU vector instructions.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
         <figure class="case-graphic compiler-graphic" aria-label="The current Rake compiler parses a fused float-rack expression, rejects unsupported features during type checking, and emits MLIR vector operations">
@@ -221,12 +221,12 @@
           <div class="compiler-path">
             <div><b>Parser</b><span>Builds the syntax tree, including language features still under development.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>Type checker</b><span>Accepts the implemented float-rack and mask subset; unsupported features stop with a WIP diagnostic.</span></div>
+            <div><b>Type checker</b><span>Checks the implemented float-rack and mask subset. Other parsed features produce a clear work-in-progress diagnostic.</span></div>
             <i aria-hidden="true"></i>
             <div><b>MLIR emitter</b><span>Produces width-parameterized floating-point vector operations for later compiler stages.</span></div>
           </div>
           <div class="current-boundary"><strong>Current implementation boundary</strong><span>MLIR text emission for vector CPU operations</span></div>
-          <figcaption>Rake currently emits MLIR text. The project doesn't yet claim lowering through the LLVM compiler infrastructure or generated-machine-code performance.</figcaption>
+          <figcaption>Rake's current compiler stops at MLIR text emission. It doesn't lower through LLVM or produce machine code.</figcaption>
         </figure>
       </article>
     </section>
