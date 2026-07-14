@@ -1,0 +1,67 @@
+{
+  "sites": [
+    {
+      "name": "Over Yonder",
+      "base_url": "https://over-yonder.tech",
+      "pages": [
+        { "path": "/", "schema": ["Organization", "WebSite"] },
+        { "path": "/work/rstat.html", "schema": ["Article"] }
+      ],
+      "excluded": [
+        "/capabilities.html",
+        "/company.html",
+        "/contact.html",
+        "/work/",
+        "/work/archivist.html",
+        "/writing/",
+        "/writing/article-name.html",
+        "/concepts/",
+        "/archived/legacy-site/"
+      ]
+    },
+    {
+      "name": "Archivist",
+      "base_url": "https://archivist.over-yonder.tech",
+      "pages": [
+        { "path": "/", "schema": ["SoftwareApplication"] },
+        { "path": "/performance.html", "schema": ["Article"] },
+        { "path": "/launching.html", "schema": ["Article"] },
+        { "path": "/retool.html", "schema": ["Article"] }
+      ],
+      "excluded": ["/app-demo/"]
+    },
+    {
+      "name": "OpenZT2",
+      "base_url": "https://openzt2.over-yonder.tech",
+      "pages": [
+        { "path": "/", "schema": ["SoftwareApplication"] },
+        { "path": "/zt-disk-map.html", "schema": ["TechArticle"] },
+        { "path": "/perimeter.html", "schema": ["TechArticle"] },
+        { "path": "/functional-specification.html", "schema": ["TechArticle"] },
+        { "path": "/clean-room-legal-roadmap.html", "schema": ["TechArticle"] }
+      ],
+      "excluded": [
+        "/source/",
+        "/source/zt-disk-map.html",
+        "/source/perimeter.html",
+        "/source/clean-room-legal-roadmap.html"
+      ]
+    },
+    {
+      "name": "Rake",
+      "base_url": "https://rake-lang.org",
+      "pages": [
+        { "path": "/", "schema": ["SoftwareApplication"] }
+      ],
+      "excluded": []
+    },
+    {
+      "name": "Pong AI",
+      "base_url": "https://pong.over-yonder.tech",
+      "pages": [
+        { "path": "/", "schema": ["SoftwareApplication"] }
+      ],
+      "excluded": []
+    }
+  ]
+}

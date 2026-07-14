@@ -1,0 +1,28 @@
+name: SEO audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/seo-sites.json"
+      - "tools/seo_audit.py"
+      - ".github/workflows/seo-audit.yml"
+  schedule:
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Audit deployed sites
+        run: python3 tools/seo_audit.py
