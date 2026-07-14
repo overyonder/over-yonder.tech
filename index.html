@@ -58,24 +58,24 @@
           </g>
 
           <g class="stage-labels">
-            <text class="domain" x="20" y="42">Workflow / product</text><text class="intervention" style="--step:0" x="466" y="42">remove unnecessary steps</text>
-            <text class="domain" x="20" y="68">System / distribution</text><text class="intervention" style="--step:1" x="489" y="68">remove service hops</text>
-            <text class="domain" x="20" y="94">Algorithm</text><text class="intervention" style="--step:2" x="512" y="94">reduce the amount of work</text>
-            <text class="domain" x="20" y="142">Data model / query plan</text><text class="intervention" style="--step:3" x="535" y="142">scan only necessary data</text>
-            <text class="domain" x="20" y="168">Data structure / access pattern</text><text class="intervention" style="--step:4" x="558" y="168">shorten each lookup</text>
-            <text class="domain" x="20" y="194">Allocation / garbage collection</text><text class="intervention" style="--step:5" x="581" y="194">reuse memory; avoid pauses</text>
-            <text class="domain" x="20" y="220">Data layout / locality</text><text class="intervention" style="--step:6" x="604" y="220">keep hot data together</text>
-            <text class="domain" x="20" y="246">Concurrency / synchronization</text><text class="intervention" style="--step:7" x="627" y="246">remove contention and waits</text>
-            <text class="domain" x="20" y="294">Language runtime / virtual machine</text><text class="intervention" style="--step:8" x="650" y="294">remove hot-path dispatch</text>
-            <text class="domain" x="20" y="320">Compiler / code generation</text><text class="intervention" style="--step:9" x="673" y="320">generate better machine code</text>
-            <text class="domain" x="20" y="368">Storage / filesystem / I/O</text><text class="intervention intervention-before" style="--step:10" x="668" y="368">avoid seeks, calls and copies</text>
-            <text class="domain" x="20" y="394">Network / interprocess calls</text><text class="intervention intervention-before" style="--step:11" x="691" y="394">batch calls; move fewer bytes</text>
-            <text class="domain" x="20" y="420">Operating system / scheduler</text><text class="intervention intervention-before" style="--step:12" x="714" y="420">move work into the kernel</text>
-            <text class="domain" x="20" y="468">Instruction set / vector execution</text><text class="intervention intervention-before" style="--step:13" x="737" y="468">do more work per instruction</text>
-            <text class="domain" x="20" y="494">Microarchitecture / cache / memory</text><text class="intervention intervention-before" style="--step:14" x="760" y="494">keep execution units fed</text>
-            <text class="domain" x="20" y="520">Graphics processor / accelerator</text><text class="intervention intervention-before" style="--step:15" x="783" y="520">run parallel work in hardware</text>
-            <text class="domain" x="20" y="568">Reconfigurable logic / FPGA</text><text class="intervention intervention-before" style="--step:16" x="806" y="568">build a dedicated datapath</text>
-            <text class="domain" x="20" y="594">Application-specific silicon / ASIC</text><text class="intervention intervention-before" style="--step:17" x="829" y="594">put the workload into silicon</text>
+            <text class="domain" x="20" y="42">Workflow / product</text><text class="intervention" style="--step:0" x="466" y="30">remove unnecessary steps</text>
+            <text class="domain" x="20" y="68">System / distribution</text><text class="intervention" style="--step:1" x="489" y="56">remove service hops</text>
+            <text class="domain" x="20" y="94">Algorithm</text><text class="intervention" style="--step:2" x="512" y="82">reduce the amount of work</text>
+            <text class="domain" x="20" y="142">Data model / query plan</text><text class="intervention" style="--step:3" x="535" y="130">scan only necessary data</text>
+            <text class="domain" x="20" y="168">Data structure / access pattern</text><text class="intervention" style="--step:4" x="558" y="156">shorten each lookup</text>
+            <text class="domain" x="20" y="194">Allocation / garbage collection</text><text class="intervention" style="--step:5" x="581" y="182">reuse memory; avoid pauses</text>
+            <text class="domain" x="20" y="220">Data layout / locality</text><text class="intervention" style="--step:6" x="604" y="208">keep hot data together</text>
+            <text class="domain" x="20" y="246">Concurrency / synchronization</text><text class="intervention" style="--step:7" x="627" y="234">remove contention and waits</text>
+            <text class="domain" x="20" y="294">Language runtime / virtual machine</text><text class="intervention" style="--step:8" x="650" y="282">remove hot-path dispatch</text>
+            <text class="domain" x="20" y="320">Compiler / code generation</text><text class="intervention" style="--step:9" x="673" y="308">generate better machine code</text>
+            <text class="domain" x="20" y="368">Storage / filesystem / I/O</text><text class="intervention intervention-before" style="--step:10" x="668" y="380">avoid seeks, calls and copies</text>
+            <text class="domain" x="20" y="394">Network / interprocess calls</text><text class="intervention intervention-before" style="--step:11" x="691" y="406">batch calls; move fewer bytes</text>
+            <text class="domain" x="20" y="420">Operating system / scheduler</text><text class="intervention intervention-before" style="--step:12" x="714" y="432">move work into the kernel</text>
+            <text class="domain" x="20" y="468">Instruction set / vector execution</text><text class="intervention intervention-before" style="--step:13" x="737" y="480">do more work per instruction</text>
+            <text class="domain" x="20" y="494">Microarchitecture / cache / memory</text><text class="intervention intervention-before" style="--step:14" x="760" y="506">keep execution units fed</text>
+            <text class="domain" x="20" y="520">Graphics processor / accelerator</text><text class="intervention intervention-before" style="--step:15" x="783" y="532">run parallel work in hardware</text>
+            <text class="domain" x="20" y="568">Reconfigurable logic / FPGA</text><text class="intervention intervention-before" style="--step:16" x="806" y="580">build a dedicated datapath</text>
+            <text class="domain" x="20" y="594">Application-specific silicon / ASIC</text><text class="intervention intervention-before" style="--step:17" x="829" y="606">put the workload into silicon</text>
           </g>
 
           <path class="progress-halo" d="M452 38L475 64 498 90 521 138 544 164 567 190 590 216 613 242 636 290 659 316 682 364 705 390 728 416 751 464 774 490 797 516 820 564 843 590"/>
