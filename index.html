@@ -158,7 +158,7 @@
           <h3>222,242 entries, live in 420 milliseconds.</h3>
           <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
           <p>Archivist's Rust backend builds one compact snapshot for the browser-based interface. Parent indices replace repeated path strings, and aligned columnar arrays replace one object per entry. The backend compresses the snapshot for transmission. The browser reconstructs paths and reads numeric columns in place.</p>
-          <a class="case-link" href="https://archivist.over-yonder.tech/">Visit Archivist <span>↗</span></a>
+          <a class="case-link" href="https://archivist.over-yonder.tech/performance.html">Read the performance article <span>↗</span></a>
         </div>
         <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
           <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB benchmark snapshot</span></div>
