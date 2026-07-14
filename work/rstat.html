@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How over|yonder replaced recurring Linux procfs process walks with Rust and eBPF, reducing the measured userspace refresh path from roughly 15 milliseconds to an average below 0.2 milliseconds.">
+  <title>rstat performance case study — over|yonder</title>
+  <link rel="stylesheet" href="../styles/case-study.css?v=2">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="over yonder home">over<span>|</span>yonder</a>
+    <nav aria-label="Case study navigation">
+      <a href="#problem">Problem</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#measurement">Measurement</a>
+    </nav>
+    <a class="nav-cta" href="mailto:overyonderstudios@gmail.com">Discuss a problem <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Performance case study / Linux systems</p>
+        <h1>rstat</h1>
+        <h2>From roughly 15 milliseconds to <em>0.16 milliseconds on average.</em></h2>
+        <p>rstat is a long-running Linux monitor that supplies CPU, memory, task I/O, temperature, power-state and per-process data to Waybar, a desktop status bar. An early shell implementation mixed process-file polling with a blocking power-profile service call. After removing that unrelated delay, the optimized Rust collector still spent roughly 15 milliseconds rebuilding process state from text files. The current design accounts for tasks during scheduler events and averages 0.13–0.16 milliseconds for the userspace refresh.</p>
+        <p class="case-meta">Rust · eBPF · Linux kernel · 2026</p>
+      </div>
+
+      <figure class="hero-measurement" aria-label="The historical procfs collector took roughly 15 milliseconds; the current eBPF userspace refresh averages 0.16 milliseconds">
+        <div class="figure-label"><span>Userspace refresh pipeline</span><strong>linear scale</strong></div>
+        <div class="bar-chart">
+          <div class="bar-row" style="--delay: 0s"><span>Optimised procfs</span><i style="--bar:100%"></i><b>~15 ms</b></div>
+          <div class="bar-row final" style="--delay: .15s"><span>eBPF userspace</span><i style="--bar:1.067%"></i><b>0.16 ms avg</b></div>
+          <div class="bar-axis"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15 ms</span></div>
+        </div>
+        <figcaption>The roughly 15-millisecond figure came from the optimized Rust procfs collector's internal timer, which stopped before JSON formatting. Rebuilding that source revision produced 10.3–38.7 milliseconds on the current desktop under a heavily loaded workload. The 0.16-millisecond figure is the slower average from three current 1,000-refresh runs and covers kernel-map collection through JSON construction. Neither measurement includes the potentially blocking stdout write.</figcaption>
+      </figure>
+    </section>
+
+    <div class="case-body">
+      <aside class="reading-index" aria-label="On this page">
+        <a href="#problem">01 / Problem</a>
+        <a href="#progression">02 / Progression</a>
+        <a href="#architecture">03 / Architecture</a>
+        <a href="#hot-path">04 / Hot path</a>
+        <a href="#measurement">05 / Measurement</a>
+      </aside>
+
+      <article class="article-flow">
+        <section id="problem">
+          <p class="section-number">01 / The problem</p>
+          <h2>A slow service call hid an inefficient poller.</h2>
+          <p class="lead">Waybar requests one JSON status update on a fixed schedule. rstat's original Waybar module launched a shell script for every update, and that script invoked command-line tools including <code>awk</code>, <code>bc</code> and <code>powerprofilesctl</code>.</p>
+          <p>The shell module and its raw timings weren't retained, so its exact wall time is no longer recoverable. The earlier development article also gives an internally inconsistent timing breakdown. The first retained Rust collector does preserve the important dependency: <code>powerprofilesctl get</code> ran inside its timed sample. That command started a client, contacted the system power-profile daemon over D-Bus and waited for a response.</p>
+
+          <dl class="mechanism-list">
+            <div><dt>Service round trip</dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
+            <div><dt>Process churn</dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. Those costs contributed to the shell design, but the surviving evidence doesn't justify attributing hundreds of milliseconds to process startup.</dd></div>
+            <div><dt>Text interfaces</dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
+            <div><dt>No in-process history</dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
+          </dl>
+        </section>
+
+        <section id="progression">
+          <p class="section-number">02 / The progression</p>
+          <h2>Remove the dominant delay, then measure what remained.</h2>
+          <p>We first replaced the one-shot shell module with a long-running Rust collector that retained counters, buffers and previous samples between Waybar updates. That collector removed nearly every external utility but kept <code>powerprofilesctl</code> inside the timed path. The intermediate Rust collector therefore isolated the blocking service call, but its mixed measurement isn't used in the performance comparison.</p>
+          <p>Reading the active power profile directly from <code>/sys/firmware/acpi/platform_profile</code> removed the D-Bus round trip and exposed the process-file walk as the next bottleneck. The Rust procfs collector then collapsed three process-directory walks into one, reused an 8 KB read buffer, took resident-set size (RSS) from <code>/proc/[pid]/stat</code> instead of opening <code>statm</code>, and identified kernel threads from that same record so it could skip their I/O file in the default view.</p>
+          <p>The optimized Rust procfs collector's internal timer reported roughly 15 milliseconds per collection. That timer stopped before JSON formatting, and no raw benchmark series survives. Its source revision does survive: rebuilt on the current, heavily loaded desktop, it produced samples between 10.3 and 38.7 milliseconds. The historical and current conditions differ, so the rerun confirms only the same order of magnitude.</p>
+          <p>The remaining cost came from the design. Every refresh still enumerated <code>/proc</code>, opened files for each live process and asked the kernel to turn counters into text. Local tuning could reduce that walk, but it couldn't remove it.</p>
+        </section>
+
+        <section class="architecture-section" id="architecture">
+          <p class="section-number">03 / The architecture</p>
+          <h2>Stop asking the kernel to describe what it already knows.</h2>
+          <p>The optimized Rust procfs collector still scaled with the number of live processes. It opened <code>stat</code> for every process and <code>io</code> for each ordinary process. Across roughly 300 processes, those files can require about 1,800 open, read and close system calls per refresh, before directory enumeration and global metrics. We replaced that refresh-time reconstruction with event-time accounting. A small extended Berkeley Packet Filter (eBPF) program, checked by the Linux kernel before loading, now records CPU residency and snapshots the kernel's RSS and task-I/O counters when scheduler events already identify the relevant task.</p>
+          <p>Four scheduler tracepoints maintain task state as processes fork, run, exit and are freed. Every record is keyed by its process identifier (PID) and kernel start timestamp, preventing a reused PID from joining two unrelated process lifetimes. A retired record remains in the shared eBPF statistics map until the Rust daemon consumes its final counters, so short-lived work remains visible. One procfs scan at startup seeds blocked threads and zombie process leaders that already existed when the eBPF program attached; that scan doesn't recur during refreshes.</p>
+
+          <figure class="architecture-figure">
+            <div class="boundary-labels"><span>Kernel</span><span>Userspace</span></div>
+            <div class="pipeline">
+              <div class="pipeline-step kernel">
+                <b>Task lifecycle</b>
+                <code>sched_process_fork</code>
+                <code>sched_switch</code>
+                <code>sched_process_exit</code>
+                <code>sched_process_free</code>
+                <small>Four tracepoints create, update and retire task state.</small>
+              </div>
+              <i class="pipeline-arrow" aria-hidden="true"></i>
+              <div class="pipeline-step kernel">
+                <b>Account and snapshot</b>
+                <code>CPU ← every switch</code>
+                <code>RSS / I/O ← gated</code>
+                <small>At most once per task every 10 ms; exit forces the final snapshot.</small>
+              </div>
+              <i class="pipeline-arrow" aria-hidden="true"></i>
+              <div class="pipeline-step kernel">
+                <b>Retain counters</b>
+                <code>stats[PID, start time]</code>
+                <small>Final counters survive task exit until userspace consumes them.</small>
+              </div>
+              <i class="pipeline-arrow" aria-hidden="true"></i>
+              <div class="pipeline-step">
+                <b>Collect and emit</b>
+                <code>batch map lookup</code>
+                <code>reused buffers → Waybar JSON</code>
+              </div>
+            </div>
+            <figcaption>The fork tracepoint establishes each task's I/O baseline. The scheduler-switch tracepoint charges CPU time and, at most once per task every 10 milliseconds, follows the kernel task record to its resident-memory and I/O-accounting fields. Exit and free events preserve the final counters for one last userspace collection. The Rust daemon then aggregates threads into processes, computes changes since the previous sample and formats Waybar's JSON response.</figcaption>
+          </figure>
+        </section>
+
+        <section id="hot-path">
+          <p class="section-number">04 / The hot path</p>
+          <h2>Once the architecture was right, small costs became visible.</h2>
+          <p>The eBPF design removed the recurring procfs walk. We then bounded every output list and reused the Rust daemon's allocated storage after it reached its steady working set.</p>
+
+          <dl class="optimization-list">
+            <div><dt>Batch the statistics map</dt><dd>Linux's <code>BPF_MAP_LOOKUP_BATCH</code> operation transfers many task records into preallocated key and value arrays in one system call. The iterative fallback requires separate key-advance and lookup calls for each record.</dd></div>
+            <div><dt>Gate the snapshots</dt><dd>CPU residency is charged on every switch. RSS and I/O are sampled at most once per task every 10 milliseconds, with a forced final snapshot when the task exits.</dd></div>
+            <div><dt>Preallocate the working set</dt><dd>The statistics, scheduler-start and PID-to-start-time hash maps have fixed capacities and are created before their tracepoints attach. Userspace reserves its batch arrays and process-aggregation tables once, then clears them without releasing their storage.</dd></div>
+            <div><dt>Reuse contiguous snapshots</dt><dd>Two vectors retain capacity and swap roles between samples. Sorting records by PID and start time gives cache-friendly traversal and binary-search lookups against the previous sample.</dd></div>
+            <div><dt>Minimise system reads</dt><dd><code>sysinfo()</code> returns all three load averages in one system call. The daemon discovers and opens its sysfs temperature, frequency, graphics-processor and throttling files once; <code>pread()</code> fills fixed byte buffers, and numeric values are parsed directly from those bytes.</dd></div>
+            <div><dt>Write the fixed schema directly</dt><dd><code>write!</code> appends the known Waybar schema to reusable tooltip and JSON strings. A small emitter escapes task names in place without a general serializer or temporary formatted strings.</dd></div>
+            <div><dt>Bound the result sets</dt><dd>CPU, memory and I/O leaders are selected into fixed five-entry arrays, while the list of tasks blocked in Linux's uninterruptible D state is capped at ten. Only those small arrays are sorted for output.</dd></div>
+          </dl>
+        </section>
+      </article>
+    </div>
+
+    <section class="measurement-band" id="measurement">
+      <div class="measurement-inner">
+        <p class="section-number">05 / Measure the whole cost</p>
+        <h2>The userspace refresh became cheap. Scheduler accounting still had a cost.</h2>
+
+        <p class="measurement-note"><code>rstat --bench 1000</code> measures each current userspace refresh from eBPF-map collection through system-file reads, process aggregation, retired-record cleanup and JSON construction. It excludes the potentially blocking stdout write.</p>
+
+        <div class="metrics">
+          <div class="metric"><strong>0.16 ms</strong><span class="metric-label">Average map-to-JSON refresh</span></div>
+          <div class="metric"><strong>0.15 ms</strong><span class="metric-label">Median map-to-JSON refresh</span></div>
+          <div class="metric"><strong>0.22 ms</strong><span class="metric-label">95th-percentile map-to-JSON refresh</span></div>
+        </div>
+
+        <div class="measurement-copy">
+          <h3>eBPF moves part of the monitoring cost onto scheduler events.</h3>
+          <p>The procfs collector pays most of its cost whenever Waybar requests an update. The eBPF design pays a small amount whenever a task switches and a much smaller amount during each userspace refresh. Frequent refreshes favour the eBPF design. During an extreme context-switch storm, a slowly refreshed procfs collector can consume less CPU because it does no work between polls.</p>
+        </div>
+
+        <table class="measurement-table">
+          <caption>Estimated monitoring CPU time per second at four Waybar refresh intervals. The model combines the historical 15-millisecond procfs observation with the current 0.16-millisecond userspace average and instrumented eBPF scheduler-handler estimates under 12,454 switches per second and a deliberate 2.36-million-switch-per-second storm. These inputs weren't measured side by side.</caption>
+          <thead><tr><th>Refresh interval</th><th>15 ms procfs model</th><th>Ordinary-load rstat</th><th>Switch-storm rstat</th></tr></thead>
+          <tbody>
+            <tr><td>2000 ms</td><td>7.5 ms/s</td><td>8.1 ms/s</td><td>1,812.5 ms/s</td></tr>
+            <tr><td>500 ms</td><td>30.0 ms/s</td><td>8.3 ms/s</td><td>1,812.7 ms/s</td></tr>
+            <tr><td>250 ms</td><td>60.0 ms/s</td><td>8.6 ms/s</td><td>1,813.1 ms/s</td></tr>
+            <tr><td>100 ms</td><td>150.0 ms/s</td><td>9.6 ms/s</td><td>1,814.0 ms/s</td></tr>
+          </tbody>
+        </table>
+        <p class="measurement-note">The scheduler-handler figures come from <code>rstat --profile</code>, which recompiles the eBPF program with clock reads, latency-histogram buckets and profiling-map updates. Normal builds contain none of that instrumentation. Histogram-bucket midpoints estimated 0.641 microseconds for each instrumented scheduler-switch handler and 7.98 milliseconds of handler body time per second under the ordinary workload. A deliberate 12-worker switch storm raised those estimates to 0.767 microseconds per handler and 1,812 milliseconds per second. The timed interval ends before the histogram-map update that records each sample. It also excludes the less frequent fork, exit and free handlers and any effect that instrumentation has on the workload.</p>
+      </div>
+    </section>
+
+    <section class="lesson">
+      <div>
+        <p class="section-number">The result</p>
+        <h2>Reading the counters cost more than calculating the result.</h2>
+      </div>
+      <div class="lesson-copy">
+        <p class="lesson-lead">The surrounding machinery dominated the work: process startup, service calls, reopened files, text serialization and repeated allocations.</p>
+        <p>Replacing the D-Bus power-profile query with one sysfs read removed the blocking dependency retained by the first Rust collector. Moving recurring process accounting from procfs polling to scheduler events then made the measured map-to-JSON refresh typically sub-millisecond, while tying the background cost to scheduler activity. One change removed an unrelated wait; the other changed the monitoring architecture.</p>
+        <a class="text-link" href="https://github.com/overyonder/rstat">View the rstat source <span>↗</span></a>
+        <p class="scope-note">rstat is a performance research exercise, not a production desktop application.</p>
+      </div>
+    </section>
+
+    <section class="case-contact">
+      <p>Have a performance problem that has survived the usual fixes?</p>
+      <a href="mailto:overyonderstudios@gmail.com">Let’s find the real limit. <span>↗</span></a>
+      <small>Sydney, Australia · Working worldwide</small>
+    </section>
+  </main>
+</body>
+</html>
