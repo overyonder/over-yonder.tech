@@ -245,7 +245,21 @@ a { color: inherit; }
 }
 
 .article-flow strong { color: var(--ink); }
-.mechanism-list, .optimization-list { margin-top: 48px; border-top: 1px solid var(--rule); }
+.article-flow .diagnostic-prompt {
+  max-width: 790px;
+  margin: 44px 0 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--signal);
+  border-bottom: 1px solid var(--signal);
+  color: var(--signal);
+  font: 650 13px/1.6 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: .015em;
+}
+
+.diagnostic-prompt strong { color: var(--signal); font-weight: 800; }
+.mechanism-list { margin-top: 24px; }
+.optimization-list { margin-top: 48px; }
+.mechanism-list, .optimization-list { border-top: 1px solid var(--rule); }
 .mechanism-list > div, .optimization-list > div {
   display: grid;
   grid-template-columns: minmax(170px, .75fr) minmax(0, 1.25fr);
@@ -256,6 +270,21 @@ a { color: inherit; }
 
 .mechanism-list dt, .optimization-list dt {
   font: 400 22px/1.3 Georgia, serif;
+}
+
+.mechanism-list dt span {
+  display: block;
+  margin-top: 9px;
+  color: var(--signal);
+  font: 700 10px/1.5 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  transition: color .18s ease, transform .18s ease;
+}
+
+.mechanism-list > div:hover dt span {
+  color: var(--ink);
+  transform: translateX(3px);
 }
 
 .mechanism-list dd, .optimization-list dd {

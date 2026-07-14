@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="How over|yonder replaced recurring Linux procfs process walks with Rust and eBPF, reducing the measured userspace refresh path from roughly 15 milliseconds to an average below 0.2 milliseconds.">
   <title>rstat performance case study — over|yonder</title>
-  <link rel="stylesheet" href="../styles/case-study.css?v=2">
+  <link rel="stylesheet" href="../styles/case-study.css?v=3">
 </head>
 <body>
   <header class="site-header">
@@ -54,11 +54,13 @@
           <h2>A slow service call hid an inefficient poller.</h2>
           <p class="lead">Waybar requests one JSON status update on a fixed schedule. rstat's original Waybar module launched a shell script for every update, and that script invoked command-line tools including <code>awk</code>, <code>bc</code> and <code>powerprofilesctl</code>.</p>
 
+          <p class="diagnostic-prompt">We ask: <strong>Why is it slow?</strong> And we don’t stop until we have a real, measurable answer:</p>
+
           <dl class="mechanism-list">
-            <div><dt>Service round trip</dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
-            <div><dt>Process churn</dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
-            <div><dt>Text interfaces</dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
-            <div><dt>No in-process history</dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
+            <div><dt>Service round trip <span>1 external client + 1 D-Bus request / update</span></dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
+            <div><dt>Process churn <span>Shell + at least 3 named utilities / update</span></dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
+            <div><dt>Text interfaces <span>1 kernel → ASCII → number round trip / procfs value</span></dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
+            <div><dt>No in-process history <span>0 counters, buffers or file descriptors retained</span></dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
           </dl>
         </section>
 
