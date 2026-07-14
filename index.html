@@ -236,21 +236,21 @@
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>SIMD the compiler must prove.</h3>
-          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. Its pack/rack model is designed to express one target-sized program instead of separate SSE, AVX, NEON or GPU-intrinsic variants: a CPU rack is exactly one native SIMD register, while the proposed Vulkan profile maps a rack across one logical subgroup.</p>
-          <p>Rake asks whether a compiler can make machine shape a checked requirement. C and Rust can emit equivalent SIMD, but they don't make that machine shape a source-level acceptance condition. ISPC is Rake's closest established relative and already retargets SPMD code across SIMD widths. Rake explores a functional, expression-oriented version of that model with stricter fail-closed lowering: supported native slices reject any program that would split, scalarize, call out or spill a promised rack. Pack traversal, broader CPU profiles and SPIR-V remain in flight.</p>
+          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. A rack is one target-sized vector of values—not a 400-particle container—and a pack supplies the complete column storage and runtime count. The same source is intended to traverse four-lane NEON or SSE2, eight-lane AVX2, or sixteen-lane AVX-512 racks without spelling width-specific intrinsics.</p>
+          <p>Rake asks whether machine shape can be a checked requirement. C, Rust and ISPC can emit excellent SIMD; Rake's narrower experiment makes selected physical properties conditions of compilation. Its current AVX2 and NEON slices reject supported kernels that would split or scalarize a rack, call a helper, or spill a live rack. Fused names are transparent dataflow aliases, so an ordinary multiply-add graph inside a fused region currently becomes one verified FMA where the target provides it. Native pack traversal, broader algebraic rewrites, more CPU profiles and SPIR-V remain in flight.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
         <figure class="case-graphic compiler-graphic" aria-label="Rake preserves explicit rack and lane-mask semantics through verified lowering into target machine code, rejecting programs that break the selected target profile's contract">
           <div class="source-expression">
-            <span>Lane choices in source</span>
-            <code>rake safe_root values -&gt; result:<br>&nbsp;&nbsp;| #valid := (values &gt;= &lt;0.0&gt;)<br>&nbsp;&nbsp;through #valid else &lt;0.0&gt;: sqrt(values) -&gt; rooted<br>&nbsp;&nbsp;sweep: #valid -&gt; rooted | _ -&gt; &lt;0.0&gt; -&gt; result</code>
+            <span>Fused dataflow in source</span>
+            <code>crunch advance(positions: f32s, velocities: f32s) -&gt; f32s:<br>&nbsp;&nbsp;| scaled: f32s &lt;| velocities * &lt;0.5&gt;<br>&nbsp;&nbsp;| result: f32s &lt;| positions + scaled<br>&nbsp;&nbsp;return result</code>
           </div>
           <div class="compiler-path">
-            <div><b>Language contract</b><span>Racks fix the target width. Tines name lane masks; through blocks compute under them; sweeps define every result lane.</span></div>
+            <div><b>Language contract</b><span>Profiles fix rack width. Angle brackets expose scalar broadcasts; fused names add readability without imposing storage or rounding boundaries.</span></div>
             <i aria-hidden="true"></i>
             <div><b>Verified lowering</b><span>Typed vector SSA preserves rack identity, explicit broadcasts, masked safety and fused regions while the selected profile is legalized.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>Target machine</b><span>Instruction selection and no-spill allocation produce the promised CPU register or GPU subgroup shape—or compilation fails.</span></div>
+            <div><b>Target machine</b><span>Today, instruction selection and no-spill allocation produce the promised CPU register shape—or compilation fails. GPU subgroup lowering remains proposed.</span></div>
           </div>
           <div class="current-boundary"><strong>Native backends today</strong><span>x86-64 AVX2 · AArch64 NEON</span></div>
           <figcaption>Rake owns CPU instruction selection, register allocation and textual assembly, then verifies the encoded object. SSE2, AVX-512 and Vulkan subgroup profiles are planned extensions of the same fail-closed machine contract.</figcaption>
