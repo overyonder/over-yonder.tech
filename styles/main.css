@@ -130,7 +130,8 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .premise-copy p:last-child { margin-bottom: 0; }
 .premise-copy .premise-lead { max-width: 760px; margin-bottom: 36px; color: var(--ink); font: 400 clamp(26px, 2.5vw, 36px)/1.35 Georgia, serif; letter-spacing: -.025em; }
 
-.evidence { padding: 105px 6vw 120px; background: var(--forest); color: var(--white); }
+.evidence, .research { padding: 105px 6vw 120px; background: var(--forest); color: var(--white); }
+.research { padding-top: 92px; }
 .section-heading.light > p { color: var(--signal-hot); }
 .section-heading.light h2 { margin-bottom: 58px; }
 .result-case { display: grid; grid-template-columns: minmax(280px, .72fr) minmax(560px, 1.28fr); gap: clamp(50px, 8vw, 130px); align-items: center; padding: 64px 0 72px; border-top: 1px solid var(--dark-rule); }
@@ -290,7 +291,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   .premise-heading h2 { font-size: 43px; }
   .premise-copy p { font-size: 17px; }
   .premise-copy .premise-lead { font-size: 27px; }
-  .evidence { padding: 84px 20px; }
+  .evidence, .research { padding: 84px 20px; }
   .result-case { grid-template-columns: 1fr; gap: 42px; padding: 54px 0 62px; }
   .bar-row { grid-template-columns: 118px minmax(100px, 1fr) 65px; gap: 10px; }
   .bar-axis { margin-right: 75px; margin-left: 128px; font-size: 8px; }
