@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="openzt2-site-version" content="3871049a3cdd89c9">
+<title>Byte Range Map</title>
+<link rel="prefetch" href="index.html">
+<style>
+:root{--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--status-alpha:.82;--implicit-gap-alpha:.24}*{box-sizing:border-box}
+body{margin:0;font:14px/1.3 system-ui,sans-serif}.map-content{padding:0 22px 12px;font-size:13px}
+a{color:var(--link)}
+section.pane+section.pane{margin-top:8px}.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:4px;color:var(--muted);flex-wrap:wrap}
+button,.jump input{background:var(--control);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:2px 7px;font-size:12px;font-weight:400;line-height:1.2}button{cursor:pointer}button[aria-pressed="true"]{background:var(--active)!important;outline:2px solid currentColor;outline-offset:1px}button:disabled{opacity:.35;cursor:default}.jump{display:flex;align-items:center;gap:6px}.jump input{width:136px;font:400 12px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.jump input.invalid{border-color:#e05252;outline:1px solid #e05252}
+.title{color:var(--muted);font-weight:400}.axis{font-weight:400;color:var(--muted)}.toolbar button,.toolbar input{color:var(--muted)!important;font-weight:400}.pane.linked-secondary .back,.pane.linked-secondary .jump,.pane.linked-secondary .title{display:none}.bar{position:relative;height:44px;display:block;border:1px solid var(--line);background:var(--panel);overflow:hidden}.bar.panning,.bytebar.panning{cursor:grabbing}.bytebar{height:10px;margin-top:0;width:100%;display:block;border:1px solid var(--line);border-top:0;background:var(--panel)}.seg{position:absolute;top:0;bottom:0;min-width:0;cursor:pointer;overflow:hidden}
+.known{background:rgba(var(--c-known),var(--status-alpha));color:var(--map-text)}.generated-known{background:rgba(var(--c-generated-known),var(--status-alpha));color:var(--map-text)}.assessed{background:rgba(var(--c-assessed),var(--status-alpha));color:var(--map-text)}.external{background:rgba(var(--c-external),var(--status-alpha));color:var(--map-text)}.not-done{background:rgba(var(--c-not-done),var(--status-alpha));color:var(--map-text)}.indirected{background:rgba(var(--c-indirected),var(--status-alpha));color:var(--map-text)}.mixed{background:rgba(var(--c-mixed),var(--status-alpha));color:var(--map-text)}.copied{background:rgba(var(--c-copied),var(--status-alpha));color:var(--map-text)}.consumed{background:rgba(var(--c-consumed),var(--status-alpha));color:var(--map-text)}.matches-runtime{background:rgba(var(--c-matches-runtime),var(--status-alpha));color:var(--map-text)}.awaiting-depepper{background:rgba(var(--c-awaiting-depepper),var(--status-alpha));color:var(--map-text)}.needs-depepper{background:rgba(var(--c-needs-depepper),var(--status-alpha));color:var(--map-text)}.changed-unverified{background:rgba(var(--c-changed-unverified),var(--status-alpha));color:var(--map-text)}.unmaterialized{background:rgba(var(--c-unmaterialized),var(--status-alpha));color:var(--map-text)}.omitted{background:rgba(var(--c-omitted),var(--status-alpha));color:var(--map-text)}.seg.implicit-gap.omitted{background:rgba(var(--c-omitted),var(--implicit-gap-alpha))}.unknown{background:rgba(var(--c-unknown),var(--status-alpha));color:var(--map-text)}
+.label{position:absolute;left:7px;right:7px;top:4px;width:max-content;max-width:calc(100% - 14px);padding:1px 3px;border-radius:2px;background:rgba(var(--label-bg),.88);font-weight:400;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.seg.clickable .label{font-weight:400}.seg.clickable{cursor:pointer}.seg:not(.clickable){cursor:default}.range{position:absolute;left:7px;right:7px;bottom:3px;width:max-content;max-width:calc(100% - 14px);padding:1px 3px;border-radius:2px;background:rgba(var(--label-bg),.82);color:inherit;opacity:.86;font:11px/1.15 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tiny .label{font-size:11px;writing-mode:vertical-rl;inset:5px auto 5px 5px;width:auto;max-width:none;max-height:37px}.tiny .range{display:none}
+.pipeline{border:1px solid var(--line);border-radius:6px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:12px 14px;margin:0 0 12px}.pipeline h1{font-size:24px;margin:0 0 2px}.pipeline h2{font-size:17px;margin:10px 0 6px}.pipeline p{color:var(--muted);margin:0 0 8px}.pipeline ol{margin:0;padding-left:22px}.pipeline li{margin:4px 0;color:var(--muted)}.pipeline strong{color:var(--fg)}
+.top-legend{display:flex;justify-content:space-between;gap:14px;margin:2px 0 6px;color:var(--muted);flex-wrap:wrap;font-size:11px;line-height:1.2}.legend-group{white-space:nowrap}.legend-controls{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.legend-controls button{padding:1px 6px;font-size:11px;line-height:1.2}.legend-background{margin-left:auto}.legend-action{color:var(--fg);margin-right:6px;font-weight:400}.swatch{display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px;border:1px solid var(--control-border)}.status-swatch{cursor:pointer}.swatch.legend-dim,.seg.legend-dim{opacity:.1}.swatch.legend-active{outline:2px solid currentColor;outline-offset:2px}.legend-title{color:var(--fg);font-weight:400;margin-right:5px}
+.xxd-overlay{position:fixed;inset:0;z-index:80;display:none;background:rgba(0,0,0,.48);padding:28px}.xxd-overlay.open{display:flex}.xxd-panel{width:min(1580px,100%);max-height:100%;margin:auto;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:8px;border:1px solid var(--control-border);background:var(--panel);color:var(--fg);box-shadow:0 18px 50px rgba(0,0,0,.38)}.xxd-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line)}.xxd-title{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.xxd-close{margin-left:auto}.xxd-meta{padding:0 12px;color:var(--muted);font:12px/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}.xxd-body{display:grid;grid-template-columns:minmax(320px,.65fr) minmax(0,1.35fr);min-height:0;border-top:1px solid var(--line);background:var(--soft)!important}.xxd-view{margin:0;padding:10px 12px;overflow:auto;background:transparent!important;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-ligatures:none;tab-size:8}.xxd-hex,.xxd-asm{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));min-width:0;overflow:hidden}.xxd-hex-single,.xxd-asm-single{display:block}.xxd-asm{border-left:1px solid var(--line)}.xxd-hex-col,.xxd-asm-col{min-width:0;overflow:auto;border-left:1px solid var(--line);background:transparent}.xxd-hex-col:first-child,.xxd-asm-col:first-child{border-left:0}.xxd-badge{position:sticky;top:0;z-index:1;display:inline-block;margin:10px 12px 0;padding:2px 7px;border:1px solid var(--control-border);border-radius:999px;color:var(--map-text);font:700 11px/1.3 system-ui,sans-serif}.xxd-badge.disk{background:rgba(var(--c-generated-known),var(--status-alpha))}.xxd-badge.runtime-parent{background:rgba(var(--c-known),var(--status-alpha))}.xxd-badge.unwrapped{background:rgba(var(--c-awaiting-depepper),var(--status-alpha))}.xxd-badge.depeppered{background:rgba(var(--c-matches-runtime),var(--status-alpha))}.xxd-badge.stripped{background:rgba(var(--c-copied),var(--status-alpha))}.xxd-hex-pre,.xxd-asm-pre{margin:0;padding:8px 12px 10px;overflow:visible;background:transparent!important;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}.xxd-view *,.xxd-hex-pre *,.xxd-asm-pre *{font:inherit;font-variant-ligatures:inherit}.xxd-byte,.xxd-char{border-radius:2px}.xxd-byte{padding:0}.xxd-addr{color:var(--muted)}.xxd-border{color:var(--muted)}.xxd-ascii{color:var(--fg)}.xxd-zero{color:#928374}.xxd-space{color:#b57614;background:rgba(181,118,20,.16)}.xxd-ascii-byte{color:#076678}.xxd-nonascii{color:#8f3f71}.xxd-magic{color:#9d0006;background:rgba(157,0,6,.16);font-weight:700}.xxd-diff{background:rgba(var(--c-needs-depepper),.22);outline:1px solid rgba(var(--c-needs-depepper),.36)}.xxd-asm-line{display:block;margin:0 -12px;padding:0 12px}.xxd-asm-line.xxd-diff{background:rgba(var(--c-needs-depepper),.2);outline:0}:root[data-theme="dark"] .xxd-zero{color:#928374}:root[data-theme="dark"] .xxd-space{color:#fabd2f;background:rgba(250,189,47,.14)}:root[data-theme="dark"] .xxd-ascii-byte{color:#83a598}:root[data-theme="dark"] .xxd-nonascii{color:#d3869b}:root[data-theme="dark"] .xxd-magic{color:#fb4934;background:rgba(251,73,52,.16)}@media(max-width:980px){.xxd-body{grid-template-columns:1fr}.xxd-asm{border-left:0;border-top:1px solid var(--line)}.xxd-hex,.xxd-asm{grid-template-columns:1fr}}
+/* shared-site-nav */.tabs{box-sizing:border-box;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1436px);margin:5px auto 6px!important;transform:none!important;font:12px/1.05 system-ui,sans-serif!important}.tabs a{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;min-height:24px;padding:2px 6px!important;text-align:center;white-space:nowrap;color:var(--fg)!important;text-decoration:none!important;border:1px solid var(--line)!important;border-radius:4px;background:var(--panel)!important;font:inherit!important}.tabs a.active{outline:2px solid currentColor;outline-offset:1px}.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}.nav-icon{display:none}.nav-label{display:inline}@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.7fr) minmax(110px,.9fr) minmax(96px,.8fr) minmax(260px,1.7fr) minmax(150px,1.1fr) minmax(124px,1fr) 34px!important;width:min(calc(100vw - 24px),1500px)!important}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:50!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:5px!important;width:100%!important;margin:0!important;padding:6px 8px!important;background:var(--panel)!important;border-top:1px solid var(--control-border)!important;font:11px/1 system-ui,sans-serif!important}.tabs a{min-height:48px!important;padding:0!important;white-space:normal!important;border-radius:4px!important;min-width:0!important}.tabs a.gstart{margin-left:0!important}.tabs a.gstart::before{display:none!important}.nav-icon{display:block!important;font:22px/1 system-ui,sans-serif!important}.nav-label{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}.tabs .theme-toggle{width:48px!important;height:48px!important;font-size:22px!important;justify-self:stretch!important}}/* end-shared-site-nav */
+
+
+
+/* shared-gruvbox-theme */
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--ok:#79740e;--warn:#b57614;--bad:#9d0006;--unk:#8f3f71;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--code-kw:#9d0006;--code-ty:#076678;--code-st:#79740e;--code-cm:#7c6f64;--code-at:#8f3f71;--c-known:152,151,26;--c-generated-known:215,153,33;--c-assessed:69,133,136;--c-external:146,131,116;--c-not-done:204,36,29;--c-indirected:211,134,155;--c-mixed:131,96,196;--c-copied:124,111,100;--c-consumed:214,93,14;--c-matches-runtime:104,157,106;--c-awaiting-depepper:215,153,33;--c-needs-depepper:204,36,29;--c-changed-unverified:177,98,134;--c-unmaterialized:177,98,134;--c-omitted:146,131,116;--c-unknown:204,36,29;--label-bg:251,241,199;--map-text:#3c3836}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--ok:#98971a;--warn:#d79921;--bad:#cc241d;--unk:#b16286;--control:#3c3836;--control-border:#665c54;--active:#504945;--code-kw:#cc241d;--code-ty:#458588;--code-st:#98971a;--code-cm:#928374;--code-at:#b16286;--c-known:152,151,26;--c-generated-known:215,153,33;--c-assessed:69,133,136;--c-external:146,131,116;--c-not-done:204,36,29;--c-indirected:211,134,155;--c-mixed:131,96,196;--c-copied:124,111,100;--c-consumed:214,93,14;--c-matches-runtime:104,157,106;--c-awaiting-depepper:215,153,33;--c-needs-depepper:204,36,29;--c-changed-unverified:177,98,134;--c-unmaterialized:177,98,134;--c-omitted:146,131,116;--c-unknown:204,36,29;--label-bg:40,40,40;--map-text:#ebdbb2}
+html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}
+main,article,section,aside{color:var(--fg)}
+a{color:var(--link)}
+.tabs a{color:var(--fg)!important;background:var(--panel)!important;border-color:var(--control-border)!important}
+.tabs a.active{background:var(--active)!important}
+.theme-toggle{position:static;z-index:20;width:24px;height:24px;display:flex;align-items:center;justify-content:center;justify-self:center;align-self:center;background:var(--control)!important;color:var(--fg)!important;border:1px solid var(--control-border)!important;border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+button,input,select,textarea,.jump input{background:var(--control)!important;color:var(--fg)!important;border-color:var(--control-border)!important}
+button:disabled{color:var(--muted)!important;background:var(--soft)!important}
+table{border-color:var(--line)}
+th,td{border-color:var(--line)}
+th{background:var(--soft);color:var(--fg)}
+td{background:var(--panel);color:var(--fg)}
+pre,code{color:var(--fg)}
+pre,details,.box,.toc,.table-wrap,.repo-switch{background:var(--panel)!important;border-color:var(--line)!important}
+.repo-switch button[aria-selected="true"]{background:var(--active)!important;border-color:var(--control-border)!important}
+.meta,.muted,.filters label,.filter-count,.top-legend{color:var(--muted)!important}
+.title,.axis,.legend-title{color:var(--fg)!important}
+.bar,.bytebar{background:var(--panel);border-color:var(--control-border)}
+.info-table th,.def-table th,#recovery-table th{background:var(--soft);color:var(--fg)}
+#recovery-table td{background:var(--panel);color:var(--fg)}
+.status-functioning{color:var(--ok)}.status-removed,.status-failed{color:var(--bad)}.status-untested{color:var(--warn)}.status-blocked{color:var(--warn)}
+.kw{color:var(--code-kw)}.ty{color:var(--code-ty)}.st{color:var(--code-st)}.cm{color:var(--code-cm)}.at{color:var(--code-at)}
+.legal-frame{background:var(--panel);border-color:var(--line)}
+@media(max-width:980px){.theme-toggle{margin:0;display:flex}}
+/* end-shared-gruvbox-theme */
+</style>
+<script>
+(()=>{
+ const key="zt2-theme";
+ const storedTheme=()=>{try{return localStorage.getItem(key)}catch(_){return null}};
+ const saveTheme=theme=>{try{localStorage.setItem(key,theme)}catch(_){ }};
+ const root=document.documentElement;
+ const syncFrames=theme=>{
+  for(const frame of document.querySelectorAll("iframe.legal-frame")){
+   try{if(frame.contentDocument)frame.contentDocument.documentElement.dataset.theme=theme}catch(_){ }
+  }
+ };
+ const apply=(theme,persist=false)=>{root.dataset.theme=theme;if(persist)saveTheme(theme);const b=document.querySelector(".theme-toggle");if(b){b.textContent=theme==="dark"?"☀":"☾";b.title=theme==="dark"?"Switch to light mode":"Switch to dark mode";b.setAttribute("aria-label",b.title)};syncFrames(theme);window.refreshThemeCanvases?.()};
+ const initial=storedTheme()==="light"?"light":"dark";
+ apply(initial);
+ window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);const nav=document.querySelector(".tabs");if(nav)nav.append(b);else document.body.prepend(b);for(const frame of document.querySelectorAll("iframe.legal-frame"))frame.addEventListener("load",()=>syncFrames(root.dataset.theme||initial));apply(root.dataset.theme||initial)});
+})();
+</script><body>
+<nav class="tabs"><a href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="active gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a><a href="asset-coverage.html"><span class="nav-icon" aria-hidden="true">⬡</span><span class="nav-label">Asset Coverage</span></a></nav>
+<main class="map-content">
+<section class="pipeline" aria-label="Reconstruction pipeline">
+ <h1>Byte Range Map</h1>
+ <p>This page is gate 1. It records evidence by address/range: whether each mapped byte or range exists and what it is.</p>
+ <h2>Pipeline</h2>
+ <ol>
+  <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
+  <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
+  <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
+  <li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+ </ol>
+</section>
+<div class="top-legend">
+ <span class="legend-group knowledge-legend"><strong class="legend-action">Filter:</strong><span class="legend-title">Status</span><i class="swatch status-swatch known"></i>known <i class="swatch status-swatch generated-known"></i>runtime-generated <i class="swatch status-swatch assessed"></i>assessed <i class="swatch status-swatch external"></i>external <i class="swatch status-swatch not-done"></i>not done <i class="swatch status-swatch indirected"></i>indirected <i class="swatch status-swatch copied"></i>copied <i class="swatch status-swatch consumed"></i>consumed <i class="swatch status-swatch matches-runtime"></i>matches runtime <i class="swatch status-swatch awaiting-depepper"></i>awaiting depepper <i class="swatch status-swatch needs-depepper"></i>needs depepper <i class="swatch status-swatch changed-unverified"></i>changed unverified <i class="swatch status-swatch unmaterialized"></i>unmaterialized <i class="swatch status-swatch unknown"></i>unknown</span>
+ <span class="legend-controls"><button class="legend-root" type="button">root</button><button class="legend-lock-toggle" type="button">nav lock</button><button class="legend-scale" type="button">log scale</button><button class="legend-hidden-toggle" type="button">show omitted</button><button class="legend-temp-toggle" type="button">hide temp/process</button><button class="legend-asset-toggle" type="button">hide assets</button><button class="legend-refresh" type="button">refresh</button></span>
+</div>
+<div id="spaces"></div>
+</main>
+<script>
+let payload;
+const MAP_URLS=["zt-byte-range-map.tsv?v=ba14fdfeeef2","../docs/analysis/zt-byte-range-map.tsv?v=ba14fdfeeef2"];
+async function fetchMap(urls){
+ let lastError="";
+ for(const url of urls){
+  try{
+   const response=await fetch(url);
+   if(response.ok)return response;
+   lastError=`${url}: ${response.status}`;
+  }catch(error){
+   lastError=error.message;
+  }
+ }
+ throw new Error(`failed to load zt-byte-range-map.tsv: ${lastError}`);
+}
+async function loadPayload(urls=MAP_URLS){
+ const response=await fetchMap(Array.isArray(urls)?urls:[urls]);
+ payload=buildTrees(parseTsv(await response.text()));
+}
+const hex=n=>"0x"+n.toString(16).padStart(6,"0"),size=n=>n<1024?`${n} bytes`:n<1048576?`${(n/1024).toFixed(1)} KiB`:`${(n/1048576).toFixed(2)} MiB`;
+const rangeText=n=>`${hex(n.start)}..${hex(n.end)}`,axisText=(n,axis)=>`\n${axis}: ${axisValue(n,axis)}`;
+const detailsText=n=>n.details?`\n${n.details}`:"";
+const explorers=[];
+let activeLegendStatus="";
+let linkedSyncing=false;
+let navigationLocked=true;
+function sameLegendStatus(key,status){
+ return key===status;
+}
+function legendDimClass(key){
+ return activeLegendStatus&&!sameLegendStatus(key,activeLegendStatus)?"legend-dim":"";
+}
+function swatchStatus(swatch){
+ return [...swatch.classList].find(token=>!["swatch","status-swatch","legend-dim","legend-active"].includes(token))||"";
+}
+function updateLegendSwatches(){
+ for(const swatch of document.querySelectorAll(".knowledge-legend .status-swatch")){
+  const status=swatchStatus(swatch);
+  swatch.classList.toggle("legend-active",status===activeLegendStatus);
+  swatch.classList.toggle("legend-dim",!!activeLegendStatus&&!sameLegendStatus(status,activeLegendStatus));
+  swatch.setAttribute("aria-pressed",String(status===activeLegendStatus));
+ }
+}
+function setLegendStatus(status){
+ activeLegendStatus=activeLegendStatus===status?"":status;
+ updateLegendSwatches();
+ for(const explorer of explorers)explorer.render();
+}
+function initLegendFilter(){
+ for(const swatch of document.querySelectorAll(".knowledge-legend .status-swatch")){
+  const status=swatchStatus(swatch);
+  swatch.setAttribute("role","button");
+  swatch.setAttribute("tabindex","0");
+  swatch.setAttribute("aria-label",`toggle ${status}`);
+  swatch.addEventListener("click",()=>setLegendStatus(status));
+  swatch.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();setLegendStatus(status)}});
+ }
+ updateLegendSwatches();
+}
+const SPACE_LABELS={"disk":"zt.exe on disk","disk-child-e5":"~e5.0001 disk image","runtime-child-e5":"child process address space","disk-pfdrun":"PfdRun.pfd disk image","disk-secserv":"~df394b.tmp disk image","disk-authserv":"~de37fc.tmp disk image","runtime-parent":"main process address space","unwrapped":"unwrapped","depeppered":"depeppered","stripped":"stripped","z2f-x300":"x300_000.z2f archive","z2f-x301":"x301_000.z2f archive","z2f-x302":"x302_000.z2f archive"};
+const SPACE_ORDER=["disk","disk-child-e5","runtime-child-e5","disk-pfdrun","disk-secserv","disk-authserv","z2f-x300","z2f-x301","z2f-x302","runtime-parent","unwrapped","depeppered","stripped"];
+const BYTE_SOURCES={"disk":"binary-artifacts/zt.exe","disk-child-e5":"binary-artifacts/child-e5-0001.bin","runtime-child-e5":"binary-artifacts/runtime-child-e5-snapshot.bin","disk-pfdrun":"binary-artifacts/pfdrun.pfd","disk-secserv":"binary-artifacts/secserv-df394b.tmp","disk-authserv":"binary-artifacts/authserv-de37fc.tmp","runtime-parent":"binary-artifacts/runtime-handoff-snapshot.bin","unwrapped":"binary-artifacts/zt-unwrapped.exe","depeppered":"binary-artifacts/zt-depeppered.exe","stripped":"binary-artifacts/zt-stripped.exe"};
+const RUNTIME_PARENT_REFERENCE_SOURCES=[
+ {start:0x01b70000,end:0x01bf2000,base:0x01b70000,url:"binary-artifacts/authserv-post-load.bin",label:"AuthServ post-LoadLibrary capture"},
+];
+const MAIN_PE_RAW_SOURCES=[
+ {start:0x00400000,end:0x00401000,raw:0x00000000,label:"PE headers"},
+ {start:0x00401000,end:0x008b8000,raw:0x00001000,label:".text raw section"},
+ {start:0x008b8000,end:0x00919000,raw:0x004b8000,label:".rdata raw section"},
+ {start:0x00919000,end:0x00921000,raw:0x00519000,label:".data raw section"},
+ {start:0x00952000,end:0x00a8b000,raw:0x00521000,label:".rsrc raw section"},
+ {start:0x00a8b000,end:0x00a8e000,raw:0x0065b000,label:"stxt774 raw section"},
+ {start:0x00a8e000,end:0x00a92000,raw:0x0065e000,label:"stxt371 raw section"},
+];
+const EMBEDDED_TEMP_SPACES=new Set(["disk-child-e5","disk-pfdrun","disk-secserv","disk-authserv"]);
+const DEEP_TEMP_SPACES=new Set(["disk-authserv"]);
+const AUXILIARY_PROCESS_SPACES=new Set(["disk-child-e5","runtime-child-e5","disk-pfdrun","disk-secserv","disk-authserv"]);
+const DISK_BACKING_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
+const ASSET_SPACES=new Set(["z2f-x300","z2f-x301","z2f-x302"]);
+const LINKED_PROJECTION_SPACES=new Set(["disk","runtime-parent","unwrapped","depeppered","stripped"]);
+const LINKED_STRUCTURAL_BUCKET_NAMES=new Set(["runtime memory","zt.exe","executable","PE header table"]);
+const MAX_XXD_BYTES=65536;
+function spaceLabel(space){return SPACE_LABELS[space]||space}
+function leafs(n,out=[]){if(n.children?.length)n.children.forEach(c=>leafs(c,out));else out.push(n);return out}
+function parseAddr(s){return Number.parseInt(s.replace(/^0x/i,""),16)}
+function parseJumpAddr(s){
+ s=s.trim();
+ if(!s)return NaN;
+ if(/^0x[0-9a-f]+$/i.test(s))return Number.parseInt(s.slice(2),16);
+ if(/^[0-9a-f]+h$/i.test(s))return Number.parseInt(s.slice(0,-1),16);
+ if(/^[0-9a-f]+$/i.test(s))return Number.parseInt(s,16);
+ return Number.parseInt(s,10);
+}
+function containsAddr(n,addr){return n.start<=addr&&addr<n.end}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const xxdState={title:"",meta:"",bytes:null,base:0,status:"",body:"",hexHtml:"",asmHtml:""};
+function ensureXxdModal(){
+ let overlay=document.querySelector(".xxd-overlay");
+ if(overlay)return overlay;
+ overlay=document.createElement("div");
+ overlay.className="xxd-overlay";
+ overlay.innerHTML=`<section class="xxd-panel" role="dialog" aria-modal="true" aria-labelledby="xxd-title"><div class="xxd-head"><div id="xxd-title" class="xxd-title"></div><button class="xxd-close" type="button">close</button></div><div class="xxd-meta"></div><div class="xxd-body"><div class="xxd-view xxd-hex"></div><div class="xxd-view xxd-asm"></div></div></section>`;
+ overlay.addEventListener("click",event=>{if(event.target===overlay)closeXxd()});
+ overlay.querySelector(".xxd-close").onclick=closeXxd;
+ document.addEventListener("keydown",event=>{if(event.key==="Escape")closeXxd()});
+ document.body.appendChild(overlay);
+ return overlay;
+}
+function closeXxd(){document.querySelector(".xxd-overlay")?.classList.remove("open")}
+function renderXxd(){
+ const overlay=ensureXxdModal();
+ overlay.querySelector(".xxd-title").textContent=xxdState.title;
+ overlay.querySelector(".xxd-meta").textContent=xxdState.meta;
+ const hex=overlay.querySelector(".xxd-hex");
+ hex.classList.toggle("xxd-hex-single",!xxdState.hexHtml);
+ hex.innerHTML=xxdState.hexHtml||(xxdState.bytes?`<pre class="xxd-hex-pre">${formatXxd(xxdState.bytes,xxdState.base,xxdState.status)}</pre>`:xxdState.body);
+ const asm=overlay.querySelector(".xxd-asm");
+ asm.classList.toggle("xxd-asm-single",!xxdState.asmHtml);
+ asm.innerHTML=xxdState.asmHtml||(xxdState.bytes?`<pre class="xxd-asm-pre">${formatDisassembly(xxdState.bytes,xxdState.base)}</pre>`:"");
+ linkXxdScrollers(overlay);
+ overlay.classList.add("open");
+}
+function setXxd(title,meta,body,options={}){
+ xxdState.title=title;
+ xxdState.meta=meta;
+ xxdState.body=body;
+ xxdState.bytes=options.bytes||null;
+ xxdState.base=options.base||0;
+ xxdState.status=options.status||"";
+ xxdState.hexHtml=options.hexHtml||"";
+ xxdState.asmHtml=options.asmHtml||"";
+ renderXxd();
+}
+function linkXxdScrollers(root){
+ const groups=[[".xxd-hex-col"],[".xxd-asm-col"]];
+ for(const [selector] of groups){
+  const panes=[...root.querySelectorAll(selector)];
+  if(panes.length<2)continue;
+  let syncing=false;
+  for(const pane of panes){
+   pane.onscroll=()=>{
+    if(syncing)return;
+    syncing=true;
+    const maxTop=Math.max(1,pane.scrollHeight-pane.clientHeight),topRatio=pane.scrollTop/maxTop;
+    const maxLeft=Math.max(1,pane.scrollWidth-pane.clientWidth),leftRatio=pane.scrollLeft/maxLeft;
+    for(const other of panes){
+     if(other===pane)continue;
+     other.scrollTop=topRatio*Math.max(0,other.scrollHeight-other.clientHeight);
+     other.scrollLeft=leftRatio*Math.max(0,other.scrollWidth-other.clientWidth);
+    }
+    syncing=false;
+   };
+  }
+ }
+}
+async function fetchByteRange(url,start,end){
+ const requested=end-start;
+ const response=await fetch(url,{headers:{Range:`bytes=${start}-${end-1}`}});
+ if(response.status!==206){
+  const length=Number(response.headers.get("content-length")||0);
+  if(response.status!==200||!length||length>requested)throw new Error(`range request failed: HTTP ${response.status}`);
+ }
+ return new Uint8Array(await response.arrayBuffer());
+}
+const MAGIC_SIGNATURES=[
+ [0x4d,0x5a],
+ [0x50,0x45,0x00,0x00],
+ [0x50,0x4b,0x03,0x04],
+ [0x50,0x4b,0x01,0x02],
+ [0x50,0x4b,0x05,0x06],
+ [0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a],
+ [0x37,0x7a,0xbc,0xaf,0x27,0x1c],
+ [0x52,0x61,0x72,0x21,0x1a,0x07],
+];
+function magicMask(bytes){
+ const mask=new Uint8Array(bytes.length);
+ for(let i=0;i<bytes.length;i++){
+  for(const sig of MAGIC_SIGNATURES){
+   if(i+sig.length>bytes.length)continue;
+   let ok=true;
+   for(let j=0;j<sig.length;j++)if(bytes[i+j]!==sig[j]){ok=false;break}
+   if(!ok)continue;
+   for(let j=0;j<sig.length;j++)mask[i+j]=1;
+  }
+ }
+ return mask;
+}
+function byteClass(b,isMagic){
+ if(isMagic)return "xxd-magic";
+ if(b===0)return "xxd-zero";
+ if(b===0x20)return "xxd-space";
+ if(b>=0x21&&b<=0x7e)return "xxd-ascii-byte";
+ return "xxd-nonascii";
+}
+function formatXxd(bytes,base,status,diffMask=null){
+ const mask=magicMask(bytes),lines=[];
+ const border=s=>`<span class="xxd-border">${s}</span>`;
+ const rule=(n)=>"─".repeat(n);
+ const top=border(`┌${rule(8)}┬${rule(25)}┬${rule(25)}┬${rule(8)}┬${rule(9)}┐`);
+ const bottom=border(`└${rule(8)}┴${rule(25)}┴${rule(25)}┴${rule(8)}┴${rule(9)}┘`);
+ lines.push(top);
+ for(let i=0;i<bytes.length;i+=16){
+  const chunk=bytes.slice(i,i+16),addr=(base+i).toString(16).padStart(8,"0").slice(-8),hexes=[],ascii=[];
+  for(let j=0;j<16;j++){
+   if(j<chunk.length){
+    const b=chunk[j],h=b.toString(16).padStart(2,"0");
+    const cls=byteClass(b,mask[i+j])+(diffMask?.[i+j]?" xxd-diff":"");
+    hexes.push(`<span class="xxd-byte ${cls}">${h}</span>`);
+    const ch=b>=32&&b<127?escapeHtml(String.fromCharCode(b)):".";
+    ascii.push(`<span class="xxd-char ${cls}">${ch}</span>`);
+   }else{
+    hexes.push("  ");
+    ascii.push(" ");
+   }
+  }
+  const leftHex=" "+hexes.slice(0,8).join(" ");
+  const rightHex=" "+hexes.slice(8).join(" ");
+  const leftAscii=ascii.slice(0,8).join("");
+  const rightAscii=ascii.slice(8).join("");
+  lines.push(`${border("│")}<span class="xxd-addr">${addr}</span>${border("│")}${leftHex} ${border("┊")}${rightHex} ${border("│")}<span class="xxd-ascii">${leftAscii}</span>${border("┊")}<span class="xxd-ascii">${rightAscii}</span> ${border("│")}`);
+ }
+ lines.push(bottom);
+ return lines.join("\n");
+}
+const X86_REG32=["eax","ecx","edx","ebx","esp","ebp","esi","edi"];
+const X86_REG8=["al","cl","dl","bl","ah","ch","dh","bh"];
+const X86_JCC=["jo","jno","jb","jae","je","jne","jbe","ja","js","jns","jp","jnp","jl","jge","jle","jg"];
+const X86_ALU=["add","or","adc","sbb","and","sub","xor","cmp"];
+function u8(bytes,i){return i<bytes.length?bytes[i]:0}
+function s8(n){return n&0x80?n-0x100:n}
+function u16(bytes,i){return u8(bytes,i)|(u8(bytes,i+1)<<8)}
+function s16(n){return n&0x8000?n-0x10000:n}
+function u32(bytes,i){return (u8(bytes,i)|(u8(bytes,i+1)<<8)|(u8(bytes,i+2)<<16)|(u8(bytes,i+3)<<24))>>>0}
+function s32(n){return n>>0}
+function hexByte(n){return n.toString(16).padStart(2,"0")}
+function hex32(n){return "0x"+(n>>>0).toString(16).padStart(8,"0")}
+function signedHex(n){return n<0?"-0x"+(-n).toString(16):"0x"+n.toString(16)}
+function formatDisp(base,disp){
+ const value=disp<0?` - 0x${(-disp).toString(16)}`:disp>0?` + 0x${disp.toString(16)}`:"";
+ return base?`${base}${value}`:hex32(disp);
+}
+function decodeModRm(bytes,i,regSet=X86_REG32){
+ const modrm=u8(bytes,i),mod=modrm>>6,reg=(modrm>>3)&7,rm=modrm&7;
+ let len=1,rmText="";
+ if(mod===3)return {len,reg,rmText:regSet[rm]};
+ if(rm===4){
+  const sib=u8(bytes,i+len++),scale=1<<(sib>>6),index=(sib>>3)&7,base=sib&7;
+  let parts=[];
+  if(!(mod===0&&base===5))parts.push(X86_REG32[base]);
+  if(index!==4)parts.push(scale===1?X86_REG32[index]:`${X86_REG32[index]}*${scale}`);
+  let disp=0;
+  if(mod===1){disp=s8(u8(bytes,i+len));len++}
+  else if(mod===2||(mod===0&&base===5)){disp=s32(u32(bytes,i+len));len+=4}
+  rmText=`[${formatDisp(parts.join(" + "),disp)}]`;
+ }else if(mod===0&&rm===5){
+  rmText=`[${hex32(u32(bytes,i+len))}]`;
+  len+=4;
+ }else{
+  let disp=0;
+  if(mod===1){disp=s8(u8(bytes,i+len));len++}
+  else if(mod===2){disp=s32(u32(bytes,i+len));len+=4}
+  rmText=`[${formatDisp(X86_REG32[rm],disp)}]`;
+ }
+ return {len,reg,rmText};
+}
+function asmLine(address,raw,text){
+ return `${address.toString(16).padStart(8,"0")}  ${raw.map(hexByte).join(" ").padEnd(20)} ${text}`;
+}
+function decodeInstruction(bytes,i,base){
+ const start=i,address=base+i,op=u8(bytes,i++);
+ let text="";
+ const rel8=mn=>{const d=s8(u8(bytes,i++));text=`${mn} ${hex32(address+i-start+d)}`};
+ const rel32=mn=>{const d=s32(u32(bytes,i));i+=4;text=`${mn} ${hex32(address+i-start+d)}`};
+ const imm32=()=>{const v=u32(bytes,i);i+=4;return hex32(v)};
+ const imm8=()=>`0x${u8(bytes,i++).toString(16)}`;
+ if(op>=0x50&&op<=0x57)text=`push ${X86_REG32[op-0x50]}`;
+ else if(op>=0x58&&op<=0x5f)text=`pop ${X86_REG32[op-0x58]}`;
+ else if(op>=0x40&&op<=0x47)text=`inc ${X86_REG32[op-0x40]}`;
+ else if(op>=0x48&&op<=0x4f)text=`dec ${X86_REG32[op-0x48]}`;
+ else if(op>=0xb8&&op<=0xbf)text=`mov ${X86_REG32[op-0xb8]}, ${imm32()}`;
+ else if(op>=0xb0&&op<=0xb7)text=`mov ${X86_REG8[op-0xb0]}, ${imm8()}`;
+ else if(op>=0x70&&op<=0x7f)rel8(X86_JCC[op-0x70]);
+ else if(op===0x0f){
+  const op2=u8(bytes,i++);
+  if(op2>=0x80&&op2<=0x8f)rel32(X86_JCC[op2-0x80]);
+  else text="(bad)";
+ }else if(op===0xe8)rel32("call");
+ else if(op===0xe9)rel32("jmp");
+ else if(op===0xeb)rel8("jmp");
+ else if(op===0x90)text="nop";
+ else if(op===0xc3)text="ret";
+ else if(op===0xc2){const v=u16(bytes,i);i+=2;text=`ret 0x${v.toString(16)}`}
+ else if(op===0xcc)text="int3";
+ else if(op===0xcd){text=`int ${imm8()}`}
+ else if(op===0x68)text=`push ${imm32()}`;
+ else if(op===0x6a)text=`push ${signedHex(s8(u8(bytes,i++)))}`;
+ else if(op===0x8d){const m=decodeModRm(bytes,i);i+=m.len;text=`lea ${X86_REG32[m.reg]}, ${m.rmText}`}
+ else if(op===0x8b){const m=decodeModRm(bytes,i);i+=m.len;text=`mov ${X86_REG32[m.reg]}, ${m.rmText}`}
+ else if(op===0x89){const m=decodeModRm(bytes,i);i+=m.len;text=`mov ${m.rmText}, ${X86_REG32[m.reg]}`}
+ else if(op===0x88){const m=decodeModRm(bytes,i,X86_REG8);i+=m.len;text=`mov ${m.rmText}, ${X86_REG8[m.reg]}`}
+ else if(op===0x8a){const m=decodeModRm(bytes,i,X86_REG8);i+=m.len;text=`mov ${X86_REG8[m.reg]}, ${m.rmText}`}
+ else if(op===0xc7){const m=decodeModRm(bytes,i);i+=m.len;text=`mov ${m.rmText}, ${imm32()}`}
+ else if(op===0xc6){const m=decodeModRm(bytes,i,X86_REG8);i+=m.len;text=`mov ${m.rmText}, ${imm8()}`}
+ else if(op>=0x80&&op<=0x83){const m=decodeModRm(bytes,i);i+=m.len;const imm=op===0x83?signedHex(s8(u8(bytes,i++))):op===0x81?imm32():imm8();text=`${X86_ALU[m.reg]} ${m.rmText}, ${imm}`}
+ else if([0x01,0x09,0x11,0x19,0x21,0x29,0x31,0x39].includes(op)){const m=decodeModRm(bytes,i);i+=m.len;text=`${X86_ALU[op>>3]} ${m.rmText}, ${X86_REG32[m.reg]}`}
+ else if([0x03,0x0b,0x13,0x1b,0x23,0x2b,0x33,0x3b].includes(op)){const m=decodeModRm(bytes,i);i+=m.len;text=`${X86_ALU[op>>3]} ${X86_REG32[m.reg]}, ${m.rmText}`}
+ else if(op===0x85){const m=decodeModRm(bytes,i);i+=m.len;text=`test ${m.rmText}, ${X86_REG32[m.reg]}`}
+ else if(op===0x84){const m=decodeModRm(bytes,i,X86_REG8);i+=m.len;text=`test ${m.rmText}, ${X86_REG8[m.reg]}`}
+ else if(op===0xa1)text=`mov eax, [${imm32()}]`;
+ else if(op===0xa3)text=`mov [${imm32()}], eax`;
+ else text="(bad)";
+ return {len:i-start,line:asmLine(address,Array.from(bytes.slice(start,i)),text)};
+}
+function formatDisassembly(bytes,base){
+ const lines=[`basic x86-32 disassembly for ${hex32(base)}..${hex32(base+bytes.length)}`,""];
+ for(const instruction of disassemblyLines(bytes,base)){
+  lines.push(escapeHtml(instruction.line));
+ }
+ return lines.join("\n");
+}
+function disassemblyLines(bytes,base){
+ const lines=[];
+ for(let i=0;i<bytes.length;){
+  const instruction=decodeInstruction(bytes,i,base);
+  lines.push({offset:i,len:Math.max(1,instruction.len),line:instruction.line});
+  i+=Math.max(1,instruction.len);
+ }
+ return lines;
+}
+function runtimeProjectionReference(start,end){
+ return {space:"runtime-parent",url:BYTE_SOURCES["runtime-parent"],sourceStart:start,sourceEnd:end,shownStart:start,label:"runtime"};
+}
+function mappedProjectionReference(space,start,end){
+ if(space==="disk"){
+  const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.start<=start&&end<=r.end);
+  if(!mapping)return null;
+  return {
+   space,
+   url:BYTE_SOURCES[space],
+   sourceStart:mapping.raw+(start-mapping.start),
+   sourceEnd:mapping.raw+(end-mapping.start),
+   shownStart:start,
+   label:spaceLabel(space),
+  };
+ }
+ if(space==="runtime-parent")return runtimeProjectionReference(start,end);
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.start<=start&&end<=r.end);
+ if(!mapping)return null;
+ return {
+  space,
+  url:BYTE_SOURCES[space],
+  sourceStart:mapping.raw+(start-mapping.start),
+  sourceEnd:mapping.raw+(end-mapping.start),
+  shownStart:start,
+  label:spaceLabel(space),
+ };
+}
+function projectionReferencesForRange(start,end){
+ return ["disk","runtime-parent","unwrapped","depeppered","stripped"].map(space=>mappedProjectionReference(space,start,end)).filter(Boolean);
+}
+function disassemblyBadge(space,label){
+ return `<span class="xxd-badge ${space}">${escapeHtml(label)}</span>`;
+}
+function diffMasks(columns){
+ const max=Math.max(...columns.map(column=>column.bytes.length));
+ return columns.map(()=>new Uint8Array(max));
+}
+function applyDiffMasks(columns){
+ const masks=diffMasks(columns);
+ const max=Math.max(...columns.map(column=>column.bytes.length));
+ for(let i=0;i<max;i++){
+  const values=columns.map(column=>i<column.bytes.length?column.bytes[i]:null);
+  if(new Set(values).size<=1)continue;
+  for(let c=0;c<columns.length;c++)if(i<columns[c].bytes.length)masks[c][i]=1;
+ }
+ return masks;
+}
+function xxdColumn(ref,bytes,diffMask){
+ return `<section class="xxd-hex-col">${disassemblyBadge(ref.space,ref.label)}<pre class="xxd-hex-pre">${formatXxd(bytes,ref.shownStart,"",diffMask)}</pre></section>`;
+}
+function disassemblyColumn(ref,bytes,diffMask=null){
+ const shownEnd=ref.shownStart+bytes.length;
+ const header=`${hex32(ref.shownStart)}..${hex32(shownEnd)}`;
+ const lines=[
+  escapeHtml(header),
+  "",
+  escapeHtml(`basic x86-32 disassembly for ${hex32(ref.shownStart)}..${hex32(shownEnd)}`),
+  "",
+ ];
+ for(const instruction of disassemblyLines(bytes,ref.shownStart)){
+  let changed=false;
+  for(let i=instruction.offset;i<instruction.offset+instruction.len&&i<bytes.length;i++){
+   if(diffMask?.[i]){changed=true;break}
+  }
+  lines.push(`<span class="xxd-asm-line${changed?" xxd-diff":""}">${escapeHtml(instruction.line)}</span>`);
+ }
+ return `<section class="xxd-asm-col">${disassemblyBadge(ref.space,ref.label)}<pre class="xxd-asm-pre">${lines.join("\n")}</pre></section>`;
+}
+async function projectionXxdViews(node,end){
+ if(!LINKED_PROJECTION_SPACES.has(node.space))return "";
+ const refs=projectionReferencesForRange(node.start,end);
+ if(refs.length!==5||refs.some(ref=>!ref.url))return null;
+ const columns=await Promise.all(refs.map(async ref=>{
+  try{
+   const bytes=await fetchByteRange(ref.url,ref.sourceStart,ref.sourceEnd);
+   return {ref,bytes,error:null};
+  }catch(error){
+   return {ref,bytes:null,error};
+  }
+ }));
+ if(columns.some(column=>column.error)){
+  return {
+   hexHtml:"",
+   asmHtml:columns.map(column=>`<section class="xxd-asm-col">${disassemblyBadge(column.ref.space,column.ref.label)}<pre class="xxd-asm-pre">${escapeHtml(column.error?`Failed to load bytes: ${column.error.message}`:"")}</pre></section>`).join(""),
+  };
+ }
+ const masks=applyDiffMasks(columns);
+ return {
+  hexHtml:columns.map((column,index)=>xxdColumn(column.ref,column.bytes,masks[index])).join(""),
+  asmHtml:columns.map((column,index)=>disassemblyColumn(column.ref,column.bytes,masks[index])).join(""),
+ };
+}
+function mainPeRawReference(node){
+ if(node.space!=="unwrapped"&&node.space!=="depeppered"&&node.space!=="stripped")return null;
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.start<=node.start&&node.end<=r.end);
+ if(!mapping)return null;
+ const label=node.space;
+ return {
+  url:BYTE_SOURCES[node.space],
+  sourceStart:mapping.raw+(node.start-mapping.start),
+  sourceEnd:mapping.raw+(node.end-mapping.start),
+  shownStart:node.start,
+  label:`${label} ${mapping.label}`,
+ };
+}
+async function openXxd(node){
+ const patchOffset=/patch file offset (0x[0-9a-f]+)/i.exec(node.details||"")?.[1];
+ const patchReference=node.space==="depeppered"&&patchOffset?{base:node.start-parseAddr(patchOffset),url:"binary-artifacts/zt-depeppered.exe",label:"depeppered executable"}:null;
+ const reference=mainPeRawReference(node)||patchReference||RUNTIME_PARENT_REFERENCE_SOURCES.find(r=>node.space==="runtime-parent"&&r.start<=node.start&&node.end<=r.end);
+ const source=reference?.url||BYTE_SOURCES[node.space],range=rangeText(node),status=axisValue(node,"status"),shownStatus=axisLabel(node,"status",status);
+ if(!source){
+  setXxd(node.name,`${node.space} ${range}\nNo deployed byte source for this space.`,escapeHtml("Z2F archive bytes are intentionally excluded from the deployed byte artifacts."));
+  return;
+ }
+ const sourceStart=reference?.sourceStart??(reference?node.start-reference.base:node.start),sourceEnd=reference?.sourceEnd??(reference?node.end-reference.base:node.end);
+ const start=sourceStart,end=Math.min(sourceEnd,sourceStart+MAX_XXD_BYTES),truncated=end<sourceEnd;
+ const sourceRange=reference?`\nsource range ${hex(start)}..${hex(end)} in ${reference.label}`:`\nloading ${hex(start)}..${hex(end)}`;
+ setXxd(node.name,`${node.space} ${range}\n${source}${sourceRange}${truncated?" (truncated)":""}`,escapeHtml("Loading..."));
+ try{
+  const bytes=await fetchByteRange(source,start,end);
+   const details=node.details?`\ndetails: ${node.details}`:"";
+  const shownRuntimeStart=reference?.shownStart??(reference?reference.base+start:start),shownRuntimeEnd=shownRuntimeStart+(end-start);
+  const meta=`${node.space} ${range}\n${source}${reference?`\n${reference.label}`:""}\nshown ${hex(shownRuntimeStart)}..${hex(shownRuntimeEnd)} (${size(bytes.length)})${truncated?`; leaf is ${size(node.end-node.start)}, showing first ${size(MAX_XXD_BYTES)}`:""}\nstatus: ${shownStatus}${details}`;
+  const projectionViews=await projectionXxdViews(node,node.start+(end-start));
+  setXxd(node.name,meta,formatXxd(bytes,shownRuntimeStart,status),{bytes,base:shownRuntimeStart,status,hexHtml:projectionViews?.hexHtml||"",asmHtml:projectionViews?.asmHtml||""});
+ }catch(error){
+  setXxd(node.name,`${node.space} ${range}\n${source}`,escapeHtml(`Failed to load bytes: ${error.message}`));
+ }
+}
+function parseTsv(text){
+ const lines=text.trimEnd().split(/\r?\n/);
+ const header=lines.shift().split("\t");
+ return lines.filter(Boolean).map(line=>Object.fromEntries(line.split("\t").map((value,i)=>[header[i],value]))).map(row=>({space:row.space,start:parseAddr(row.start),end:parseAddr(row.end),name:row.name,status:row.status,details:row.details||"",children:[]}));
+}
+function buildSpaceTree(space,rows){
+ rows=rows.filter(row=>row.space===space).sort((a,b)=>a.start-b.start||b.end-a.end);
+ const stack=[],top=[];
+ for(const node of rows){
+  while(stack.length&&!(stack.at(-1).start<=node.start&&node.end<=stack.at(-1).end))stack.pop();
+  let i=stack.length-1,parent=null;
+  while(i>=0){
+   const candidate=stack[i--];
+   if(candidate.start<=node.start&&node.end<=candidate.end&&candidate.end-candidate.start>node.end-node.start){parent=candidate;break}
+  }
+  if(parent)parent.children.push(node);else top.push(node);
+  stack.push(node);
+ }
+ for(const node of rows)node.children.sort((a,b)=>a.start-b.start||b.end-a.end);
+ for(const node of rows)fillImplicitPadding(node);
+ return top.length===1?top[0]:{space,start:Math.min(...top.map(r=>r.start)),end:Math.max(...top.map(r=>r.end)),name:spaceLabel(space),children:top};
+}
+function fillImplicitPadding(node){
+ if(!node.children?.length)return;
+ const children=[];
+ let cursor=node.start;
+ for(const child of node.children){
+  if(child.start>cursor)children.push({space:node.space,start:cursor,end:child.start,name:"implicit omitted bytes",status:"omitted",details:"Implicit uncovered span; the validator allows this only when source bytes are zero or byte-verified padding.",children:[],implicit:true});
+  children.push(child);
+  cursor=Math.max(cursor,child.end);
+ }
+ if(cursor<node.end)children.push({space:node.space,start:cursor,end:node.end,name:"implicit omitted bytes",status:"omitted",details:"Implicit uncovered span; the validator allows this only when source bytes are zero or byte-verified padding.",children:[],implicit:true});
+ node.children=children;
+}
+function spaceNames(rows){return [...new Set(rows.map(row=>row.space))].sort((a,b)=>{const ai=SPACE_ORDER.indexOf(a),bi=SPACE_ORDER.indexOf(b);return (ai<0?999:ai)-(bi<0?999:bi)||a.localeCompare(b)})}
+function buildTrees(rows){return Object.fromEntries(spaceNames(rows).map(space=>[space,buildSpaceTree(space,rows)]))}
+function isAcceptedPatchedRuntimeSpace(space){return space==="depeppered"}
+function axisValue(n,axis){
+ const values=[...new Set(leafs(n).filter(x=>!isOmitted(x)).map(x=>x[axis]||"unknown"))];
+ if(axis==="status"&&n.status==="indirected")return "indirected";
+ if(axis==="status"&&n.children?.length&&LINKED_PROJECTION_SPACES.has(n.space)&&values.includes("unknown"))return "unknown";
+ if(axis==="status"&&n.children?.length&&values.includes("needs-depepper"))return "needs-depepper";
+ if(axis==="status"&&n.children?.length&&values.includes("changed-unverified"))return "changed-unverified";
+ if(axis==="status"&&n.children?.length&&values.includes("awaiting-depepper"))return "awaiting-depepper";
+ if(axis==="status"&&n.children?.length&&values.length&&values.every(v=>v==="matches-runtime"))return "matches-runtime";
+ if(axis==="status"&&n.children?.length&&values.length&&values.every(v=>["copied","consumed"].includes(v)))return "copied";
+ if(axis==="status"&&n.children?.length&&isAcceptedPatchedRuntimeSpace(n.space)&&values.includes("generated-known"))return "generated-known";
+ if(axis==="status"&&n.children?.length&&values.every(v=>["copied","indirected","known"].includes(v)))return values.includes("indirected")?"indirected":"known";
+ if(n[axis])return n[axis];
+ if(values.length===1)return values[0];
+ return "mixed";
+}
+function axisLabel(n,axis,value=axisValue(n,axis)){return axis==="status"&&value==="generated-known"&&isAcceptedPatchedRuntimeSpace(n.space)?"runtime-generated":value}
+function isOmitted(n){return n.status==="omitted"||n.status==="consumed"}
+function isAssetSpace(space){return ASSET_SPACES.has(space)}
+function isAuxiliaryProcessSpace(space){return AUXILIARY_PROCESS_SPACES.has(space)}
+function isViewerHidden(n){return /\bviewer_hidden:\s*true\b/i.test(n.details||"")}
+function isAsset(n){return isAssetSpace(n.space)||isViewerHidden(n)}
+const cssColorCache={};
+const cssColorVars=["--status-alpha","--implicit-gap-alpha","--c-known","--c-generated-known","--c-assessed","--c-external","--c-not-done","--c-indirected","--c-mixed","--c-copied","--c-consumed","--c-matches-runtime","--c-awaiting-depepper","--c-needs-depepper","--c-changed-unverified","--c-unmaterialized","--c-omitted","--c-unknown"];
+let cssColorSignature="";
+function clearCssColorCache(){for(const key of Object.keys(cssColorCache))delete cssColorCache[key]}
+function refreshCssColorCacheIfNeeded(){
+ const style=getComputedStyle(document.documentElement);
+ const signature=[document.documentElement.dataset.theme||"",...cssColorVars.map(name=>style.getPropertyValue(name).trim())].join("|");
+ if(signature!==cssColorSignature){
+  cssColorSignature=signature;
+  clearCssColorCache();
+ }
+}
+window.refreshThemeCanvases=()=>{
+ cssColorSignature="";
+ clearCssColorCache();
+ for(const explorer of explorers)explorer.render();
+};
+new MutationObserver(mutations=>{
+ if(mutations.some(m=>["class","data-theme","style"].includes(m.attributeName)))window.refreshThemeCanvases();
+}).observe(document.documentElement,{attributes:true,attributeFilter:["class","data-theme","style"]});
+function cssColor(key){
+ if(cssColorCache[key]) return cssColorCache[key];
+ const el=document.createElement("i");
+ el.className=`swatch ${key}`;
+ el.style.position="absolute";
+ el.style.left="-9999px";
+ document.body.appendChild(el);
+ const color=getComputedStyle(el).backgroundColor;
+ el.remove();
+ cssColorCache[key]=color&&color!=="rgba(0, 0, 0, 0)"?color:cssColor("unknown");
+ return cssColorCache[key];
+}
+function canvasColor(key,implicit=false){
+ const style=getComputedStyle(document.documentElement),rgb=style.getPropertyValue(`--c-${key}`).trim()||style.getPropertyValue("--c-unknown").trim();
+ const normalAlpha=parseFloat(style.getPropertyValue("--status-alpha"))||.82;
+ const implicitAlpha=parseFloat(style.getPropertyValue("--implicit-gap-alpha"))||.24;
+ const alpha=activeLegendStatus&&!sameLegendStatus(key,activeLegendStatus) ? .1 : implicit ? implicitAlpha : normalAlpha;
+ return `rgba(${rgb},${alpha})`;
+}
+function createPane(space){const classes=["pane"];if(EMBEDDED_TEMP_SPACES.has(space))classes.push("embedded-temp");if(DEEP_TEMP_SPACES.has(space))classes.push("deep");if(DISK_BACKING_SPACES.has(space))classes.push("disk-backing");if(LINKED_PROJECTION_SPACES.has(space)&&space!=="disk"&&space!=="runtime-parent")classes.push("linked-secondary");const root=document.createElement("section");root.className=classes.join(" ");root.id=space;root.dataset.axis="status";root.innerHTML=`<div class="toolbar"><span class="axis">${spaceLabel(space)}</span><button class="back">back</button><form class="jump"><input class="jump-address" inputmode="text" autocomplete="off" spellcheck="false" placeholder="address"></form><span class="title"></span></div><div class="bar top"></div><canvas class="bytebar bytes"></canvas>`;document.getElementById("spaces").appendChild(root);return root}
+function linkedProjectionPeers(source){return LINKED_PROJECTION_SPACES.has(source.space)?explorers.filter(e=>e!==source&&LINKED_PROJECTION_SPACES.has(e.space)):[]}
+function syncLinkedProjections(source,fn){if(!navigationLocked||linkedSyncing)return;const peers=linkedProjectionPeers(source);if(!peers.length)return;linkedSyncing=true;try{for(const peer of peers)fn(peer)}finally{linkedSyncing=false}}
+function diskToRuntimeAddress(addr){
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.raw<=addr&&addr<r.raw+(r.end-r.start));
+ return mapping?mapping.start+(addr-mapping.raw):null;
+}
+function runtimeToDiskAddress(addr){
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.start<=addr&&addr<r.end);
+ return mapping?mapping.raw+(addr-mapping.start):null;
+}
+function linkedAddressForPeer(sourceSpace,peerSpace,addr){
+ if(sourceSpace==="disk"&&peerSpace!=="disk")return diskToRuntimeAddress(addr);
+ if(sourceSpace!=="disk"&&peerSpace==="disk")return runtimeToDiskAddress(addr);
+ return addr;
+}
+function diskToRuntimeRange(node){
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.raw<=node.start&&node.end<=r.raw+(r.end-r.start));
+ return mapping?{...node,start:mapping.start+(node.start-mapping.raw),end:mapping.start+(node.end-mapping.raw)}:null;
+}
+function runtimeToDiskRange(node){
+ const mapping=MAIN_PE_RAW_SOURCES.find(r=>r.start<=node.start&&node.end<=r.end);
+ return mapping?{...node,start:mapping.raw+(node.start-mapping.start),end:mapping.raw+(node.end-mapping.start)}:null;
+}
+function linkedRangeForPeer(sourceSpace,peerSpace,node){
+ if(sourceSpace==="disk"&&peerSpace!=="disk")return diskToRuntimeRange(node);
+ if(sourceSpace!=="disk"&&peerSpace==="disk")return runtimeToDiskRange(node);
+ return node;
+}
+function linkedStructuralBucketName(peerSpace,target){
+ if(target.name==="zt.exe"&&peerSpace!=="disk")return "runtime memory";
+ if(target.name==="runtime memory"&&peerSpace==="disk")return "zt.exe";
+ return LINKED_STRUCTURAL_BUCKET_NAMES.has(target.name)?target.name:null;
+}
+function makeExplorer(space,tree){const root=createPane(space),axis=root.dataset.axis,viewRoot={space,start:tree.start,end:tree.end,name:spaceLabel(space),status:"",details:"",children:[tree]},stack=[viewRoot];let logScale=true,hideOmitted=true,hideAssets=false,hideAuxiliary=false,zoomStart=0,zoomEnd=1;
+ let panDrag=null;
+ let api=null;
+ const bar=root.querySelector(".top"),bytebar=root.querySelector(".bytes"),title=root.querySelector(".title"),back=root.querySelector(".back"),jump=root.querySelector(".jump"),jumpInput=root.querySelector(".jump-address");
+ const spanWeight=n=>logScale?Math.log2(visibleSize(n)+1):visibleSize(n);
+ const isHidden=n=>(hideOmitted&&isOmitted(n))||(hideAssets&&isAsset(n));
+ const visible=rows=>rows.filter(x=>!isHidden(x));
+ const visibleSize=n=>{
+  if(!hideOmitted)return n.end-n.start;
+  const kids=n.children||[];
+  if(!kids.length)return isHidden(n)?0:n.end-n.start;
+  return kids.reduce((total,k)=>total+visibleSize(k),0);
+ };
+ const nodeWeight=n=>spanWeight(n);
+ const displaySize=visibleSize;
+ const topLayout=kids=>{kids=visible(kids).filter(k=>nodeWeight(k)>0);const total=kids.map(nodeWeight).reduce((a,b)=>a+b,0)||1;let left=0;return kids.map(k=>{const width=nodeWeight(k)/total,row={node:k,left,width};left+=width;return row})};
+ const resetZoom=()=>{zoomStart=0;zoomEnd=1};
+ const clippedRows=(kids,clipStart,clipEnd)=>{const span=clipEnd-clipStart;return topLayout(kids).map(row=>{const a=row.left,b=row.left+row.width,s=Math.max(a,clipStart),e=Math.min(b,clipEnd);if(e<=s)return null;return {node:row.node,left:(s-clipStart)/span,width:(e-s)/span,clipStart:(s-a)/(b-a),clipEnd:(e-a)/(b-a)}}).filter(Boolean)};
+ const zoomedRows=kids=>clippedRows(kids,zoomStart,zoomEnd).map(({node,left,width})=>({node,left,width}));
+ const displayLayout=kids=>zoomedRows(kids);
+ const pathToAddress=(node,addr,path=[])=>{if(!containsAddr(node,addr))return null;const next=[...path,node],child=(node.children||[]).find(c=>containsAddr(c,addr));return child?pathToAddress(child,addr,next):next};
+ const pathToRange=(node,target,path=[])=>{if(target.start<node.start||node.end<target.end)return null;const next=[...path,node],kids=node.children||[],exact=kids.find(c=>c.start===target.start&&c.end===target.end&&c.name===target.name)||kids.find(c=>c.start===target.start&&c.end===target.end),child=exact||kids.find(c=>c.start<=target.start&&target.end<=c.end);return child?pathToRange(child,target,next):next};
+ const findByName=(node,name)=>node.name===name?node:(node.children||[]).map(child=>findByName(child,name)).find(Boolean)||null;
+ const visualAxisValue=(n,parent)=>axisValue(n,axis);
+ const visualAxisLabel=(n,parent,value=visualAxisValue(n,parent))=>axisLabel(n,axis,value);
+ function cls(n,tiny,parent){const status=visualAxisValue(n,parent);return `seg ${status} ${legendDimClass(status)} ${n.implicit?"implicit-gap":""} ${n.children?.length?"clickable":""} ${tiny?"tiny":""}`}
+ function drawTop(container,parent,kids){container.innerHTML="";const frag=document.createDocumentFragment();for(const item of displayLayout(kids)){const k=item.node,w=item.width*100,shownSize=displaySize(k),shownAxis=visualAxisValue(k,parent),shownAxisLabel=visualAxisLabel(k,parent,shownAxis),el=document.createElement("section");el.className=cls(k,w<5,parent);el.style.left=(item.left*100)+"%";el.style.width=w+"%";el.title=`${k.name}\n${rangeText(k)}\nknowledge: ${shownAxisLabel}${detailsText(k)}\n${size(shownSize)}`;el.innerHTML=`<div class="label">${k.name}</div><div class="range">${rangeText(k)} · ${shownAxisLabel} · ${size(shownSize)}</div>`;el.onclick=()=>{if(k.children?.length){api.focusRange(k);syncLinkedProjections(api,peer=>peer.focusLinkedRange(api.space,k))}else openXxd(k)};frag.appendChild(el)}container.appendChild(frag)}
+ function drawByteNode(ctx,node,left,width,h,clipStart=0,clipEnd=1){
+  if(node.children?.length){
+   for(const row of clippedRows(node.children,clipStart,clipEnd))drawByteNode(ctx,row.node,left+row.left*width,row.width*width,h,row.clipStart,row.clipEnd);
+   return;
+  }
+  {
+   const key=axisValue(node,axis),x=Math.round(left),x2=Math.round(left+width);
+   if(x2<=x)return;
+   ctx.fillStyle=canvasColor(key,node.implicit);
+   ctx.fillRect(x,0,x2-x,h);
+   return;
+  }
+ }
+ function drawBytes(canvas){refreshCssColorCacheIfNeeded();const ratio=devicePixelRatio||1,w=canvas.clientWidth||1200,h=canvas.clientHeight||34;canvas.width=w*ratio;canvas.height=h*ratio;const ctx=canvas.getContext("2d");ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,w,h);drawByteNode(ctx,stack.at(-1),0,w,h,zoomStart,zoomEnd)}
+ function setZoom(start,span){span=Math.min(1,Math.max(.0005,span));zoomStart=Math.max(0,Math.min(1-span,start));zoomEnd=zoomStart+span}
+ function syncZoom(){syncLinkedProjections(api,peer=>peer.setZoomRange(zoomStart,zoomEnd-zoomStart))}
+ function panBy(delta){const span=zoomEnd-zoomStart;if(span>=.999)return;setZoom(zoomStart+delta,span);render();syncZoom()}
+ function wheelMove(event){event.preventDefault();const span=zoomEnd-zoomStart,rect=bar.getBoundingClientRect();if(event.shiftKey||Math.abs(event.deltaX)>Math.abs(event.deltaY)){const delta=(event.deltaX||event.deltaY)/Math.max(1,rect.width)*span;panBy(delta);return}const x=Math.min(1,Math.max(0,(event.clientX-rect.left)/Math.max(1,rect.width))),center=zoomStart+x*span,factor=event.deltaY<0?.65:1/.65,newSpan=Math.min(1,Math.max(.0005,span*factor));setZoom(center-x*newSpan,newSpan);render();syncZoom()}
+ function startPan(event){if(event.button!==1)return;event.preventDefault();const span=zoomEnd-zoomStart;if(span>=.999)return;panDrag={x:event.clientX,start:zoomStart,span};bar.classList.add("panning");bytebar.classList.add("panning")}
+ function movePan(event){if(!panDrag)return;const rect=bar.getBoundingClientRect(),delta=-(event.clientX-panDrag.x)/Math.max(1,rect.width)*panDrag.span;setZoom(panDrag.start+delta,panDrag.span);render();syncZoom()}
+ function endPan(){if(!panDrag)return;panDrag=null;bar.classList.remove("panning");bytebar.classList.remove("panning")}
+ function jumpToAddress(addr){
+  const path=pathToAddress(viewRoot,addr);
+  if(!path)return false;
+  let focus=path.length-1;
+  while(focus>0&&!path[focus].children?.length)focus--;
+  stack.length=0;stack.push(...path.slice(0,focus+1));
+  const node=stack.at(-1),kids=node.children?.length?node.children:[node];
+  if(!visible(kids).some(k=>containsAddr(k,addr))){
+   if(kids.some(k=>containsAddr(k,addr)&&isOmitted(k)))hideOmitted=false;
+   if(kids.some(k=>containsAddr(k,addr)&&isAsset(k)))hideAssets=false;
+  }
+  const row=topLayout(kids).find(r=>containsAddr(r.node,addr));
+  if(row){
+   const center=row.left+row.width/2,newSpan=Math.min(1,Math.max(.0005,Math.min(.18,row.width*3)));
+   setZoom(center-newSpan/2,newSpan);
+  }else resetZoom();
+  jumpInput.classList.remove("invalid");
+  jumpInput.value=hex(addr);
+  render();
+  return true;
+ }
+ function focusRange(target){
+  const path=pathToRange(viewRoot,target);
+  if(!path)return false;
+  let focus=path.length-1;
+  while(focus>0&&!path[focus].children?.length)focus--;
+  stack.length=0;stack.push(...path.slice(0,focus+1));
+  resetZoom();
+  jumpInput.classList.remove("invalid");
+  render();
+  return true;
+ }
+ function focusLinkedRange(sourceSpace,target){
+  const structuralName=linkedStructuralBucketName(space,target);
+  const named=structuralName?findByName(viewRoot,structuralName):null;
+  if(named)return focusRange(named);
+  const mapped=linkedRangeForPeer(sourceSpace,space,target);
+  return mapped?focusRange(mapped):false;
+ }
+ function localBack(){if(stack.length>1){stack.pop();resetZoom();render();return true}return false}
+ function render(){const node=stack.at(-1),kids=node.children?.length?node.children:[node],shownAxis=axisValue(node,axis),zoomLabel=zoomEnd-zoomStart<.999?`  zoom ${(1/(zoomEnd-zoomStart)).toFixed(1)}x`:"";root.hidden=(hideAssets&&isAssetSpace(space))||(hideAuxiliary&&isAuxiliaryProcessSpace(space));if(root.hidden)return;title.textContent=`${node.name}  ${rangeText(node)}  ${axisLabel(node,axis,shownAxis)}  ${size(displaySize(node))}${zoomLabel}`;back.disabled=stack.length===1;drawTop(bar,node,kids);drawBytes(bytebar)}
+ function findReplacement(node,newParent){return (newParent.children||[]).find(candidate=>candidate.start===node.start&&candidate.end===node.end&&candidate.name===node.name)||(newParent.children||[]).find(candidate=>candidate.start<=node.start&&node.end<=candidate.end)||newParent}
+ api={space,render,focusRange,focusLinkedRange,setZoomRange(start,span){setZoom(start,span);render()},jumpToAddress,backLocal:localBack,root(){stack.length=1;resetZoom();render()},setScale(v){logScale=v;resetZoom();render();updateCommonControls()},scale(){return logScale},setHidden(v){hideOmitted=v;resetZoom();render();updateCommonControls()},hidden(){return hideOmitted},setAssetHidden(v){hideAssets=v;if(hideAssets&&stack.some(isAsset)){stack.length=1}resetZoom();render();updateCommonControls()},assetHidden(){return hideAssets},setAuxiliaryHidden(v){hideAuxiliary=v;resetZoom();render();updateCommonControls()},auxiliaryHidden(){return hideAuxiliary},replaceTree(tree){const oldStack=stack.slice(1);viewRoot.start=tree.start;viewRoot.end=tree.end;viewRoot.children=[tree];stack.length=1;let parent=viewRoot;for(const oldNode of oldStack){const replacement=findReplacement(oldNode,parent);if(replacement===parent)break;stack.push(replacement);parent=replacement}setZoom(zoomStart,zoomEnd-zoomStart);render()}};
+ function goBack(){if(localBack())syncLinkedProjections(api,peer=>peer.backLocal())}
+ function rightClickBack(event){event.preventDefault();goBack()}
+ back.onclick=goBack;bar.addEventListener("contextmenu",rightClickBack);bytebar.addEventListener("contextmenu",rightClickBack);bar.addEventListener("wheel",wheelMove,{passive:false});bytebar.addEventListener("wheel",wheelMove,{passive:false});bar.addEventListener("mousedown",startPan);bytebar.addEventListener("mousedown",startPan);document.addEventListener("mousemove",movePan);document.addEventListener("mouseup",endPan);jump.onsubmit=event=>{event.preventDefault();const addr=parseJumpAddr(jumpInput.value);if(!Number.isFinite(addr)||!jumpToAddress(addr)){jumpInput.classList.add("invalid");return}syncLinkedProjections(api,peer=>{const target=linkedAddressForPeer(api.space,peer.space,addr);if(target!==null)peer.jumpToAddress(target)})};jumpInput.oninput=()=>jumpInput.classList.remove("invalid");explorers.push(api);render();updateCommonControls()}
+function setToggle(button,on,label){button.textContent=label;button.setAttribute("aria-pressed",String(on))}
+function updateCommonControls(){const first=explorers[0];if(!first)return;setToggle(document.querySelector(".legend-lock-toggle"),navigationLocked,"nav lock");setToggle(document.querySelector(".legend-scale"),first.scale(),first.scale()?"log scale":"linear scale");setToggle(document.querySelector(".legend-hidden-toggle"),!first.hidden(),first.hidden()?"show omitted":"hide omitted");setToggle(document.querySelector(".legend-temp-toggle"),!first.auxiliaryHidden(),first.auxiliaryHidden()?"show temp/process":"hide temp/process");setToggle(document.querySelector(".legend-asset-toggle"),!first.assetHidden(),first.assetHidden()?"show assets":"hide assets")}
+function initCommonControls(){
+ const home=document.querySelector(".legend-root"),lockToggle=document.querySelector(".legend-lock-toggle"),scale=document.querySelector(".legend-scale"),hiddenToggle=document.querySelector(".legend-hidden-toggle"),tempToggle=document.querySelector(".legend-temp-toggle"),assetToggle=document.querySelector(".legend-asset-toggle"),refresh=document.querySelector(".legend-refresh");
+ home.onclick=()=>{for(const e of explorers)e.root();updateCommonControls()};
+ lockToggle.onclick=()=>{navigationLocked=!navigationLocked;updateCommonControls()};
+ scale.onclick=()=>{const v=!(explorers[0]?.scale()??true);for(const e of explorers)e.setScale(v);updateCommonControls()};
+ hiddenToggle.onclick=()=>{const v=!(explorers[0]?.hidden()??true);for(const e of explorers)e.setHidden(v);updateCommonControls()};
+ tempToggle.onclick=()=>{const v=!(explorers[0]?.auxiliaryHidden()??true);for(const e of explorers)e.setAuxiliaryHidden(v);updateCommonControls()};
+ assetToggle.onclick=()=>{const v=!(explorers[0]?.assetHidden()??true);for(const e of explorers)e.setAssetHidden(v);updateCommonControls()};
+ refresh.onclick=async()=>{const oldText=refresh.textContent;refresh.disabled=true;refresh.textContent="refreshing";try{const token=Date.now();await loadPayload([`zt-byte-range-map.tsv?v=${token}`,`../docs/analysis/zt-byte-range-map.tsv?v=${token}`]);for(const explorer of explorers){const tree=payload[explorer.space];if(tree)explorer.replaceTree(tree)}updateCommonControls()}catch(error){console.error(error);refresh.textContent="failed";setTimeout(()=>{refresh.textContent=oldText},1200);return}finally{refresh.disabled=false}refresh.textContent=oldText};
+ updateCommonControls();
+}
+initLegendFilter();
+initCommonControls();
+loadPayload().then(()=>{for(const [space,tree] of Object.entries(payload))makeExplorer(space,tree)}).catch(error=>{document.getElementById("spaces").innerHTML=`<p style="color:#e05252">Failed to load byte range map: ${error.message}</p>`});
+</script></body><script id="openzt2-live-reload">
+(()=>{
+ const current="3871049a3cdd89c9";
+ const endpoint="site-version.json";
+ const interval=60000;
+ let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
+ const update=()=>{
+  if(!button)return;
+  if(paused){
+   button.classList.add("paused");
+   button.style.setProperty("--reload-progress","0");
+   button.title="Automatic refresh paused. Click to unpause.";
+   button.setAttribute("aria-label",button.title);
+   button.textContent="⏸";
+   return;
+  }
+  const remaining=Math.max(0,Math.ceil((nextAt-Date.now())/1000));
+  const progress=Math.min(100,Math.max(0,100-(remaining*100)/(interval/1000)));
+  button.classList.remove("paused");
+  button.style.setProperty("--reload-progress",progress.toFixed(1));
+  button.title=`Next automatic refresh in ${remaining}s. Click to pause.`;
+  button.setAttribute("aria-label",button.title);
+  button.textContent="↻";
+ };
+ const schedule=()=>{
+  if(paused)return;
+  nextAt=Date.now()+interval;
+  clearTimeout(timer);
+  timer=setTimeout(check,interval);
+  update();
+ };
+ const check=async()=>{
+  if(paused)return;
+  try{
+   const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
+   if(!response.ok){schedule();return;}
+   const latest=(await response.json()).version;
+   if(latest&&latest!==current){location.reload();return;}
+  }catch(_){
+  }
+  schedule();
+ };
+ const toggle=()=>{
+  paused=!paused;
+  if(paused){
+   clearTimeout(timer);
+  }else{
+   schedule();
+  }
+  update();
+ };
+ const mount=()=>{
+  const nav=document.querySelector(".tabs");
+  if(!nav)return;
+  button=document.createElement("button");
+  button.type="button";
+  button.className="reload-toggle";
+  button.onclick=toggle;
+  const theme=document.querySelector(".theme-toggle");
+  if(theme)theme.after(button);else nav.append(button);
+  ticker=setInterval(update,1000);
+  schedule();
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+})();
+</script>
+</html>

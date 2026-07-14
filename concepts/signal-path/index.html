@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signal Path — over|yonder concept</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="over yonder home">over<span>|</span>yonder</a>
+    <nav aria-label="Primary navigation">
+      <a href="#range">Range</a><a href="#proof">Proof</a><a href="#contact">Contact</a>
+    </nav>
+    <span class="status"><i></i> engineering at every layer</span>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Performance engineering · Sydney / worldwide</p>
+        <h1>When software hits the limit, <em>we move the limit.</em></h1>
+        <p class="lede">From application code to custom silicon.</p>
+        <a class="cta" href="#contact">Discuss a hard problem <span>↗</span></a>
+      </div>
+
+      <div class="instrument" aria-label="A signal descending from application software through the kernel and hardware to silicon">
+        <div class="scope-head"><span>OY / TRACE 01</span><span>6.94 ms/div</span></div>
+        <svg viewBox="0 0 760 680" role="img" aria-label="Computing stack signal trace">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="currentColor" opacity=".13"/></pattern>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="760" height="680" fill="url(#grid)"/>
+          <g class="planes">
+            <path d="M76 104H668"/><path d="M76 212H668"/><path d="M76 320H668"/><path d="M76 428H668"/><path d="M76 536H668"/>
+          </g>
+          <g class="labels">
+            <text x="76" y="82">APPLICATION</text><text x="76" y="190">RUNTIME</text><text x="76" y="298">KERNEL</text><text x="76" y="406">ISA / LOGIC</text><text x="76" y="514">SILICON</text>
+          </g>
+          <path class="signal shadow" d="M76 125h120l18-40 28 82 28-42h110l18 86h68l22-126 30 82h150v66h-86l-18 76h-84l-22-56-26 178h-78l-20-110-30 210H76"/>
+          <path class="signal" d="M76 125h120l18-40 28 82 28-42h110l18 86h68l22-126 30 82h150v66h-86l-18 76h-84l-22-56-26 178h-78l-20-110-30 210H76"/>
+          <circle class="probe" cx="304" cy="535" r="7"/>
+          <text class="annotation" x="325" y="565">problem boundary moved</text>
+        </svg>
+        <div class="scope-foot"><span>Δ 800 ms → &lt;1 ms</span><span>RING 3 → RING 0 → RTL</span></div>
+      </div>
+    </section>
+
+    <section class="range" id="range">
+      <p class="section-no">01 / RANGE</p>
+      <h2>One firm.<br>Every layer.</h2>
+      <ol class="layer-list">
+        <li><span>01</span><strong>Products</strong><small>Native consumer software built for demanding workloads.</small></li>
+        <li><span>02</span><strong>Systems</strong><small>Compilers, storage, kernels and data paths.</small></li>
+        <li><span>03</span><strong>Compute</strong><small>SIMD, FPGA, ASIC and application-specific architecture.</small></li>
+        <li><span>04</span><strong>Physics</strong><small>When the constraint is below the abstraction.</small></li>
+      </ol>
+    </section>
+
+    <section class="proof" id="proof">
+      <p class="section-no">02 / EVIDENCE</p>
+      <div class="result"><span>rstat</span><strong>800 ms</strong><i>→</i><strong>&lt;1 ms</strong><small>Sampling moved into the Linux kernel.</small></div>
+      <div class="result"><span>Archivist</span><strong>222,242</strong><i>in</i><strong>420 ms</strong><small>A live collection hydrated from a purpose-built data path.</small></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p>Have a problem beyond the usual stack?</p>
+      <a href="mailto:overyonderstudios@gmail.com">Let’s trace it to the source. <span>↗</span></a>
+    </section>
+  </main>
+</body>
+</html>

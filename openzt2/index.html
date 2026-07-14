@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="openzt2-site-version" content="3871049a3cdd89c9">
+<meta name="openzt2-site-version" content="b4f92bb432767f67">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenZT2 — Reconstruction Dashboard</title>
 <style>
@@ -9,7 +9,7 @@
 :root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--frontier:#b16286;--bad:#cc241d}
 *{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
 button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
-.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1436px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 34px 26px;gap:5px;width:min(calc(100vw - 24px),1000px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
 .tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
 .nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
 main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
@@ -19,7 +19,7 @@ main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;marg
 .progress-card.primary{grid-column:1/-1}
 .stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
 .seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-accepted,.seg-known,.seg-named,.seg-all{background:#79740e}.seg-candidate,.seg-some{background:#b57614}.seg-open,.seg-unnamed,.seg-none{background:#9d0006}.seg-mid,.seg-type{background:#076678}.seg-support{background:#7c6f64}.mini-label{margin:8px 0 3px;font-size:12px;color:var(--muted)}
-.seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-planned{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
+.seg-brief{background:#b57614}.seg-active{background:#8f3f71}.seg-implemented{background:#076678}.seg-verified{background:#79740e}.seg-blocked{background:#9d0006}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
 h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
 .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:10px 0 18px}
@@ -31,10 +31,10 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
 .modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
 .modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
 .modal-box iframe{flex:1;border:0;width:100%}
-@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.7fr) minmax(110px,.9fr) minmax(96px,.8fr) minmax(260px,1.7fr) minmax(150px,1.1fr) minmax(124px,1fr) 34px;width:min(calc(100vw - 24px),1500px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(7,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
+@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.8fr) minmax(110px,1fr) minmax(96px,.9fr) minmax(220px,1.6fr) 34px 26px;width:min(calc(100vw - 24px),1000px)}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle,.reload-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
 </style>
 <body>
-<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a><a href="asset-coverage.html"><span class="nav-icon" aria-hidden="true">⬡</span><span class="nav-label">Asset Coverage</span></a></nav>
+<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Functional Specification</span></a></nav>
 <main>
  <h1>OpenZT2 Reconstruction Dashboard</h1>
  <p class="sub">A map of the reconstruction pipeline: evidence, ownership/behavior, and implementation.</p>
@@ -44,8 +44,7 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
   <ol>
    <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
    <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
-   <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
-   <li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+   <li><strong>Functional specification</strong> is the product and delivery gate: it defines the greenfield Bevy architecture, native pack contracts, original behavior, performance acceptance, and every discrete implementation package.</li>
   </ol>
  </section>
 
@@ -62,16 +61,8 @@ h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-
    <p>Shows generated function, variables/data, and type-identity inventories over the stripped binary, joining exact byte-map anchors with library provenance, vtable membership, inferred domains, and remaining frontier classifications.</p>
   </div>
   <div class="doc-card">
-   <h3><a href="original-game-functional-specification.html">Functional Specification</a></h3>
-   <p>Records original-game ownership and behavior: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and remaining behavior gaps.</p>
-  </div>
-  <div class="doc-card">
-   <h3><a href="rust-bevy-plan.html">Rust/Bevy Plan</a></h3>
-   <p>Tracks Rust/Bevy implementation progress for the specified ownership and behavior: what is planned, recorded, loaded, running, or adapted.</p>
-  </div>
-  <div class="doc-card">
-   <h3><a href="asset-coverage.html">Native Asset Coverage</a></h3>
-   <p>Maps every original source family into the canonical engine-native asset type it should become, and distinguishes accepted zero-copy layouts from partial, prototype, passthrough, and missing contracts.</p>
+   <h3><a href="functional-specification.html">Functional Specification</a></h3>
+   <p>The canonical product contract and delivery map: high-performance native assets, greenfield Bevy ownership, original-game behavior, acceptance criteria, and the status of all 55 independent work packages.</p>
   </div>
  </div>
 
@@ -94,11 +85,11 @@ function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
 function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${pct(n,total)}</div>`:""}
 function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
 (()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
-text(["rust-bevy-plan.html","../docs/RUST-BEVY-PLAN.md"]).then(planText=>{
- const plan=planProgress(planText);
+text(["functional-specification.html"]).then(specText=>{
+ const plan=packageProgress(specText);
  document.getElementById("progress-bars").innerHTML=[
    `<div class="progress-card primary">
-    <h3><a href="rust-bevy-plan.html">Reconstruction Work Board</a></h3>
+    <h3><a href="functional-specification.html">Game Package Delivery</a></h3>
     <div class="stacked-bar" role="img" aria-label="${esc(plan.aria)}">
      ${plan.segments}
     </div>
@@ -107,44 +98,27 @@ text(["rust-bevy-plan.html","../docs/RUST-BEVY-PLAN.md"]).then(planText=>{
    </div>`,
    `<div class="progress-card">
     <h3><a href="perimeter.html">Evidence Gates</a></h3>
-    <p class="progress-note">Byte range and binary perimeter coverage remain on their evidence pages. The dashboard bar starts at the implementation gate.</p>
+    <p class="progress-note">Byte range and binary perimeter coverage remain on their evidence pages. The delivery bar tracks the packages whose combined acceptance produces the complete game.</p>
    </div>`
  ].join("");
 }).catch(e=>{document.getElementById("progress-bars").insertAdjacentHTML("afterend",`<p class="sub">Failed to load progress data: ${esc(e.message)}</p>`)});
-function planProgress(source){
- const order=[["done","Done"],["runs","Runs"],["loaded","Loaded"],["recorded","Recorded"],["planned","Planned"],["map","Map"],["adapter","Adapter"]];
+function packageProgress(source){
+ const order=[["brief","Brief ready"],["active","Active"],["implemented","Implemented"],["verified","Verified"],["blocked","Blocked"]];
  const counts=Object.fromEntries(order.map(([s])=>[s,0]));
- let domains=0;
- const aria=source.match(/class="plan-stacked-bar"[^>]*aria-label="([^"]+)"/);
- if(aria){
-  for(const m of aria[1].matchAll(/([a-z-]+)\s+([0-9]+)/g))if(m[1] in counts)counts[m[1]]=Number(m[2]);
-  const note=source.match(/([0-9,]+) work-board rows across ([0-9,]+) top-level domains/);
-  if(note)domains=Number(note[2].replace(/,/g,""));
- }else{
-  let inBoard=false;const seen=new Set();
-  for(const line of source.split(/\r?\n/)){
-   if(line.startsWith("| Owner | Subdomain | Feature | Status |")){inBoard=true;continue}
-   if(!inBoard)continue;
-   if(!line.startsWith("| "))break;
-   const cells=line.trim().replace(/^\||\|$/g,"").split("|").map(s=>s.trim());
-   if(cells.length<6||cells[0]==="---")continue;
-   const status=cells[3].replace(/[` ]/g,"");
-   if(status in counts){counts[status]++;seen.add(cells[0])}
-  }
-  domains=seen.size;
- }
+ const doc=new DOMParser().parseFromString(source,"text/html");
+ for(const card of doc.querySelectorAll(".package-card"))for(const [status] of order)if(card.classList.contains(`package-status-${status}`))counts[status]++;
  const total=Object.values(counts).reduce((a,n)=>a+n,0);
  return {
   aria:order.filter(([s])=>counts[s]).map(([s])=>`${s} ${counts[s]}`).join(", "),
   segments:order.map(([s,l])=>seg(`seg-${s}`,counts[s],total,`${l}: ${counts[s]}`)).join(""),
   legend:order.filter(([s])=>counts[s]).map(([s,l])=>legend(`seg-${s}`,`${l}: ${counts[s].toLocaleString()}`)).join(""),
-  note:domains?`${total.toLocaleString()} work-board rows across ${domains.toLocaleString()} top-level domains.`:`${total.toLocaleString()} work-board rows.`
+  note:`${counts.verified.toLocaleString()} of ${total.toLocaleString()} packages have passed complete acceptance. Only verified packages are green.`
  };
 }
 </script>
 <script id="openzt2-live-reload">
 (()=>{
- const current="3871049a3cdd89c9";
+ const current="b4f92bb432767f67";
  const endpoint="site-version.json";
  const interval=60000;
  let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;

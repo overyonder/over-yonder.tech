@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="openzt2-site-version" content="3871049a3cdd89c9">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenZT2 — Reconstruction Dashboard</title>
+<style>
+:root{color-scheme:light;--fg:#3c3836;--muted:#7c6f64;--line:#d5c4a1;--panel:#fbf1c7;--soft:#ebdbb2;--link:#076678;--control:#f2e5bc;--control-border:#a89984;--active:#ebdbb2;--ok:#79740e;--warn:#b57614;--frontier:#8f3f71;--bad:#9d0006}
+:root[data-theme="dark"]{color-scheme:dark;--fg:#ebdbb2;--muted:#a89984;--line:#504945;--panel:#282828;--soft:#3c3836;--link:#83a598;--control:#3c3836;--control-border:#665c54;--active:#504945;--ok:#98971a;--warn:#d79921;--frontier:#b16286;--bad:#cc241d}
+*{box-sizing:border-box}html,body{background:var(--panel);color:var(--fg);overscroll-behavior:none}body{margin:0;font:14px/1.5 system-ui,sans-serif}a{color:var(--link)}
+button,input,select{background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:3px 7px;font-size:12px}button{cursor:pointer}
+.tabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 34px;gap:5px;width:min(calc(100vw - 24px),1436px);margin:5px auto 6px;font:12px/1.05 system-ui,sans-serif}.tabs a{display:flex;align-items:center;justify-content:center;min-height:24px;padding:2px 6px;text-align:center;white-space:nowrap;color:var(--fg);text-decoration:none;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}.tabs a.active{background:var(--active);outline:2px solid currentColor;outline-offset:1px}
+.tabs a.gstart{margin-left:9px;position:relative}.tabs a.gstart::before{content:"";position:absolute;left:-5px;top:2px;bottom:2px;border-left:1px solid var(--control-border)}
+.nav-icon{display:none}.theme-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--control);color:var(--fg);border:1px solid var(--control-border);border-radius:4px;padding:0;font:15px/1 system-ui,sans-serif;cursor:pointer}
+main{max-width:1180px;margin:0 auto;padding:8px 20px 60px}h1{font-size:24px;margin:10px 0 2px}.sub{color:var(--muted);margin:0 0 16px}
+.pipeline{border:1px solid var(--line);border-radius:6px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:12px 14px;margin:12px 0 18px}.pipeline h2{margin:0 0 8px;border:0;padding:0}.pipeline ol{margin:0;padding-left:22px}.pipeline li{margin:4px 0;color:var(--muted)}.pipeline strong{color:var(--fg)}
+.progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 18px}
+.progress-card{border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--soft) 55%,transparent);padding:10px 12px}.progress-card h3{margin:0 0 7px;font-size:15px}.progress-card h3 a{text-decoration:none}
+.progress-card.primary{grid-column:1/-1}
+.stacked-bar{display:flex;width:100%;height:28px;overflow:hidden;border:1px solid var(--control-border);border-radius:4px;background:var(--panel)}
+.seg{display:flex;align-items:center;justify-content:center;min-width:2px;color:#fbf1c7;font:700 11px/1 system-ui,sans-serif;white-space:nowrap}.seg-accepted,.seg-known,.seg-named,.seg-all{background:#79740e}.seg-candidate,.seg-some{background:#b57614}.seg-open,.seg-unnamed,.seg-none{background:#9d0006}.seg-mid,.seg-type{background:#076678}.seg-support{background:#7c6f64}.mini-label{margin:8px 0 3px;font-size:12px;color:var(--muted)}
+.seg-done{background:#79740e}.seg-runs{background:#98971a}.seg-loaded{background:#076678}.seg-recorded{background:#7c6f64}.seg-planned{background:#b57614}.seg-map{background:#9d0006}.seg-adapter{background:#8f3f71}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:3px 12px;margin:7px 0 0;font-size:12px;color:var(--muted)}.legend-row{display:flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}.progress-note{font-size:12.5px;color:var(--muted);margin:8px 0 0!important}
+h2{font-size:17px;margin:26px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:10px 0 18px}
+.doc-card{border:1px solid var(--line);border-radius:6px;background:var(--soft);padding:12px 14px}
+.doc-card h3{margin:0 0 6px;font-size:15px}.doc-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.doc-card a{font-weight:700;text-decoration:none}
+.legalrow{margin:22px 0 0;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.legalrow button{font-size:12px}
+.modal[hidden]{display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:60}
+.modal-box{background:var(--panel);width:min(92vw,1000px);height:min(88vh,900px);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column}
+.modal-box header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line)}
+.modal-box iframe{flex:1;border:0;width:100%}
+@media(min-width:881px){.tabs{grid-template-columns:minmax(72px,.7fr) minmax(110px,.9fr) minmax(96px,.8fr) minmax(260px,1.7fr) minmax(150px,1.1fr) minmax(124px,1fr) 34px;width:min(calc(100vw - 24px),1500px)}.tabs a[href="original-game-functional-specification.html"]{min-width:260px}}@media(max-width:880px){body{padding-bottom:62px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(7,minmax(0,1fr));width:100%;margin:0;padding:6px 8px;background:var(--panel);border-top:1px solid var(--control-border);font:11px/1 system-ui,sans-serif}.tabs a{min-height:48px;padding:0;white-space:normal;border-radius:4px;min-width:0}.tabs a.gstart{margin-left:0}.tabs a.gstart::before{display:none}.nav-icon{display:block;font:22px/1 system-ui,sans-serif}.nav-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.theme-toggle{width:48px;height:48px;font-size:22px}main{padding:8px 10px 74px}.progress-grid{grid-template-columns:1fr}.seg{font-size:10px}}
+</style>
+<body>
+<nav class="tabs"><a class="active" href="index.html"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Dashboard</span></a><a class="gstart" href="zt-disk-map.html"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-label">Byte Range Map</span></a><a href="perimeter.html"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-label">Binary Perimeter</span></a><a class="gstart" href="original-game-functional-specification.html"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Original Game Functional Specification</span></a><a class="gstart" href="rust-bevy-plan.html"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-label">Rust/Bevy Plan</span></a><a href="asset-coverage.html"><span class="nav-icon" aria-hidden="true">⬡</span><span class="nav-label">Asset Coverage</span></a></nav>
+<main>
+ <h1>OpenZT2 Reconstruction Dashboard</h1>
+ <p class="sub">A map of the reconstruction pipeline: evidence, ownership/behavior, and implementation.</p>
+
+ <section class="pipeline" aria-label="Reconstruction pipeline">
+  <h2>Pipeline</h2>
+  <ol>
+   <li><strong>Byte range map</strong> is the evidence gate by address/range: it records whether each mapped byte or range exists and what it is.</li>
+   <li><strong>Binary perimeter</strong> is the evidence pivot gate: it groups the recorded evidence by functions, type identities, vtables, globals, and broad evidence families.</li>
+   <li><strong>Functional specification</strong> is the ownership and behavior gate: it consumes recovered evidence and records which original systems own state/data and what behavior is understood or still missing.</li>
+   <li><strong>Rust/Bevy plan</strong> is the implementation gate: it consumes specified ownership/behavior and tracks what OpenZT2 has implemented, loaded, run, or still needs to build.</li>
+  </ol>
+ </section>
+
+ <div class="progress-grid" id="progress-bars" aria-label="Project progress summary"></div>
+
+ <h2>Pages</h2>
+ <div class="doc-grid" aria-label="Project page guide">
+  <div class="doc-card">
+   <h3><a href="zt-disk-map.html">Byte Range Map</a></h3>
+   <p>Contains the byte-level evidence ledger for the original executable: disk/runtime ranges, SafeDisc materialization records, accepted function identities, residual gaps, and status notes for exact address spans.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="perimeter.html">Binary Perimeter</a></h3>
+   <p>Shows generated function, variables/data, and type-identity inventories over the stripped binary, joining exact byte-map anchors with library provenance, vtable membership, inferred domains, and remaining frontier classifications.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="original-game-functional-specification.html">Functional Specification</a></h3>
+   <p>Records original-game ownership and behavior: source hydration, BF/BT framework surfaces, BFG substrate systems, ZT product domains, projection adapters, message registries, and remaining behavior gaps.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="rust-bevy-plan.html">Rust/Bevy Plan</a></h3>
+   <p>Tracks Rust/Bevy implementation progress for the specified ownership and behavior: what is planned, recorded, loaded, running, or adapted.</p>
+  </div>
+  <div class="doc-card">
+   <h3><a href="asset-coverage.html">Native Asset Coverage</a></h3>
+   <p>Maps every original source family into the canonical engine-native asset type it should become, and distinguishes accepted zero-copy layouts from partial, prototype, passthrough, and missing contracts.</p>
+  </div>
+ </div>
+
+ <div class="legalrow">
+  <span>Clean-room project reference.</span>
+  <button type="button" id="legal-open">§ Legal &amp; clean-room roadmap</button>
+ </div>
+</main>
+<div class="modal" id="legal-modal" hidden>
+ <div class="modal-box">
+  <header><strong>Clean-Room Legal Roadmap</strong><button type="button" id="legal-close">Close</button></header>
+  <iframe class="legal-frame" src="clean-room-legal-roadmap.html" title="Legal Roadmap"></iframe>
+ </div>
+</div>
+<script>
+(()=>{const key="zt2-theme";const root=document.documentElement;const stored=()=>{try{return localStorage.getItem(key)}catch(_){return null}};const save=t=>{try{localStorage.setItem(key,t)}catch(_){}};const syncFrames=t=>{for(const f of document.querySelectorAll("iframe.legal-frame")){try{if(f.contentDocument)f.contentDocument.documentElement.dataset.theme=t}catch(_){}}};const apply=(t,p=false)=>{root.dataset.theme=t;if(p)save(t);const b=document.querySelector(".theme-toggle");if(b){b.textContent=t==="dark"?"☀":"☾";b.title="Toggle theme"}syncFrames(t)};apply(stored()==="light"?"light":"dark");window.addEventListener("DOMContentLoaded",()=>{const b=document.createElement("button");b.type="button";b.className="theme-toggle";b.onclick=()=>apply(root.dataset.theme==="dark"?"light":"dark",true);document.querySelector(".tabs").append(b);for(const f of document.querySelectorAll("iframe.legal-frame"))f.addEventListener("load",()=>syncFrames(root.dataset.theme||"dark"));apply(root.dataset.theme||"dark")})})();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function text(urls){let last;for(const u of urls){try{const r=await fetch(u);if(r.ok)return await r.text();last=u+": "+r.status}catch(e){last=e.message}}throw new Error(last)}
+function pct(n,total){return total?`${(100*n/total).toFixed(1)}%`:"0.0%"}
+function seg(cls,n,total,label){return n?`<div class="seg ${cls}" style="width:${100*n/(total||1)}%" title="${esc(label)}">${pct(n,total)}</div>`:""}
+function legend(cls,label){return `<div class="legend-row"><span class="swatch ${cls}"></span>${esc(label)}</div>`}
+(()=>{const m=document.getElementById("legal-modal");document.getElementById("legal-open").onclick=()=>m.hidden=false;document.getElementById("legal-close").onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}})();
+text(["rust-bevy-plan.html","../docs/RUST-BEVY-PLAN.md"]).then(planText=>{
+ const plan=planProgress(planText);
+ document.getElementById("progress-bars").innerHTML=[
+   `<div class="progress-card primary">
+    <h3><a href="rust-bevy-plan.html">Reconstruction Work Board</a></h3>
+    <div class="stacked-bar" role="img" aria-label="${esc(plan.aria)}">
+     ${plan.segments}
+    </div>
+    <div class="legend">${plan.legend}</div>
+    <p class="progress-note">${plan.note}</p>
+   </div>`,
+   `<div class="progress-card">
+    <h3><a href="perimeter.html">Evidence Gates</a></h3>
+    <p class="progress-note">Byte range and binary perimeter coverage remain on their evidence pages. The dashboard bar starts at the implementation gate.</p>
+   </div>`
+ ].join("");
+}).catch(e=>{document.getElementById("progress-bars").insertAdjacentHTML("afterend",`<p class="sub">Failed to load progress data: ${esc(e.message)}</p>`)});
+function planProgress(source){
+ const order=[["done","Done"],["runs","Runs"],["loaded","Loaded"],["recorded","Recorded"],["planned","Planned"],["map","Map"],["adapter","Adapter"]];
+ const counts=Object.fromEntries(order.map(([s])=>[s,0]));
+ let domains=0;
+ const aria=source.match(/class="plan-stacked-bar"[^>]*aria-label="([^"]+)"/);
+ if(aria){
+  for(const m of aria[1].matchAll(/([a-z-]+)\s+([0-9]+)/g))if(m[1] in counts)counts[m[1]]=Number(m[2]);
+  const note=source.match(/([0-9,]+) work-board rows across ([0-9,]+) top-level domains/);
+  if(note)domains=Number(note[2].replace(/,/g,""));
+ }else{
+  let inBoard=false;const seen=new Set();
+  for(const line of source.split(/\r?\n/)){
+   if(line.startsWith("| Owner | Subdomain | Feature | Status |")){inBoard=true;continue}
+   if(!inBoard)continue;
+   if(!line.startsWith("| "))break;
+   const cells=line.trim().replace(/^\||\|$/g,"").split("|").map(s=>s.trim());
+   if(cells.length<6||cells[0]==="---")continue;
+   const status=cells[3].replace(/[` ]/g,"");
+   if(status in counts){counts[status]++;seen.add(cells[0])}
+  }
+  domains=seen.size;
+ }
+ const total=Object.values(counts).reduce((a,n)=>a+n,0);
+ return {
+  aria:order.filter(([s])=>counts[s]).map(([s])=>`${s} ${counts[s]}`).join(", "),
+  segments:order.map(([s,l])=>seg(`seg-${s}`,counts[s],total,`${l}: ${counts[s]}`)).join(""),
+  legend:order.filter(([s])=>counts[s]).map(([s,l])=>legend(`seg-${s}`,`${l}: ${counts[s].toLocaleString()}`)).join(""),
+  note:domains?`${total.toLocaleString()} work-board rows across ${domains.toLocaleString()} top-level domains.`:`${total.toLocaleString()} work-board rows.`
+ };
+}
+</script>
+<script id="openzt2-live-reload">
+(()=>{
+ const current="3871049a3cdd89c9";
+ const endpoint="site-version.json";
+ const interval=60000;
+ let paused=false,timer=0,ticker=0,nextAt=Date.now()+interval,button=null;
+ const update=()=>{
+  if(!button)return;
+  if(paused){
+   button.classList.add("paused");
+   button.style.setProperty("--reload-progress","0");
+   button.title="Automatic refresh paused. Click to unpause.";
+   button.setAttribute("aria-label",button.title);
+   button.textContent="⏸";
+   return;
+  }
+  const remaining=Math.max(0,Math.ceil((nextAt-Date.now())/1000));
+  const progress=Math.min(100,Math.max(0,100-(remaining*100)/(interval/1000)));
+  button.classList.remove("paused");
+  button.style.setProperty("--reload-progress",progress.toFixed(1));
+  button.title=`Next automatic refresh in ${remaining}s. Click to pause.`;
+  button.setAttribute("aria-label",button.title);
+  button.textContent="↻";
+ };
+ const schedule=()=>{
+  if(paused)return;
+  nextAt=Date.now()+interval;
+  clearTimeout(timer);
+  timer=setTimeout(check,interval);
+  update();
+ };
+ const check=async()=>{
+  if(paused)return;
+  try{
+   const response=await fetch(endpoint+"?t="+Date.now(),{cache:"no-store"});
+   if(!response.ok){schedule();return;}
+   const latest=(await response.json()).version;
+   if(latest&&latest!==current){location.reload();return;}
+  }catch(_){
+  }
+  schedule();
+ };
+ const toggle=()=>{
+  paused=!paused;
+  if(paused){
+   clearTimeout(timer);
+  }else{
+   schedule();
+  }
+  update();
+ };
+ const mount=()=>{
+  const nav=document.querySelector(".tabs");
+  if(!nav)return;
+  button=document.createElement("button");
+  button.type="button";
+  button.className="reload-toggle";
+  button.onclick=toggle;
+  const theme=document.querySelector(".theme-toggle");
+  if(theme)theme.after(button);else nav.append(button);
+  ticker=setInterval(update,1000);
+  schedule();
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
+})();
+</script>
+</html>
