@@ -12,9 +12,8 @@
     <a class="brand" href="#top" aria-label="over yonder home">over<span>|</span>yonder</a>
     <nav aria-label="Primary navigation">
       <a href="#premise">Why performance</a>
-      <a href="#evidence">Results</a>
+      <a href="#evidence">Work</a>
       <a href="#range">Capabilities</a>
-      <a href="#research">Research</a>
     </nav>
     <a class="nav-cta" href="#contact">Discuss a problem <span>↗</span></a>
   </header>
@@ -121,8 +120,8 @@
 
     <section class="evidence" id="evidence">
       <div class="section-heading light">
-        <p>02 / Demonstrated work</p>
-        <h2>The limiting layer changes from problem to problem.</h2>
+        <p>02 / Work across the stack</p>
+        <h2>The limiting layer changes from project to project.</h2>
       </div>
       <article class="result-case rstat-case">
         <div class="case-copy">
@@ -205,32 +204,13 @@
           <figcaption>After the selected pages are resident, asset hydration performs no file-open or read system calls. Untouched pages remain available through Linux's normal demand paging.</figcaption>
         </figure>
       </article>
-    </section>
 
-    <section class="range" id="range">
-      <div class="section-heading">
-        <p>03 / Extreme engineering range</p>
-        <h2>Whatever layer the problem requires.</h2>
-      </div>
-      <div class="range-list">
-        <div><span>Software</span><p>Business applications, native products, algorithms and data layout.</p></div>
-        <div><span>Systems</span><p>Storage, databases, networking, compilers and operating-system kernels.</p></div>
-        <div><span>Compute</span><p>Vector instructions, instruction-set architecture, programmable logic and application-specific silicon.</p></div>
-        <div><span>Silicon</span><p>Semiconductor and physical constraints when software is no longer the boundary.</p></div>
-      </div>
-    </section>
-
-    <section class="research" id="research">
-      <div class="section-heading light">
-        <p>04 / Compiler research</p>
-        <h2>A compiler can make machine shape a checked requirement.</h2>
-      </div>
       <article class="result-case rake-case">
         <div class="case-copy">
-          <p class="case-index">Rake <span>In flight</span></p>
+          <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>SIMD the compiler must prove.</h3>
           <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. Its pack/rack model is designed to express one target-sized program instead of separate SSE, AVX, NEON or GPU-intrinsic variants: a CPU rack is exactly one native SIMD register, while the proposed Vulkan profile maps a rack across one logical subgroup.</p>
-          <p>C and Rust can emit equivalent SIMD, but they don't make that machine shape a source-level acceptance condition. ISPC is Rake's closest established relative and already retargets SPMD code across SIMD widths. Rake explores a functional, expression-oriented version of that model with stricter fail-closed lowering: supported native slices reject any program that would split, scalarize, call out or spill a promised rack. Pack traversal, broader CPU profiles and SPIR-V remain in flight.</p>
+          <p>Rake asks whether a compiler can make machine shape a checked requirement. C and Rust can emit equivalent SIMD, but they don't make that machine shape a source-level acceptance condition. ISPC is Rake's closest established relative and already retargets SPMD code across SIMD widths. Rake explores a functional, expression-oriented version of that model with stricter fail-closed lowering: supported native slices reject any program that would split, scalarize, call out or spill a promised rack. Pack traversal, broader CPU profiles and SPIR-V remain in flight.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
         <figure class="case-graphic compiler-graphic" aria-label="Rake preserves explicit rack and lane-mask semantics through verified lowering into target machine code, rejecting programs that break the selected target profile's contract">
@@ -251,8 +231,21 @@
       </article>
     </section>
 
+    <section class="range" id="range">
+      <div class="section-heading">
+        <p>03 / Extreme engineering range</p>
+        <h2>Whatever layer the problem requires.</h2>
+      </div>
+      <div class="range-list">
+        <div><span>Software</span><p>Business applications, native products, algorithms and data layout.</p></div>
+        <div><span>Systems</span><p>Storage, databases, networking, compilers and operating-system kernels.</p></div>
+        <div><span>Compute</span><p>Vector instructions, instruction-set architecture, programmable logic and application-specific silicon.</p></div>
+        <div><span>Silicon</span><p>Semiconductor and physical constraints when software is no longer the boundary.</p></div>
+      </div>
+    </section>
+
     <aside class="experiments" aria-labelledby="experiments-title">
-      <p class="experiments-kicker">05 / Experimental work</p>
+      <p class="experiments-kicker">04 / Experimental work</p>
       <div class="experiments-note">
         <div>
           <h2 id="experiments-title">Complex simulations? We have the minerals.</h2>
