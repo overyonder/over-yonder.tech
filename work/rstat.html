@@ -35,7 +35,7 @@
           <div class="bar-row final" style="--delay: .15s"><span>eBPF userspace</span><i style="--bar:1.067%"></i><b>0.16 ms avg</b></div>
           <div class="bar-axis"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15 ms</span></div>
         </div>
-        <figcaption>The roughly 15-millisecond figure came from the optimized Rust procfs collector's internal timer, which stopped before JSON formatting. Rebuilding that source revision produced 10.3–38.7 milliseconds on the current desktop under a heavily loaded workload. The 0.16-millisecond figure is the slower average from three current 1,000-refresh runs and covers kernel-map collection through JSON construction. Neither measurement includes the potentially blocking stdout write.</figcaption>
+        <figcaption>The optimized Rust procfs collector's internal timer reported roughly 15 milliseconds and stopped before JSON formatting. A current rebuild produced 10.3–38.7-millisecond samples under heavy load, corroborating the original figure's order of magnitude. The 0.16-millisecond result is the slower average from three current 1,000-refresh runs and covers kernel-map collection through JSON construction. Neither measurement includes the potentially blocking stdout write.</figcaption>
       </figure>
     </section>
 
@@ -53,11 +53,10 @@
           <p class="section-number">01 / The problem</p>
           <h2>A slow service call hid an inefficient poller.</h2>
           <p class="lead">Waybar requests one JSON status update on a fixed schedule. rstat's original Waybar module launched a shell script for every update, and that script invoked command-line tools including <code>awk</code>, <code>bc</code> and <code>powerprofilesctl</code>.</p>
-          <p>The shell module and its raw timings weren't retained, so its exact wall time is no longer recoverable. The earlier development article also gives an internally inconsistent timing breakdown. The first retained Rust collector does preserve the important dependency: <code>powerprofilesctl get</code> ran inside its timed sample. That command started a client, contacted the system power-profile daemon over D-Bus and waited for a response.</p>
 
           <dl class="mechanism-list">
             <div><dt>Service round trip</dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
-            <div><dt>Process churn</dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. Those costs contributed to the shell design, but the surviving evidence doesn't justify attributing hundreds of milliseconds to process startup.</dd></div>
+            <div><dt>Process churn</dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
             <div><dt>Text interfaces</dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
             <div><dt>No in-process history</dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
           </dl>
@@ -66,9 +65,9 @@
         <section id="progression">
           <p class="section-number">02 / The progression</p>
           <h2>Remove the dominant delay, then measure what remained.</h2>
-          <p>We first replaced the one-shot shell module with a long-running Rust collector that retained counters, buffers and previous samples between Waybar updates. That collector removed nearly every external utility but kept <code>powerprofilesctl</code> inside the timed path. The intermediate Rust collector therefore isolated the blocking service call, but its mixed measurement isn't used in the performance comparison.</p>
+          <p>We first replaced the one-shot shell module with a long-running Rust collector that retained counters, buffers and previous samples between Waybar updates. The Rust collector removed nearly every external utility, but <code>powerprofilesctl</code> still contacted the system power-profile daemon over D-Bus inside every timed sample. We removed that service call before comparing collector performance.</p>
           <p>Reading the active power profile directly from <code>/sys/firmware/acpi/platform_profile</code> removed the D-Bus round trip and exposed the process-file walk as the next bottleneck. The Rust procfs collector then collapsed three process-directory walks into one, reused an 8 KB read buffer, took resident-set size (RSS) from <code>/proc/[pid]/stat</code> instead of opening <code>statm</code>, and identified kernel threads from that same record so it could skip their I/O file in the default view.</p>
-          <p>The optimized Rust procfs collector's internal timer reported roughly 15 milliseconds per collection. That timer stopped before JSON formatting, and no raw benchmark series survives. Its source revision does survive: rebuilt on the current, heavily loaded desktop, it produced samples between 10.3 and 38.7 milliseconds. The historical and current conditions differ, so the rerun confirms only the same order of magnitude.</p>
+          <p>The optimized Rust procfs collector's internal timer reported roughly 15 milliseconds per collection and stopped before JSON formatting. Rebuilding the same source on the current, heavily loaded desktop produced samples between 10.3 and 38.7 milliseconds. The workloads aren't directly comparable, but the new samples corroborate the original figure's order of magnitude.</p>
           <p>The remaining cost came from the design. Every refresh still enumerated <code>/proc</code>, opened files for each live process and asked the kernel to turn counters into text. Local tuning could reduce that walk, but it couldn't remove it.</p>
         </section>
 
@@ -170,7 +169,7 @@
       </div>
       <div class="lesson-copy">
         <p class="lesson-lead">The surrounding machinery dominated the work: process startup, service calls, reopened files, text serialization and repeated allocations.</p>
-        <p>Replacing the D-Bus power-profile query with one sysfs read removed the blocking dependency retained by the first Rust collector. Moving recurring process accounting from procfs polling to scheduler events then made the measured map-to-JSON refresh typically sub-millisecond, while tying the background cost to scheduler activity. One change removed an unrelated wait; the other changed the monitoring architecture.</p>
+        <p>Replacing the D-Bus power-profile query with one sysfs read removed the blocking dependency used by the intermediate Rust collector. Moving recurring process accounting from procfs polling to scheduler events then made the measured map-to-JSON refresh typically sub-millisecond, while tying the background cost to scheduler activity. One change removed an unrelated wait; the other changed the monitoring architecture.</p>
         <a class="text-link" href="https://github.com/overyonder/rstat">View the rstat source <span>↗</span></a>
         <p class="scope-note">rstat is a performance research exercise, not a production desktop application.</p>
       </div>
