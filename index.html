@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Software performance consulting and advanced systems engineering from application code to custom silicon.">
   <title>over|yonder — Performance engineering</title>
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/main.css?v=2">
 </head>
 <body>
   <header class="site-header">
@@ -126,24 +126,29 @@
       <article class="result-case rstat-case">
         <div class="case-copy">
           <p class="case-index">01 / rstat</p>
-          <h3>System monitoring without the system-call churn.</h3>
-          <p class="case-summary">rstat began as a Linux status-bar monitor that took too long to collect each update. We rebuilt its collection path around the work the kernel was already doing.</p>
-          <p>The optimized Rust poller still opened and parsed process files on every refresh. The current version uses an extended Berkeley Packet Filter (eBPF) program to account for tasks during scheduler events, then reads the accumulated counters in one userspace refresh.</p>
+          <h3>From roughly 800 milliseconds to 0.16 milliseconds.</h3>
+          <p class="case-summary">rstat began as a Linux status-bar monitor whose shell path took roughly 800 milliseconds per update.</p>
+          <p>Replacing the blocking power-profile service call with a direct sysfs read and optimizing procfs cut that to 15 milliseconds. Moving recurring process accounting into an extended Berkeley Packet Filter (eBPF) program cut the userspace refresh to 0.16 milliseconds on average.</p>
           <a class="case-link" href="work/rstat.html">Read the case study <span>↗</span></a>
         </div>
-        <figure class="case-graphic bar-chart" aria-label="rstat userspace refresh time reduced from roughly 15 milliseconds for the optimized procfs collector to a current average of 0.16 milliseconds for the eBPF collector">
+        <figure class="case-graphic bar-chart" aria-label="rstat improved from roughly 800 milliseconds for the original shell path, to 15 milliseconds after removing the power-profile service call and optimizing procfs, to a 0.16-millisecond average eBPF userspace refresh">
           <div class="bar-row">
-            <span>Optimised procfs collector</span>
-            <i style="--bar: 100%"></i>
+            <span>Shell + service call</span>
+            <i style="--bar: 97.58%"></i>
+            <strong>~800 ms</strong>
+          </div>
+          <div class="bar-row">
+            <span>Direct sysfs + procfs</span>
+            <i style="--bar: 54.40%"></i>
             <strong>~15 ms</strong>
           </div>
           <div class="bar-row final">
             <span>eBPF userspace refresh</span>
-            <i style="--bar: 1.067%"></i>
+            <i style="--bar: 5.10%"></i>
             <strong>0.16 ms avg</strong>
           </div>
-          <div class="bar-axis"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15 ms</span></div>
-          <figcaption>The historical 15-millisecond figure came from the optimized procfs collector's internal timer. The 0.16-millisecond figure is the slower average from three current 1,000-refresh runs. Both measure collection before the potentially blocking stdout write.</figcaption>
+          <div class="bar-axis"><span>0.1 ms</span><span>1 ms</span><span>10 ms</span><span>100 ms</span><span>1 s</span></div>
+          <figcaption>Three working stages on a logarithmic scale. The complete path became 5,000 times faster.</figcaption>
         </figure>
       </article>
 

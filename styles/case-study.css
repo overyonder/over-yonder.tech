@@ -146,7 +146,7 @@ a { color: inherit; }
   display: block;
   height: 26px;
   border-left: 1px solid rgba(243,236,223,.56);
-  background: linear-gradient(to right, rgba(243,236,223,.14) 1px, transparent 1px) 20% 0 / 20% 100%;
+  background: linear-gradient(to right, rgba(243,236,223,.14) 1px, transparent 1px) 25% 0 / 25% 100%;
 }
 
 .bar-row i::after {
@@ -162,16 +162,13 @@ a { color: inherit; }
 .bar-row.final { color: var(--signal-hot); }
 .bar-row.final i::after { background: var(--signal-hot); }
 .bar-axis {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  justify-content: space-between;
   margin: -8px 89px 0 157px;
   color: var(--dark-muted);
   font-size: 10px;
 }
 
-.bar-axis span { text-align: center; }
-.bar-axis span:first-child { text-align: left; }
-.bar-axis span:last-child { text-align: right; }
 .hero-measurement figcaption {
   margin-top: 34px;
   padding-top: 18px;
