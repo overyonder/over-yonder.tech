@@ -182,7 +182,7 @@
       <article class="result-case openzt2-case">
         <div class="case-copy">
           <p class="case-index">03 / OpenZT2</p>
-          <h3>An entire game, mapped into memory.</h3>
+          <h3>During gameplay, OpenZT2 doesn't load assets slowly or quickly—it just doesn't load them at all.</h3>
           <p class="case-summary">OpenZT2 is a clean-room, native reconstruction of Zoo Tycoon 2. Its engine needs an entire game's converted assets without copying them through a conventional runtime cache.</p>
           <p>A launcher converts source assets into an immutable, versioned content pack laid out in the same binary form the Rust engine reads. The game maps the pack into its virtual address space, validates typed references into those mapped bytes and asks Linux to preload selected page groups within an available-memory budget.</p>
           <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
