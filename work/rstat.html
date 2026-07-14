@@ -58,7 +58,7 @@
 
           <dl class="mechanism-list">
             <div><dt>Service round trip <span>1 external client + 1 D-Bus request / update</span></dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
-            <div><dt>Process churn <span>Shell + at least 3 named utilities / update</span></dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
+            <div><dt>Process churn <span>Shell + at least 3 child processes / update</span></dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
             <div><dt>Text interfaces <span>1 kernel → ASCII → number round trip / procfs value</span></dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
             <div><dt>No in-process history <span>0 counters, buffers or file descriptors retained</span></dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
           </dl>
