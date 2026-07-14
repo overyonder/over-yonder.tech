@@ -209,8 +209,8 @@
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>SIMD the compiler must prove.</h3>
-          <p class="case-summary">Rake is a vector-first language for writing target-sized parallel programs directly. A rack is the primitive unit of computation: one native SIMD register on a CPU, or one logical subgroup on a GPU.</p>
-          <p>Rake makes lane masks, predication, data layout, broadcasts, reductions, scans and fusion part of the language. Its compiler preserves those contracts through vector SSA, target legalization, instruction selection and register allocation, then rejects any program it can't lower without splitting, scalarizing or spilling a rack.</p>
+          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. Its pack/rack model is designed to express one target-sized program instead of separate SSE, AVX, NEON or GPU-intrinsic variants: a CPU rack is exactly one native SIMD register, while the proposed Vulkan profile maps a rack across one logical subgroup.</p>
+          <p>C and Rust can emit equivalent SIMD, but they don't make that machine shape a source-level acceptance condition. ISPC is Rake's closest established relative and already retargets SPMD code across SIMD widths. Rake explores a functional, expression-oriented version of that model with stricter fail-closed lowering: supported native slices reject any program that would split, scalarize, call out or spill a promised rack. Pack traversal, broader CPU profiles and SPIR-V remain in flight.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
         <figure class="case-graphic compiler-graphic" aria-label="Rake preserves explicit rack and lane-mask semantics through verified lowering into target machine code, rejecting programs that break the selected target profile's contract">
