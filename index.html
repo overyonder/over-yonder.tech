@@ -236,7 +236,7 @@
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>SIMD the compiler must prove.</h3>
-          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. A rack is one target-sized vector of values—not a 400-particle container—and a pack supplies the complete column storage and runtime count. The same source is intended to traverse four-lane NEON or SSE2, eight-lane AVX2, or sixteen-lane AVX-512 racks without spelling width-specific intrinsics.</p>
+          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. A rack is one target-sized vector of values, and a pack supplies the complete column storage and runtime count. The same source is intended to traverse four-lane NEON or SSE2, eight-lane AVX2, or sixteen-lane AVX-512 racks without spelling out width-specific intrinsics.</p>
           <p>Rake asks whether machine shape can be a checked requirement. C, Rust and ISPC can emit excellent SIMD; Rake's narrower experiment makes selected physical properties conditions of compilation. Its current AVX2 and NEON slices reject supported kernels that would split or scalarize a rack, call a helper, or spill a live rack. Fused names are transparent dataflow aliases, so an ordinary multiply-add graph inside a fused region currently becomes one verified FMA where the target provides it. Native pack traversal, broader algebraic rewrites, more CPU profiles and SPIR-V remain in flight.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
