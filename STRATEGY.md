@@ -164,11 +164,11 @@ order:
 - [x] Enable Cloudflare Web Analytics for every production hostname. Verify a
   real page view from each site and confirm that Cloudflare reports hostname,
   pathname, referrer, country, device and real-user performance as expected.
-- [ ] Audit the visible fleet links and contact links. Every product site must
+- [x] Audit the visible fleet links and contact links. Every product site must
   identify over|yonder, link to `over-yonder.tech` and expose
   `hello@over-yonder.tech`; every corporate proof point must link to the exact
   product or technical article it describes.
-- [ ] Take a dated Search Console baseline for every property. Record indexed
+- [x] Take a dated Search Console baseline for every property. Record indexed
   and excluded pages, sitemap status, crawl or security errors, impressions,
   clicks, click-through rate, average position, leading queries and leading
   pages. Low or absent traffic is a valid baseline.
@@ -191,6 +191,43 @@ order:
 - [ ] Begin the review cadence: weekly launch checks, one monthly decision
   report and one quarterly strategy review. Every content change made for
   search performance must record its hypothesis and next assessment date.
+
+### Fleet integration audit — 16 July 2026
+
+The corporate homepage links each proof point to its exact destination: the
+Rstat case study, Archivist performance article, OpenZT2 site, Rake site and
+Pong AI site. Archivist, OpenZT2 and Rake identify over|yonder and link to the
+corporate site. Pong AI does neither, so its shared site footer still needs the
+corporate identity and link.
+
+The public corporate pages expose `hello@over-yonder.tech`. None of the
+canonical Archivist, OpenZT2, Pong AI or Rake pages expose that address. Add the
+shared contact link to every public product page when the fleet footer work is
+implemented. Cloudflare may obfuscate the address in delivered HTML, so future
+audits must check both the repository source and the rendered link instead of
+treating the rewritten URL as a missing address.
+
+### Search Console baseline — 16 July 2026
+
+Search Console has two fleet properties. The `over-yonder.tech` domain property
+covers the corporate site and its Archivist, OpenZT2 and Pong AI subdomains.
+Rake is covered by the separate `rake-lang.org` domain property.
+
+| Property | Clicks | Impressions | CTR | Average position | Page indexing | Safety |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| `over-yonder.tech` | 0 | 0 | 0% | 0 | Google is still processing the report | No manual actions or security issues |
+| `rake-lang.org` | 0 | 5 | 0% | 29.4 | Google is still processing the report | No manual actions or security issues |
+
+The performance window currently contains data from 13–14 July 2026. Rake's
+only reported page is `https://rake-lang.org/`, with five impressions. Its only
+visible query is “what does the rake do”, with one impression. Search Console
+doesn't expose the remaining low-volume queries in the table.
+
+All submitted sitemaps report `Success`. Google discovered two corporate
+pages, four Archivist pages, six OpenZT2 pages, one Pong AI page and one Rake
+page. Indexed and excluded page counts aren't available yet because both Page
+indexing reports are still processing. Recheck those counts during the first
+weekly launch review.
 
 ### Instrumentation
 
