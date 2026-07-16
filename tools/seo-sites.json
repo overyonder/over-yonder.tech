@@ -3,6 +3,10 @@
     {
       "name": "Over Yonder",
       "base_url": "https://over-yonder.tech",
+      "repository": "overyonder/over-yonder.tech",
+      "deployment": { "provider": "GitHub Pages", "branch": "main", "path": "/" },
+      "sitemap": "/sitemap.xml",
+      "cloudflare": { "zone": "over-yonder.tech", "pages_project": null, "proxied": true, "web_analytics": true },
       "pages": [
         { "path": "/", "schema": ["Organization", "WebSite"] },
         { "path": "/work/rstat.html", "schema": ["Article"] }
@@ -22,6 +26,10 @@
     {
       "name": "Archivist",
       "base_url": "https://archivist.over-yonder.tech",
+      "repository": "overyonder/archivist-site",
+      "deployment": { "provider": "GitHub Pages", "branch": "main", "path": "/" },
+      "sitemap": "/sitemap.xml",
+      "cloudflare": { "zone": "over-yonder.tech", "pages_project": null, "proxied": true, "web_analytics": true },
       "pages": [
         { "path": "/", "schema": ["SoftwareApplication"] },
         { "path": "/performance.html", "schema": ["Article"] },
@@ -33,10 +41,15 @@
     {
       "name": "OpenZT2",
       "base_url": "https://openzt2.over-yonder.tech",
+      "repository": "overyonder/openzt2-site",
+      "deployment": { "provider": "GitHub Pages", "branch": "main", "path": "/" },
+      "sitemap": "/sitemap.xml",
+      "cloudflare": { "zone": "over-yonder.tech", "pages_project": null, "proxied": true, "web_analytics": true },
       "pages": [
         { "path": "/", "schema": ["SoftwareApplication"] },
         { "path": "/zt-disk-map.html", "schema": ["TechArticle"] },
         { "path": "/perimeter.html", "schema": ["TechArticle"] },
+        { "path": "/asset-lineage.html", "schema": ["TechArticle"] },
         { "path": "/functional-specification.html", "schema": ["TechArticle"] },
         { "path": "/clean-room-legal-roadmap.html", "schema": ["TechArticle"] }
       ],
@@ -50,6 +63,10 @@
     {
       "name": "Rake",
       "base_url": "https://rake-lang.org",
+      "repository": "rakelang/rake-lang.org",
+      "deployment": { "provider": "GitHub Pages", "branch": "main", "path": "/" },
+      "sitemap": "/sitemap.xml",
+      "cloudflare": { "zone": "rake-lang.org", "pages_project": null, "proxied": true, "web_analytics": true },
       "pages": [
         { "path": "/", "schema": ["SoftwareApplication"] }
       ],
@@ -58,6 +75,10 @@
     {
       "name": "Pong AI",
       "base_url": "https://pong.over-yonder.tech",
+      "repository": "overyonder/CITS4404",
+      "deployment": { "provider": "GitHub Pages", "branch": "master", "path": "/docs" },
+      "sitemap": "/sitemap.xml",
+      "cloudflare": { "zone": "over-yonder.tech", "pages_project": null, "proxied": true, "web_analytics": true },
       "pages": [
         { "path": "/", "schema": ["SoftwareApplication"] }
       ],
