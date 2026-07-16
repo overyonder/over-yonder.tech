@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Not found — over|yonder</title>
+  <link rel="icon" href="/archived/legacy-site/assets/logo.webp" type="image/webp">
+  <link rel="stylesheet" href="/styles/main.css?v=3">
+  <style>
+    body{min-height:100svh;display:grid;grid-template-rows:auto 1fr;background:var(--paper)}
+    .not-found{width:min(100% - 40px,1120px);margin:auto;padding:80px 0}
+    .not-found div{position:relative;max-width:760px;padding-left:clamp(26px,5vw,66px);animation:arrive .4s ease-out both}
+    .not-found div::before{position:absolute;inset:.4rem auto .3rem 0;width:2px;content:"";background:var(--signal-ink)}
+    .not-found p:first-child{margin:0 0 20px;color:var(--signal-ink);font:700 10px ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase}
+    .not-found h1{max-width:700px;margin:0;font:400 clamp(46px,8vw,88px)/.94 Georgia,serif;letter-spacing:-.055em}
+    .not-found p{max-width:570px;margin:26px 0 0;color:var(--muted);font-size:18px;line-height:1.6}
+    .not-found a{display:inline-flex;margin-top:32px;padding:13px 17px;color:var(--white);background:var(--signal-ink);font:700 11px ui-monospace,monospace;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;transition:transform .15s ease}
+    .not-found a:hover{transform:translateY(-2px)}
+    @keyframes arrive{from{opacity:0;transform:translateY(14px)}}
+    @media(prefers-reduced-motion:reduce){.not-found div{animation:none}.not-found a{transition:none}}
+    @media(max-width:640px){.site-header nav,.site-header .nav-cta{display:none}.not-found{width:calc(100% - 32px)}.not-found div{padding-left:22px}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="/" aria-label="over yonder home">over<span>|</span>yonder</a><nav aria-label="Primary navigation"><a href="/#evidence">Work</a><a href="/#range">Capabilities</a></nav><a class="nav-cta" href="/#contact">Discuss a problem <span>↗</span></a></header>
+  <main class="not-found"><div><p>404 / address outside the map</p><h1>We can’t find that page.</h1><p>There’s no page at this address.</p><a href="/">Return home&nbsp; ↗</a></div></main>
+</body>
+</html>

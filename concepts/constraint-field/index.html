@@ -11,7 +11,7 @@
   <header class="site-header">
     <a class="brand" href="#top" aria-label="over yonder home">over<span>|</span>yonder</a>
     <nav aria-label="Primary navigation">
-      <a href="#method">How we work</a>
+      <a href="#premise">Why performance</a>
       <a href="#evidence">Results</a>
       <a href="#range">Capabilities</a>
     </nav>
@@ -21,101 +21,238 @@
   <main id="top">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Software performance consulting · Advanced systems engineering</p>
         <h1>When software hits the limit, <em>we move the limit.</em></h1>
-        <p class="lede">From application code down to custom silicon, if we have to.</p>
-        <div class="hero-actions">
-          <a class="primary-action" href="#contact">Discuss a performance problem <span>↗</span></a>
-          <a class="text-action" href="#evidence">See measured results <span>↓</span></a>
-        </div>
       </div>
 
-      <figure class="constraint-figure">
-        <svg viewBox="0 0 640 690" role="img" aria-labelledby="constraint-title constraint-desc">
-          <title id="constraint-title">A constraint traced down through the computing stack</title>
-          <desc id="constraint-desc">One path changes from an application curve into data, kernel, digital logic and a semiconductor lattice.</desc>
-          <defs>
-            <pattern id="microgrid" width="18" height="18" patternUnits="userSpaceOnUse">
-              <path d="M18 0H0V18" fill="none" stroke="currentColor" stroke-opacity=".12" vector-effect="non-scaling-stroke"/>
-            </pattern>
-            <pattern id="lattice" width="36" height="31" patternUnits="userSpaceOnUse">
-              <path d="M18 1 35 10v20L18 40 1 30V10Z" fill="none" stroke="currentColor" stroke-opacity=".22" vector-effect="non-scaling-stroke"/>
-              <circle cx="18" cy="1" r="2.5" fill="currentColor" fill-opacity=".55"/>
-            </pattern>
-            <clipPath id="field-clip"><path d="M150 28H615V650H150C92 650 45 603 45 545V133C45 75 92 28 150 28Z"/></clipPath>
-          </defs>
+      <figure class="performance-figure">
+        <div class="plot-scroll" tabindex="0" aria-label="Scrollable performance plot">
+        <svg viewBox="0 0 900 650" role="img" aria-labelledby="plot-title plot-desc">
+          <title id="plot-title">Optimization through the computing stack</title>
+          <desc id="plot-desc">A sequence moves through grouped performance intervention domains: product architecture, data and execution, runtime and toolchain, operating systems, machine architecture and custom hardware.</desc>
 
-          <path class="field" d="M150 28H615V650H150C92 650 45 603 45 545V133C45 75 92 28 150 28Z"/>
-          <g class="bands">
-            <path d="M45 153H615"/><path d="M45 278H615"/><path d="M45 403H615"/><path d="M45 528H615"/>
-          </g>
-          <g class="layer-labels">
-            <text x="78" y="70">01</text><text x="112" y="70">APPLICATION</text>
-            <text x="78" y="195">02</text><text x="112" y="195">DATA / RUNTIME</text>
-            <text x="78" y="320">03</text><text x="112" y="320">KERNEL / ISA</text>
-            <text x="78" y="445">04</text><text x="112" y="445">LOGIC / FABRIC</text>
-            <text x="78" y="570">05</text><text x="112" y="570">MATERIAL</text>
+          <g class="plot-grid">
+            <path class="major-grid" d="M450 25V604M530 25V604M610 25V604M690 25V604M770 25V604M850 25V604"/>
+            <path class="minor-grid" d="M453.7 25V604M457.7 25V604M462.4 25V604M467.8 25V604M474.1 25V604M481.8 25V604M491.9 25V604M505.9 25V604M533.7 25V604M537.7 25V604M542.4 25V604M547.8 25V604M554.1 25V604M561.8 25V604M571.9 25V604M585.9 25V604M613.7 25V604M617.7 25V604M622.4 25V604M627.8 25V604M634.1 25V604M641.8 25V604M651.9 25V604M665.9 25V604M693.7 25V604M697.7 25V604M702.4 25V604M707.8 25V604M714.1 25V604M721.8 25V604M731.9 25V604M745.9 25V604M773.7 25V604M777.7 25V604M782.4 25V604M787.8 25V604M794.1 25V604M801.8 25V604M811.9 25V604M825.9 25V604"/>
           </g>
 
-          <g clip-path="url(#field-clip)">
-            <rect class="grid-fill" x="45" y="153" width="570" height="375" fill="url(#microgrid)"/>
-            <rect class="lattice-fill" x="45" y="528" width="570" height="122" fill="url(#lattice)"/>
+          <g class="barriers">
+            <path d="M440 38H438M466 38H860M440 64H461M489 64H860M440 90H484M512 90H860M440 138H507M535 138H860M440 164H530M558 164H860M440 190H553M581 190H860M440 216H576M604 216H860M440 242H599M627 242H860M440 290H622M650 290H860M440 316H645M673 316H860M440 364H668M696 364H860M440 390H691M719 390H860M440 416H714M742 416H860M440 464H737M765 464H860M440 490H760M788 490H860M440 516H783M811 516H860M440 564H806M834 564H860M440 590H829M857 590H860"/>
           </g>
 
-          <path class="constraint-halo" d="M382 82C470 82 498 114 498 145S448 184 398 184 318 214 361 247l91 70-111 55 93 49-73 55 48 79-75 45"/>
-          <path class="constraint" d="M382 82C470 82 498 114 498 145S448 184 398 184 318 214 361 247l91 70-111 55 93 49-73 55 48 79-75 45"/>
-          <g class="nodes"><circle cx="382" cy="82" r="6"/><circle cx="398" cy="184" r="6"/><circle cx="452" cy="317" r="6"/><circle cx="434" cy="421" r="6"/><circle cx="334" cy="600" r="8"/></g>
-          <path class="limit" d="M334 600h196"/><text class="limit-label" x="545" y="604">LIMIT MOVED</text>
+          <g class="axis-labels">
+            <text x="450" y="635">1 s</text>
+            <text x="530" y="635">100 ms</text>
+            <text x="610" y="635">10 ms</text>
+            <text x="690" y="635">1 ms</text>
+            <text x="770" y="635">100 µs</text>
+            <text x="850" y="635">10 µs</text>
+          </g>
+
+          <g class="group-labels">
+            <text x="20" y="16">PRODUCT AND ARCHITECTURE</text>
+            <text x="20" y="116">DATA AND EXECUTION</text>
+            <text x="20" y="268">RUNTIME AND TOOLCHAIN</text>
+            <text x="20" y="342">OPERATING SYSTEM AND SERVICES</text>
+            <text x="20" y="442">MACHINE ARCHITECTURE</text>
+            <text x="20" y="542">CUSTOM HARDWARE</text>
+          </g>
+
+          <g class="stage-labels">
+            <text class="domain" x="20" y="42">Workflow / product</text><text class="intervention" style="--step:0" x="466" y="30">remove unnecessary steps</text>
+            <text class="domain" x="20" y="68">System / distribution</text><text class="intervention" style="--step:1" x="489" y="56">remove service hops</text>
+            <text class="domain" x="20" y="94">Algorithm</text><text class="intervention" style="--step:2" x="512" y="82">reduce the amount of work</text>
+            <text class="domain" x="20" y="142">Data model / query plan</text><text class="intervention" style="--step:3" x="535" y="130">scan only necessary data</text>
+            <text class="domain" x="20" y="168">Data structure / access pattern</text><text class="intervention" style="--step:4" x="558" y="156">shorten each lookup</text>
+            <text class="domain" x="20" y="194">Allocation / garbage collection</text><text class="intervention" style="--step:5" x="581" y="182">reuse memory; avoid pauses</text>
+            <text class="domain" x="20" y="220">Data layout / locality</text><text class="intervention" style="--step:6" x="604" y="208">keep hot data together</text>
+            <text class="domain" x="20" y="246">Concurrency / synchronization</text><text class="intervention" style="--step:7" x="627" y="234">remove contention and waits</text>
+            <text class="domain" x="20" y="294">Language runtime / virtual machine</text><text class="intervention" style="--step:8" x="650" y="282">remove hot-path dispatch</text>
+            <text class="domain" x="20" y="320">Compiler / code generation</text><text class="intervention" style="--step:9" x="673" y="308">generate better machine code</text>
+            <text class="domain" x="20" y="368">Storage / filesystem / I/O</text><text class="intervention intervention-before" style="--step:10" x="668" y="380">avoid seeks, calls and copies</text>
+            <text class="domain" x="20" y="394">Network / interprocess calls</text><text class="intervention intervention-before" style="--step:11" x="691" y="406">batch calls; move fewer bytes</text>
+            <text class="domain" x="20" y="420">Operating system / scheduler</text><text class="intervention intervention-before" style="--step:12" x="714" y="432">move work into the kernel</text>
+            <text class="domain" x="20" y="468">Instruction set / vector execution</text><text class="intervention intervention-before" style="--step:13" x="737" y="480">do more work per instruction</text>
+            <text class="domain" x="20" y="494">Microarchitecture / cache / memory</text><text class="intervention intervention-before" style="--step:14" x="760" y="506">keep execution units fed</text>
+            <text class="domain" x="20" y="520">Graphics processor / accelerator</text><text class="intervention intervention-before" style="--step:15" x="783" y="532">run parallel work in hardware</text>
+            <text class="domain" x="20" y="568">Reconfigurable logic / FPGA</text><text class="intervention intervention-before" style="--step:16" x="806" y="580">build a dedicated datapath</text>
+            <text class="domain" x="20" y="594">Application-specific silicon / ASIC</text><text class="intervention intervention-before" style="--step:17" x="829" y="606">put the workload into silicon</text>
+          </g>
+
+          <path class="progress-halo" d="M452 38L475 64 498 90 521 138 544 164 567 190 590 216 613 242 636 290 659 316 682 364 705 390 728 416 751 464 774 490 797 516 820 564 843 590"/>
+          <path class="progress-line" d="M452 38L475 64 498 90 521 138 544 164 567 190 590 216 613 242 636 290 659 316 682 364 705 390 728 416 751 464 774 490 797 516 820 564 843 590"/>
+
+          <g class="plot-points">
+            <g style="--step:0"><circle cx="452" cy="38" r="5"/></g>
+            <g style="--step:1"><circle cx="475" cy="64" r="5"/></g>
+            <g style="--step:2"><circle cx="498" cy="90" r="5"/></g>
+            <g style="--step:3"><circle cx="521" cy="138" r="5"/></g>
+            <g style="--step:4"><circle cx="544" cy="164" r="5"/></g>
+            <g style="--step:5"><circle cx="567" cy="190" r="5"/></g>
+            <g style="--step:6"><circle cx="590" cy="216" r="5"/></g>
+            <g style="--step:7"><circle cx="613" cy="242" r="5"/></g>
+            <g style="--step:8"><circle cx="636" cy="290" r="5"/></g>
+            <g style="--step:9"><circle cx="659" cy="316" r="5"/></g>
+            <g style="--step:10"><circle cx="682" cy="364" r="5"/></g>
+            <g style="--step:11"><circle cx="705" cy="390" r="5"/></g>
+            <g style="--step:12"><circle cx="728" cy="416" r="5"/></g>
+            <g style="--step:13"><circle cx="751" cy="464" r="5"/></g>
+            <g style="--step:14"><circle cx="774" cy="490" r="5"/></g>
+            <g style="--step:15"><circle cx="797" cy="516" r="5"/></g>
+            <g style="--step:16"><circle cx="820" cy="564" r="5"/></g>
+            <g style="--step:17"><circle cx="843" cy="590" r="7"/></g>
+          </g>
         </svg>
-        <figcaption><span>Constraint trace / 01</span><p>Follow the limiting mechanism.<br>Change the layer that matters.</p></figcaption>
+        </div>
+        <figcaption>From product architecture down to custom silicon, if we have to.</figcaption>
       </figure>
     </section>
 
-    <section class="method" id="method">
-      <div class="section-heading">
-        <p>01 / Method</p>
-        <h2>Find the layer imposing the limit.</h2>
+    <section class="premise" id="premise">
+      <div class="premise-heading">
+        <p>01 / The premise</p>
+        <h2>Most people have learned to wait.</h2>
       </div>
-      <ol class="method-steps">
-        <li><span>01</span><strong>Measure the complete path</strong><p>Profile the real workload and establish where time, bandwidth or energy is being spent.</p></li>
-        <li><span>02</span><strong>Remove the dominant mechanism</strong><p>Redesign the architecture instead of polishing overhead the system does not need.</p></li>
-        <li><span>03</span><strong>Descend when necessary</strong><p>Move through runtimes, kernels, instruction sets and hardware until the constraint can move.</p></li>
-      </ol>
+      <div class="premise-copy">
+        <p class="premise-lead">Wheels spin. Loading bars creep. We all agree that computers are slow.</p>
+        <p><strong>But usually,</strong> the delay belongs to the software. Modern hardware can perform billions of operations a second, then sit idle behind a disk seek, network round trip, unnecessary copy or expensive abstraction. We measure the complete operation, find the mechanism imposing the delay, and remove it. An operation that took seconds can fall to milliseconds when the limiting mechanism disappears.</p>
+      </div>
     </section>
 
     <section class="evidence" id="evidence">
       <div class="section-heading light">
         <p>02 / Measured work</p>
-        <h2>Results, end to end.</h2>
+        <h2>How we remove performance limits.</h2>
       </div>
-      <div class="result-row">
-        <p>rstat <span>Linux system monitoring</span></p>
-        <strong><s>800 ms</s> &nbsp;→&nbsp; &lt;1 ms</strong>
-        <small>Sampling moved from a shell pipeline into the kernel.</small>
-      </div>
-      <div class="result-row">
-        <p>Archivist <span>Native collection infrastructure</span></p>
-        <strong>222,242 &nbsp;/&nbsp; 420 ms</strong>
-        <small>Filesystem entries applied through a purpose-built data path.</small>
-      </div>
+      <article class="result-case rstat-case">
+        <div class="case-copy">
+          <p class="case-index">01 / rstat</p>
+          <h3>System monitoring without the system-call churn.</h3>
+          <p class="case-summary">rstat began as a Linux status-bar monitor that took too long to collect each update. We rebuilt its collection path around the work the kernel was already doing.</p>
+          <p>The optimized Rust poller still opened and parsed process files on every refresh. The current version uses an extended Berkeley Packet Filter (eBPF) program to account for tasks during scheduler events, then reads the accumulated counters in one userspace refresh.</p>
+          <a class="case-link" href="../../work/rstat.html">Read the case study <span>↗</span></a>
+        </div>
+        <figure class="case-graphic bar-chart" aria-label="rstat userspace refresh time reduced from roughly 15 milliseconds for the optimized procfs collector to a current average of 0.16 milliseconds for the eBPF collector">
+          <div class="bar-row">
+            <span>Optimised procfs collector</span>
+            <i style="--bar: 100%"></i>
+            <strong>~15 ms</strong>
+          </div>
+          <div class="bar-row final">
+            <span>eBPF userspace refresh</span>
+            <i style="--bar: 1.067%"></i>
+            <strong>0.16 ms avg</strong>
+          </div>
+          <div class="bar-axis"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15 ms</span></div>
+          <figcaption>The historical 15-millisecond figure came from the optimized procfs collector's internal timer. The 0.16-millisecond figure is the slower average from three current 1,000-refresh runs. Both measure collection before the potentially blocking stdout write.</figcaption>
+        </figure>
+      </article>
+
+      <article class="result-case archivist-case">
+        <div class="case-copy">
+          <p class="case-index">02 / Archivist</p>
+          <h3>222,242 entries, live in 420 milliseconds.</h3>
+          <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
+          <p>We designed one snapshot around its Rust producer and browser-based consumer. Parent indices replace repeated paths, while aligned columnar arrays replace per-entry objects. The Rust backend compresses that snapshot for transmission, and the browser reconstructs paths while viewing numeric columns in place.</p>
+          <a class="case-link" href="https://archivist.over-yonder.tech/">Visit Archivist <span>↗</span></a>
+        </div>
+        <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
+          <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB isolated codec fixture</span></div>
+          <div class="packet">
+            <span class="packet-head"><b>Header metadata</b><small>small irregular MessagePack record</small></span>
+            <span class="packet-parent"><b>Parent indices</b><small>replaces repeated paths</small></span>
+            <span class="packet-columns"><b>Aligned field columns</b><small>one structure-of-arrays column per field</small></span>
+            <span class="packet-name"><b>Basename blob</b><small>NUL-separated UTF-8</small></span>
+          </div>
+          <div class="process-arrow"><span>The Rust backend compresses the complete snapshot with gzip for HTTP transport</span></div>
+          <div class="diagram-title transport-title"><strong>4.70 MB live response</strong><span>51 ms browser fetch</span></div>
+          <div class="decode-steps">
+            <div><b>1</b><span><strong>DecompressionStream</strong><small>browser-native streaming gzip</small></span></div>
+            <div><b>2</b><span><strong>Typed-array views</strong><small>numeric columns are viewed in place</small></span></div>
+            <div><b>3</b><span><strong>One UTF-8 decode</strong><small>basenames are reconstructed through parent indices</small></span></div>
+          </div>
+          <figcaption>The browser applies all 222,242 entries 420 milliseconds after requesting the snapshot. A parallel Rust decoder produces the backend's resident copy in 174 milliseconds.</figcaption>
+        </figure>
+      </article>
+
+      <article class="result-case openzt2-case">
+        <div class="case-copy">
+          <p class="case-index">03 / OpenZT2</p>
+          <h3>Game data that's already in memory.</h3>
+          <p class="case-summary">OpenZT2 is a clean-room, native reconstruction of Zoo Tycoon 2. Its engine needs an entire game's converted assets without copying them through a conventional runtime cache.</p>
+          <p>A launcher converts source assets into immutable, versioned records whose archived Rust layout can be read directly. The game maps that native content pack into its virtual address space, validates typed references into the mapped bytes, and asks Linux to load selected page groups within an available-memory budget.</p>
+          <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
+        </div>
+        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 maps a versioned rkyv pack read-only, selectively faults requested pages into the Linux page cache, and accesses those mapped bytes through typed archived references">
+          <div class="memory-chain">
+            <div><strong>Native content pack</strong><small>versioned archived Rust records and aligned payload ranges</small></div>
+            <i><span>read-only memory map</span></i>
+            <div><strong>Process address range</strong><small>the virtual addresses exist before any payload page is read</small></div>
+          </div>
+          <div class="page-map" aria-hidden="true">
+            <span class="page hot">4 KiB</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page">cold</span>
+          </div>
+          <div class="memory-operations">
+            <div><b>1 / Select resident pages</b><p>The preload routine walks the requested asset groups and stops at the available-memory budget.</p></div>
+            <div><b>2 / Fault selected pages</b><p>Touching selected payload pages asks Linux to populate those 4-KiB pages in the kernel page cache.</p></div>
+            <div><b>3 / Borrow typed data</b><p>Archive validation returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
+          </div>
+          <figcaption>After the selected pages are resident, asset hydration performs no file-open or read system calls. Untouched pages remain available through Linux's normal demand paging.</figcaption>
+        </figure>
+      </article>
+
+      <article class="result-case rake-case">
+        <div class="case-copy">
+          <p class="case-index">04 / Rake <span>In flight</span></p>
+          <h3>A vector-first language for CPUs.</h3>
+          <p class="case-summary">Rake is a research programming language for expressing single-instruction, multiple-data (SIMD) work directly. It makes a CPU vector, called a rack, the primitive unit of computation.</p>
+          <p>Rake's compiler type-checks rack operations without first reducing them to scalar code. It carries that vector structure into the Multi-Level Intermediate Representation (MLIR), giving later compiler stages enough information to target the CPU's vector instructions.</p>
+          <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
+        </div>
+        <figure class="case-graphic compiler-graphic" aria-label="The current Rake compiler parses a fused float-rack expression, rejects unsupported features during type checking, and emits MLIR vector operations">
+          <div class="source-expression">
+            <span>Accepted Rake source</span>
+            <code>crunch dot ax ay az bx by bz -&gt; d:<br>&nbsp;&nbsp;| d &lt;| ax * bx + ay * by + az * bz</code>
+          </div>
+          <div class="compiler-path">
+            <div><b>Parser</b><span>Builds the syntax tree, including language features still under development.</span></div>
+            <i aria-hidden="true"></i>
+            <div><b>Type checker</b><span>Accepts the implemented float-rack and mask subset; unsupported features stop with a WIP diagnostic.</span></div>
+            <i aria-hidden="true"></i>
+            <div><b>MLIR emitter</b><span>Produces width-parameterized floating-point vector operations for later compiler stages.</span></div>
+          </div>
+          <div class="current-boundary"><strong>Current implementation boundary</strong><span>MLIR text emission for vector CPU operations</span></div>
+          <figcaption>Rake currently emits MLIR text. The project doesn't yet claim lowering through the LLVM compiler infrastructure or generated-machine-code performance.</figcaption>
+        </figure>
+      </article>
     </section>
 
     <section class="range" id="range">
       <div class="section-heading">
-        <p>03 / Engineering range</p>
+        <p>03 / Extreme engineering range</p>
         <h2>Whatever layer the problem requires.</h2>
       </div>
       <div class="range-list">
         <div><span>Software</span><p>Business applications, native products, algorithms and data layout.</p></div>
         <div><span>Systems</span><p>Storage, databases, networking, compilers and operating-system kernels.</p></div>
-        <div><span>Compute</span><p>SIMD, instruction sets, FPGA and ASIC architecture.</p></div>
+        <div><span>Compute</span><p>Vector instructions, instruction-set architecture, programmable logic and application-specific silicon.</p></div>
         <div><span>Silicon</span><p>Semiconductor and physical constraints when software is no longer the boundary.</p></div>
       </div>
     </section>
 
+    <aside class="experiments" aria-labelledby="experiments-title">
+      <p class="experiments-kicker">Other experiments</p>
+      <div class="experiments-note">
+        <div>
+          <h2 id="experiments-title">Not every build needs to become a case study.</h2>
+          <p>Pong AI evolves a small neural network in Rust and WebAssembly, entirely in the browser. Train it, then see if you can beat it.</p>
+        </div>
+        <a href="https://pong.over-yonder.tech/">Play Pong AI <span>↗</span></a>
+      </div>
+    </aside>
+
     <section class="contact" id="contact">
       <p>Have a performance problem that has survived the usual fixes?</p>
-      <a href="mailto:overyonderstudios@gmail.com">Let’s find the real limit. <span>↗</span></a>
+      <a href="mailto:hello@over-yonder.tech">Let’s find the real limit. <span>↗</span></a>
       <small>Sydney, Australia · Working worldwide</small>
     </section>
   </main>

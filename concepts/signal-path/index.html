@@ -36,14 +36,14 @@
             <path d="M76 104H668"/><path d="M76 212H668"/><path d="M76 320H668"/><path d="M76 428H668"/><path d="M76 536H668"/>
           </g>
           <g class="labels">
-            <text x="76" y="82">APPLICATION</text><text x="76" y="190">RUNTIME</text><text x="76" y="298">KERNEL</text><text x="76" y="406">ISA / LOGIC</text><text x="76" y="514">SILICON</text>
+            <text x="76" y="82">APPLICATION</text><text x="76" y="190">RUNTIME</text><text x="76" y="298">KERNEL</text><text x="76" y="406">INSTRUCTIONS / LOGIC</text><text x="76" y="514">SILICON</text>
           </g>
           <path class="signal shadow" d="M76 125h120l18-40 28 82 28-42h110l18 86h68l22-126 30 82h150v66h-86l-18 76h-84l-22-56-26 178h-78l-20-110-30 210H76"/>
           <path class="signal" d="M76 125h120l18-40 28 82 28-42h110l18 86h68l22-126 30 82h150v66h-86l-18 76h-84l-22-56-26 178h-78l-20-110-30 210H76"/>
           <circle class="probe" cx="304" cy="535" r="7"/>
-          <text class="annotation" x="325" y="565">problem boundary moved</text>
+          <text class="annotation" x="325" y="565">redesign the limiting layer</text>
         </svg>
-        <div class="scope-foot"><span>Δ 800 ms → &lt;1 ms</span><span>RING 3 → RING 0 → RTL</span></div>
+        <div class="scope-foot"><span>MEASURE → LOCATE → REMOVE</span><span>APPLICATION → KERNEL → HARDWARE</span></div>
       </div>
     </section>
 
@@ -53,20 +53,20 @@
       <ol class="layer-list">
         <li><span>01</span><strong>Products</strong><small>Native consumer software built for demanding workloads.</small></li>
         <li><span>02</span><strong>Systems</strong><small>Compilers, storage, kernels and data paths.</small></li>
-        <li><span>03</span><strong>Compute</strong><small>SIMD, FPGA, ASIC and application-specific architecture.</small></li>
+        <li><span>03</span><strong>Compute</strong><small>Vector instructions, programmable logic and application-specific architecture.</small></li>
         <li><span>04</span><strong>Physics</strong><small>When the constraint is below the abstraction.</small></li>
       </ol>
     </section>
 
     <section class="proof" id="proof">
       <p class="section-no">02 / EVIDENCE</p>
-      <div class="result"><span>rstat</span><strong>800 ms</strong><i>→</i><strong>&lt;1 ms</strong><small>Sampling moved into the Linux kernel.</small></div>
-      <div class="result"><span>Archivist</span><strong>222,242</strong><i>in</i><strong>420 ms</strong><small>A live collection hydrated from a purpose-built data path.</small></div>
+      <div class="result"><span>rstat</span><strong>~15 ms</strong><i>→</i><strong>0.16 ms</strong><small>Userspace refresh after scheduler accounting moved into the Linux kernel.</small></div>
+      <div class="result"><span>Archivist</span><strong>222,242</strong><i>in</i><strong>420 ms</strong><small>Filesystem entries applied through a purpose-built data path.</small></div>
     </section>
 
     <section class="contact" id="contact">
       <p>Have a problem beyond the usual stack?</p>
-      <a href="mailto:overyonderstudios@gmail.com">Let’s trace it to the source. <span>↗</span></a>
+      <a href="mailto:hello@over-yonder.tech">Let’s trace it to the source. <span>↗</span></a>
     </section>
   </main>
 </body>
