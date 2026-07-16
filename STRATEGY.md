@@ -143,14 +143,14 @@ truth for this inventory.
 
 | Hostname | Canonical pages | Sitemap | Repository and deployment | Cloudflare |
 | --- | ---: | --- | --- | --- |
-| `over-yonder.tech` | 2 | `/sitemap.xml` | `overyonder/over-yonder.tech`, `main:/` | `over-yonder.tech` zone; proxied; Web Analytics enabled |
-| `archivist.over-yonder.tech` | 4 | `/sitemap.xml` | `overyonder/archivist-site`, `main:/` | `over-yonder.tech` zone; proxied; Web Analytics enabled |
-| `openzt2.over-yonder.tech` | 6 | `/sitemap.xml` | `overyonder/openzt2-site`, `main:/` | `over-yonder.tech` zone; proxied; Web Analytics enabled |
-| `pong.over-yonder.tech` | 1 | `/sitemap.xml` | `overyonder/CITS4404`, `master:/docs` | `over-yonder.tech` zone; proxied; Web Analytics enabled |
-| `rake-lang.org` | 1 | `/sitemap.xml` | `rakelang/rake-lang.org`, `main:/` | `rake-lang.org` zone; proxied; Web Analytics enabled |
+| `over-yonder.tech` | 2 | `/sitemap.xml` | `overyonder/over-yonder.tech`, `main:/` | Pages `over-yonder-tech`; Web Analytics enabled |
+| `archivist.over-yonder.tech` | 4 | `/sitemap.xml` | `overyonder/archivist-site`, `main:/` | Pages `archivist`; Web Analytics enabled |
+| `openzt2.over-yonder.tech` | 6 | `/sitemap.xml` | `overyonder/openzt2-site`, `main:/` | Pages `openzt2`; Web Analytics enabled |
+| `pong.over-yonder.tech` | 1 | `/sitemap.xml` | `overyonder/pong-site`, `main:/` | Pages `pong-ai`; Web Analytics enabled |
+| `rake-lang.org` | 1 | `/sitemap.xml` | `rakelang/rake-lang.org`, `main:/` | Pages `rake-lang`; Web Analytics enabled |
 
-All five sites deploy from GitHub Pages. There are no corresponding Cloudflare
-Pages projects; Cloudflare provides DNS, proxying and fleet analytics.
+All five sites deploy to Cloudflare Pages through repository-owned GitHub
+Actions. Cloudflare now provides the origin, DNS, CDN and fleet analytics.
 
 ### Implementation checklist
 
