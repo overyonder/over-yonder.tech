@@ -159,7 +159,7 @@
           <h3>From 800 milliseconds to 160 <em>micro</em>seconds.</h3>
           <p class="case-summary">rstat is a Linux monitor that supplies CPU, memory and per-process data to a desktop status bar. It replaced a shell module that took roughly 800 milliseconds to produce one update.</p>
           <p>A long-running Rust collector retained state between updates. Replacing the blocking power-profile service call with a direct Linux sysfs read and collapsing three Linux process-filesystem (procfs) walks into one brought each update down to 15 milliseconds. An extended Berkeley Packet Filter (eBPF) program then moved recurring process accounting into the kernel, leaving 0.16 milliseconds of userspace work on average.</p>
-          <a class="case-link" href="work/rstat.html">Read the case study <span>↗</span></a>
+          <a class="case-link" href="work/rstat">Read the case study <span>↗</span></a>
         </div>
         <figure class="case-graphic bar-chart" aria-label="The rstat Linux monitor improved from roughly 800 milliseconds for one shell-module update, to 15 milliseconds after replacing the power-profile service call and consolidating process-filesystem reads, to 0.16 milliseconds on average for an eBPF-backed userspace refresh">
           <div class="bar-row">
@@ -188,7 +188,7 @@
           <h3>222,242 entries, live in 420 milliseconds.</h3>
           <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
           <p>Archivist's Rust backend builds one compact snapshot for the browser-based interface. Parent indices replace repeated path strings, and aligned columnar arrays replace one object per entry. The backend compresses the snapshot for transmission. The browser reconstructs paths and reads numeric columns in place.</p>
-          <a class="case-link" href="https://archivist.over-yonder.tech/performance.html">Read the performance article <span>↗</span></a>
+          <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
         </div>
         <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
           <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB benchmark snapshot</span></div>

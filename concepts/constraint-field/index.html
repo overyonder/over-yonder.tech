@@ -132,7 +132,7 @@
           <h3>System monitoring without the system-call churn.</h3>
           <p class="case-summary">rstat began as a Linux status-bar monitor that took too long to collect each update. We rebuilt its collection path around the work the kernel was already doing.</p>
           <p>The optimized Rust poller still opened and parsed process files on every refresh. The current version uses an extended Berkeley Packet Filter (eBPF) program to account for tasks during scheduler events, then reads the accumulated counters in one userspace refresh.</p>
-          <a class="case-link" href="../../work/rstat.html">Read the case study <span>↗</span></a>
+          <a class="case-link" href="../../work/rstat">Read the case study <span>↗</span></a>
         </div>
         <figure class="case-graphic bar-chart" aria-label="rstat userspace refresh time reduced from roughly 15 milliseconds for the optimized procfs collector to a current average of 0.16 milliseconds for the eBPF collector">
           <div class="bar-row">
