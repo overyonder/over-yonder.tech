@@ -142,10 +142,10 @@ The fleet already has a shared SEO audit, verified Search Console properties,
 submitted sitemaps and baseline metadata. The next work should proceed in this
 order:
 
-- [ ] Create one current fleet inventory from `tools/seo-sites.json`. Confirm
+- [x] Create one current fleet inventory from `tools/seo-sites.json`. Confirm
   every production hostname, canonical page, sitemap, repository and Cloudflare
   project before configuring services against it.
-- [ ] Enable Cloudflare Web Analytics for every production hostname. Verify a
+- [x] Enable Cloudflare Web Analytics for every production hostname. Verify a
   real page view from each site and confirm that Cloudflare reports hostname,
   pathname, referrer, country, device and real-user performance as expected.
 - [ ] Audit the visible fleet links and contact links. Every product site must
