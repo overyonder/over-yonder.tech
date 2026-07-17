@@ -172,7 +172,7 @@ order:
   and excluded pages, sitemap status, crawl or security errors, impressions,
   clicks, click-through rate, average position, leading queries and leading
   pages. Low or absent traffic is a valid baseline.
-- [ ] Create and verify every fleet site in Ahrefs Free. Run the first Site
+- [x] Create and verify every fleet site in Ahrefs Free. Run the first Site
   Audit and record Health Score, Domain Rating, URL Rating, referring domains,
   backlinks, estimated keywords and every actionable crawl issue.
 - [ ] Reconcile the three technical views: the repository SEO audit, Search
@@ -228,6 +228,60 @@ pages, four Archivist pages, six OpenZT2 pages, one Pong AI page and one Rake
 page. Indexed and excluded page counts aren't available yet because both Page
 indexing reports are still processing. Recheck those counts during the first
 weekly launch review.
+
+### Ahrefs baseline — 17 July 2026
+
+Ahrefs Free has two verified domain projects. The `over-yonder.tech` project
+covers the corporate site and its Archivist, OpenZT2 and Pong AI subdomains.
+The `rake-lang.org` project covers the Rake site. Both projects run a Site Audit
+each Friday between 12:00 and 12:59 p.m. Sydney time.
+
+| Project | Fleet hosts reached | Health Score | DR | UR | Referring domains | Backlinks | Organic keywords |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `over-yonder.tech` | 4 | 89 | 0 | 0 | 274 | 637 | 0 |
+| `rake-lang.org` | 1 | 70 | 10 | 0 | 267 | 269 | 0 |
+
+Ahrefs crawled 22 internal pages and 15 resources across the
+`over-yonder.tech` project. Its Structure Explorer reached 17 Archivist URLs,
+12 OpenZT2 URLs, 10 corporate URLs and two Pong AI URLs, plus four redirects
+on the `www` hostname. The Rake audit crawled four internal pages from ten
+total URLs. Counts include redirects, resources and non-canonical URLs, so they
+shouldn't be compared directly with the 14 canonical pages in the fleet
+inventory.
+
+The first audit produced the following work:
+
+- Configure `www.over-yonder.tech`, `www.rake-lang.org` and their HTTP variants
+  to redirect to the canonical HTTPS host. Ahrefs currently receives 404
+  responses from the `www` URLs.
+- Stop Cloudflare email-address obfuscation from exposing
+  `/cdn-cgi/l/email-protection` as a crawlable link on the corporate site, or
+  exclude that generated endpoint from the audit. It accounts for the other
+  corporate 404 and the pages reported as linking to a broken page.
+- Repair the one broken redirect and replace links to redirects with their
+  final canonical destinations. Ahrefs found eight redirected URLs and four
+  pages that link through a redirect across the `over-yonder.tech` project.
+- Add the missing description, Open Graph tags and X card to the one indexable
+  page reported without them. Add alternative text to the four reported image
+  references and reduce the one oversized Rake image.
+- Review the one page with multiple H1 elements and the six indexable URLs that
+  Ahrefs didn't find in a sitemap. Intentional non-canonical and utility URLs
+  should be excluded from the crawl; canonical public pages should be added to
+  the appropriate sitemap.
+- Remove `SoftwareApplication` rich-result markup from Rake unless the public
+  page can truthfully supply Google's required `offers` and `aggregateRating`
+  or `review` properties. Ahrefs reports the same rich-result validation class
+  on two `over-yonder.tech` URLs, which must be checked before deciding whether
+  their schema type is appropriate.
+- Review the four noindex-and-nofollow URLs in the `over-yonder.tech` crawl and
+  their internal links. Keep those directives when the pages are deliberately
+  non-public; remove the links or directives when a canonical page should be
+  discoverable.
+
+Ahrefs also reported HTTP-to-HTTPS redirects, newly published pages eligible
+for IndexNow and pages with only one incoming link. Those are observations,
+not defects by themselves. The reconciliation step will use the affected URLs
+to distinguish intended edge behaviour from repository or deployment errors.
 
 ### Instrumentation
 
