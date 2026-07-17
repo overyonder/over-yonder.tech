@@ -155,6 +155,15 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .case-copy h3 { margin: 0 0 24px; font: 400 clamp(30px, 3vw, 45px)/1.05 Georgia, serif; letter-spacing: -.035em; }
 .case-copy .case-summary { margin: 0 0 19px; color: var(--white); font: 400 19px/1.45 Georgia, serif; }
 .case-copy > p:last-of-type { margin: 0; color: var(--dark-text); font-size: 16px; line-height: 1.65; }
+.conversion-measurements { overflow-x: auto; margin: 22px 0; border-block: 1px solid var(--dark-rule); }
+.conversion-measurements table { width: 100%; min-width: 390px; border-collapse: collapse; color: var(--dark-text); font: 11px/1.35 "SFMono-Regular", Consolas, monospace; font-variant-numeric: tabular-nums; }
+.conversion-measurements caption { padding: 11px 0 8px; color: var(--white); text-align: left; font-weight: 700; }
+.conversion-measurements th, .conversion-measurements td { padding: 6px 8px; border-top: 1px solid rgba(243,236,223,.09); text-align: right; white-space: nowrap; }
+.conversion-measurements th:first-child, .conversion-measurements td:first-child { padding-left: 0; text-align: left; }
+.conversion-measurements th:last-child, .conversion-measurements td:last-child { padding-right: 0; }
+.conversion-measurements thead th { color: var(--white); font-weight: 700; }
+.conversion-measurements .conversion-highlight td { color: var(--signal-hot); }
+.conversion-measurements .conversion-total td { color: var(--white); font-weight: 700; }
 .case-link { display: inline-flex; gap: 18px; margin-top: 25px; padding-bottom: 6px; border-bottom: 1px solid var(--signal-hot); color: var(--signal-hot); font-size: 13px; text-decoration: none; }
 .case-link span { display: inline-block; transition: transform .2s; }
 .case-link:hover span { transform: translate(5px, -5px); }

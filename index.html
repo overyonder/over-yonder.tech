@@ -216,6 +216,30 @@
           <h3>During gameplay, OpenZT2 doesn't load assets slowly or quickly—it just doesn't load them at all.</h3>
           <p class="case-summary">OpenZT2 is a clean-room, native reconstruction of Zoo Tycoon 2. Its engine needs an entire game's converted assets without copying them through a conventional runtime cache.</p>
           <p>A launcher converts source assets into an immutable, versioned content pack laid out in the same binary form the Rust engine reads. The game maps the pack into its virtual address space, validates typed references into those mapped bytes and asks Linux to preload selected page groups within an available-memory budget.</p>
+          <p>Journal timestamps showed that behaviour compilation, not asset I/O, consumed 18 minutes 42 seconds of a 22-minute conversion. The compiler now parses and lowers independent behaviour documents in parallel before one deterministic graph closure. Audio received a separate indexed path, filename and stem lookup. Together, those changes reduced the same conversion path to 4 minutes 13 seconds.</p>
+          <div class="conversion-measurements" role="region" aria-label="OpenZT2 conversion performance before and after optimization" tabindex="0">
+            <table>
+              <caption>Core conversion to the same two semantic blockers</caption>
+              <thead><tr><th>Stage</th><th>Before</th><th>After</th></tr></thead>
+              <tbody>
+                <tr><td>Indexing</td><td>97 ms</td><td>71 ms</td></tr>
+                <tr><td>Planning</td><td>21.871 s</td><td>22.091 s</td></tr>
+                <tr><td>Leaf assets</td><td>144.083 s</td><td>147.777 s</td></tr>
+                <tr><td>Behaviour auxiliary</td><td>26 ms</td><td>22 ms</td></tr>
+                <tr><td>World preparation</td><td>78 ms</td><td>63 ms</td></tr>
+                <tr><td>Audio corpus</td><td>8.261 s</td><td>95 ms</td></tr>
+                <tr><td>Terrain corpus</td><td>24.487 s</td><td>25.779 s</td></tr>
+                <tr class="conversion-highlight"><td>Behaviour corpus</td><td>18m 42.237s</td><td>7.882 s</td></tr>
+                <tr><td>Scenario corpus</td><td>11.288 s</td><td>11.406 s</td></tr>
+                <tr><td>Animation corpus</td><td>12.679 s</td><td>22.983 s</td></tr>
+                <tr><td>UI corpus</td><td>404 ms</td><td>1.959 s</td></tr>
+                <tr><td>Localization corpus</td><td>313 ms</td><td>6.409 s</td></tr>
+                <tr class="conversion-total"><td>Total wall time</td><td>22m 32.063s</td><td>4m 12.898s</td></tr>
+                <tr class="conversion-total"><td>Peak memory</td><td>8.5 GiB</td><td>7.6 GiB</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Both measurements use the optimized release converter, the same three core archives and the same failure boundary. They end at two unresolved semantic translations, before pack writing. Stage boundaries come from the retained system journal; total wall time and peak memory come from the transient service counters.</p>
           <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
         </div>
         <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 maps a versioned native content pack read-only, selectively faults requested pages into the Linux page cache, and accesses those mapped bytes through typed Rust references">
