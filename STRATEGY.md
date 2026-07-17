@@ -131,6 +131,11 @@ quality move together.
   Health Score, Domain Rating, URL Rating, referring domains, backlinks and
   estimated organic keywords. These are Ahrefs measurements, not Google
   ranking signals.
+- Pursue Google's software-app rich result for eligible commercial products.
+  Publish `SoftwareApplication` markup only after the product page states a
+  genuine offer and can cite genuine reviews or an aggregate rating. The
+  structured data must describe evidence visible on the page and pass Google's
+  Rich Results Test before deployment.
 - Do not run A/B tests until the eligible traffic can support a predeclared
   sample size and decision rule. Before then, improve weak pages using direct
   reader feedback, search intent, contact-intent evidence and editorial
@@ -191,6 +196,10 @@ order:
 - [ ] Begin the review cadence: weekly launch checks, one monthly decision
   report and one quarterly strategy review. Every content change made for
   search performance must record its hypothesis and next assessment date.
+- [ ] Qualify the first commercial product for Google's software-app rich
+  result after its offer and customer-review programme are operating. Add the
+  required structured data, validate the production page and track the search
+  appearance in Search Console.
 
 ### Fleet integration audit — 16 July 2026
 
