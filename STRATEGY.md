@@ -131,6 +131,10 @@ quality move together.
   Health Score, Domain Rating, URL Rating, referring domains, backlinks and
   estimated organic keywords. These are Ahrefs measurements, not Google
   ranking signals.
+- Add both Search Console domain properties to Bing Webmaster Tools. Use
+  IndexNow to notify participating search engines when a canonical page is
+  added, materially revised or removed; ordinary crawling and sitemaps remain
+  the authoritative inventory.
 - Pursue Google's software-app rich result for eligible commercial products.
   Publish `SoftwareApplication` markup only after the product page states a
   genuine offer and can cite genuine reviews or an aggregate rating. The
@@ -140,6 +144,19 @@ quality move together.
   sample size and decision rule. Before then, improve weak pages using direct
   reader feedback, search intent, contact-intent evidence and editorial
   judgment.
+
+### Deferred measurement tools
+
+The fleet will not add Google Analytics, advertising pixels, a tag manager,
+heatmaps or session replay while Cloudflare Web Analytics and the first-party
+contact-intent event answer the current measurement questions. Reconsider a
+tool only when a named decision requires data the existing system cannot
+provide, and document its privacy cost before deployment.
+
+A/B testing remains deferred until an eligible page has enough traffic for a
+predeclared sample size, success metric and stopping rule. Low-volume changes
+will be assessed through search intent, direct reader feedback, contact-intent
+counts and editorial judgment.
 
 ### Fleet inventory
 
@@ -169,10 +186,10 @@ order:
 - [x] Enable Cloudflare Web Analytics for every production hostname. Verify a
   real page view from each site and confirm that Cloudflare reports hostname,
   pathname, referrer, country, device and real-user performance as expected.
-- [x] Audit the visible fleet links and contact links. Every product site must
-  identify over|yonder, link to `over-yonder.tech` and expose
-  `hello@over-yonder.tech`; every corporate proof point must link to the exact
-  product or technical article it describes.
+- [x] Audit the visible fleet links and contact links. Record which product
+  pages identify over|yonder, link to `over-yonder.tech` and expose
+  `hello@over-yonder.tech`; confirm that every corporate proof point links to
+  the exact product or technical article it describes.
 - [x] Take a dated Search Console baseline for every property. Record indexed
   and excluded pages, sitemap status, crawl or security errors, impressions,
   clicks, click-through rate, average position, leading queries and leading
@@ -180,10 +197,18 @@ order:
 - [x] Create and verify every fleet site in Ahrefs Free. Run the first Site
   Audit and record Health Score, Domain Rating, URL Rating, referring domains,
   backlinks, estimated keywords and every actionable crawl issue.
-- [ ] Reconcile the three technical views: the repository SEO audit, Search
-  Console and Ahrefs. Fix objective defects such as broken links, contradictory
-  canonicals, missing pages and failed metadata before making content changes
-  based on estimated rankings.
+- [x] Fix the objective defects found by the first repository and Ahrefs
+  audits. The deployed fleet now passes the repository audit with zero errors
+  and zero warnings across all 14 canonical pages.
+- [ ] Add a consistent over|yonder identity, corporate link and
+  `mailto:hello@over-yonder.tech` contact link to every public Archivist,
+  OpenZT2, Rake and Pong AI page.
+- [ ] Run the post-fix Ahrefs crawls for both domain projects. Reconcile the new
+  results with the green repository audit and Search Console before changing
+  page content in response to estimated rankings.
+- [ ] Verify both domain properties in Bing Webmaster Tools and configure
+  IndexNow for canonical page additions, material revisions and removals. Test
+  one accepted submission from each domain.
 - [ ] Implement the first-party contact-intent endpoint, daily D1 aggregates
   and the shared `mailto:` event script. Test one event from every hostname and
   confirm that the email client still opens normally when measurement fails.
@@ -196,25 +221,27 @@ order:
 - [ ] Begin the review cadence: weekly launch checks, one monthly decision
   report and one quarterly strategy review. Every content change made for
   search performance must record its hypothesis and next assessment date.
+- [ ] Schedule production smoke checks for every hostname. Alert on an
+  unreachable canonical page or sitemap, a changed canonical URL, an accidental
+  `noindex` directive, a broken contact link or a failing fleet SEO audit.
 - [ ] Qualify the first commercial product for Google's software-app rich
   result after its offer and customer-review programme are operating. Add the
   required structured data, validate the production page and track the search
   appearance in Search Console.
 
-### Fleet integration audit — 16 July 2026
+### Fleet integration audit — 17 July 2026
 
 The corporate homepage links each proof point to its exact destination: the
 Rstat case study, Archivist performance article, OpenZT2 site, Rake site and
 Pong AI site. Archivist, OpenZT2 and Rake identify over|yonder and link to the
-corporate site. Pong AI does neither, so its shared site footer still needs the
-corporate identity and link.
+corporate site. Pong AI still needs the corporate identity and link.
 
 The public corporate pages expose `hello@over-yonder.tech`. None of the
-canonical Archivist, OpenZT2, Pong AI or Rake pages expose that address. Add the
-shared contact link to every public product page when the fleet footer work is
-implemented. Cloudflare may obfuscate the address in delivered HTML, so future
-audits must check both the repository source and the rendered link instead of
-treating the rewritten URL as a missing address.
+canonical Archivist, OpenZT2, Pong AI or Rake pages expose that address yet.
+The fleet footer work must add the shared contact link to every public product
+page. Cloudflare email-address obfuscation is disabled on both zones, so the
+deployed HTML now retains the real `mailto:` target for crawlers and the future
+contact-intent script.
 
 ### Search Console baseline — 16 July 2026
 
@@ -258,50 +285,42 @@ total URLs. Counts include redirects, resources and non-canonical URLs, so they
 shouldn't be compared directly with the 14 canonical pages in the fleet
 inventory.
 
-The first audit produced the following work:
+The first audit produced the following work, completed on 17 July 2026:
 
-- Configure `www.over-yonder.tech`, `www.rake-lang.org` and their HTTP variants
-  to redirect to the canonical HTTPS host. Ahrefs currently receives 404
-  responses from the `www` URLs.
-- Stop Cloudflare email-address obfuscation from exposing
-  `/cdn-cgi/l/email-protection` as a crawlable link on the corporate site, or
-  exclude that generated endpoint from the audit. It accounts for the other
-  corporate 404 and the pages reported as linking to a broken page.
-- Repair the one broken redirect and replace links to redirects with their
-  final canonical destinations. Ahrefs found eight redirected URLs and four
-  pages that link through a redirect across the `over-yonder.tech` project.
-- Add the missing description, Open Graph tags and X card to the one indexable
-  page reported without them. Add alternative text to the four reported image
-  references and reduce the one oversized Rake image.
-- Review the one page with multiple H1 elements and the six indexable URLs that
-  Ahrefs didn't find in a sitemap. Intentional non-canonical and utility URLs
-  should be excluded from the crawl; canonical public pages should be added to
-  the appropriate sitemap.
-- Remove `SoftwareApplication` rich-result markup from Rake unless the public
-  page can truthfully supply Google's required `offers` and `aggregateRating`
-  or `review` properties. Ahrefs reports the same rich-result validation class
-  on two `over-yonder.tech` URLs, which must be checked before deciding whether
-  their schema type is appropriate.
-- Review the four noindex-and-nofollow URLs in the `over-yonder.tech` crawl and
-  their internal links. Keep those directives when the pages are deliberately
-  non-public; remove the links or directives when a canonical page should be
-  discoverable.
+- `www.over-yonder.tech` and `www.rake-lang.org` now redirect permanently to
+  their canonical HTTPS hosts while preserving the path and query string.
+- Cloudflare email-address obfuscation is disabled on both zones. The generated
+  `/cdn-cgi/l/email-protection` crawl target no longer replaces the corporate
+  `mailto:` link.
+- Internal links now use their final extensionless URLs, and the broken
+  redirect reported by the first crawl has been removed.
+- OpenZT2's six canonical pages now carry complete descriptions, canonical
+  URLs, social metadata, favicons and appropriate structured data. A deployment
+  guard rejects regenerated public pages that restore `noindex` or omit their
+  description or canonical URL.
+- The OpenZT2 functional specification now has one H1. Deliberately private,
+  utility and source-copy pages retain their `noindex` directives.
+- Rake's 3.1 MB hero PNG has been replaced in the page by a 304 KB WebP with
+  explicit dimensions.
+- Archivist, OpenZT2, Rake and Pong AI now use structured-data types that
+  describe the published page without claiming eligibility for Google's
+  software-app rich result before genuine offer and review data exists.
 
-Ahrefs also reported HTTP-to-HTTPS redirects, newly published pages eligible
-for IndexNow and pages with only one incoming link. Those are observations,
-not defects by themselves. The reconciliation step will use the affected URLs
-to distinguish intended edge behaviour from repository or deployment errors.
+The production fleet audit now reports zero errors and zero warnings across all
+14 canonical pages. Ahrefs still displays the original crawl until both domain
+projects run again. HTTP-to-HTTPS redirects and pages with only one incoming
+link remain observations rather than defects by themselves.
 
 ### Instrumentation
 
-- Enable Cloudflare Web Analytics on every production hostname and confirm that
-  each canonical page appears independently in its reports.
+- Cloudflare Web Analytics is enabled on every production hostname. Continue
+  confirming that each canonical page appears independently in its reports.
 - Use one fleet event schema for all sites. Every page-view or contact-intent
   aggregate must retain the production hostname and canonical pathname.
 - Give every public article and project page a visible link to
   `hello@over-yonder.tech`. The main homepage and Rstat case study already have
-  contact links; the connected project repositories must be audited as part of
-  implementation.
+  contact links; the Archivist, OpenZT2, Rake and Pong AI repositories still
+  need the shared fleet footer.
 - Add one small deferred script to contact links. On activation it sends the
   canonical pathname to a same-origin Cloudflare Worker with
   `navigator.sendBeacon`, then allows the normal `mailto:` action to continue.
