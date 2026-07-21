@@ -157,24 +157,23 @@
       <article class="result-case rstat-case">
         <div class="case-copy">
           <p class="case-index">01 / rstat</p>
-          <h3>From 800 milliseconds to 160 <em>micro</em>seconds.</h3>
-          <p class="case-summary">A desktop system monitor that once took almost a second to update now refreshes in 160 microseconds—about 5,000 times faster.</p>
-          <p>rstat keeps its working state between updates instead of rebuilding it with shell commands. Direct Linux system-file reads first cut the refresh to 15 milliseconds; an extended Berkeley Packet Filter (eBPF) program then moved recurring process accounting into the kernel.</p>
+          <h3>System-monitor updates cut from 800 milliseconds to 160 <em>micro</em>seconds.</h3>
+          <p class="case-summary">rstat delivers CPU, memory and process data to a desktop status bar about 5,000 times faster.</p>
           <a class="case-link" href="work/rstat">Read the case study <span>↗</span></a>
         </div>
         <figure class="case-graphic bar-chart" aria-label="The rstat Linux monitor improved from roughly 800 milliseconds for one shell-module update, to 15 milliseconds after replacing the power-profile service call and consolidating process-filesystem reads, to 0.16 milliseconds on average for an eBPF-backed userspace refresh">
           <div class="bar-row">
-            <span>Shell + service call</span>
+            <div class="bar-label"><b>Shell + service call</b><small>Started command-line tools and waited on the power-profile service for every update.</small></div>
             <i style="--bar: 97.58%"></i>
             <strong>~800 ms</strong>
           </div>
           <div class="bar-row">
-            <span>Direct sysfs + procfs</span>
+            <div class="bar-label"><b>Long-running Rust collector</b><small>Kept state in memory, read power directly and combined three process scans into one.</small></div>
             <i style="--bar: 54.40%"></i>
             <strong>~15 ms</strong>
           </div>
           <div class="bar-row final">
-            <span>eBPF userspace refresh</span>
+            <div class="bar-label"><b>Kernel-assisted collector</b><small>eBPF accounts during scheduler events; userspace reads the accumulated counters in a batch.</small></div>
             <i style="--bar: 5.10%"></i>
             <strong>0.16 ms avg</strong>
           </div>
@@ -186,12 +185,13 @@
       <article class="result-case archivist-case">
         <div class="case-copy">
           <p class="case-index">02 / Archivist</p>
-          <h3>222,242 entries, live in 420 milliseconds.</h3>
-          <p class="case-summary">Archivist makes more than 222,000 files ready to browse in 420 milliseconds, so a huge game archive feels immediate.</p>
-          <p>Archivist's Rust backend builds one compact snapshot for the browser-based interface. Parent indices replace repeated path strings, and aligned columnar arrays replace one object per entry. The backend compresses the snapshot for transmission. The browser reconstructs paths and reads numeric columns in place.</p>
+          <h3>Archive-browser loading cut from 4.9 seconds to 420 milliseconds.</h3>
+          <p class="case-summary">Archivist makes 222,242 files ready to browse more than eleven times faster.</p>
           <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
         </div>
-        <figure class="case-graphic packet-graphic" aria-label="Archivist snapshot uses MessagePack metadata, parent indices, aligned structure-of-arrays columns and a basename blob, transported with gzip and consumed through typed array views">
+        <figure class="case-graphic packet-graphic" aria-label="Archivist loading improved from 4.9 seconds to 420 milliseconds by replacing repeated full paths and per-entry objects with parent indices, aligned field columns and a basename blob, then transporting the snapshot with gzip and consuming it through typed-array views">
+          <div class="diagram-baseline"><strong>Before · 4.9 s</strong><span>Repeated full paths and one JavaScript object per entry made decoding alone take 3 seconds.</span></div>
+          <div class="process-arrow"><span>Replace repetition with one compact, browser-readable snapshot</span></div>
           <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB benchmark snapshot</span></div>
           <div class="packet">
             <span class="packet-head"><b>Header metadata</b><small>small irregular MessagePack record</small></span>
@@ -199,12 +199,12 @@
             <span class="packet-columns"><b>Aligned field columns</b><small>one structure-of-arrays column per field</small></span>
             <span class="packet-name"><b>Basename blob</b><small>NUL-separated UTF-8</small></span>
           </div>
-          <div class="process-arrow"><span>The Rust backend compresses the complete snapshot with gzip for HTTP transport</span></div>
+          <div class="process-arrow"><span>Compress once in Rust with gzip for HTTP transport</span></div>
           <div class="diagram-title transport-title"><strong>4.70 MB live response</strong><span>51 ms browser fetch</span></div>
           <div class="decode-steps">
-            <div><b>1</b><span><strong>DecompressionStream</strong><small>browser-native streaming gzip</small></span></div>
-            <div><b>2</b><span><strong>Typed-array views</strong><small>numeric columns are viewed in place</small></span></div>
-            <div><b>3</b><span><strong>One UTF-8 decode</strong><small>basenames are reconstructed through parent indices</small></span></div>
+            <div><b>1</b><span><strong>Decompress</strong><small>the browser's native DecompressionStream handles gzip</small></span></div>
+            <div><b>2</b><span><strong>View columns in place</strong><small>typed arrays avoid rebuilding one object per entry</small></span></div>
+            <div><b>3</b><span><strong>Rebuild paths once</strong><small>one UTF-8 decode plus parent indices restores full paths</small></span></div>
           </div>
           <figcaption>The browser applies all 222,242 entries 420 milliseconds after requesting the snapshot. In parallel, the backend decodes its own resident copy in 174 milliseconds.</figcaption>
         </figure>
@@ -214,35 +214,20 @@
         <div class="case-copy">
           <p class="case-index">03 / OpenZT2</p>
           <h3>Game conversion cut from 22 minutes to 4.</h3>
-          <p class="case-summary">OpenZT2 prepares Zoo Tycoon 2's game data more than five times faster, then lets gameplay use that data directly without a second loading-and-copying step.</p>
-          <p>A launcher converts source assets into an immutable, versioned content pack laid out in the same binary form the Rust engine reads. The game maps the pack into its virtual address space, validates typed references into those mapped bytes and asks Linux to preload selected page groups within an available-memory budget.</p>
-          <p>Timing data showed that behaviour compilation, rather than reading assets, consumed 18 minutes 42 seconds. The compiler now processes independent behaviour documents in parallel before combining them into one deterministic graph. Indexed audio lookup removed another repeated search, bringing the same conversion path down to 4 minutes 13 seconds.</p>
-          <div class="conversion-measurements" role="region" aria-label="OpenZT2 conversion performance before and after optimization" tabindex="0">
-            <table>
-              <caption>Core conversion to the same two semantic blockers</caption>
-              <thead><tr><th>Stage</th><th>Before</th><th>After</th></tr></thead>
-              <tbody>
-                <tr><td>Indexing</td><td>97 ms</td><td>71 ms</td></tr>
-                <tr><td>Planning</td><td>21.871 s</td><td>22.091 s</td></tr>
-                <tr><td>Leaf assets</td><td>144.083 s</td><td>147.777 s</td></tr>
-                <tr><td>Behaviour auxiliary</td><td>26 ms</td><td>22 ms</td></tr>
-                <tr><td>World preparation</td><td>78 ms</td><td>63 ms</td></tr>
-                <tr><td>Audio corpus</td><td>8.261 s</td><td>95 ms</td></tr>
-                <tr><td>Terrain corpus</td><td>24.487 s</td><td>25.779 s</td></tr>
-                <tr class="conversion-highlight"><td>Behaviour corpus</td><td>18m 42.237s</td><td>7.882 s</td></tr>
-                <tr><td>Scenario corpus</td><td>11.288 s</td><td>11.406 s</td></tr>
-                <tr><td>Animation corpus</td><td>12.679 s</td><td>22.983 s</td></tr>
-                <tr><td>UI corpus</td><td>404 ms</td><td>1.959 s</td></tr>
-                <tr><td>Localization corpus</td><td>313 ms</td><td>6.409 s</td></tr>
-                <tr class="conversion-total"><td>Total wall time</td><td>22m 32.063s</td><td>4m 12.898s</td></tr>
-                <tr class="conversion-total"><td>Peak memory</td><td>8.5 GiB</td><td>7.6 GiB</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p>Both measurements use the optimized release converter, the same three core archives and the same failure boundary. They end at two unresolved semantic translations, before pack writing. Stage boundaries come from the retained system journal; total wall time and peak memory come from the transient service counters.</p>
+          <p class="case-summary">OpenZT2 prepares Zoo Tycoon 2's data more than five times faster, then lets the game read the finished pack without copying it into a second cache.</p>
           <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
         </div>
-        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 maps a versioned native content pack read-only, selectively faults requested pages into the Linux page cache, and accesses those mapped bytes through typed Rust references">
+        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 conversion improved from 22 minutes 32 seconds to 4 minutes 12.898 seconds through parallel behaviour compilation and indexed audio lookup; during gameplay it maps the versioned native content pack read-only, preloads selected pages and reads mapped bytes through typed Rust references">
+          <div class="conversion-path">
+            <div><b>Before</b><strong>22m 32s total</strong><small>Behaviour compilation consumed 18m 42s.</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>Parallel behaviour work</b><strong>18m 42s → 7.882s</strong><small>Independent documents compile in parallel before one deterministic graph closure.</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>Indexed audio lookup</b><strong>8.261s → 95ms</strong><small>Path, filename and stem indexes replace repeated archive searches.</small></div>
+            <i aria-hidden="true"></i>
+            <div class="final"><b>After</b><strong>4m 12.898s total</strong><small>Peak memory also fell from 8.5 to 7.6 GiB.</small></div>
+          </div>
+          <div class="diagram-divider"><strong>During gameplay</strong><span>The converted pack is already in the engine's readable format</span></div>
           <div class="memory-chain">
             <div><strong>Native content pack</strong><small>versioned records in the engine's Rust layout, with aligned payload ranges</small></div>
             <i><span>read-only memory map</span></i>
@@ -256,7 +241,7 @@
             <div><b>2 / Fault selected pages</b><p>Touching selected payload pages asks Linux to populate those 4-KiB pages in the kernel page cache.</p></div>
             <div><b>3 / Read typed records in place</b><p>Validating the mapped archive returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
           </div>
-          <figcaption>After the selected pages are resident, asset hydration performs no file-open or read system calls. Untouched pages remain available through Linux's normal demand paging.</figcaption>
+          <figcaption>Conversion runs used the same three archives and stopped at the same two unresolved translations before pack writing. At runtime, resident assets require no file-open or read system calls; untouched pages remain demand-paged by Linux.</figcaption>
         </figure>
       </article>
 
@@ -264,8 +249,7 @@
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
           <h3>Write parallel CPU work once. Make the compiler prove it stays fast.</h3>
-          <p class="case-summary">Rake is an experimental language for writing one calculation across many values at once. The same source can target different CPU vector widths, while compilation fails if the machine would quietly fall back to slower scalar work.</p>
-          <p>Rake asks whether machine shape can be a checked requirement. C, Rust and ISPC can emit excellent SIMD; Rake's narrower experiment makes selected physical properties conditions of compilation. Its current AVX2 and NEON slices reject supported kernels that would split or scalarize a rack, call a helper, or spill a live rack. Fused names are transparent dataflow aliases, so an ordinary multiply-add graph inside a fused region currently becomes one verified FMA where the target provides it. Native pack traversal, broader algebraic rewrites, more CPU profiles and SPIR-V remain in flight.</p>
+          <p class="case-summary">Rake targets different CPU vector widths from the same source and rejects code that would silently fall back to slower work.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
         <figure class="case-graphic compiler-graphic" aria-label="Rake preserves explicit rack and lane-mask semantics through verified lowering into target machine code, rejecting programs that break the selected target profile's contract">
@@ -274,14 +258,14 @@
             <code>crunch advance(positions: f32s, velocities: f32s) -&gt; f32s:<br>&nbsp;&nbsp;| scaled: f32s &lt;| velocities * &lt;0.5&gt;<br>&nbsp;&nbsp;| result: f32s &lt;| positions + scaled<br>&nbsp;&nbsp;return result</code>
           </div>
           <div class="compiler-path">
-            <div><b>Language contract</b><span>Profiles fix rack width. Angle brackets expose scalar broadcasts; fused names add readability without imposing storage or rounding boundaries.</span></div>
+            <div><b>1 / State the machine contract</b><span>The target profile fixes vector width. Explicit broadcasts and fused regions state which operations must stay together.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>Verified lowering</b><span>Typed vector SSA preserves rack identity, explicit broadcasts, masked safety and fused regions while the selected profile is legalized.</span></div>
+            <div><b>2 / Lower and verify</b><span>Typed vector SSA preserves rack identity and masked safety. A supported multiply-add graph becomes one verified FMA.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>Target machine</b><span>Today, instruction selection and no-spill allocation produce the promised CPU register shape—or compilation fails. GPU subgroup lowering remains proposed.</span></div>
+            <div><b>3 / Emit or reject</b><span>Rake selects instructions and allocates registers. Splitting, scalar fallback, helper calls or live-rack spills fail compilation.</span></div>
           </div>
           <div class="current-boundary"><strong>Native backends today</strong><span>x86-64 AVX2 · AArch64 NEON</span></div>
-          <figcaption>Rake owns CPU instruction selection, register allocation and textual assembly, then verifies the encoded object. SSE2, AVX-512 and Vulkan subgroup profiles are planned extensions of the same fail-closed machine contract.</figcaption>
+          <figcaption>Rake verifies the encoded object after assembly. Native pack traversal, SSE2, AVX-512 and Vulkan subgroup targets remain in development.</figcaption>
         </figure>
       </article>
     </section>
