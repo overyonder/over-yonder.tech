@@ -144,22 +144,22 @@
         <h2>Most people have learned to wait.</h2>
       </div>
       <div class="premise-copy">
-        <p class="premise-lead">Wheels spin, loading bars creep, we all agree that computers are slow.</p>
-        <p><strong>But usually,</strong> software creates the delay. Hardware that can perform billions of operations a second sits idle through a disk seek, network round trip, unnecessary copy or expensive abstraction. We measure the complete operation, find exactly where the time goes and remove the cause. That's how seconds become micro- or nanoseconds.</p>
+        <p class="premise-lead">A slow computer is often fast hardware waiting on avoidable software work.</p>
+        <p>We time the complete operation, find the delay and remove its cause. That might mean a better query, fewer copies, a different data layout or work moved closer to the hardware. The useful result is the same: less waiting.</p>
       </div>
     </section>
 
     <section class="evidence" id="evidence">
       <div class="section-heading light">
-        <p>02 / Work across the stack</p>
-        <h2>The limiting layer changes from project to project.</h2>
+        <p>02 / Measured work</p>
+        <h2>What less waiting looks like.</h2>
       </div>
       <article class="result-case rstat-case">
         <div class="case-copy">
           <p class="case-index">01 / rstat</p>
           <h3>From 800 milliseconds to 160 <em>micro</em>seconds.</h3>
-          <p class="case-summary">rstat is a Linux monitor that supplies CPU, memory and per-process data to a desktop status bar. It replaced a shell module that took roughly 800 milliseconds to produce one update.</p>
-          <p>A long-running Rust collector retained state between updates. Replacing the blocking power-profile service call with a direct Linux sysfs read and collapsing three Linux process-filesystem (procfs) walks into one brought each update down to 15 milliseconds. An extended Berkeley Packet Filter (eBPF) program then moved recurring process accounting into the kernel, leaving 0.16 milliseconds of userspace work on average.</p>
+          <p class="case-summary">A desktop system monitor that once took almost a second to update now refreshes in 160 microseconds—about 5,000 times faster.</p>
+          <p>rstat keeps its working state between updates instead of rebuilding it with shell commands. Direct Linux system-file reads first cut the refresh to 15 milliseconds; an extended Berkeley Packet Filter (eBPF) program then moved recurring process accounting into the kernel.</p>
           <a class="case-link" href="work/rstat">Read the case study <span>↗</span></a>
         </div>
         <figure class="case-graphic bar-chart" aria-label="The rstat Linux monitor improved from roughly 800 milliseconds for one shell-module update, to 15 milliseconds after replacing the power-profile service call and consolidating process-filesystem reads, to 0.16 milliseconds on average for an eBPF-backed userspace refresh">
@@ -179,7 +179,7 @@
             <strong>0.16 ms avg</strong>
           </div>
           <div class="bar-axis"><span>0.1 ms</span><span>1 ms</span><span>10 ms</span><span>100 ms</span><span>1 s</span></div>
-          <figcaption>The refresh fell from roughly 800 to 0.16 milliseconds: a 5,000-fold reduction.</figcaption>
+          <figcaption>Three generations of the same desktop-monitor refresh, shown on a logarithmic time scale.</figcaption>
         </figure>
       </article>
 
@@ -187,7 +187,7 @@
         <div class="case-copy">
           <p class="case-index">02 / Archivist</p>
           <h3>222,242 entries, live in 420 milliseconds.</h3>
-          <p class="case-summary">Archivist is a desktop frontend for curating, verifying and launching a large video-game archive. Its interface needed 222,242 filesystem entries ready before browsing began.</p>
+          <p class="case-summary">Archivist makes more than 222,000 files ready to browse in 420 milliseconds, so a huge game archive feels immediate.</p>
           <p>Archivist's Rust backend builds one compact snapshot for the browser-based interface. Parent indices replace repeated path strings, and aligned columnar arrays replace one object per entry. The backend compresses the snapshot for transmission. The browser reconstructs paths and reads numeric columns in place.</p>
           <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
         </div>
@@ -213,10 +213,10 @@
       <article class="result-case openzt2-case">
         <div class="case-copy">
           <p class="case-index">03 / OpenZT2</p>
-          <h3>During gameplay, OpenZT2 doesn't load assets slowly or quickly—it just doesn't load them at all.</h3>
-          <p class="case-summary">OpenZT2 is a clean-room, native reconstruction of Zoo Tycoon 2. Its engine needs an entire game's converted assets without copying them through a conventional runtime cache.</p>
+          <h3>Game conversion cut from 22 minutes to 4.</h3>
+          <p class="case-summary">OpenZT2 prepares Zoo Tycoon 2's game data more than five times faster, then lets gameplay use that data directly without a second loading-and-copying step.</p>
           <p>A launcher converts source assets into an immutable, versioned content pack laid out in the same binary form the Rust engine reads. The game maps the pack into its virtual address space, validates typed references into those mapped bytes and asks Linux to preload selected page groups within an available-memory budget.</p>
-          <p>Journal timestamps showed that behaviour compilation, not asset I/O, consumed 18 minutes 42 seconds of a 22-minute conversion. The compiler now parses and lowers independent behaviour documents in parallel before one deterministic graph closure. Audio received a separate indexed path, filename and stem lookup. Together, those changes reduced the same conversion path to 4 minutes 13 seconds.</p>
+          <p>Timing data showed that behaviour compilation, rather than reading assets, consumed 18 minutes 42 seconds. The compiler now processes independent behaviour documents in parallel before combining them into one deterministic graph. Indexed audio lookup removed another repeated search, bringing the same conversion path down to 4 minutes 13 seconds.</p>
           <div class="conversion-measurements" role="region" aria-label="OpenZT2 conversion performance before and after optimization" tabindex="0">
             <table>
               <caption>Core conversion to the same two semantic blockers</caption>
@@ -263,8 +263,8 @@
       <article class="result-case rake-case">
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
-          <h3>SIMD the compiler must prove.</h3>
-          <p class="case-summary">Rake is an experimental, vector-first language for structure-of-arrays kernels. A rack is one target-sized vector of values, and a pack supplies the complete column storage and runtime count. The same source is intended to traverse four-lane NEON or SSE2, eight-lane AVX2, or sixteen-lane AVX-512 racks without spelling out width-specific intrinsics.</p>
+          <h3>Write parallel CPU work once. Make the compiler prove it stays fast.</h3>
+          <p class="case-summary">Rake is an experimental language for writing one calculation across many values at once. The same source can target different CPU vector widths, while compilation fails if the machine would quietly fall back to slower scalar work.</p>
           <p>Rake asks whether machine shape can be a checked requirement. C, Rust and ISPC can emit excellent SIMD; Rake's narrower experiment makes selected physical properties conditions of compilation. Its current AVX2 and NEON slices reject supported kernels that would split or scalarize a rack, call a helper, or spill a live rack. Fused names are transparent dataflow aliases, so an ordinary multiply-add graph inside a fused region currently becomes one verified FMA where the target provides it. Native pack traversal, broader algebraic rewrites, more CPU profiles and SPIR-V remain in flight.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
@@ -304,7 +304,7 @@
       <div class="experiments-note">
         <div>
           <h2 id="experiments-title">Complex simulations? We have the minerals.</h2>
-          <p>Small experiments let us test unfamiliar execution models quickly. Pong AI is a fun demo: its Rust engine compiles to WebAssembly, evolves a multilayer perceptron through 100 generations in your browser and then lets you play against the trained network. We do this stuff for fun between the real challenges.</p>
+          <p>Pong AI trains a small neural network through 100 generations in your browser, then lets you play against it. Its Rust engine runs locally through WebAssembly.</p>
         </div>
         <a href="https://pong.over-yonder.tech/">Play Pong AI <span>↗</span></a>
       </div>
