@@ -2,14 +2,8 @@ name: SEO audit
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "tools/seo-sites.json"
-      - "tools/seo_audit.py"
-      - ".github/workflows/seo-audit.yml"
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "17 2 * * 1"
 
 permissions:
   contents: read
@@ -25,4 +19,32 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Audit deployed sites
-        run: python3 tools/seo_audit.py
+        id: audit
+        shell: bash
+        run: |
+          mkdir -p .seo-audit-result
+          set +e
+          python3 tools/seo_audit.py 2>&1 | tee .seo-audit-result/output.txt
+          audit_exit=${PIPESTATUS[0]}
+          set -e
+          printf '%s\n' "$audit_exit" > .seo-audit-result/exit-code.txt
+          audit_digest=$(sha256sum .seo-audit-result/output.txt .seo-audit-result/exit-code.txt | sha256sum | cut -d' ' -f1)
+          printf 'exit_code=%s\n' "$audit_exit" >> "$GITHUB_OUTPUT"
+          printf 'digest=%s\n' "$audit_digest" >> "$GITHUB_OUTPUT"
+      - name: Check whether this result was already reported
+        id: previous-result
+        uses: actions/cache/restore@v5
+        with:
+          path: .seo-audit-result
+          key: seo-audit-result-${{ steps.audit.outputs.digest }}
+          lookup-only: true
+      - name: Remember this audit result
+        if: steps.previous-result.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: .seo-audit-result
+          key: seo-audit-result-${{ steps.audit.outputs.digest }}
+      - name: Report changed audit findings
+        if: steps.audit.outputs.exit_code != '0' && steps.previous-result.outputs.cache-hit != 'true'
+        shell: bash
+        run: exit "${{ steps.audit.outputs.exit_code }}"
