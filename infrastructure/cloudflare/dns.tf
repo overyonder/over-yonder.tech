@@ -378,6 +378,17 @@ locals {
       comment  = null
       live_id  = "6158bac4f9ae63fee9bddfb18ef33a9b"
     }
+    "over-yonder.tech/praecept" = {
+      zone     = "over-yonder.tech"
+      name     = "praecept.over-yonder.tech"
+      type     = "CNAME"
+      content  = "praecept.pages.dev"
+      ttl      = 1
+      proxied  = true
+      priority = null
+      comment  = "Praecept Cloudflare Pages"
+      live_id  = null
+    }
     "over-yonder.tech/ad75645470729f0be1f9c7244aa5b303" = {
       zone     = "over-yonder.tech"
       name     = "openzt2.over-yonder.tech"

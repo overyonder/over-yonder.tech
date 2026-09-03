@@ -4,6 +4,7 @@ locals {
     "openzt2-site",
     "over-yonder.tech",
     "pong-site",
+    "praecept",
   ])
 }
 

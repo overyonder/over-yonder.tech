@@ -4,6 +4,7 @@ locals {
     "openzt2"          = { production_branch = "main" }
     "over-yonder-tech" = { production_branch = "main" }
     "pong-ai"          = { production_branch = "main" }
+    "praecept"         = { production_branch = "main" }
     "rake-lang"        = { production_branch = "main" }
   }
 
@@ -12,6 +13,7 @@ locals {
     "openzt2.over-yonder.tech"   = { project = "openzt2" }
     "over-yonder.tech"           = { project = "over-yonder-tech" }
     "pong.over-yonder.tech"      = { project = "pong-ai" }
+    "praecept.over-yonder.tech"  = { project = "praecept" }
     "rake-lang.org"              = { project = "rake-lang" }
   }
 }
