@@ -218,18 +218,20 @@ a { color: inherit; }
 .graphics-portfolio > header { display: flex; justify-content: space-between; gap: 60px; align-items: end; margin-bottom: 80px; }
 .graphics-portfolio > header h2 { margin: 0; font: 400 clamp(48px, 5vw, 70px)/1 Georgia, serif; letter-spacing: -.045em; }
 .graphics-portfolio > header p { max-width: 520px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
-.graphics-project { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: clamp(50px, 7vw, 100px); align-items: center; padding: 70px 0; border-top: 1px solid var(--rule); }
-.graphics-project-reversed { grid-template-columns: minmax(300px, .65fr) minmax(0, 1.35fr); }
-.graphics-project-reversed figure { order: 2; }
-.graphics-project figure { margin: 0; border: 1px solid var(--dark-rule); background: var(--ink); }
-.graphics-project img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.graphics-project { position: relative; margin-top: 70px; border: 1px solid var(--dark-rule); background: var(--ink); }
+.graphics-project figure { margin: 0; }
+.graphics-project img { display: block; width: 100%; height: auto; }
+.graphics-project-copy { position: absolute; z-index: 1; top: 50%; width: min(38%, 460px); padding: clamp(26px, 3vw, 44px); transform: translateY(-50%); background: rgba(55,57,54,.88); box-shadow: 0 16px 45px rgba(0,0,0,.22); backdrop-filter: blur(8px); }
+.graphics-project-copy-left { left: clamp(24px, 4vw, 64px); }
+.graphics-project-copy-right { right: clamp(24px, 4vw, 64px); }
 .advent-project-preview { display: flex; min-height: 360px; flex-direction: column; justify-content: space-between; padding: clamp(28px, 4vw, 56px); background: linear-gradient(135deg, #1d3027, var(--forest)); color: var(--white); }
 .advent-project-preview span { font: 400 clamp(58px, 8vw, 108px)/.9 Georgia, serif; letter-spacing: -.06em; }
 .advent-project-preview small { color: var(--signal-hot); font: 700 11px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
-.graphics-project-copy > small { color: var(--signal-ink); font: 700 11px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
-.graphics-project-copy h3 { margin: 14px 0 22px; font: 400 clamp(40px, 4.5vw, 64px)/.95 Georgia, serif; letter-spacing: -.045em; }
-.graphics-project-copy p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
+.graphics-project-copy > small { color: var(--signal-hot); font: 700 11px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
+.graphics-project-copy h3 { margin: 14px 0 22px; color: var(--white); font: 400 clamp(36px, 4vw, 56px)/.95 Georgia, serif; letter-spacing: -.045em; }
+.graphics-project-copy p { margin: 0; color: var(--white); font-size: 16px; line-height: 1.65; }
 .graphics-project-copy a, .graphics-project-status { display: inline-flex; margin-top: 30px; padding-bottom: 6px; border-bottom: 1px solid var(--signal-ink); color: var(--signal-ink); font-size: 13px; text-decoration: none; }
+.graphics-project-copy a { border-color: var(--signal-hot); color: var(--signal-hot); }
 .graphics-project-status { border: 0; font-family: "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
 
 .contact { min-height: 62svh; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 8vw max(8vw, calc((100vw - 1440px) / 2)); background: var(--forest); color: var(--white); text-align: right; }
@@ -251,8 +253,7 @@ a { color: inherit; }
   .performance-figure { width: 100%; max-width: 900px; }
   .result-case { grid-template-columns: 1fr; gap: 42px; }
   .case-copy { max-width: 660px; }
-  .graphics-project, .graphics-project-reversed { grid-template-columns: 1fr; }
-  .graphics-project-reversed figure { order: 0; }
+  .graphics-project-copy { width: min(46%, 430px); }
 }
 
 @media (max-width: 700px) {
@@ -307,7 +308,8 @@ a { color: inherit; }
   .graphics-portfolio { padding: 80px 20px 100px; }
   .graphics-portfolio > header { align-items: flex-start; flex-direction: column; margin-bottom: 48px; }
   .graphics-portfolio > header h2 { font-size: 46px; }
-  .graphics-project { gap: 32px; padding: 50px 0; }
+  .graphics-project { margin-top: 42px; }
+  .graphics-project-copy { position: static; width: 100%; transform: none; box-shadow: none; backdrop-filter: none; }
   .graphics-project-copy h3 { font-size: 44px; }
   .contact { padding: 84px 20px; }
   .contact > a { font-size: 13vw; }
