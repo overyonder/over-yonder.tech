@@ -234,9 +234,9 @@
             <span class="page hot">4 KiB</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page hot">4 KiB</span><span class="page">cold</span><span class="page">cold</span>
           </div>
           <div class="memory-operations">
-            <div><b>1 / Choose pages to preload</b><p>The preload routine walks the requested asset groups and stops at the available-memory budget.</p></div>
-            <div><b>2 / Fault selected pages</b><p>Touching selected payload pages asks Linux to populate those 4-KiB pages in the kernel page cache.</p></div>
-            <div><b>3 / Read typed records in place</b><p>Validating the mapped archive returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
+            <div><b>1 / Preload selection</b><p>The preload routine walks the requested asset groups and stops at the available-memory budget.</p></div>
+            <div><b>2 / Linux page loading</b><p>Touching selected payload pages asks Linux to populate those 4-KiB pages in the kernel page cache.</p></div>
+            <div><b>3 / Typed access to mapped records</b><p>Validating the mapped archive returns typed Rust references into the memory mapping. Payload bytes aren't copied into a separate heap cache.</p></div>
           </div>
           <figcaption>Conversion runs used the same three archives and stopped at the same two unresolved translations before pack writing. At runtime, resident assets require no file-open or read system calls; untouched pages remain demand-paged by Linux.</figcaption>
         </figure>
@@ -255,11 +255,11 @@
             <code>crunch advance(positions: f32s, velocities: f32s) -&gt; f32s:<br>&nbsp;&nbsp;| scaled: f32s &lt;| velocities * &lt;0.5&gt;<br>&nbsp;&nbsp;| result: f32s &lt;| positions + scaled<br>&nbsp;&nbsp;return result</code>
           </div>
           <div class="compiler-path">
-            <div><b>1 / State the machine contract</b><span>The target profile fixes vector width. Explicit broadcasts and fused regions state which operations must stay together.</span></div>
+            <div><b>1 / Target machine contract</b><span>The target profile fixes vector width. Explicit broadcasts and fused regions state which operations must stay together.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>2 / Lower and verify</b><span>Typed vector SSA preserves rack identity and masked safety. A supported multiply-add graph becomes one verified FMA.</span></div>
+            <div><b>2 / Verified vector lowering</b><span>Typed vector SSA preserves rack identity and masked safety. A supported multiply-add graph becomes one verified FMA.</span></div>
             <i aria-hidden="true"></i>
-            <div><b>3 / Emit or reject</b><span>Rake selects instructions and allocates registers. Splitting, scalar fallback, helper calls or live-rack spills fail compilation.</span></div>
+            <div><b>3 / Instruction emission or rejection</b><span>Rake selects instructions and allocates registers. Splitting, scalar fallback, helper calls or live-rack spills fail compilation.</span></div>
           </div>
           <div class="current-boundary"><strong>Native backends today</strong><span>x86-64 AVX2 · AArch64 NEON</span></div>
           <figcaption>Rake verifies the encoded object after assembly. Native pack traversal, SSE2, AVX-512 and Vulkan subgroup targets remain in development.</figcaption>
