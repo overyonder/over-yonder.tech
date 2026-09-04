@@ -196,6 +196,13 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .compact-result-cases .case-copy { max-width: none; }
 .compact-result-cases .case-copy h3 { font-size: clamp(28px, 2.7vw, 40px); }
 
+.team { display: grid; grid-template-columns: .55fr minmax(240px, .7fr) 1.25fr; gap: clamp(44px, 7vw, 110px); align-items: center; padding: 120px 6vw; }
+.team h2 { align-self: start; margin: 0; font: 400 clamp(48px, 5vw, 70px)/1 Georgia, serif; letter-spacing: -.045em; }
+.team > img { display: block; width: 100%; height: auto; }
+.team-copy h3 { margin: 0 0 8px; font: 400 clamp(30px, 3vw, 44px)/1.05 Georgia, serif; letter-spacing: -.035em; }
+.team-role { margin: 0 0 30px; color: var(--signal-ink); font: 700 12px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
+.team-biography { max-width: 720px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
+
 .range { padding-top: 130px; padding-bottom: 130px; }
 .range-list > div { display: grid; grid-template-columns: .7fr 1.3fr; gap: 30px; padding: 25px 0; border-top: 1px solid var(--rule); transition: padding-left .2s, color .2s; }
 .range-list > div:hover { padding-left: 10px; color: var(--signal-ink); }
@@ -271,6 +278,10 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   .bar-row { grid-template-columns: 138px minmax(90px, 1fr) 62px; gap: 10px; }
   .bar-axis { margin-right: 72px; margin-left: 148px; font-size: 8px; }
   .compact-result-cases { grid-template-columns: 1fr; gap: 0; }
+  .team { grid-template-columns: 1fr; gap: 36px; padding: 88px 20px; }
+  .team h2 { font-size: 43px; }
+  .team > img { max-width: 420px; }
+  .team-biography { font-size: 17px; }
   .range-list > div { grid-template-columns: 1fr; gap: 10px; }
   .experiments { margin: 0 20px; padding: 38px 0 44px; }
   .experiments-note { grid-template-columns: 1fr; gap: 25px; }
