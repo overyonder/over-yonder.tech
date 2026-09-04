@@ -157,7 +157,7 @@
         <div class="case-copy">
           <p class="case-index">01 / rstat</p>
           <h3>System-monitor updates cut from 800 milliseconds to 160 <em>micro</em>seconds.</h3>
-          <p class="case-summary">rstat delivers CPU, memory and process data to a desktop status bar about 5,000 times faster.</p>
+          <p class="case-summary">rstat is a Linux system monitor that supplies CPU, memory and process data to desktop status bars.</p>
           <a class="case-link" href="work/rstat">Read the case study <span>↗</span></a>
         </div>
         <figure class="case-graphic bar-chart" aria-label="The rstat Linux monitor improved from roughly 800 milliseconds for one shell-module update, to 15 milliseconds after replacing the power-profile service call and consolidating process-filesystem reads, to 0.16 milliseconds on average for an eBPF-backed userspace refresh">
@@ -177,7 +177,6 @@
             <strong>0.16 ms avg</strong>
           </div>
           <div class="bar-axis"><span>0.1 ms</span><span>1 ms</span><span>10 ms</span><span>100 ms</span><span>1 s</span></div>
-          <figcaption>Three generations of the same desktop-monitor refresh, shown on a logarithmic time scale.</figcaption>
         </figure>
       </article>
 
@@ -185,7 +184,7 @@
         <div class="case-copy">
           <p class="case-index">02 / Archivist</p>
           <h3>Archive-browser loading cut from 4.9 seconds to 420 milliseconds.</h3>
-          <p class="case-summary">Archivist makes 222,242 files ready to browse more than eleven times faster.</p>
+          <p class="case-summary">Archivist is a web interface for browsing large file archives.</p>
           <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
         </div>
         <figure class="case-graphic packet-graphic" aria-label="Archivist loading improved from 4.9 seconds to 420 milliseconds by replacing repeated full paths and per-entry objects with parent indices, aligned field columns and a basename blob, then transporting the snapshot with gzip and consuming it through typed-array views">
@@ -193,7 +192,7 @@
           <div class="process-arrow"><span>Replace repetition with one compact, browser-readable snapshot</span></div>
           <div class="diagram-title"><strong>Uncompressed snapshot layout</strong><span>12.296 MiB benchmark snapshot</span></div>
           <div class="packet">
-            <span class="packet-head"><b>Header metadata</b><small>small irregular MessagePack record</small></span>
+            <span class="packet-head"><b>MessagePack header</b><small>snapshot metadata record</small></span>
             <span class="packet-parent"><b>Parent indices</b><small>replaces repeated paths</small></span>
             <span class="packet-columns"><b>Aligned field columns</b><small>one structure-of-arrays column per field</small></span>
             <span class="packet-name"><b>Basename blob</b><small>NUL-separated UTF-8</small></span>
@@ -205,7 +204,6 @@
             <div><b>2</b><span><strong>View columns in place</strong><small>typed arrays avoid rebuilding one object per entry</small></span></div>
             <div><b>3</b><span><strong>Rebuild paths once</strong><small>one UTF-8 decode plus parent indices restores full paths</small></span></div>
           </div>
-          <figcaption>The browser applies all 222,242 entries 420 milliseconds after requesting the snapshot. In parallel, the backend decodes its own resident copy in 174 milliseconds.</figcaption>
         </figure>
       </article>
 
