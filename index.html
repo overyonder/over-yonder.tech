@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://over-yonder.tech/#organization","name":"over|yonder","url":"https://over-yonder.tech/","email":"hello@over-yonder.tech"},{"@type":"WebSite","@id":"https://over-yonder.tech/#website","url":"https://over-yonder.tech/","name":"over|yonder","publisher":{"@id":"https://over-yonder.tech/#organization"}}]}</script>
-  <link rel="stylesheet" href="styles/main.css?v=5">
+  <link rel="stylesheet" href="styles/main.css?v=6">
   <!-- Cloudflare Web Analytics -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;:&quot;7462f5834b4745449f0f5e46d98a53ab&quot;}"></script>
   <!-- End Cloudflare Web Analytics -->
@@ -180,53 +180,34 @@
         </figure>
       </article>
 
-      <article class="result-case archivist-case">
-        <div class="case-copy">
-          <p class="case-index">02 / Archivist</p>
-          <h3>Archive-browser loading cut from 4.9 seconds to 420 milliseconds.</h3>
-          <p class="case-summary">Archivist is a web interface for browsing large file archives.</p>
-          <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
-        </div>
-      </article>
+      <div class="compact-result-cases">
+        <article class="result-case archivist-case">
+          <div class="case-copy">
+            <p class="case-index">02 / Archivist</p>
+            <h3>Archive-browser loading cut from 4.9 seconds to 420 milliseconds.</h3>
+            <p class="case-summary">Archivist is a web interface for browsing large file archives.</p>
+            <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
+          </div>
+        </article>
 
-      <article class="result-case openzt2-case">
-        <div class="case-copy">
-          <p class="case-index">03 / OpenZT2</p>
-          <h3>Zoo Tycoon 2 assets load directly from their original archives.</h3>
-          <p class="case-summary">OpenZT2 is a clean-room Rust and Bevy reconstruction of Zoo Tycoon 2.</p>
-          <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
-        </div>
-        <figure class="case-graphic openzt2-live-asset-graphic" aria-label="OpenZT2 exposes enabled Zoo Tycoon 2 Z2F archives directly to Bevy. Archive priority selects one file for each path, and Bevy loads and translates that file only when the game requests it.">
-          <div class="openzt2-live-asset-flow">
-            <div><strong>Enabled Z2F archives</strong><span>The base game, expansions and mods remain in their original archives.</span></div>
-            <i aria-hidden="true">→</i>
-            <div><strong>Highest-priority file</strong><span>For each path, an enabled mod can override the original file.</span></div>
-            <i aria-hidden="true">→</i>
-            <div><strong>Bevy game asset</strong><span>The winning file is read and translated only when the game requests it.</span></div>
+        <article class="result-case openzt2-case">
+          <div class="case-copy">
+            <p class="case-index">03 / OpenZT2</p>
+            <h3>Zoo Tycoon 2 assets load directly from their original archives.</h3>
+            <p class="case-summary">OpenZT2 is a clean-room Rust and Bevy reconstruction of Zoo Tycoon 2.</p>
+            <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
           </div>
-          <div class="openzt2-live-asset-change"><strong>When archive priority changes</strong><span>Bevy reloads the assets whose winning files changed, along with anything that depends on them.</span></div>
-        </figure>
-      </article>
+        </article>
 
-      <article class="result-case rake-case">
-        <div class="case-copy">
-          <p class="case-index">04 / Rake <span>In flight</span></p>
-          <h3>One data-parallel function compiles for different CPU vector widths.</h3>
-          <p class="case-summary">Rake is a programming language for applying the same operation across many values.</p>
-          <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
-        </div>
-        <figure class="case-graphic rake-target-graphic" aria-label="One Rake function compiles to 256-bit AVX2 vector instructions on x86-64 or 128-bit NEON vector instructions on AArch64. Compilation fails if a target would require scalar fallback.">
-          <div class="rake-source">
-            <strong>One Rake function</strong>
-            <span>Describes the same arithmetic across a group of values.</span>
+        <article class="result-case rake-case">
+          <div class="case-copy">
+            <p class="case-index">04 / Rake <span>In flight</span></p>
+            <h3>One data-parallel function compiles for different CPU vector widths.</h3>
+            <p class="case-summary">Rake is a programming language for applying the same operation across many values.</p>
+            <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
           </div>
-          <div class="rake-targets">
-            <div><strong>x86-64 · AVX2</strong><span>256-bit vector instructions</span></div>
-            <div><strong>AArch64 · NEON</strong><span>128-bit vector instructions</span></div>
-          </div>
-          <div class="rake-rejection"><strong>If a target cannot keep the operation vectorised</strong><span>Compilation fails instead of silently producing scalar code.</span></div>
-        </figure>
-      </article>
+        </article>
+      </div>
     </section>
 
     <section class="range" id="range">
