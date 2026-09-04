@@ -30,7 +30,7 @@ a { color: inherit; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   height: 76px;
-  padding: 0 4vw;
+  padding-inline: max(4vw, calc((100vw - 1440px) / 2));
   border-bottom: 1px solid var(--rule);
 }
 .brand { font: 400 27px/1 Georgia, serif; letter-spacing: -.05em; text-decoration: none; }
@@ -47,7 +47,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   grid-template-columns: minmax(370px, .66fr) minmax(720px, 1.34fr);
   gap: 2vw;
   align-items: center;
-  padding: 112px 2vw 42px;
+  padding: 112px max(2vw, calc((100vw - 1560px) / 2)) 42px;
   overflow: hidden;
   background:
     radial-gradient(circle at 12% 20%, rgba(255,255,255,.32), transparent 32%),
@@ -62,7 +62,6 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   text-wrap: balance;
 }
 .hero h1 em { color: var(--signal-ink); font-weight: 400; }
-.hero-copy > p { max-width: 590px; margin: 30px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
 
 .performance-figure {
   position: relative;
@@ -130,7 +129,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .breach-fragments g { opacity: 0; animation: point-in .25s calc(.65s + var(--step) * .22s) ease-out forwards; }
 .performance-figure figcaption { margin: 0 8px; padding: 20px 0 4px; border-top: 1px solid var(--dark-rule); color: var(--white); font: 400 clamp(20px, 1.7vw, 25px)/1.35 Georgia, serif; }
 
-.premise { display: grid; grid-template-columns: .9fr 1.1fr; gap: 9vw; padding: 82px 6vw 88px; }
+.premise { display: grid; grid-template-columns: .9fr 1.1fr; gap: 9vw; padding: 82px max(6vw, calc((100vw - 1440px) / 2)) 88px; }
 .section-heading h2 { max-width: 710px; margin: 0; font: 400 clamp(43px, 4.5vw, 64px)/1 Georgia, serif; letter-spacing: -.045em; }
 .premise-heading h2 { max-width: 600px; margin: 0; font: 400 clamp(44px, 4.6vw, 66px)/1 Georgia, serif; letter-spacing: -.045em; }
 .premise-copy { max-width: 760px; }
@@ -138,7 +137,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .premise-copy p:last-child { margin-bottom: 0; }
 .premise-copy .premise-lead { max-width: 760px; margin-bottom: 36px; color: var(--ink); font: 400 clamp(26px, 2.5vw, 36px)/1.35 Georgia, serif; letter-spacing: -.025em; }
 
-.evidence, .research { padding: 105px 6vw 120px; background: var(--forest); color: var(--white); }
+.evidence, .research { padding: 105px max(6vw, calc((100vw - 1440px) / 2)) 120px; background: var(--forest); color: var(--white); }
 .research { padding-top: 92px; }
 .section-heading.light h2 { margin-bottom: 58px; }
 .result-case { display: grid; grid-template-columns: minmax(280px, .72fr) minmax(560px, 1.28fr); gap: clamp(50px, 8vw, 130px); align-items: center; padding: 64px 0 72px; border-top: 1px solid var(--dark-rule); }
@@ -196,7 +195,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .compact-result-cases .case-copy { max-width: none; }
 .compact-result-cases .case-copy h3 { font-size: clamp(28px, 2.7vw, 40px); }
 
-.team { display: grid; width: 70%; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: clamp(60px, 9vw, 150px); align-items: center; margin: 0 auto; padding: 120px 0; }
+.team { display: grid; width: min(70%, 1120px); grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: clamp(60px, 9vw, 150px); align-items: center; margin: 0 auto; padding: 120px 0; }
 .team h2 { margin: 0 0 8px; font: 400 clamp(24px, 2.2vw, 32px)/1.1 Georgia, serif; letter-spacing: -.025em; }
 .team-copy h3 { margin: 0 0 18px; color: var(--signal-ink); font: 400 clamp(30px, 3vw, 42px)/1 Georgia, serif; letter-spacing: -.035em; }
 .team > img { display: block; width: 100%; height: auto; border: 1px solid var(--dark-rule); }
@@ -212,10 +211,10 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .graphics-promo-copy > a span { display: inline-block; transition: transform .2s; }
 .graphics-promo-copy > a:hover span { transform: translate(5px, -5px); }
 
-.graphics-hero { display: grid; min-height: 74svh; grid-template-columns: .9fr 1.1fr; gap: 9vw; align-items: end; padding: 170px 8vw 110px; }
+.graphics-hero { display: grid; min-height: 74svh; grid-template-columns: .9fr 1.1fr; gap: 9vw; align-items: end; padding: 170px max(8vw, calc((100vw - 1440px) / 2)) 110px; }
 .graphics-hero h1 { max-width: 700px; margin: 0; font: 400 clamp(58px, 7vw, 100px)/.92 Georgia, serif; letter-spacing: -.055em; }
 .graphics-hero p { max-width: 760px; margin: 0; color: var(--muted); font: 400 clamp(22px, 2.4vw, 34px)/1.4 Georgia, serif; letter-spacing: -.02em; }
-.graphics-projects { padding: 100px 6vw 130px; background: var(--forest); color: var(--white); }
+.graphics-projects { padding: 100px max(6vw, calc((100vw - 1440px) / 2)) 130px; background: var(--forest); color: var(--white); }
 .graphics-projects > h2 { max-width: 760px; margin: 0 0 60px; font: 400 clamp(43px, 4.5vw, 64px)/1 Georgia, serif; letter-spacing: -.045em; }
 .graphics-project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(34px, 5vw, 80px); }
 .graphics-project-card { display: flex; min-height: 310px; flex-direction: column; padding: 34px 0 0; border-top: 1px solid var(--dark-rule); }
@@ -225,7 +224,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .graphics-project-card a { border-bottom: 1px solid var(--signal-hot); }
 .graphics-project-status { letter-spacing: .1em; text-transform: uppercase; }
 
-.contact { min-height: 62svh; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 8vw; background: var(--forest); color: var(--white); text-align: right; }
+.contact { min-height: 62svh; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 8vw max(8vw, calc((100vw - 1440px) / 2)); background: var(--forest); color: var(--white); text-align: right; }
 .contact > p { font: 12px monospace; letter-spacing: .1em; color: var(--dark-text); }
 .contact > a { max-width: 980px; margin: 30px 0 48px; font: 400 clamp(48px, 6vw, 82px)/.95 Georgia, serif; letter-spacing: -.05em; text-decoration: none; }
 .contact > a span { display: inline-block; color: var(--signal-hot); transition: transform .2s; }
