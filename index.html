@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://over-yonder.tech/#organization","name":"over|yonder","url":"https://over-yonder.tech/","email":"hello@over-yonder.tech"},{"@type":"WebSite","@id":"https://over-yonder.tech/#website","url":"https://over-yonder.tech/","name":"over|yonder","publisher":{"@id":"https://over-yonder.tech/#organization"}}]}</script>
-  <link rel="stylesheet" href="styles/main.css?v=4">
+  <link rel="stylesheet" href="styles/main.css?v=5">
   <!-- Cloudflare Web Analytics -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;:&quot;7462f5834b4745449f0f5e46d98a53ab&quot;}"></script>
   <!-- End Cloudflare Web Analytics -->
@@ -187,80 +187,44 @@
           <p class="case-summary">Archivist is a web interface for browsing large file archives.</p>
           <a class="case-link" href="https://archivist.over-yonder.tech/performance">Read the performance article <span>↗</span></a>
         </div>
-        <figure class="case-graphic packet-graphic" aria-label="Archivist loading improved from 4.9 seconds to 420 milliseconds by replacing repeated full paths and per-entry objects with parent indices, aligned field columns and a basename blob, then transporting the snapshot with gzip and consuming it through typed-array views">
-          <div class="diagram-baseline"><strong>Before · 4.9 s</strong><span>The browser spent 3 seconds rebuilding 222,242 file records from repeated full paths.</span></div>
-          <div class="process-arrow"><span>Repeated information stored once</span></div>
-          <div class="diagram-title"><strong>Compact file index</strong><span>12.296 MiB before compression</span></div>
-          <div class="packet">
-            <span class="packet-head"><b>File format</b><small>version and section sizes</small></span>
-            <span class="packet-parent"><b>Folder links</b><small>each item points to its parent folder</small></span>
-            <span class="packet-columns"><b>File details</b><small>values of the same kind stored together</small></span>
-            <span class="packet-name"><b>Names</b><small>all file names stored together</small></span>
-          </div>
-          <div class="process-arrow"><span>Compressed for download</span></div>
-          <div class="diagram-title transport-title"><strong>4.70 MB download</strong><span>51 ms browser fetch</span></div>
-          <div class="decode-steps">
-            <div><b>1</b><span><strong>Browser decompresses</strong><small>using built-in gzip support</small></span></div>
-            <div><b>2</b><span><strong>Browser reads fields</strong><small>compact columns stay in place</small></span></div>
-            <div><b>3</b><span><strong>Paths restored</strong><small>folder links and names form full paths</small></span></div>
-          </div>
-        </figure>
       </article>
 
       <article class="result-case openzt2-case">
         <div class="case-copy">
           <p class="case-index">03 / OpenZT2</p>
-          <h3>Game conversion cut from 22 minutes to 4.</h3>
-          <p class="case-summary">OpenZT2 prepares Zoo Tycoon 2's data more than five times faster, then lets the game read the finished pack without copying it into a second cache.</p>
+          <h3>Zoo Tycoon 2 assets load directly from their original archives.</h3>
+          <p class="case-summary">OpenZT2 is a clean-room Rust and Bevy reconstruction of Zoo Tycoon 2.</p>
           <a class="case-link" href="https://openzt2.over-yonder.tech/">Visit OpenZT2 <span>↗</span></a>
         </div>
-        <figure class="case-graphic mmap-graphic" aria-label="OpenZT2 conversion improved from 22 minutes 32 seconds to 4 minutes 12.898 seconds through parallel behaviour compilation and indexed audio lookup; during gameplay it maps the versioned native content pack read-only, preloads selected pages and reads mapped bytes through typed Rust references">
-          <div class="conversion-path">
-            <div><b>Before</b><strong>22m 32s total</strong><small>Behaviour compilation consumed 18m 42s.</small></div>
-            <i aria-hidden="true"></i>
-            <div><b>Parallel compilation</b><strong>18m 42s → 7.882s</strong><small>Independent behaviour files compile at the same time before their results are joined.</small></div>
-            <i aria-hidden="true"></i>
-            <div><b>Indexed audio search</b><strong>8.261s → 95ms</strong><small>A lookup table replaces repeated searches through the archive.</small></div>
-            <i aria-hidden="true"></i>
-            <div class="final"><b>After</b><strong>4m 12.898s total</strong><small>Peak memory also fell from 8.5 to 7.6 GiB.</small></div>
+        <figure class="case-graphic openzt2-live-asset-graphic" aria-label="OpenZT2 exposes enabled Zoo Tycoon 2 Z2F archives directly to Bevy. Archive priority selects one file for each path, and Bevy loads and translates that file only when the game requests it.">
+          <div class="openzt2-live-asset-flow">
+            <div><strong>Enabled Z2F archives</strong><span>The base game, expansions and mods remain in their original archives.</span></div>
+            <i aria-hidden="true">→</i>
+            <div><strong>Highest-priority file</strong><span>For each path, an enabled mod can override the original file.</span></div>
+            <i aria-hidden="true">→</i>
+            <div><strong>Bevy game asset</strong><span>The winning file is read and translated only when the game requests it.</span></div>
           </div>
-          <div class="diagram-divider"><strong>Gameplay asset loading</strong><span>The converted pack already matches the engine's format</span></div>
-          <div class="memory-chain">
-            <div><strong>Converted content pack</strong><small>assets stored in the format used by the game</small></div>
-            <i><span>mapped into memory</span></i>
-            <div><strong>Game memory</strong><small>Linux loads each part when the game needs it</small></div>
-          </div>
-          <div class="page-map" aria-hidden="true">
-            <span class="page hot">loaded</span><span class="page hot">loaded</span><span class="page">on disk</span><span class="page hot">loaded</span><span class="page">on disk</span><span class="page">on disk</span>
-          </div>
-          <div class="memory-operations">
-            <div><b>1 / Assets selected before play</b><p>OpenZT2 chooses likely-needed assets without exceeding the available-memory budget.</p></div>
-            <div><b>2 / Selected data loaded</b><p>Linux brings those parts of the pack into memory.</p></div>
-            <div><b>3 / Game reads the pack directly</b><p>The game uses the loaded data without copying it into a second cache.</p></div>
-          </div>
+          <div class="openzt2-live-asset-change"><strong>When archive priority changes</strong><span>Bevy reloads the assets whose winning files changed, along with anything that depends on them.</span></div>
         </figure>
       </article>
 
       <article class="result-case rake-case">
         <div class="case-copy">
           <p class="case-index">04 / Rake <span>In flight</span></p>
-          <h3>One parallel function, verified for each CPU target.</h3>
-          <p class="case-summary">Rake targets different CPU vector widths from the same source and rejects code that would silently fall back to slower work.</p>
+          <h3>One data-parallel function compiles for different CPU vector widths.</h3>
+          <p class="case-summary">Rake is a programming language for applying the same operation across many values.</p>
           <a class="case-link" href="https://rake-lang.org/">Visit Rake <span>↗</span></a>
         </div>
-        <figure class="case-graphic compiler-graphic" aria-label="Rake preserves explicit rack and lane-mask semantics through verified lowering into target machine code, rejecting programs that break the selected target profile's contract">
-          <div class="source-expression">
-            <span>One source function</span>
-            <code>crunch advance(positions: f32s, velocities: f32s) -&gt; f32s:<br>&nbsp;&nbsp;| scaled: f32s &lt;| velocities * &lt;0.5&gt;<br>&nbsp;&nbsp;| result: f32s &lt;| positions + scaled<br>&nbsp;&nbsp;return result</code>
+        <figure class="case-graphic rake-target-graphic" aria-label="One Rake function compiles to 256-bit AVX2 vector instructions on x86-64 or 128-bit NEON vector instructions on AArch64. Compilation fails if a target would require scalar fallback.">
+          <div class="rake-source">
+            <strong>One Rake function</strong>
+            <span>Describes the same arithmetic across a group of values.</span>
           </div>
-          <div class="compiler-path">
-            <div><b>1 / CPU target selected</b><span>The compiler knows the CPU's vector width and which operations must stay together.</span></div>
-            <i aria-hidden="true"></i>
-            <div><b>2 / Parallel operations checked</b><span>The compiler verifies that the work stays vectorised and that inactive lanes remain safe.</span></div>
-            <i aria-hidden="true"></i>
-            <div><b>3 / Fast machine code or an error</b><span>Rake emits direct vector instructions or reports that the target cannot preserve the requested performance.</span></div>
+          <div class="rake-targets">
+            <div><strong>x86-64 · AVX2</strong><span>256-bit vector instructions</span></div>
+            <div><strong>AArch64 · NEON</strong><span>128-bit vector instructions</span></div>
           </div>
-          <div class="current-boundary"><strong>Supported CPUs today</strong><span>x86-64 AVX2 · AArch64 NEON</span></div>
+          <div class="rake-rejection"><strong>If a target cannot keep the operation vectorised</strong><span>Compilation fails instead of silently producing scalar code.</span></div>
         </figure>
       </article>
     </section>
