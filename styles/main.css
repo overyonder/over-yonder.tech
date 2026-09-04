@@ -62,6 +62,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   text-wrap: balance;
 }
 .hero h1 em { color: var(--signal-ink); font-weight: 400; }
+.hero-copy > p { max-width: 590px; margin: 30px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
 
 .performance-figure {
   position: relative;
@@ -129,8 +130,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .breach-fragments g { opacity: 0; animation: point-in .25s calc(.65s + var(--step) * .22s) ease-out forwards; }
 .performance-figure figcaption { margin: 0 8px; padding: 20px 0 4px; border-top: 1px solid var(--dark-rule); color: var(--white); font: 400 clamp(20px, 1.7vw, 25px)/1.35 Georgia, serif; }
 
-.premise, .range { display: grid; grid-template-columns: .9fr 1.1fr; gap: 9vw; padding: 120px 6vw; }
-.premise { padding-top: 82px; padding-bottom: 88px; }
+.premise { display: grid; grid-template-columns: .9fr 1.1fr; gap: 9vw; padding: 82px 6vw 88px; }
 .section-heading h2 { max-width: 710px; margin: 0; font: 400 clamp(43px, 4.5vw, 64px)/1 Georgia, serif; letter-spacing: -.045em; }
 .premise-heading h2 { max-width: 600px; margin: 0; font: 400 clamp(44px, 4.6vw, 66px)/1 Georgia, serif; letter-spacing: -.045em; }
 .premise-copy { max-width: 760px; }
@@ -204,12 +204,6 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .team-biography { max-width: 720px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
 .team-biography + .team-biography { margin-top: 18px; }
 
-.range { padding-top: 130px; padding-bottom: 130px; }
-.range-list > div { display: grid; grid-template-columns: .7fr 1.3fr; gap: 30px; padding: 25px 0; border-top: 1px solid var(--rule); transition: padding-left .2s, color .2s; }
-.range-list > div:hover { padding-left: 10px; color: var(--signal-ink); }
-.range-list span { font: 400 24px Georgia, serif; }
-.range-list p { max-width: 520px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
-
 .graphics-promo { display: flex; justify-content: center; margin: 0 6vw; padding: 52px 0 62px; border-top: 1px solid var(--rule); }
 .graphics-promo-copy { display: grid; width: min(100%, 860px); grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 80px); align-items: end; }
 .graphics-promo-copy h2 { max-width: 620px; margin: 0 0 12px; font: 400 30px/1.15 Georgia, serif; letter-spacing: -.025em; }
@@ -281,7 +275,7 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
     pointer-events: none;
   }
   .performance-figure figcaption { margin-inline: 4px; font-size: 20px; }
-  .premise, .range { grid-template-columns: 1fr; gap: 55px; padding: 88px 20px; }
+  .premise { grid-template-columns: 1fr; gap: 55px; padding: 88px 20px; }
   .premise { gap: 38px; padding-top: 64px; padding-bottom: 68px; }
   .section-heading h2 { font-size: 42px; }
   .premise-heading h2 { font-size: 43px; }
@@ -297,7 +291,6 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   .team-copy h3 { font-size: 30px; }
   .team > img { max-width: 420px; grid-row: 1; }
   .team-biography { font-size: 17px; }
-  .range-list > div { grid-template-columns: 1fr; gap: 10px; }
   .graphics-promo { margin: 0 20px; padding: 42px 0 48px; }
   .graphics-promo-copy { grid-template-columns: 1fr; gap: 25px; }
   .graphics-promo-copy h2 { font-size: 27px; }
