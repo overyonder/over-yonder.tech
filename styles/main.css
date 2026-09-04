@@ -197,8 +197,8 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
 .compact-result-cases .case-copy h3 { font-size: clamp(28px, 2.7vw, 40px); }
 
 .team { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: clamp(60px, 9vw, 150px); align-items: center; padding: 120px 10vw; }
-.team h2 { margin: 0 0 20px; font: 400 clamp(48px, 5vw, 70px)/.98 Georgia, serif; letter-spacing: -.045em; }
-.team h2 span { color: var(--signal-ink); }
+.team h2 { margin: 0 0 8px; font: 400 clamp(24px, 2.2vw, 32px)/1.1 Georgia, serif; letter-spacing: -.025em; }
+.team-copy h3 { margin: 0 0 18px; color: var(--signal-ink); font: 400 clamp(46px, 4.8vw, 68px)/.98 Georgia, serif; letter-spacing: -.045em; }
 .team > img { display: block; width: 100%; height: auto; }
 .team-postnominals { margin: 0 0 30px; color: var(--signal-ink); font: 700 12px/1.5 "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; }
 .team-biography { max-width: 720px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
@@ -280,7 +280,8 @@ nav a, .nav-cta { font-size: 13px; text-decoration: none; }
   .bar-axis { margin-right: 72px; margin-left: 148px; font-size: 8px; }
   .compact-result-cases { grid-template-columns: 1fr; gap: 0; }
   .team { grid-template-columns: 1fr; gap: 36px; padding: 88px 20px; }
-  .team h2 { font-size: 43px; }
+  .team h2 { font-size: 24px; }
+  .team-copy h3 { font-size: 43px; }
   .team > img { max-width: 420px; grid-row: 1; }
   .team-biography { font-size: 17px; }
   .range-list > div { grid-template-columns: 1fr; gap: 10px; }
