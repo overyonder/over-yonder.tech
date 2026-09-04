@@ -3,63 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Graphics and visualisation engineering across browser simulations, game reconstruction and real-time rendering.">
+  <meta name="description" content="Specialist graphics and visualisation engineering across browser simulation, game reconstruction and real-time rendering.">
   <title>Graphics and visualisation — over|yonder</title>
   <link rel="canonical" href="https://over-yonder.tech/graphics/">
   <meta property="og:title" content="Graphics and visualisation — over|yonder">
-  <meta property="og:description" content="Graphics and visualisation engineering across browser simulations, game reconstruction and real-time rendering.">
+  <meta property="og:description" content="Specialist graphics and visualisation engineering across browser simulation, game reconstruction and real-time rendering.">
   <meta property="og:url" content="https://over-yonder.tech/graphics/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://over-yonder.tech/assets/social-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles/main.css?v=15">
+  <link rel="stylesheet" href="/styles/main.css?v=16">
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;:&quot;7462f5834b4745449f0f5e46d98a53ab&quot;}"></script>
 </head>
-<body>
+<body class="graphics-body">
   <header class="site-header">
     <a class="brand" href="/" aria-label="over yonder home">over<span>|</span>yonder</a>
-    <nav aria-label="Primary navigation">
-      <a href="/#premise">Why performance</a>
-      <a href="/#evidence">Projects</a>
-      <a href="/graphics/">Graphics</a>
-      <a href="/#team">Team</a>
+    <nav class="site-navigation" aria-label="Primary navigation">
+      <span class="site-navigation-main">
+        <a href="/#premise">Why performance</a>
+        <a href="/#evidence">Projects</a>
+        <a href="/#team">Team</a>
+      </span>
+      <a class="site-navigation-speciality" href="/graphics/" aria-current="page">Graphics <span>↗</span></a>
     </nav>
     <a class="nav-cta" href="/#contact">Discuss a problem <span>↗</span></a>
   </header>
 
   <main>
-    <section class="graphics-hero">
-      <h1>Graphics and visualisation.</h1>
-      <p>Graphics and visualisation are a specialist branch of over|yonder’s performance engineering work. Real-time rendering coordinates CPU threads, GPU queues and separate rendering, compute and copy engines within each frame budget.</p>
-    </section>
+    <section class="graphics-introduction">
+      <div class="graphics-introduction-copy">
+        <h1>Real-time graphics engineering.</h1>
+        <p>Graphics and visualisation are a specialist branch of over|yonder’s performance work. A frame coordinates execution across CPU threads, GPU queues and dedicated hardware engines before it reaches the display.</p>
+      </div>
 
-    <section class="graphics-projects" aria-labelledby="graphics-projects-title">
-      <h2 id="graphics-projects-title">Work across the graphics stack.</h2>
-      <div class="graphics-project-grid">
-        <article class="graphics-project-card">
-          <h3>Pong AI</h3>
-          <p>Browser simulation in Rust and WebAssembly that evolves a neural-network player through 100 generations, then lets you play against it.</p>
-          <a href="https://pong.over-yonder.tech/">Play Pong AI&nbsp; ↗</a>
-        </article>
-
-        <article class="graphics-project-card">
-          <h3>OpenZT2</h3>
-          <p>Game reconstruction in Rust and Bevy that reads Zoo Tycoon 2 assets from their original archives and renders them in a modern engine.</p>
-          <a href="https://openzt2.over-yonder.tech/">Visit OpenZT2&nbsp; ↗</a>
-        </article>
-
-        <article class="graphics-project-card">
-          <h3>Advent</h3>
-          <p>Real-time Unreal Engine 5.8 game using Nanite, Lumen, MetaHuman characters and the Unreal Animation Framework.</p>
-          <span class="graphics-project-status">Upcoming</span>
-        </article>
+      <div class="frame-schedule" role="img" aria-label="An example 16.67 millisecond frame schedule overlaps CPU threads, data transfer, GPU compute and GPU rendering before the display deadline.">
+        <header><strong>One frame</strong><span>16.67 ms at 60 Hz</span></header>
+        <div class="frame-schedule-track"><b>CPU threads</b><span><i style="--start:0%;--width:44%"></i></span></div>
+        <div class="frame-schedule-track"><b>Data transfer</b><span><i style="--start:31%;--width:24%"></i></span></div>
+        <div class="frame-schedule-track"><b>GPU compute</b><span><i style="--start:45%;--width:30%"></i></span></div>
+        <div class="frame-schedule-track"><b>GPU render</b><span><i style="--start:62%;--width:38%"></i></span></div>
+        <footer><span>0 ms</span><strong>display deadline</strong></footer>
       </div>
     </section>
 
+    <section class="graphics-portfolio" aria-labelledby="graphics-portfolio-title">
+      <header>
+        <h2 id="graphics-portfolio-title">Graphics work</h2>
+        <p>Three projects across browser rendering, engine reconstruction and current-generation real-time production.</p>
+      </header>
+
+      <article class="graphics-project">
+        <figure><img src="/assets/images/pong-ai-browser.jpg" alt="Pong AI training a neural-network player in the browser" width="1280" height="720"></figure>
+        <div class="graphics-project-copy">
+          <small>Browser simulation</small>
+          <h3>Pong AI</h3>
+          <p>Rust and WebAssembly evolve a neural-network player through 100 generations in the browser. The finished player then competes against you in the same rendered simulation.</p>
+          <a href="https://pong.over-yonder.tech/">Play Pong AI&nbsp; ↗</a>
+        </div>
+      </article>
+
+      <article class="graphics-project graphics-project-reversed">
+        <figure><img src="/assets/images/openzt2-reconstruction.png" alt="OpenZT2 reconstruction dashboard" width="1200" height="630"></figure>
+        <div class="graphics-project-copy">
+          <small>Game reconstruction</small>
+          <h3>OpenZT2</h3>
+          <p>A clean-room Rust and Bevy reconstruction reads Zoo Tycoon 2 assets from their original archives and rebuilds the game in a modern rendering engine.</p>
+          <a href="https://openzt2.over-yonder.tech/">Visit OpenZT2&nbsp; ↗</a>
+        </div>
+      </article>
+
+      <article class="graphics-project">
+        <figure><img src="/assets/images/advent-terrain.png" alt="Early terrain rendering in Advent" width="192" height="192"></figure>
+        <div class="graphics-project-copy">
+          <small>Current-generation rendering</small>
+          <h3>Advent</h3>
+          <p>An upcoming Unreal Engine 5.8 game using Nanite, Lumen, MetaHuman characters and the Unreal Animation Framework.</p>
+          <span class="graphics-project-status">Upcoming</span>
+        </div>
+      </article>
+    </section>
+
     <section class="contact" id="contact">
-      <p>Need graphics work to meet a demanding frame budget?</p>
-      <a href="mailto:hello@over-yonder.tech">Let’s make every frame count. <span>↗</span></a>
+      <p>Got graphics work constrained by a frame budget?</p>
+      <a href="mailto:hello@over-yonder.tech">Let’s examine the frame. <span>↗</span></a>
       <small>Sydney, Australia · Working worldwide</small>
     </section>
   </main>
