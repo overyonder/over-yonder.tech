@@ -54,8 +54,8 @@
 
     <div class="case-body">
       <aside class="reading-index" aria-label="On this page">
-        <a href="#problem">01 / Problem</a>
-        <a href="#progression">02 / Progression</a>
+        <a href="#problem">01 / Baseline</a>
+        <a href="#progression">02 / Procfs collector</a>
         <a href="#architecture">03 / Architecture</a>
         <a href="#hot-path">04 / Hot path</a>
         <a href="#measurement">05 / Measurement</a>
@@ -63,32 +63,30 @@
 
       <article class="article-flow">
         <section id="problem">
-          <p class="section-number">01 / The problem</p>
-          <h2>A slow service call hid an inefficient poller.</h2>
+          <p class="section-number">01 / Baseline</p>
+          <h2>Service latency and per-update collection costs</h2>
           <p class="lead">Waybar requests one JSON status update on a fixed schedule. rstat's original Waybar module took roughly 800 milliseconds per update because it launched a shell script that invoked command-line tools including <code>awk</code>, <code>bc</code> and <code>powerprofilesctl</code>.</p>
-
-          <p class="diagnostic-prompt">We ask: <strong>Why is it slow?</strong> And we don’t stop until we have a real, measurable answer:</p>
 
           <dl class="mechanism-list">
             <div><dt>Service round trip <span>~800 ms with the D-Bus request in the update path</span></dt><dd><code>powerprofilesctl</code> crossed process and D-Bus boundaries to retrieve the active power profile, even though Linux exposed the same value through a sysfs file.</dd></div>
-            <div><dt>Process churn <span>Shell + at least 3 child processes / update</span></dt><dd>Each external utility required <code>fork()</code>, <code>exec()</code>, dynamic loading and process teardown. The shell implementation paid those costs again on every update.</dd></div>
-            <div><dt>Text interfaces <span>~15 ms remained after the D-Bus call was removed</span></dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
-            <div><dt>No in-process history <span>0 counters, buffers or file descriptors retained</span></dt><dd>A short-lived script couldn't retain previous counters, file descriptors or buffers in memory between Waybar refreshes.</dd></div>
+            <div><dt>Process creation <span>Shell + at least 3 child processes / update</span></dt><dd>Each update started external utilities, incurring process creation, executable loading and teardown costs.</dd></div>
+            <div><dt>Text interfaces <span>Per-process file reads and parsing</span></dt><dd>Linux's process filesystem, procfs, converted kernel counters into text. The command-line utilities then parsed that text and passed more text through the shell.</dd></div>
+            <div><dt>State lifetime <span>One shell invocation per update</span></dt><dd>The script exited after each update, releasing its file descriptors and buffers. Persistent sampling state required a collector that remained running between updates.</dd></div>
           </dl>
         </section>
 
         <section id="progression">
-          <p class="section-number">02 / The progression</p>
-          <h2>Remove the dominant delay, then measure what remained.</h2>
-          <p>We first replaced the one-shot shell module with a long-running Rust collector that retained counters, buffers and previous samples between Waybar updates. The Rust collector removed nearly every external utility, but <code>powerprofilesctl</code> still contacted the system power-profile daemon over D-Bus inside every update.</p>
+          <p class="section-number">02 / Procfs collector</p>
+          <h2>Persistent collection and direct sysfs access</h2>
+          <p>The first revision replaced the one-shot shell module with a long-running Rust collector that retained counters, buffers and previous samples between Waybar updates. The Rust collector removed nearly every external utility, but <code>powerprofilesctl</code> still contacted the system power-profile daemon over D-Bus inside every update.</p>
           <p>Reading the active power profile directly from <code>/sys/firmware/acpi/platform_profile</code> removed that round trip. The Rust procfs collector then collapsed three process-directory walks into one, reused an 8 KB read buffer, took resident-set size (RSS) from <code>/proc/[pid]/stat</code> instead of opening <code>statm</code>, and identified kernel threads from the same record so it could skip their I/O file in the default view. Together, those changes cut each update from roughly 800 to 15 milliseconds.</p>
-          <p>The remaining cost came from the design. Every refresh still enumerated <code>/proc</code>, opened files for each live process and asked the kernel to turn counters into text. Local tuning could reduce that walk, but it couldn't remove it.</p>
+          <p>Each refresh still enumerated <code>/proc</code> and opened per-process files, causing the kernel to format counters as text for userspace to parse. Collection cost therefore continued to grow with the number of live processes.</p>
         </section>
 
         <section class="architecture-section" id="architecture">
-          <p class="section-number">03 / The architecture</p>
-          <h2>Stop asking the kernel to describe what it already knows.</h2>
-          <p>The optimized Rust procfs collector still scaled with the number of live processes. It opened <code>stat</code> for every process and <code>io</code> for each ordinary process. Across roughly 300 processes, those files can require about 1,800 open, read and close system calls per refresh, before directory enumeration and global metrics. We replaced that refresh-time reconstruction with event-time accounting. A small extended Berkeley Packet Filter (eBPF) program, checked by the Linux kernel before loading, now records CPU residency and snapshots the kernel's RSS and task-I/O counters when scheduler events already identify the relevant task.</p>
+          <p class="section-number">03 / Event-driven accounting</p>
+          <h2>Scheduler tracepoints and task lifetime tracking</h2>
+          <p>The optimized Rust procfs collector still scaled with the number of live processes. It opened <code>stat</code> for every process and <code>io</code> for each ordinary process. Across roughly 300 processes, those files can require about 1,800 open, read and close system calls per refresh, before directory enumeration and global metrics. The next revision moved recurring task accounting into an extended Berkeley Packet Filter (eBPF) program, verified by the Linux kernel before loading. Scheduler events supply the task being accounted for, allowing the program to accumulate its CPU residency and snapshot its RSS and I/O counters.</p>
           <p>Four scheduler tracepoints maintain task state as processes fork, run, exit and are freed. Every record is keyed by its process identifier (PID) and kernel start timestamp, preventing a reused PID from joining two unrelated process lifetimes. A retired record remains in the shared eBPF statistics map until the Rust daemon consumes its final counters, so short-lived work remains visible. One procfs scan at startup seeds blocked threads and zombie process leaders that already existed when the eBPF program attached; that scan doesn't recur during refreshes.</p>
 
           <figure class="architecture-figure">
@@ -127,18 +125,18 @@
         </section>
 
         <section id="hot-path">
-          <p class="section-number">04 / The hot path</p>
-          <h2>Once the architecture was right, small costs became visible.</h2>
-          <p>The eBPF design removed the recurring procfs walk. We then bounded every output list and reused the Rust daemon's allocated storage after it reached its steady working set.</p>
+          <p class="section-number">04 / Collection and output</p>
+          <h2>Batch reads, retained storage and bounded output</h2>
+          <p>With task accounting maintained in eBPF maps, each userspace refresh collects task records, reads global metrics, aggregates processes and constructs the Waybar response. Batch operations reduce system-call overhead, while retained buffers and bounded result sets limit allocation and sorting work.</p>
 
           <dl class="optimization-list">
-            <div><dt>Batch the statistics map</dt><dd>Linux's <code>BPF_MAP_LOOKUP_BATCH</code> operation transfers many task records into preallocated key and value arrays in one system call. The iterative fallback requires separate key-advance and lookup calls for each record.</dd></div>
-            <div><dt>Gate the snapshots</dt><dd>CPU residency is charged on every switch. RSS and I/O are sampled at most once per task every 10 milliseconds, with a forced final snapshot when the task exits.</dd></div>
-            <div><dt>Preallocate the working set</dt><dd>The statistics, scheduler-start and PID-to-start-time hash maps have fixed capacities and are created before their tracepoints attach. Userspace reserves its batch arrays and process-aggregation tables once, then clears them without releasing their storage.</dd></div>
-            <div><dt>Reuse contiguous snapshots</dt><dd>Two vectors retain capacity and swap roles between samples. Sorting records by PID and start time gives cache-friendly traversal and binary-search lookups against the previous sample.</dd></div>
-            <div><dt>Minimise system reads</dt><dd><code>sysinfo()</code> returns all three load averages in one system call. The daemon discovers and opens its sysfs temperature, frequency, graphics-processor and throttling files once; <code>pread()</code> fills fixed byte buffers, and numeric values are parsed directly from those bytes.</dd></div>
-            <div><dt>Write the fixed schema directly</dt><dd><code>write!</code> appends the known Waybar schema to reusable tooltip and JSON strings. A small emitter escapes task names in place without a general serializer or temporary formatted strings.</dd></div>
-            <div><dt>Bound the result sets</dt><dd>CPU, memory and I/O leaders are selected into fixed five-entry arrays, while the list of tasks blocked in Linux's uninterruptible D state is capped at ten. Only those small arrays are sorted for output.</dd></div>
+            <div><dt>Batch map collection</dt><dd>Linux's <code>BPF_MAP_LOOKUP_BATCH</code> operation transfers many task records into preallocated key and value arrays in one system call. The iterative fallback requires separate key-advance and lookup calls for each record.</dd></div>
+            <div><dt>RSS and I/O sampling interval</dt><dd>CPU residency is charged on every switch. RSS and I/O are sampled at most once per task every 10 milliseconds, with a forced final snapshot when the task exits.</dd></div>
+            <div><dt>Map capacity and userspace storage</dt><dd>The statistics, scheduler-start and PID-to-start-time hash maps have fixed capacities and are created before their tracepoints attach. Userspace reserves its batch arrays and process-aggregation tables once, then clears them without releasing their storage.</dd></div>
+            <div><dt>Current and previous snapshots</dt><dd>Two vectors retain capacity and swap roles between samples. Sorting records by PID and start time gives cache-friendly traversal and binary-search lookups against the previous sample.</dd></div>
+            <div><dt>Persistent system-file descriptors</dt><dd><code>sysinfo()</code> returns all three load averages in one system call. The daemon discovers and opens its sysfs temperature, frequency, graphics-processor and throttling files once; <code>pread()</code> fills fixed byte buffers, and numeric values are parsed directly from those bytes.</dd></div>
+            <div><dt>Waybar JSON construction</dt><dd><code>write!</code> appends the known Waybar schema to reusable tooltip and JSON strings. A small emitter escapes task names in place without a general serializer or temporary formatted strings.</dd></div>
+            <div><dt>Top-process selection</dt><dd>CPU, memory and I/O leaders are selected into fixed five-entry arrays, while the list of tasks blocked in Linux's uninterruptible D state is capped at ten. Only those small arrays are sorted for output.</dd></div>
           </dl>
         </section>
       </article>
@@ -146,8 +144,8 @@
 
     <section class="measurement-band" id="measurement">
       <div class="measurement-inner">
-        <p class="section-number">05 / Understanding. Not handwaving.</p>
-        <h2>We make the tradeoffs measurable too.</h2>
+        <p class="section-number">05 / Measurement</p>
+        <h2>Refresh latency and scheduler overhead</h2>
 
         <p class="measurement-note"><code>rstat --bench 1000</code> measures each userspace refresh from eBPF-map collection through system-file reads, process aggregation, retired-record cleanup and JSON construction.</p>
 
@@ -158,8 +156,8 @@
         </div>
 
         <div class="measurement-copy">
-          <h3>eBPF moves part of the monitoring cost onto scheduler events.</h3>
-          <p>The procfs collector pays most of its cost whenever Waybar requests an update. The eBPF design pays a small amount whenever a task switches and a much smaller amount during each userspace refresh. Frequent refreshes favour the eBPF design. During an extreme context-switch storm, a slowly refreshed procfs collector can consume less CPU because it does no work between polls.</p>
+          <h3>CPU cost at different refresh intervals</h3>
+          <p>The procfs collector performs its accounting work during each refresh, so its collection cost per second scales with refresh frequency. The eBPF collector also runs handlers on scheduler events, making its total cost depend on both refresh frequency and scheduler activity. Under the measured ordinary load, eBPF uses less CPU at the three shorter intervals shown below. At a two-second interval, the procfs model is slightly cheaper. The deliberate context-switch storm makes scheduler accounting the dominant cost at every interval shown.</p>
         </div>
 
         <table class="measurement-table">
