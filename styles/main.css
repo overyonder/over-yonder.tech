@@ -226,6 +226,8 @@ a { color: inherit; }
 .graphics-project-copy p { margin: 0; color: var(--white); font-size: 15px; line-height: 1.55; }
 .graphics-project-copy p { grid-column: 2; }
 .graphics-project-copy-left p { grid-column: 1 / 3; }
+.openzt2-project figure { padding: clamp(24px, 5vw, 64px); background: var(--forest); }
+.openzt2-project .graphics-project-copy { position: static; }
 .graphics-project-copy a, .graphics-project-status { display: inline-flex; grid-column: 3; margin-top: 0; padding-bottom: 6px; border-bottom: 1px solid var(--signal-ink); color: var(--signal-ink); font-size: 13px; text-decoration: none; }
 .graphics-project-copy a { border-color: var(--signal-hot); color: var(--signal-hot); }
 .graphics-project-status { border: 0; font-family: "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
